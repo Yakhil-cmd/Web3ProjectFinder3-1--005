@@ -1,0 +1,573 @@
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.28;
+
+import {EulerTestBase} from "./EulerTestBase.t.sol";
+import {IRMTwyneCurve} from "src/twyne/IRMTwyneCurve.sol";
+import {ReferenceEulerWrapper} from "test/mocks/ReferenceEulerWrapper.sol";
+import {IEVault} from "euler-vault-kit/EVault/IEVault.sol";
+import {IERC20} from "openzeppelin-contracts/token/ERC20/IERC20.sol";
+import {IErrors as TwyneErrors} from "src/interfaces/IErrors.sol";
+import {VaultType} from "src/TwyneFactory/CollateralVaultFactory.sol";
+
+contract EulerTestNormalActions is EulerTestBase {
+    function setUp() public virtual override {
+        super.setUp();
+    }
+
+    // non-fuzzing unit test for single collateral
+    function test_e_creditDeposit() public noGasMetering {
+        e_creditDeposit(eulerWETH);
+    }
+
+    // fuzzing entry point for all assets
+    function testFuzz_e_creditDeposit(address collateralAssets) public noGasMetering {
+        e_creditDeposit(collateralAssets);
+    }
+
+    // non-fuzzing unit test for single collateral
+    function test_e_createWETHCollateralVault() public noGasMetering {
+        e_createCollateralVault(eulerWETH, 0.9e4);
+    }
+
+    // fuzzing entry point for all assets
+    function testFuzz_e_createCollateralVault(address collateralAssets, uint16 liqLTV) public noGasMetering {
+        e_createCollateralVault(collateralAssets, liqLTV);
+    }
+
+    // non-fuzzing unit test for single collateral
+    function test_e_totalAssetsIntermediateVault() public noGasMetering {
+        e_totalAssetsIntermediateVault(eulerWETH, 0.9e4);
+    }
+
+    // fuzzing entry point for all assets
+    function testFuzz_e_totalAssetsIntermediateVault(address collateralAssets, uint16 liqLTV) public noGasMetering {
+        e_totalAssetsIntermediateVault(collateralAssets, liqLTV);
+    }
+
+    // non-fuzzing unit test for single collateral
+    function test_e_totalAssetsCollateralVault() public noGasMetering {
+        e_totalAssetsCollateralVault(eulerWETH, 0.9e4);
+    }
+
+    // fuzzing entry point for all assets
+    function testFuzz_e_totalAssetsCollateralVault(address collateralAssets, uint16 liqLTV) public noGasMetering {
+        e_totalAssetsCollateralVault(collateralAssets, liqLTV);
+    }
+
+    // non-fuzzing unit test for single collateral
+    function test_e_supplyCap_creditDeposit() public noGasMetering {
+        e_supplyCap_creditDeposit(eulerWETH);
+    }
+
+    // fuzzing entry point for all assets
+    function testFuzz_e_supplyCap_creditDeposit(address collateralAssets) public noGasMetering {
+        e_supplyCap_creditDeposit(collateralAssets);
+    }
+
+    // non-fuzzing unit test for single collateral
+    function test_e_second_creditDeposit() public noGasMetering {
+        e_second_creditDeposit(eulerWETH);
+    }
+
+    // fuzzing entry point for all assets
+    function testFuzz_e_second_creditDeposit(address collateralAssets) public noGasMetering {
+        e_second_creditDeposit(collateralAssets);
+    }
+
+    // non-fuzzing unit test for single collateral
+    function test_e_creditWithdrawNoInterest() public noGasMetering {
+        e_creditWithdrawNoInterest(eulerWETH);
+    }
+
+    // fuzzing entry point for all assets
+    function testFuzz_e_creditWithdrawNoInterest(address collateralAssets) public noGasMetering {
+        e_creditWithdrawNoInterest(collateralAssets);
+    }
+
+    // non-fuzzing unit test for single collateral
+    function test_e_collateralDepositWithoutBorrow() public noGasMetering {
+        e_collateralDepositWithoutBorrow(eulerWETH, 0.9e4);
+    }
+
+    // fuzzing entry point for all assets
+    function testFuzz_e_collateralDepositWithoutBorrow(address collateralAssets, uint16 liqLTV) public noGasMetering {
+        e_collateralDepositWithoutBorrow(collateralAssets, liqLTV);
+    }
+
+    function test_e_creditWithdrawWithInterestAndNoFees() public noGasMetering {
+        e_creditWithdrawWithInterestAndNoFees(eulerWETH, 1000);
+    }
+
+    // fuzzing entry point for all assets
+    function testFuzz_e_creditWithdrawWithInterestAndNoFees(address /* collateralAssets */, uint warpBlockAmount) public noGasMetering {
+        e_creditWithdrawWithInterestAndNoFees(eulerWETH, warpBlockAmount); // TODO
+    }
+
+    function test_e_creditWithdrawWithInterestAndFees() public noGasMetering {
+        e_creditWithdrawWithInterestAndFees(eulerWETH);
+    }
+
+    function testFuzz_e_creditWithdrawWithInterestAndFees(address /* collateralAssets */) public noGasMetering {
+        e_creditWithdrawWithInterestAndFees(eulerWETH); // TODO
+    }
+
+    // Test the case of C_LP = 0 (no reserved assets) with non-zero C and B
+    // This should be identical to using the underlying protocol without Twyne
+    function test_e_collateralDepositWithBorrow() public noGasMetering {
+        e_collateralDepositWithBorrow(eulerWETH);
+    }
+
+    function testFuzz_e_collateralDepositWithBorrow(address collateralAssets) public noGasMetering {
+        e_collateralDepositWithBorrow(collateralAssets);
+    }
+
+    // Deposit WETH instead of eWETH into Twyne
+    // This allows users to bypass the Euler Finance frontend entirely
+    function test_e_collateralDepositUnderlying() public noGasMetering {
+        e_collateralDepositUnderlying(eulerWETH);
+    }
+
+    function testFuzz_e_collateralDepositUnderlying(address collateralAssets) public noGasMetering {
+        e_collateralDepositUnderlying(collateralAssets);
+    }
+
+    // Test Permit2 deposit of eWETH (not WETH)
+    function test_e_permit2CollateralDeposit() public noGasMetering {
+        e_permit2CollateralDeposit(eulerWETH);
+    }
+
+    function testFuzz_e_permit2CollateralDeposit(address collateralAssets) public noGasMetering {
+        e_permit2CollateralDeposit(collateralAssets);
+    }
+
+    // Test Permit2 deposit of WETH (not eWETH)
+    function test_e_permit2_CollateralDepositUnderlying() public noGasMetering {
+        e_permit2_CollateralDepositUnderlying(eulerWETH);
+    }
+
+    function testFuzz_e_permit2_CollateralDepositUnderlying(address collateralAssets) public noGasMetering {
+        e_permit2_CollateralDepositUnderlying(collateralAssets);
+    }
+
+    // Test the creation of a collateral vault in a batch (the frontend does this)
+    function test_e_evcCanCreateCollateralVault() public noGasMetering {
+        e_evcCanCreateCollateralVault(eulerWETH);
+    }
+
+    function testFuzz_e_evcCanCreateCollateralVault(address collateralAssets) public noGasMetering {
+        e_evcCanCreateCollateralVault(collateralAssets);
+    }
+
+    function test_e_setIntermediateVaultFalse() public {
+        e_creditDeposit(eulerWETH);
+        assertTrue(twyneVaultManager.isIntermediateVault(address(eeWETH_intermediate_vault)));
+
+        // unregister
+        vm.prank(admin);
+        twyneVaultManager.setIntermediateVault(eeWETH_intermediate_vault, false);
+        assertFalse(twyneVaultManager.isIntermediateVault(address(eeWETH_intermediate_vault)));
+
+        // creating a collateral vault should revert
+        vm.startPrank(alice);
+        vm.expectRevert(TwyneErrors.IntermediateVaultNotSet.selector);
+        collateralVaultFactory.createCollateralVault({
+            _vaultType: VaultType.EULER_V2,
+            _intermediateVault: intermediateVaultFor[eulerWETH],
+            _targetVault: eulerUSDC,
+            _liqLTV: twyneLiqLTV,
+            _targetAsset: address(0)
+        });
+        vm.stopPrank();
+
+        // re-register
+        vm.prank(admin);
+        twyneVaultManager.setIntermediateVault(eeWETH_intermediate_vault, true);
+        assertTrue(twyneVaultManager.isIntermediateVault(address(eeWETH_intermediate_vault)));
+
+        // creating a collateral vault should succeed after re-register
+        vm.prank(alice);
+        address vault = collateralVaultFactory.createCollateralVault({
+            _vaultType: VaultType.EULER_V2,
+            _intermediateVault: intermediateVaultFor[eulerWETH],
+            _targetVault: eulerUSDC,
+            _liqLTV: twyneLiqLTV,
+            _targetAsset: address(0)
+        });
+        assertTrue(vault != address(0));
+    }
+
+    // Test that if time passes, the balance of aTokens in the collateral vault increases and the user can withdraw all
+    function test_e_withdrawCollateralAfterWarp() public noGasMetering {
+        e_withdrawCollateralAfterWarp(eulerWETH, 1000);
+    }
+
+    // fuzzing entry point for all assets and different warp periods
+    function testFuzz_e_withdrawCollateralAfterWarp(address collateralAssets, uint warpBlockAmount) public noGasMetering {
+        e_withdrawCollateralAfterWarp(collateralAssets, warpBlockAmount);
+    }
+
+    // Test the user withdrawing WETH from the collateral vault
+    function test_e_redeemUnderlying() public noGasMetering {
+        e_redeemUnderlying(eulerWETH);
+    }
+
+    function testFuzz_e_redeemUnderlying(address collateralAssets) public noGasMetering {
+        e_redeemUnderlying(collateralAssets);
+    }
+
+    function test_e_firstBorrowFromEulerDirect() public noGasMetering {
+        e_firstBorrowFromEulerDirect(eulerWETH);
+    }
+
+    function testFuzz_e_firstBorrowFromEulerDirect(address collateralAssets) public noGasMetering {
+        e_firstBorrowFromEulerDirect(collateralAssets);
+    }
+
+    function test_e_firstBorrowFromEulerViaCollateral() public noGasMetering {
+        e_firstBorrowFromEulerViaCollateral(eulerWETH);
+    }
+
+    function testFuzz_e_firstBorrowFromEulerViaCollateral(address collateralAssets) public noGasMetering {
+        e_firstBorrowFromEulerViaCollateral(collateralAssets);
+    }
+
+    // Separate the checks that are run after the borrow operation so that they are only run once
+    // instead of running on every test that runs the borrow test first
+    function test_e_postBorrowChecks() public {
+        e_postBorrowChecks(eulerWETH);
+    }
+
+    function testFuzz_e_postBorrowChecks(address collateralAssets) public {
+        e_postBorrowChecks(collateralAssets);
+    }
+
+    // Try max borrowing from the external protocol
+    // This imitates the frontend
+    function test_e_maxBorrowFromEulerDirect() public noGasMetering {
+        e_maxBorrowFromEulerDirect(eulerWETH, 1e4);
+    }
+
+    // fuzzing entry point for all assets and different warp periods
+    function testFuzz_e_maxBorrowFromEulerDirect(address /* collateralAssets */, uint16 collateralMultiplier) public noGasMetering {
+        e_maxBorrowFromEulerDirect(eulerWETH, collateralMultiplier); // TODO
+    }
+
+    // User wishes to close their collateral vault position by repaying all and withdrawing all
+    function test_e_repayWithdrawAll() public noGasMetering {
+        e_repayWithdrawAll(eulerWETH);
+    }
+
+    // fuzzing entry point for all assets and different warp periods
+    function testFuzz_e_repayWithdrawAll(address collateralAssets) public noGasMetering {
+        e_repayWithdrawAll(collateralAssets);
+    }
+
+    // User Permit2 to repay all
+    function test_e_permit2FirstRepay() public noGasMetering {
+        e_permit2FirstRepay(eulerWETH);
+    }
+
+    function testFuzz_e_permit2FirstRepay(address collateralAssets) public noGasMetering {
+        e_permit2FirstRepay(collateralAssets);
+    }
+
+    function test_e_interestAccrualThenRepay() external noGasMetering {
+        e_interestAccrualThenRepay(eulerWETH);
+    }
+
+    function testFuzz_e_interestAccrualThenRepay(address collateralAssets) external noGasMetering {
+        e_interestAccrualThenRepay(collateralAssets);
+    }
+
+    function test_e_secondBorrow() public noGasMetering {
+        e_secondBorrow(eulerWETH);
+    }
+
+    function testFuzz_e_secondBorrow(address collateralAssets) public noGasMetering {
+        e_secondBorrow(collateralAssets);
+    }
+
+    // user sets their custom LTV before borrowing
+    function test_e_setTwyneLiqLTVNoBorrow() public noGasMetering {
+        e_setTwyneLiqLTVNoBorrow(eulerWETH);
+    }
+
+    function testFuzz_e_setTwyneLiqLTVNoBorrow(address collateralAssets) public noGasMetering {
+        e_setTwyneLiqLTVNoBorrow(collateralAssets);
+    }
+
+    // user sets their custom LTV after borrowing
+    function test_e_setTwyneLiqLTVWithBorrow() public noGasMetering {
+        e_setTwyneLiqLTVWithBorrow(eulerWETH);
+    }
+
+    function testFuzz_e_setTwyneLiqLTVWithBorrow(address collateralAssets) public noGasMetering {
+        e_setTwyneLiqLTVWithBorrow(collateralAssets);
+    }
+
+    function test_e_teleportEulerPosition() public noGasMetering {
+        e_teleportEulerPosition(eulerWETH);
+    }
+
+    function testFuzz_e_teleportEulerPosition(address /* collateralAssets */) public noGasMetering {
+        e_teleportEulerPosition(eulerWETH); // TODO
+    }
+
+    function test_e_IRMTwyneCurve_nonLinearPoint() public noGasMetering {
+        IRMTwyneCurve irm = new IRMTwyneCurve({
+            minInterest_: 0,
+            linearParameter_: 750,
+            polynomialParameter_: 49250,
+            nonlinearPoint_: 5e17
+        });
+
+        uint utilization = irm.nonlinearPoint() - 1;
+        uint linearParameter = irm.linearParameter();
+        uint polynomialParameter = irm.polynomialParameter();
+        uint SECONDS_PER_YEAR =  365.2425 * 86400;
+
+        uint totalAssets = 1e36;
+        uint borrows = utilization * totalAssets / 1e18;
+        uint ir = irm.computeInterestRateView(address(0), totalAssets - borrows, borrows);
+
+        assertEq(ir, linearParameter * utilization * 1e9 / MAXFACTOR / SECONDS_PER_YEAR);
+
+        utilization++;
+        borrows = utilization * totalAssets / 1e18;
+        ir = irm.computeInterestRateView(address(0), totalAssets - borrows, borrows);
+        assertEq(ir, linearParameter * utilization * 1e9 / MAXFACTOR / SECONDS_PER_YEAR);
+
+        utilization++;
+        borrows = utilization * totalAssets / 1e18;
+        ir = irm.computeInterestRateView(address(0), totalAssets - borrows, borrows);
+
+        uint utilTemp4 = (utilization * utilization) / 1e18;
+        // utilization^4
+        utilTemp4 = (utilTemp4 * utilTemp4) / 1e18;
+        // utilization^8
+        uint utilpow = (utilTemp4 * utilTemp4) / 1e18;
+        // utilization^12
+        utilpow = (utilpow * utilTemp4) / 1e18;
+
+        uint ir_expected = ((linearParameter * utilization) + (polynomialParameter * utilpow)) * (1e9 / MAXFACTOR);
+        ir_expected /= SECONDS_PER_YEAR;
+
+        assertEq(ir, ir_expected);
+    }
+
+    function test_e_IRMTwyneCurve_minInterest() public noGasMetering {
+        // minInterest = 100 (1% base rate), linearParameter = 750, polynomialParameter = 49250
+        IRMTwyneCurve irm = new IRMTwyneCurve(100, 750, 49250, 5e17);
+
+        uint SECONDS_PER_YEAR = 365.2425 * 86400;
+        uint totalAssets = 1e36;
+
+        // Test at 0% utilization - should return minInterest only
+        uint ir = irm.computeInterestRateView(address(0), totalAssets, 0);
+        uint expectedIr = (100 * 1e18 * (1e9 / MAXFACTOR)) / SECONDS_PER_YEAR;
+        assertEq(ir, expectedIr, "Interest rate at 0% utilization should equal minInterest");
+
+        // Test at 50% utilization (at nonlinearPoint) - should return minInterest + linear term only
+        uint borrows = 5e17 * totalAssets / 1e18;
+        ir = irm.computeInterestRateView(address(0), totalAssets - borrows, borrows);
+        expectedIr = ((100 * 1e18 + 750 * 5e17) * (1e9 / MAXFACTOR)) / SECONDS_PER_YEAR;
+        assertEq(ir, expectedIr, "Interest rate at 50% utilization incorrect");
+
+        // Test at 80% utilization (above nonlinearPoint) - should include polynomial term
+        borrows = 8e17 * totalAssets / 1e18;
+        ir = irm.computeInterestRateView(address(0), totalAssets - borrows, borrows);
+
+        // Calculate polynomial term for 80% utilization
+        uint utilpow = _computeUtilPow12(8e17);
+        expectedIr = ((100 * 1e18 + 750 * 8e17 + 49250 * utilpow) * (1e9 / MAXFACTOR)) / SECONDS_PER_YEAR;
+        assertEq(ir, expectedIr, "Interest rate at 80% utilization incorrect");
+    }
+
+    function _computeUtilPow12(uint utilization) internal pure returns (uint utilpow) {
+        uint utilTemp4 = (utilization * utilization) / 1e18;
+        utilTemp4 = (utilTemp4 * utilTemp4) / 1e18;
+        utilpow = (utilTemp4 * utilTemp4) / 1e18;
+        utilpow = (utilpow * utilTemp4) / 1e18;
+    }
+
+    function testFuzz_e_IRMTwyneCurve(uint64 _utilization) public noGasMetering {
+        // Note: only do differential fuzzing if DIFFERENTIAL_FUZZ = 1 in .env file
+        // User must manually set "ffi = true" in foundry.toml for this to work
+        uint differentialFuzzing = vm.envUint("DIFFERENTIAL_FUZZ");
+        if (differentialFuzzing == 1) {
+            vm.assume(_utilization <= 1e18);
+            uint utilization = uint(_utilization);
+            IRMTwyneCurve irm = new IRMTwyneCurve({
+                minInterest_: 0,
+                linearParameter_: 750,
+                polynomialParameter_: 49250,
+                nonlinearPoint_: 5e17
+            });
+
+            uint totalAssets = 1e36;
+            uint borrows = utilization * totalAssets / 1e18;
+            uint ir1 = irm.computeInterestRateView(address(0), totalAssets - borrows, borrows);
+
+            // Call Python script via FFI
+            string[] memory cmd = new string[](3);
+            cmd[0] = "python3";
+            cmd[1] = "../py-fuzz/IRMTwyneCurve.py";
+            cmd[2] = vm.toString(utilization);
+
+            bytes memory res = vm.ffi(cmd);
+            uint ir2 = abi.decode(res, (uint));
+
+            assertApproxEqRel(ir1, ir2, 3e16); // 3% margin of error
+        }
+    }
+
+    // Test both direct and batch calls to depositUnderlyingToIntermediateVault
+    function test_e_depositUnderlyingToIntermediateVault() public noGasMetering {
+        e_depositUnderlyingToIntermediateVault(eulerWETH);
+    }
+
+    function testFuzz_e_depositUnderlyingToIntermediateVault(address collateralAssets) public noGasMetering {
+        e_depositUnderlyingToIntermediateVault(collateralAssets);
+    }
+
+    // Test both direct and batch calls to depositETHToIntermediateVault
+    function test_e_depositETHToIntermediateVault() public noGasMetering {
+        e_depositETHToIntermediateVault(eulerWETH);
+    }
+
+    function testFuzz_e_depositETHToIntermediateVault(address collateralAssets) public noGasMetering {
+        e_depositETHToIntermediateVault(collateralAssets);
+    }
+
+    // Test skim function
+    function test_e_skim() public noGasMetering {
+        e_skim(eulerWETH);
+    }
+
+    function testFuzz_e_skim(address collateralAssets) public noGasMetering {
+        e_skim(collateralAssets);
+    }
+
+    // Fuzz test comparing new EulerWrapper implementation with reference (old) implementation
+    function testFuzz_EulerWrapperComparison(uint256 amount) public noGasMetering {
+        amount = bound(amount, 1, 10e18);
+
+        ReferenceEulerWrapper referenceWrapper = new ReferenceEulerWrapper(address(evc), WETH);
+
+        address collateralAsset = eulerWETH;
+        IEVault intermediateVault = IEVault(intermediateVaultFor[collateralAsset]);
+
+        deal(WETH, alice, amount); // Give enough for both tests
+
+        vm.startPrank(alice);
+
+        // Test with reference (old) implementation
+        uint256 snapshot = vm.snapshot();
+
+        // Approve reference wrapper to spend alice's tokens
+        IERC20(WETH).approve(address(referenceWrapper), amount);
+
+        uint256 referenceResult;
+        bool referenceSuccess = true;
+        try referenceWrapper.depositUnderlyingToIntermediateVault(intermediateVault, amount) returns (uint256 result) {
+            referenceResult = result;
+        } catch {
+            referenceSuccess = false;
+        }
+
+        uint256 aliceBalanceAfterReference = IERC20(WETH).balanceOf(alice);
+        uint256 aliceSharesAfterReference = intermediateVault.balanceOf(alice);
+
+        // Revert to snapshot for new implementation test
+        vm.revertTo(snapshot);
+
+        // Test with new implementation
+        IERC20(WETH).approve(address(eulerWrapper), amount);
+
+        uint256 newResult;
+        bool newSuccess = true;
+        try eulerWrapper.depositUnderlyingToIntermediateVault(intermediateVault, amount) returns (uint256 result) {
+            newResult = result;
+        } catch {
+            newSuccess = false;
+        }
+
+        uint256 aliceBalanceAfterNew = IERC20(WETH).balanceOf(alice);
+        uint256 aliceSharesAfterNew = intermediateVault.balanceOf(alice);
+
+        vm.stopPrank();
+
+        // Both implementations should have same success/failure behavior
+        assertEq(newSuccess, referenceSuccess, "Success/failure behavior should match");
+
+        if (referenceSuccess && newSuccess) {
+            // Compare return values
+            assertEq(newResult, referenceResult, "Return values should be equal");
+
+            // Compare user balances after operation
+            assertEq(aliceBalanceAfterNew, aliceBalanceAfterReference, "User balances should be equal");
+            assertEq(aliceSharesAfterNew, aliceSharesAfterReference, "User shares should be equal");
+        }
+    }
+
+    // Fuzz test comparing ETH deposit functionality between implementations
+    function testFuzz_EulerWrapperETHComparison(uint256 amount) public noGasMetering {
+        amount = bound(amount, 1, 10 ether);
+
+        // Deploy reference (old) implementation
+        ReferenceEulerWrapper referenceWrapper = new ReferenceEulerWrapper(address(evc), WETH);
+
+        // Use existing eulerWETH as collateral and get intermediate vault
+        address collateralAsset = eulerWETH;
+        IEVault intermediateVault = IEVault(intermediateVaultFor[collateralAsset]);
+
+        // Give alice enough ETH for both tests
+        deal(alice, amount); // Give enough ETH for both tests
+
+        vm.startPrank(alice);
+
+        // Test with reference (old) implementation
+        uint256 snapshot = vm.snapshot();
+
+        uint256 referenceResult;
+        bool referenceSuccess = true;
+        try referenceWrapper.depositETHToIntermediateVault{value: amount}(intermediateVault) returns (uint256 result) {
+            referenceResult = result;
+        } catch {
+            referenceSuccess = false;
+        }
+
+        uint256 aliceETHBalanceAfterReference = alice.balance;
+        uint256 aliceSharesAfterReference = intermediateVault.balanceOf(alice);
+
+        // Revert to snapshot for new implementation test
+        vm.revertTo(snapshot);
+
+        // Test with new implementation
+        uint256 newResult;
+        bool newSuccess = true;
+        try eulerWrapper.depositETHToIntermediateVault{value: amount}(intermediateVault) returns (uint256 result) {
+            newResult = result;
+        } catch {
+            newSuccess = false;
+        }
+
+        uint256 aliceETHBalanceAfterNew = alice.balance;
+        uint256 aliceSharesAfterNew = intermediateVault.balanceOf(alice);
+
+        vm.stopPrank();
+
+        // Both implementations should have same success/failure behavior
+        assertEq(newSuccess, referenceSuccess, "ETH deposit success/failure behavior should match");
+
+        if (referenceSuccess && newSuccess) {
+            // Compare return values
+            assertEq(newResult, referenceResult, "ETH deposit return values should be equal");
+
+            // Compare user balances after operation
+            assertEq(aliceETHBalanceAfterNew, aliceETHBalanceAfterReference, "Alice ETH balances should be equal");
+            assertEq(aliceSharesAfterNew, aliceSharesAfterReference, "Alice shares from ETH deposit should be equal");
+        }
+    }
+}

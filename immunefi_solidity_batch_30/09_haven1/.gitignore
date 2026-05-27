@@ -1,0 +1,24 @@
+# Dependency directories
+node_modules
+
+# Environment and configuration files
+.env
+
+# Coverage and testing
+coverage
+coverage.json
+**/gas-report.txt
+
+# Typechain generated files
+typechain
+typechain-types
+
+# Build and cache directories
+cache
+artifacts
+
+# System files
+**/.DS_Store
+
+# IDE/editor-specific files
+.vscode

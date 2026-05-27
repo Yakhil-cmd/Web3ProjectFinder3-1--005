@@ -1,0 +1,801 @@
+# SSV Network Smart Contracts
+
+### Intro | [Architecture](./docs/architecture.md) | [Setup](./docs/setup.md) | [Tasks](./docs/tasks.md) | [Local development](./docs/local-dev.md) | [Roles](./docs/roles.md) | [Operator owners](./docs/operators.md)
+### Deep docs | [Specification](./docs/SPEC.md) | [Flows](./docs/FLOWS.md) | [Mainnet upgrade playbook](./docs/UPGRADE_PLAYBOOK.md) | [Deployments](./deployments/README.md)
+
+This repository contains the Solidity smart contracts for the SSV Network `v2.0.0`.
+
+The upgraded system keeps the modular SSV Network architecture while adding ETH-based fee accounting for new clusters, effective-balance-aware charging, an oracle-driven effective balance update flow, SSV staking through `cSSV`, and one-way migration for legacy SSV clusters.
+
+The documentation is divided into different sections:
+
+- **Architecture** explains the system layout, the contract modules, the v2 feature set, the legacy-to-ETH migration model, and the main design assumptions to keep in mind.
+- **Setup** covers local prerequisites, environment configuration, and the minimum steps needed to compile and test the repository.
+- **Tasks** lists the `just` recipes used for day-to-day development, testing, deployment support, and verification.
+- **Local development** focuses on local deployment, fork-based upgrade validation, smoke tests, and where environment-specific configuration lives.
+- **Roles** summarizes the operational actors in the system, including the owner, deployer, oracle set, operator owners, cluster owners, and stakers.
+- **Operator owners** documents operator registration, privacy and whitelisting, ETH fee management, and earnings withdrawal.
+- **Specification / Flows** remain the deep technical source of truth for rules, invariants, and exact execution behavior.
+
+## Quick start
+
+```bash
+npm install
+cp .env.example .env
+just build
+just test-unit
+```
+
+For environment-driven deployments, upgrades, SAFE batch generation, and post-upgrade verification, use [deployments/README.md](./deployments/README.md).
+
+## Repository map
+
+- `contracts/` core contracts, modules, storage libraries, interfaces, and upgrade entrypoints
+- `contracts/modules/` protocol logic split across operators, clusters, validators, DAO, staking, views, and whitelisting modules
+- `contracts/upgrades/mainnet/` dedicated upgrade implementation used for the v2 mainnet rollout
+- `deployments/` per-environment config, results, attestations, and SAFE batch artifacts
+- `scripts/` deployment, upgrade, verification, and support scripts used by the `just` recipes
+- `test/` unit, integration, fork, sanity, and Echidna test suites
+
+## SSV documentation
+
+Check the official [SSV Network smart contracts documentation](https://docs.ssv.network/developers/smart-contracts) for protocol-facing documentation, releases, and higher-level integration guidance.
+
+## How to contribute
+
+### Join the builders
+
+Start getting familiar with DVT staking in the [SSV Discord](https://discord.gg/5vT22pRBrf) and use the `#dev-support` channel for protocol and repository questions.
+
+### Suggest improvements
+
+If you have an improvement for the contracts, tests, or deployment flow, open an issue or PR and include the protocol or operational context behind the suggestion.
+
+## Bug bounty program
+
+SSV Network runs its smart contract bug bounty program through [Immunefi](https://immunefi.com/bounty/ssvnetwork/).
+
+If you believe you found a vulnerability, report it through the [SSV Network Immunefi page](https://immunefi.com/bounty/ssvnetwork/). Follow the program rules there to stay eligible for review and rewards.
+
+<!-- AUDIT_DOSSIER_START -->
+## Protocol State/Value Dossier (Auto-Generated)
+
+Generated (UTC): `2026-05-26T16:59:56Z`  
+Project: `17_ssvnetwork`  
+Solidity files: `89`
+
+### Structure
+Top Solidity directories:
+- `contracts`: 73 `.sol` files
+- `test`: 16 `.sol` files
+
+Pragmas:
+- `0.8.18`
+- `0.8.24`
+- `0.8.4`
+- `^0.8.20`
+- `^0.8.24`
+
+Contracts/Libraries/Interfaces detected: `117`
+
+### Life Total / Balance Values
+Detected accounting/state total variables:
+- `ssvStaking` | type: `address public immutable` | vis: `public` | flags: `immutable` | `CSSVToken` @ `contracts/token/CSSVToken.sol`
+- `SSV_SUPPLY_CAP` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol` = `1_000_000_000 ether`
+- `totalBurned` | type: `uint256 public` | vis: `public` | flags: `-` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol`
+- `totalMinted` | type: `uint256 public` | vis: `public` | flags: `-` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol`
+- `ssvStaking` | type: `address public immutable` | vis: `public` | flags: `immutable` | `CSSVTokenMock` @ `test/echidna/SSVStakingEchidna.sol`
+- `sharesData` | type: `bytes private` | vis: `private` | flags: `-` | `FakeWhitelistingContract` @ `contracts/test/mocks/FakeWhitelistingContract.sol`
+- `effectiveBalance` | type: `uint32 public` | vis: `public` | flags: `-` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `balanceOf` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `NonStandardERC20Mock` @ `contracts/test/mocks/NonStandardERC20Mock.sol`
+- `totalSupply` | type: `uint256 public` | vis: `public` | flags: `-` | `NonStandardERC20Mock` @ `contracts/test/mocks/NonStandardERC20Mock.sol`
+- `totalEthIn` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `totalEthOut` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `totalSsvIn` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `totalSsvOut` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `MAX_STAKE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `1_000_000 ether`
+- `MINIMAL_STAKING_AMOUNT` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `1_000_000_000`
+- `clusterBalanceFloorViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `feeIndexNotCurrentAfterSettle` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `staker1` | type: `StakingUser private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `staker2` | type: `StakingUser private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `totalExpectedBalance` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `DUSTY_RAW_SUPPLY` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol` = `1_000_000_002`
+- `DUSTY_TRUNCATED_SUPPLY` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol` = `1_000_000_000`
+- `commitmentWeightOverSupply` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `daoIndexBlockInFuture` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `feeIndexDecreased` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `feeIndexTrackingInitialized` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `generalizedDustSupply` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `prevEthFeeCurrentIndex` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `prevSsvFeeCurrentIndex` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `totalDaoSsvMintedUnits` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `feeIndexOverflowMissed` | type: `bool private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `feeIndexOverflowSSVMissed` | type: `bool private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `INITIAL_CLUSTER_BALANCE_SSV` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol` = `1_000 * DEDUCTED_DIGITS`
+- `INITIAL_SSV_BALANCE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol` = `1_000_000_000 * DEDUCTED_DIGITS`
+- `INITIAL_SSV_BALANCE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol` = `1_000 * DEDUCTED_DIGITS`
+- `removedFrozenIndex` | type: `mapping(uint64 => uint64) private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `expectedEthBalance` | type: `mapping(uint64 => PackedETH) private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `expectedSsvBalance` | type: `mapping(uint64 => PackedSSV) private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `removalContractBalanceMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `BASELINE_EFFECTIVE_BALANCE` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol` = `32`
+- `EXPLICIT_EFFECTIVE_BALANCE` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol` = `64`
+- `validatorShares` | type: `bytes private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `MINIMAL_STAKING_AMOUNT` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVStaking` @ `contracts/modules/SSVStaking.sol` = `1_000_000_000`
+- `CANONICAL_TEST_STAKE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol` = `1 ether`
+- `MAX_STAKE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol` = `1_000_000 ether`
+- `MINIMAL_STAKING_AMOUNT` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol` = `1_000_000_000`
+- `cssvSupplyDeltaMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `expectedCssvSupply` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `invalidStakeSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `invalidUnstakeSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `totalEthCreditedWei` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `totalEthPaidOutWei` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `unstakeStopsAccrualViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `userIndexSettleMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `totalExpectedBalance` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `expectedTotalValidators` | type: `uint32 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `totalExpectedBalance` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `staking` | type: `IStaking public` | vis: `public` | flags: `-` | `StakingUser` @ `test/echidna/SSVStakingEchidna.sol`
+
+All detected state variables (full list):
+- `ssvContract` | type: `address private` | vis: `private` | flags: `-` | `AttackerContract` @ `contracts/test/mocks/AttackerWhitelistingContract.sol`
+- `beneficiaryContract` | type: `BeneficiaryContract private` | vis: `private` | flags: `-` | `BadOperatorWhitelistingContract` @ `contracts/test/mocks/BadOperatorWhitelistingContract.sol`
+- `whitelisted` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `BasicWhitelisting` @ `contracts/whitelisting/BasicWhitelisting.sol`
+- `ssvContract` | type: `ISSVOperators private` | vis: `private` | flags: `-` | `BeneficiaryContract` @ `contracts/test/mocks/BeneficiaryContract.sol`
+- `targetOperatorId` | type: `uint64 private` | vis: `private` | flags: `-` | `BeneficiaryContract` @ `contracts/test/mocks/BeneficiaryContract.sol`
+- `ssvStaking` | type: `address public immutable` | vis: `public` | flags: `immutable` | `CSSVToken` @ `contracts/token/CSSVToken.sol`
+- `USER1` | type: `address constant` | vis: `default` | flags: `constant` | `CSSVTokenAccessControlEchidna` @ `test/echidna/CSSVTokenAccessControlEchidna.sol` = `address(0x10000)`
+- `attacker` | type: `UnauthorizedMinter public` | vis: `public` | flags: `-` | `CSSVTokenAccessControlEchidna` @ `test/echidna/CSSVTokenAccessControlEchidna.sol`
+- `SSV_SUPPLY_CAP` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol` = `1_000_000_000 ether`
+- `USER1` | type: `address constant` | vis: `default` | flags: `constant` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol` = `address(0x10000)`
+- `USER2` | type: `address constant` | vis: `default` | flags: `constant` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol` = `address(0x20000)`
+- `USER3` | type: `address constant` | vis: `default` | flags: `constant` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol` = `address(0x30000)`
+- `USER4` | type: `address constant` | vis: `default` | flags: `constant` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol` = `address(0x40000)`
+- `callbackCount` | type: `uint256 public` | vis: `public` | flags: `-` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol`
+- `headroomAccountingViolation` | type: `bool public` | vis: `public` | flags: `-` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol`
+- `ssvToken` | type: `MockToken private` | vis: `private` | flags: `-` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol`
+- `totalBurned` | type: `uint256 public` | vis: `public` | flags: `-` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol`
+- `totalMinted` | type: `uint256 public` | vis: `public` | flags: `-` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol`
+- `ssvStaking` | type: `address public immutable` | vis: `public` | flags: `immutable` | `CSSVTokenMock` @ `test/echidna/SSVStakingEchidna.sol`
+- `clusters` | type: `ISSVClusters public` | vis: `public` | flags: `-` | `ClusterUser` @ `test/echidna/SSVAccountingEchidna.sol`
+- `clusters` | type: `ISSVClusters public` | vis: `public` | flags: `-` | `ClusterUser` @ `test/echidna/SSVClustersEchidna.sol`
+- `clusters` | type: `ISSVClusters public` | vis: `public` | flags: `-` | `ClusterUser` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `dao` | type: `ISSVDAO public` | vis: `public` | flags: `-` | `DAOUser` @ `test/echidna/SSVDAOEchidna.sol`
+- `clusters` | type: `ISSVClusters public` | vis: `public` | flags: `-` | `EBUpdateUser` @ `test/echidna/SSVEBProofEchidna.sol`
+- `amount` | type: `uint256 private` | vis: `private` | flags: `-` | `FakeWhitelistingContract` @ `contracts/test/mocks/FakeWhitelistingContract.sol`
+- `clusterData` | type: `Cluster private` | vis: `private` | flags: `-` | `FakeWhitelistingContract` @ `contracts/test/mocks/FakeWhitelistingContract.sol`
+- `operatorIds` | type: `uint64[] private` | vis: `private` | flags: `-` | `FakeWhitelistingContract` @ `contracts/test/mocks/FakeWhitelistingContract.sol`
+- `sharesData` | type: `bytes private` | vis: `private` | flags: `-` | `FakeWhitelistingContract` @ `contracts/test/mocks/FakeWhitelistingContract.sol`
+- `ssvContract` | type: `address private` | vis: `private` | flags: `-` | `FakeWhitelistingContract` @ `contracts/test/mocks/FakeWhitelistingContract.sol`
+- `operators` | type: `ISSVOperators public` | vis: `public` | flags: `-` | `FeeGovUser` @ `test/echidna/SSVOperatorFeeGovEchidna.sol`
+- `ssvContract` | type: `ISSVValidators private` | vis: `private` | flags: `-` | `GenericWhitelistContract` @ `contracts/test/mocks/GenericWhitelistContract.sol`
+- `ssvToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `GenericWhitelistContract` @ `contracts/test/mocks/GenericWhitelistContract.sol`
+- `validators` | type: `ISSVValidators public` | vis: `public` | flags: `-` | `LegacySSVValidatorRemovalUser` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `ssvNetwork` | type: `address public` | vis: `public` | flags: `-` | `MaliciousClaimEthRewards` @ `contracts/test/mocks/MaliciousClaimEthRewards.sol`
+- `cl` | type: `ISSVNetworkCore.Cluster public` | vis: `public` | flags: `-` | `MaliciousLiquidate` @ `contracts/test/mocks/MaliciousLiquidate.sol`
+- `ops` | type: `uint64[] public` | vis: `public` | flags: `-` | `MaliciousLiquidate` @ `contracts/test/mocks/MaliciousLiquidate.sol`
+- `ssvNetwork` | type: `address public` | vis: `public` | flags: `-` | `MaliciousLiquidate` @ `contracts/test/mocks/MaliciousLiquidate.sol`
+- `targetOwner` | type: `address public` | vis: `public` | flags: `-` | `MaliciousLiquidate` @ `contracts/test/mocks/MaliciousLiquidate.sol`
+- `cl` | type: `ISSVNetworkCore.Cluster public` | vis: `public` | flags: `-` | `MaliciousReactivate` @ `contracts/test/mocks/MaliciousReactivate.sol`
+- `ops` | type: `uint64[] public` | vis: `public` | flags: `-` | `MaliciousReactivate` @ `contracts/test/mocks/MaliciousReactivate.sol`
+- `reactivateCl` | type: `ISSVNetworkCore.Cluster public` | vis: `public` | flags: `-` | `MaliciousReactivate` @ `contracts/test/mocks/MaliciousReactivate.sol`
+- `reactivateOps` | type: `uint64[] public` | vis: `public` | flags: `-` | `MaliciousReactivate` @ `contracts/test/mocks/MaliciousReactivate.sol`
+- `ssvNetwork` | type: `address public` | vis: `public` | flags: `-` | `MaliciousReactivate` @ `contracts/test/mocks/MaliciousReactivate.sol`
+- `attemptedReenter` | type: `bool public` | vis: `public` | flags: `-` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `blockNum` | type: `uint64 public` | vis: `public` | flags: `-` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `effectiveBalance` | type: `uint32 public` | vis: `public` | flags: `-` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `liquidationCluster` | type: `ISSVNetworkCore.Cluster public` | vis: `public` | flags: `-` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `liquidationOps` | type: `uint64[] public` | vis: `public` | flags: `-` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `merkleProof` | type: `bytes32[] public` | vis: `public` | flags: `-` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `reenterSucceeded` | type: `bool public` | vis: `public` | flags: `-` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `ssvNetwork` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `withdrawAmount` | type: `uint256 public` | vis: `public` | flags: `-` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `withdrawCluster` | type: `ISSVNetworkCore.Cluster public` | vis: `public` | flags: `-` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `withdrawOps` | type: `uint64[] public` | vis: `public` | flags: `-` | `MaliciousUpdateClusterBalance` @ `contracts/test/mocks/MaliciousUpdateClusterBalance.sol`
+- `amount` | type: `uint256 public` | vis: `public` | flags: `-` | `MaliciousWithdraw` @ `contracts/test/mocks/MaliciousWithdraw.sol`
+- `cl` | type: `ISSVNetworkCore.Cluster public` | vis: `public` | flags: `-` | `MaliciousWithdraw` @ `contracts/test/mocks/MaliciousWithdraw.sol`
+- `ops` | type: `uint64[] public` | vis: `public` | flags: `-` | `MaliciousWithdraw` @ `contracts/test/mocks/MaliciousWithdraw.sol`
+- `ssvNetwork` | type: `address public` | vis: `public` | flags: `-` | `MaliciousWithdraw` @ `contracts/test/mocks/MaliciousWithdraw.sol`
+- `opId` | type: `uint64 public` | vis: `public` | flags: `-` | `MaliciousWithdrawAllOperatorEarnings` @ `contracts/test/mocks/MaliciousWithdrawAllOperatorEarnings.sol`
+- `ssvNetwork` | type: `address public` | vis: `public` | flags: `-` | `MaliciousWithdrawAllOperatorEarnings` @ `contracts/test/mocks/MaliciousWithdrawAllOperatorEarnings.sol`
+- `opId` | type: `uint64 public` | vis: `public` | flags: `-` | `MaliciousWithdrawAllVersionOperatorEarnings` @ `contracts/test/mocks/MaliciousWithdrawAllVersionOperatorEarnings.sol`
+- `ssvNetwork` | type: `address public` | vis: `public` | flags: `-` | `MaliciousWithdrawAllVersionOperatorEarnings` @ `contracts/test/mocks/MaliciousWithdrawAllVersionOperatorEarnings.sol`
+- `amount` | type: `uint256 public` | vis: `public` | flags: `-` | `MaliciousWithdrawOperatorEarnings` @ `contracts/test/mocks/MaliciousWithdrawOperatorEarnings.sol`
+- `opId` | type: `uint64 public` | vis: `public` | flags: `-` | `MaliciousWithdrawOperatorEarnings` @ `contracts/test/mocks/MaliciousWithdrawOperatorEarnings.sol`
+- `ssvNetwork` | type: `address public` | vis: `public` | flags: `-` | `MaliciousWithdrawOperatorEarnings` @ `contracts/test/mocks/MaliciousWithdrawOperatorEarnings.sol`
+- `clusters` | type: `ISSVClusters public` | vis: `public` | flags: `-` | `MigrationClusterUser` @ `test/echidna/SSVMigrationEchidna.sol`
+- `operators` | type: `ISSVOperators public` | vis: `public` | flags: `-` | `MigrationOperatorUser` @ `test/echidna/SSVMigrationEchidna.sol`
+- `whitelisted` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `MockWhitelistingContract` @ `contracts/test/mocks/MockWhitelistingContract.sol`
+- `balanceOf` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `NonStandardERC20Mock` @ `contracts/test/mocks/NonStandardERC20Mock.sol`
+- `decimals` | type: `uint8 public constant` | vis: `public` | flags: `constant` | `NonStandardERC20Mock` @ `contracts/test/mocks/NonStandardERC20Mock.sol` = `18`
+- `name` | type: `string public constant` | vis: `public` | flags: `constant` | `NonStandardERC20Mock` @ `contracts/test/mocks/NonStandardERC20Mock.sol` = `"NonStandardToken"`
+- `symbol` | type: `string public constant` | vis: `public` | flags: `constant` | `NonStandardERC20Mock` @ `contracts/test/mocks/NonStandardERC20Mock.sol` = `"NST"`
+- `totalSupply` | type: `uint256 public` | vis: `public` | flags: `-` | `NonStandardERC20Mock` @ `contracts/test/mocks/NonStandardERC20Mock.sol`
+- `operatorId` | type: `uint64 public` | vis: `public` | flags: `-` | `OperatorEarningsReentrancy` @ `contracts/test/mocks/OperatorEarningsReentrancy.sol`
+- `operators` | type: `ISSVOperators public immutable` | vis: `public` | flags: `immutable` | `OperatorEarningsReentrancy` @ `contracts/test/mocks/OperatorEarningsReentrancy.sol`
+- `reenterAmount` | type: `uint256 public` | vis: `public` | flags: `-` | `OperatorEarningsReentrancy` @ `contracts/test/mocks/OperatorEarningsReentrancy.sol`
+- `reenterSucceeded` | type: `bool public` | vis: `public` | flags: `-` | `OperatorEarningsReentrancy` @ `contracts/test/mocks/OperatorEarningsReentrancy.sol`
+- `reentered` | type: `bool public` | vis: `public` | flags: `-` | `OperatorEarningsReentrancy` @ `contracts/test/mocks/OperatorEarningsReentrancy.sol`
+- `operatorId` | type: `uint64 public` | vis: `public` | flags: `-` | `OperatorEarningsReentrancySSV` @ `contracts/test/mocks/OperatorEarningsReentrancySSV.sol`
+- `operators` | type: `ISSVOperators public immutable` | vis: `public` | flags: `immutable` | `OperatorEarningsReentrancySSV` @ `contracts/test/mocks/OperatorEarningsReentrancySSV.sol`
+- `reenterAmount` | type: `uint256 public` | vis: `public` | flags: `-` | `OperatorEarningsReentrancySSV` @ `contracts/test/mocks/OperatorEarningsReentrancySSV.sol`
+- `reenterSucceeded` | type: `bool public` | vis: `public` | flags: `-` | `OperatorEarningsReentrancySSV` @ `contracts/test/mocks/OperatorEarningsReentrancySSV.sol`
+- `reentered` | type: `bool public` | vis: `public` | flags: `-` | `OperatorEarningsReentrancySSV` @ `contracts/test/mocks/OperatorEarningsReentrancySSV.sol`
+- `token` | type: `IERC20 public immutable` | vis: `public` | flags: `immutable` | `OperatorEarningsReentrancySSV` @ `contracts/test/mocks/OperatorEarningsReentrancySSV.sol`
+- `operators` | type: `ISSVOperators public` | vis: `public` | flags: `-` | `OperatorUser` @ `test/echidna/SSVAccountingEchidna.sol`
+- `operators` | type: `ISSVOperators public` | vis: `public` | flags: `-` | `OperatorUser` @ `test/echidna/SSVClustersEchidna.sol`
+- `operators` | type: `ISSVOperators public` | vis: `public` | flags: `-` | `OperatorUser` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `dao` | type: `ISSVDAO public` | vis: `public` | flags: `-` | `OracleUser` @ `test/echidna/SSVDAOEchidna.sol`
+- `SSV_STORAGE_POSITION` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `RegisterAuth` @ `contracts/deprecated/RegisterAuth.sol` = `uint256(keccak256("ssv.network.storage.auth")) - 1`
+- `DEFAULT_NETWORK_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `PackedETH.wrap(1)`
+- `DEFAULT_NETWORK_SSV_FEE` | type: `PackedSSV private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `PackedSSV.wrap(1)`
+- `DEFAULT_OPERATOR_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `PackedETH.wrap(1)`
+- `DEFAULT_OPERATOR_SSV_FEE` | type: `PackedSSV private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `PackedSSV.wrap(1)`
+- `LIFECYCLE_OPERATORS_KEY` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `2`
+- `MAX_ADVANCE_BLOCKS` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `8`
+- `MAX_ETH_CLUSTERS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `6`
+- `MAX_LIFECYCLE_VALIDATORS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `24`
+- `MAX_SSV_CLUSTERS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `6`
+- `MAX_SSV_MINT_UNITS` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `1_000_000`
+- `MIN_BLOCKS_BEFORE_LIQUIDATION` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `2`
+- `daoSsvOverWithdrawSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `daoSsvWithdrawMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `ethClusters` | type: `mapping(bytes32 => ClusterRecord) private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `lifecycleClusterId` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `lifecycleClusterInitialized` | type: `bool private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `lifecycleClusterPathTouched` | type: `bool private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `lifecycleStateViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `lifecycleUnauthorizedSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `lifecycleValidatorKeyToId` | type: `mapping(bytes32 => uint256) private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `lifecycleValidators` | type: `mapping(uint256 => LifecycleValidatorRecord) private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `liquidator` | type: `ClusterUser private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `migratedClusterIds` | type: `bytes32[] private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `migratedSet` | type: `mapping(bytes32 => bool) private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `nextLifecycleValidatorId` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `op1` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `op2` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `op3` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `opOwner1` | type: `OperatorUser private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `opOwner2` | type: `OperatorUser private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `opOwner3` | type: `OperatorUser private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `operatorIds` | type: `uint64[] private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `operatorOwner` | type: `mapping(uint64 => address) private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `owner1` | type: `ClusterUser private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `owner2` | type: `ClusterUser private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `ssvAccrualCorrupted` | type: `bool private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `ssvClusterIds` | type: `bytes32[] private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `ssvClusters` | type: `mapping(bytes32 => ClusterRecord) private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `totalEthIn` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `totalEthOut` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `totalSsvIn` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `totalSsvOut` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `unallocatedEth` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `unallocatedSsv` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `validatorAttacker` | type: `ValidatorUser private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `validatorOwner` | type: `ValidatorUser private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `HARNESS_DEFAULT_NETWORK_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `PackedETH.wrap(1)`
+- `HARNESS_DEFAULT_OPERATOR_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `PackedETH.wrap(1)`
+- `MAX_ADVANCE_BLOCKS` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `8`
+- `MAX_CLUSTERS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `6`
+- `MAX_STAKE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `1_000_000 ether`
+- `MINIMAL_STAKING_AMOUNT` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `1_000_000_000`
+- `MIN_BLOCKS_BEFORE_LIQUIDATION` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `2`
+- `MIN_BLOCKS_BETWEEN_UPDATES` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `2`
+- `SOLVENCY_BLOCK_WINDOW` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `5_000_000`
+- `attacker` | type: `ClusterUser private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `clusterBalanceFloorViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `clusters` | type: `mapping(bytes32 => ClusterRecord) private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `cssv` | type: `CSSVTokenMock private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `depositLiquidatedViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `dustLiquidationFailed` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `ebSnapshotFutureBlock` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `ebSnapshotRootDecreased` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `ebUpdateFrequencyBypassed` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `ebUpdateNonLatestRootBypassed` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `ebUpdateStalenessBypassed` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `ebUpdateWithoutRootSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `feeIndexNotCurrentAfterSettle` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `feeUsedNewVUnitsOnEbChange` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `implicitEbDefaultViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `inactiveEbUpdateViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `liquidatePayoutMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `liquidatedClusters` | type: `mapping(bytes32 => bool) private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `op1` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `op2` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `op3` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `opOwner1` | type: `OperatorUser private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `opOwner2` | type: `OperatorUser private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `opOwner3` | type: `OperatorUser private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `overWithdrawSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `owner1` | type: `ClusterUser private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `owner2` | type: `ClusterUser private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `reactivateRemovedOperatorsViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `reactivateWhileActiveSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `staker1` | type: `StakingUser private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `staker2` | type: `StakingUser private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `totalExpectedBalance` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `unauthorizedWithdrawSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `withdrawLiquidatedViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `withdrawPayoutMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `CSSV_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `SSVDAO` @ `contracts/modules/SSVDAO.sol`
+- `MINIMAL_LIQUIDATION_THRESHOLD` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVDAO` @ `contracts/modules/SSVDAO.sol` = `21_480`
+- `BPS_DENOMINATOR` | type: `uint16 private constant` | vis: `private` | flags: `constant` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol` = `10_000`
+- `DUSTY_QUORUM_BPS` | type: `uint16 private constant` | vis: `private` | flags: `constant` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol` = `7_500`
+- `DUSTY_RAW_SUPPLY` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol` = `1_000_000_002`
+- `DUSTY_TRUNCATED_SUPPLY` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol` = `1_000_000_000`
+- `MAX_FEE_UNITS` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol` = `1_000_000`
+- `MAX_PERIOD` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol` = `1_000_000`
+- `MAX_QUORUM_BPS` | type: `uint16 private constant` | vis: `private` | flags: `constant` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol` = `10_000`
+- `MINIMAL_LIQUIDATION_THRESHOLD` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol` = `21_480`
+- `attacker` | type: `OracleUser private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `belowOracleCountCommitSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `candidate1` | type: `OracleUser private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `candidate2` | type: `OracleUser private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `commitmentBlockByKey` | type: `mapping(bytes32 => uint64) private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `commitmentRootByKey` | type: `mapping(bytes32 => bytes32) private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `commitmentWeightOverSupply` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `daoEarningsDecreased` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `daoEarningsTrackingInitialized` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `daoIndexBlockInFuture` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `duplicateVoteSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `dustyBlock` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `dustyPrematureCommit` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `dustyRoot` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `dustyRoundSeeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `dustySeedNonce` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `dustyVoteCount` | type: `uint8 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `failedQuorumBlock` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `failedQuorumKey` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `failedQuorumOracleId` | type: `uint32 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `failedQuorumPersistenceViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `failedQuorumRoot` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `failedQuorumTracked` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `feeIndexDecreased` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `feeIndexTrackingInitialized` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `finalizationWithoutQuorum` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `finalizedWeightNotCleared` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `futureCommitSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `generalizedDustBlock` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `generalizedDustCommitmentKeys` | type: `bytes32[] private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `generalizedDustCommitmentTracked` | type: `mapping(bytes32 => bool) private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `generalizedDustExpectedFrozen` | type: `mapping(bytes32 => uint256) private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `generalizedDustRoot` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `generalizedDustRoundSeeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `generalizedDustSupply` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `generalizedDustTruncationViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `lastCommitBlock` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `lastCommitOracle` | type: `OracleUser private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `lastCommitRoot` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `lastCommittedBlock` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `localVotes` | type: `mapping(bytes32 => mapping(uint32 => bool)) private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `nonOracleCommitSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `oracle1` | type: `OracleUser private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `oracle2` | type: `OracleUser private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `oracle3` | type: `OracleUser private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `oracle4` | type: `OracleUser private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `overWithdrawSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `prevEthDaoEarningsUnits` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `prevEthFeeCurrentIndex` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `prevSsvDaoEarningsUnits` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `prevSsvFeeCurrentIndex` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `revoteDifferentRootFailed` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `staleCommitSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `totalDaoSsvMintedUnits` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `touchedCommitmentKeyExists` | type: `mapping(bytes32 => bool) private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `touchedCommitmentKeys` | type: `bytes32[] private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `user1` | type: `DAOUser private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `user2` | type: `DAOUser private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `withdrawMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `MAX_EB_PER_VALIDATOR_ETH` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol` = `2048`
+- `MIN_EB_PER_VALIDATOR` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol` = `32`
+- `VALIDATOR_COUNT` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol` = `4`
+- `clusterId` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol`
+- `clusterOperatorIds` | type: `uint64[] private` | vis: `private` | flags: `-` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol`
+- `clusterOwner` | type: `address private` | vis: `private` | flags: `-` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol`
+- `clusterRecord` | type: `ISSVNetworkCore.Cluster private` | vis: `private` | flags: `-` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol`
+- `ebOutOfBoundsAccepted` | type: `bool private` | vis: `private` | flags: `-` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol`
+- `invalidProofAccepted` | type: `bool private` | vis: `private` | flags: `-` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol`
+- `op1` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol`
+- `snapshotFieldsMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol`
+- `updateUser` | type: `EBUpdateUser private` | vis: `private` | flags: `-` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol`
+- `DEFAULT_ETH_NETWORK_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol` = `PackedETH.wrap(1)`
+- `DEFAULT_OPERATOR_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol` = `PackedETH.wrap(1)`
+- `DEFAULT_OPERATOR_SSV_FEE` | type: `PackedSSV private constant` | vis: `private` | flags: `constant` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol` = `PackedSSV.wrap(1)`
+- `DEFAULT_SSV_NETWORK_FEE` | type: `PackedSSV private constant` | vis: `private` | flags: `constant` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol` = `PackedSSV.wrap(1)`
+- `MAX_ADVANCE_BLOCKS` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol` = `8`
+- `MIN_BLOCKS_BEFORE_LIQUIDATION` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol` = `2`
+- `YOYO_LOOPS` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol` = `3`
+- `clusterId` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `ethAccrualCorrupted` | type: `bool private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `feeIndexOverflowMissed` | type: `bool private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `feeIndexOverflowSSVMissed` | type: `bool private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `liquidator` | type: `ClusterUser private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `op1` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `op2` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `opSpam` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `owner` | type: `ClusterUser private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `packOverflowSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `reactivationVUnitsMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `validatorSpamFailed` | type: `bool private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `yoyoLiquidationFailed` | type: `bool private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `INITIAL_CLUSTER_BALANCE_SSV` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol` = `1_000 * DEDUCTED_DIGITS`
+- `MIN_BLOCKS_BEFORE_LIQ_SSV` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol` = `2`
+- `OPERATOR_SSV_FEE` | type: `PackedSSV private constant` | vis: `private` | flags: `constant` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol` = `PackedSSV.wrap(10)`
+- `VALIDATOR_COUNT` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol` = `2`
+- `clusterId` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol`
+- `clusterOperatorIds` | type: `uint64[] private` | vis: `private` | flags: `-` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol`
+- `liquidationPayoutMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol`
+- `liquidationStateDirty` | type: `bool private` | vis: `private` | flags: `-` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol`
+- `liquidator` | type: `SSVLiquidatorUser private` | vis: `private` | flags: `-` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol`
+- `op1` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol`
+- `op2` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol`
+- `ssvFeesUsedEbViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol`
+- `DEFAULT_NETWORK_SSV_FEE` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol` = `1`
+- `DEFAULT_OPERATOR_SSV_FEE` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol` = `1`
+- `INITIAL_SSV_BALANCE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol` = `1_000_000_000 * DEDUCTED_DIGITS`
+- `INITIAL_VALIDATOR_COUNT` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol` = `2`
+- `activeClusterId` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `activeClusterModel` | type: `ISSVNetworkCore.Cluster private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `activeOwner` | type: `LegacySSVValidatorRemovalUser private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `activeValidatorPresent` | type: `mapping(uint8 => bool) private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `expectedCountedValidators` | type: `uint32 private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `liquidatedClusterId` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `liquidatedClusterModel` | type: `ISSVNetworkCore.Cluster private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `liquidatedOwner` | type: `LegacySSVValidatorRemovalUser private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `liquidatedValidatorPresent` | type: `mapping(uint8 => bool) private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `op1` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `op2` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `op3` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `op4` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `operatorIds` | type: `uint64[] private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `settlementViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `clusters` | type: `ISSVClusters public` | vis: `public` | flags: `-` | `SSVLiquidatorUser` @ `test/echidna/SSVLegacyClustersEchidna.sol`
+- `DEFAULT_NETWORK_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol` = `PackedETH.wrap(1)`
+- `DEFAULT_NETWORK_SSV_FEE` | type: `PackedSSV private constant` | vis: `private` | flags: `constant` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol` = `PackedSSV.wrap(1)`
+- `DEFAULT_OPERATOR_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol` = `PackedETH.wrap(1)`
+- `DEFAULT_OPERATOR_SSV_FEE` | type: `PackedSSV private constant` | vis: `private` | flags: `constant` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol` = `PackedSSV.wrap(1)`
+- `INITIAL_SSV_BALANCE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol` = `1_000 * DEDUCTED_DIGITS`
+- `INITIAL_VALIDATOR_COUNT` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol` = `2`
+- `MAX_ADVANCE_BLOCKS` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol` = `8`
+- `MIN_BLOCKS_BEFORE_LIQUIDATION` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol` = `2`
+- `accountingViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `clusterOwner` | type: `MigrationClusterUser private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `daoValidatorCountBeforeMigration` | type: `uint32 private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `ethDaoValidatorCountBeforeMigration` | type: `uint32 private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `liquidatedMigrationObserved` | type: `bool private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `liquidatedMigrationViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `migratedValidatorCount` | type: `uint32 private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `migrationObserved` | type: `bool private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `migrationValidatorShiftViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `op1` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `op2` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `op3` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `opOwner1` | type: `MigrationOperatorUser private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `opOwner2` | type: `MigrationOperatorUser private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `opOwner3` | type: `MigrationOperatorUser private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `operatorIds` | type: `uint64[] private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `removedBeforeMigration` | type: `mapping(uint64 => bool) private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `removedEthInitViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `removedFrozenIndex` | type: `mapping(uint64 => uint64) private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `removedOperatorVUnitsMutationViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `removedStateViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `removedTracked` | type: `mapping(uint64 => bool) private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `ssvEbUpdateViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `ssvRecord` | type: `SSVClusterRecord private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `unallocatedEth` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `__gap` | type: `uint256[50] private` | vis: `private` | flags: `-` | `SSVNetworkViews` @ `contracts/SSVNetworkViews.sol`
+- `ssvNetwork` | type: `ISSVViews public` | vis: `public` | flags: `-` | `SSVNetworkViews` @ `contracts/SSVNetworkViews.sol`
+- `DEFAULT_MIN_OPERATOR_ETH_FEE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVOperatorFeeGovEchidna` @ `test/echidna/SSVOperatorFeeGovEchidna.sol` = `10_000_000`
+- `MAX_OPERATORS` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVOperatorFeeGovEchidna` @ `test/echidna/SSVOperatorFeeGovEchidna.sol` = `4`
+- `lastOperatorId` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVOperatorFeeGovEchidna` @ `test/echidna/SSVOperatorFeeGovEchidna.sol`
+- `legacyDeclarationExecutable` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorFeeGovEchidna` @ `test/echidna/SSVOperatorFeeGovEchidna.sol`
+- `operatorIds` | type: `uint64[] private` | vis: `private` | flags: `-` | `SSVOperatorFeeGovEchidna` @ `test/echidna/SSVOperatorFeeGovEchidna.sol`
+- `operatorOwner` | type: `mapping(uint64 => address) private` | vis: `private` | flags: `-` | `SSVOperatorFeeGovEchidna` @ `test/echidna/SSVOperatorFeeGovEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVOperatorFeeGovEchidna` @ `test/echidna/SSVOperatorFeeGovEchidna.sol`
+- `user1` | type: `FeeGovUser private` | vis: `private` | flags: `-` | `SSVOperatorFeeGovEchidna` @ `test/echidna/SSVOperatorFeeGovEchidna.sol`
+- `user2` | type: `FeeGovUser private` | vis: `private` | flags: `-` | `SSVOperatorFeeGovEchidna` @ `test/echidna/SSVOperatorFeeGovEchidna.sol`
+- `UPGRADE_TIMESTAMP` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `SSVOperators` @ `contracts/modules/SSVOperators.sol`
+- `DEFAULT_MIN_OPERATOR_ETH_FEE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol` = `10_000_000`
+- `MAX_ADVANCE_BLOCKS` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol` = `8`
+- `MAX_OPERATORS` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol` = `8`
+- `MAX_SSV_MINT_UNITS` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol` = `1_000_000`
+- `attacker` | type: `OperatorUser private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `declareChangedFee` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `declareFromZeroSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `duplicatePkAllowed` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `ensureEthDefaultsViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `ethWithdrawTouchedSSV` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `expectedEthBalance` | type: `mapping(uint64 => PackedETH) private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `expectedSsvBalance` | type: `mapping(uint64 => PackedSSV) private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `feeLatencyMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `feeSettleBeforeChangeViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `invalidExecuteFeeSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `invalidExecuteSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `invalidReduceSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `lastOperatorId` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `nonMonotonicEarnings` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `nonMonotonicId` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `operatorIds` | type: `uint64[] private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `operatorOwner` | type: `mapping(uint64 => address) private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `operatorPk` | type: `mapping(uint64 => bytes32) private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `operatorRegisteredBelowMinFee` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `operatorTracked` | type: `mapping(uint64 => bool) private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `overWithdrawSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `pkToId` | type: `mapping(bytes32 => uint64) private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `removalContractBalanceMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `removalPayoutMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `removedOperatorEarningsViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `removedOperatorOwnerViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `removedStateDirty` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `ssvWithdrawTouchedEth` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `unauthorizedActionSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `user1` | type: `OperatorUser private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `user2` | type: `OperatorUser private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `user3` | type: `OperatorUser private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `withdrawAllNotZero` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `withdrawConservationBroken` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `withdrawPayoutMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `ENTERED` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVReentrancyGuardLib` @ `contracts/libraries/SSVReentrancyGuardLib.sol` = `2`
+- `NOT_ENTERED` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVReentrancyGuardLib` @ `contracts/libraries/SSVReentrancyGuardLib.sol` = `1`
+- `BASELINE_EFFECTIVE_BALANCE` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol` = `32`
+- `DEFAULT_OPERATOR_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol` = `PACKED_ETH_ZERO`
+- `EXPLICIT_EFFECTIVE_BALANCE` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol` = `64`
+- `clusterId` | type: `bytes32 private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `clusterModel` | type: `ISSVNetworkCore.Cluster private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `finalBulkRemovalViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `finalRemovalViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `initialized` | type: `bool private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `liquidationViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `op1` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `op2` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `op3` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `op4` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `operatorRemoved` | type: `bool private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `removedOperatorId` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `removedOperatorId2` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `secondOperatorRemoved` | type: `bool private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `updateDecreaseViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `updateIncreaseViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `validatorPublicKey` | type: `bytes private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `validatorShares` | type: `bytes private` | vis: `private` | flags: `-` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol`
+- `CSSV_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `SSVStaking` @ `contracts/modules/SSVStaking.sol`
+- `MAX_PENDING_REQUESTS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStaking` @ `contracts/modules/SSVStaking.sol` = `2000`
+- `MINIMAL_STAKING_AMOUNT` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVStaking` @ `contracts/modules/SSVStaking.sol` = `1_000_000_000`
+- `ACCRUAL_PRECISION` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol` = `1e18`
+- `CANONICAL_TEST_STAKE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol` = `1 ether`
+- `MAX_PENDING_REQUESTS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol` = `2000`
+- `MAX_REWARD_WINDOW_UNITS` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol` = `1_000_000_000`
+- `MAX_STAKE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol` = `1_000_000 ether`
+- `MINIMAL_STAKING_AMOUNT` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol` = `1_000_000_000`
+- `claimDeltaMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `claimPayoutPrecisionMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `cssv` | type: `CSSVTokenMock private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `cssvSupplyDeltaMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `dustForfeitureViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `expectedCssvSupply` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `freeRewardsOnTransferDetected` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `invalidStakeSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `invalidUnstakeSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `invalidWithdrawSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `payoutAccountingOverflow` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `sawDecrease` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `secondSameBlockClaimPaid` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `syncFeesFailed` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `syncFeesMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `totalEthCreditedWei` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `totalEthPaidOutWei` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `transferSettleMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `unstakeStopsAccrualViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `user1` | type: `StakingUser private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `user2` | type: `StakingUser private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `user3` | type: `StakingUser private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `user4` | type: `StakingUser private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `userIndexSettleMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `withdrawUnlockedBatchViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `zeroCssvAccrualViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `SSV_STORAGE_POSITION` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStorage` @ `contracts/libraries/storage/SSVStorage.sol` = `uint256(keccak256("ssv.network.storage.main")) - 1`
+- `SSV_STORAGE_POSITION` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStorageEB` @ `contracts/libraries/storage/SSVStorageEB.sol` = `uint256(keccak256("ssv.network.storage.eb")) - 1`
+- `SSV_STORAGE_POSITION` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStorageProtocol` @ `contracts/libraries/storage/SSVStorageProtocol.sol` = `uint256(keccak256("ssv.network.storage.protocol")) - 1`
+- `SSV_REENTRANCY_POSITION` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStorageReentrancy` @ `contracts/libraries/storage/SSVStorageReentrancy.sol` = `uint256(keccak256("ssv.network.storage.reentrancy")) - 1`
+- `SSV_STORAGE_POSITION` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVStorageStaking` @ `contracts/libraries/storage/SSVStorageStaking.sol` = `uint256(keccak256("ssv.network.storage.staking")) - 1`
+- `SSV_STORAGE_POSITION` | type: `uint256 constant` | vis: `default` | flags: `constant` | `SSVStorageT` @ `contracts/test/libraries/SSVStorageT.sol` = `uint256(keccak256("ssv.network.storage")) - 1`
+- `MAX_VALIDATORS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol` = `16`
+- `attacker` | type: `ValidatorUser private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `clusters` | type: `mapping(bytes32 => ClusterRecord) private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `duplicateValidatorRegistered` | type: `bool private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `expectedOperatorEthValidators` | type: `mapping(uint64 => uint32) private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `nextValidatorId` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `op1` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `op2` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `op3` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `op4` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `op5` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `op6` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `op7` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `owner1` | type: `ValidatorUser private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `owner2` | type: `ValidatorUser private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `totalExpectedBalance` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `unauthorizedExitSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `unauthorizedRemoveSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `validatorIds` | type: `uint256[] private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `validatorKeyToId` | type: `mapping(bytes32 => uint256) private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `validators` | type: `mapping(uint256 => ValidatorRecord) private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `CSSV_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `SSVViews` @ `contracts/modules/SSVViews.sol`
+- `PRIVATE_FEE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol` = `15_000_000`
+- `PUBLIC_FEE_1` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol` = `10_000_000`
+- `PUBLIC_FEE_2` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol` = `20_000_000`
+- `PUBLIC_FEE_3` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol` = `30_000_000`
+- `REGISTRATION_AMOUNT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol` = `1 ether`
+- `attacker` | type: `WhitelistClusterUser private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `clusters` | type: `mapping(bytes32 => ClusterRecord) private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `contractWhitelistBulkScenarioDone` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `contractWhitelistScenarioDone` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `contractWhitelistViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `contractWhitelistedBulkUser` | type: `WhitelistClusterUser private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `contractWhitelistedUser` | type: `WhitelistClusterUser private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `eoaWhitelistedBulkUser` | type: `WhitelistClusterUser private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `eoaWhitelistedUser` | type: `WhitelistClusterUser private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `expectedOperatorEthValidators` | type: `mapping(uint64 => uint32) private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `expectedTotalValidators` | type: `uint32 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `legacyBulkScenarioDone` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `legacyFeePrepared` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `legacyOwner` | type: `WhitelistOperatorOwner private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `legacyPrivateOp` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `legacyScenarioDone` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `legacyWhitelistViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `mixedZeroBulkScenarioDone` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `mixedZeroFeeViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `mixedZeroScenarioDone` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `mockWhitelistContract` | type: `MockWhitelistingContract private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `nextPkNonce` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `privacyToggleScenarioDone` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `privacyToggleViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `privateFeeOp` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `privateFeeOwner` | type: `WhitelistOperatorOwner private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `privateMutationOp` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `privateMutationOwner` | type: `WhitelistOperatorOwner private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `privateToggleOp` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `privateToggleOwner` | type: `WhitelistOperatorOwner private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `privateZeroOp` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `privateZeroOwner` | type: `WhitelistOperatorOwner private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `publicOp1` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `publicOp2` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `publicOp3` | type: `uint64 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `publicOwner1` | type: `WhitelistOperatorOwner private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `publicOwner2` | type: `WhitelistOperatorOwner private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `publicOwner3` | type: `WhitelistOperatorOwner private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `totalExpectedBalance` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `unauthorizedPrivateRegistrationSucceeded` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `whitelistMutationFeeScenarioDone` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `whitelistMutationFeeViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `cssv` | type: `IERC20 public` | vis: `public` | flags: `-` | `StakingUser` @ `test/echidna/SSVStakingEchidna.sol`
+- `staking` | type: `IStaking public` | vis: `public` | flags: `-` | `StakingUser` @ `test/echidna/SSVStakingEchidna.sol`
+- `token` | type: `IERC20 public` | vis: `public` | flags: `-` | `StakingUser` @ `test/echidna/SSVStakingEchidna.sol`
+- `burnSucceeded` | type: `bool public` | vis: `public` | flags: `-` | `UnauthorizedMinter` @ `test/echidna/CSSVTokenAccessControlEchidna.sol`
+- `mintSucceeded` | type: `bool public` | vis: `public` | flags: `-` | `UnauthorizedMinter` @ `test/echidna/CSSVTokenAccessControlEchidna.sol`
+- `token` | type: `CSSVToken public` | vis: `public` | flags: `-` | `UnauthorizedMinter` @ `test/echidna/CSSVTokenAccessControlEchidna.sol`
+- `MAX_OPERATORS_LENGTH` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `ValidatorLib` @ `contracts/libraries/ValidatorLib.sol` = `13`
+- `MIN_OPERATORS_LENGTH` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `ValidatorLib` @ `contracts/libraries/ValidatorLib.sol` = `4`
+- `MODULO_OPERATORS_LENGTH` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `ValidatorLib` @ `contracts/libraries/ValidatorLib.sol` = `3`
+- `PUBLIC_KEY_LENGTH` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `ValidatorLib` @ `contracts/libraries/ValidatorLib.sol` = `48`
+- `validators` | type: `ISSVValidators public` | vis: `public` | flags: `-` | `ValidatorUser` @ `test/echidna/SSVAccountingEchidna.sol`
+- `validators` | type: `ISSVValidators public` | vis: `public` | flags: `-` | `ValidatorUser` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `validators` | type: `ISSVValidators public` | vis: `public` | flags: `-` | `WhitelistClusterUser` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `operators` | type: `ISSVOperators public` | vis: `public` | flags: `-` | `WhitelistOperatorOwner` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `operatorsWhitelist` | type: `ISSVOperatorsWhitelist public` | vis: `public` | flags: `-` | `WhitelistOperatorOwner` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+
+### Tokens Added / Token State Values
+Detected token-related variables:
+- `ssvToken` | type: `MockToken private` | vis: `private` | flags: `-` | `CSSVTokenEchidna` @ `test/echidna/CSSVTokenEchidna.sol`
+- `ssvToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `GenericWhitelistContract` @ `contracts/test/mocks/GenericWhitelistContract.sol`
+- `token` | type: `IERC20 public immutable` | vis: `public` | flags: `immutable` | `OperatorEarningsReentrancySSV` @ `contracts/test/mocks/OperatorEarningsReentrancySSV.sol`
+- `DEFAULT_NETWORK_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `PackedETH.wrap(1)`
+- `DEFAULT_OPERATOR_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `PackedETH.wrap(1)`
+- `MAX_ETH_CLUSTERS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol` = `6`
+- `ethClusters` | type: `mapping(bytes32 => ClusterRecord) private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `totalEthIn` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `totalEthOut` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `unallocatedEth` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVAccountingEchidna` @ `test/echidna/SSVAccountingEchidna.sol`
+- `HARNESS_DEFAULT_NETWORK_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `PackedETH.wrap(1)`
+- `HARNESS_DEFAULT_OPERATOR_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol` = `PackedETH.wrap(1)`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVClustersEchidna` @ `test/echidna/SSVClustersEchidna.sol`
+- `prevEthDaoEarningsUnits` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `prevEthFeeCurrentIndex` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVDAOEchidna` @ `test/echidna/SSVDAOEchidna.sol`
+- `MAX_EB_PER_VALIDATOR_ETH` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `SSVEBProofEchidna` @ `test/echidna/SSVEBProofEchidna.sol` = `2048`
+- `DEFAULT_ETH_NETWORK_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol` = `PackedETH.wrap(1)`
+- `DEFAULT_OPERATOR_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol` = `PackedETH.wrap(1)`
+- `ethAccrualCorrupted` | type: `bool private` | vis: `private` | flags: `-` | `SSVEdgeCasesEchidna` @ `test/echidna/SSVEdgeCasesEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVLegacyClustersEchidna` @ `test/echidna/SSVLegacyClustersEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVLegacyValidatorRemovalEchidna` @ `test/echidna/SSVLegacyValidatorRemovalEchidna.sol`
+- `DEFAULT_NETWORK_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol` = `PackedETH.wrap(1)`
+- `DEFAULT_OPERATOR_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol` = `PackedETH.wrap(1)`
+- `ethDaoValidatorCountBeforeMigration` | type: `uint32 private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `removedEthInitViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `unallocatedEth` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVMigrationEchidna` @ `test/echidna/SSVMigrationEchidna.sol`
+- `DEFAULT_MIN_OPERATOR_ETH_FEE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVOperatorFeeGovEchidna` @ `test/echidna/SSVOperatorFeeGovEchidna.sol` = `10_000_000`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVOperatorFeeGovEchidna` @ `test/echidna/SSVOperatorFeeGovEchidna.sol`
+- `DEFAULT_MIN_OPERATOR_ETH_FEE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol` = `10_000_000`
+- `ensureEthDefaultsViolation` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `ethWithdrawTouchedSSV` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `expectedEthBalance` | type: `mapping(uint64 => PackedETH) private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `removalPayoutMismatch` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `ssvWithdrawTouchedEth` | type: `bool private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVOperatorsEchidna` @ `test/echidna/SSVOperatorsEchidna.sol`
+- `DEFAULT_OPERATOR_ETH_FEE` | type: `PackedETH private constant` | vis: `private` | flags: `constant` | `SSVRemovedOperatorETHFlowsEchidna` @ `test/echidna/SSVRemovedOperatorETHFlowsEchidna.sol` = `PACKED_ETH_ZERO`
+- `token` | type: `MockToken private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `totalEthCreditedWei` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `totalEthPaidOutWei` | type: `uint256 private` | vis: `private` | flags: `-` | `SSVStakingEchidna` @ `test/echidna/SSVStakingEchidna.sol`
+- `expectedOperatorEthValidators` | type: `mapping(uint64 => uint32) private` | vis: `private` | flags: `-` | `SSVValidatorsEchidna` @ `test/echidna/SSVValidatorsEchidna.sol`
+- `expectedOperatorEthValidators` | type: `mapping(uint64 => uint32) private` | vis: `private` | flags: `-` | `SSVWhitelistValidatorsEchidna` @ `test/echidna/SSVWhitelistValidatorsEchidna.sol`
+- `cssv` | type: `IERC20 public` | vis: `public` | flags: `-` | `StakingUser` @ `test/echidna/SSVStakingEchidna.sol`
+- `token` | type: `IERC20 public` | vis: `public` | flags: `-` | `StakingUser` @ `test/echidna/SSVStakingEchidna.sol`
+- `token` | type: `CSSVToken public` | vis: `public` | flags: `-` | `UnauthorizedMinter` @ `test/echidna/CSSVTokenAccessControlEchidna.sol`
+
+Hardcoded token addresses found:
+- None detected
+
+### Struct Values (All Parsed Struct Fields)
+- `AuthData` (contracts/deprecated/RegisterAuth.sol): mapping(address => Authorization) authorization
+- `Authorization` (contracts/deprecated/RegisterAuth.sol): bool registerOperator, bool registerValidator
+- `Cluster` (contracts/interfaces/ISSVNetworkCore.sol): uint32 validatorCount, uint64 networkFeeIndex, uint64 index, bool active, uint256 balance
+- `Cluster` (contracts/test/mocks/FakeWhitelistingContract.sol): uint32 validatorCount, uint64 networkFeeIndex, uint64 index, bool active, uint256 balance
+- `ClusterEBSnapshot` (contracts/libraries/storage/SSVStorageEB.sol): uint64 vUnits, uint64 lastRootBlockNum, uint64 lastUpdateBlock
+- `ClusterRecord` (test/echidna/SSVAccountingEchidna.sol): ISSVNetworkCore.Cluster cluster, address owner, uint8 operatorsKey, bool exists
+- `ClusterRecord` (test/echidna/SSVClustersEchidna.sol): ISSVNetworkCore.Cluster cluster, address owner, uint8 operatorsKey, bool exists
+- `ClusterRecord` (test/echidna/SSVEdgeCasesEchidna.sol): ISSVNetworkCore.Cluster cluster, address owner, bool exists
+- `ClusterRecord` (test/echidna/SSVValidatorsEchidna.sol): ISSVNetworkCore.Cluster cluster, address owner, uint8 operatorsKey, bool exists
+- `ClusterRecord` (test/echidna/SSVWhitelistValidatorsEchidna.sol): ISSVNetworkCore.Cluster cluster, address owner, uint8 scenario, bool exists
+- `EthSnapshot` (contracts/interfaces/ISSVNetworkCore.sol): uint32 block, uint64 index, PackedETH balance
+- `LastUpdate` (test/echidna/SSVEBProofEchidna.sol): uint64 blockNum, uint32 effectiveBalance, bool occurred
+- `LifecycleValidatorRecord` (test/echidna/SSVAccountingEchidna.sol): bytes publicKey, bool active
+- `NetworkInitParams` (contracts/interfaces/ISSVNetwork.sol): uint64 minimumBlocksBeforeLiquidation, uint256 minimumLiquidationCollateral, uint32 validatorsPerOperatorLimit, uint64 declareOperatorFeePeriod, uint64 executeOperatorFeePeriod, uint64 operatorMaxFeeIncrease, uint32[MAX_DELEGATION_SLOTS] defaultOracleIds, uint16 quorumBps
+- `Operator` (contracts/interfaces/ISSVNetworkCore.sol): uint32 validatorCount, PackedSSV fee, address owner, bool whitelisted, Snapshot snapshot, uint32 ethValidatorCount, PackedETH ethFee, EthSnapshot ethSnapshot
+- `OperatorData` (contracts/interfaces/ISSVViews.sol): address owner, uint256 fee, uint32 validatorCount, address whitelistedAddress, bool isPrivate, bool isActive
+- `OperatorDeclaredFeeData` (contracts/interfaces/ISSVViews.sol): bool isFeeDeclared, uint256 fee, uint64 approvalBeginTime, uint64 approvalEndTime
+- `OperatorFeeChangeRequest` (contracts/interfaces/ISSVNetworkCore.sol): uint64 fee, uint64 approvalBeginTime, uint64 approvalEndTime
+- `OperatorFeePeriodsData` (contracts/interfaces/ISSVViews.sol): uint64 declarePeriod, uint64 executePeriod
+- `PayoutVerifyParams` (test/echidna/SSVStakingEchidna.sol): uint256 accAfterWindow, uint256 expectedPayout, uint256 expectedRemainder, uint256 wrongPayout, uint256 wrongRemainder, bool wrongDiffers
+- `SSVClusterRecord` (test/echidna/SSVLegacyClustersEchidna.sol): ISSVNetworkCore.Cluster cluster, address owner, bool exists
+- `SSVClusterRecord` (test/echidna/SSVMigrationEchidna.sol): ISSVNetworkCore.Cluster cluster, address owner, bool exists
+- `Snapshot` (contracts/interfaces/ISSVNetworkCore.sol): uint32 block, uint64 index, PackedSSV balance
+- `StorageData` (contracts/libraries/storage/SSVStorage.sol): mapping(bytes32 => bytes32) validatorPKs, mapping(bytes32 => bytes32) clusters, mapping(bytes32 => uint64) operatorsPKs, mapping(SSVModules => address) ssvContracts, mapping(uint64 => address) operatorsWhitelist, mapping(uint64 => ISSVNetworkCore.OperatorFeeChangeRequest) operatorFeeChangeRequests, mapping(uint64 => ISSVNetworkCore.Operator) operators, IERC20 token, Counters.Counter lastOperatorId, mapping(address => mapping(uint256 => uint256)) addressWhitelistedForOperators, mapping(bytes32 => bytes32) ethClusters
+- `StorageData` (contracts/test/libraries/SSVStorageT.sol): bytes32 version, IERC20 token, Counters.Counter lastOperatorId, mapping(SSVModules => address) ssvContracts, mapping(bytes32 => uint64) operatorsPKs, mapping(uint64 => ISSVNetworkCore.Operator) operators, mapping(uint64 => address) operatorsWhitelist, mapping(bytes32 => bytes32) validatorPKs, mapping(bytes32 => bytes32) clusters, mapping(uint64 => ISSVNetworkCore.OperatorFeeChangeRequest) operatorFeeChangeRequests, uint64 minOperatorsPerCluster
+- `StorageEB` (contracts/libraries/storage/SSVStorageEB.sol): mapping(uint64 => bytes32) ebRoots, mapping(bytes32 => ClusterEBSnapshot) clusterEB, mapping(uint64 => uint64) operatorEthVUnits, uint64 latestCommittedBlock, uint32 minBlocksBetweenUpdates, mapping(bytes32 => uint256) rootCommitments, mapping(bytes32 => mapping(uint32 => bool)) hasVoted, mapping(bytes32 => uint256) roundFrozenSupply
+- `StorageProtocol` (contracts/libraries/storage/SSVStorageProtocol.sol): uint32 networkFeeIndexBlockNumber, uint32 daoValidatorCount, uint32 daoIndexBlockNumber, uint32 validatorsPerOperatorLimit, PackedSSV networkFee, uint64 networkFeeIndex, PackedSSV daoBalance, uint64 minimumBlocksBeforeLiquidationSSV, PackedSSV minimumLiquidationCollateralSSV, uint64 declareOperatorFeePeriod, uint64 executeOperatorFeePeriod, uint64 operatorMaxFeeIncrease, uint64 operatorMaxFeeSSV, uint32 ethNetworkFeeIndexBlockNumber, uint32 ethDaoValidatorCount, uint32 ethDaoIndexBlockNumber, PackedETH ethNetworkFee, uint64 ethNetworkFeeIndex, PackedETH ethDaoBalance, PackedETH minimumLiquidationCollateral, uint64 minimumBlocksBeforeLiquidation, PackedETH operatorMaxFee, uint64 daoTotalEthVUnits, PackedETH minimumOperatorEthFee
+- `StorageReentrancy` (contracts/libraries/storage/SSVStorageReentrancy.sol): uint256 status
+- `StorageStaking` (contracts/libraries/storage/SSVStorageStaking.sol): uint64 cooldownDuration, PackedETH stakingEthPoolBalance, uint128 accEthPerShare, mapping(address => uint256) userIndex, mapping(address => uint256) accrued, mapping(uint32 => address) oracles, mapping(address => uint32) oracleIdOf, uint32[MAX_DELEGATION_SLOTS] defaultOracleIds, uint16 quorumBps, mapping(address => UnstakeRequest[]) withdrawalRequests
+- `UnstakeRequest` (contracts/libraries/storage/SSVStorageStaking.sol): uint192 amount, uint64 unlockTime
+- `UnstakeRequestsData` (contracts/interfaces/ISSVViews.sol): uint256 amount, uint256 unlockTime
+- `UpdateCtx` (contracts/interfaces/ISSVClusters.sol): address clusterOwner, bytes32 clusterId, uint64 blockNum, uint32 effectiveBalance, bytes32[] merkleProof, uint8 version
+- `ValidatorRecord` (test/echidna/SSVValidatorsEchidna.sol): bytes publicKey, address owner, uint8 operatorsKey, bool active
+
+### Enum State Values
+- `SSVModules` (contracts/libraries/storage/SSVStorage.sol): SSV_OPERATORS, SSV_CLUSTERS, SSV_DAO, SSV_VIEWS, SSV_OPERATORS_WHITELIST, SSV_STAKING, SSV_VALIDATORS
+- `SSVModules` (contracts/test/libraries/SSVStorageT.sol): SSV_OPERATORS, SSV_CLUSTERS, SSV_DAO, SSV_VIEWS
+
+### Invariant Values (Variable-Tied)
+- `sum(balanceOf[*]) == totalSupply` (token balance conservation)
+- Every token address/handle variable must be non-zero and immutable or governance-gated
+- Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition
+
+### Full Raw State Inventory
+- `AUDIT_STATE_VALUES_FULL.json` includes:
+  - all state variables
+  - all total/balance variables
+  - all token variables
+  - all structs and fields
+  - enum values
+<!-- AUDIT_DOSSIER_END -->

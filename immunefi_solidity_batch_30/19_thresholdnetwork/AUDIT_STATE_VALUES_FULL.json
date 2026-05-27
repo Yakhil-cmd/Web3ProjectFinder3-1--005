@@ -1,0 +1,1463 @@
+{
+  "generated_at_utc": "2026-05-26T16:59:57Z",
+  "project": "19_thresholdnetwork",
+  "solidity_file_count": 25,
+  "solidity_files": [
+    "contracts/governance/BaseTokenholderGovernor.sol",
+    "contracts/governance/Checkpoints.sol",
+    "contracts/governance/GovernorParameters.sol",
+    "contracts/governance/IVotesHistory.sol",
+    "contracts/governance/ProxyAdminWithDeputy.sol",
+    "contracts/governance/StakerGovernor.sol",
+    "contracts/governance/StakerGovernorVotes.sol",
+    "contracts/governance/TokenholderGovernor.sol",
+    "contracts/governance/TokenholderGovernorVotes.sol",
+    "contracts/staking/IApplication.sol",
+    "contracts/staking/IApplicationWithDecreaseDelay.sol",
+    "contracts/staking/IApplicationWithOperator.sol",
+    "contracts/staking/IStaking.sol",
+    "contracts/staking/TokenStaking.sol",
+    "contracts/test/SimplePREApplicationStub.sol",
+    "contracts/test/TestGovernorTestSet.sol",
+    "contracts/test/TestStakerGovernorVotes.sol",
+    "contracts/test/TestStakingCheckpoints.sol",
+    "contracts/test/TestToken.sol",
+    "contracts/test/TestTokenholderGovernorVotes.sol",
+    "contracts/test/TokenStakingTestSet.sol",
+    "contracts/test/UpgradesTestSet.sol",
+    "contracts/token/T.sol",
+    "contracts/utils/SafeTUpgradeable.sol",
+    "contracts/vending/VendingMachine.sol"
+  ],
+  "pragmas": [
+    "0.8.9",
+    "^0.8.0",
+    "^0.8.9"
+  ],
+  "top_directories_by_solidity_file_count": [
+    [
+      "contracts",
+      25
+    ]
+  ],
+  "contracts": [
+    {
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "kind": "contract",
+      "name": "ApplicationMock",
+      "bases": [
+        "IApplication"
+      ]
+    },
+    {
+      "file": "contracts/governance/BaseTokenholderGovernor.sol",
+      "kind": "contract",
+      "name": "BaseTokenholderGovernor",
+      "bases": [
+        "AccessControl",
+        "GovernorCountingSimple",
+        "TokenholderGovernorVotes",
+        "GovernorPreventLateQuorum",
+        "GovernorTimelockControl"
+      ]
+    },
+    {
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "kind": "contract",
+      "name": "BrokenApplicationMock",
+      "bases": [
+        "ApplicationMock"
+      ]
+    },
+    {
+      "file": "contracts/governance/Checkpoints.sol",
+      "kind": "abstract contract",
+      "name": "Checkpoints",
+      "bases": [
+        "IVotesHistory"
+      ]
+    },
+    {
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "kind": "contract",
+      "name": "ExpensiveApplicationMock",
+      "bases": [
+        "ApplicationMock"
+      ]
+    },
+    {
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "kind": "contract",
+      "name": "ExtendedTokenStaking",
+      "bases": [
+        "TokenStaking"
+      ]
+    },
+    {
+      "file": "contracts/governance/GovernorParameters.sol",
+      "kind": "abstract contract",
+      "name": "GovernorParameters",
+      "bases": [
+        "Governor"
+      ]
+    },
+    {
+      "file": "contracts/staking/IApplication.sol",
+      "kind": "interface",
+      "name": "IApplication",
+      "bases": []
+    },
+    {
+      "file": "contracts/staking/IApplicationWithDecreaseDelay.sol",
+      "kind": "interface",
+      "name": "IApplicationWithDecreaseDelay",
+      "bases": [
+        "IApplication"
+      ]
+    },
+    {
+      "file": "contracts/staking/IApplicationWithOperator.sol",
+      "kind": "interface",
+      "name": "IApplicationWithOperator",
+      "bases": [
+        "IApplication"
+      ]
+    },
+    {
+      "file": "contracts/staking/IStaking.sol",
+      "kind": "interface",
+      "name": "IStaking",
+      "bases": []
+    },
+    {
+      "file": "contracts/governance/IVotesHistory.sol",
+      "kind": "interface",
+      "name": "IVotesHistory",
+      "bases": []
+    },
+    {
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "kind": "contract",
+      "name": "ManagedGrantMock",
+      "bases": []
+    },
+    {
+      "file": "contracts/governance/ProxyAdminWithDeputy.sol",
+      "kind": "contract",
+      "name": "ProxyAdminWithDeputy",
+      "bases": [
+        "ProxyAdmin"
+      ]
+    },
+    {
+      "file": "contracts/utils/SafeTUpgradeable.sol",
+      "kind": "library",
+      "name": "SafeTUpgradeable",
+      "bases": []
+    },
+    {
+      "file": "contracts/test/SimplePREApplicationStub.sol",
+      "kind": "contract",
+      "name": "SimplePREApplicationStub",
+      "bases": []
+    },
+    {
+      "file": "contracts/test/UpgradesTestSet.sol",
+      "kind": "contract",
+      "name": "SimpleStorage",
+      "bases": []
+    },
+    {
+      "file": "contracts/governance/StakerGovernor.sol",
+      "kind": "contract",
+      "name": "StakerGovernor",
+      "bases": [
+        "AccessControl",
+        "GovernorCountingSimple",
+        "StakerGovernorVotes",
+        "GovernorTimelockControl"
+      ]
+    },
+    {
+      "file": "contracts/governance/StakerGovernorVotes.sol",
+      "kind": "abstract contract",
+      "name": "StakerGovernorVotes",
+      "bases": [
+        "GovernorParameters"
+      ]
+    },
+    {
+      "file": "contracts/token/T.sol",
+      "kind": "contract",
+      "name": "T",
+      "bases": [
+        "ERC20WithPermit",
+        "MisfundRecovery",
+        "Checkpoints"
+      ]
+    },
+    {
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "kind": "contract",
+      "name": "TestGovernorParameters",
+      "bases": [
+        "GovernorParameters"
+      ]
+    },
+    {
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "kind": "contract",
+      "name": "TestStakerGovernor",
+      "bases": [
+        "StakerGovernor"
+      ]
+    },
+    {
+      "file": "contracts/test/TestStakerGovernorVotes.sol",
+      "kind": "contract",
+      "name": "TestStakerGovernorVotes",
+      "bases": [
+        "StakerGovernorVotes"
+      ]
+    },
+    {
+      "file": "contracts/test/TestStakingCheckpoints.sol",
+      "kind": "contract",
+      "name": "TestStakingCheckpoints",
+      "bases": [
+        "Checkpoints"
+      ]
+    },
+    {
+      "file": "contracts/test/TestToken.sol",
+      "kind": "contract",
+      "name": "TestToken",
+      "bases": [
+        "ERC20WithPermit"
+      ]
+    },
+    {
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "kind": "contract",
+      "name": "TestTokenholderGovernor",
+      "bases": [
+        "BaseTokenholderGovernor"
+      ]
+    },
+    {
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "kind": "contract",
+      "name": "TestTokenholderGovernorStub",
+      "bases": []
+    },
+    {
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "kind": "contract",
+      "name": "TestTokenholderGovernorStubV2",
+      "bases": []
+    },
+    {
+      "file": "contracts/test/TestTokenholderGovernorVotes.sol",
+      "kind": "contract",
+      "name": "TestTokenholderGovernorVotes",
+      "bases": [
+        "TokenholderGovernorVotes"
+      ]
+    },
+    {
+      "file": "contracts/staking/TokenStaking.sol",
+      "kind": "contract",
+      "name": "TokenStaking",
+      "bases": [
+        "Initializable",
+        "IStaking",
+        "Checkpoints"
+      ]
+    },
+    {
+      "file": "contracts/governance/TokenholderGovernor.sol",
+      "kind": "contract",
+      "name": "TokenholderGovernor",
+      "bases": [
+        "BaseTokenholderGovernor"
+      ]
+    },
+    {
+      "file": "contracts/governance/TokenholderGovernorVotes.sol",
+      "kind": "abstract contract",
+      "name": "TokenholderGovernorVotes",
+      "bases": [
+        "GovernorParameters"
+      ]
+    },
+    {
+      "file": "contracts/vending/VendingMachine.sol",
+      "kind": "contract",
+      "name": "VendingMachine",
+      "bases": [
+        "IReceiveApproval"
+      ]
+    },
+    {
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "kind": "contract",
+      "name": "VendingMachineMock",
+      "bases": []
+    }
+  ],
+  "enums": [
+    {
+      "file": "contracts/staking/TokenStaking.sol",
+      "enum": "ApplicationStatus",
+      "values": [
+        "NOT_APPROVED",
+        "APPROVED",
+        "PAUSED",
+        "DISABLED"
+      ]
+    },
+    {
+      "file": "contracts/staking/TokenStaking.sol",
+      "enum": "StakeType",
+      "values": [
+        "NU",
+        "KEEP",
+        "T"
+      ]
+    }
+  ],
+  "structs": [
+    {
+      "file": "contracts/staking/TokenStaking.sol",
+      "struct": "AppAuthorization",
+      "fields": [
+        {
+          "name": "authorized",
+          "type": "uint96"
+        },
+        {
+          "name": "deauthorizing",
+          "type": "uint96"
+        }
+      ]
+    },
+    {
+      "file": "contracts/staking/TokenStaking.sol",
+      "struct": "ApplicationInfo",
+      "fields": [
+        {
+          "name": "status",
+          "type": "ApplicationStatus"
+        },
+        {
+          "name": "panicButton",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "contracts/governance/Checkpoints.sol",
+      "struct": "Checkpoint",
+      "fields": [
+        {
+          "name": "fromBlock",
+          "type": "uint32"
+        },
+        {
+          "name": "votes",
+          "type": "uint96"
+        }
+      ]
+    },
+    {
+      "file": "contracts/staking/TokenStaking.sol",
+      "struct": "SlashingEvent",
+      "fields": [
+        {
+          "name": "stakingProvider",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint96"
+        }
+      ]
+    },
+    {
+      "file": "contracts/staking/TokenStaking.sol",
+      "struct": "StakingProviderInfo",
+      "fields": [
+        {
+          "name": "nuInTStake",
+          "type": "uint96"
+        },
+        {
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "name": "keepInTStake",
+          "type": "uint96"
+        },
+        {
+          "name": "beneficiary",
+          "type": "address payable"
+        },
+        {
+          "name": "tStake",
+          "type": "uint96"
+        },
+        {
+          "name": "authorizer",
+          "type": "address"
+        },
+        {
+          "name": "authorizations",
+          "type": "mapping(address => AppAuthorization)"
+        },
+        {
+          "name": "authorizedApplications",
+          "type": "address[]"
+        },
+        {
+          "name": "startStakingTimestamp",
+          "type": "uint256"
+        },
+        {
+          "name": "autoIncrease",
+          "type": "bool"
+        },
+        {
+          "name": "optOutAmount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/test/SimplePREApplicationStub.sol",
+      "struct": "StakingProviderInfo",
+      "fields": [
+        {
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "name": "operatorConfirmed",
+          "type": "bool"
+        },
+        {
+          "name": "operatorStartTimestamp",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "struct": "StakingProviderStruct",
+      "fields": [
+        {
+          "name": "authorized",
+          "type": "uint96"
+        },
+        {
+          "name": "deauthorizingTo",
+          "type": "uint96"
+        }
+      ]
+    }
+  ],
+  "all_state_variables": [
+    {
+      "name": "stakeless",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public stakeless",
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "contract": "ApplicationMock"
+    },
+    {
+      "name": "stakingProviders",
+      "type": "mapping(address => StakingProviderStruct) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => StakingProviderStruct) public stakingProviders",
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "contract": "ApplicationMock"
+    },
+    {
+      "name": "VETO_POWER",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"Power to veto proposals in Threshold's Tokenholder DAO\")",
+      "declaration": "bytes32 public constant VETO_POWER = keccak256(\"Power to veto proposals in Threshold's Tokenholder DAO\")",
+      "file": "contracts/governance/BaseTokenholderGovernor.sol",
+      "contract": "BaseTokenholderGovernor"
+    },
+    {
+      "name": "__gap",
+      "type": "uint256[47] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256[47] private __gap",
+      "file": "contracts/governance/Checkpoints.sol",
+      "contract": "Checkpoints"
+    },
+    {
+      "name": "_checkpoints",
+      "type": "mapping(address => uint128[]) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint128[]) internal _checkpoints",
+      "file": "contracts/governance/Checkpoints.sol",
+      "contract": "Checkpoints"
+    },
+    {
+      "name": "_totalSupplyCheckpoints",
+      "type": "uint128[] internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint128[] internal _totalSupplyCheckpoints",
+      "file": "contracts/governance/Checkpoints.sol",
+      "contract": "Checkpoints"
+    },
+    {
+      "name": "dummy",
+      "type": "uint256[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256[] private dummy",
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "contract": "ExpensiveApplicationMock"
+    },
+    {
+      "name": "skipList",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public skipList",
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "contract": "ExtendedTokenStaking"
+    },
+    {
+      "name": "AVERAGE_BLOCK_TIME_IN_SECONDS",
+      "type": "uint64 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "13",
+      "declaration": "uint64 internal constant AVERAGE_BLOCK_TIME_IN_SECONDS = 13",
+      "file": "contracts/governance/GovernorParameters.sol",
+      "contract": "GovernorParameters"
+    },
+    {
+      "name": "FRACTION_DENOMINATOR",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10000",
+      "declaration": "uint256 public constant FRACTION_DENOMINATOR = 10000",
+      "file": "contracts/governance/GovernorParameters.sol",
+      "contract": "GovernorParameters"
+    },
+    {
+      "name": "_votingDelay",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _votingDelay",
+      "file": "contracts/governance/GovernorParameters.sol",
+      "contract": "GovernorParameters"
+    },
+    {
+      "name": "_votingPeriod",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _votingPeriod",
+      "file": "contracts/governance/GovernorParameters.sol",
+      "contract": "GovernorParameters"
+    },
+    {
+      "name": "proposalThresholdNumerator",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public proposalThresholdNumerator",
+      "file": "contracts/governance/GovernorParameters.sol",
+      "contract": "GovernorParameters"
+    },
+    {
+      "name": "quorumNumerator",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public quorumNumerator",
+      "file": "contracts/governance/GovernorParameters.sol",
+      "contract": "GovernorParameters"
+    },
+    {
+      "name": "grantee",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public grantee",
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "contract": "ManagedGrantMock"
+    },
+    {
+      "name": "deputy",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public deputy",
+      "file": "contracts/governance/ProxyAdminWithDeputy.sol",
+      "contract": "ProxyAdminWithDeputy"
+    },
+    {
+      "name": "implementationVersion",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable implementationVersion",
+      "file": "contracts/test/UpgradesTestSet.sol",
+      "contract": "SimpleStorage"
+    },
+    {
+      "name": "storedValue",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public storedValue",
+      "file": "contracts/test/UpgradesTestSet.sol",
+      "contract": "SimpleStorage"
+    },
+    {
+      "name": "INITIAL_PROPOSAL_THRESHOLD_NUMERATOR",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "25",
+      "declaration": "uint256 private constant INITIAL_PROPOSAL_THRESHOLD_NUMERATOR = 25",
+      "file": "contracts/governance/StakerGovernor.sol",
+      "contract": "StakerGovernor"
+    },
+    {
+      "name": "INITIAL_QUORUM_NUMERATOR",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "150",
+      "declaration": "uint256 private constant INITIAL_QUORUM_NUMERATOR = 150",
+      "file": "contracts/governance/StakerGovernor.sol",
+      "contract": "StakerGovernor"
+    },
+    {
+      "name": "INITIAL_VOTING_DELAY",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2 days / AVERAGE_BLOCK_TIME_IN_SECONDS",
+      "declaration": "uint256 private constant INITIAL_VOTING_DELAY = 2 days / AVERAGE_BLOCK_TIME_IN_SECONDS",
+      "file": "contracts/governance/StakerGovernor.sol",
+      "contract": "StakerGovernor"
+    },
+    {
+      "name": "INITIAL_VOTING_PERIOD",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 days / AVERAGE_BLOCK_TIME_IN_SECONDS",
+      "declaration": "uint256 private constant INITIAL_VOTING_PERIOD = 10 days / AVERAGE_BLOCK_TIME_IN_SECONDS",
+      "file": "contracts/governance/StakerGovernor.sol",
+      "contract": "StakerGovernor"
+    },
+    {
+      "name": "VETO_POWER",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"Power to veto proposals in Threshold's Staker DAO\")",
+      "declaration": "bytes32 public constant VETO_POWER = keccak256(\"Power to veto proposals in Threshold's Staker DAO\")",
+      "file": "contracts/governance/StakerGovernor.sol",
+      "contract": "StakerGovernor"
+    },
+    {
+      "name": "manager",
+      "type": "address internal immutable",
+      "visibility": "internal",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address internal immutable manager",
+      "file": "contracts/governance/StakerGovernor.sol",
+      "contract": "StakerGovernor"
+    },
+    {
+      "name": "staking",
+      "type": "IVotesHistory public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IVotesHistory public immutable staking",
+      "file": "contracts/governance/StakerGovernorVotes.sol",
+      "contract": "StakerGovernorVotes"
+    },
+    {
+      "name": "DELEGATION_TYPEHASH",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256( \"Delegation(address delegatee,uint256 nonce,uint256 deadline)\" )",
+      "declaration": "bytes32 public constant DELEGATION_TYPEHASH = keccak256( \"Delegation(address delegatee,uint256 nonce,uint256 deadline)\" )",
+      "file": "contracts/token/T.sol",
+      "contract": "T"
+    },
+    {
+      "name": "executor",
+      "type": "address internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address internal executor",
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "contract": "TestGovernorParameters"
+    },
+    {
+      "name": "stake",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public stake",
+      "file": "contracts/test/TestStakingCheckpoints.sol",
+      "contract": "TestStakingCheckpoints"
+    },
+    {
+      "name": "tToken",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable tToken",
+      "file": "contracts/test/TestStakingCheckpoints.sol",
+      "contract": "TestStakingCheckpoints"
+    },
+    {
+      "name": "INITIAL_PROPOSAL_THRESHOLD_NUMERATOR",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "25",
+      "declaration": "uint256 private constant INITIAL_PROPOSAL_THRESHOLD_NUMERATOR = 25",
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "contract": "TestTokenholderGovernor"
+    },
+    {
+      "name": "INITIAL_QUORUM_NUMERATOR",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "150",
+      "declaration": "uint256 private constant INITIAL_QUORUM_NUMERATOR = 150",
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "contract": "TestTokenholderGovernor"
+    },
+    {
+      "name": "INITIAL_VOTING_DELAY",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2",
+      "declaration": "uint256 private constant INITIAL_VOTING_DELAY = 2",
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "contract": "TestTokenholderGovernor"
+    },
+    {
+      "name": "INITIAL_VOTING_EXTENSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "4",
+      "declaration": "uint64 private constant INITIAL_VOTING_EXTENSION = 4",
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "contract": "TestTokenholderGovernor"
+    },
+    {
+      "name": "INITIAL_VOTING_PERIOD",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "8",
+      "declaration": "uint256 private constant INITIAL_VOTING_PERIOD = 8",
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "contract": "TestTokenholderGovernor"
+    },
+    {
+      "name": "name",
+      "type": "string public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "\"TokenholderGovernor\"",
+      "declaration": "string public name = \"TokenholderGovernor\"",
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "contract": "TestTokenholderGovernorStub"
+    },
+    {
+      "name": "timelock",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "address(0x42)",
+      "declaration": "address public timelock = address(0x42)",
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "contract": "TestTokenholderGovernorStub"
+    },
+    {
+      "name": "name",
+      "type": "string public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "\"TokenholderGovernor\"",
+      "declaration": "string public name = \"TokenholderGovernor\"",
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "contract": "TestTokenholderGovernorStubV2"
+    },
+    {
+      "name": "timelock",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public timelock",
+      "file": "contracts/test/TestGovernorTestSet.sol",
+      "contract": "TestTokenholderGovernorStubV2"
+    },
+    {
+      "name": "HALF_MAX_STAKE",
+      "type": "uint96 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "MAX_STAKE / 2",
+      "declaration": "uint96 internal constant HALF_MAX_STAKE = MAX_STAKE / 2",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "MAX_STAKE",
+      "type": "uint96 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "15 * 10**(18 + 6)",
+      "declaration": "uint96 internal constant MAX_STAKE = 15 * 10**(18 + 6)",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "TACO_APPLICATION",
+      "type": "address internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x347CC7ede7e5517bD47D20620B2CF1b406edcF07",
+      "declaration": "address internal constant TACO_APPLICATION = 0x347CC7ede7e5517bD47D20620B2CF1b406edcF07",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "applicationInfo",
+      "type": "mapping(address => ApplicationInfo) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => ApplicationInfo) public applicationInfo",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "applications",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public applications",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "authorizationCeiling",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public authorizationCeiling",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "governance",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public governance",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "legacyNotificationReward",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private legacyNotificationReward",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "legacySlashingQueue",
+      "type": "SlashingEvent[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "SlashingEvent[] private legacySlashingQueue",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "legacySlashingQueueIndex",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private legacySlashingQueueIndex",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "legacyStakeDiscrepancyPenalty",
+      "type": "uint96 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint96 private legacyStakeDiscrepancyPenalty",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "legacyStakeDiscrepancyRewardMultiplier",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private legacyStakeDiscrepancyRewardMultiplier",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "minTStakeAmount",
+      "type": "uint96 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint96 public minTStakeAmount",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "notifiersTreasury",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public notifiersTreasury",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "stakingProviders",
+      "type": "mapping(address => StakingProviderInfo) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => StakingProviderInfo) internal stakingProviders",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "token",
+      "type": "T internal immutable",
+      "visibility": "internal",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "T internal immutable token",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "INITIAL_PROPOSAL_THRESHOLD_NUMERATOR",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "25",
+      "declaration": "uint256 private constant INITIAL_PROPOSAL_THRESHOLD_NUMERATOR = 25",
+      "file": "contracts/governance/TokenholderGovernor.sol",
+      "contract": "TokenholderGovernor"
+    },
+    {
+      "name": "INITIAL_QUORUM_NUMERATOR",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "150",
+      "declaration": "uint256 private constant INITIAL_QUORUM_NUMERATOR = 150",
+      "file": "contracts/governance/TokenholderGovernor.sol",
+      "contract": "TokenholderGovernor"
+    },
+    {
+      "name": "INITIAL_VOTING_DELAY",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2 days / AVERAGE_BLOCK_TIME_IN_SECONDS",
+      "declaration": "uint256 private constant INITIAL_VOTING_DELAY = 2 days / AVERAGE_BLOCK_TIME_IN_SECONDS",
+      "file": "contracts/governance/TokenholderGovernor.sol",
+      "contract": "TokenholderGovernor"
+    },
+    {
+      "name": "INITIAL_VOTING_EXTENSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(2 days) / AVERAGE_BLOCK_TIME_IN_SECONDS",
+      "declaration": "uint64 private constant INITIAL_VOTING_EXTENSION = uint64(2 days) / AVERAGE_BLOCK_TIME_IN_SECONDS",
+      "file": "contracts/governance/TokenholderGovernor.sol",
+      "contract": "TokenholderGovernor"
+    },
+    {
+      "name": "INITIAL_VOTING_PERIOD",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 days / AVERAGE_BLOCK_TIME_IN_SECONDS",
+      "declaration": "uint256 private constant INITIAL_VOTING_PERIOD = 10 days / AVERAGE_BLOCK_TIME_IN_SECONDS",
+      "file": "contracts/governance/TokenholderGovernor.sol",
+      "contract": "TokenholderGovernor"
+    },
+    {
+      "name": "staking",
+      "type": "IVotesHistory public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IVotesHistory public immutable staking",
+      "file": "contracts/governance/TokenholderGovernorVotes.sol",
+      "contract": "TokenholderGovernorVotes"
+    },
+    {
+      "name": "token",
+      "type": "IVotesHistory public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IVotesHistory public immutable token",
+      "file": "contracts/governance/TokenholderGovernorVotes.sol",
+      "contract": "TokenholderGovernorVotes"
+    },
+    {
+      "name": "FLOATING_POINT_DIVISOR",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**(18 - WRAPPED_TOKEN_CONVERSION_PRECISION)",
+      "declaration": "uint256 public constant FLOATING_POINT_DIVISOR = 10**(18 - WRAPPED_TOKEN_CONVERSION_PRECISION)",
+      "file": "contracts/vending/VendingMachine.sol",
+      "contract": "VendingMachine"
+    },
+    {
+      "name": "WRAPPED_TOKEN_CONVERSION_PRECISION",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "3",
+      "declaration": "uint256 public constant WRAPPED_TOKEN_CONVERSION_PRECISION = 3",
+      "file": "contracts/vending/VendingMachine.sol",
+      "contract": "VendingMachine"
+    },
+    {
+      "name": "ratio",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable ratio",
+      "file": "contracts/vending/VendingMachine.sol",
+      "contract": "VendingMachine"
+    },
+    {
+      "name": "tToken",
+      "type": "T public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "T public immutable tToken",
+      "file": "contracts/vending/VendingMachine.sol",
+      "contract": "VendingMachine"
+    },
+    {
+      "name": "wrappedBalance",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public wrappedBalance",
+      "file": "contracts/vending/VendingMachine.sol",
+      "contract": "VendingMachine"
+    },
+    {
+      "name": "wrappedToken",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable wrappedToken",
+      "file": "contracts/vending/VendingMachine.sol",
+      "contract": "VendingMachine"
+    },
+    {
+      "name": "FLOATING_POINT_DIVISOR",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**15",
+      "declaration": "uint256 public constant FLOATING_POINT_DIVISOR = 10**15",
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "contract": "VendingMachineMock"
+    },
+    {
+      "name": "ratio",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable ratio",
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "contract": "VendingMachineMock"
+    }
+  ],
+  "total_balance_variables": [
+    {
+      "name": "stakeless",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public stakeless",
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "contract": "ApplicationMock"
+    },
+    {
+      "name": "stakingProviders",
+      "type": "mapping(address => StakingProviderStruct) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => StakingProviderStruct) public stakingProviders",
+      "file": "contracts/test/TokenStakingTestSet.sol",
+      "contract": "ApplicationMock"
+    },
+    {
+      "name": "_totalSupplyCheckpoints",
+      "type": "uint128[] internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint128[] internal _totalSupplyCheckpoints",
+      "file": "contracts/governance/Checkpoints.sol",
+      "contract": "Checkpoints"
+    },
+    {
+      "name": "staking",
+      "type": "IVotesHistory public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IVotesHistory public immutable staking",
+      "file": "contracts/governance/StakerGovernorVotes.sol",
+      "contract": "StakerGovernorVotes"
+    },
+    {
+      "name": "stake",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public stake",
+      "file": "contracts/test/TestStakingCheckpoints.sol",
+      "contract": "TestStakingCheckpoints"
+    },
+    {
+      "name": "HALF_MAX_STAKE",
+      "type": "uint96 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "MAX_STAKE / 2",
+      "declaration": "uint96 internal constant HALF_MAX_STAKE = MAX_STAKE / 2",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "MAX_STAKE",
+      "type": "uint96 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "15 * 10**(18 + 6)",
+      "declaration": "uint96 internal constant MAX_STAKE = 15 * 10**(18 + 6)",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "legacySlashingQueueIndex",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private legacySlashingQueueIndex",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "legacyStakeDiscrepancyPenalty",
+      "type": "uint96 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint96 private legacyStakeDiscrepancyPenalty",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "legacyStakeDiscrepancyRewardMultiplier",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private legacyStakeDiscrepancyRewardMultiplier",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "minTStakeAmount",
+      "type": "uint96 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint96 public minTStakeAmount",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "stakingProviders",
+      "type": "mapping(address => StakingProviderInfo) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => StakingProviderInfo) internal stakingProviders",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "staking",
+      "type": "IVotesHistory public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IVotesHistory public immutable staking",
+      "file": "contracts/governance/TokenholderGovernorVotes.sol",
+      "contract": "TokenholderGovernorVotes"
+    },
+    {
+      "name": "wrappedBalance",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public wrappedBalance",
+      "file": "contracts/vending/VendingMachine.sol",
+      "contract": "VendingMachine"
+    }
+  ],
+  "token_variables": [
+    {
+      "name": "tToken",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable tToken",
+      "file": "contracts/test/TestStakingCheckpoints.sol",
+      "contract": "TestStakingCheckpoints"
+    },
+    {
+      "name": "token",
+      "type": "T internal immutable",
+      "visibility": "internal",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "T internal immutable token",
+      "file": "contracts/staking/TokenStaking.sol",
+      "contract": "TokenStaking"
+    },
+    {
+      "name": "token",
+      "type": "IVotesHistory public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IVotesHistory public immutable token",
+      "file": "contracts/governance/TokenholderGovernorVotes.sol",
+      "contract": "TokenholderGovernorVotes"
+    },
+    {
+      "name": "WRAPPED_TOKEN_CONVERSION_PRECISION",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "3",
+      "declaration": "uint256 public constant WRAPPED_TOKEN_CONVERSION_PRECISION = 3",
+      "file": "contracts/vending/VendingMachine.sol",
+      "contract": "VendingMachine"
+    },
+    {
+      "name": "tToken",
+      "type": "T public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "T public immutable tToken",
+      "file": "contracts/vending/VendingMachine.sol",
+      "contract": "VendingMachine"
+    },
+    {
+      "name": "wrappedToken",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable wrappedToken",
+      "file": "contracts/vending/VendingMachine.sol",
+      "contract": "VendingMachine"
+    }
+  ],
+  "token_addresses_hardcoded": [],
+  "invariant_values": [
+    "Key accounting vars (`_totalSupplyCheckpoints`, `staking`, `staking`, `MAX_STAKE`, `HALF_MAX_STAKE`, `minTStakeAmount`, `legacyStakeDiscrepancyPenalty`, `legacyStakeDiscrepancyRewardMultiplier`) must only change through authorized accounting paths",
+    "Every token address/handle variable must be non-zero and immutable or governance-gated",
+    "Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": false,
+    "printWidth": 80,
+    "arrowParens": "avoid",
+    "overrides": [
+        {
+            "files": "hardhat.config.ts",
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "*.sol",
+            "options": {
+                "printWidth": 80,
+                "tabWidth": 4,
+                "useTabs": false,
+                "singleQuote": false,
+                "bracketSpacing": true,
+                "trailingComma": "none"
+            }
+        },
+        {
+            "files": "*.json",
+            "options": {
+                "printWidth": 100,
+                "tabWidth": 2
+            }
+        }
+    ]
+}

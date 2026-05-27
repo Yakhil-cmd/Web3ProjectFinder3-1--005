@@ -1,0 +1,55 @@
+name: CI with heavy test run
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  FOUNDRY_PROFILE: heavy_ci
+  URL_ETH_MAINNET: ${{ secrets.URL_ETH_MAINNET }}
+  HERMES_RA2_NODE_URL: ${{ secrets.HERMES_RA2_NODE_URL }}
+  CHAINLINK_DATA_STREAMS_API_URL: ${{ secrets.CHAINLINK_DATA_STREAMS_API_URL }}
+  CHAINLINK_DATA_STREAMS_API_KEY: ${{ secrets.CHAINLINK_DATA_STREAMS_API_KEY }}
+  CHAINLINK_DATA_STREAMS_API_SECRET: ${{ secrets.CHAINLINK_DATA_STREAMS_API_SECRET }}
+
+jobs:
+  heavy-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+
+      - uses: actions/checkout@v4
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Install Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: npm ci && forge soldeer install
+
+      - name: Build test_utils
+        run: cargo build --release
+
+      # skip for now
+      #- name: Check gas snapshots
+      #  run: npm run snapshot:check
+
+      - name: Run tests
+        run: forge test --no-match-test "(ForkGasUsage)"
+
+  notify-on-failure:
+    needs: heavy-ci
+    if: ${{ always() && contains(needs.*.result, 'failure') }}
+    uses: ./.github/workflows/notify_failure.yml
+    secrets: inherit

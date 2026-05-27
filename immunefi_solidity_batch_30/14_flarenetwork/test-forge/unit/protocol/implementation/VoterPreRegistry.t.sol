@@ -1,0 +1,516 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import { Test } from "forge-std/Test.sol";
+import { VoterPreRegistry } from "../../../../contracts/protocol/implementation/VoterPreRegistry.sol";
+import { VoterRegistry } from "../../../../contracts/protocol/implementation/VoterRegistry.sol";
+import { IIFlareSystemsCalculator } from "../../../../contracts/protocol/interface/IIFlareSystemsCalculator.sol";
+import { IIFlareSystemsManager } from "../../../../contracts/protocol/interface/IIFlareSystemsManager.sol";
+import { IEntityManager } from "../../../../contracts/userInterfaces/IEntityManager.sol";
+import { IFlareSystemsManager } from "../../../../contracts/userInterfaces/IFlareSystemsManager.sol";
+import { ProtocolsV2Interface } from "../../../../contracts/userInterfaces/LTS/ProtocolsV2Interface.sol";
+import { IVoterPreRegistry } from "../../../../contracts/userInterfaces/IVoterPreRegistry.sol";
+import { IVoterRegistry } from "../../../../contracts/userInterfaces/IVoterRegistry.sol";
+import { Signature } from "../../../../contracts/userInterfaces/ISignature.sol";
+import { PublicKey } from "../../../../contracts/userInterfaces/IPublicKey.sol";
+import { IGovernanceSettings } from "@flarenetwork/flare-periphery-contracts/flare/IGovernanceSettings.sol";
+import { MessageHashUtils } from "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
+
+// solhint-disable-next-line max-states-count
+contract VoterPreRegistryTest is Test {
+
+    VoterPreRegistry private voterPreRegistry;
+    VoterRegistry private voterRegistry;
+    address private mockFlareSystemsManager;
+    address private mockEntityManager;
+    address private mockFlareSystemsCalculator;
+
+    address private governance;
+    address private addressUpdater;
+    address[] private initialVoters;
+    uint256[] private initialVotersSigningPolicyPk; // private keys
+    Signature[] private initialVotersSignatures;
+    uint256[] private initialWeights;
+    bytes32[] private contractNameHashes;
+    address[] private contractAddresses;
+    address[] private initialDelegationAddresses;
+    address[] private initialSubmitAddresses;
+    address[] private initialSubmitSignaturesAddresses;
+    address[] private initialSigningPolicyAddresses;
+    PublicKey[] private initialPublicKeys;
+    bytes20[][] private initialNodeIds;
+    IEntityManager.VoterAddresses[] private initialVotersRegisteredAddresses;
+    uint256[] private initialVotersWeights;
+
+    uint256 private constant UINT16_MAX = type(uint16).max;
+
+    function setUp() public {
+        governance = makeAddr("governance");
+        addressUpdater = makeAddr("addressUpdater");
+
+        _createInitialVoters(4);
+
+        voterRegistry = new VoterRegistry(
+            IGovernanceSettings(makeAddr("governanceSettings")),
+            governance,
+            addressUpdater,
+            4,
+            10,
+            0,
+            0,
+            initialVoters,
+            initialVotersWeights
+        );
+
+        voterPreRegistry = new VoterPreRegistry(addressUpdater);
+
+        //// update contract addresses
+        mockFlareSystemsManager = makeAddr("flareSystemsManager");
+        mockEntityManager = makeAddr("entityManager");
+        mockFlareSystemsCalculator = makeAddr("flareSystemsCalculator");
+        vm.startPrank(addressUpdater);
+        contractNameHashes = new bytes32[](4);
+        contractAddresses = new address[](4);
+        // VoterRegistry
+        contractNameHashes[0] = _keccak256AbiEncode("AddressUpdater");
+        contractNameHashes[1] = _keccak256AbiEncode("FlareSystemsManager");
+        contractNameHashes[2] = _keccak256AbiEncode("EntityManager");
+        contractNameHashes[3] = _keccak256AbiEncode("FlareSystemsCalculator");
+        contractAddresses[0] = addressUpdater;
+        contractAddresses[1] = mockFlareSystemsManager;
+        contractAddresses[2] = mockEntityManager;
+        contractAddresses[3] = mockFlareSystemsCalculator;
+        voterRegistry.updateContractAddresses(contractNameHashes, contractAddresses);
+        // VoterPreRegistry
+        contractNameHashes[3] = _keccak256AbiEncode("VoterRegistry");
+        contractAddresses[3] = address(voterRegistry);
+        voterPreRegistry.updateContractAddresses(contractNameHashes, contractAddresses);
+        vm.stopPrank();
+    }
+
+    function testPreRegisterVoterRevertNotOpened() public {
+        _mockGetCurrentEpochId(10);
+        _mockGetRandomAcquisitionInfo(11, 200);
+
+        Signature memory signature = _createSigningPolicyAddressSignature(0, 11);
+        vm.expectRevert("pre-registration not opened anymore");
+        voterPreRegistry.preRegisterVoter(initialVoters[0], signature);
+    }
+
+    function testPreRegisterVoterRevertInvalidSignature() public {
+        _mockGetCurrentEpochId(10);
+        vm.prank(mockFlareSystemsManager);
+        vm.roll(90);
+        voterRegistry.setNewSigningPolicyInitializationStartBlockNumber(10);
+        _mockGetRandomAcquisitionInfo(11, 0);
+        _mockGetVoterForSigningPolicyAddress(initialSigningPolicyAddresses[0], 90, initialVoters[0]);
+
+        // create signature
+        bytes32 messageHash = keccak256(abi.encode(block.chainid, 11, initialVoters[1]));
+        bytes32 signedMessageHash = MessageHashUtils.toEthSignedMessageHash(messageHash);
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(initialVotersSigningPolicyPk[0], signedMessageHash);
+        Signature memory signature = Signature(v, r, s);
+
+        vm.expectRevert("invalid signature");
+        voterPreRegistry.preRegisterVoter(initialVoters[1], signature);
+    }
+
+    function testPreRegisterVoterRevertNotRegistered() public {
+        _mockGetCurrentEpochId(10);
+        vm.prank(mockFlareSystemsManager);
+        vm.roll(90);
+        voterRegistry.setNewSigningPolicyInitializationStartBlockNumber(10);
+        _mockGetRandomAcquisitionInfo(11, 0);
+        (address newVoterSigningPolicyAddr, uint256 pk) = makeAddrAndKey(
+        "newVoterSigningPolicyAddr");
+        address newVoter = makeAddr("newVoter");
+
+        _mockGetVoterForSigningPolicyAddress(newVoterSigningPolicyAddr, 90, newVoter);
+        // create signature
+        bytes32 messageHash = keccak256(abi.encode(block.chainid, 11, newVoter));
+        bytes32 signedMessageHash = MessageHashUtils.toEthSignedMessageHash(messageHash);
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(pk, signedMessageHash);
+        Signature memory signature = Signature(v, r, s);
+        vm.expectRevert("voter currently not registered");
+        voterPreRegistry.preRegisterVoter(newVoter, signature);
+    }
+
+    function testPreRegisterVoter() public {
+        _mockGetCurrentEpochId(10);
+        _mockGetRandomAcquisitionInfo(11, 0);
+        vm.prank(mockFlareSystemsManager);
+        vm.roll(90);
+        voterRegistry.setNewSigningPolicyInitializationStartBlockNumber(10);
+        _mockGetVoterForSigningPolicyAddress(initialSigningPolicyAddresses[0], 90, initialVoters[0]);
+        Signature memory signature = _createSigningPolicyAddressSignature(0, 11);
+
+        vm.expectEmit();
+        emit IVoterPreRegistry.VoterPreRegistered(initialVoters[0], 11);
+
+        voterPreRegistry.preRegisterVoter(initialVoters[0], signature);
+        Signature memory signature2 = voterPreRegistry.getVoterSignature(11, initialVoters[0]);
+        assertEq(signature2.v, signature.v);
+        assertEq(signature2.r, signature.r);
+        assertEq(signature2.s, signature.s);
+    }
+
+    function testPreRegisterVoterAgainAfterChangingSigningPolicyAddress() public {
+        testPreRegisterVoter();
+        Signature memory signature1 = voterPreRegistry.getVoterSignature(11, initialVoters[0]);
+
+        vm.roll(100);
+        // change the signing policy address and key
+        initialSigningPolicyAddresses[0] = initialSigningPolicyAddresses[1];
+        initialVotersSigningPolicyPk[0] = initialVotersSigningPolicyPk[1];
+        _mockGetVoterForSigningPolicyAddress(initialSigningPolicyAddresses[0], 100, initialVoters[0]);
+        Signature memory signature = _createSigningPolicyAddressSignature(0, 11);
+
+        vm.expectEmit();
+        emit IVoterPreRegistry.VoterPreRegistered(initialVoters[0], 11);
+        voterPreRegistry.preRegisterVoter(initialVoters[0], signature);
+
+        Signature memory signature2 = voterPreRegistry.getVoterSignature(11, initialVoters[0]);
+        assertEq(signature2.v, signature.v);
+        assertEq(signature2.r, signature.r);
+        assertEq(signature2.s, signature.s);
+        assertNotEq(signature2.r, signature1.r);
+        assertNotEq(signature2.s, signature1.s);
+    }
+
+    function testPreRegisterVoters() public {
+        // pre-register all four currently registered voters
+        _mockGetCurrentEpochId(10);
+        _mockGetRandomAcquisitionInfo(11, 0);
+        vm.prank(mockFlareSystemsManager);
+        vm.roll(90);
+        voterRegistry.setNewSigningPolicyInitializationStartBlockNumber(10);
+        for (uint256 i = 0; i < initialVoters.length; i++) {
+            _mockGetVoterForSigningPolicyAddress(initialSigningPolicyAddresses[i], 90, initialVoters[i]);
+            Signature memory signature = _createSigningPolicyAddressSignature(i, 11);
+            initialVotersSignatures[i] = signature;
+            emit IVoterPreRegistry.VoterPreRegistered(initialVoters[i], 11);
+            voterPreRegistry.preRegisterVoter(initialVoters[i], signature);
+        }
+    }
+
+    function testTriggerVoterRegistrationRevertOnlyFSM() public {
+        vm.expectRevert("only flare systems manager");
+        voterPreRegistry.triggerVoterRegistration(11);
+    }
+
+    function testTriggerVoterRegistration() public {
+        testPreRegisterVoters();
+        _mockGetVoterAddressesAt();
+        vm.prank(mockFlareSystemsManager);
+        vm.roll(190);
+        voterRegistry.setNewSigningPolicyInitializationStartBlockNumber(11);
+        _mockGetVoterRegistrationData(210, true);
+        _mockGetDelegationAddressOfAt();
+        _mockVoterWeights();
+        _mockGetPublicKeyOfAt();
+        for (uint256 i = 0; i < initialVoters.length; i++) {
+            vm.expectEmit();
+            emit IVoterRegistry.VoterRegistered(
+                initialVoters[i],
+                uint24(11),
+                initialSigningPolicyAddresses[i],
+                initialSubmitAddresses[i],
+                initialSubmitSignaturesAddresses[i],
+                initialPublicKeys[i],
+                initialVotersWeights[i],
+                initialVotersSignatures[i]
+            );
+        }
+        vm.prank(mockFlareSystemsManager);
+        voterPreRegistry.triggerVoterRegistration(11);
+        assertEq(voterRegistry.getNumberOfRegisteredVoters(11), 4);
+    }
+
+    function testTriggerVoterRegistration1() public {
+        vm.mockCall(
+            mockFlareSystemsManager,
+            abi.encodeWithSelector(IIFlareSystemsManager.signingPolicyMinNumberOfVoters.selector),
+            abi.encode(3)
+        );
+        vm.prank(governance);
+        voterRegistry.setMaxVoters(3);
+        testPreRegisterVoters();
+        _mockGetVoterAddressesAt();
+        vm.prank(mockFlareSystemsManager);
+        vm.roll(190);
+        voterRegistry.setNewSigningPolicyInitializationStartBlockNumber(11);
+        _mockGetVoterRegistrationData(210, true);
+        _mockGetDelegationAddressOfAt();
+        _mockVoterWeights();
+        _mockGetPublicKeyOfAt();
+        for (uint256 i = 0; i < initialVoters.length; i++) {
+            if (i == 3) {
+                vm.expectEmit();
+                emit IVoterRegistry.VoterRemoved(initialVoters[0], 11);
+            }
+            vm.expectEmit();
+            emit IVoterRegistry.VoterRegistered(
+                initialVoters[i],
+                11,
+                initialSigningPolicyAddresses[i],
+                initialSubmitAddresses[i],
+                initialSubmitSignaturesAddresses[i],
+                initialPublicKeys[i],
+                initialVotersWeights[i],
+                initialVotersSignatures[i]
+            );
+        }
+        vm.prank(mockFlareSystemsManager);
+        voterPreRegistry.triggerVoterRegistration(11);
+        assertEq(voterRegistry.getNumberOfRegisteredVoters(11), 3);
+    }
+
+    function testTriggerVoterRegistration2() public {
+        // pre-register all four currently registered voters
+        _mockGetCurrentEpochId(10);
+        _mockGetRandomAcquisitionInfo(11, 0);
+        vm.prank(mockFlareSystemsManager);
+        vm.roll(90);
+        voterRegistry.setNewSigningPolicyInitializationStartBlockNumber(10);
+        // order of pre-registration is different
+        uint256 i = 4;
+        while (i > 0) {
+            i--;
+            _mockGetVoterForSigningPolicyAddress(initialSigningPolicyAddresses[i], 90, initialVoters[i]);
+            Signature memory signature = _createSigningPolicyAddressSignature(i, 11);
+            initialVotersSignatures[i] = signature;
+            emit IVoterPreRegistry.VoterPreRegistered(initialVoters[i], 11);
+            voterPreRegistry.preRegisterVoter(initialVoters[i], signature);
+        }
+
+        vm.mockCall(
+            mockFlareSystemsManager,
+            abi.encodeWithSelector(IIFlareSystemsManager.signingPolicyMinNumberOfVoters.selector),
+            abi.encode(3)
+        );
+        vm.prank(governance);
+        voterRegistry.setMaxVoters(3);
+        _mockGetVoterAddressesAt();
+        vm.prank(mockFlareSystemsManager);
+        vm.roll(190);
+        voterRegistry.setNewSigningPolicyInitializationStartBlockNumber(11);
+        _mockGetVoterRegistrationData(210, true);
+        _mockGetDelegationAddressOfAt();
+        _mockVoterWeights();
+        _mockGetPublicKeyOfAt();
+
+        i = 3;
+        while (i > 0) {
+            vm.expectEmit();
+            emit IVoterRegistry.VoterRegistered(
+                initialVoters[i],
+                11,
+                initialSigningPolicyAddresses[i],
+                initialSubmitAddresses[i],
+                initialSubmitSignaturesAddresses[i],
+                initialPublicKeys[i],
+                initialVotersWeights[i],
+                initialVotersSignatures[i]
+            );
+            i--;
+        }
+        // registration for last voter should fail because max voters is 3 and the last has lowest weight
+        vm.expectEmit();
+        emit IVoterPreRegistry.VoterRegistrationFailed(initialVoters[0], 11);
+        vm.prank(mockFlareSystemsManager);
+        voterPreRegistry.triggerVoterRegistration(11);
+        assertEq(voterRegistry.getNumberOfRegisteredVoters(11), 3);
+    }
+
+    function testGetPreRegisteredVoters() public {
+        testPreRegisterVoters();
+        address[] memory preRegisteredVoters = voterPreRegistry.getPreRegisteredVoters(11);
+        assertEq(preRegisteredVoters.length, 4);
+        for (uint256 i = 0; i < preRegisteredVoters.length; i++) {
+            assertEq(preRegisteredVoters[i], initialVoters[i]);
+        }
+
+        preRegisteredVoters = voterPreRegistry.getPreRegisteredVoters(10);
+        assertEq(preRegisteredVoters.length, 0);
+        preRegisteredVoters = voterPreRegistry.getPreRegisteredVoters(12);
+        assertEq(preRegisteredVoters.length, 0);
+    }
+
+    function testGetPreRegisteredVoters1() public {
+        testTriggerVoterRegistration2();
+        uint256 i = 4;
+        while (i > 0) {
+            i--;
+            assert(voterPreRegistry.isVoterPreRegistered(11, initialVoters[i]));
+        }
+    }
+
+    function testIsVoterPreRegistered() public {
+        testPreRegisterVoters();
+        for (uint256 i = 0; i < initialVoters.length; i++) {
+            assert(voterPreRegistry.isVoterPreRegistered(11, initialVoters[i]));
+        }
+        address newVoter = makeAddr("newVoter");
+        assert(!voterPreRegistry.isVoterPreRegistered(11, newVoter));
+        assert(!voterPreRegistry.isVoterPreRegistered(10, initialVoters[0]));
+        assert(!voterPreRegistry.isVoterPreRegistered(12, initialVoters[0]));
+    }
+
+    function testConstructorCoverage() public {
+        voterPreRegistry = new VoterPreRegistry(addressUpdater);
+    }
+
+    ///// helper functions
+    function _mockGetRandomAcquisitionInfo(uint256 _rewardEpoch, uint256 _randomAcquisitionEndBlock) internal {
+        vm.mockCall(
+            mockFlareSystemsManager,
+            abi.encodeWithSelector(IIFlareSystemsManager.getRandomAcquisitionInfo.selector, _rewardEpoch),
+            abi.encode(50, 100, 150, _randomAcquisitionEndBlock)
+        );
+    }
+
+    function _mockGetVoterForSigningPolicyAddress(
+        address _signingPolicyAddress,
+        uint256 _initBlock,
+        address _voter
+    )
+        internal
+    {
+        vm.mockCall(
+            mockEntityManager,
+            abi.encodeWithSelector(
+                IEntityManager.getVoterForSigningPolicyAddress.selector, _signingPolicyAddress, _initBlock),
+            abi.encode(_voter)
+        );
+    }
+
+    function _createInitialVoters(uint256 _num) internal {
+        for (uint256 i = 0; i < _num; i++) {
+            initialVoters.push(makeAddr(string.concat("initialVoter", vm.toString(i))));
+            initialWeights.push(uint16(UINT16_MAX / _num));
+
+            initialDelegationAddresses.push(makeAddr(
+                string.concat("delegationAddress", vm.toString(i))));
+            initialSubmitAddresses.push(makeAddr(
+                string.concat("submitAddress", vm.toString(i))));
+            initialSubmitSignaturesAddresses.push(makeAddr(
+                string.concat("submitSignaturesAddress", vm.toString(i))));
+
+            (address addr, uint256 pk) = makeAddrAndKey(
+                string.concat("signingPolicyAddress", vm.toString(i)));
+            initialSigningPolicyAddresses.push(addr);
+            initialVotersSigningPolicyPk.push(pk);
+            initialVotersSignatures.push(); // will be filled later
+
+            // registered addresses
+            initialVotersRegisteredAddresses.push(IEntityManager.VoterAddresses(
+                initialSubmitAddresses[i],
+                initialSubmitSignaturesAddresses[i],
+                initialSigningPolicyAddresses[i]
+            ));
+
+            // weights
+            initialVotersWeights.push(100 * (i + 1));
+
+            // public keys
+            if (i == 0) {
+                initialPublicKeys.push(
+                    PublicKey(keccak256(abi.encode("publicKey1")), keccak256(abi.encode("publicKey2")))
+                );
+            } else {
+                initialPublicKeys.push();
+            }
+
+            initialNodeIds.push(new bytes20[](i));
+            for (uint256 j = 0; j < i; j++) {
+                initialNodeIds[i][j] = bytes20(bytes(string.concat("nodeId", vm.toString(i), vm.toString(j))));
+            }
+        }
+    }
+
+    function _mockGetVoterAddressesAt() internal {
+        for (uint256 i = 0; i < initialVoters.length; i++) {
+            vm.mockCall(
+                mockEntityManager,
+                abi.encodeWithSelector(IEntityManager.getVoterAddressesAt.selector, initialVoters[i]),
+                abi.encode(initialVotersRegisteredAddresses[i])
+            );
+        }
+    }
+
+    function _mockGetDelegationAddressOfAt() internal {
+        for (uint256 i = 0; i < initialVoters.length; i++) {
+            vm.mockCall(
+                mockEntityManager,
+                abi.encodeWithSelector(IEntityManager.getDelegationAddressOfAt.selector, initialVoters[i]),
+                abi.encode(initialDelegationAddresses[i])
+            );
+        }
+    }
+
+    function _mockGetPublicKeyOfAt() internal {
+        for (uint256 i = 0; i < initialVoters.length; i++) {
+            vm.mockCall(
+                mockEntityManager,
+                abi.encodeWithSelector(IEntityManager.getPublicKeyOfAt.selector, initialVoters[i]),
+                abi.encode(initialPublicKeys[i].x, initialPublicKeys[i].y)
+            );
+        }
+    }
+
+    function _mockGetCurrentEpochId(uint256 _epochId) internal {
+        vm.mockCall(
+            mockFlareSystemsManager,
+            abi.encodeWithSelector(ProtocolsV2Interface.getCurrentRewardEpochId.selector),
+            abi.encode(_epochId)
+        );
+    }
+
+    function _createSigningPolicyAddressSignature(
+        uint256 _voterIndex,
+        uint256 _nextRewardEpochId
+    )
+        internal
+        returns (
+            Signature memory _signature
+        )
+    {
+        bytes32 messageHash = keccak256(abi.encode(block.chainid, _nextRewardEpochId, initialVoters[_voterIndex]));
+        bytes32 signedMessageHash = MessageHashUtils.toEthSignedMessageHash(messageHash);
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(initialVotersSigningPolicyPk[_voterIndex], signedMessageHash);
+        _signature = Signature(v, r, s);
+    }
+
+    function _mockGetVoterRegistrationData(uint256 _vpBlock, bool _enabled) internal {
+        vm.mockCall(
+            mockFlareSystemsManager,
+            abi.encodeWithSelector(IFlareSystemsManager.getVoterRegistrationData.selector),
+            abi.encode(_vpBlock, _enabled)
+        );
+    }
+
+    // mock calculate weight
+    function _mockVoterWeights() internal {
+        for (uint256 i = 0; i < initialVoters.length; i++) {
+            vm.mockCall(
+                mockFlareSystemsCalculator,
+                abi.encodeWithSelector(
+                    IIFlareSystemsCalculator.calculateRegistrationWeight.selector,initialVoters[i]),
+                abi.encode(initialVotersWeights[i])
+            );
+        }
+    }
+
+    function _mockSigningPolicyMinNumberOfVoters(uint256 _signingPolicyMinNumberOfVoters) internal {
+        vm.mockCall(
+            mockFlareSystemsManager,
+            abi.encodeWithSelector(IIFlareSystemsManager.signingPolicyMinNumberOfVoters.selector),
+            abi.encode(_signingPolicyMinNumberOfVoters)
+        );
+    }
+
+    function _keccak256AbiEncode(string memory _value) internal pure returns(bytes32) {
+        return keccak256(abi.encode(_value));
+    }
+
+}

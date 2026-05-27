@@ -1,0 +1,41 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import { IFtsoFeedIdConverter } from "../../userInterfaces/IFtsoFeedIdConverter.sol";
+
+
+/**
+ * FtsoFeedIdConverter contract.
+ *
+ * This contract is used for converting the feed id to category and name and vice versa.
+ */
+contract FtsoFeedIdConverter is IFtsoFeedIdConverter {
+
+    /**
+     * @inheritdoc IFtsoFeedIdConverter
+     */
+    function getFeedId(uint8 _category, string memory _name) external pure returns(bytes21) {
+        bytes memory nameBytes = bytes(_name);
+        require(nameBytes.length <= 20, "name too long");
+        return bytes21(bytes.concat(bytes1(_category), nameBytes));
+    }
+
+    /**
+     * @inheritdoc IFtsoFeedIdConverter
+     */
+    function getFeedCategoryAndName(bytes21 _feedId) external pure returns(uint8 _category, string memory _name) {
+        _category = uint8(_feedId[0]);
+        uint256 length = 20;
+        while (length > 0) {
+            if (_feedId[length] != 0x00) {
+                break;
+            }
+            length--;
+        }
+        bytes memory nameBytes = new bytes(length);
+        for (uint256 i = 0; i < length; i++) {
+            nameBytes[i] = _feedId[i + 1];
+        }
+        _name = string(nameBytes);
+    }
+}

@@ -1,0 +1,1716 @@
+# Enzyme Blue
+
+[![CI](../../actions/workflows/ci.yaml/badge.svg)](../../actions/workflows/ci.yaml)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+
+Enzyme Blue is an Ethereum-based protocol for decentralized on-chain asset management. It is a protocol for people or entities to manage their wealth & the wealth of others within a customizable and safe environment. It empowers anyone to set up, manage and invest in customized on-chain investment vehicles.
+
+## Security Issues and Bug Bounty
+
+If you find a vulnerability that may affect live deployments, you can submit a report via:
+
+A. Immunefi (https://immunefi.com/bounty/enzymefinance/), or
+
+B. Direct email to [security@enzyme.finance](mailto:security@enzyme.finance)
+
+Please **DO NOT** open a public issue.
+
+## Using this Repository
+
+This is the branch for active development of Enzyme Blue v4.
+
+v4 contract deployments can be found [here](https://docs.enzyme.finance/developers/contracts).
+
+This repository has been migrated from Hardhat to Foundry. Most tests for core v4 system contracts have not been ported from Hardhat. The legacy test suite & test coverage are in the [hardhat branch](https://github.com/enzymefinance/protocol/tree/hardhat).
+
+### Prerequisites
+
+Make sure to have the following installed:
+
+- [foundry](https://github.com/foundry-rs/foundry)
+- [make](https://www.gnu.org/software/make)
+
+Then, clone this repository:
+
+```
+git clone [GIT_REPOSITORY_URL]
+```
+
+### Compile Contracts
+
+Compile contracts, build artifacts, and generate internal interfaces for foundry deployment and tests:
+
+```sh
+make
+```
+
+#### Interface Generation
+
+Interfaces are only generated for items listed in this [interfaces file](/tests/interfaces/interfaces.txt).
+
+### Run Tests
+
+First, create your `.env` file by copying `.env.example`. Input your Ethereum (and/or other networks) node endpoint info as-needed (generally, only setting `ETHEREUM_NODE_MAINNET`, `ETHEREUM_NODE_POLYGON`, etc is fine).
+
+Then, in order to run the test suite:
+
+```sh
+make test
+```
+
+You can also manually run parts of the test suite using `forge` directly, e.g:
+
+```sh
+forge test --match-test <REGEX>
+```
+
+#### Hardhat test coverage
+
+This repository has been migrated from Hardhat to Foundry, and old test suites are still being ported.
+
+If you are looking for the legacy test suite & test coverage please refer to the [hardhat branch](https://github.com/enzymefinance/protocol/tree/hardhat).
+
+## Contributing
+
+See [our contributing instructions](.github/CONTRIBUTING.md).
+
+Please note that all repositories hosted under this organization follow our [Code of Conduct](.github/CODE_OF_CONDUCT.md), make sure to review and follow it.
+
+By contributing, you agree your contribution is licensed under GPL-3.0,
+and may also be sublicensed by Enzyme Foundation under alternative terms (e.g., BUSL-1.1).
+
+## Licensing
+
+- Public: GPL-3.0 (see [LICENSES/GPL-3.0](LICENSES/GPL-3.0))
+- Alternative Terms: The copyright holder, Enzyme Foundation, may license this code under
+  alternative terms (e.g., BUSL-1.1) for affiliated/internal products.
+
+SPDX identifiers:
+
+- Source files in this repo use: `GPL-3.0`.
+- Vendored third-party files retain their original identifiers (e.g., `MIT` for OpenZeppelin).
+
+<!-- AUDIT_DOSSIER_START -->
+## Protocol State/Value Dossier (Auto-Generated)
+
+Generated (UTC): `2026-05-26T17:00:01Z`  
+Project: `28_enzymefinance`  
+Solidity files: `515`
+
+### Structure
+Top Solidity directories:
+- `contracts`: 361 `.sol` files
+- `tests`: 154 `.sol` files
+
+Pragmas:
+- `0.6.12`
+- `0.7.6`
+- `0.8.19`
+- `>=0.6.0 <0.8.0`
+- `>=0.6.0 <0.9.0`
+- `>=0.8.0 <0.9.0`
+
+Contracts/Libraries/Interfaces detected: `630`
+
+### Life Total / Balance Values
+Detected accounting/state total variables:
+- `POOL_ADDRESS_PROVIDER_CONTRACT` | type: `IAaveV3PoolAddressProvider private immutable` | vis: `private` | flags: `immutable` | `AaveV3ATokenListOwner` @ `contracts/persistent/address-list-registry/address-list-owners/AaveV3ATokenListOwner.sol`
+- `AAVE_V3_POOL_CONTRACT` | type: `IAaveV3Pool internal immutable` | vis: `internal` | flags: `immutable` | `AaveV3ActionsMixin` @ `contracts/release/extensions/integration-manager/integrations/utils/0.6.12/actions/AaveV3ActionsMixin.sol`
+- `LENDING_POOL_ADDRESS_PROVIDER_CONTRACT` | type: `IAaveV3PoolAddressProvider public immutable` | vis: `public` | flags: `immutable` | `AaveV3DebtPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/AaveV3DebtPositionLib.sol`
+- `borrowedAssetToDebtToken` | type: `mapping(address => address) internal` | vis: `internal` | flags: `-` | `AaveV3DebtPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/bases/AaveV3DebtPositionLibBase1.sol`
+- `borrowedAssets` | type: `address[] internal` | vis: `internal` | flags: `-` | `AaveV3DebtPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/bases/AaveV3DebtPositionLibBase1.sol`
+- `collateralAssets` | type: `address[] internal` | vis: `internal` | flags: `-` | `AaveV3DebtPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/bases/AaveV3DebtPositionLibBase1.sol`
+- `REPAYMENT_BALANCE_BUFFER` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `AaveV3FlashLoanAssetManagerLib` @ `contracts/persistent/smart-accounts/aave-v3-flash-loan-asset-manager/AaveV3FlashLoanAssetManagerLib.sol` = `2`
+- `borrowedAssetsRecipient` | type: `address internal` | vis: `internal` | flags: `-` | `AaveV3FlashLoanAssetManagerLib` @ `contracts/persistent/smart-accounts/aave-v3-flash-loan-asset-manager/AaveV3FlashLoanAssetManagerLib.sol`
+- `liquidityPoolContract` | type: `address internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `ALICEV2_NATIVE_ASSET_ADDRESS` | type: `address public constant` | vis: `public` | flags: `constant` | `AliceV2PositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/AliceV2PositionLib.sol` = `address(0)`
+- `WRAPPED_NATIVE_ASSET` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ArbitraryLoanPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/ArbitraryLoanPositionLib.sol`
+- `borrowableAmount` | type: `uint256 internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `borrower` | type: `address internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `loanAsset` | type: `address internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `totalBorrowed` | type: `uint128 internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `totalRepaid` | type: `uint128 internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `PROTOCOL_FEE_RESERVE` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `SHARES_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol` = `10 ** 18`
+- `SPECIFIC_ASSET_REDEMPTION_DUMMY_FORFEIT_ADDRESS` | type: `address private constant` | vis: `private` | flags: `constant` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol` = `0x000000000000000000000000000000000000aaaa`
+- `acctToLastSharesBoughtTimestamp` | type: `mapping(address => uint256) internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `autoProtocolFeeSharesBuyback` | type: `bool internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `denominationAsset` | type: `address internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `permissionedVaultActionAllowed` | type: `bool internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `sharesActionTimelock` | type: `uint256 internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `vaultProxy` | type: `address internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_STAKEWISE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `22400000`
+- `ETHEREUM_ETHERFI_LIQUIDITY_POOL` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x308861A430be4cce5502d0A12724771Fc6DaF216`
+- `NATIVE_ASSET_ADDRESS` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`
+- `CVX_CRV_STAKING_CONTRACT` | type: `IConvexBaseRewardPool private immutable` | vis: `private` | flags: `immutable` | `ConvexVotingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/convex-voting/ConvexVotingPositionLib.sol`
+- `ANY_VAULT_CALL` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol` = `0x5bf1898dd28c4d29f33c4c1bb9b8a7e2f6322847d70be63e8f89de024d08a669`
+- `sharesBuyer` | type: `address internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol` = `makeAddr("SharesBuyer")`
+- `vaultInitialBalance` | type: `uint256 internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol` = `1 ether`
+- `vaultOwner` | type: `address internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `vaultProxy` | type: `IVaultLib internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `WRAPPED_NATIVE_ASSET` | type: `IWETH private immutable` | vis: `private` | flags: `immutable` | `DepositWrapper` @ `contracts/release/peripheral/DepositWrapper.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `DeprecatedPositionTest` @ `tests/tests/misc-external-positions/DeprecatedPosition.t.sol`
+- `sharesTokenSymbol` | type: `string private` | vis: `private` | flags: `-` | `Dispatcher` @ `contracts/persistent/dispatcher/Dispatcher.sol`
+- `vaultProxyToFundDeployer` | type: `mapping(address => address) private` | vis: `private` | flags: `-` | `Dispatcher` @ `contracts/persistent/dispatcher/Dispatcher.sol`
+- `vaultProxyToMigrationRequest` | type: `mapping(address => MigrationRequest) private` | vis: `private` | flags: `-` | `Dispatcher` @ `contracts/persistent/dispatcher/Dispatcher.sol`
+- `erc4626Vault` | type: `IERC4626 internal` | vis: `internal` | flags: `-` | `ERC4626AdapterTestBase` @ `tests/tests/protocols/erc4626/ERC4626Adapter.t.sol`
+- `vaultProxy` | type: `IVaultLib internal` | vis: `internal` | flags: `-` | `ERC4626AdapterTestBase` @ `tests/tests/protocols/erc4626/ERC4626Adapter.t.sol`
+- `erc4626Vault` | type: `IERC4626 internal` | vis: `internal` | flags: `-` | `ERC4626PriceFeedTestBase` @ `tests/tests/protocols/erc4626/ERC4626PriceFeed.t.sol`
+- `ERC_4626_ASSET_PRECISION` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `ERC4626RateAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/ERC4626RateAggregator.sol`
+- `ERC_4626_SHARES_PRECISION` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `ERC4626RateAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/ERC4626RateAggregator.sol`
+- `ERC_4626_VAULT` | type: `IERC4626 public immutable` | vis: `public` | flags: `immutable` | `ERC4626RateAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/ERC4626RateAggregator.sol`
+- `childVaultComptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `childVaultDenominationAsset` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `childVaultFundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `childVaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `parentVaultComptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `parentVaultFundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `parentVaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `SHARES_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `EnzymeVaultPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/EnzymeVaultPriceFeed.sol` = `10 ** 18`
+- `SHARES_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `EnzymeVaultPriceFeedTestBase` @ `tests/tests/protocols/enzyme/EnzymeVaultPriceFeed.t.sol` = `10 ** 18`
+- `denominationAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `EnzymeVaultPriceFeedTestBase` @ `tests/tests/protocols/enzyme/EnzymeVaultPriceFeed.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeVaultPriceFeedTestBase` @ `tests/tests/protocols/enzyme/EnzymeVaultPriceFeed.t.sol`
+- `inputAsset` | type: `IERC20` | vis: `default` | flags: `-` | `ExchangeErc20AndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `inputAssetAmount` | type: `uint256` | vis: `default` | flags: `-` | `ExchangeErc20AndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `minExpectedShares` | type: `uint256` | vis: `default` | flags: `-` | `ExchangeErc20AndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `uniV3PoolFee` | type: `uint24` | vis: `default` | flags: `-` | `ExchangeErc20AndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `minExpectedShares` | type: `uint256` | vis: `default` | flags: `-` | `ExchangeEthAndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `nativeAssetAmount` | type: `uint256` | vis: `default` | flags: `-` | `ExchangeEthAndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `uniV3PoolFee` | type: `uint24` | vis: `default` | flags: `-` | `ExchangeEthAndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `comptrollerProxyToVaultProxy` | type: `mapping(address => address) internal` | vis: `internal` | flags: `-` | `ExtensionBase` @ `contracts/release/extensions/utils/ExtensionBase.sol`
+- `VAULT_PROXY` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ExternalPositionProxy` @ `contracts/persistent/external-positions/ExternalPositionProxy.sol`
+- `comptrollerProxyToFeeToSharesOutstanding` | type: `mapping(address => mapping(address => uint256)) private` | vis: `private` | flags: `-` | `FeeManager` @ `contracts/release/extensions/fee-manager/FeeManager.sol`
+- `denominationAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `FundDataProviderRouterTest` @ `tests/tests/persistent/FundDataProviderRouter.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `FundDataProviderRouterTest` @ `tests/tests/persistent/FundDataProviderRouter.t.sol`
+- `ANY_VAULT_CALL` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol` = `0x5bf1898dd28c4d29f33c4c1bb9b8a7e2f6322847d70be63e8f89de024d08a669`
+- `acctToIsAllowedBuySharesOnBehalfCaller` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `vaultCallToPayloadToIsAllowed` | type: `mapping(bytes32 => mapping(bytes32 => bool)) private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `vaultLib` | type: `address private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `vaultProxyToReconfigurationRequest` | type: `mapping(address => ReconfigurationRequest) private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `vaultOwner` | type: `address internal` | vis: `internal` | flags: `-` | `FundDeployerMigrationInTest` @ `tests/tests/core/fund-deployer/FundDeployerMigrationIn.t.sol`
+- `vaultProxyCore` | type: `IVaultCore internal` | vis: `internal` | flags: `-` | `FundDeployerMigrationInTest` @ `tests/tests/core/fund-deployer/FundDeployerMigrationIn.t.sol`
+- `SHARES_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `FundValueCalculator` @ `contracts/release/infrastructure/FundValueCalculator.sol` = `10 ** 18`
+- `CLAIMABLE_COLLATERAL_AMOUNT_DATA_STORE_KEY` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol` = `keccak256(abi.encode("CLAIMABLE_COLLATERAL_AMOUNT"))`
+- `CLAIMABLE_COLLATERAL_TIME_DIVISOR_DATA_STORE_KEY` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol` = `keccak256(abi.encode("CLAIMABLE_COLLATERAL_TIME_DIVISOR"))`
+- `MANAGED_ASSETS_LIB` | type: `GMXV2LeverageTradingPositionLibManagedAssets public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol`
+- `claimableCollateralKeys` | type: `bytes32[] internal` | vis: `internal` | flags: `-` | `GMXV2LeverageTradingPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/bases/GMXV2LeverageTradingPositionLibBase1.sol`
+- `trackedAssets` | type: `address[] internal` | vis: `internal` | flags: `-` | `GMXV2LeverageTradingPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/bases/GMXV2LeverageTradingPositionLibBase1.sol`
+- `CLAIMABLE_COLLATERAL_FACTOR_DATA_STORE_KEY` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `GMXV2LeverageTradingPositionLibManagedAssets` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLibManagedAssets.sol` = `keccak256(abi.encode("CLAIMABLE_COLLATERAL_FACTOR"))`
+- `CLAIMABLE_COLLATERAL_REDUCTION_FACTOR_DATA_STORE_KEY` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `GMXV2LeverageTradingPositionLibManagedAssets` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLibManagedAssets.sol` = `keccak256(abi.encode("CLAIMABLE_COLLATERAL_REDUCTION_FACTOR"))`
+- `CLAIMED_COLLATERAL_AMOUNT_DATA_STORE_KEY` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `GMXV2LeverageTradingPositionMixin` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionMixin.sol` = `keccak256(abi.encode("CLAIMED_COLLATERAL_AMOUNT"))`
+- `DEPOSIT_MAX_TOTAL` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol`
+- `parentVault` | type: `address internal` | vis: `internal` | flags: `-` | `GasRelayPaymasterLibBase1` @ `contracts/release/infrastructure/gas-relayer/bases/GasRelayPaymasterLibBase1.sol`
+- `vaultProxy` | type: `IVaultLib` | vis: `default` | flags: `-` | `GasRelayerTestBase` @ `tests/tests/infrastracture/GasRelayer.t.sol`
+- `NATIVE_ASSET` | type: `address private constant` | vis: `private` | flags: `constant` | `GatedRedemptionQueueSharesWrapperLib` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/GatedRedemptionQueueSharesWrapperLib.sol` = `0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`
+- `WRAPPED_NATIVE_ASSET_CONTRACT` | type: `IWETH private immutable` | vis: `private` | flags: `immutable` | `GatedRedemptionQueueSharesWrapperLib` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/GatedRedemptionQueueSharesWrapperLib.sol`
+- `depositAssetToQueue` | type: `mapping(address => IGatedRedemptionQueueSharesWrapper.DepositQueue) internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `redemptionAsset` | type: `address internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `userToAssetToDepositApproval` | type: `mapping(address => mapping(address => uint256)) internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `vaultProxy` | type: `address internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `USE_NATIVE_ASSET` | type: `bool internal immutable` | vis: `internal` | flags: `immutable` | `GenericWrappingAdapterBase` @ `contracts/release/extensions/integration-manager/integrations/utils/0.8.19/bases/GenericWrappingAdapterBase.sol`
+- `vaultAddress` | type: `address internal` | vis: `internal` | flags: `-` | `HelperDataReaderTest` @ `tests/tests/off-chain/HelperDataReader.t.sol` = `0xbb05D8bd8c8AA18e1aA05d695129dbe95190c2a7`
+- `LEND_AND_STAKE_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("lendAndStake(address,bytes,bytes)"))`
+- `STAKE_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("stake(address,bytes,bytes)"))`
+- `UNSTAKE_AND_REDEEM_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("unstakeAndRedeem(address,bytes,bytes)"))`
+- `UNSTAKE_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("unstake(address,bytes,bytes)"))`
+- `LOCKED_SHARES_ADDRESS` | type: `address private constant` | vis: `private` | flags: `constant` | `MinSharesSupplyFee` @ `contracts/release/extensions/fee-manager/fees/MinSharesSupplyFee.sol` = `address(1)`
+- `MIN_SHARES_SUPPLY` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `MinSharesSupplyFee` @ `contracts/release/extensions/fee-manager/fees/MinSharesSupplyFee.sol` = `1e6`
+- `shareValue` | type: `uint256 public` | vis: `public` | flags: `-` | `MockFundValueCalculator` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol`
+- `targetVaultProxyAddress` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `MockFundValueCalculator` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol`
+- `borrowedAssetsRecipient` | type: `address internal` | vis: `internal` | flags: `-` | `MorphoBlueFlashLoanAssetManagerLib` @ `contracts/persistent/smart-accounts/morpho-blue-flash-loan-asset-manager/MorphoBlueFlashLoanAssetManagerLib.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `ethPeggedAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `ethPeggedAssetAggregator` | type: `TestChainlinkAggregator internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `usdPeggedAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `usdPeggedAssetAggregator` | type: `TestChainlinkAggregator internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `comptrollerProxyToAssetConfigs` | type: `mapping(address => AssetConfig[]) private` | vis: `private` | flags: `-` | `NoDepegPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.8.19/NoDepegPolicyBase.sol`
+- `feeVault` | type: `IParaSwapV6FeeVault internal` | vis: `internal` | flags: `-` | `ParaSwapV6AdapterTestBase` @ `tests/tests/protocols/paraswap-v6/ParaSwapV6Adapter.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `ParaSwapV6AdapterTestBase` @ `tests/tests/protocols/paraswap-v6/ParaSwapV6Adapter.t.sol`
+- `NATIVE_ASSET_ADDRESS` | type: `address private constant` | vis: `private` | flags: `constant` | `PendleV2Adapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/PendleV2Adapter.sol` = `0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`
+- `PENDLE_NATIVE_ASSET_ADDRESS` | type: `address private constant` | vis: `private` | flags: `constant` | `PendleV2Adapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/PendleV2Adapter.sol` = `address(0)`
+- `WRAPPED_NATIVE_ASSET` | type: `IWETH private immutable` | vis: `private` | flags: `immutable` | `PendleV2Adapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/PendleV2Adapter.sol`
+- `SHARE_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PerformanceFee` @ `contracts/release/extensions/fee-manager/fees/PerformanceFee.sol` = `10 ** 18`
+- `PRICELESS_ASSET_BYPASS_TIMELOCK` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `PricelessAssetBypassMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PricelessAssetBypassMixin.sol`
+- `PRICELESS_ASSET_BYPASS_TIME_LIMIT` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `PricelessAssetBypassMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PricelessAssetBypassMixin.sol`
+- `PRICELESS_ASSET_BYPASS_VALUE_INTERPRETER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `PricelessAssetBypassMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PricelessAssetBypassMixin.sol`
+- `PRICELESS_ASSET_BYPASS_WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `PricelessAssetBypassMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PricelessAssetBypassMixin.sol`
+- `comptrollerProxyToAssetToBypassWindowStart` | type: `mapping(address => mapping(address => uint256)) private` | vis: `private` | flags: `-` | `PricelessAssetBypassMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PricelessAssetBypassMixin.sol`
+- `vaultProxyToFeeBpsOverride` | type: `mapping(address => uint256) private` | vis: `private` | flags: `-` | `ProtocolFeeTracker` @ `contracts/release/infrastructure/protocol-fees/ProtocolFeeTracker.sol`
+- `vaultProxyToLastPaid` | type: `mapping(address => uint256) private` | vis: `private` | flags: `-` | `ProtocolFeeTracker` @ `contracts/release/infrastructure/protocol-fees/ProtocolFeeTracker.sol`
+- `vaultProxyAddress` | type: `address private` | vis: `private` | flags: `-` | `SharePriceThrottledAssetManagerLib` @ `contracts/persistent/smart-accounts/share-price-throttled-asset-manager/SharePriceThrottledAssetManagerLib.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `SharePriceThrottledAssetManagerTest` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol` = `makeAddr("VaultProxy")`
+- `SHARES_SPLITTER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `SharesSplitterFactory` @ `contracts/persistent/shares-splitter/SharesSplitterFactory.sol`
+- `sharesAllowances` | type: `mapping(address => mapping(address => uint256)) internal` | vis: `internal` | flags: `-` | `SharesTokenBase` @ `contracts/persistent/vault/utils/SharesTokenBase.sol`
+- `sharesBalances` | type: `mapping(address => uint256) internal` | vis: `internal` | flags: `-` | `SharesTokenBase` @ `contracts/persistent/vault/utils/SharesTokenBase.sol`
+- `sharesName` | type: `string internal` | vis: `internal` | flags: `-` | `SharesTokenBase` @ `contracts/persistent/vault/utils/SharesTokenBase.sol`
+- `sharesSymbol` | type: `string internal` | vis: `internal` | flags: `-` | `SharesTokenBase` @ `contracts/persistent/vault/utils/SharesTokenBase.sol`
+- `sharesTotalSupply` | type: `uint256 internal` | vis: `internal` | flags: `-` | `SharesTokenBase` @ `contracts/persistent/vault/utils/SharesTokenBase.sol`
+- `depositAsset` | type: `IERC20 private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `minDepositAssetAmount` | type: `uint128 private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `vaultProxy` | type: `address private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `SingleAssetDepositQueueTest` @ `tests/tests/persistent/SingleAssetDepositQueue.t.sol`
+- `bypassableSharesThreshold` | type: `uint256 private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `idToSharesAmount` | type: `mapping(uint256 => uint256) private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `redemptionAsset` | type: `IERC20 private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `vaultProxy` | type: `address private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `STADER_STAKE_POOLS_MANAGER` | type: `IStaderStakePoolsManager public immutable` | vis: `public` | flags: `immutable` | `StaderEthXRateEthAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/StaderEthXRateEthAggregator.sol`
+- `STADER_STAKE_POOLS_MANAGER` | type: `IStaderStakePoolsManager public immutable` | vis: `public` | flags: `immutable` | `StaderStakingAdapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/StaderStakingAdapter.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `StaderWithdrawalsPositionTestBase` @ `tests/tests/protocols/stader/StaderWithdrawalsPosition.t.sol`
+- `aavePool` | type: `IAaveV3Pool` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol`
+- `aaveV3DebtPosition` | type: `IAaveV3DebtPositionLib` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `aaveV3FlashLoanAssetManager` | type: `IAaveV3FlashLoanAssetManager` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol`
+- `assetAddresses` | type: `address[]` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol`
+- `borrowAsset` | type: `IERC20` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/MorphoBlueFlashLoanAssetManagerLib.t.sol`
+- `borrowableUnderlyingAddresses` | type: `address[]` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `collateralUnderlyingAddresses` | type: `address[]` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `denominationAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `lendingPool` | type: `IAaveV3Pool` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `morphoFlashLoanAssetManager` | type: `IMorphoBlueFlashLoanAssetManager` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/MorphoBlueFlashLoanAssetManagerLib.t.sol`
+- `poolAddressProvider` | type: `IAaveV3PoolAddressProvider` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `repaymentBalanceBuffer` | type: `uint256` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol` = `2`
+- `rewardedCollateralUnderlyingAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `sharesBuyer` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol` = `makeAddr("SharesBuyer")`
+- `underlyingAsset` | type: `IERC20` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `uniswapV3LiquidityPosition` | type: `IUniswapV3LiquidityPositionLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol`
+- `vault` | type: `MockVault` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol`
+- `vault` | type: `MockVault` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/MorphoBlueFlashLoanAssetManagerLib.t.sol`
+- `vaultProxy` | type: `IVaultLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `vaultProxy` | type: `IVaultLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/bebop/BebopBlendAdapter.t.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/convex-voting/ConvexVotingPosition.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/lido/LidoWithdrawalsPosition.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/one-inch/OneInchV5Adapter.t.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3Adapter.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `assetAddresses` | type: `address[]` | vis: `default` | flags: `-` | `TransferAssetsAdapterTest` @ `tests/tests/misc-adapters/TransferAssetsAdapter.t.sol`
+- `transferAssetsAdapter` | type: `ITransferAssetsAdapter` | vis: `default` | flags: `-` | `TransferAssetsAdapterTest` @ `tests/tests/misc-adapters/TransferAssetsAdapter.t.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TransferAssetsAdapterTest` @ `tests/tests/misc-adapters/TransferAssetsAdapter.t.sol`
+- `tokenToTotalBalClaimed` | type: `mapping(address => uint256) private` | vis: `private` | flags: `-` | `TreasurySplitterMixin` @ `contracts/persistent/shares-splitter/TreasurySplitterMixin.sol`
+- `BASE_ASSET_AGGREGATOR` | type: `IChainlinkAggregator public immutable` | vis: `public` | flags: `immutable` | `TwoAggregatorsWithCommonQuoteSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/utils/TwoAggregatorsWithCommonQuoteSimulatedAggregator.sol`
+- `QUOTE_ASSET_AGGREGATOR` | type: `IChainlinkAggregator public immutable` | vis: `public` | flags: `immutable` | `TwoAggregatorsWithCommonQuoteSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/utils/TwoAggregatorsWithCommonQuoteSimulatedAggregator.sol`
+- `TRUSTED_RATE_INITIAL_VIRTUAL_BALANCE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `UniswapV3LiquidityPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/UniswapV3LiquidityPositionLib.sol` = `10 ** 18`
+- `PROTOCOL_FEE_RESERVE` | type: `address private immutable` | vis: `private` | flags: `immutable` | `VaultLib` @ `contracts/release/core/fund/vault/VaultLib.sol`
+- `assetToIsTracked` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `VaultLibBase1` @ `contracts/persistent/vault/VaultLibBase1.sol`
+- `trackedAssets` | type: `address[] internal` | vis: `internal` | flags: `-` | `VaultLibBase1` @ `contracts/persistent/vault/VaultLibBase1.sol`
+- `accountToIsAssetManager` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `VaultLibBase2` @ `contracts/persistent/vault/VaultLibBase2.sol`
+- `freelyTransferableShares` | type: `bool internal` | vis: `internal` | flags: `-` | `VaultLibBase2` @ `contracts/persistent/vault/VaultLibBase2.sol`
+- `makerAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+- `takerAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+
+All detected state variables (full list):
+- `ROUNDING_BUFFER` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `AaveAdapterBase` @ `contracts/release/extensions/integration-manager/integrations/utils/0.6.12/bases/AaveAdapterBase.sol` = `2`
+- `POOL_ADDRESS_PROVIDER_CONTRACT` | type: `IAaveV3PoolAddressProvider private immutable` | vis: `private` | flags: `immutable` | `AaveV3ATokenListOwner` @ `contracts/persistent/address-list-registry/address-list-owners/AaveV3ATokenListOwner.sol`
+- `AAVE_V3_POOL_CONTRACT` | type: `IAaveV3Pool internal immutable` | vis: `internal` | flags: `immutable` | `AaveV3ActionsMixin` @ `contracts/release/extensions/integration-manager/integrations/utils/0.6.12/actions/AaveV3ActionsMixin.sol`
+- `AAVE_V3_REFERRAL_CODE` | type: `uint16 internal immutable` | vis: `internal` | flags: `immutable` | `AaveV3ActionsMixin` @ `contracts/release/extensions/integration-manager/integrations/utils/0.6.12/actions/AaveV3ActionsMixin.sol`
+- `DATA_PROVIDER_CONTRACT` | type: `IAaveV3ProtocolDataProvider public immutable` | vis: `public` | flags: `immutable` | `AaveV3DebtPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/AaveV3DebtPositionLib.sol`
+- `LENDING_POOL_ADDRESS_PROVIDER_CONTRACT` | type: `IAaveV3PoolAddressProvider public immutable` | vis: `public` | flags: `immutable` | `AaveV3DebtPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/AaveV3DebtPositionLib.sol`
+- `MERKL_DISTRIBUTOR` | type: `IMerklDistributor public immutable` | vis: `public` | flags: `immutable` | `AaveV3DebtPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/AaveV3DebtPositionLib.sol`
+- `REFERRAL_CODE` | type: `uint16 public immutable` | vis: `public` | flags: `immutable` | `AaveV3DebtPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/AaveV3DebtPositionLib.sol`
+- `REWARDS_CONTROLLER` | type: `IAaveV3RewardsController public immutable` | vis: `public` | flags: `immutable` | `AaveV3DebtPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/AaveV3DebtPositionLib.sol`
+- `VARIABLE_INTEREST_RATE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `AaveV3DebtPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/AaveV3DebtPositionLib.sol` = `2`
+- `borrowedAssetToDebtToken` | type: `mapping(address => address) internal` | vis: `internal` | flags: `-` | `AaveV3DebtPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/bases/AaveV3DebtPositionLibBase1.sol`
+- `borrowedAssets` | type: `address[] internal` | vis: `internal` | flags: `-` | `AaveV3DebtPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/bases/AaveV3DebtPositionLibBase1.sol`
+- `collateralAssets` | type: `address[] internal` | vis: `internal` | flags: `-` | `AaveV3DebtPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/bases/AaveV3DebtPositionLibBase1.sol`
+- `AAVE_REFERRAL_CODE` | type: `uint16 public immutable` | vis: `public` | flags: `immutable` | `AaveV3FlashLoanAssetManagerLib` @ `contracts/persistent/smart-accounts/aave-v3-flash-loan-asset-manager/AaveV3FlashLoanAssetManagerLib.sol`
+- `ADDRESSES_PROVIDER` | type: `address public immutable override` | vis: `public` | flags: `immutable,override` | `AaveV3FlashLoanAssetManagerLib` @ `contracts/persistent/smart-accounts/aave-v3-flash-loan-asset-manager/AaveV3FlashLoanAssetManagerLib.sol`
+- `REPAYMENT_BALANCE_BUFFER` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `AaveV3FlashLoanAssetManagerLib` @ `contracts/persistent/smart-accounts/aave-v3-flash-loan-asset-manager/AaveV3FlashLoanAssetManagerLib.sol` = `2`
+- `borrowedAssetsRecipient` | type: `address internal` | vis: `internal` | flags: `-` | `AaveV3FlashLoanAssetManagerLib` @ `contracts/persistent/smart-accounts/aave-v3-flash-loan-asset-manager/AaveV3FlashLoanAssetManagerLib.sol`
+- `owner` | type: `address internal` | vis: `internal` | flags: `-` | `AaveV3FlashLoanAssetManagerLib` @ `contracts/persistent/smart-accounts/aave-v3-flash-loan-asset-manager/AaveV3FlashLoanAssetManagerLib.sol`
+- `INTEGRATION_MANAGER` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `AdapterBase` @ `contracts/release/extensions/integration-manager/integrations/utils/0.6.12/AdapterBase.sol`
+- `INTEGRATION_MANAGER` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `AdapterBase` @ `contracts/release/extensions/integration-manager/integrations/utils/0.8.19/AdapterBase.sol`
+- `ADDRESS_LIST_REGISTRY_CONTRACT` | type: `IAddressListRegistry internal immutable` | vis: `internal` | flags: `immutable` | `AddOnlyAddressListOwnerBase` @ `contracts/persistent/address-list-registry/address-list-owners/utils/0.6.12/AddOnlyAddressListOwnerBase.sol`
+- `ADDRESS_LIST_REGISTRY_CONTRACT` | type: `IAddressListRegistry internal immutable` | vis: `internal` | flags: `immutable` | `AddOnlyAddressListOwnerBase` @ `contracts/persistent/address-list-registry/address-list-owners/utils/0.8.19/AddOnlyAddressListOwnerBase.sol`
+- `LIST_ID` | type: `uint256 internal immutable` | vis: `internal` | flags: `immutable` | `AddOnlyAddressListOwnerBase` @ `contracts/persistent/address-list-registry/address-list-owners/utils/0.6.12/AddOnlyAddressListOwnerBase.sol`
+- `LIST_ID` | type: `uint256 internal immutable` | vis: `internal` | flags: `immutable` | `AddOnlyAddressListOwnerBase` @ `contracts/persistent/address-list-registry/address-list-owners/utils/0.8.19/AddOnlyAddressListOwnerBase.sol`
+- `ADDRESS_LIST_REGISTRY_CONTRACT` | type: `IAddressListRegistry internal immutable` | vis: `internal` | flags: `immutable` | `AddOnlyAddressListOwnerConsumerMixin` @ `contracts/persistent/address-list-registry/address-list-owners/utils/0.6.12/AddOnlyAddressListOwnerConsumerMixin.sol`
+- `ADDRESS_LIST_REGISTRY_CONTRACT` | type: `IAddressListRegistry internal immutable` | vis: `internal` | flags: `immutable` | `AddOnlyAddressListOwnerConsumerMixin` @ `contracts/persistent/address-list-registry/address-list-owners/utils/0.8.19/AddOnlyAddressListOwnerConsumerMixin.sol`
+- `LIST_ID` | type: `uint256 internal immutable` | vis: `internal` | flags: `immutable` | `AddOnlyAddressListOwnerConsumerMixin` @ `contracts/persistent/address-list-registry/address-list-owners/utils/0.6.12/AddOnlyAddressListOwnerConsumerMixin.sol`
+- `LIST_ID` | type: `uint256 internal immutable` | vis: `internal` | flags: `immutable` | `AddOnlyAddressListOwnerConsumerMixin` @ `contracts/persistent/address-list-registry/address-list-owners/utils/0.8.19/AddOnlyAddressListOwnerConsumerMixin.sol`
+- `LIST_OWNER_CONTRACT` | type: `IAddOnlyAddressListOwner internal immutable` | vis: `internal` | flags: `immutable` | `AddOnlyAddressListOwnerConsumerMixin` @ `contracts/persistent/address-list-registry/address-list-owners/utils/0.6.12/AddOnlyAddressListOwnerConsumerMixin.sol`
+- `LIST_OWNER_CONTRACT` | type: `IAddOnlyAddressListOwner internal immutable` | vis: `internal` | flags: `immutable` | `AddOnlyAddressListOwnerConsumerMixin` @ `contracts/persistent/address-list-registry/address-list-owners/utils/0.8.19/AddOnlyAddressListOwnerConsumerMixin.sol`
+- `DISPATCHER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `AddressListRegistry` @ `contracts/persistent/address-list-registry/AddressListRegistry.sol`
+- `lists` | type: `ListInfo[] private` | vis: `private` | flags: `-` | `AddressListRegistry` @ `contracts/persistent/address-list-registry/AddressListRegistry.sol`
+- `ADDRESS_LIST_REGISTRY_CONTRACT` | type: `IAddressListRegistry internal immutable` | vis: `internal` | flags: `immutable` | `AddressListRegistryPerUserPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/AddressListRegistryPerUserPolicyBase.sol`
+- `comptrollerProxyToUserToListIds` | type: `mapping(address => mapping(address => uint256[])) private` | vis: `private` | flags: `-` | `AddressListRegistryPerUserPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/AddressListRegistryPerUserPolicyBase.sol`
+- `ADDRESS_LIST_REGISTRY` | type: `address private immutable` | vis: `private` | flags: `immutable` | `AddressListRegistryPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/AddressListRegistryPolicyBase.sol`
+- `ADDRESS_LIST_REGISTRY` | type: `address private immutable` | vis: `private` | flags: `immutable` | `AddressListRegistryPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.8.19/AddressListRegistryPolicyBase.sol`
+- `comptrollerProxyToListIds` | type: `mapping(address => uint256[]) private` | vis: `private` | flags: `-` | `AddressListRegistryPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/AddressListRegistryPolicyBase.sol`
+- `comptrollerProxyToListIds` | type: `mapping(address => uint256[]) private` | vis: `private` | flags: `-` | `AddressListRegistryPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.8.19/AddressListRegistryPolicyBase.sol`
+- `derivativeToPriceFeed` | type: `mapping(address => address) private` | vis: `private` | flags: `-` | `AggregatedDerivativePriceFeedMixin` @ `contracts/release/infrastructure/price-feeds/derivatives/AggregatedDerivativePriceFeedMixin.sol`
+- `DEVIATION_TOLERANCE_BPS` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `AggregatorRateDeviationBase` @ `contracts/release/infrastructure/price-feeds/primitives/utils/AggregatorRateDeviationBase.sol`
+- `MARKET_AGGREGATOR_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `AggregatorRateDeviationBase` @ `contracts/release/infrastructure/price-feeds/primitives/utils/AggregatorRateDeviationBase.sol`
+- `MARKET_AGGREGATOR_PRECISION` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `AggregatorRateDeviationBase` @ `contracts/release/infrastructure/price-feeds/primitives/utils/AggregatorRateDeviationBase.sol`
+- `idealRatePrecision` | type: `uint256 public` | vis: `public` | flags: `-` | `AggregatorRateDeviationBaseHarness` @ `contracts/test/AggregatorRateDeviationBaseHarness.sol`
+- `idealRateStored` | type: `uint256 public` | vis: `public` | flags: `-` | `AggregatorRateDeviationBaseHarness` @ `contracts/test/AggregatorRateDeviationBaseHarness.sol`
+- `idealRateTimestamp` | type: `uint256 public` | vis: `public` | flags: `-` | `AggregatorRateDeviationBaseHarness` @ `contracts/test/AggregatorRateDeviationBaseHarness.sol`
+- `newerTimestamp` | type: `uint256` | vis: `default` | flags: `-` | `AggregatorRateDeviationBaseTest` @ `tests/tests/utils/AggregatorRateDeviationBase.t.sol` = `olderTimestamp + 3`
+- `olderTimestamp` | type: `uint256` | vis: `default` | flags: `-` | `AggregatorRateDeviationBaseTest` @ `tests/tests/utils/AggregatorRateDeviationBase.t.sol` = `1122`
+- `aliceExternalPosition` | type: `IAliceV2PositionLib internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `aliceOrderManager` | type: `IAliceInstantOrderV2 internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `aliceOwner` | type: `address internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `buyToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `externalPositionManager` | type: `IExternalPositionManager internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `liquidityPoolContract` | type: `address internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `secondaryBuyToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `secondarySellToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `sellToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `ALICEV2_NATIVE_ASSET_ADDRESS` | type: `address public constant` | vis: `public` | flags: `constant` | `AliceV2PositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/AliceV2PositionLib.sol` = `address(0)`
+- `ALICE_INSTANT_ORDER_V2` | type: `IAliceInstantOrderV2 public immutable` | vis: `public` | flags: `immutable` | `AliceV2PositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/AliceV2PositionLib.sol`
+- `WRAPPED_NATIVE_TOKEN` | type: `IWETH public immutable` | vis: `public` | flags: `immutable` | `AliceV2PositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/AliceV2PositionLib.sol`
+- `orderIdToOrderDetails` | type: `mapping(uint256 orderId => OrderDetails)` | vis: `default` | flags: `-` | `AliceV2PositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/bases/AliceV2PositionLibBase1.sol`
+- `orderIds` | type: `uint256[] internal` | vis: `internal` | flags: `-` | `AliceV2PositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/bases/AliceV2PositionLibBase1.sol`
+- `referenceIdToIsPending` | type: `mapping(bytes32 referenceId => bool isPending) internal` | vis: `internal` | flags: `-` | `AliceV2PositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/bases/AliceV2PositionLibBase1.sol`
+- `ALICE_NATIVE_ETH` | type: `address public constant` | vis: `public` | flags: `constant` | `AliceV2PositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/AliceV2PositionParser.sol` = `address(0)`
+- `ALICE_V2_ORDER_MANAGER` | type: `IAliceInstantOrderV2 public immutable` | vis: `public` | flags: `immutable` | `AliceV2PositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/AliceV2PositionParser.sol`
+- `WRAPPED_NATIVE_TOKEN_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `AliceV2PositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/AliceV2PositionParser.sol`
+- `BYPASS_FLAG` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `AllowedAdaptersPerManagerPolicy` @ `contracts/release/extensions/policy-manager/policies/asset-managers/AllowedAdaptersPerManagerPolicy.sol` = `type(uint256).max`
+- `BYPASS_FLAG` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `AllowedExternalPositionTypesPerManagerPolicy` @ `contracts/release/extensions/policy-manager/policies/asset-managers/AllowedExternalPositionTypesPerManagerPolicy.sol` = `type(uint256).max`
+- `allowedRedeemer` | type: `address` | vis: `default` | flags: `-` | `AllowedRedeemersForSpecificAssetsPolicy` @ `tests/tests/policies/AllowedRedeemersForSpecificAssetsPolicy.t.sol` = `makeAddr("AllowedRedeemer")`
+- `policy` | type: `IAllowedRedeemersForSpecificAssetsPolicy internal` | vis: `internal` | flags: `-` | `AllowedRedeemersForSpecificAssetsPolicy` @ `tests/tests/policies/AllowedRedeemersForSpecificAssetsPolicy.t.sol`
+- `WRAPPED_NATIVE_ASSET` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ArbitraryLoanPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/ArbitraryLoanPositionLib.sol`
+- `accountingModule` | type: `address internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `borrowableAmount` | type: `uint256 internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `borrower` | type: `address internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `isClosed` | type: `bool internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `loanAsset` | type: `address internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `totalBorrowed` | type: `uint128 internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `totalRepaid` | type: `uint128 internal` | vis: `internal` | flags: `-` | `ArbitraryLoanPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/bases/ArbitraryLoanPositionLibBase1.sol`
+- `loanToOracleInfo` | type: `mapping(address => OracleInfo) private` | vis: `private` | flags: `-` | `ArbitraryLoanTotalNominalDeltaOracleModule` @ `contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/modules/ArbitraryLoanTotalNominalDeltaOracleModule.sol`
+- `VALUE_INTERPRETER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `AssetValueCalculator` @ `contracts/release/off-chain/AssetValueCalculator.sol`
+- `BEACON` | type: `address private immutable` | vis: `private` | flags: `immutable` | `BeaconProxy` @ `contracts/utils/0.6.12/beacon-proxy/BeaconProxy.sol`
+- `BEACON` | type: `address private immutable` | vis: `private` | flags: `immutable` | `BeaconProxy` @ `contracts/utils/0.8.19/deprecated/beacon-proxy/BeaconProxy.sol`
+- `canonicalLib` | type: `address private` | vis: `private` | flags: `-` | `BeaconProxyFactory` @ `contracts/utils/0.6.12/beacon-proxy/BeaconProxyFactory.sol`
+- `canonicalLib` | type: `address private` | vis: `private` | flags: `-` | `BeaconProxyFactory` @ `contracts/utils/0.8.19/deprecated/beacon-proxy/BeaconProxyFactory.sol`
+- `ADDRESS_LIST_REGISTRY` | type: `IAddressListRegistry public immutable` | vis: `public` | flags: `immutable` | `BebopBlendAdapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/BebopBlendAdapter.sol`
+- `BEBOP_BLEND` | type: `IBebopBlend public immutable` | vis: `public` | flags: `immutable` | `BebopBlendAdapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/BebopBlendAdapter.sol`
+- `TRUSTED_MAKERS_LIST_ID` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `BebopBlendAdapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/BebopBlendAdapter.sol`
+- `CHAINLINK_AGGREGATOR_ETH_QUOTE_DECIMALS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `ChainlinkLikeWstethPriceFeed` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkLikeWstethPriceFeed.sol` = `18`
+- `STETH` | type: `ILidoSteth private immutable` | vis: `private` | flags: `immutable` | `ChainlinkLikeWstethPriceFeed` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkLikeWstethPriceFeed.sol`
+- `STETH_ETH_CHAINLINK_AGGREGATOR` | type: `IChainlinkAggregator private immutable` | vis: `private` | flags: `immutable` | `ChainlinkLikeWstethPriceFeed` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkLikeWstethPriceFeed.sol`
+- `STETH_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ChainlinkLikeWstethPriceFeed` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkLikeWstethPriceFeed.sol` = `10 ** 18`
+- `WSTETH_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ChainlinkLikeWstethPriceFeed` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkLikeWstethPriceFeed.sol` = `10 ** 18`
+- `originalStethEthAggregator` | type: `IChainlinkAggregator` | vis: `default` | flags: `-` | `ChainlinkLikeWstethPriceFeedTest` @ `tests/tests/protocols/lido/ChainlinkLikeWstethPriceFeed.t.sol` = `IChainlinkAggregator(ETHEREUM_STETH_ETH_AGGREGATOR)`
+- `wstethAggregator` | type: `IChainlinkAggregator` | vis: `default` | flags: `-` | `ChainlinkLikeWstethPriceFeedTest` @ `tests/tests/protocols/lido/ChainlinkLikeWstethPriceFeed.t.sol`
+- `ETH_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ChainlinkPriceFeedMixin` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkPriceFeedMixin.sol` = `10 ** 18`
+- `STALE_RATE_THRESHOLD` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `ChainlinkPriceFeedMixin` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkPriceFeedMixin.sol`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ChainlinkPriceFeedMixin` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkPriceFeedMixin.sol`
+- `ethUsdAggregator` | type: `address private` | vis: `private` | flags: `-` | `ChainlinkPriceFeedMixin` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkPriceFeedMixin.sol`
+- `primitiveToAggregatorInfo` | type: `mapping(address => AggregatorInfo) private` | vis: `private` | flags: `-` | `ChainlinkPriceFeedMixin` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkPriceFeedMixin.sol`
+- `primitiveToUnit` | type: `mapping(address => uint256) private` | vis: `private` | flags: `-` | `ChainlinkPriceFeedMixin` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkPriceFeedMixin.sol`
+- `DISPATCHER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `EXTERNAL_POSITION_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `FEE_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `FUND_DEPLOYER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `INTEGRATION_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `MLN_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `ONE_HUNDRED_PERCENT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol` = `10000`
+- `POLICY_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `PROTOCOL_FEE_RESERVE` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `SHARES_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol` = `10 ** 18`
+- `SPECIFIC_ASSET_REDEMPTION_DUMMY_FORFEIT_ADDRESS` | type: `address private constant` | vis: `private` | flags: `constant` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol` = `0x000000000000000000000000000000000000aaaa`
+- `VALUE_INTERPRETER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `acctToLastSharesBoughtTimestamp` | type: `mapping(address => uint256) internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `autoProtocolFeeSharesBuyback` | type: `bool internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `denominationAsset` | type: `address internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `gasRelayPaymaster` | type: `address private` | vis: `private` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `isLib` | type: `bool internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `permissionedVaultActionAllowed` | type: `bool internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `reentranceLocked` | type: `bool internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `sharesActionTimelock` | type: `uint256 internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `vaultProxy` | type: `address internal` | vis: `internal` | flags: `-` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `ARBITRUM_BAL` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x040d1EdC9569d4Bab2D15287Dc5A4F10F56a56B8`
+- `ARBITRUM_BAL_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xBE5eA816870D11239c543F84b71439511D70B94f`
+- `ARBITRUM_BLOCK_LATEST` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `278101140`
+- `ARBITRUM_BLOCK_TIME_SENSITIVE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `231099000`
+- `ARBITRUM_BLOCK_TIME_SENSITIVE_GMXV2` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `403587800`
+- `ARBITRUM_CHAIN_ID` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `42161`
+- `ARBITRUM_CRV` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x11cDb42B0EB46D95f990BeDD4695A6e3fA034978`
+- `ARBITRUM_CRV_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xaebDA2c976cfd1eE1977Eac079B4382acb849325`
+- `ARBITRUM_DAI` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1`
+- `ARBITRUM_DAI_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xc5C8E77B397E531B8EC06BFb0048328B30E9eCfB`
+- `ARBITRUM_EETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x35fA164735182de50811E8e2E824cFb9B6118ac2`
+- `ARBITRUM_ETH_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612`
+- `ARBITRUM_LINK` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xf97f4df75117a78c1A5a0DBb814Af92458539FB4`
+- `ARBITRUM_MERKL_DISTRIBUTOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `ETHEREUM_MERKL_DISTRIBUTOR`
+- `ARBITRUM_MLN` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x8f5c1A99b1df736Ad685006Cb6ADCA7B7Ae4b514`
+- `ARBITRUM_MLN_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xb7c8Fb1dB45007F98A68Da0588e1AA524C317f27`
+- `ARBITRUM_USDC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xaf88d065e77c8cC2239327C5EDb3A432268e5831`
+- `ARBITRUM_USDC_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x50834F3163758fcC1Df9973b6e91f0F0F0434aD3`
+- `ARBITRUM_USDT` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9`
+- `ARBITRUM_USDT_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x3f3f5dF88dC9F13eac63DF89EC16ef6e7E25DdE7`
+- `ARBITRUM_WBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f`
+- `ARBITRUM_WETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x82aF49447D8a07e3bd95BD0d56f35241523fBab1`
+- `BASE_BLOCK_LATEST` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `27583610`
+- `BASE_CBETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22`
+- `BASE_CHAIN_BLOCK_TIME_SENSITIVE_ONE_INCH_V5` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `23218719`
+- `BASE_CHAIN_ID` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `8453`
+- `BASE_DAI` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb`
+- `BASE_ETH_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x71041dddad3595F9CEd3DcCFBe3D1F4b0a16Bb70`
+- `BASE_MERKL_DISTRIBUTOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `ETHEREUM_MERKL_DISTRIBUTOR`
+- `BASE_MLN` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x7C298664BD6582f6f264c2Cb5a4B9cC09b6E3889`
+- `BASE_MLN_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x0000000000000000000000000000000000000000`
+- `BASE_USDC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`
+- `BASE_USDC_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x7e860098F58bBFC8648a4311b374B1D669a2bc6B`
+- `BASE_WETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x4200000000000000000000000000000000000006`
+- `BASE_WSTETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xc1CBa3fCea344f92D9239c08C0568f6F2F0ee452`
+- `BASE_WSTETH_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x43a5C292A453A3bF3606fa856197f09D7B74251a`
+- `BPS_ONE_HUNDRED_PERCENT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `10_000`
+- `BPS_ONE_PERCENT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `BPS_ONE_HUNDRED_PERCENT / 100`
+- `CHAINLINK_AGGREGATOR_DECIMALS_ETH` | type: `uint8 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `18`
+- `CHAINLINK_AGGREGATOR_DECIMALS_USD` | type: `uint8 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `8`
+- `CHAINLINK_AGGREGATOR_PRECISION_ETH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `10 ** CHAINLINK_AGGREGATOR_DECIMALS_ETH`
+- `CHAINLINK_AGGREGATOR_PRECISION_USD` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `10 ** CHAINLINK_AGGREGATOR_DECIMALS_USD`
+- `ETHEREUM_AURA` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xC0c293ce456fF0ED870ADd98a0828Dd4d2903DBF`
+- `ETHEREUM_BAL` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xba100000625a3754423978a60c9317c58a424e3D`
+- `ETHEREUM_BAL_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xC1438AA3823A6Ba0C159CfA8D98dF5A994bA120b`
+- `ETHEREUM_BLOCK_LATEST` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `21710000`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `21710000`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_ALICE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `23840000`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_MYSO_V3` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `21679809`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_ONE_INCH_V5` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `19518890`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_PARASWAP_V6` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `21819120`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_PENDLE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `20100000`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_STAKEWISE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `22400000`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_THE_GRAPH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `20711624`
+- `ETHEREUM_CBBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf`
+- `ETHEREUM_CHAIN_ID` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `1`
+- `ETHEREUM_CRV` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xD533a949740bb3306d119CC777fa900bA034cd52`
+- `ETHEREUM_CVX` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B`
+- `ETHEREUM_DAI` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- `ETHEREUM_DAI_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x773616E4d11A78F511299002da57A0a94577F1f4`
+- `ETHEREUM_EBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x657e8C867D8B37dCC18fA4Caead9C45EB088C642`
+- `ETHEREUM_EETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x35fA164735182de50811E8e2E824cFb9B6118ac2`
+- `ETHEREUM_ETHERFI_LIQUIDITY_POOL` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x308861A430be4cce5502d0A12724771Fc6DaF216`
+- `ETHEREUM_ETH_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419`
+- `ETHEREUM_ETH_X` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xA35b1B31Ce002FBF2058D22F30f95D405200A15b`
+- `ETHEREUM_LBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x8236a87084f8B84306f72007F36F2618A5634494`
+- `ETHEREUM_LDO` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32`
+- `ETHEREUM_LINK` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x514910771AF9Ca656af840dff83E8264EcF986CA`
+- `ETHEREUM_LUSD` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x5f98805A4E8be255a32880FDeC7F6728C6568bA0`
+- `ETHEREUM_MBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x2F913C820ed3bEb3a67391a6eFF64E70c4B20b19`
+- `ETHEREUM_MERKL_DISTRIBUTOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x3Ef3D8bA38EBe18DB133cEc108f4D14CE00Dd9Ae`
+- `ETHEREUM_MLN` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xec67005c4E498Ec7f55E092bd1d35cbC47C91892`
+- `ETHEREUM_MLN_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xDaeA8386611A157B08829ED4997A8A62B557014C`
+- `ETHEREUM_PAXG` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x45804880De22913dAFE09f4980848ECE6EcbAf78`
+- `ETHEREUM_STETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84`
+- `ETHEREUM_STETH_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x86392dC19c0b719886221c78AB11eb8Cf5c52812`
+- `ETHEREUM_STKAAVE` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x4da27a545c0c5B758a6BA100e3a049001de870f5`
+- `ETHEREUM_USDC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `ETHEREUM_USDC_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x986b5E1e1755e3C2440e960477f25201B0a8bbD4`
+- `ETHEREUM_USDE` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x4c9EDD5852cd905f086C759E8383e09bff1E68B3`
+- `ETHEREUM_USDS` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xdC035D45d973E3EC169d2276DDab16f1e407384F`
+- `ETHEREUM_USDT` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `ETHEREUM_USDT_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xEe9F2375b4bdF6387aa8265dD4FB8F16512A1d46`
+- `ETHEREUM_WBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `ETHEREUM_WEETH_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x5c9C449BbC9a6075A2c061dF312a35fd1E05fF22`
+- `ETHEREUM_WETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `ETHEREUM_WSTETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0`
+- `NATIVE_ASSET_ADDRESS` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`
+- `POLYGON_BAL` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x9a71012B13CA4d3D0Cdc72A177DF3ef03b0E76A3`
+- `POLYGON_BLOCK_LATEST` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `67047280`
+- `POLYGON_BLOCK_TIME_SENSITIVE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `54900000`
+- `POLYGON_BLOCK_TIME_SENSITIVE_ONE_INCH_V5` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `55136740`
+- `POLYGON_CHAIN_ID` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `137`
+- `POLYGON_CRV` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x172370d5Cd63279eFa6d502DAB29171933a610AF`
+- `POLYGON_DAI` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063`
+- `POLYGON_DAI_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xFC539A559e170f848323e19dfD66007520510085`
+- `POLYGON_ETH_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xF9680D99D6C9589e2a93a78A04A279e509205945`
+- `POLYGON_LINK` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39`
+- `POLYGON_MATIC_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xAB594600376Ec9fD91F8e885dADF0CE036862dE0`
+- `POLYGON_MATIC_X` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xfa68FB4628DFF1028CFEc22b4162FCcd0d45efb6`
+- `POLYGON_MERKL_DISTRIBUTOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `ETHEREUM_MERKL_DISTRIBUTOR`
+- `POLYGON_MLN` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xa9f37D84c856fDa3812ad0519Dad44FA0a3Fe207`
+- `POLYGON_MLN_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xB89D583B72aBF9C3a7e6e093251C2fCad3365312`
+- `POLYGON_USDC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174`
+- `POLYGON_USDC_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xfE4A8cc5b5B2366C1B58Bea3858e81843581b2F7`
+- `POLYGON_USDT` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xc2132D05D31c914a87C6611C10748AEb04B58e8F`
+- `POLYGON_USDT_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xf9d5AAC6E5572AEFa6bd64108ff86a222F69B64d`
+- `POLYGON_WBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6`
+- `POLYGON_WBTC_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xDE31F8bFBD8c84b5360CFACCa3539B938dd78ae6`
+- `POLYGON_WETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619`
+- `POLYGON_WMATIC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270`
+- `SECONDS_ONE_DAY` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `SECONDS_ONE_HOUR * 24`
+- `SECONDS_ONE_HOUR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `SECONDS_ONE_MINUTE * 60`
+- `SECONDS_ONE_MINUTE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `60`
+- `SECONDS_ONE_YEAR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `SECONDS_ONE_DAY * 36525 / 100`
+- `WEI_ONE_HUNDRED_PERCENT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `10 ** 18`
+- `WEI_ONE_PERCENT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `WEI_ONE_HUNDRED_PERCENT / 100`
+- `SOURCE_AGGREGATOR_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `ConvertedQuoteAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/ConvertedQuoteAggregator.sol`
+- `SOURCE_AGGREGATOR_PRECISION` | type: `uint256 internal immutable` | vis: `internal` | flags: `immutable` | `ConvertedQuoteAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/ConvertedQuoteAggregator.sol`
+- `CONVEX_SNAPSHOT_ID` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `ConvexVotingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/convex-voting/ConvexVotingPositionLib.sol` = `"cvx.eth"`
+- `CVX_CRV_STAKING_CONTRACT` | type: `IConvexBaseRewardPool private immutable` | vis: `private` | flags: `immutable` | `ConvexVotingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/convex-voting/ConvexVotingPositionLib.sol`
+- `CVX_TOKEN_CONTRACT` | type: `IERC20 private immutable` | vis: `private` | flags: `immutable` | `ConvexVotingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/convex-voting/ConvexVotingPositionLib.sol`
+- `SNAPSHOT_DELEGATE_REGISTRY` | type: `ISnapshotDelegateRegistry private immutable` | vis: `private` | flags: `immutable` | `ConvexVotingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/convex-voting/ConvexVotingPositionLib.sol`
+- `VLCVX_CONTRACT` | type: `IConvexCvxLockerV2 private immutable` | vis: `private` | flags: `immutable` | `ConvexVotingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/convex-voting/ConvexVotingPositionLib.sol`
+- `VLCVX_EXTRA_REWARDS_CONTRACT` | type: `IConvexVlCvxExtraRewardDistribution private immutable` | vis: `private` | flags: `immutable` | `ConvexVotingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/convex-voting/ConvexVotingPositionLib.sol`
+- `VOTIUM_MULTI_MERKLE_STASH_CONTRACT` | type: `IVotiumMultiMerkleStash private immutable` | vis: `private` | flags: `immutable` | `ConvexVotingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/convex-voting/ConvexVotingPositionLib.sol`
+- `CVX_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ConvexVotingPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/convex-voting/ConvexVotingPositionParser.sol`
+- `ADDRESS_LIST_REGISTRY` | type: `address private immutable` | vis: `private` | flags: `immutable` | `CumulativeSlippageTolerancePolicy` @ `contracts/release/extensions/policy-manager/policies/asset-managers/CumulativeSlippageTolerancePolicy.sol`
+- `BYPASSABLE_ADAPTERS_LIST_ID` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `CumulativeSlippageTolerancePolicy` @ `contracts/release/extensions/policy-manager/policies/asset-managers/CumulativeSlippageTolerancePolicy.sol`
+- `ONE_HUNDRED_PERCENT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `CumulativeSlippageTolerancePolicy` @ `contracts/release/extensions/policy-manager/policies/asset-managers/CumulativeSlippageTolerancePolicy.sol` = `1 ether`
+- `TOLERANCE_PERIOD_DURATION` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `CumulativeSlippageTolerancePolicy` @ `contracts/release/extensions/policy-manager/policies/asset-managers/CumulativeSlippageTolerancePolicy.sol`
+- `comptrollerProxyToPolicyInfo` | type: `mapping(address => PolicyInfo) private` | vis: `private` | flags: `-` | `CumulativeSlippageTolerancePolicy` @ `contracts/release/extensions/policy-manager/policies/asset-managers/CumulativeSlippageTolerancePolicy.sol`
+- `ANY_VAULT_CALL` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol` = `0x5bf1898dd28c4d29f33c4c1bb9b8a7e2f6322847d70be63e8f89de024d08a669`
+- `ERROR_MESSAGE_FOR_POLICY` | type: `bytes private constant` | vis: `private` | flags: `constant` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol` = `"Rule evaluated to false: CUMULATIVE_SLIPPAGE_TOLERANCE"`
+- `ONE_HUNDRED_PERCENT_FOR_POLICY` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol` = `1 ether`
+- `comptrollerProxy` | type: `IComptrollerLib internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `cumulativeSlippageTolerancePolicy` | type: `ICumulativeSlippageTolerancePolicy internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `fakeToken0` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `fakeToken0Aggregator` | type: `TestChainlinkAggregator internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `fakeToken1` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `fakeToken1Aggregator` | type: `TestChainlinkAggregator internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `mockedAdapter` | type: `MockedAdapter internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `sharesBuyer` | type: `address internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol` = `makeAddr("SharesBuyer")`
+- `vaultInitialBalance` | type: `uint256 internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol` = `1 ether`
+- `vaultOwner` | type: `address internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `vaultProxy` | type: `IVaultLib internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `ADDRESS_LIST_REGISTRY` | type: `IAddressListRegistry private immutable` | vis: `private` | flags: `immutable` | `DepositWrapper` @ `contracts/release/peripheral/DepositWrapper.sol`
+- `ALLOWED_EXCHANGES_LIST_ID` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `DepositWrapper` @ `contracts/release/peripheral/DepositWrapper.sol`
+- `WRAPPED_NATIVE_ASSET` | type: `IWETH private immutable` | vis: `private` | flags: `immutable` | `DepositWrapper` @ `contracts/release/peripheral/DepositWrapper.sol`
+- `comptrollerProxyAddress` | type: `address` | vis: `default` | flags: `-` | `DeprecatedPositionTest` @ `tests/tests/misc-external-positions/DeprecatedPosition.t.sol`
+- `deprecatedPosition` | type: `IDeprecatedPosition` | vis: `default` | flags: `-` | `DeprecatedPositionTest` @ `tests/tests/misc-external-positions/DeprecatedPosition.t.sol`
+- `fundOwner` | type: `address` | vis: `default` | flags: `-` | `DeprecatedPositionTest` @ `tests/tests/misc-external-positions/DeprecatedPosition.t.sol`
+- `usdtToken` | type: `IERC20` | vis: `default` | flags: `-` | `DeprecatedPositionTest` @ `tests/tests/misc-external-positions/DeprecatedPosition.t.sol` = `IERC20(ETHEREUM_USDT)`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `DeprecatedPositionTest` @ `tests/tests/misc-external-positions/DeprecatedPosition.t.sol`
+- `currentFundDeployer` | type: `address private` | vis: `private` | flags: `-` | `Dispatcher` @ `contracts/persistent/dispatcher/Dispatcher.sol`
+- `migrationTimelock` | type: `uint256 private` | vis: `private` | flags: `-` | `Dispatcher` @ `contracts/persistent/dispatcher/Dispatcher.sol`
+- `nominatedOwner` | type: `address private` | vis: `private` | flags: `-` | `Dispatcher` @ `contracts/persistent/dispatcher/Dispatcher.sol`
+- `owner` | type: `address private` | vis: `private` | flags: `-` | `Dispatcher` @ `contracts/persistent/dispatcher/Dispatcher.sol`
+- `sharesTokenSymbol` | type: `string private` | vis: `private` | flags: `-` | `Dispatcher` @ `contracts/persistent/dispatcher/Dispatcher.sol`
+- `vaultProxyToFundDeployer` | type: `mapping(address => address) private` | vis: `private` | flags: `-` | `Dispatcher` @ `contracts/persistent/dispatcher/Dispatcher.sol`
+- `vaultProxyToMigrationRequest` | type: `mapping(address => MigrationRequest) private` | vis: `private` | flags: `-` | `Dispatcher` @ `contracts/persistent/dispatcher/Dispatcher.sol`
+- `DISPATCHER_CONTRACT` | type: `IDispatcher internal immutable` | vis: `internal` | flags: `immutable` | `DispatcherOwnedBeacon` @ `contracts/utils/0.8.19/dispatcher-owned-beacon/DispatcherOwnedBeacon.sol`
+- `implementation` | type: `address public override` | vis: `public` | flags: `override` | `DispatcherOwnedBeacon` @ `contracts/utils/0.8.19/dispatcher-owned-beacon/DispatcherOwnedBeacon.sol`
+- `beaconFactory` | type: `IDispatcherOwnedBeaconFactory` | vis: `default` | flags: `-` | `DispatcherOwnedBeaconFactoryTest` @ `tests/tests/utils/dispatcher-owned-beacon/DispatcherOwnedBeaconFactory.t.sol`
+- `dustToleranceInWeth` | type: `uint256 private` | vis: `private` | flags: `-` | `DustEvaluatorMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/DustEvaluatorMixin.sol`
+- `comptrollerProxy` | type: `IComptrollerLib internal` | vis: `internal` | flags: `-` | `ERC4626AdapterTestBase` @ `tests/tests/protocols/erc4626/ERC4626Adapter.t.sol`
+- `erc4626Adapter` | type: `IERC4626Adapter internal` | vis: `internal` | flags: `-` | `ERC4626AdapterTestBase` @ `tests/tests/protocols/erc4626/ERC4626Adapter.t.sol`
+- `erc4626Vault` | type: `IERC4626 internal` | vis: `internal` | flags: `-` | `ERC4626AdapterTestBase` @ `tests/tests/protocols/erc4626/ERC4626Adapter.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `ERC4626AdapterTestBase` @ `tests/tests/protocols/erc4626/ERC4626Adapter.t.sol`
+- `underlying` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `ERC4626AdapterTestBase` @ `tests/tests/protocols/erc4626/ERC4626Adapter.t.sol`
+- `vaultProxy` | type: `IVaultLib internal` | vis: `internal` | flags: `-` | `ERC4626AdapterTestBase` @ `tests/tests/protocols/erc4626/ERC4626Adapter.t.sol`
+- `erc4626Vault` | type: `IERC4626 internal` | vis: `internal` | flags: `-` | `ERC4626PriceFeedTestBase` @ `tests/tests/protocols/erc4626/ERC4626PriceFeed.t.sol`
+- `priceFeed` | type: `IERC4626PriceFeed internal` | vis: `internal` | flags: `-` | `ERC4626PriceFeedTestBase` @ `tests/tests/protocols/erc4626/ERC4626PriceFeed.t.sol`
+- `underlying` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `ERC4626PriceFeedTestBase` @ `tests/tests/protocols/erc4626/ERC4626PriceFeed.t.sol`
+- `ERC_4626_ASSET_PRECISION` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `ERC4626RateAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/ERC4626RateAggregator.sol`
+- `ERC_4626_SHARES_PRECISION` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `ERC4626RateAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/ERC4626RateAggregator.sol`
+- `ERC_4626_VAULT` | type: `IERC4626 public immutable` | vis: `public` | flags: `immutable` | `ERC4626RateAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/ERC4626RateAggregator.sol`
+- `ETH_QUOTE_DECIMALS` | type: `uint8 constant` | vis: `default` | flags: `constant` | `ERC4626RateAggregatorFactory` @ `contracts/release/infrastructure/price-feeds/primitives/factories/ERC4626RateAggregatorFactory.sol` = `18`
+- `USD_QUOTE_DECIMALS` | type: `uint8 constant` | vis: `default` | flags: `constant` | `ERC4626RateAggregatorFactory` @ `contracts/release/infrastructure/price-feeds/primitives/factories/ERC4626RateAggregatorFactory.sol` = `8`
+- `ONE_HUNDRED_PERCENT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `EntranceRateFeeBase` @ `contracts/release/extensions/fee-manager/fees/utils/EntranceRateFeeBase.sol` = `10000`
+- `SETTLEMENT_TYPE` | type: `IFeeManager.SettlementType private immutable` | vis: `private` | flags: `immutable` | `EntranceRateFeeBase` @ `contracts/release/extensions/fee-manager/fees/utils/EntranceRateFeeBase.sol`
+- `comptrollerProxyToRate` | type: `mapping(address => uint256) private` | vis: `private` | flags: `-` | `EntranceRateFeeBase` @ `contracts/release/extensions/fee-manager/fees/utils/EntranceRateFeeBase.sol`
+- `DISPATCHER` | type: `IDispatcher public immutable` | vis: `public` | flags: `immutable` | `EnzymeV4VaultAdapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/EnzymeV4VaultAdapter.sol`
+- `FUND_DEPLOYER_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `EnzymeV4VaultAdapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/EnzymeV4VaultAdapter.sol`
+- `adapter` | type: `IEnzymeV4VaultAdapter internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `childVaultComptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `childVaultDenominationAsset` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `childVaultFundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `childVaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `parentVaultComptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `parentVaultFundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `parentVaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeV4VaultAdapterTesBase` @ `tests/tests/protocols/enzyme/EnzymeV4VaultAdapter.t.sol`
+- `DISPATCHER` | type: `IDispatcher public immutable` | vis: `public` | flags: `immutable` | `EnzymeVaultPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/EnzymeVaultPriceFeed.sol`
+- `FUND_VALUE_CALCULATOR_ROUTER` | type: `IFundValueCalculatorRouter public immutable` | vis: `public` | flags: `immutable` | `EnzymeVaultPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/EnzymeVaultPriceFeed.sol`
+- `SHARES_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `EnzymeVaultPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/EnzymeVaultPriceFeed.sol` = `10 ** 18`
+- `SHARES_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `EnzymeVaultPriceFeedTestBase` @ `tests/tests/protocols/enzyme/EnzymeVaultPriceFeed.t.sol` = `10 ** 18`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeVaultPriceFeedTestBase` @ `tests/tests/protocols/enzyme/EnzymeVaultPriceFeed.t.sol`
+- `denominationAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `EnzymeVaultPriceFeedTestBase` @ `tests/tests/protocols/enzyme/EnzymeVaultPriceFeed.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeVaultPriceFeedTestBase` @ `tests/tests/protocols/enzyme/EnzymeVaultPriceFeed.t.sol`
+- `priceFeed` | type: `IEnzymeVaultPriceFeed internal` | vis: `internal` | flags: `-` | `EnzymeVaultPriceFeedTestBase` @ `tests/tests/protocols/enzyme/EnzymeVaultPriceFeed.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `EnzymeVaultPriceFeedTestBase` @ `tests/tests/protocols/enzyme/EnzymeVaultPriceFeed.t.sol`
+- `EETH` | type: `address private immutable` | vis: `private` | flags: `immutable` | `EtherFiEthPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/EtherFiEthPriceFeed.sol`
+- `WEETH_CONTRACT` | type: `IEtherFiWrappedEth private immutable` | vis: `private` | flags: `immutable` | `EtherFiEthPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/EtherFiEthPriceFeed.sol`
+- `priceFeed` | type: `IEtherFiEthPriceFeed internal` | vis: `internal` | flags: `-` | `EtherFiEthPriceFeedTestBase` @ `tests/tests/protocols/etherfi/EtherFiEthPriceFeed.t.sol`
+- `exchangeData` | type: `bytes` | vis: `default` | flags: `-` | `ExchangeErc20AndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `inputAsset` | type: `IERC20` | vis: `default` | flags: `-` | `ExchangeErc20AndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `inputAssetAmount` | type: `uint256` | vis: `default` | flags: `-` | `ExchangeErc20AndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `minExpectedShares` | type: `uint256` | vis: `default` | flags: `-` | `ExchangeErc20AndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `uniV3PoolFee` | type: `uint24` | vis: `default` | flags: `-` | `ExchangeErc20AndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `exchangeData` | type: `bytes` | vis: `default` | flags: `-` | `ExchangeEthAndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `minExpectedShares` | type: `uint256` | vis: `default` | flags: `-` | `ExchangeEthAndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `nativeAssetAmount` | type: `uint256` | vis: `default` | flags: `-` | `ExchangeEthAndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `uniV3PoolFee` | type: `uint24` | vis: `default` | flags: `-` | `ExchangeEthAndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `ONE_HUNDRED_PERCENT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ExitRateFeeBase` @ `contracts/release/extensions/fee-manager/fees/utils/ExitRateFeeBase.sol` = `10000`
+- `SETTLEMENT_TYPE` | type: `IFeeManager.SettlementType private immutable` | vis: `private` | flags: `immutable` | `ExitRateFeeBase` @ `contracts/release/extensions/fee-manager/fees/utils/ExitRateFeeBase.sol`
+- `comptrollerProxyToFeeInfo` | type: `mapping(address => FeeInfo) private` | vis: `private` | flags: `-` | `ExitRateFeeBase` @ `contracts/release/extensions/fee-manager/fees/utils/ExitRateFeeBase.sol`
+- `comptrollerProxyToVaultProxy` | type: `mapping(address => address) internal` | vis: `internal` | flags: `-` | `ExtensionBase` @ `contracts/release/extensions/utils/ExtensionBase.sol`
+- `DISPATCHER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ExternalPositionFactory` @ `contracts/persistent/external-positions/ExternalPositionFactory.sol`
+- `accountToIsExternalPositionProxy` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `ExternalPositionFactory` @ `contracts/persistent/external-positions/ExternalPositionFactory.sol`
+- `accountToIsPositionDeployer` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `ExternalPositionFactory` @ `contracts/persistent/external-positions/ExternalPositionFactory.sol`
+- `positionTypeCounter` | type: `uint256 private` | vis: `private` | flags: `-` | `ExternalPositionFactory` @ `contracts/persistent/external-positions/ExternalPositionFactory.sol`
+- `positionTypeIdToLabel` | type: `mapping(uint256 => string) private` | vis: `private` | flags: `-` | `ExternalPositionFactory` @ `contracts/persistent/external-positions/ExternalPositionFactory.sol`
+- `EXTERNAL_POSITION_FACTORY` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ExternalPositionManager` @ `contracts/release/extensions/external-position-manager/ExternalPositionManager.sol`
+- `POLICY_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ExternalPositionManager` @ `contracts/release/extensions/external-position-manager/ExternalPositionManager.sol`
+- `typeIdToTypeInfo` | type: `mapping(uint256 => ExternalPositionTypeInfo) private` | vis: `private` | flags: `-` | `ExternalPositionManager` @ `contracts/release/extensions/external-position-manager/ExternalPositionManager.sol`
+- `EXTERNAL_POSITION_TYPE` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `ExternalPositionProxy` @ `contracts/persistent/external-positions/ExternalPositionProxy.sol`
+- `VAULT_PROXY` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ExternalPositionProxy` @ `contracts/persistent/external-positions/ExternalPositionProxy.sol`
+- `FEE_MANAGER` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `FeeBase` @ `contracts/release/extensions/fee-manager/fees/utils/FeeBase.sol`
+- `comptrollerProxyToFeeToSharesOutstanding` | type: `mapping(address => mapping(address => uint256)) private` | vis: `private` | flags: `-` | `FeeManager` @ `contracts/release/extensions/fee-manager/FeeManager.sol`
+- `comptrollerProxyToFees` | type: `mapping(address => address[]) private` | vis: `private` | flags: `-` | `FeeManager` @ `contracts/release/extensions/fee-manager/FeeManager.sol`
+- `FUND_VALUE_CALCULATOR_ROUTER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundDataProviderRouter` @ `contracts/persistent/off-chain/fund-data-provider/FundDataProviderRouter.sol`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundDataProviderRouter` @ `contracts/persistent/off-chain/fund-data-provider/FundDataProviderRouter.sol`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `FundDataProviderRouterTest` @ `tests/tests/persistent/FundDataProviderRouter.t.sol`
+- `denominationAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `FundDataProviderRouterTest` @ `tests/tests/persistent/FundDataProviderRouter.t.sol`
+- `depositAmount` | type: `uint256` | vis: `default` | flags: `-` | `FundDataProviderRouterTest` @ `tests/tests/persistent/FundDataProviderRouter.t.sol`
+- `fundDataProviderRouter` | type: `IFundDataProviderRouter` | vis: `default` | flags: `-` | `FundDataProviderRouterTest` @ `tests/tests/persistent/FundDataProviderRouter.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `FundDataProviderRouterTest` @ `tests/tests/persistent/FundDataProviderRouter.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `FundDataProviderRouterTest` @ `tests/tests/persistent/FundDataProviderRouter.t.sol`
+- `ANY_VAULT_CALL` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol` = `0x5bf1898dd28c4d29f33c4c1bb9b8a7e2f6322847d70be63e8f89de024d08a669`
+- `CREATOR` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `DISPATCHER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `acctToIsAllowedBuySharesOnBehalfCaller` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `comptrollerLib` | type: `address private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `gasLimitForDestructCallToDeactivateFeeManager` | type: `uint32 private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `gasLimitForDestructCallToPayProtocolFee` | type: `uint32 private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `isLive` | type: `bool private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `protocolFeeTracker` | type: `address private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `reconfigurationTimelock` | type: `uint256 private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `vaultCallToPayloadToIsAllowed` | type: `mapping(bytes32 => mapping(bytes32 => bool)) private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `vaultLib` | type: `address private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `vaultProxyToReconfigurationRequest` | type: `mapping(address => ReconfigurationRequest) private` | vis: `private` | flags: `-` | `FundDeployer` @ `contracts/release/core/fund-deployer/FundDeployer.sol`
+- `nextComptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `FundDeployerCancelMigrationTest` @ `tests/tests/core/fund-deployer/FundDeployerMigrationIn.t.sol`
+- `nextComptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `FundDeployerExecuteMigrationTest` @ `tests/tests/core/fund-deployer/FundDeployerMigrationIn.t.sol`
+- `bypassPrevReleaseFailure` | type: `bool internal` | vis: `internal` | flags: `-` | `FundDeployerMigrationInTest` @ `tests/tests/core/fund-deployer/FundDeployerMigrationIn.t.sol`
+- `migrator` | type: `address internal` | vis: `internal` | flags: `-` | `FundDeployerMigrationInTest` @ `tests/tests/core/fund-deployer/FundDeployerMigrationIn.t.sol`
+- `vaultOwner` | type: `address internal` | vis: `internal` | flags: `-` | `FundDeployerMigrationInTest` @ `tests/tests/core/fund-deployer/FundDeployerMigrationIn.t.sol`
+- `vaultProxyCore` | type: `IVaultCore internal` | vis: `internal` | flags: `-` | `FundDeployerMigrationInTest` @ `tests/tests/core/fund-deployer/FundDeployerMigrationIn.t.sol`
+- `FUND_DEPLOYER` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `FundDeployerOwnerMixin` @ `contracts/release/utils/0.6.12/FundDeployerOwnerMixin.sol`
+- `FUND_DEPLOYER` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `FundDeployerOwnerMixin` @ `contracts/release/utils/0.8.19/FundDeployerOwnerMixin.sol`
+- `BUYBACK_DISCOUNT_DIVISOR` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `FundValueCalculator` @ `contracts/release/infrastructure/FundValueCalculator.sol` = `2`
+- `FEE_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundValueCalculator` @ `contracts/release/infrastructure/FundValueCalculator.sol`
+- `MAX_BPS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `FundValueCalculator` @ `contracts/release/infrastructure/FundValueCalculator.sol` = `10000`
+- `PROTOCOL_FEE_TRACKER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundValueCalculator` @ `contracts/release/infrastructure/FundValueCalculator.sol`
+- `SECONDS_IN_YEAR` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `FundValueCalculator` @ `contracts/release/infrastructure/FundValueCalculator.sol` = `31557600`
+- `SHARES_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `FundValueCalculator` @ `contracts/release/infrastructure/FundValueCalculator.sol` = `10 ** 18`
+- `VALUE_INTERPRETER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundValueCalculator` @ `contracts/release/infrastructure/FundValueCalculator.sol`
+- `DISPATCHER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundValueCalculatorRouter` @ `contracts/persistent/fund-value-calculator/FundValueCalculatorRouter.sol`
+- `fundDeployerToFundValueCalculator` | type: `mapping(address => address) private` | vis: `private` | flags: `-` | `FundValueCalculatorRouter` @ `contracts/persistent/fund-value-calculator/FundValueCalculatorRouter.sol`
+- `ETH_USD_AGGREGATOR` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundValueCalculatorUsdWrapper` @ `contracts/persistent/off-chain/fund-value-calculator-usd-wrapper/FundValueCalculatorUsdWrapper.sol`
+- `ETH_USD_AGGREGATOR_DECIMALS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `FundValueCalculatorUsdWrapper` @ `contracts/persistent/off-chain/fund-value-calculator-usd-wrapper/FundValueCalculatorUsdWrapper.sol` = `8`
+- `FUND_VALUE_CALCULATOR_ROUTER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundValueCalculatorUsdWrapper` @ `contracts/persistent/off-chain/fund-value-calculator-usd-wrapper/FundValueCalculatorUsdWrapper.sol`
+- `STALE_RATE_THRESHOLD` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `FundValueCalculatorUsdWrapper` @ `contracts/persistent/off-chain/fund-value-calculator-usd-wrapper/FundValueCalculatorUsdWrapper.sol`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundValueCalculatorUsdWrapper` @ `contracts/persistent/off-chain/fund-value-calculator-usd-wrapper/FundValueCalculatorUsdWrapper.sol`
+- `CALLBACK_GAS_LIMIT` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol`
+- `CLAIMABLE_COLLATERAL_AMOUNT_DATA_STORE_KEY` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol` = `keccak256(abi.encode("CLAIMABLE_COLLATERAL_AMOUNT"))`
+- `CLAIMABLE_COLLATERAL_TIME_DIVISOR_DATA_STORE_KEY` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol` = `keccak256(abi.encode("CLAIMABLE_COLLATERAL_TIME_DIVISOR"))`
+- `CONTROLLER_ROLE_STORE_KEY` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol` = `keccak256(abi.encode("CONTROLLER"))`
+- `MANAGED_ASSETS_LIB` | type: `GMXV2LeverageTradingPositionLibManagedAssets public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol`
+- `REFERRAL_CODE` | type: `bytes32 public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol`
+- `REFERRAL_STORAGE_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol`
+- `ROLE_STORE` | type: `IGMXV2RoleStore public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol`
+- `UI_FEE_RECEIVER_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol`
+- `WRAPPED_NATIVE_TOKEN` | type: `IWETH public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol`
+- `claimableCollateralKeys` | type: `bytes32[] internal` | vis: `internal` | flags: `-` | `GMXV2LeverageTradingPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/bases/GMXV2LeverageTradingPositionLibBase1.sol`
+- `marketToIsCallbackContractSet` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `GMXV2LeverageTradingPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/bases/GMXV2LeverageTradingPositionLibBase1.sol`
+- `trackedAssets` | type: `address[] internal` | vis: `internal` | flags: `-` | `GMXV2LeverageTradingPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/bases/GMXV2LeverageTradingPositionLibBase1.sol`
+- `trackedMarkets` | type: `address[] internal` | vis: `internal` | flags: `-` | `GMXV2LeverageTradingPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/bases/GMXV2LeverageTradingPositionLibBase1.sol`
+- `CHAINLINK_PRICE_FEED_PROVIDER` | type: `IGMXV2ChainlinkPriceFeedProvider public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLibManagedAssets` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLibManagedAssets.sol`
+- `CLAIMABLE_COLLATERAL_FACTOR_DATA_STORE_KEY` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `GMXV2LeverageTradingPositionLibManagedAssets` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLibManagedAssets.sol` = `keccak256(abi.encode("CLAIMABLE_COLLATERAL_FACTOR"))`
+- `CLAIMABLE_COLLATERAL_REDUCTION_FACTOR_DATA_STORE_KEY` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `GMXV2LeverageTradingPositionLibManagedAssets` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLibManagedAssets.sol` = `keccak256(abi.encode("CLAIMABLE_COLLATERAL_REDUCTION_FACTOR"))`
+- `FLOAT_PRECISION` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `GMXV2LeverageTradingPositionLibManagedAssets` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLibManagedAssets.sol` = `10 ** 30`
+- `REFERRAL_STORAGE_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLibManagedAssets` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLibManagedAssets.sol`
+- `UI_FEE_RECEIVER_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLibManagedAssets` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLibManagedAssets.sol`
+- `WRAPPED_NATIVE_TOKEN` | type: `IWETH public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLibManagedAssets` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLibManagedAssets.sol`
+- `CLAIMABLE_FUNDING_AMOUNT_DATA_STORE_KEY` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `GMXV2LeverageTradingPositionMixin` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionMixin.sol` = `keccak256(abi.encode("CLAIMABLE_FUNDING_AMOUNT"))`
+- `CLAIMED_COLLATERAL_AMOUNT_DATA_STORE_KEY` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `GMXV2LeverageTradingPositionMixin` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionMixin.sol` = `keccak256(abi.encode("CLAIMED_COLLATERAL_AMOUNT"))`
+- `DATA_STORE` | type: `IGMXV2DataStore public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionMixin` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionMixin.sol`
+- `READER` | type: `IGMXV2Reader public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionMixin` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionMixin.sol`
+- `DATA_STORE_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `GMXV2LeverageTradingPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionParser.sol`
+- `READER` | type: `IGMXV2Reader private immutable` | vis: `private` | flags: `immutable` | `GMXV2LeverageTradingPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionParser.sol`
+- `WRAPPED_NATIVE_TOKEN_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `GMXV2LeverageTradingPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionParser.sol`
+- `GSN_RECIPIENT_ADDRESS_LIST_REGISTRY` | type: `IAddressListRegistry internal immutable` | vis: `internal` | flags: `immutable` | `GSNRecipientMixin` @ `contracts/utils/0.8.19/gas-station-network/GSNRecipientMixin.sol`
+- `GSN_RECIPIENT_TRUSTED_FORWARDERS_LIST_ID` | type: `uint256 internal immutable` | vis: `internal` | flags: `immutable` | `GSNRecipientMixin` @ `contracts/utils/0.8.19/gas-station-network/GSNRecipientMixin.sol`
+- `gsnRecipient` | type: `IGSNRecipientMixinHarness` | vis: `default` | flags: `-` | `GSNRecipientMixinTest` @ `tests/tests/utils/GSNRecipientMixin.t.sol`
+- `trustedForwarder` | type: `address` | vis: `default` | flags: `-` | `GSNRecipientMixinTest` @ `tests/tests/utils/GSNRecipientMixin.t.sol` = `makeAddr("TrustedForwarder")`
+- `DISPATCHER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `GasRelayPaymasterFactory` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterFactory.sol`
+- `CALLDATA_SIZE_LIMIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol` = `10500`
+- `DEPOSIT_COOLDOWN` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol`
+- `DEPOSIT_MAX_TOTAL` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol`
+- `PAYMASTER_ACCEPTANCE_BUDGET` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol` = `150000`
+- `POST_RELAYED_CALL_GAS_LIMIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol` = `110000`
+- `PRE_RELAYED_CALL_GAS_LIMIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol` = `100000`
+- `RELAY_FEE_MAX_BASE` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol`
+- `RELAY_FEE_MAX_PERCENT` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol`
+- `RELAY_HUB` | type: `address private immutable` | vis: `private` | flags: `immutable` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol`
+- `TRUSTED_FORWARDER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol`
+- `accountToIsAdditionalRelayUser` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol`
+- `parentVault` | type: `address internal` | vis: `internal` | flags: `-` | `GasRelayPaymasterLibBase1` @ `contracts/release/infrastructure/gas-relayer/bases/GasRelayPaymasterLibBase1.sol`
+- `lastDepositTimestamp` | type: `uint256 internal` | vis: `internal` | flags: `-` | `GasRelayPaymasterLibBase2` @ `contracts/release/infrastructure/gas-relayer/bases/GasRelayPaymasterLibBase2.sol`
+- `GAS_RELAY_PAYMASTER_FACTORY` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `GasRelayRecipientMixin` @ `contracts/release/infrastructure/gas-relayer/GasRelayRecipientMixin.sol`
+- `comptrollerProxy` | type: `IComptrollerLib` | vis: `default` | flags: `-` | `GasRelayerTestBase` @ `tests/tests/infrastracture/GasRelayer.t.sol`
+- `fundOwner` | type: `address` | vis: `default` | flags: `-` | `GasRelayerTestBase` @ `tests/tests/infrastracture/GasRelayer.t.sol`
+- `fundOwnerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `GasRelayerTestBase` @ `tests/tests/infrastracture/GasRelayer.t.sol`
+- `hubAddress` | type: `address` | vis: `default` | flags: `-` | `GasRelayerTestBase` @ `tests/tests/infrastracture/GasRelayer.t.sol`
+- `paymaster` | type: `IGasRelayPaymasterLib` | vis: `default` | flags: `-` | `GasRelayerTestBase` @ `tests/tests/infrastracture/GasRelayer.t.sol`
+- `vaultProxy` | type: `IVaultLib` | vis: `default` | flags: `-` | `GasRelayerTestBase` @ `tests/tests/infrastracture/GasRelayer.t.sol`
+- `DISPATCHER_CONTRACT` | type: `IDispatcher private immutable` | vis: `private` | flags: `immutable` | `GatedRedemptionQueueSharesWrapperFactory` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/GatedRedemptionQueueSharesWrapperFactory.sol`
+- `implementation` | type: `address public override` | vis: `public` | flags: `override` | `GatedRedemptionQueueSharesWrapperFactory` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/GatedRedemptionQueueSharesWrapperFactory.sol`
+- `GLOBAL_CONFIG_CONTRACT` | type: `IGlobalConfig2 private immutable` | vis: `private` | flags: `immutable` | `GatedRedemptionQueueSharesWrapperLib` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/GatedRedemptionQueueSharesWrapperLib.sol`
+- `NATIVE_ASSET` | type: `address private constant` | vis: `private` | flags: `constant` | `GatedRedemptionQueueSharesWrapperLib` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/GatedRedemptionQueueSharesWrapperLib.sol` = `0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`
+- `ONE_HUNDRED_PERCENT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `GatedRedemptionQueueSharesWrapperLib` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/GatedRedemptionQueueSharesWrapperLib.sol` = `1e18`
+- `THIS_LIB` | type: `address private immutable` | vis: `private` | flags: `immutable` | `GatedRedemptionQueueSharesWrapperLib` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/GatedRedemptionQueueSharesWrapperLib.sol`
+- `WRAPPED_NATIVE_ASSET_CONTRACT` | type: `IWETH private immutable` | vis: `private` | flags: `immutable` | `GatedRedemptionQueueSharesWrapperLib` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/GatedRedemptionQueueSharesWrapperLib.sol`
+- `depositAssetToQueue` | type: `mapping(address => IGatedRedemptionQueueSharesWrapper.DepositQueue) internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `depositMode` | type: `IGatedRedemptionQueueSharesWrapper.DepositMode internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `redemptionAsset` | type: `address internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `redemptionQueue` | type: `IGatedRedemptionQueueSharesWrapper.RedemptionQueue internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `redemptionWindowConfig` | type: `IGatedRedemptionQueueSharesWrapper.RedemptionWindowConfig internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `useDepositApprovals` | type: `bool internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `useRedemptionApprovals` | type: `bool internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `useTransferApprovals` | type: `bool internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `userToAssetToDepositApproval` | type: `mapping(address => mapping(address => uint256)) internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `userToIsManager` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `userToRecipientToTransferApproval` | type: `mapping(address => mapping(address => uint256)) internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `userToRedemptionApproval` | type: `mapping(address => uint256) internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `vaultProxy` | type: `address internal` | vis: `internal` | flags: `-` | `GatedRedemptionQueueSharesWrapperLibBase1` @ `contracts/persistent/shares-wrappers/gated-redemption-queue/bases/GatedRedemptionQueueSharesWrapperLibBase1.sol`
+- `DERIVATIVE` | type: `IERC20 internal immutable` | vis: `internal` | flags: `immutable` | `GenericWrappingAdapterBase` @ `contracts/release/extensions/integration-manager/integrations/utils/0.8.19/bases/GenericWrappingAdapterBase.sol`
+- `UNDERLYING` | type: `IERC20 internal immutable` | vis: `internal` | flags: `immutable` | `GenericWrappingAdapterBase` @ `contracts/release/extensions/integration-manager/integrations/utils/0.8.19/bases/GenericWrappingAdapterBase.sol`
+- `USE_NATIVE_ASSET` | type: `bool internal immutable` | vis: `internal` | flags: `immutable` | `GenericWrappingAdapterBase` @ `contracts/release/extensions/integration-manager/integrations/utils/0.8.19/bases/GenericWrappingAdapterBase.sol`
+- `FUND_DEPLOYER_V4` | type: `address private immutable` | vis: `private` | flags: `immutable` | `GlobalConfigLib` @ `contracts/persistent/global-config/GlobalConfigLib.sol`
+- `ONE_HUNDRED_PERCENT_IN_BPS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `GlobalConfigLib` @ `contracts/persistent/global-config/GlobalConfigLib.sol` = `10000`
+- `NO_VALIDATION_DUMMY_ADDRESS` | type: `address internal constant` | vis: `internal` | flags: `constant` | `GlobalConfigLibBase1` @ `contracts/persistent/global-config/bases/GlobalConfigLibBase1.sol` = `0x000000000000000000000000000000000000aaaa`
+- `NO_VALIDATION_DUMMY_AMOUNT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GlobalConfigLibBase1` @ `contracts/persistent/global-config/bases/GlobalConfigLibBase1.sol` = `type(uint256).max - 1`
+- `dispatcher` | type: `address internal` | vis: `internal` | flags: `-` | `GlobalConfigLibBaseCore` @ `contracts/persistent/global-config/bases/GlobalConfigLibBaseCore.sol`
+- `EIP_1822_PROXIABLE_UUID` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `GlobalConfigProxyConstants` @ `contracts/persistent/global-config/utils/GlobalConfigProxyConstants.sol` = `0xf25d88d51901d7fabc9924b03f4c2fe4300e6fe1aae4b5134c0a90b68cd8e81c`
+- `EIP_1967_SLOT` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `GlobalConfigProxyConstants` @ `contracts/persistent/global-config/utils/GlobalConfigProxyConstants.sol` = `0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc`
+- `EXTERNAL_POSITION_FACTORY` | type: `IExternalPositionFactory private immutable` | vis: `private` | flags: `immutable` | `HelperDataReader` @ `contracts/release/off-chain/HelperDataReader.sol`
+- `FEE_MANAGER` | type: `IFeeManagerExtended private immutable` | vis: `private` | flags: `immutable` | `HelperDataReader` @ `contracts/release/off-chain/HelperDataReader.sol`
+- `FUND_VALUE_CALCULATOR_ROUTER` | type: `IFundValueCalculatorRouter private immutable` | vis: `private` | flags: `immutable` | `HelperDataReader` @ `contracts/release/off-chain/HelperDataReader.sol`
+- `POLICY_MANAGER` | type: `IPolicyManagerExtended private immutable` | vis: `private` | flags: `immutable` | `HelperDataReader` @ `contracts/release/off-chain/HelperDataReader.sol`
+- `DISPATCHER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `HelperDataReaderRouter` @ `contracts/persistent/off-chain/helper-data-reader/HelperDataReaderRouter.sol`
+- `fundDeployerToHelperDataReaderInfo` | type: `mapping(address => HelperDataReaderInfo) private` | vis: `private` | flags: `-` | `HelperDataReaderRouter` @ `contracts/persistent/off-chain/helper-data-reader/HelperDataReaderRouter.sol`
+- `helperDataReader` | type: `IHelperDataReader internal` | vis: `internal` | flags: `-` | `HelperDataReaderTest` @ `tests/tests/off-chain/HelperDataReader.t.sol`
+- `helperDataReaderRouter` | type: `IHelperDataReaderRouter internal` | vis: `internal` | flags: `-` | `HelperDataReaderTest` @ `tests/tests/off-chain/HelperDataReader.t.sol`
+- `vaultAddress` | type: `address internal` | vis: `internal` | flags: `-` | `HelperDataReaderTest` @ `tests/tests/off-chain/HelperDataReader.t.sol` = `0xbb05D8bd8c8AA18e1aA05d695129dbe95190c2a7`
+- `POLICY_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `IntegrationManager` @ `contracts/release/extensions/integration-manager/IntegrationManager.sol`
+- `VALUE_INTERPRETER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `IntegrationManager` @ `contracts/release/extensions/integration-manager/IntegrationManager.sol`
+- `ACTION_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("action(address,bytes,bytes)"))`
+- `CLAIM_REWARDS_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("claimRewards(address,bytes,bytes)"))`
+- `LEND_AND_STAKE_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("lendAndStake(address,bytes,bytes)"))`
+- `LEND_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("lend(address,bytes,bytes)"))`
+- `REDEEM_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("redeem(address,bytes,bytes)"))`
+- `STAKE_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("stake(address,bytes,bytes)"))`
+- `TAKE_MULTIPLE_ORDERS_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("takeMultipleOrders(address,bytes,bytes)"))`
+- `TAKE_ORDER_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("takeOrder(address,bytes,bytes)"))`
+- `TRANSFER_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("transfer(address,bytes,bytes)"))`
+- `UNSTAKE_AND_REDEEM_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("unstakeAndRedeem(address,bytes,bytes)"))`
+- `UNSTAKE_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("unstake(address,bytes,bytes)"))`
+- `UNWRAP_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("unwrap(address,bytes,bytes)"))`
+- `WRAP_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `IntegrationSelectors` @ `contracts/release/extensions/integration-manager/integrations/utils/IntegrationSelectors.sol` = `bytes4(keccak256("wrap(address,bytes,bytes)"))`
+- `core` | type: `Deployment internal` | vis: `internal` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `mlnToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `nonStandardPrimitive` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `standardPrimitive` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `symbolToCoreToken` | type: `mapping(string => IERC20) private` | vis: `private` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `tokenToIsCore` | type: `mapping(IERC20 => bool) private` | vis: `private` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `wethToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `wrappedNativeToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `STETH_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `LidoWithdrawalsPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/lido-withdrawals/LidoWithdrawalsPositionLib.sol`
+- `WITHDRAWAL_QUEUE` | type: `ILidoWithdrawalQueue private immutable` | vis: `private` | flags: `immutable` | `LidoWithdrawalsPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/lido-withdrawals/LidoWithdrawalsPositionLib.sol`
+- `requests` | type: `ILidoWithdrawalsPosition.Request[] internal` | vis: `internal` | flags: `-` | `LidoWithdrawalsPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/lido-withdrawals/bases/LidoWithdrawalsPositionLibBase1.sol`
+- `STETH_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `LidoWithdrawalsPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/lido-withdrawals/LidoWithdrawalsPositionParser.sol`
+- `WETH_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `LidoWithdrawalsPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/lido-withdrawals/LidoWithdrawalsPositionParser.sol`
+- `RATE_SCALE_BASE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ManagementFee` @ `contracts/release/extensions/fee-manager/fees/ManagementFee.sol` = `10 ** 27`
+- `comptrollerProxyToFeeInfo` | type: `mapping(address => FeeInfo) private` | vis: `private` | flags: `-` | `ManagementFee` @ `contracts/release/extensions/fee-manager/fees/ManagementFee.sol`
+- `LIB` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ManualValueOracleFactory` @ `contracts/persistent/arbitrary-value-oracles/manual-value/ManualValueOracleFactory.sol`
+- `lastUpdated` | type: `uint64 private` | vis: `private` | flags: `-` | `ManualValueOracleLib` @ `contracts/persistent/arbitrary-value-oracles/manual-value/ManualValueOracleLib.sol`
+- `updater` | type: `address private` | vis: `private` | flags: `-` | `ManualValueOracleLib` @ `contracts/persistent/arbitrary-value-oracles/manual-value/ManualValueOracleLib.sol`
+- `value` | type: `int192 private` | vis: `private` | flags: `-` | `ManualValueOracleLib` @ `contracts/persistent/arbitrary-value-oracles/manual-value/ManualValueOracleLib.sol`
+- `comptrollerProxyToFundSettings` | type: `mapping(address => FundSettings) private` | vis: `private` | flags: `-` | `MinMaxInvestmentPolicy` @ `contracts/release/extensions/policy-manager/policies/new-shareholders/MinMaxInvestmentPolicy.sol`
+- `LOCKED_SHARES_ADDRESS` | type: `address private constant` | vis: `private` | flags: `constant` | `MinSharesSupplyFee` @ `contracts/release/extensions/fee-manager/fees/MinSharesSupplyFee.sol` = `address(1)`
+- `MIN_SHARES_SUPPLY` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `MinSharesSupplyFee` @ `contracts/release/extensions/fee-manager/fees/MinSharesSupplyFee.sol` = `1e6`
+- `shareValue` | type: `uint256 public` | vis: `public` | flags: `-` | `MockFundValueCalculator` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol`
+- `targetVaultProxyAddress` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `MockFundValueCalculator` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol`
+- `foo` | type: `uint256 public` | vis: `public` | flags: `-` | `MockImplementation` @ `tests/tests/utils/dispatcher-owned-beacon/DispatcherOwnedBeaconFactory.t.sol`
+- `prices` | type: `mapping(address => mapping(address => uint256)) public` | vis: `public` | flags: `-` | `MockOracle` @ `tests/tests/protocols/myso-v3/MockOracle.sol`
+- `MORPHO` | type: `IMorphoBlue public immutable` | vis: `public` | flags: `immutable` | `MorphoBlueFlashLoanAssetManagerLib` @ `contracts/persistent/smart-accounts/morpho-blue-flash-loan-asset-manager/MorphoBlueFlashLoanAssetManagerLib.sol`
+- `borrowedAssetsRecipient` | type: `address internal` | vis: `internal` | flags: `-` | `MorphoBlueFlashLoanAssetManagerLib` @ `contracts/persistent/smart-accounts/morpho-blue-flash-loan-asset-manager/MorphoBlueFlashLoanAssetManagerLib.sol`
+- `owner` | type: `address internal` | vis: `internal` | flags: `-` | `MorphoBlueFlashLoanAssetManagerLib` @ `contracts/persistent/smart-accounts/morpho-blue-flash-loan-asset-manager/MorphoBlueFlashLoanAssetManagerLib.sol`
+- `owner` | type: `address private` | vis: `private` | flags: `-` | `MultiCallAccountMixin` @ `contracts/persistent/smart-accounts/utils/MultiCallAccountMixin.sol`
+- `calls` | type: `IMultiCallAccountMixinTypeLibrary.Call[]` | vis: `default` | flags: `-` | `MultiCallAccountTest` @ `tests/tests/persistent/smart-accounts/MultiCallAccount.t.sol`
+- `multiCallAccount` | type: `IMultiCallAccountMixinHarness` | vis: `default` | flags: `-` | `MultiCallAccountTest` @ `tests/tests/persistent/smart-accounts/MultiCallAccount.t.sol`
+- `owner` | type: `address` | vis: `default` | flags: `-` | `MultiCallAccountTest` @ `tests/tests/persistent/smart-accounts/MultiCallAccount.t.sol`
+- `MYSO_ROUTER` | type: `IMysoV3Router public immutable` | vis: `public` | flags: `immutable` | `MysoV3OptionWritingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/myso-v3/MysoV3OptionWritingPositionLib.sol`
+- `openEscrowsIdxs` | type: `uint32[] internal` | vis: `internal` | flags: `-` | `MysoV3OptionWritingPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/myso-v3/bases/MysoV3OptionWritingPositionLibBase1.sol`
+- `MYSO_ROUTER` | type: `IMysoV3Router public immutable` | vis: `public` | flags: `immutable` | `MysoV3OptionWritingPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/myso-v3/MysoV3OptionWritingPositionParser.sol`
+- `comptrollerProxyAddress` | type: `address` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `fundOwner` | type: `address` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `mockOracle` | type: `address` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `mysoRouter` | type: `IMysoV3Router` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `mysoV3OptionWritingPosition` | type: `IMysoV3OptionWritingPositionLib` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `settlementToken` | type: `IERC20` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `tradingFirm` | type: `address` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `tradingFirmKey` | type: `uint256` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `underlyingToken` | type: `IERC20` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `underlyingTokenPrice` | type: `uint256` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `ERROR_MESSAGE_ONLY_POLICY_MANAGER` | type: `bytes private constant` | vis: `private` | flags: `constant` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol` = `"Only the PolicyManager can make this call"`
+- `ONE_HUNDRED_PERCENT_FOR_POLICY` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol` = `BPS_ONE_HUNDRED_PERCENT`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol` = `makeAddr("ComptrollerProxyAddress")`
+- `ethPeggedAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `ethPeggedAssetAggregator` | type: `TestChainlinkAggregator internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `policy` | type: `INoDepegPolicy internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `policyHook` | type: `IPolicyManagerTypeLibrary.PolicyHook internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol` = `IPolicyManagerTypeLibrary.PolicyHook.wrap(uint8(IPolicyManagerProd.PolicyHook.RedeemSharesForSpecificAssets))`
+- `simulatedUsd` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `usdPeggedAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `usdPeggedAssetAggregator` | type: `TestChainlinkAggregator internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `BPS_ONE_HUNDRED_PERCENT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `NoDepegPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.8.19/NoDepegPolicyBase.sol` = `10_000`
+- `VALUE_INTERPRETER` | type: `IValueInterpreter private immutable` | vis: `private` | flags: `immutable` | `NoDepegPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.8.19/NoDepegPolicyBase.sol`
+- `comptrollerProxyToAssetConfigs` | type: `mapping(address => AssetConfig[]) private` | vis: `private` | flags: `-` | `NoDepegPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.8.19/NoDepegPolicyBase.sol`
+- `nominatedOwner` | type: `address private` | vis: `private` | flags: `-` | `NominatedOwnerMixin` @ `contracts/utils/0.6.12/NominatedOwnerMixin.sol`
+- `owner` | type: `address private` | vis: `private` | flags: `-` | `NominatedOwnerMixin` @ `contracts/utils/0.6.12/NominatedOwnerMixin.sol`
+- `AGGREGATOR` | type: `IChainlinkAggregator private immutable` | vis: `private` | flags: `immutable` | `NonStandardPrecisionSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/NonStandardPrecisionSimulatedAggregator.sol`
+- `SCALE_FACTOR` | type: `int256 private immutable` | vis: `private` | flags: `immutable` | `NonStandardPrecisionSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/NonStandardPrecisionSimulatedAggregator.sol`
+- `SCALE_TYPE` | type: `ScaleType private immutable` | vis: `private` | flags: `immutable` | `NonStandardPrecisionSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/NonStandardPrecisionSimulatedAggregator.sol`
+- `STANDARD_ETH_RATE_DECIMALS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `NonStandardPrecisionSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/NonStandardPrecisionSimulatedAggregator.sol` = `18`
+- `STANDARD_RATE_DECIMALS` | type: `uint8 private immutable` | vis: `private` | flags: `immutable` | `NonStandardPrecisionSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/NonStandardPrecisionSimulatedAggregator.sol`
+- `STANDARD_USD_RATE_DECIMALS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `NonStandardPrecisionSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/NonStandardPrecisionSimulatedAggregator.sol` = `8`
+- `dummyAnsweredInRound` | type: `uint80` | vis: `default` | flags: `-` | `NonStandardPrecisionSimulatedAggregatorTest` @ `tests/tests/peripheral/NonStandardPrecisionSimulatedAggregator.t.sol` = `100`
+- `dummyRoundId` | type: `uint80` | vis: `default` | flags: `-` | `NonStandardPrecisionSimulatedAggregatorTest` @ `tests/tests/peripheral/NonStandardPrecisionSimulatedAggregator.t.sol` = `4`
+- `dummyStartedAt` | type: `uint256` | vis: `default` | flags: `-` | `NonStandardPrecisionSimulatedAggregatorTest` @ `tests/tests/peripheral/NonStandardPrecisionSimulatedAggregator.t.sol` = `88`
+- `dummyUpdatedAt` | type: `uint256` | vis: `default` | flags: `-` | `NonStandardPrecisionSimulatedAggregatorTest` @ `tests/tests/peripheral/NonStandardPrecisionSimulatedAggregator.t.sol` = `99`
+- `CONTRACT_LOGIC` | type: `address private immutable` | vis: `private` | flags: `immutable` | `NonUpgradableProxy` @ `contracts/utils/0.6.12/NonUpgradableProxy.sol`
+- `CONTRACT_LOGIC` | type: `address private immutable` | vis: `private` | flags: `immutable` | `NonUpgradableProxy` @ `contracts/utils/0.8.19/NonUpgradableProxy.sol`
+- `ONE_INCH_V5_AGGREGATION_ROUTER_CONTRACT` | type: `IOneInchV5AggregationRouter public immutable` | vis: `public` | flags: `immutable` | `OneInchV5ActionsMixin` @ `contracts/release/extensions/integration-manager/integrations/utils/0.6.12/actions/OneInchV5ActionsMixin.sol`
+- `PARA_SWAP_V6_AUGUSTUS_SWAPPER` | type: `IParaSwapV6AugustusSwapper public immutable` | vis: `public` | flags: `immutable` | `ParaSwapV6Adapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/ParaSwapV6Adapter.sol`
+- `adapter` | type: `IParaSwapV6Adapter internal` | vis: `internal` | flags: `-` | `ParaSwapV6AdapterTestBase` @ `tests/tests/protocols/paraswap-v6/ParaSwapV6Adapter.t.sol`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `ParaSwapV6AdapterTestBase` @ `tests/tests/protocols/paraswap-v6/ParaSwapV6Adapter.t.sol`
+- `feeRecipientAddress` | type: `address internal` | vis: `internal` | flags: `-` | `ParaSwapV6AdapterTestBase` @ `tests/tests/protocols/paraswap-v6/ParaSwapV6Adapter.t.sol`
+- `feeVault` | type: `IParaSwapV6FeeVault internal` | vis: `internal` | flags: `-` | `ParaSwapV6AdapterTestBase` @ `tests/tests/protocols/paraswap-v6/ParaSwapV6Adapter.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `ParaSwapV6AdapterTestBase` @ `tests/tests/protocols/paraswap-v6/ParaSwapV6Adapter.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `ParaSwapV6AdapterTestBase` @ `tests/tests/protocols/paraswap-v6/ParaSwapV6Adapter.t.sol`
+- `priceFeed` | type: `IPeggedDerivativesPriceFeed internal` | vis: `internal` | flags: `-` | `PeggedDerivativesPriceFeedTestBase` @ `tests/tests/infrastracture/PeggedDerivativesPriceFeed.t.sol`
+- `ETH_QUOTE_DECIMALS` | type: `uint8 constant` | vis: `default` | flags: `constant` | `PeggedRateDeviationAggregatorFactory` @ `contracts/release/infrastructure/price-feeds/primitives/factories/PeggedRateDeviationAggregatorFactory.sol` = `18`
+- `USD_QUOTE_DECIMALS` | type: `uint8 constant` | vis: `default` | flags: `constant` | `PeggedRateDeviationAggregatorFactory` @ `contracts/release/infrastructure/price-feeds/primitives/factories/PeggedRateDeviationAggregatorFactory.sol` = `8`
+- `NATIVE_ASSET_ADDRESS` | type: `address private constant` | vis: `private` | flags: `constant` | `PendleV2Adapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/PendleV2Adapter.sol` = `0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE`
+- `PENDLE_NATIVE_ASSET_ADDRESS` | type: `address private constant` | vis: `private` | flags: `constant` | `PendleV2Adapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/PendleV2Adapter.sol` = `address(0)`
+- `PENDLE_ROUTER` | type: `IPendleV2Router private immutable` | vis: `private` | flags: `immutable` | `PendleV2Adapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/PendleV2Adapter.sol`
+- `WRAPPED_NATIVE_ASSET` | type: `IWETH private immutable` | vis: `private` | flags: `immutable` | `PendleV2Adapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/PendleV2Adapter.sol`
+- `ONE_HUNDRED_PERCENT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PerformanceFee` @ `contracts/release/extensions/fee-manager/fees/PerformanceFee.sol` = `10000`
+- `RESET_HWM_FLAG` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PerformanceFee` @ `contracts/release/extensions/fee-manager/fees/PerformanceFee.sol` = `type(uint256).max`
+- `SHARE_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PerformanceFee` @ `contracts/release/extensions/fee-manager/fees/PerformanceFee.sol` = `10 ** 18`
+- `comptrollerProxyToFeeInfo` | type: `mapping(address => FeeInfo) private` | vis: `private` | flags: `-` | `PerformanceFee` @ `contracts/release/extensions/fee-manager/fees/PerformanceFee.sol`
+- `feeManager` | type: `address internal` | vis: `internal` | flags: `-` | `PerformanceFeeTest` @ `tests/tests/fees/performance/PerformanceFeeUnit.t.sol` = `makeAddr("FeeManager")`
+- `performanceFee` | type: `IPerformanceFee internal` | vis: `internal` | flags: `-` | `PerformanceFeeTest` @ `tests/tests/fees/performance/PerformanceFeeIntegration.t.sol`
+- `performanceFee` | type: `IPerformanceFee internal` | vis: `internal` | flags: `-` | `PerformanceFeeTest` @ `tests/tests/fees/performance/PerformanceFeeUnit.t.sol`
+- `POLICY_MANAGER` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `PolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PolicyBase.sol`
+- `POLICY_MANAGER` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `PolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.8.19/PolicyBase.sol`
+- `POLICY_HOOK_COUNT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PolicyManager` @ `contracts/release/extensions/policy-manager/PolicyManager.sol` = `10`
+- `comptrollerProxyToHookToPolicies` | type: `mapping(address => mapping(PolicyHook => address[])) private` | vis: `private` | flags: `-` | `PolicyManager` @ `contracts/release/extensions/policy-manager/PolicyManager.sol`
+- `BPS_MAX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PriceFeedHelpersLib` @ `contracts/release/infrastructure/price-feeds/utils/PriceFeedHelpersLib.sol` = `10_000`
+- `priceFeedHelpers` | type: `IPriceFeedHelpersLibHarness` | vis: `default` | flags: `-` | `PriceFeedHelpersLibTest` @ `tests/tests/utils/PriceFeedHelpersLib.t.sol`
+- `PRICELESS_ASSET_BYPASS_TIMELOCK` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `PricelessAssetBypassMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PricelessAssetBypassMixin.sol`
+- `PRICELESS_ASSET_BYPASS_TIME_LIMIT` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `PricelessAssetBypassMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PricelessAssetBypassMixin.sol`
+- `PRICELESS_ASSET_BYPASS_VALUE_INTERPRETER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `PricelessAssetBypassMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PricelessAssetBypassMixin.sol`
+- `PRICELESS_ASSET_BYPASS_WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `PricelessAssetBypassMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PricelessAssetBypassMixin.sol`
+- `comptrollerProxyToAssetToBypassWindowStart` | type: `mapping(address => mapping(address => uint256)) private` | vis: `private` | flags: `-` | `PricelessAssetBypassMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PricelessAssetBypassMixin.sol`
+- `EIP_1822_PROXIABLE_UUID` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `ProtocolFeeProxyConstants` @ `contracts/persistent/protocol-fee-reserve/utils/ProtocolFeeProxyConstants.sol` = `0xbc966524590ce702cc9340e80d86ea9095afa6b8eecbb5d6213f576332239181`
+- `EIP_1967_SLOT` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `ProtocolFeeProxyConstants` @ `contracts/persistent/protocol-fee-reserve/utils/ProtocolFeeProxyConstants.sol` = `0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc`
+- `BUYBACK_DISCOUNT_DIVISOR` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ProtocolFeeReserveLib` @ `contracts/persistent/protocol-fee-reserve/ProtocolFeeReserveLib.sol` = `2`
+- `dispatcher` | type: `address private` | vis: `private` | flags: `-` | `ProtocolFeeReserveLibBaseCore` @ `contracts/persistent/protocol-fee-reserve/bases/ProtocolFeeReserveLibBaseCore.sol`
+- `MAX_BPS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ProtocolFeeTracker` @ `contracts/release/infrastructure/protocol-fees/ProtocolFeeTracker.sol` = `10000`
+- `SECONDS_IN_YEAR` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ProtocolFeeTracker` @ `contracts/release/infrastructure/protocol-fees/ProtocolFeeTracker.sol` = `31557600`
+- `feeBpsDefault` | type: `uint256 private` | vis: `private` | flags: `-` | `ProtocolFeeTracker` @ `contracts/release/infrastructure/protocol-fees/ProtocolFeeTracker.sol`
+- `vaultProxyToFeeBpsOverride` | type: `mapping(address => uint256) private` | vis: `private` | flags: `-` | `ProtocolFeeTracker` @ `contracts/release/infrastructure/protocol-fees/ProtocolFeeTracker.sol`
+- `vaultProxyToLastPaid` | type: `mapping(address => uint256) private` | vis: `private` | flags: `-` | `ProtocolFeeTracker` @ `contracts/release/infrastructure/protocol-fees/ProtocolFeeTracker.sol`
+- `DECIMALS` | type: `uint8 public immutable` | vis: `public` | flags: `immutable` | `RateAggregatorBase` @ `contracts/release/infrastructure/price-feeds/primitives/utils/RateAggregatorBase.sol`
+- `INVERTED_RATE_PRECISION` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `RateAggregatorBase` @ `contracts/release/infrastructure/price-feeds/primitives/utils/RateAggregatorBase.sol` = `10 ** 27`
+- `PRECISION` | type: `uint256 internal immutable` | vis: `internal` | flags: `immutable` | `RateAggregatorBase` @ `contracts/release/infrastructure/price-feeds/primitives/utils/RateAggregatorBase.sol`
+- `QUOTE_CONVERSION_AGGREGATOR_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `RateAggregatorBase` @ `contracts/release/infrastructure/price-feeds/primitives/utils/RateAggregatorBase.sol`
+- `QUOTE_CONVERSION_AGGREGATOR_INVERTED` | type: `bool public immutable` | vis: `public` | flags: `immutable` | `RateAggregatorBase` @ `contracts/release/infrastructure/price-feeds/primitives/utils/RateAggregatorBase.sol`
+- `QUOTE_CONVERSION_AGGREGATOR_PRECISION` | type: `uint256 internal immutable` | vis: `internal` | flags: `immutable` | `RateAggregatorBase` @ `contracts/release/infrastructure/price-feeds/primitives/utils/RateAggregatorBase.sol`
+- `rate` | type: `uint256 public` | vis: `public` | flags: `-` | `RateAggregatorBaseHarness` @ `contracts/test/RateAggregatorBaseHarness.sol`
+- `ratePrecision` | type: `uint256 public` | vis: `public` | flags: `-` | `RateAggregatorBaseHarness` @ `contracts/test/RateAggregatorBaseHarness.sol`
+- `timestamp` | type: `uint256 public` | vis: `public` | flags: `-` | `RateAggregatorBaseHarness` @ `contracts/test/RateAggregatorBaseHarness.sol`
+- `comptrollerProxyToRecipient` | type: `mapping(address => address) private` | vis: `private` | flags: `-` | `SettableFeeRecipientBase` @ `contracts/release/extensions/fee-manager/fees/utils/SettableFeeRecipientBase.sol`
+- `LIB_ADDRESS` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `SharePriceThrottledAssetManagerFactory` @ `contracts/persistent/smart-accounts/share-price-throttled-asset-manager/SharePriceThrottledAssetManagerFactory.sol`
+- `FUND_VALUE_CALCULATOR_ROUTER` | type: `IFundValueCalculator private immutable` | vis: `private` | flags: `immutable` | `SharePriceThrottledAssetManagerLib` @ `contracts/persistent/smart-accounts/share-price-throttled-asset-manager/SharePriceThrottledAssetManagerLib.sol`
+- `ONE_HUNDRED_PERCENT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SharePriceThrottledAssetManagerLib` @ `contracts/persistent/smart-accounts/share-price-throttled-asset-manager/SharePriceThrottledAssetManagerLib.sol` = `1e18`
+- `lossTolerance` | type: `uint64 private` | vis: `private` | flags: `-` | `SharePriceThrottledAssetManagerLib` @ `contracts/persistent/smart-accounts/share-price-throttled-asset-manager/SharePriceThrottledAssetManagerLib.sol`
+- `lossTolerancePeriodDuration` | type: `uint32 private` | vis: `private` | flags: `-` | `SharePriceThrottledAssetManagerLib` @ `contracts/persistent/smart-accounts/share-price-throttled-asset-manager/SharePriceThrottledAssetManagerLib.sol`
+- `shutdowner` | type: `address private` | vis: `private` | flags: `-` | `SharePriceThrottledAssetManagerLib` @ `contracts/persistent/smart-accounts/share-price-throttled-asset-manager/SharePriceThrottledAssetManagerLib.sol`
+- `throttle` | type: `Throttle private` | vis: `private` | flags: `-` | `SharePriceThrottledAssetManagerLib` @ `contracts/persistent/smart-accounts/share-price-throttled-asset-manager/SharePriceThrottledAssetManagerLib.sol`
+- `vaultProxyAddress` | type: `address private` | vis: `private` | flags: `-` | `SharePriceThrottledAssetManagerLib` @ `contracts/persistent/smart-accounts/share-price-throttled-asset-manager/SharePriceThrottledAssetManagerLib.sol`
+- `accountOwner` | type: `address` | vis: `default` | flags: `-` | `SharePriceThrottledAssetManagerTest` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol` = `makeAddr("AccountOwner")`
+- `factory` | type: `ISharePriceThrottledAssetManagerFactory` | vis: `default` | flags: `-` | `SharePriceThrottledAssetManagerTest` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol`
+- `lossTolerance` | type: `uint256` | vis: `default` | flags: `-` | `SharePriceThrottledAssetManagerTest` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol` = `WEI_ONE_PERCENT`
+- `lossTolerancePeriodDuration` | type: `uint256` | vis: `default` | flags: `-` | `SharePriceThrottledAssetManagerTest` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol` = `100`
+- `mockFundValueCalculator` | type: `MockFundValueCalculator` | vis: `default` | flags: `-` | `SharePriceThrottledAssetManagerTest` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol`
+- `oneHundredPercent` | type: `uint256` | vis: `default` | flags: `-` | `SharePriceThrottledAssetManagerTest` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol` = `WEI_ONE_HUNDRED_PERCENT`
+- `shutdowner` | type: `address` | vis: `default` | flags: `-` | `SharePriceThrottledAssetManagerTest` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol` = `makeAddr("Shutdowner")`
+- `smartAccount` | type: `ISharePriceThrottledAssetManagerLib` | vis: `default` | flags: `-` | `SharePriceThrottledAssetManagerTest` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `SharePriceThrottledAssetManagerTest` @ `tests/tests/persistent/smart-accounts/SharePriceThrottledAssetManager.t.sol` = `makeAddr("VaultProxy")`
+- `SHARES_SPLITTER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `SharesSplitterFactory` @ `contracts/persistent/shares-splitter/SharesSplitterFactory.sol`
+- `GLOBAL_CONFIG_CONTRACT` | type: `IGlobalConfig1 private immutable` | vis: `private` | flags: `immutable` | `SharesSplitterLib` @ `contracts/persistent/shares-splitter/SharesSplitterLib.sol`
+- `INITIALIZER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `SharesSplitterLib` @ `contracts/persistent/shares-splitter/SharesSplitterLib.sol`
+- `NO_VALIDATION_DUMMY_ADDRESS` | type: `address internal constant` | vis: `internal` | flags: `constant` | `SharesSplitterLib` @ `contracts/persistent/shares-splitter/SharesSplitterLib.sol` = `0x000000000000000000000000000000000000aaaa`
+- `sharesAllowances` | type: `mapping(address => mapping(address => uint256)) internal` | vis: `internal` | flags: `-` | `SharesTokenBase` @ `contracts/persistent/vault/utils/SharesTokenBase.sol`
+- `sharesBalances` | type: `mapping(address => uint256) internal` | vis: `internal` | flags: `-` | `SharesTokenBase` @ `contracts/persistent/vault/utils/SharesTokenBase.sol`
+- `sharesName` | type: `string internal` | vis: `internal` | flags: `-` | `SharesTokenBase` @ `contracts/persistent/vault/utils/SharesTokenBase.sol`
+- `sharesSymbol` | type: `string internal` | vis: `internal` | flags: `-` | `SharesTokenBase` @ `contracts/persistent/vault/utils/SharesTokenBase.sol`
+- `sharesTotalSupply` | type: `uint256 internal` | vis: `internal` | flags: `-` | `SharesTokenBase` @ `contracts/persistent/vault/utils/SharesTokenBase.sol`
+- `ADDRESS_LIST_REGISTRY` | type: `IAddressListRegistry public immutable` | vis: `public` | flags: `immutable` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `GLOBAL_CONFIG` | type: `IGlobalConfig2 public immutable` | vis: `public` | flags: `immutable` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `depositAsset` | type: `IERC20 private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `depositorAllowlistId` | type: `uint64 private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `idToRequest` | type: `mapping(uint256 => Request) private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `isShutdown` | type: `bool private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `minDepositAssetAmount` | type: `uint128 private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `minRequestTime` | type: `uint64 private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `nextNewId` | type: `uint88 private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `nextQueuedId` | type: `uint88 private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `userToIsManager` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `vaultProxy` | type: `address private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `SingleAssetDepositQueueTest` @ `tests/tests/persistent/SingleAssetDepositQueue.t.sol`
+- `depositQueue` | type: `ISingleAssetDepositQueueLib internal` | vis: `internal` | flags: `-` | `SingleAssetDepositQueueTest` @ `tests/tests/persistent/SingleAssetDepositQueue.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `SingleAssetDepositQueueTest` @ `tests/tests/persistent/SingleAssetDepositQueue.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `SingleAssetDepositQueueTest` @ `tests/tests/persistent/SingleAssetDepositQueue.t.sol`
+- `LIB_ADDRESS` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `SingleAssetRedemptionQueueFactory` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueFactory.sol`
+- `GLOBAL_CONFIG_CONTRACT` | type: `IGlobalConfig2 private immutable` | vis: `private` | flags: `immutable` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `bypassableSharesThreshold` | type: `uint256 private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `idToSharesAmount` | type: `mapping(uint256 => uint256) private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `idToUser` | type: `mapping(uint256 => address) private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `isShutdown` | type: `bool private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `nextNewId` | type: `uint256 private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `nextQueuedId` | type: `uint256 private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `redemptionAsset` | type: `IERC20 private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `userToIsManager` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `vaultProxy` | type: `address private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `factory` | type: `ISingleAssetRedemptionQueueFactory internal` | vis: `internal` | flags: `-` | `SingleAssetRedemptionQueueTest` @ `tests/tests/persistent/SingleAssetRedemptionQueue.t.sol`
+- `DERIVATIVE` | type: `address private immutable` | vis: `private` | flags: `immutable` | `SinglePeggedDerivativePriceFeedBase` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/utils/SinglePeggedDerivativePriceFeedBase.sol`
+- `UNDERLYING` | type: `address private immutable` | vis: `private` | flags: `immutable` | `SinglePeggedDerivativePriceFeedBase` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/utils/SinglePeggedDerivativePriceFeedBase.sol`
+- `derivativeToUnderlying` | type: `mapping(address => address) private` | vis: `private` | flags: `-` | `SingleUnderlyingDerivativeRegistryMixin` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/utils/SingleUnderlyingDerivativeRegistryMixin.sol`
+- `USDN_PROTOCOL` | type: `ISmarDexUsdnProtocol public immutable` | vis: `public` | flags: `immutable` | `SmarDexUsdnNativeRateUsdAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/SmarDexUsdnNativeRateUsdAggregator.sol`
+- `USDN_RATES_PRECISION` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `SmarDexUsdnNativeRateUsdAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/SmarDexUsdnNativeRateUsdAggregator.sol` = `10 ** 18`
+- `STADER_STAKE_POOLS_MANAGER` | type: `IStaderStakePoolsManager public immutable` | vis: `public` | flags: `immutable` | `StaderEthXRateEthAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/StaderEthXRateEthAggregator.sol`
+- `aggregator` | type: `IChainlinkAggregator internal` | vis: `internal` | flags: `-` | `StaderEthXRateEthAggregatorTest` @ `tests/tests/protocols/stader/StaderEthXRateEthAggregatorTest.t.sol`
+- `SD_TOKEN_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `StaderSDPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/StaderSDPriceFeed.sol`
+- `SD_TOKEN_UNIT` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StaderSDPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/StaderSDPriceFeed.sol`
+- `STADER_ORACLE` | type: `IStaderOracle private immutable` | vis: `private` | flags: `immutable` | `StaderSDPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/StaderSDPriceFeed.sol`
+- `WETH_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `StaderSDPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/StaderSDPriceFeed.sol`
+- `priceFeed` | type: `IStaderSDPriceFeed internal` | vis: `internal` | flags: `-` | `StaderSDPriceFeedTestBase` @ `tests/tests/protocols/stader/StaderSDPriceFeed.t.sol`
+- `STADER_STAKE_POOLS_MANAGER` | type: `IStaderStakePoolsManager public immutable` | vis: `public` | flags: `immutable` | `StaderStakingAdapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/StaderStakingAdapter.sol`
+- `ETHX_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `StaderWithdrawalsPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/StaderWithdrawalsPositionLib.sol`
+- `USER_WITHDRAWAL_MANAGER` | type: `IStaderUserWithdrawalManager public immutable` | vis: `public` | flags: `immutable` | `StaderWithdrawalsPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/StaderWithdrawalsPositionLib.sol`
+- `WETH_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `StaderWithdrawalsPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/StaderWithdrawalsPositionLib.sol`
+- `ETHX_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `StaderWithdrawalsPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/StaderWithdrawalsPositionParser.sol`
+- `WETH_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `StaderWithdrawalsPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/StaderWithdrawalsPositionParser.sol`
+- `comptrollerProxyAddress` | type: `address` | vis: `default` | flags: `-` | `StaderWithdrawalsPositionTestBase` @ `tests/tests/protocols/stader/StaderWithdrawalsPosition.t.sol`
+- `ethxToken` | type: `IERC20` | vis: `default` | flags: `-` | `StaderWithdrawalsPositionTestBase` @ `tests/tests/protocols/stader/StaderWithdrawalsPosition.t.sol` = `IERC20(ETHEREUM_ETHX)`
+- `fundOwner` | type: `address` | vis: `default` | flags: `-` | `StaderWithdrawalsPositionTestBase` @ `tests/tests/protocols/stader/StaderWithdrawalsPosition.t.sol`
+- `staderUserWithdrawalManager` | type: `IStaderUserWithdrawalManager` | vis: `default` | flags: `-` | `StaderWithdrawalsPositionTestBase` @ `tests/tests/protocols/stader/StaderWithdrawalsPosition.t.sol` = `IStaderUserWithdrawalManager(USER_WITHDRAWAL_MANAGER)`
+- `staderWithdrawalsPosition` | type: `IStaderWithdrawalsPositionLib` | vis: `default` | flags: `-` | `StaderWithdrawalsPositionTestBase` @ `tests/tests/protocols/stader/StaderWithdrawalsPosition.t.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `StaderWithdrawalsPositionTestBase` @ `tests/tests/protocols/stader/StaderWithdrawalsPosition.t.sol`
+- `usdnAggregator` | type: `IChainlinkAggregator` | vis: `default` | flags: `-` | `Test` @ `tests/tests/protocols/smar-dex/SmarDexUsdnNativeRateUsdAggregator.t.sol`
+- `wstethUsdAggregatorAddress` | type: `address` | vis: `default` | flags: `-` | `Test` @ `tests/tests/protocols/smar-dex/SmarDexUsdnNativeRateUsdAggregator.t.sol`
+- `BUFFER_PERCENT` | type: `uint256 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol` = `WEI_ONE_PERCENT / 2`
+- `FEE_HIGH` | type: `uint24 internal constant` | vis: `internal` | flags: `constant` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol` = `10_000`
+- `FEE_LOW` | type: `uint24 internal constant` | vis: `internal` | flags: `constant` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol` = `500`
+- `FEE_LOWEST` | type: `uint24 internal constant` | vis: `internal` | flags: `constant` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol` = `100`
+- `FEE_MEDIUM` | type: `uint24 internal constant` | vis: `internal` | flags: `constant` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol` = `3_000`
+- `UNITS_MINTED` | type: `uint24 internal constant` | vis: `internal` | flags: `constant` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol` = `1_000`
+- `aavePool` | type: `IAaveV3Pool` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol`
+- `aaveV3DebtPosition` | type: `IAaveV3DebtPositionLib` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `aaveV3FlashLoanAssetManager` | type: `IAaveV3FlashLoanAssetManager` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol`
+- `accountOwner` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol` = `makeAddr("AccountOwner")`
+- `accountOwner` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/MorphoBlueFlashLoanAssetManagerLib.t.sol` = `makeAddr("AccountOwner")`
+- `adapter` | type: `IOneInchV5Adapter internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/one-inch/OneInchV5Adapter.t.sol`
+- `adapter` | type: `IUniswapV3Adapter internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3Adapter.t.sol`
+- `adapterAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `allowedExchangesListId` | type: `uint256 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `assetAddresses` | type: `address[]` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol`
+- `bebopBlendAdapter` | type: `IBebopBlendAdapter internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/bebop/BebopBlendAdapter.t.sol`
+- `borrowAsset` | type: `IERC20` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/MorphoBlueFlashLoanAssetManagerLib.t.sol`
+- `borrowableUnderlyingAddresses` | type: `address[]` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `chainlinkPriceFeedProvider` | type: `IGMXV2ChainlinkPriceFeedProvider internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `collateralUnderlyingAddresses` | type: `address[]` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `comptrollerProxy` | type: `IComptrollerLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `comptrollerProxy` | type: `IComptrollerLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/bebop/BebopBlendAdapter.t.sol`
+- `comptrollerProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/convex-voting/ConvexVotingPosition.t.sol`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/lido/LidoWithdrawalsPosition.t.sol`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/one-inch/OneInchV5Adapter.t.sol`
+- `comptrollerProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3Adapter.t.sol`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol`
+- `comptrollerProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `convexVotingPosition` | type: `IConvexVotingPositionLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/convex-voting/ConvexVotingPosition.t.sol`
+- `dataStoreAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `denominationAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `depositWrapper` | type: `IDepositWrapper internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `derivativeToken` | type: `IERC20` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `exchangeAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `exchangeApprovalTargetAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `exchangeRouter` | type: `IGMXV2ExchangeRouter internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `executionFee` | type: `uint256 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `expectedPremiums` | type: `uint256[]` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol`
+- `externalPosition` | type: `IGMXV2LeverageTradingPositionLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `factoryAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol`
+- `fundOwner` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/bebop/BebopBlendAdapter.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/convex-voting/ConvexVotingPosition.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/lido/LidoWithdrawalsPosition.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/one-inch/OneInchV5Adapter.t.sol`
+- `fundOwner` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3Adapter.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol`
+- `fundOwner` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `guessPt` | type: `IPendleV2RouterProd.ApproxParams` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `integrationManager` | type: `IIntegrationManager` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `lendingPool` | type: `IAaveV3Pool` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `lidoWithdrawalsPosition` | type: `ILidoWithdrawalsPositionLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/lido/LidoWithdrawalsPosition.t.sol`
+- `loanAmounts` | type: `uint256[]` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol`
+- `loanRepaymentAmounts` | type: `uint256[]` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol`
+- `makerToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/bebop/BebopBlendAdapter.t.sol`
+- `market` | type: `IPendleV2Market` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `merklDistributor` | type: `IMerklDistributor` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `morpho` | type: `IMorphoBlue` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/MorphoBlueFlashLoanAssetManagerLib.t.sol`
+- `morphoFlashLoanAssetManager` | type: `IMorphoBlueFlashLoanAssetManager` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/MorphoBlueFlashLoanAssetManagerLib.t.sol`
+- `nonFungibleTokenManagerAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol`
+- `oracleAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `pendleOracle` | type: `IPendleV2PyYtLpOracle` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `pendleRouter` | type: `IPendleV2Router` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `pendleV2Adapter` | type: `IPendleV2Adapter` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `poolAddressProvider` | type: `IAaveV3PoolAddressProvider` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `priceOracle` | type: `IAaveV3PriceOracle` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `principalToken` | type: `IPendleV2PrincipalToken` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `protocolDataProvider` | type: `IAaveV3ProtocolDataProvider` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `rateConversionTolerance` | type: `uint256` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol` = `10`
+- `ratePerUnderlying` | type: `uint256` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `reader` | type: `IGMXV2Reader internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `repaymentBalanceBuffer` | type: `uint256` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol` = `2`
+- `rewardedCollateralUnderlyingAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `rewardsController` | type: `IAaveV3RewardsController` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `roleStore` | type: `IGMXV2RoleStore internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `sharesBuyer` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol` = `makeAddr("SharesBuyer")`
+- `stethToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/lido/LidoWithdrawalsPosition.t.sol` = `IERC20(ETHEREUM_STETH)`
+- `syToken` | type: `IPendleV2StandardizedYield` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `takerToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/bebop/BebopBlendAdapter.t.sol`
+- `testUnwrap` | type: `bool` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `testWrap` | type: `bool` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `trustedMaker` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/bebop/BebopBlendAdapter.t.sol`
+- `trustedMakerPrivateKey` | type: `uint256 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/bebop/BebopBlendAdapter.t.sol`
+- `underlyingAsset` | type: `IERC20` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `underlyingToken` | type: `IERC20` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `uniswapV3LiquidityPosition` | type: `IUniswapV3LiquidityPositionLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol`
+- `vault` | type: `MockVault` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/AaveV3FlashLoanAssetManagerLib.t.sol`
+- `vault` | type: `MockVault` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/MorphoBlueFlashLoanAssetManagerLib.t.sol`
+- `vaultProxy` | type: `IVaultLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `vaultProxy` | type: `IVaultLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/bebop/BebopBlendAdapter.t.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/aave/AaveV3DebtPositionTest.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/convex-voting/ConvexVotingPosition.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/lido/LidoWithdrawalsPosition.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/one-inch/OneInchV5Adapter.t.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3Adapter.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `withdrawalQueue` | type: `ILidoWithdrawalQueue internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/lido/LidoWithdrawalsPosition.t.sol` = `ILidoWithdrawalQueue(WITHDRAWAL_QUEUE_ADDRESS)`
+- `decimals` | type: `uint8 public immutable` | vis: `public` | flags: `immutable` | `TestChainlinkAggregator` @ `tests/utils/core/AssetUniverseUtils.sol`
+- `price` | type: `int256 internal` | vis: `internal` | flags: `-` | `TestChainlinkAggregator` @ `tests/utils/core/AssetUniverseUtils.sol`
+- `timestamp` | type: `uint256 internal` | vis: `internal` | flags: `-` | `TestChainlinkAggregator` @ `tests/utils/core/AssetUniverseUtils.sol`
+- `DECIMALS` | type: `uint8 internal immutable` | vis: `internal` | flags: `immutable` | `TestToken` @ `tests/utils/common/TokenUtils.sol`
+- `assetAddresses` | type: `address[]` | vis: `default` | flags: `-` | `TransferAssetsAdapterTest` @ `tests/tests/misc-adapters/TransferAssetsAdapter.t.sol`
+- `comptrollerProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TransferAssetsAdapterTest` @ `tests/tests/misc-adapters/TransferAssetsAdapter.t.sol`
+- `fundOwner` | type: `address` | vis: `default` | flags: `-` | `TransferAssetsAdapterTest` @ `tests/tests/misc-adapters/TransferAssetsAdapter.t.sol`
+- `recipient` | type: `address` | vis: `default` | flags: `-` | `TransferAssetsAdapterTest` @ `tests/tests/misc-adapters/TransferAssetsAdapter.t.sol` = `makeAddr("TransferRecipient")`
+- `transferAssetsAdapter` | type: `ITransferAssetsAdapter` | vis: `default` | flags: `-` | `TransferAssetsAdapterTest` @ `tests/tests/misc-adapters/TransferAssetsAdapter.t.sol`
+- `vaultProxyAddress` | type: `address` | vis: `default` | flags: `-` | `TransferAssetsAdapterTest` @ `tests/tests/misc-adapters/TransferAssetsAdapter.t.sol`
+- `ONE_HUNDRED_PERCENT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `TreasurySplitterMixin` @ `contracts/persistent/shares-splitter/TreasurySplitterMixin.sol` = `10000`
+- `tokenToTotalBalClaimed` | type: `mapping(address => uint256) private` | vis: `private` | flags: `-` | `TreasurySplitterMixin` @ `contracts/persistent/shares-splitter/TreasurySplitterMixin.sol`
+- `userToSplitPercentage` | type: `mapping(address => uint256) private` | vis: `private` | flags: `-` | `TreasurySplitterMixin` @ `contracts/persistent/shares-splitter/TreasurySplitterMixin.sol`
+- `userToTokenToBalClaimed` | type: `mapping(address => mapping(address => uint256)) private` | vis: `private` | flags: `-` | `TreasurySplitterMixin` @ `contracts/persistent/shares-splitter/TreasurySplitterMixin.sol`
+- `BASE_ASSET_AGGREGATOR` | type: `IChainlinkAggregator public immutable` | vis: `public` | flags: `immutable` | `TwoAggregatorsWithCommonQuoteSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/utils/TwoAggregatorsWithCommonQuoteSimulatedAggregator.sol`
+- `CONVERSION_FACTOR` | type: `int256 private immutable` | vis: `private` | flags: `immutable` | `TwoAggregatorsWithCommonQuoteSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/utils/TwoAggregatorsWithCommonQuoteSimulatedAggregator.sol`
+- `PRECISION_DECIMALS` | type: `uint8 public immutable` | vis: `public` | flags: `immutable` | `TwoAggregatorsWithCommonQuoteSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/utils/TwoAggregatorsWithCommonQuoteSimulatedAggregator.sol`
+- `QUOTE_ASSET_AGGREGATOR` | type: `IChainlinkAggregator public immutable` | vis: `public` | flags: `immutable` | `TwoAggregatorsWithCommonQuoteSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/utils/TwoAggregatorsWithCommonQuoteSimulatedAggregator.sol`
+- `mockAggregatorCount` | type: `uint256` | vis: `default` | flags: `-` | `TwoAggregatorsWithCommonQuoteSimulatedAggregatorTest` @ `tests/tests/peripheral/TwoAggregatorsWithCommonQuoteSimulatedAggregator.t.sol`
+- `DISPATCHER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `UintListRegistry` @ `contracts/persistent/uint-list-registry/UintListRegistry.sol`
+- `lists` | type: `ListInfo[] private` | vis: `private` | flags: `-` | `UintListRegistry` @ `contracts/persistent/uint-list-registry/UintListRegistry.sol`
+- `UINT_LIST_REGISTRY_CONTRACT` | type: `IUintListRegistry internal immutable` | vis: `internal` | flags: `immutable` | `UintListRegistryPerUserPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/UintListRegistryPerUserPolicyBase.sol`
+- `comptrollerProxyToUserToListIds` | type: `mapping(address => mapping(address => uint256[])) private` | vis: `private` | flags: `-` | `UintListRegistryPerUserPolicyBase` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/UintListRegistryPerUserPolicyBase.sol`
+- `UNISWAP_V3_ROUTER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `UniswapV3ActionsMixin` @ `contracts/release/extensions/integration-manager/integrations/utils/0.6.12/actions/UniswapV3ActionsMixin.sol`
+- `NON_FUNGIBLE_TOKEN_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `UniswapV3LiquidityPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/UniswapV3LiquidityPositionLib.sol`
+- `TRUSTED_RATE_INITIAL_VIRTUAL_BALANCE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `UniswapV3LiquidityPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/UniswapV3LiquidityPositionLib.sol` = `10 ** 18`
+- `UNISWAP_SQRT_INFLATE_FACTOR` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `UniswapV3LiquidityPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/UniswapV3LiquidityPositionLib.sol` = `2 ** 192`
+- `VALUE_INTERPRETER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `UniswapV3LiquidityPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/UniswapV3LiquidityPositionLib.sol`
+- `nftIdToToken0` | type: `mapping(uint256 => address) internal` | vis: `internal` | flags: `-` | `UniswapV3LiquidityPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/bases/UniswapV3LiquidityPositionLibBase1.sol`
+- `nftIdToToken1` | type: `mapping(uint256 => address) internal` | vis: `internal` | flags: `-` | `UniswapV3LiquidityPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/bases/UniswapV3LiquidityPositionLibBase1.sol`
+- `nftIds` | type: `uint256[] internal` | vis: `internal` | flags: `-` | `UniswapV3LiquidityPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/bases/UniswapV3LiquidityPositionLibBase1.sol`
+- `UNISWAP_V3_NON_FUNGIBLE_POSITION_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `UniswapV3LiquidityPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/UniswapV3LiquidityPositionParser.sol`
+- `VALUE_INTERPRETER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `UniswapV3LiquidityPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/UniswapV3LiquidityPositionParser.sol`
+- `FEE_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `UnpermissionedActionsWrapper` @ `contracts/release/peripheral/UnpermissionedActionsWrapper.sol`
+- `DECIMALS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `UsdEthSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/UsdEthSimulatedAggregator.sol` = `18`
+- `ETH_USD_AGGREGATOR_CONTRACT` | type: `IChainlinkAggregator private immutable` | vis: `private` | flags: `immutable` | `UsdEthSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/UsdEthSimulatedAggregator.sol`
+- `INVERSE_RATE_NUMERATOR` | type: `int256 private constant` | vis: `private` | flags: `constant` | `UsdEthSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/UsdEthSimulatedAggregator.sol` = `10 ** 26`
+- `MIN_INVERSE_RATE_AMOUNT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ValueInterpreter` @ `contracts/release/infrastructure/value-interpreter/ValueInterpreter.sol` = `10000`
+- `DAI` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ValueInterpreterTestEthereum` @ `tests/tests/infrastracture/ValueInterpreter.t.sol` = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- `DAI_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ValueInterpreterTestEthereum` @ `tests/tests/infrastracture/ValueInterpreter.t.sol` = `0x773616E4d11A78F511299002da57A0a94577F1f4`
+- `EXTERNAL_POSITION_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `VaultLib` @ `contracts/release/core/fund/vault/VaultLib.sol`
+- `MLN_BURNER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `VaultLib` @ `contracts/release/core/fund/vault/VaultLib.sol`
+- `MLN_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `VaultLib` @ `contracts/release/core/fund/vault/VaultLib.sol`
+- `POSITIONS_LIMIT` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `VaultLib` @ `contracts/release/core/fund/vault/VaultLib.sol`
+- `PROTOCOL_FEE_RESERVE` | type: `address private immutable` | vis: `private` | flags: `immutable` | `VaultLib` @ `contracts/release/core/fund/vault/VaultLib.sol`
+- `PROTOCOL_FEE_TRACKER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `VaultLib` @ `contracts/release/core/fund/vault/VaultLib.sol`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `VaultLib` @ `contracts/release/core/fund/vault/VaultLib.sol`
+- `assetToIsTracked` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `VaultLibBase1` @ `contracts/persistent/vault/VaultLibBase1.sol`
+- `trackedAssets` | type: `address[] internal` | vis: `internal` | flags: `-` | `VaultLibBase1` @ `contracts/persistent/vault/VaultLibBase1.sol`
+- `accountToIsAssetManager` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `VaultLibBase2` @ `contracts/persistent/vault/VaultLibBase2.sol`
+- `activeExternalPositions` | type: `address[] internal` | vis: `internal` | flags: `-` | `VaultLibBase2` @ `contracts/persistent/vault/VaultLibBase2.sol`
+- `externalPositionToIsActive` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `VaultLibBase2` @ `contracts/persistent/vault/VaultLibBase2.sol`
+- `freelyTransferableShares` | type: `bool internal` | vis: `internal` | flags: `-` | `VaultLibBase2` @ `contracts/persistent/vault/VaultLibBase2.sol`
+- `nominatedOwner` | type: `address internal` | vis: `internal` | flags: `-` | `VaultLibBase2` @ `contracts/persistent/vault/VaultLibBase2.sol`
+- `accessor` | type: `address internal` | vis: `internal` | flags: `-` | `VaultLibBaseCore` @ `contracts/persistent/vault/VaultLibBaseCore.sol`
+- `creator` | type: `address internal` | vis: `internal` | flags: `-` | `VaultLibBaseCore` @ `contracts/persistent/vault/VaultLibBaseCore.sol`
+- `migrator` | type: `address internal` | vis: `internal` | flags: `-` | `VaultLibBaseCore` @ `contracts/persistent/vault/VaultLibBaseCore.sol`
+- `owner` | type: `address internal` | vis: `internal` | flags: `-` | `VaultLibBaseCore` @ `contracts/persistent/vault/VaultLibBaseCore.sol`
+- `ZERO_EX_V4_EXCHANGE` | type: `address internal immutable` | vis: `internal` | flags: `immutable` | `ZeroExV4ActionsMixin` @ `contracts/release/extensions/integration-manager/integrations/utils/0.6.12/actions/ZeroExV4ActionsMixin.sol`
+- `ADDRESS_LIST_REGISTRY_CONTRACT` | type: `IAddressListRegistry private immutable` | vis: `private` | flags: `immutable` | `ZeroExV4Adapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/ZeroExV4Adapter.sol`
+- `ALLOWED_MAKERS_LIST_ID` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `ZeroExV4Adapter` @ `contracts/release/extensions/integration-manager/integrations/adapters/ZeroExV4Adapter.sol`
+- `comptrollerProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+- `fundOwner` | type: `address internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+- `maker` | type: `address internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+- `makerAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+- `makerKey` | type: `uint256` | vis: `default` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+- `takerAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+- `vaultProxyAddress` | type: `address internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+- `zeroExV4Adapter` | type: `IZeroExV4Adapter internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+- `zeroExV4Exchange` | type: `IZeroExV4 internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+
+### Tokens Added / Token State Values
+Detected token-related variables:
+- `borrowedAssetToDebtToken` | type: `mapping(address => address) internal` | vis: `internal` | flags: `-` | `AaveV3DebtPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/bases/AaveV3DebtPositionLibBase1.sol`
+- `aliceExternalPosition` | type: `IAliceV2PositionLib internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `buyToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `externalPositionManager` | type: `IExternalPositionManager internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `secondaryBuyToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `secondarySellToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `sellToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `AliceTestBase` @ `tests/tests/protocols/alice-v2/AliceV2Position.t.sol`
+- `WRAPPED_NATIVE_TOKEN` | type: `IWETH public immutable` | vis: `public` | flags: `immutable` | `AliceV2PositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/AliceV2PositionLib.sol`
+- `ALICE_NATIVE_ETH` | type: `address public constant` | vis: `public` | flags: `constant` | `AliceV2PositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/AliceV2PositionParser.sol` = `address(0)`
+- `WRAPPED_NATIVE_TOKEN_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `AliceV2PositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/alice-v2/AliceV2PositionParser.sol`
+- `CHAINLINK_AGGREGATOR_ETH_QUOTE_DECIMALS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `ChainlinkLikeWstethPriceFeed` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkLikeWstethPriceFeed.sol` = `18`
+- `STETH` | type: `ILidoSteth private immutable` | vis: `private` | flags: `immutable` | `ChainlinkLikeWstethPriceFeed` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkLikeWstethPriceFeed.sol`
+- `STETH_ETH_CHAINLINK_AGGREGATOR` | type: `IChainlinkAggregator private immutable` | vis: `private` | flags: `immutable` | `ChainlinkLikeWstethPriceFeed` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkLikeWstethPriceFeed.sol`
+- `STETH_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ChainlinkLikeWstethPriceFeed` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkLikeWstethPriceFeed.sol` = `10 ** 18`
+- `WSTETH_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ChainlinkLikeWstethPriceFeed` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkLikeWstethPriceFeed.sol` = `10 ** 18`
+- `originalStethEthAggregator` | type: `IChainlinkAggregator` | vis: `default` | flags: `-` | `ChainlinkLikeWstethPriceFeedTest` @ `tests/tests/protocols/lido/ChainlinkLikeWstethPriceFeed.t.sol` = `IChainlinkAggregator(ETHEREUM_STETH_ETH_AGGREGATOR)`
+- `wstethAggregator` | type: `IChainlinkAggregator` | vis: `default` | flags: `-` | `ChainlinkLikeWstethPriceFeedTest` @ `tests/tests/protocols/lido/ChainlinkLikeWstethPriceFeed.t.sol`
+- `ETH_UNIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ChainlinkPriceFeedMixin` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkPriceFeedMixin.sol` = `10 ** 18`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ChainlinkPriceFeedMixin` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkPriceFeedMixin.sol`
+- `ethUsdAggregator` | type: `address private` | vis: `private` | flags: `-` | `ChainlinkPriceFeedMixin` @ `contracts/release/infrastructure/price-feeds/primitives/ChainlinkPriceFeedMixin.sol`
+- `MLN_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ComptrollerLib` @ `contracts/release/core/fund/comptroller/ComptrollerLib.sol`
+- `ARBITRUM_DAI` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1`
+- `ARBITRUM_DAI_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xc5C8E77B397E531B8EC06BFb0048328B30E9eCfB`
+- `ARBITRUM_EETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x35fA164735182de50811E8e2E824cFb9B6118ac2`
+- `ARBITRUM_ETH_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612`
+- `ARBITRUM_MLN_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xb7c8Fb1dB45007F98A68Da0588e1AA524C317f27`
+- `ARBITRUM_USDC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xaf88d065e77c8cC2239327C5EDb3A432268e5831`
+- `ARBITRUM_USDC_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x50834F3163758fcC1Df9973b6e91f0F0F0434aD3`
+- `ARBITRUM_USDT` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9`
+- `ARBITRUM_USDT_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x3f3f5dF88dC9F13eac63DF89EC16ef6e7E25DdE7`
+- `ARBITRUM_WBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f`
+- `ARBITRUM_WETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x82aF49447D8a07e3bd95BD0d56f35241523fBab1`
+- `BASE_CBETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22`
+- `BASE_DAI` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb`
+- `BASE_ETH_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x71041dddad3595F9CEd3DcCFBe3D1F4b0a16Bb70`
+- `BASE_MLN_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x0000000000000000000000000000000000000000`
+- `BASE_USDC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`
+- `BASE_USDC_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x7e860098F58bBFC8648a4311b374B1D669a2bc6B`
+- `BASE_WETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x4200000000000000000000000000000000000006`
+- `BASE_WSTETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xc1CBa3fCea344f92D9239c08C0568f6F2F0ee452`
+- `BASE_WSTETH_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x43a5C292A453A3bF3606fa856197f09D7B74251a`
+- `CHAINLINK_AGGREGATOR_DECIMALS_ETH` | type: `uint8 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `18`
+- `CHAINLINK_AGGREGATOR_PRECISION_ETH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `10 ** CHAINLINK_AGGREGATOR_DECIMALS_ETH`
+- `ETHEREUM_AURA` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xC0c293ce456fF0ED870ADd98a0828Dd4d2903DBF`
+- `ETHEREUM_BAL` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xba100000625a3754423978a60c9317c58a424e3D`
+- `ETHEREUM_BAL_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xC1438AA3823A6Ba0C159CfA8D98dF5A994bA120b`
+- `ETHEREUM_BLOCK_LATEST` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `21710000`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `21710000`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_ALICE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `23840000`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_MYSO_V3` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `21679809`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_ONE_INCH_V5` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `19518890`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_PARASWAP_V6` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `21819120`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_PENDLE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `20100000`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_STAKEWISE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `22400000`
+- `ETHEREUM_BLOCK_TIME_SENSITIVE_THE_GRAPH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `20711624`
+- `ETHEREUM_CBBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf`
+- `ETHEREUM_CHAIN_ID` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `1`
+- `ETHEREUM_CRV` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xD533a949740bb3306d119CC777fa900bA034cd52`
+- `ETHEREUM_CVX` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B`
+- `ETHEREUM_DAI` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- `ETHEREUM_DAI_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x773616E4d11A78F511299002da57A0a94577F1f4`
+- `ETHEREUM_EBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x657e8C867D8B37dCC18fA4Caead9C45EB088C642`
+- `ETHEREUM_EETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x35fA164735182de50811E8e2E824cFb9B6118ac2`
+- `ETHEREUM_ETHERFI_LIQUIDITY_POOL` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x308861A430be4cce5502d0A12724771Fc6DaF216`
+- `ETHEREUM_ETH_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419`
+- `ETHEREUM_ETH_X` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xA35b1B31Ce002FBF2058D22F30f95D405200A15b`
+- `ETHEREUM_LBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x8236a87084f8B84306f72007F36F2618A5634494`
+- `ETHEREUM_LDO` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32`
+- `ETHEREUM_LINK` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x514910771AF9Ca656af840dff83E8264EcF986CA`
+- `ETHEREUM_LUSD` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x5f98805A4E8be255a32880FDeC7F6728C6568bA0`
+- `ETHEREUM_MBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x2F913C820ed3bEb3a67391a6eFF64E70c4B20b19`
+- `ETHEREUM_MERKL_DISTRIBUTOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x3Ef3D8bA38EBe18DB133cEc108f4D14CE00Dd9Ae`
+- `ETHEREUM_MLN` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xec67005c4E498Ec7f55E092bd1d35cbC47C91892`
+- `ETHEREUM_MLN_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xDaeA8386611A157B08829ED4997A8A62B557014C`
+- `ETHEREUM_PAXG` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x45804880De22913dAFE09f4980848ECE6EcbAf78`
+- `ETHEREUM_STETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84`
+- `ETHEREUM_STETH_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x86392dC19c0b719886221c78AB11eb8Cf5c52812`
+- `ETHEREUM_STKAAVE` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x4da27a545c0c5B758a6BA100e3a049001de870f5`
+- `ETHEREUM_USDC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `ETHEREUM_USDC_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x986b5E1e1755e3C2440e960477f25201B0a8bbD4`
+- `ETHEREUM_USDE` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x4c9EDD5852cd905f086C759E8383e09bff1E68B3`
+- `ETHEREUM_USDS` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xdC035D45d973E3EC169d2276DDab16f1e407384F`
+- `ETHEREUM_USDT` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `ETHEREUM_USDT_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xEe9F2375b4bdF6387aa8265dD4FB8F16512A1d46`
+- `ETHEREUM_WBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `ETHEREUM_WEETH_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x5c9C449BbC9a6075A2c061dF312a35fd1E05fF22`
+- `ETHEREUM_WETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `ETHEREUM_WSTETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0`
+- `POLYGON_DAI` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063`
+- `POLYGON_DAI_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xFC539A559e170f848323e19dfD66007520510085`
+- `POLYGON_ETH_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xF9680D99D6C9589e2a93a78A04A279e509205945`
+- `POLYGON_MLN_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xB89D583B72aBF9C3a7e6e093251C2fCad3365312`
+- `POLYGON_USDC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174`
+- `POLYGON_USDC_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xfE4A8cc5b5B2366C1B58Bea3858e81843581b2F7`
+- `POLYGON_USDT` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xc2132D05D31c914a87C6611C10748AEb04B58e8F`
+- `POLYGON_USDT_ETH_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xf9d5AAC6E5572AEFa6bd64108ff86a222F69B64d`
+- `POLYGON_WBTC` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6`
+- `POLYGON_WBTC_USD_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0xDE31F8bFBD8c84b5360CFACCa3539B938dd78ae6`
+- `POLYGON_WETH` | type: `address internal constant` | vis: `internal` | flags: `constant` | `Constants` @ `tests/utils/Constants.sol` = `0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619`
+- `CVX_TOKEN_CONTRACT` | type: `IERC20 private immutable` | vis: `private` | flags: `immutable` | `ConvexVotingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/convex-voting/ConvexVotingPositionLib.sol`
+- `CVX_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `ConvexVotingPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/convex-voting/ConvexVotingPositionParser.sol`
+- `fakeToken0` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `fakeToken0Aggregator` | type: `TestChainlinkAggregator internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `fakeToken1` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `fakeToken1Aggregator` | type: `TestChainlinkAggregator internal` | vis: `internal` | flags: `-` | `CumulativeSlippageTolerancePolicyTest` @ `tests/tests/policies/CumulativeSlippageTolerancePolicy.t.sol`
+- `usdtToken` | type: `IERC20` | vis: `default` | flags: `-` | `DeprecatedPositionTest` @ `tests/tests/misc-external-positions/DeprecatedPosition.t.sol` = `IERC20(ETHEREUM_USDT)`
+- `sharesTokenSymbol` | type: `string private` | vis: `private` | flags: `-` | `Dispatcher` @ `contracts/persistent/dispatcher/Dispatcher.sol`
+- `dustToleranceInWeth` | type: `uint256 private` | vis: `private` | flags: `-` | `DustEvaluatorMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/DustEvaluatorMixin.sol`
+- `underlying` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `ERC4626AdapterTestBase` @ `tests/tests/protocols/erc4626/ERC4626Adapter.t.sol`
+- `underlying` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `ERC4626PriceFeedTestBase` @ `tests/tests/protocols/erc4626/ERC4626PriceFeed.t.sol`
+- `ETH_QUOTE_DECIMALS` | type: `uint8 constant` | vis: `default` | flags: `constant` | `ERC4626RateAggregatorFactory` @ `contracts/release/infrastructure/price-feeds/primitives/factories/ERC4626RateAggregatorFactory.sol` = `18`
+- `denominationAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `EnzymeVaultPriceFeedTestBase` @ `tests/tests/protocols/enzyme/EnzymeVaultPriceFeed.t.sol`
+- `EETH` | type: `address private immutable` | vis: `private` | flags: `immutable` | `EtherFiEthPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/EtherFiEthPriceFeed.sol`
+- `WEETH_CONTRACT` | type: `IEtherFiWrappedEth private immutable` | vis: `private` | flags: `immutable` | `EtherFiEthPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/EtherFiEthPriceFeed.sol`
+- `inputAsset` | type: `IERC20` | vis: `default` | flags: `-` | `ExchangeErc20AndBuySharesTest` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `accountToIsExternalPositionProxy` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `ExternalPositionFactory` @ `contracts/persistent/external-positions/ExternalPositionFactory.sol`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundDataProviderRouter` @ `contracts/persistent/off-chain/fund-data-provider/FundDataProviderRouter.sol`
+- `denominationAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `FundDataProviderRouterTest` @ `tests/tests/persistent/FundDataProviderRouter.t.sol`
+- `ETH_USD_AGGREGATOR` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundValueCalculatorUsdWrapper` @ `contracts/persistent/off-chain/fund-value-calculator-usd-wrapper/FundValueCalculatorUsdWrapper.sol`
+- `ETH_USD_AGGREGATOR_DECIMALS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `FundValueCalculatorUsdWrapper` @ `contracts/persistent/off-chain/fund-value-calculator-usd-wrapper/FundValueCalculatorUsdWrapper.sol` = `8`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `FundValueCalculatorUsdWrapper` @ `contracts/persistent/off-chain/fund-value-calculator-usd-wrapper/FundValueCalculatorUsdWrapper.sol`
+- `WRAPPED_NATIVE_TOKEN` | type: `IWETH public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLib.sol`
+- `WRAPPED_NATIVE_TOKEN` | type: `IWETH public immutable` | vis: `public` | flags: `immutable` | `GMXV2LeverageTradingPositionLibManagedAssets` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionLibManagedAssets.sol`
+- `WRAPPED_NATIVE_TOKEN_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `GMXV2LeverageTradingPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/GMXV2LeverageTradingPositionParser.sol`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `GasRelayPaymasterLib` @ `contracts/release/infrastructure/gas-relayer/GasRelayPaymasterLib.sol`
+- `DERIVATIVE` | type: `IERC20 internal immutable` | vis: `internal` | flags: `immutable` | `GenericWrappingAdapterBase` @ `contracts/release/extensions/integration-manager/integrations/utils/0.8.19/bases/GenericWrappingAdapterBase.sol`
+- `UNDERLYING` | type: `IERC20 internal immutable` | vis: `internal` | flags: `immutable` | `GenericWrappingAdapterBase` @ `contracts/release/extensions/integration-manager/integrations/utils/0.8.19/bases/GenericWrappingAdapterBase.sol`
+- `fundDeployerToHelperDataReaderInfo` | type: `mapping(address => HelperDataReaderInfo) private` | vis: `private` | flags: `-` | `HelperDataReaderRouter` @ `contracts/persistent/off-chain/helper-data-reader/HelperDataReaderRouter.sol`
+- `helperDataReader` | type: `IHelperDataReader internal` | vis: `internal` | flags: `-` | `HelperDataReaderTest` @ `tests/tests/off-chain/HelperDataReader.t.sol`
+- `helperDataReaderRouter` | type: `IHelperDataReaderRouter internal` | vis: `internal` | flags: `-` | `HelperDataReaderTest` @ `tests/tests/off-chain/HelperDataReader.t.sol`
+- `mlnToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `nonStandardPrimitive` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `standardPrimitive` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `symbolToCoreToken` | type: `mapping(string => IERC20) private` | vis: `private` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `tokenToIsCore` | type: `mapping(IERC20 => bool) private` | vis: `private` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `wethToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `wrappedNativeToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `IntegrationTest` @ `tests/bases/IntegrationTest.sol`
+- `STETH_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `LidoWithdrawalsPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/lido-withdrawals/LidoWithdrawalsPositionLib.sol`
+- `STETH_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `LidoWithdrawalsPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/lido-withdrawals/LidoWithdrawalsPositionParser.sol`
+- `WETH_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `LidoWithdrawalsPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/lido-withdrawals/LidoWithdrawalsPositionParser.sol`
+- `settlementToken` | type: `IERC20` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `underlyingToken` | type: `IERC20` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `underlyingTokenPrice` | type: `uint256` | vis: `default` | flags: `-` | `MysoV3OptionWritingPositionTestBase` @ `tests/tests/protocols/myso-v3/MysoV3OptionWritingPosition.t.sol`
+- `ethPeggedAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `ethPeggedAssetAggregator` | type: `TestChainlinkAggregator internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `simulatedUsd` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `usdPeggedAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `NoDepegOnRedeemSharesForSpecificAssetsPolicyTest` @ `tests/tests/policies/NoDepegOnRedeemSharesForSpecificAssetsPolicy.t.sol`
+- `STANDARD_ETH_RATE_DECIMALS` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `NonStandardPrecisionSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/NonStandardPrecisionSimulatedAggregator.sol` = `18`
+- `ETH_QUOTE_DECIMALS` | type: `uint8 constant` | vis: `default` | flags: `constant` | `PeggedRateDeviationAggregatorFactory` @ `contracts/release/infrastructure/price-feeds/primitives/factories/PeggedRateDeviationAggregatorFactory.sol` = `18`
+- `priceFeedHelpers` | type: `IPriceFeedHelpersLibHarness` | vis: `default` | flags: `-` | `PriceFeedHelpersLibTest` @ `tests/tests/utils/PriceFeedHelpersLib.t.sol`
+- `PRICELESS_ASSET_BYPASS_WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `PricelessAssetBypassMixin` @ `contracts/release/extensions/policy-manager/policies/utils/0.6.12/PricelessAssetBypassMixin.sol`
+- `depositAsset` | type: `IERC20 private` | vis: `private` | flags: `-` | `SingleAssetDepositQueueLib` @ `contracts/persistent/single-asset-deposit-queue/SingleAssetDepositQueueLib.sol`
+- `redemptionAsset` | type: `IERC20 private` | vis: `private` | flags: `-` | `SingleAssetRedemptionQueueLib` @ `contracts/persistent/single-asset-redemption-queue/SingleAssetRedemptionQueueLib.sol`
+- `SD_TOKEN_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `StaderSDPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/StaderSDPriceFeed.sol`
+- `SD_TOKEN_UNIT` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StaderSDPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/StaderSDPriceFeed.sol`
+- `WETH_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `StaderSDPriceFeed` @ `contracts/release/infrastructure/price-feeds/derivatives/feeds/StaderSDPriceFeed.sol`
+- `ETHX_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `StaderWithdrawalsPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/StaderWithdrawalsPositionLib.sol`
+- `WETH_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `StaderWithdrawalsPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/StaderWithdrawalsPositionLib.sol`
+- `ETHX_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `StaderWithdrawalsPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/StaderWithdrawalsPositionParser.sol`
+- `WETH_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `StaderWithdrawalsPositionParser` @ `contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/StaderWithdrawalsPositionParser.sol`
+- `ethxToken` | type: `IERC20` | vis: `default` | flags: `-` | `StaderWithdrawalsPositionTestBase` @ `tests/tests/protocols/stader/StaderWithdrawalsPosition.t.sol` = `IERC20(ETHEREUM_ETHX)`
+- `wstethUsdAggregatorAddress` | type: `address` | vis: `default` | flags: `-` | `Test` @ `tests/tests/protocols/smar-dex/SmarDexUsdnNativeRateUsdAggregator.t.sol`
+- `borrowAsset` | type: `IERC20` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/persistent/smart-accounts/MorphoBlueFlashLoanAssetManagerLib.t.sol`
+- `denominationAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/peripheral/DepositWrapper.t.sol`
+- `derivativeToken` | type: `IERC20` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `externalPosition` | type: `IGMXV2LeverageTradingPositionLib internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol`
+- `makerToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/bebop/BebopBlendAdapter.t.sol`
+- `nonFungibleTokenManagerAddress` | type: `address internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/uniswap/UniswapV3LiquidityPosition.t.sol`
+- `principalToken` | type: `IPendleV2PrincipalToken` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `stethToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/lido/LidoWithdrawalsPosition.t.sol` = `IERC20(ETHEREUM_STETH)`
+- `syToken` | type: `IPendleV2StandardizedYield` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `takerToken` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `TestBase` @ `tests/tests/protocols/bebop/BebopBlendAdapter.t.sol`
+- `underlyingAsset` | type: `IERC20` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/pendle/PendleV2Adapter.t.sol`
+- `underlyingToken` | type: `IERC20` | vis: `default` | flags: `-` | `TestBase` @ `tests/tests/protocols/utils/GenericWrappingAdapterBase.sol`
+- `tokenToTotalBalClaimed` | type: `mapping(address => uint256) private` | vis: `private` | flags: `-` | `TreasurySplitterMixin` @ `contracts/persistent/shares-splitter/TreasurySplitterMixin.sol`
+- `userToTokenToBalClaimed` | type: `mapping(address => mapping(address => uint256)) private` | vis: `private` | flags: `-` | `TreasurySplitterMixin` @ `contracts/persistent/shares-splitter/TreasurySplitterMixin.sol`
+- `NON_FUNGIBLE_TOKEN_MANAGER` | type: `address private immutable` | vis: `private` | flags: `immutable` | `UniswapV3LiquidityPositionLib` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/UniswapV3LiquidityPositionLib.sol`
+- `nftIdToToken0` | type: `mapping(uint256 => address) internal` | vis: `internal` | flags: `-` | `UniswapV3LiquidityPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/bases/UniswapV3LiquidityPositionLibBase1.sol`
+- `nftIdToToken1` | type: `mapping(uint256 => address) internal` | vis: `internal` | flags: `-` | `UniswapV3LiquidityPositionLibBase1` @ `contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/bases/UniswapV3LiquidityPositionLibBase1.sol`
+- `ETH_USD_AGGREGATOR_CONTRACT` | type: `IChainlinkAggregator private immutable` | vis: `private` | flags: `immutable` | `UsdEthSimulatedAggregator` @ `contracts/release/infrastructure/price-feeds/primitives/UsdEthSimulatedAggregator.sol`
+- `DAI` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ValueInterpreterTestEthereum` @ `tests/tests/infrastracture/ValueInterpreter.t.sol` = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- `DAI_AGGREGATOR` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ValueInterpreterTestEthereum` @ `tests/tests/infrastracture/ValueInterpreter.t.sol` = `0x773616E4d11A78F511299002da57A0a94577F1f4`
+- `MLN_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `VaultLib` @ `contracts/release/core/fund/vault/VaultLib.sol`
+- `WETH_TOKEN` | type: `address private immutable` | vis: `private` | flags: `immutable` | `VaultLib` @ `contracts/release/core/fund/vault/VaultLib.sol`
+- `activeExternalPositions` | type: `address[] internal` | vis: `internal` | flags: `-` | `VaultLibBase2` @ `contracts/persistent/vault/VaultLibBase2.sol`
+- `externalPositionToIsActive` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `VaultLibBase2` @ `contracts/persistent/vault/VaultLibBase2.sol`
+- `makerAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+- `takerAsset` | type: `IERC20 internal` | vis: `internal` | flags: `-` | `ZeroExV4AdapterTestBase` @ `tests/tests/protocols/zeroex/ZeroExV4Adapter.t.sol`
+
+Hardcoded token addresses found:
+- `ARBITRUM_DAI` @ `tests/utils/Constants.sol` = `0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1`
+- `ARBITRUM_DAI_USD_AGGREGATOR` @ `tests/utils/Constants.sol` = `0xc5C8E77B397E531B8EC06BFb0048328B30E9eCfB`
+- `ARBITRUM_EETH` @ `tests/utils/Constants.sol` = `0x35fA164735182de50811E8e2E824cFb9B6118ac2`
+- `ARBITRUM_ETH_USD_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x639Fe6ab55C921f74e7fac1ee960C0B6293ba612`
+- `ARBITRUM_MLN_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0xb7c8Fb1dB45007F98A68Da0588e1AA524C317f27`
+- `ARBITRUM_USDC` @ `tests/utils/Constants.sol` = `0xaf88d065e77c8cC2239327C5EDb3A432268e5831`
+- `ARBITRUM_USDC_USD_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x50834F3163758fcC1Df9973b6e91f0F0F0434aD3`
+- `ARBITRUM_USDT` @ `tests/utils/Constants.sol` = `0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9`
+- `ARBITRUM_USDT_USD_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x3f3f5dF88dC9F13eac63DF89EC16ef6e7E25DdE7`
+- `ARBITRUM_WBTC` @ `tests/utils/Constants.sol` = `0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f`
+- `ARBITRUM_WETH` @ `tests/utils/Constants.sol` = `0x82aF49447D8a07e3bd95BD0d56f35241523fBab1`
+- `BASE_CBETH` @ `tests/utils/Constants.sol` = `0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22`
+- `BASE_DAI` @ `tests/utils/Constants.sol` = `0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb`
+- `BASE_ETH_USD_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x71041dddad3595F9CEd3DcCFBe3D1F4b0a16Bb70`
+- `BASE_MLN_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x0000000000000000000000000000000000000000`
+- `BASE_USDC` @ `tests/utils/Constants.sol` = `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`
+- `BASE_USDC_USD_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x7e860098F58bBFC8648a4311b374B1D669a2bc6B`
+- `BASE_WETH` @ `tests/utils/Constants.sol` = `0x4200000000000000000000000000000000000006`
+- `BASE_WSTETH` @ `tests/utils/Constants.sol` = `0xc1CBa3fCea344f92D9239c08C0568f6F2F0ee452`
+- `BASE_WSTETH_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x43a5C292A453A3bF3606fa856197f09D7B74251a`
+- `DAI` @ `tests/tests/infrastracture/ValueInterpreter.t.sol` = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- `DAI_AGGREGATOR` @ `tests/tests/infrastracture/ValueInterpreter.t.sol` = `0x773616E4d11A78F511299002da57A0a94577F1f4`
+- `ETHEREUM_AURA` @ `tests/utils/Constants.sol` = `0xC0c293ce456fF0ED870ADd98a0828Dd4d2903DBF`
+- `ETHEREUM_BAL` @ `tests/utils/Constants.sol` = `0xba100000625a3754423978a60c9317c58a424e3D`
+- `ETHEREUM_BAL_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0xC1438AA3823A6Ba0C159CfA8D98dF5A994bA120b`
+- `ETHEREUM_CBBTC` @ `tests/utils/Constants.sol` = `0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf`
+- `ETHEREUM_CRV` @ `tests/utils/Constants.sol` = `0xD533a949740bb3306d119CC777fa900bA034cd52`
+- `ETHEREUM_CVX` @ `tests/utils/Constants.sol` = `0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B`
+- `ETHEREUM_DAI` @ `tests/utils/Constants.sol` = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- `ETHEREUM_DAI_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x773616E4d11A78F511299002da57A0a94577F1f4`
+- `ETHEREUM_EBTC` @ `tests/utils/Constants.sol` = `0x657e8C867D8B37dCC18fA4Caead9C45EB088C642`
+- `ETHEREUM_EETH` @ `tests/utils/Constants.sol` = `0x35fA164735182de50811E8e2E824cFb9B6118ac2`
+- `ETHEREUM_ETHERFI_LIQUIDITY_POOL` @ `tests/utils/Constants.sol` = `0x308861A430be4cce5502d0A12724771Fc6DaF216`
+- `ETHEREUM_ETH_USD_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419`
+- `ETHEREUM_ETH_X` @ `tests/utils/Constants.sol` = `0xA35b1B31Ce002FBF2058D22F30f95D405200A15b`
+- `ETHEREUM_LBTC` @ `tests/utils/Constants.sol` = `0x8236a87084f8B84306f72007F36F2618A5634494`
+- `ETHEREUM_LDO` @ `tests/utils/Constants.sol` = `0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32`
+- `ETHEREUM_LINK` @ `tests/utils/Constants.sol` = `0x514910771AF9Ca656af840dff83E8264EcF986CA`
+- `ETHEREUM_LUSD` @ `tests/utils/Constants.sol` = `0x5f98805A4E8be255a32880FDeC7F6728C6568bA0`
+- `ETHEREUM_MBTC` @ `tests/utils/Constants.sol` = `0x2F913C820ed3bEb3a67391a6eFF64E70c4B20b19`
+- `ETHEREUM_MERKL_DISTRIBUTOR` @ `tests/utils/Constants.sol` = `0x3Ef3D8bA38EBe18DB133cEc108f4D14CE00Dd9Ae`
+- `ETHEREUM_MLN` @ `tests/utils/Constants.sol` = `0xec67005c4E498Ec7f55E092bd1d35cbC47C91892`
+- `ETHEREUM_MLN_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0xDaeA8386611A157B08829ED4997A8A62B557014C`
+- `ETHEREUM_PAXG` @ `tests/utils/Constants.sol` = `0x45804880De22913dAFE09f4980848ECE6EcbAf78`
+- `ETHEREUM_STETH` @ `tests/utils/Constants.sol` = `0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84`
+- `ETHEREUM_STETH_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x86392dC19c0b719886221c78AB11eb8Cf5c52812`
+- `ETHEREUM_STKAAVE` @ `tests/utils/Constants.sol` = `0x4da27a545c0c5B758a6BA100e3a049001de870f5`
+- `ETHEREUM_USDC` @ `tests/utils/Constants.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `ETHEREUM_USDC_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x986b5E1e1755e3C2440e960477f25201B0a8bbD4`
+- `ETHEREUM_USDE` @ `tests/utils/Constants.sol` = `0x4c9EDD5852cd905f086C759E8383e09bff1E68B3`
+- `ETHEREUM_USDS` @ `tests/utils/Constants.sol` = `0xdC035D45d973E3EC169d2276DDab16f1e407384F`
+- `ETHEREUM_USDT` @ `tests/utils/Constants.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `ETHEREUM_USDT_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0xEe9F2375b4bdF6387aa8265dD4FB8F16512A1d46`
+- `ETHEREUM_WBTC` @ `tests/utils/Constants.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `ETHEREUM_WEETH_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0x5c9C449BbC9a6075A2c061dF312a35fd1E05fF22`
+- `ETHEREUM_WETH` @ `tests/utils/Constants.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `ETHEREUM_WSTETH` @ `tests/utils/Constants.sol` = `0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0`
+- `POLYGON_DAI` @ `tests/utils/Constants.sol` = `0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063`
+- `POLYGON_DAI_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0xFC539A559e170f848323e19dfD66007520510085`
+- `POLYGON_ETH_USD_AGGREGATOR` @ `tests/utils/Constants.sol` = `0xF9680D99D6C9589e2a93a78A04A279e509205945`
+- `POLYGON_MLN_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0xB89D583B72aBF9C3a7e6e093251C2fCad3365312`
+- `POLYGON_USDC` @ `tests/utils/Constants.sol` = `0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174`
+- `POLYGON_USDC_USD_AGGREGATOR` @ `tests/utils/Constants.sol` = `0xfE4A8cc5b5B2366C1B58Bea3858e81843581b2F7`
+- `POLYGON_USDT` @ `tests/utils/Constants.sol` = `0xc2132D05D31c914a87C6611C10748AEb04B58e8F`
+- `POLYGON_USDT_ETH_AGGREGATOR` @ `tests/utils/Constants.sol` = `0xf9d5AAC6E5572AEFa6bd64108ff86a222F69B64d`
+- `POLYGON_WBTC` @ `tests/utils/Constants.sol` = `0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6`
+- `POLYGON_WBTC_USD_AGGREGATOR` @ `tests/utils/Constants.sol` = `0xDE31F8bFBD8c84b5360CFACCa3539B938dd78ae6`
+- `POLYGON_WETH` @ `tests/utils/Constants.sol` = `0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619`
+
+### Struct Values (All Parsed Struct Fields)
+- `AddLiquidityFromUnderlyingActionArgs` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IPendleV2Adapter.sol): IPendleV2Market market, address depositTokenAddress, uint256 depositTokenAmount, IPendleV2Router.ApproxParams guessPtReceived, uint256 minLpAmount
+- `AddressArrayKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, address[] value
+- `AddressItems` (contracts/external-interfaces/IGMXV2Event.sol): AddressKeyValue[] items, AddressArrayKeyValue[] arrayItems
+- `AddressKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, address value
+- `Addresses` (contracts/external-interfaces/IGMXV2Order.sol): address account, address receiver, address cancellationReceiver, address callbackContract, address uiFeeReceiver, address market, address initialCollateralToken, address[] swapPath
+- `Addresses` (contracts/external-interfaces/IGMXV2Position.sol): address account, address market, address collateralToken
+- `Addresses` (tests/interfaces/external/IGMXV2Order.sol): address account, address receiver, address cancellationReceiver, address callbackContract, address uiFeeReceiver, address market, address initialCollateralToken, address[] swapPath
+- `Addresses` (tests/interfaces/external/IGMXV2Position.sol): address account, address market, address collateralToken
+- `AdvancedSettings` (contracts/external-interfaces/IMysoV3DataTypes.sol): uint64 borrowCap, address oracle, bool premiumTokenIsUnderlying, bool votingDelegationAllowed, address allowedDelegateRegistry
+- `AdvancedSettings` (tests/interfaces/external/IMysoV3DataTypes.sol): uint64 borrowCap, address oracle, bool premiumTokenIsUnderlying, bool votingDelegationAllowed, address allowedDelegateRegistry
+- `AggregatorInfo` (contracts/release/infrastructure/price-feeds/primitives/IChainlinkPriceFeedMixin.sol): address aggregator, RateAsset rateAsset
+- `ApproxParams` (contracts/external-interfaces/IPendleV2Router.sol): uint256 guessMin, uint256 guessMax, uint256 guessOffchain, uint256 maxIteration, uint256 eps
+- `ApproxParams` (tests/interfaces/external/IPendleV2Router.sol): uint256 guessMin, uint256 guessMax, uint256 guessOffchain, uint256 maxIteration, uint256 eps
+- `AssetAmount` (contracts/release/off-chain/interfaces/IHelperDataReader.sol): address asset, uint256 amount
+- `AssetConfig` (contracts/release/extensions/policy-manager/policies/utils/interfaces/INoDepegPolicyBase.sol): IERC20 asset, IERC20 referenceAsset, uint16 deviationToleranceInBps
+- `AuctionInitialization` (contracts/external-interfaces/IMysoV3DataTypes.sol): address underlyingToken, address settlementToken, uint128 notional, AuctionParams auctionParams, AdvancedSettings advancedSettings
+- `AuctionInitialization` (tests/interfaces/external/IMysoV3DataTypes.sol): address underlyingToken, address settlementToken, uint128 notional, AuctionParams auctionParams, AdvancedSettings advancedSettings
+- `AuctionParams` (contracts/external-interfaces/IMysoV3DataTypes.sol): uint128 relStrike, uint48 tenor, uint48 earliestExerciseTenor, uint32 decayStartTime, uint32 decayDuration, uint64 relPremiumStart, uint64 relPremiumFloor, uint128 minSpot, uint128 maxSpot
+- `AuctionParams` (tests/interfaces/external/IMysoV3DataTypes.sol): uint128 relStrike, uint48 tenor, uint48 earliestExerciseTenor, uint32 decayStartTime, uint32 decayDuration, uint64 relPremiumStart, uint64 relPremiumFloor, uint128 minSpot, uint128 maxSpot
+- `BarActionArgs` (contracts/templates/adapter/IMyAdapter.sol): address qux
+- `BaseRateTestConfig` (tests/tests/utils/AggregatorRateDeviationBase.t.sol): uint8 marketAggregatorDecimals, uint8 idealRateDecimals, uint256 idealRatePrecision, uint256 marketRatePrecision, TestChainlinkAggregator marketAggregator, uint256 deviationToleranceBps
+- `BatchesCalculationState` (tests/interfaces/external/ILidoWithdrawalQueue.sol): uint256 remainingEthBudget, bool finished, uint256[36] batches, uint256 batchesLength
+- `BidPreview` (tests/interfaces/external/IMysoV3DataTypes.sol): BidStatus status, address settlementToken, address underlyingToken, uint128 strike, uint48 expiry, uint48 earliestExercise, uint128 premium, address premiumToken, uint256 oracleSpotPrice, uint64 currAsk, uint128 matchFeeProtocol, uint128 matchFeeDistPartner
+- `BoolArrayKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, bool[] value
+- `BoolItems` (contracts/external-interfaces/IGMXV2Event.sol): BoolKeyValue[] items, BoolArrayKeyValue[] arrayItems
+- `BoolKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, bool value
+- `BuildAndPlaceOrderOutput` (tests/tests/protocols/alice-v2/AliceV2Position.t.sol): uint256 orderId, IERC20 rawOutgoingAsset, IERC20 rawIncomingAsset, IERC20 outgoingAsset, IERC20 incomingAsset, uint256 orderQuantity, uint256 timestamp, uint256 limitAmountToGet
+- `BuyPrincipalTokenActionArgs` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IPendleV2Adapter.sol): IPendleV2Market market, address depositTokenAddress, uint256 depositTokenAmount, IPendleV2Router.ApproxParams guessPtOut, uint256 minPtAmount
+- `BuySharesActionArgs` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IEnzymeV4VaultAdapter.sol): address vaultProxy, uint256 investmentAmount, uint256 minSharesQuantity
+- `Bytes32ArrayKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, bytes32[] value
+- `Bytes32Items` (contracts/external-interfaces/IGMXV2Event.sol): Bytes32KeyValue[] items, Bytes32ArrayKeyValue[] arrayItems
+- `Bytes32KeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, bytes32 value
+- `BytesArrayKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, bytes[] value
+- `BytesItems` (contracts/external-interfaces/IGMXV2Event.sol): BytesKeyValue[] items, BytesArrayKeyValue[] arrayItems
+- `BytesKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, bytes value
+- `Call` (contracts/persistent/smart-accounts/aave-v3-flash-loan-asset-manager/IAaveV3FlashLoanAssetManager.sol): address target, bytes data
+- `Call` (contracts/persistent/smart-accounts/morpho-blue-flash-loan-asset-manager/IMorphoBlueFlashLoanAssetManager.sol): address target, bytes data
+- `Call` (contracts/persistent/smart-accounts/utils/interfaces/IMultiCallAccountMixin.sol): address target, bytes data
+- `CancelOrderActionArgs` (contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/IGMXV2LeverageTradingPosition.sol): bytes32 key, address exchangeRouter
+- `ClaimCollateralActionArgs` (contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/IGMXV2LeverageTradingPosition.sol): address[] markets, address[] tokens, uint256[] timeKeys, address exchangeRouter
+- `ClaimCollateralBaseSuccessArgs` (tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol): address market, address initialCollateralLongToken, uint256 increaseInitialCollateralDeltaAmount, uint256 increaseOrderSizeDeltaUsd, address userShortToken, uint256 userShortTokenDeltaAmount, uint256 userShortTokenSizeDeltaUsd, uint256 timeKey
+- `ClaimCollateralSuccessArgs` (tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol): address market, address initialCollateralLongToken, uint256 increaseInitialCollateralDeltaAmount, uint256 increaseOrderSizeDeltaUsd, address userShortToken, uint256 userShortTokenDeltaAmount, uint256 userShortTokenSizeDeltaUsd
+- `ClaimCollateralSuccessWithFactorArgs` (tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol): address market, address initialCollateralLongToken, uint256 increaseInitialCollateralDeltaAmount, uint256 increaseOrderSizeDeltaUsd, address userShortToken, uint256 userShortTokenDeltaAmount, uint256 userShortTokenSizeDeltaUsd, uint256 timeKey, uint256 collateralFactorDivisor
+- `ClaimFundingFeesActionArgs` (contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/IGMXV2LeverageTradingPosition.sol): address[] markets, address[] tokens, address exchangeRouter
+- `ClaimFundingFeesManagedAssets` (tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol): address[] preGiveFundingFeesAssets, uint256[] preGiveFundingFeesAssetAmounts, address[] postGiveFundingFeesAssets, uint256[] postGiveFundingFeesAssetAmounts, address[] postClaimAssets, uint256[] postClaimAssetAmounts
+- `ClaimParam` (contracts/external-interfaces/IVotiumMultiMerkleStash.sol): address token, uint256 index, uint256 amount, bytes32[] merkleProof
+- `ClaimParam` (tests/interfaces/external/IVotiumMultiMerkleStash.sol): address token, uint256 index, uint256 amount, bytes32[] merkleProof
+- `ClaimWithdrawalActionArgs` (contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/IStaderWithdrawalsPosition.sol): uint256 requestId
+- `ClaimableCollateralInfo` (contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/bases/GMXV2LeverageTradingPositionLibBase1.sol): address token, address market, uint256 timeKey
+- `CloseAndSweepEscrowActionArgs` (contracts/release/extensions/external-position-manager/external-positions/myso-v3/IMysoV3OptionWritingPosition.sol): uint32[] escrowIdxs, bool skipWithdrawFromEscrow
+- `Contracts` (tests/utils/core/deployment/PersistentContracts.sol): IAddressListRegistry addressListRegistry, IDispatcher dispatcher, IExternalPositionFactory externalPositionFactory, IFundValueCalculatorRouter fundValueCalculatorRouter, IGlobalConfigLib globalConfigProxy, IProtocolFeeReserveLib protocolFeeReserveProxy, IUintListRegistry uintListRegistry
+- `Contracts` (tests/utils/core/deployment/V4ReleaseContracts.sol): address comptrollerLibAddress, IFundDeployer fundDeployer, address vaultLibAddress, IExternalPositionManager externalPositionManager, IFeeManager feeManager, IIntegrationManager integrationManager, IPolicyManager policyManager, IFundValueCalculator fundValueCalculator, IGasRelayPaymasterFactory gasRelayPaymasterFactory, IProtocolFeeTracker protocolFeeTracker, IValueInterpreter valueInterpreter, IUsdEthSimulatedAggregator usdEthSimulatedAggregator
+- `CorePrimitiveInput` (tests/bases/IntegrationTest.sol): string symbol, address assetAddress, address aggregatorAddress, IChainlinkPriceFeedMixinProd.RateAsset rateAsset
+- `CreateEscrowByStartingAuctionActionArgs` (contracts/release/extensions/external-position-manager/external-positions/myso-v3/IMysoV3OptionWritingPosition.sol): IMysoV3DataTypes.AuctionInitialization auctionInitialization, address distPartner
+- `CreateEscrowByTakingQuoteActionArgs` (contracts/release/extensions/external-position-manager/external-positions/myso-v3/IMysoV3OptionWritingPosition.sol): IMysoV3DataTypes.RFQInitialization rfqInitialization, address distPartner
+- `CreateOrderActionArgs` (contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/IGMXV2LeverageTradingPosition.sol): CreateOrderParamsAddresses addresses, CreateOrderParamsNumbers numbers, IGMXV2Order.OrderType orderType, IGMXV2Order.DecreasePositionSwapType decreasePositionSwapType, bool isLong, address exchangeRouter, bool autoCancel
+- `CreateOrderParams` (contracts/external-interfaces/IGMXV2ExchangeRouter.sol): CreateOrderParamsAddresses addresses, CreateOrderParamsNumbers numbers, IGMXV2Order.OrderType orderType, IGMXV2Order.DecreasePositionSwapType decreasePositionSwapType, bool isLong, bool shouldUnwrapNativeToken, bool autoCancel, bytes32 referralCode, bytes32[] dataList
+- `CreateOrderParams` (tests/interfaces/external/IGMXV2ExchangeRouter.sol): CreateOrderParamsAddresses addresses, CreateOrderParamsNumbers numbers, IGMXV2Order.OrderType orderType, IGMXV2Order.DecreasePositionSwapType decreasePositionSwapType, bool isLong, bool shouldUnwrapNativeToken, bool autoCancel, bytes32 referralCode, bytes32[] dataList
+- `CreateOrderParamsAddresses` (contracts/external-interfaces/IGMXV2ExchangeRouter.sol): address receiver, address cancellationReceiver, address callbackContract, address uiFeeReceiver, address market, address initialCollateralToken, address[] swapPath
+- `CreateOrderParamsAddresses` (contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/IGMXV2LeverageTradingPosition.sol): address market, address initialCollateralToken
+- `CreateOrderParamsAddresses` (tests/interfaces/external/IGMXV2ExchangeRouter.sol): address receiver, address cancellationReceiver, address callbackContract, address uiFeeReceiver, address market, address initialCollateralToken, address[] swapPath
+- `CreateOrderParamsNumbers` (contracts/external-interfaces/IGMXV2ExchangeRouter.sol): uint256 sizeDeltaUsd, uint256 initialCollateralDeltaAmount, uint256 triggerPrice, uint256 acceptablePrice, uint256 executionFee, uint256 callbackGasLimit, uint256 minOutputAmount, uint256 validFromTime
+- `CreateOrderParamsNumbers` (contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/IGMXV2LeverageTradingPosition.sol): uint256 sizeDeltaUsd, uint256 initialCollateralDeltaAmount, uint256 triggerPrice, uint256 acceptablePrice, uint256 executionFee, uint256 minOutputAmount, uint256 validFromTime
+- `CreateOrderParamsNumbers` (tests/interfaces/external/IGMXV2ExchangeRouter.sol): uint256 sizeDeltaUsd, uint256 initialCollateralDeltaAmount, uint256 triggerPrice, uint256 acceptablePrice, uint256 executionFee, uint256 callbackGasLimit, uint256 minOutputAmount, uint256 validFromTime
+- `DeployComptrollerLibParams` (tests/utils/core/deployment/DeploymentUtils.sol): IDispatcher dispatcher, IProtocolFeeReserveLib protocolFeeReserveProxy, IFundDeployer fundDeployer, IValueInterpreter valueInterpreter, IExternalPositionManager externalPositionManager, IFeeManager feeManager, IIntegrationManager integrationManager, IPolicyManager policyManager, IGasRelayPaymasterFactory gasRelayPaymasterFactory, address mlnTokenAddress, address wrappedNativeTokenAddress
+- `DeployPositionTypeArgs` (tests/tests/protocols/gmx-v2/GMXV2LeverageTradingPosition.t.sol): address wrappedNativeTokenAddress, address dataStoreAddress, IGMXV2ChainlinkPriceFeedProvider chainlinkPriceFeedProvider, IGMXV2Reader reader, IGMXV2RoleStore roleStore, uint256 callbackGasLimit, bytes32 referralCode, address referralStorageAddress, address uiFeeReceiverAddress
+- `Deployment` (tests/bases/IntegrationTest.sol): ReleaseConfig lastReleaseConfig, ReleaseContracts release, PersistentContracts persistent
+- `DepositFromQueueParams` (tests/tests/persistent/SingleAssetDepositQueue.t.sol): address depositor1, address depositor2, address manager, uint256[] idsToBypass, uint88 endId
+- `DepositFromQueueSnapshot` (tests/tests/persistent/SingleAssetDepositQueue.t.sol): uint256 preTxDepositor1DepositSharesBalance, uint256 preTxDepositor2DepositSharesBalance, uint256 preTxVaultSharesBalance
+- `DepositQueue` (contracts/persistent/shares-wrappers/gated-redemption-queue/IGatedRedemptionQueueSharesWrapper.sol): mapping(address => DepositRequest) userToRequest, address[] users
+- `DepositRequest` (contracts/persistent/shares-wrappers/gated-redemption-queue/IGatedRedemptionQueueSharesWrapper.sol): uint64 index, uint128 assetAmount
+- `EventLogData` (contracts/external-interfaces/IGMXV2Event.sol): AddressItems addressItems, UintItems uintItems, IntItems intItems, BoolItems boolItems, Bytes32Items bytes32Items, BytesItems bytesItems, StringItems stringItems
+- `ExactInputParams` (contracts/external-interfaces/IUniswapV3SwapRouter.sol): bytes path, address recipient, uint256 deadline, uint256 amountIn, uint256 amountOutMinimum
+- `ExactInputParams` (tests/interfaces/external/IUniswapV3SwapRouter.sol): bytes path, address recipient, uint256 deadline, uint256 amountIn, uint256 amountOutMinimum
+- `ExecutionPriceResult` (contracts/external-interfaces/IGMXV2Position.sol): int256 priceImpactUsd, uint256 executionPrice, bool balanceWasImproved, int256 proportionalPendingImpactUsd, int256 totalImpactUsd, uint256 priceImpactDiffUsd
+- `ExternalPositionDetails` (contracts/release/off-chain/interfaces/IHelperDataReader.sol): string label, address id, uint256 typeId, AssetAmount[] debtAssetsAmounts, AssetAmount[] managedAssetsAmounts
+- `ExternalPositionTypeInfo` (contracts/release/extensions/external-position-manager/IExternalPositionManager.sol): address parser, address lib
+- `FeeDetails` (contracts/release/off-chain/interfaces/IHelperDataReader.sol): address recipientForFund, address id
+- `FeeInfo` (contracts/release/extensions/fee-manager/fees/interfaces/IManagementFee.sol): uint128 scaledPerSecondRate, uint128 lastSettled
+- `FeeInfo` (contracts/release/extensions/fee-manager/fees/interfaces/IPerformanceFee.sol): uint256 rate, uint256 highWaterMark
+- `FeeInfo` (contracts/release/extensions/fee-manager/fees/utils/interfaces/IExitRateFeeBase.sol): uint16 inKindRate, uint16 specificAssetsRate
+- `FillOrderParams` (contracts/external-interfaces/IPendleV2Router.sol): Order order, bytes signature, uint256 makingAmount
+- `Flags` (contracts/external-interfaces/IGMXV2Order.sol): bool isLong, bool shouldUnwrapNativeToken, bool isFrozen, bool autoCancel
+- `Flags` (contracts/external-interfaces/IGMXV2Position.sol): bool isLong
+- `Flags` (tests/interfaces/external/IGMXV2Order.sol): bool isLong, bool shouldUnwrapNativeToken, bool isFrozen, bool autoCancel
+- `Flags` (tests/interfaces/external/IGMXV2Position.sol): bool isLong
+- `FooActionArgs` (contracts/templates/adapter/IMyAdapter.sol): address baz
+- `ForwardData` (contracts/persistent/smart-accounts/morpho-blue-flash-loan-asset-manager/IMorphoBlueFlashLoanAssetManager.sol): address borrowedAssetAddress, Call[] calls
+- `ForwardRequest` (contracts/external-interfaces/IGsnForwarder.sol): address from, address to, uint256 value, uint256 gas, uint256 nonce, bytes data, uint256 validUntil
+- `ForwardRequest` (tests/interfaces/external/IGSNForwarder.sol): address from, address to, uint256 value, uint256 gas, uint256 nonce, bytes data, uint256 validUntil
+- `FundSettings` (contracts/release/extensions/policy-manager/policies/interfaces/IMinMaxInvestmentPolicy.sol): uint256 minInvestmentAmount, uint256 maxInvestmentAmount
+- `FundWithRedemptionQueueTestVars` (tests/tests/persistent/SingleAssetRedemptionQueue.t.sol): ISingleAssetRedemptionQueueLib redemptionQueue, address vaultProxyAddress, address fundOwner, address manager, IERC20 redemptionAsset, address holder1, address holder2
+- `GasAndDataLimits` (contracts/external-interfaces/IGsnPaymaster.sol): uint256 acceptanceBudget, uint256 preRelayedCallGasLimit, uint256 postRelayedCallGasLimit, uint256 calldataSizeLimit
+- `GenericData` (contracts/external-interfaces/IParaSwapV6AugustusSwapper.sol): address srcToken, address destToken, uint256 fromAmount, uint256 toAmount, uint256 quotedAmount, bytes32 metadata, address payable beneficiary
+- `HelperDataReaderInfo` (contracts/persistent/off-chain/helper-data-reader/HelperDataReaderRouter.sol): IHelperDataReader helperDataReader, uint8 version
+- `IntArrayKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, int256[] value
+- `IntItems` (contracts/external-interfaces/IGMXV2Event.sol): IntKeyValue[] items, IntArrayKeyValue[] arrayItems
+- `IntKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, int256 value
+- `LimitOrder` (contracts/external-interfaces/IZeroExV4.sol): address makerToken, address takerToken, uint128 makerAmount, uint128 takerAmount, uint128 takerTokenFeeAmount, address maker, address taker, address sender, address feeRecipient, bytes32 pool, uint64 expiry, uint256 salt
+- `LimitOrder` (tests/interfaces/external/IZeroExV4.sol): address makerToken, address takerToken, uint128 makerAmount, uint128 takerAmount, uint128 takerTokenFeeAmount, address maker, address taker, address sender, address feeRecipient, bytes32 pool, uint64 expiry, uint256 salt
+- `LimitOrderData` (contracts/external-interfaces/IPendleV2Router.sol): address limitRouter, uint256 epsSkipMarket, FillOrderParams[] normalFills, FillOrderParams[] flashFills, bytes optData
+- `ListInfo` (contracts/persistent/address-list-registry/IAddressListRegistry.sol): address owner, UpdateType updateType, mapping(address => bool) itemToIsInList
+- `ListInfo` (contracts/persistent/uint-list-registry/IUintListRegistry.sol): address owner, UpdateType updateType, mapping(uint256 => bool) itemToIsInList
+- `LockedBalance` (tests/interfaces/external/IConvexCvxLockerV2.sol): uint112 amount, uint112 boosted, uint32 unlockTime
+- `MakerSignature` (contracts/external-interfaces/IBebopBlend.sol): bytes signatureBytes, uint256 flags
+- `Market` (contracts/external-interfaces/IMorphoBlue.sol): uint128 totalSupplyAssets, uint128 totalSupplyShares, uint128 totalBorrowAssets, uint128 totalBorrowShares, uint128 lastUpdate, uint128 fee
+- `Market` (tests/interfaces/external/IMorphoBlue.sol): uint128 totalSupplyAssets, uint128 totalSupplyShares, uint128 totalBorrowAssets, uint128 totalBorrowShares, uint128 lastUpdate, uint128 fee
+- `MarketParams` (contracts/external-interfaces/IMorphoBlue.sol): address loanToken, address collateralToken, address oracle, address irm, uint256 lltv
+- `MarketParams` (tests/interfaces/external/IMorphoBlue.sol): address loanToken, address collateralToken, address oracle, address irm, uint256 lltv
+- `MarketPrices` (contracts/external-interfaces/IGMXV2Market.sol): IGMXV2Price.Price indexTokenPrice, IGMXV2Price.Price longTokenPrice, IGMXV2Price.Price shortTokenPrice
+- `MerkleTree` (tests/interfaces/external/IMerklDistributor.sol): bytes32 merkleRoot, bytes32 ipfsHash
+- `MigrationRequest` (contracts/persistent/dispatcher/IDispatcher.sol): address nextFundDeployer, address nextVaultAccessor, address nextVaultLib, uint256 executableTimestamp
+- `Numbers` (contracts/external-interfaces/IGMXV2Order.sol): OrderType orderType, DecreasePositionSwapType decreasePositionSwapType, uint256 sizeDeltaUsd, uint256 initialCollateralDeltaAmount, uint256 triggerPrice, uint256 acceptablePrice, uint256 executionFee, uint256 callbackGasLimit, uint256 minOutputAmount, uint256 updatedAtTime, uint256 validFromTime, uint256 srcChainId
+- `Numbers` (contracts/external-interfaces/IGMXV2Position.sol): uint256 sizeInUsd, uint256 sizeInTokens, uint256 collateralAmount, int256 pendingImpactAmount, uint256 borrowingFactor, uint256 fundingFeeAmountPerSize, uint256 longTokenClaimableFundingAmountPerSize, uint256 shortTokenClaimableFundingAmountPerSize, uint256 increasedAtTime, uint256 decreasedAtTime
+- `Numbers` (tests/interfaces/external/IGMXV2Order.sol): OrderType orderType, DecreasePositionSwapType decreasePositionSwapType, uint256 sizeDeltaUsd, uint256 initialCollateralDeltaAmount, uint256 triggerPrice, uint256 acceptablePrice, uint256 executionFee, uint256 callbackGasLimit, uint256 minOutputAmount, uint256 updatedAtTime, uint256 validFromTime, uint256 srcChainId
+- `Numbers` (tests/interfaces/external/IGMXV2Position.sol): uint256 sizeInUsd, uint256 sizeInTokens, uint256 collateralAmount, int256 pendingImpactAmount, uint256 borrowingFactor, uint256 fundingFeeAmountPerSize, uint256 longTokenClaimableFundingAmountPerSize, uint256 shortTokenClaimableFundingAmountPerSize, uint256 increasedAtTime, uint256 decreasedAtTime
+- `OptionInfo` (contracts/external-interfaces/IMysoV3DataTypes.sol): address underlyingToken, uint48 expiry, address settlementToken, uint48 earliestExercise, uint128 notional, uint128 strike, AdvancedSettings advancedSettings
+- `OptionInfo` (tests/interfaces/external/IMysoV3DataTypes.sol): address underlyingToken, uint48 expiry, address settlementToken, uint48 earliestExercise, uint128 notional, uint128 strike, AdvancedSettings advancedSettings
+- `OracleInfo` (contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/modules/IArbitraryLoanAccountingModule.sol): address oracle, uint32 stalenessThreshold
+- `Order` (contracts/external-interfaces/IPendleV2Router.sol): uint256 salt, uint256 expiry, uint256 nonce, OrderType orderType, address token, address YT, address maker, address receiver, uint256 makingAmount, uint256 lnImpliedRate, uint256 failSafeRate, bytes permit
+- `OrderDetails` (contracts/release/extensions/external-position-manager/external-positions/alice-v2/bases/AliceV2PositionLibBase1.sol): address outgoingAssetAddress, address incomingAssetAddress, uint256 outgoingAmount
+- `OrderInfo` (contracts/external-interfaces/IGMXV2Reader.sol): bytes32 orderKey, IGMXV2Order.Props order
+- `OrderInfo` (tests/interfaces/external/IGMXV2Reader.sol): bytes32 orderKey, IGMXV2Order.Props order
+- `OtcOrder` (contracts/external-interfaces/IZeroExV4.sol): address makerToken, address takerToken, uint128 makerAmount, uint128 takerAmount, address maker, address taker, address txOrigin, uint256 expiryAndNonce
+- `OtcOrder` (tests/interfaces/external/IZeroExV4.sol): address makerToken, address takerToken, uint128 makerAmount, uint128 takerAmount, address maker, address taker, address txOrigin, uint256 expiryAndNonce
+- `PlaceOrderActionArgs` (contracts/release/extensions/external-position-manager/external-positions/alice-v2/IAliceV2Position.sol): address tokenToSell, address tokenToBuy, uint256 quantityToSell, uint256 limitAmountToGet
+- `PolicyDetails` (contracts/release/off-chain/interfaces/IHelperDataReader.sol): string identifier, address id
+- `PolicyInfo` (contracts/release/extensions/policy-manager/policies/interfaces/ICumulativeSlippageTolerancePolicy.sol): uint64 tolerance, uint64 cumulativeSlippage, uint128 lastSlippageTimestamp
+- `Position` (contracts/external-interfaces/IMorphoBlue.sol): uint256 supplyShares, uint128 borrowShares, uint128 collateral
+- `Position` (tests/interfaces/external/IMorphoBlue.sol): uint256 supplyShares, uint128 borrowShares, uint128 collateral
+- `PositionBorrowingFees` (contracts/external-interfaces/IGMXV2Position.sol): uint256 borrowingFeeUsd, uint256 borrowingFeeAmount, uint256 borrowingFeeReceiverFactor, uint256 borrowingFeeAmountForFeeReceiver
+- `PositionFees` (contracts/external-interfaces/IGMXV2Position.sol): PositionReferralFees referral, PositionProFees pro, PositionFundingFees funding, PositionBorrowingFees borrowing, PositionUiFees ui, PositionLiquidationFees liquidation, IGMXV2Price.Price collateralTokenPrice, uint256 positionFeeFactor, uint256 protocolFeeAmount, uint256 positionFeeReceiverFactor, uint256 feeReceiverAmount, uint256 feeAmountForPool, uint256 positionFeeAmountForPool, uint256 positionFeeAmount, uint256 totalCostAmountExcludingFunding, uint256 totalCostAmount, uint256 totalDiscountAmount
+- `PositionFundingFees` (contracts/external-interfaces/IGMXV2Position.sol): uint256 fundingFeeAmount, uint256 claimableLongTokenAmount, uint256 claimableShortTokenAmount, uint256 latestFundingFeeAmountPerSize, uint256 latestLongTokenClaimableFundingAmountPerSize, uint256 latestShortTokenClaimableFundingAmountPerSize
+- `PositionInfo` (contracts/external-interfaces/IGMXV2Position.sol): bytes32 positionKey, Props position, PositionFees fees, ExecutionPriceResult executionPriceResult, int256 basePnlUsd, int256 uncappedBasePnlUsd, int256 pnlAfterPriceImpactUsd
+- `PositionLiquidationFees` (contracts/external-interfaces/IGMXV2Position.sol): uint256 liquidationFeeUsd, uint256 liquidationFeeAmount, uint256 liquidationFeeReceiverFactor, uint256 liquidationFeeAmountForFeeReceiver
+- `PositionProFees` (contracts/external-interfaces/IGMXV2Position.sol): uint256 traderTier, uint256 traderDiscountFactor, uint256 traderDiscountAmount
+- `PositionReferralFees` (contracts/external-interfaces/IGMXV2Position.sol): bytes32 referralCode, address affiliate, address trader, uint256 totalRebateFactor, uint256 affiliateRewardFactor, uint256 adjustedAffiliateRewardFactor, uint256 traderDiscountFactor, uint256 totalRebateAmount, uint256 traderDiscountAmount, uint256 affiliateRewardAmount
+- `PositionUiFees` (contracts/external-interfaces/IGMXV2Position.sol): address uiFeeReceiver, uint256 uiFeeReceiverFactor, uint256 uiFeeAmount
+- `Price` (contracts/external-interfaces/IGMXV2Price.sol): uint256 min, uint256 max
+- `PriceInfo` (contracts/external-interfaces/ISmarDexOracleMiddleware.sol): uint256 price, uint256 neutralPrice, uint256 timestamp
+- `Props` (contracts/external-interfaces/IGMXV2Market.sol): address marketToken, address indexToken, address longToken, address shortToken
+- `Props` (contracts/external-interfaces/IGMXV2Order.sol): Addresses addresses, Numbers numbers, Flags flags, bytes32[] dataList
+- `Props` (contracts/external-interfaces/IGMXV2Position.sol): Addresses addresses, Numbers numbers, Flags flags
+- `Props` (tests/interfaces/external/IGMXV2Market.sol): address marketToken, address indexToken, address longToken, address shortToken
+- `Props` (tests/interfaces/external/IGMXV2Order.sol): Addresses addresses, Numbers numbers, Flags flags, bytes32[] dataList
+- `Props` (tests/interfaces/external/IGMXV2Position.sol): Addresses addresses, Numbers numbers, Flags flags
+- `RFQInitialization` (contracts/external-interfaces/IMysoV3DataTypes.sol): OptionInfo optionInfo, RFQQuote rfqQuote
+- `RFQInitialization` (tests/interfaces/external/IMysoV3DataTypes.sol): OptionInfo optionInfo, RFQQuote rfqQuote
+- `RFQQuote` (contracts/external-interfaces/IMysoV3DataTypes.sol): uint128 premium, uint256 validUntil, bytes signature, address eip1271Maker
+- `RFQQuote` (tests/interfaces/external/IMysoV3DataTypes.sol): uint128 premium, uint256 validUntil, bytes signature, address eip1271Maker
+- `ReconfigurationRequest` (contracts/release/core/fund-deployer/IFundDeployer.sol): address nextComptrollerProxy, uint256 executableTimestamp
+- `RedeemSharesForSpecificAssetsActionArgs` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IEnzymeV4VaultAdapter.sol): address vaultProxy, uint256 sharesQuantity, address[] payoutAssets, uint256[] payoutAssetPercentages, uint256[] minPayoutAssetAmounts
+- `RedemptionQueue` (contracts/persistent/shares-wrappers/gated-redemption-queue/IGatedRedemptionQueueSharesWrapper.sol): uint128 totalSharesPending, uint64 relativeSharesAllowed, uint64 relativeSharesCheckpointed, mapping(address => RedemptionRequest) userToRequest, address[] users
+- `RedemptionRequest` (contracts/persistent/shares-wrappers/gated-redemption-queue/IGatedRedemptionQueueSharesWrapper.sol): uint64 index, uint64 lastRedeemed, uint128 sharesPending
+- `RedemptionWindowConfig` (contracts/persistent/shares-wrappers/gated-redemption-queue/IGatedRedemptionQueueSharesWrapper.sol): uint64 firstWindowStart, uint32 frequency, uint32 duration, uint64 relativeSharesCap
+- `RefundOrderActionArgs` (contracts/release/extensions/external-position-manager/external-positions/alice-v2/IAliceV2Position.sol): uint256 orderId, address tokenToSell, address tokenToBuy, uint256 quantityToSell, uint256 limitAmountToGet, uint256 timestamp
+- `RelayData` (contracts/external-interfaces/IGsnTypes.sol): uint256 gasPrice, uint256 pctRelayFee, uint256 baseRelayFee, address relayWorker, address paymaster, address forwarder, bytes paymasterData, uint256 clientId
+- `RelayData` (tests/interfaces/external/IGSNTypes.sol): uint256 gasPrice, uint256 pctRelayFee, uint256 baseRelayFee, address relayWorker, address paymaster, address forwarder, bytes paymasterData, uint256 clientId
+- `RelayRequest` (contracts/external-interfaces/IGsnTypes.sol): IGsnForwarder.ForwardRequest request, RelayData relayData
+- `RelayRequest` (tests/interfaces/external/IGSNTypes.sol): IGSNForwarder.ForwardRequest request, RelayData relayData
+- `ReleaseConfig` (tests/utils/core/deployment/DeploymentUtils.sol): address chainlinkEthUsdAggregatorAddress, uint256 chainlinkStaleRateThreshold, address mlnTokenAddress, address wethTokenAddress, address wrappedNativeTokenAddress, uint256 gasRelayDepositCooldown, uint256 gasRelayDepositMaxTotal, uint256 gasRelayFeeMaxPercent, address gasRelayHubAddress, uint256 gasRelayRelayFeeMaxBase, address gasRelayTrustedForwarderAddress, address vaultMlnBurner, uint256 vaultPositionsLimit
+- `RemoveLiquidityToPtAndUnderlyingActionArgs` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IPendleV2Adapter.sol): IPendleV2Market market, uint256 lpAmount, address withdrawalTokenAddress, uint256 minWithdrawalTokenAmount, uint256 minPtAmount
+- `RemoveLiquidityToUnderlyingActionArgs` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IPendleV2Adapter.sol): IPendleV2Market market, address withdrawalTokenAddress, uint256 lpAmount, uint256 minSyOut, uint256 minWithdrawalTokenAmount
+- `Request` (contracts/persistent/single-asset-deposit-queue/ISingleAssetDepositQueue.sol): address user, uint96 canCancelTime, uint256 depositAssetAmount
+- `Request` (contracts/release/extensions/external-position-manager/external-positions/lido-withdrawals/ILidoWithdrawalsPosition.sol): uint128 amount, uint128 id
+- `RequestWithdrawalActionArgs` (contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/IStaderWithdrawalsPosition.sol): uint256 ethXAmount
+- `ReserveConfigurationMap` (contracts/external-interfaces/IAaveV3Pool.sol): uint256 data
+- `ReserveConfigurationMap` (tests/interfaces/external/IAaveV3Pool.sol): uint256 data
+- `ReserveData` (contracts/external-interfaces/IAaveV3Pool.sol): ReserveConfigurationMap configuration, uint128 liquidityIndex, uint128 currentLiquidityRate, uint128 variableBorrowIndex, uint128 currentVariableBorrowRate, uint128 currentStableBorrowRate, uint40 lastUpdateTimestamp, uint16 id, address aTokenAddress, address stableDebtTokenAddress, address variableDebtTokenAddress, address interestRateStrategyAddress, uint128 accruedToTreasury, uint128 unbacked, uint128 isolationModeTotalDebt
+- `ReserveData` (tests/interfaces/external/IAaveV3Pool.sol): ReserveConfigurationMap configuration, uint128 liquidityIndex, uint128 currentLiquidityRate, uint128 variableBorrowIndex, uint128 currentVariableBorrowRate, uint128 currentStableBorrowRate, uint40 lastUpdateTimestamp, uint16 id, address aTokenAddress, address stableDebtTokenAddress, address variableDebtTokenAddress, address interestRateStrategyAddress, uint128 accruedToTreasury, uint128 unbacked, uint128 isolationModeTotalDebt
+- `RfqOrder` (contracts/external-interfaces/IZeroExV4.sol): address makerToken, address takerToken, uint128 makerAmount, uint128 takerAmount, address maker, address taker, address txOrigin, bytes32 pool, uint64 expiry, uint256 salt
+- `RfqOrder` (tests/interfaces/external/IZeroExV4.sol): address makerToken, address takerToken, uint128 makerAmount, uint128 takerAmount, address maker, address taker, address txOrigin, bytes32 pool, uint64 expiry, uint256 salt
+- `SellPrincipalTokenActionArgs` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IPendleV2Adapter.sol): IPendleV2Market market, address withdrawalTokenAddress, uint256 ptAmount, uint256 minWithdrawalTokenAmount
+- `SetPricesParams` (tests/interfaces/external/IGMXV2Prices.sol): address[] tokens, address[] providers, bytes[] data
+- `Signature` (contracts/external-interfaces/IZeroExV4.sol): SignatureType signatureType, uint8 v, bytes32 r, bytes32 s
+- `Signature` (tests/interfaces/external/IZeroExV4.sol): SignatureType signatureType, uint8 v, bytes32 r, bytes32 s
+- `Single` (contracts/external-interfaces/IBebopBlend.sol): uint256 expiry, address taker_address, address maker_address, uint256 maker_nonce, address taker_token, address maker_token, uint256 taker_amount, uint256 maker_amount, address receiver, uint256 packed_commands, uint256 flags
+- `StringArrayKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, string[] value
+- `StringItems` (contracts/external-interfaces/IGMXV2Event.sol): StringKeyValue[] items, StringArrayKeyValue[] arrayItems
+- `StringKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, string value
+- `SwapActionArgs` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IParaSwapV6Adapter.sol): address executor, SwapData swapData, uint256 partnerAndFee, bytes executorData
+- `SwapData` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IParaSwapV6Adapter.sol): address srcToken, address destToken, uint256 fromAmount, uint256 toAmount, uint256 quotedAmount, bytes32 metadata
+- `SwapDescription` (contracts/external-interfaces/IOneInchV5AggregationRouter.sol): address srcToken, address dstToken, address payable srcReceiver, address payable dstReceiver, uint256 amount, uint256 minReturnAmount, uint256 flags
+- `SwapDescription` (tests/interfaces/external/IOneInchV5AggregationRouter.sol): address srcToken, address dstToken, address payable srcReceiver, address payable dstReceiver, uint256 amount, uint256 minReturnAmount, uint256 flags
+- `SwapSingleActionArgs` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IBebopBlendAdapter.sol): IBebopBlend.Single order, IBebopBlend.MakerSignature makerSignature, uint256 minIncomingAssetAmount
+- `SwapTestData` (tests/tests/protocols/paraswap-v6/ParaSwapV6Adapter.t.sol): bytes encodedSwapData, address outgoingAssetAddress, address incomingAssetAddress, uint256 outgoingAssetAmount, uint256 incomingAssetAmount
+- `SweepActionArgs` (contracts/release/extensions/external-position-manager/external-positions/alice-v2/IAliceV2Position.sol): uint256[] orderIds
+- `SweepActionArgs` (contracts/release/extensions/external-position-manager/external-positions/myso-v3/IMysoV3OptionWritingPosition.sol): address[] tokens
+- `TakeOrder` (tests/tests/protocols/one-inch/OneInchV5Adapter.t.sol): address executor, IOneInchV5AggregationRouter.SwapDescription swapDescription, bytes data
+- `TakeOrderUniqueTokenAmounts` (tests/tests/protocols/one-inch/OneInchV5Adapter.t.sol): address[] srcTokens, uint256[] srcAmounts, address[] dstTokens, uint256[] dstAmounts
+- `Throttle` (contracts/persistent/smart-accounts/share-price-throttled-asset-manager/ISharePriceThrottledAssetManagerLib.sol): uint64 cumulativeLoss, uint64 lastLossTimestamp
+- `TokenBalances` (tests/tests/protocols/one-inch/OneInchV5Adapter.t.sol): uint256[] srcTokenBalances, uint256[] dstTokenBalances
+- `TransferERC20CallArgs` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/ITransferAssetsAdapter.sol): address recipient, address[] assetAddresses, uint256[] amounts
+- `UintArrayKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, uint256[] value
+- `UintItems` (contracts/external-interfaces/IGMXV2Event.sol): UintKeyValue[] items, UintArrayKeyValue[] arrayItems
+- `UintKeyValue` (contracts/external-interfaces/IGMXV2Event.sol): string key, uint256 value
+- `UpdateOrderActionArgs` (contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/IGMXV2LeverageTradingPosition.sol): bytes32 key, uint256 sizeDeltaUsd, uint256 acceptablePrice, uint256 triggerPrice, uint256 minOutputAmount, uint256 validFromTime, bool autoCancel, uint256 executionFeeIncrease, address exchangeRouter
+- `UserConfigurationMap` (tests/interfaces/external/IAaveV3Pool.sol): uint256 data
+- `UserWithdrawInfo` (contracts/external-interfaces/IStaderUserWithdrawalManager.sol): address payable owner, uint256 ethXAmount, uint256 ethExpected, uint256 ethFinalized, uint256 requestBlock
+- `ValidatedPrice` (contracts/external-interfaces/IGMXV2ChainlinkPriceFeedProvider.sol): address token, uint256 min, uint256 max, uint256 timestamp, address provider
+- `ValidatedPrice` (tests/interfaces/external/IGMXV2ChainlinkPriceFeedProvider.sol): address token, uint256 min, uint256 max, uint256 timestamp, address provider
+- `VaultDetails` (contracts/release/off-chain/interfaces/IHelperDataReader.sol): string name, string symbol, uint256 totalSupply, address denominationAsset, uint256 netShareValue, uint256 grossAssetValue, address owner, bool hasInvalidAum
+- `VaultDetailsExtended` (contracts/release/off-chain/interfaces/IHelperDataReader.sol): string name, string symbol, uint256 totalSupply, address denominationAsset, uint256 netShareValue, uint256 grossAssetValue, address owner, bool hasInvalidAum, AssetAmount[] trackedAssetsAmounts, ExternalPositionDetails[] activeExternalPositionsDetails, PolicyDetails[] policiesDetails, FeeDetails[] feesDetails
+- `WithdrawTokensFromEscrowsActionArgs` (contracts/release/extensions/external-position-manager/external-positions/myso-v3/IMysoV3OptionWritingPosition.sol): address[] escrows, address[] tokens
+
+### Enum State Values
+- `Action` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IBebopBlendAdapter.sol): SwapSingle
+- `Action` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IEnzymeV4VaultAdapter.sol): BuyShares, RedeemSharesForSpecificAssets
+- `Action` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IParaSwapV6Adapter.sol): SwapExactAmountIn, SwapExactAmountOut
+- `Action` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IPendleV2Adapter.sol): BuyPrincipalToken, SellPrincipalToken, AddLiquidityFromUnderlying, RemoveLiquidityToUnderlying, RemoveLiquidityToPtAndUnderlying
+- `Action` (contracts/templates/adapter/IMyAdapter.sol): Foo, Bar
+- `Actions` (contracts/release/extensions/external-position-manager/external-positions/aave-v3-debt/IAaveV3DebtPosition.sol): AddCollateral, RemoveCollateral, Borrow, RepayBorrow, SetEMode, SetUseReserveAsCollateral, ClaimRewards, Sweep, ClaimMerklRewards
+- `Actions` (contracts/release/extensions/external-position-manager/external-positions/alice-v2/IAliceV2Position.sol): PlaceOrder, RefundOrder, Sweep, PlaceOrderWithRefId
+- `Actions` (contracts/release/extensions/external-position-manager/external-positions/arbitrary-loan/IArbitraryLoanPosition.sol): ConfigureLoan, UpdateBorrowableAmount, CallOnAccountingModule, Reconcile, CloseLoan
+- `Actions` (contracts/release/extensions/external-position-manager/external-positions/convex-voting/IConvexVotingPosition.sol): Lock, Relock, Withdraw, ClaimRewards, Delegate
+- `Actions` (contracts/release/extensions/external-position-manager/external-positions/gmx-v2-leverage-trading/IGMXV2LeverageTradingPosition.sol): CreateOrder, UpdateOrder, CancelOrder, ClaimFundingFees, ClaimCollateral, Sweep
+- `Actions` (contracts/release/extensions/external-position-manager/external-positions/lido-withdrawals/ILidoWithdrawalsPosition.sol): RequestWithdrawals, ClaimWithdrawals
+- `Actions` (contracts/release/extensions/external-position-manager/external-positions/myso-v3/IMysoV3OptionWritingPosition.sol): CreateEscrowByTakingQuote, CreateEscrowByStartingAuction, CloseAndSweepEscrows, WithdrawTokensFromEscrows, Sweep
+- `Actions` (contracts/release/extensions/external-position-manager/external-positions/stader-withdrawals/IStaderWithdrawalsPosition.sol): RequestWithdrawal, ClaimWithdrawal
+- `Actions` (tests/utils/core/AdapterUtils.sol): CallOnIntegration, AddTrackedAssetsToVault, RemoveTrackedAssetsFromVault
+- `Actions` (tests/utils/core/FeeUtils.sol): InvokeContinuousFeeHook
+- `BidStatus` (tests/interfaces/external/IMysoV3DataTypes.sol): Success, SpotPriceTooLow, OutOfRangeSpotPrice, OptionAlreadyMinted, PremiumTooLow
+- `DecreasePositionSwapType` (contracts/external-interfaces/IGMXV2Order.sol): NoSwap, SwapPnlTokenToCollateralToken, SwapCollateralTokenToPnlToken
+- `DecreasePositionSwapType` (tests/interfaces/external/IGMXV2Order.sol): NoSwap, SwapPnlTokenToCollateralToken, SwapCollateralTokenToPnlToken
+- `DepositMode` (contracts/persistent/shares-wrappers/gated-redemption-queue/IGatedRedemptionQueueSharesWrapper.sol): Direct, Request
+- `ExternalPositionManagerActions` (contracts/release/extensions/external-position-manager/IExternalPositionManager.sol): CreateExternalPosition, CallOnExternalPosition, RemoveExternalPosition, ReactivateExternalPosition
+- `FeeHook` (contracts/release/extensions/fee-manager/IFeeManager.sol): Continuous, PreBuyShares, PostBuyShares, PreRedeemShares
+- `MigrationOutHook` (contracts/persistent/dispatcher/IMigrationHookHandler.sol): PreSignal, PostSignal, PreMigrate, PostMigrate, PostCancel
+- `OrderType` (contracts/external-interfaces/IGMXV2Order.sol): MarketSwap, LimitSwap, MarketIncrease, LimitIncrease, MarketDecrease, LimitDecrease, StopLossDecrease, Liquidation, StopIncrease
+- `OrderType` (contracts/external-interfaces/IPendleV2Router.sol): SY_FOR_PT, PT_FOR_SY, SY_FOR_YT, YT_FOR_SY
+- `OrderType` (contracts/release/extensions/integration-manager/integrations/adapters/interfaces/IZeroExV4Adapter.sol): Limit, Rfq, Otc
+- `OrderType` (tests/interfaces/external/IGMXV2Order.sol): MarketSwap, LimitSwap, MarketIncrease, LimitIncrease, MarketDecrease, LimitDecrease, StopLossDecrease, Liquidation, StopIncrease
+- `PolicyHook` (contracts/release/extensions/policy-manager/IPolicyManager.sol): PostBuyShares, PostCallOnIntegration, PreTransferShares, RedeemSharesForSpecificAssets, AddTrackedAssets, RemoveTrackedAssets, CreateExternalPosition, PostCallOnExternalPosition, RemoveExternalPosition, ReactivateExternalPosition
+- `ProtocolAction` (contracts/external-interfaces/ISmarDexUsdnProtocol.sol): None, Initialize, InitiateDeposit, ValidateDeposit, InitiateWithdrawal, ValidateWithdrawal, InitiateOpenPosition, ValidateOpenPosition, InitiateClosePosition, ValidateClosePosition, Liquidation
+- `RateAsset` (contracts/release/infrastructure/price-feeds/primitives/IChainlinkPriceFeedMixin.sol): ETH, USD
+- `ScaleType` (contracts/release/infrastructure/price-feeds/primitives/NonStandardPrecisionSimulatedAggregator.sol): Up, Down
+- `SecondaryOrderType` (contracts/external-interfaces/IGMXV2Order.sol): None, Adl
+- `SecondaryOrderType` (tests/interfaces/external/IGMXV2Order.sol): None, Adl
+- `SettlementType` (contracts/release/extensions/fee-manager/IFeeManager.sol): None, Direct, Mint, Burn, MintSharesOutstanding, BurnSharesOutstanding
+- `SignatureType` (contracts/external-interfaces/IZeroExV4.sol): ILLEGAL, INVALID, EIP712, ETHSIGN, PRESIGNED
+- `SignatureType` (tests/interfaces/external/IZeroExV4.sol): ILLEGAL, INVALID, EIP712, ETHSIGN, PRESIGNED
+- `SpendAssetsHandleType` (contracts/release/extensions/integration-manager/IIntegrationManager.sol): None, Approve, Transfer
+- `UniswapV3LiquidityPositionActions` (contracts/release/extensions/external-position-manager/external-positions/uniswap-v3-liquidity/IUniswapV3LiquidityPosition.sol): Mint, AddLiquidity, RemoveLiquidity, Collect, Purge
+- `UpdateType` (contracts/persistent/address-list-registry/IAddressListRegistry.sol): None, AddOnly, RemoveOnly, AddAndRemove
+- `UpdateType` (contracts/persistent/uint-list-registry/IUintListRegistry.sol): None, AddOnly, RemoveOnly, AddAndRemove
+- `VaultAction` (contracts/release/core/fund/vault/IVault.sol): None, BurnShares, MintShares, TransferShares, AddTrackedAsset, ApproveAssetSpender, RemoveTrackedAsset, WithdrawAssetTo, AddExternalPosition, CallOnExternalPosition, RemoveExternalPosition
+
+### Invariant Values (Variable-Tied)
+- Debt growth must stay bounded by collateral/liquidation constraints
+- Every token address/handle variable must be non-zero and immutable or governance-gated
+- Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition
+
+### Full Raw State Inventory
+- `AUDIT_STATE_VALUES_FULL.json` includes:
+  - all state variables
+  - all total/balance variables
+  - all token variables
+  - all structs and fields
+  - enum values
+<!-- AUDIT_DOSSIER_END -->

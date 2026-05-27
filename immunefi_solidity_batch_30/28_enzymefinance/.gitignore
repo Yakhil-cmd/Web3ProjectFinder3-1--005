@@ -1,0 +1,21 @@
+# Ignore log output.
+*.log
+
+# Ignore all dotfiles except the whitelisted ones.
+.*
+!.env.example
+!.github
+!.gitignore
+!.gitattributes
+!.solhint.json
+!.solhintignore
+!.vscode
+!.editorconfig
+
+# Ignore foundry artifacts & cache.
+artifacts/
+cache/
+
+# Ignore internal interfaces.
+tests/interfaces/internal/*.sol
+tests/interfaces/internal/*.abi.json

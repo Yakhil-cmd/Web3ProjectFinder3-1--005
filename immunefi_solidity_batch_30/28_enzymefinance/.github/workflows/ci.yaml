@@ -1,0 +1,64 @@
+name: CI
+on:
+  push:
+    branches:
+      - v[1-9]*
+      - audit/*
+      - dev
+  pull_request:
+    branches:
+      - v[1-9]*
+      - audit/*
+      - dev
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: staging
+    env:
+      ETHEREUM_NODE_MAINNET: ${{ secrets.ETHEREUM_NODE_MAINNET }}
+      ETHEREUM_NODE_POLYGON: ${{ secrets.ETHEREUM_NODE_POLYGON }}
+      ETHEREUM_NODE_ARBITRUM: ${{ secrets.ETHEREUM_NODE_ARBITRUM }}
+      ETHEREUM_NODE_BASE: ${{ secrets.ETHEREUM_NODE_BASE }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Set up bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Display config
+        run: forge config
+
+      - name: Compile contracts
+        run: make artifacts
+
+      - name: Generate interfaces
+        run: make interfaces
+
+      - name: Run tests
+        id: run_tests
+        run: make test
+        continue-on-error: true
+
+      - name: Rerun tests on failure
+        if: steps.run_tests.outcome == 'failure'
+        run: forge test --rerun
+
+      - name: Check linting & formatting
+        run: make lint

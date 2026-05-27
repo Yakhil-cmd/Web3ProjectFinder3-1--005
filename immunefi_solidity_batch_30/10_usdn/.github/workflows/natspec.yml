@@ -1,0 +1,29 @@
+name: NatSpec
+on:
+  pull_request:
+
+env:
+  FOUNDRY_PROFILE: ci
+
+jobs:
+  lintspec:
+    runs-on: ubuntu-latest
+    outputs:
+      total-diags: ${{ steps.lintspec-action.outputs.total-diags }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check NatSpec
+        id: lintspec-action
+        uses: beeb/lintspec@main
+        with:
+          fail-on-problem: "false" # we handle failure manually to be able to trigger the notification
+          version: "0.4.1"
+      - name: Fail on findings
+        if: ${{ steps.lintspec-action.outputs.total-diags > 0 }}
+        run: exit 1
+
+  notify-on-failure:
+    needs: lintspec
+    if: ${{ always() && needs.lintspec.outputs.total-diags > 0 }}
+    uses: ./.github/workflows/notify_failure.yml
+    secrets: inherit

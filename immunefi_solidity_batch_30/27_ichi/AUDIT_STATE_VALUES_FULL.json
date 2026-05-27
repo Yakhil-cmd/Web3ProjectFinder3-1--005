@@ -1,0 +1,2064 @@
+{
+  "generated_at_utc": "2026-05-26T17:00:00Z",
+  "project": "27_ichi",
+  "solidity_file_count": 69,
+  "solidity_files": [
+    "contracts/Migrations.sol",
+    "contracts/OneTokenFactory.sol",
+    "contracts/OneTokenProxy.sol",
+    "contracts/OneTokenProxyAdmin.sol",
+    "contracts/_openzeppelin/access/Ownable.sol",
+    "contracts/_openzeppelin/math/SafeMath.sol",
+    "contracts/_openzeppelin/proxy/Proxy.sol",
+    "contracts/_openzeppelin/proxy/ProxyAdmin.sol",
+    "contracts/_openzeppelin/proxy/TransparentUpgradeableProxy.sol",
+    "contracts/_openzeppelin/proxy/UpgradeableProxy.sol",
+    "contracts/_openzeppelin/token/ERC20/IERC20.sol",
+    "contracts/_openzeppelin/token/ERC20/SafeERC20.sol",
+    "contracts/_openzeppelin/utils/Address.sol",
+    "contracts/_openzeppelin/utils/Context.sol",
+    "contracts/_uniswap/lib/contracts/libraries/Babylonian.sol",
+    "contracts/_uniswap/lib/contracts/libraries/BitMath.sol",
+    "contracts/_uniswap/lib/contracts/libraries/FixedPoint.sol",
+    "contracts/_uniswap/lib/contracts/libraries/FullMath.sol",
+    "contracts/_uniswap/v2-core/contracts/UniswapV2Factory.sol",
+    "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+    "contracts/_uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol",
+    "contracts/_uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol",
+    "contracts/_uniswap/v2-core/contracts/libraries/UQ112x112.sol",
+    "contracts/_uniswap/v2-core/contracts/libraries/UniSafeMath.sol",
+    "contracts/_uniswap/v2-periphery/contracts/libraries/UniswapSafeMath.sol",
+    "contracts/_uniswap/v2-periphery/contracts/libraries/UniswapV2Library.sol",
+    "contracts/_uniswap/v2-periphery/contracts/libraries/UniswapV2OracleLibrary.sol",
+    "contracts/common/ICHICommon.sol",
+    "contracts/common/ICHIModuleCommon.sol",
+    "contracts/controller/ControllerCommon.sol",
+    "contracts/controller/null controller/NullController.sol",
+    "contracts/interface/IController.sol",
+    "contracts/interface/IERC20Extended.sol",
+    "contracts/interface/IICHICommon.sol",
+    "contracts/interface/IICHIOwnable.sol",
+    "contracts/interface/IMintMaster.sol",
+    "contracts/interface/IModule.sol",
+    "contracts/interface/IOneTokenFactory.sol",
+    "contracts/interface/IOneTokenV1.sol",
+    "contracts/interface/IOneTokenV1Base.sol",
+    "contracts/interface/IOracle.sol",
+    "contracts/interface/IStrategy.sol",
+    "contracts/interface/InterfaceCommon.sol",
+    "contracts/lib/AddressSet.sol",
+    "contracts/mintMaster/MintMasterCommon.sol",
+    "contracts/mintMaster/legacy/Incremental.sol",
+    "contracts/oracle/OracleCommon.sol",
+    "contracts/oracle/composite/ICHICompositeOracle.sol",
+    "contracts/oracle/pegged/ICHIPeggedOracle.sol",
+    "contracts/oracle/uniswap/UniswapOracleSimple.sol",
+    "contracts/oz_modified/ICHIERC20.sol",
+    "contracts/oz_modified/ICHIERC20Burnable.sol",
+    "contracts/oz_modified/ICHIInitializable.sol",
+    "contracts/oz_modified/ICHIOwnable.sol",
+    "contracts/strategy/StrategyCommon.sol",
+    "contracts/strategy/arbitrary/Arbitrary.sol",
+    "contracts/strategy/nullStrategy/NullStrategy.sol",
+    "contracts/testToken/CollateralToken.sol",
+    "contracts/testToken/DummyMintMaster.sol",
+    "contracts/testToken/MemberToken.sol",
+    "contracts/testToken/SetTest.sol",
+    "contracts/testToken/TestController.sol",
+    "contracts/testToken/TestMintMaster.sol",
+    "contracts/testToken/TestOracle.sol",
+    "contracts/testToken/Token18.sol",
+    "contracts/testToken/Token6.sol",
+    "contracts/testToken/Token9.sol",
+    "contracts/version/v1/OneTokenV1.sol",
+    "contracts/version/v1/OneTokenV1Base.sol"
+  ],
+  "pragmas": [
+    "0.7.6",
+    "=0.7.6",
+    ">=0.4.0",
+    ">=0.4.22 <0.9.0",
+    ">=0.5.0",
+    ">=0.6.0 <0.8.0",
+    ">=0.6.2 <0.8.0"
+  ],
+  "top_directories_by_solidity_file_count": [
+    [
+      "contracts",
+      69
+    ]
+  ],
+  "contracts": [
+    {
+      "file": "contracts/_openzeppelin/utils/Address.sol",
+      "kind": "library",
+      "name": "Address",
+      "bases": []
+    },
+    {
+      "file": "contracts/lib/AddressSet.sol",
+      "kind": "library",
+      "name": "AddressSet",
+      "bases": []
+    },
+    {
+      "file": "contracts/strategy/arbitrary/Arbitrary.sol",
+      "kind": "contract",
+      "name": "Arbitrary",
+      "bases": [
+        "StrategyCommon"
+      ]
+    },
+    {
+      "file": "contracts/_uniswap/lib/contracts/libraries/Babylonian.sol",
+      "kind": "library",
+      "name": "Babylonian",
+      "bases": []
+    },
+    {
+      "file": "contracts/_uniswap/lib/contracts/libraries/BitMath.sol",
+      "kind": "library",
+      "name": "BitMath",
+      "bases": []
+    },
+    {
+      "file": "contracts/testToken/CollateralToken.sol",
+      "kind": "contract",
+      "name": "CollateralToken",
+      "bases": [
+        "ICHIERC20"
+      ]
+    },
+    {
+      "file": "contracts/_openzeppelin/utils/Context.sol",
+      "kind": "abstract contract",
+      "name": "Context",
+      "bases": []
+    },
+    {
+      "file": "contracts/controller/ControllerCommon.sol",
+      "kind": "abstract contract",
+      "name": "ControllerCommon",
+      "bases": [
+        "IController"
+      ]
+    },
+    {
+      "file": "contracts/testToken/DummyMintMaster.sol",
+      "kind": "contract",
+      "name": "DummyMintMaster",
+      "bases": [
+        "MintMasterCommon"
+      ]
+    },
+    {
+      "file": "contracts/_uniswap/lib/contracts/libraries/FixedPoint.sol",
+      "kind": "library",
+      "name": "FixedPoint",
+      "bases": []
+    },
+    {
+      "file": "contracts/_uniswap/lib/contracts/libraries/FullMath.sol",
+      "kind": "library",
+      "name": "FullMath",
+      "bases": []
+    },
+    {
+      "file": "contracts/common/ICHICommon.sol",
+      "kind": "contract",
+      "name": "ICHICommon",
+      "bases": [
+        "IICHICommon",
+        "ICHIOwnable",
+        "ICHIInitializable"
+      ]
+    },
+    {
+      "file": "contracts/oracle/composite/ICHICompositeOracle.sol",
+      "kind": "contract",
+      "name": "ICHICompositeOracle",
+      "bases": [
+        "OracleCommon"
+      ]
+    },
+    {
+      "file": "contracts/oz_modified/ICHIERC20.sol",
+      "kind": "contract",
+      "name": "ICHIERC20",
+      "bases": [
+        "IERC20",
+        "Context",
+        "ICHIInitializable"
+      ]
+    },
+    {
+      "file": "contracts/oz_modified/ICHIERC20Burnable.sol",
+      "kind": "contract",
+      "name": "ICHIERC20Burnable",
+      "bases": [
+        "ICHIERC20"
+      ]
+    },
+    {
+      "file": "contracts/oz_modified/ICHIInitializable.sol",
+      "kind": "contract",
+      "name": "ICHIInitializable",
+      "bases": []
+    },
+    {
+      "file": "contracts/common/ICHIModuleCommon.sol",
+      "kind": "abstract contract",
+      "name": "ICHIModuleCommon",
+      "bases": [
+        "IModule",
+        "ICHICommon"
+      ]
+    },
+    {
+      "file": "contracts/oz_modified/ICHIOwnable.sol",
+      "kind": "contract",
+      "name": "ICHIOwnable",
+      "bases": [
+        "IICHIOwnable",
+        "Context"
+      ]
+    },
+    {
+      "file": "contracts/oracle/pegged/ICHIPeggedOracle.sol",
+      "kind": "contract",
+      "name": "ICHIPeggedOracle",
+      "bases": [
+        "OracleCommon"
+      ]
+    },
+    {
+      "file": "contracts/interface/IController.sol",
+      "kind": "interface",
+      "name": "IController",
+      "bases": []
+    },
+    {
+      "file": "contracts/_openzeppelin/token/ERC20/IERC20.sol",
+      "kind": "interface",
+      "name": "IERC20",
+      "bases": []
+    },
+    {
+      "file": "contracts/interface/IERC20Extended.sol",
+      "kind": "interface",
+      "name": "IERC20Extended",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "contracts/interface/IICHICommon.sol",
+      "kind": "interface",
+      "name": "IICHICommon",
+      "bases": [
+        "IICHIOwnable",
+        "InterfaceCommon"
+      ]
+    },
+    {
+      "file": "contracts/interface/IICHIOwnable.sol",
+      "kind": "interface",
+      "name": "IICHIOwnable",
+      "bases": []
+    },
+    {
+      "file": "contracts/interface/IMintMaster.sol",
+      "kind": "interface",
+      "name": "IMintMaster",
+      "bases": [
+        "IModule"
+      ]
+    },
+    {
+      "file": "contracts/interface/IModule.sol",
+      "kind": "interface",
+      "name": "IModule",
+      "bases": [
+        "IICHICommon"
+      ]
+    },
+    {
+      "file": "contracts/interface/IOneTokenFactory.sol",
+      "kind": "interface",
+      "name": "IOneTokenFactory",
+      "bases": [
+        "InterfaceCommon"
+      ]
+    },
+    {
+      "file": "contracts/interface/IOneTokenV1.sol",
+      "kind": "interface",
+      "name": "IOneTokenV1",
+      "bases": [
+        "IOneTokenV1Base"
+      ]
+    },
+    {
+      "file": "contracts/interface/IOneTokenV1Base.sol",
+      "kind": "interface",
+      "name": "IOneTokenV1Base",
+      "bases": [
+        "IICHICommon",
+        "IERC20"
+      ]
+    },
+    {
+      "file": "contracts/interface/IOracle.sol",
+      "kind": "interface",
+      "name": "IOracle",
+      "bases": [
+        "IModule"
+      ]
+    },
+    {
+      "file": "contracts/interface/IStrategy.sol",
+      "kind": "interface",
+      "name": "IStrategy",
+      "bases": [
+        "IModule"
+      ]
+    },
+    {
+      "file": "contracts/_uniswap/v2-core/contracts/interfaces/IUniswapV2Factory.sol",
+      "kind": "interface",
+      "name": "IUniswapV2Factory",
+      "bases": []
+    },
+    {
+      "file": "contracts/_uniswap/v2-core/contracts/interfaces/IUniswapV2Pair.sol",
+      "kind": "interface",
+      "name": "IUniswapV2Pair",
+      "bases": []
+    },
+    {
+      "file": "contracts/mintMaster/legacy/Incremental.sol",
+      "kind": "contract",
+      "name": "Incremental",
+      "bases": [
+        "MintMasterCommon"
+      ]
+    },
+    {
+      "file": "contracts/interface/InterfaceCommon.sol",
+      "kind": "interface",
+      "name": "InterfaceCommon",
+      "bases": []
+    },
+    {
+      "file": "contracts/testToken/MemberToken.sol",
+      "kind": "contract",
+      "name": "MemberToken",
+      "bases": [
+        "ICHIERC20"
+      ]
+    },
+    {
+      "file": "contracts/Migrations.sol",
+      "kind": "contract",
+      "name": "Migrations",
+      "bases": []
+    },
+    {
+      "file": "contracts/mintMaster/MintMasterCommon.sol",
+      "kind": "abstract contract",
+      "name": "MintMasterCommon",
+      "bases": [
+        "IMintMaster",
+        "ICHIModuleCommon"
+      ]
+    },
+    {
+      "file": "contracts/controller/null controller/NullController.sol",
+      "kind": "contract",
+      "name": "NullController",
+      "bases": [
+        "ControllerCommon"
+      ]
+    },
+    {
+      "file": "contracts/strategy/nullStrategy/NullStrategy.sol",
+      "kind": "contract",
+      "name": "NullStrategy",
+      "bases": [
+        "StrategyCommon"
+      ]
+    },
+    {
+      "file": "contracts/OneTokenFactory.sol",
+      "kind": "contract",
+      "name": "OneTokenFactory",
+      "bases": [
+        "IOneTokenFactory",
+        "ICHICommon"
+      ]
+    },
+    {
+      "file": "contracts/OneTokenProxy.sol",
+      "kind": "contract",
+      "name": "OneTokenProxy",
+      "bases": [
+        "TransparentUpgradeableProxy"
+      ]
+    },
+    {
+      "file": "contracts/OneTokenProxyAdmin.sol",
+      "kind": "contract",
+      "name": "OneTokenProxyAdmin",
+      "bases": [
+        "ProxyAdmin"
+      ]
+    },
+    {
+      "file": "contracts/version/v1/OneTokenV1.sol",
+      "kind": "contract",
+      "name": "OneTokenV1",
+      "bases": [
+        "IOneTokenV1",
+        "OneTokenV1Base"
+      ]
+    },
+    {
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "kind": "contract",
+      "name": "OneTokenV1Base",
+      "bases": [
+        "IOneTokenV1Base",
+        "ICHICommon",
+        "ICHIERC20Burnable"
+      ]
+    },
+    {
+      "file": "contracts/oracle/OracleCommon.sol",
+      "kind": "abstract contract",
+      "name": "OracleCommon",
+      "bases": [
+        "IOracle",
+        "ICHIModuleCommon"
+      ]
+    },
+    {
+      "file": "contracts/_openzeppelin/access/Ownable.sol",
+      "kind": "abstract contract",
+      "name": "Ownable",
+      "bases": [
+        "Context"
+      ]
+    },
+    {
+      "file": "contracts/_openzeppelin/proxy/Proxy.sol",
+      "kind": "abstract contract",
+      "name": "Proxy",
+      "bases": []
+    },
+    {
+      "file": "contracts/_openzeppelin/proxy/ProxyAdmin.sol",
+      "kind": "contract",
+      "name": "ProxyAdmin",
+      "bases": [
+        "Ownable"
+      ]
+    },
+    {
+      "file": "contracts/_openzeppelin/token/ERC20/SafeERC20.sol",
+      "kind": "library",
+      "name": "SafeERC20",
+      "bases": []
+    },
+    {
+      "file": "contracts/_openzeppelin/math/SafeMath.sol",
+      "kind": "library",
+      "name": "SafeMath",
+      "bases": []
+    },
+    {
+      "file": "contracts/testToken/SetTest.sol",
+      "kind": "contract",
+      "name": "SetTest",
+      "bases": []
+    },
+    {
+      "file": "contracts/strategy/StrategyCommon.sol",
+      "kind": "abstract contract",
+      "name": "StrategyCommon",
+      "bases": [
+        "IStrategy",
+        "ICHIModuleCommon"
+      ]
+    },
+    {
+      "file": "contracts/testToken/TestController.sol",
+      "kind": "contract",
+      "name": "TestController",
+      "bases": [
+        "ControllerCommon"
+      ]
+    },
+    {
+      "file": "contracts/testToken/TestMintMaster.sol",
+      "kind": "contract",
+      "name": "TestMintMaster",
+      "bases": [
+        "MintMasterCommon"
+      ]
+    },
+    {
+      "file": "contracts/testToken/TestOracle.sol",
+      "kind": "contract",
+      "name": "TestOracle",
+      "bases": [
+        "OracleCommon"
+      ]
+    },
+    {
+      "file": "contracts/testToken/Token18.sol",
+      "kind": "contract",
+      "name": "Token18",
+      "bases": [
+        "ICHIERC20"
+      ]
+    },
+    {
+      "file": "contracts/testToken/Token6.sol",
+      "kind": "contract",
+      "name": "Token6",
+      "bases": [
+        "ICHIERC20"
+      ]
+    },
+    {
+      "file": "contracts/testToken/Token9.sol",
+      "kind": "contract",
+      "name": "Token9",
+      "bases": [
+        "ICHIERC20"
+      ]
+    },
+    {
+      "file": "contracts/_openzeppelin/proxy/TransparentUpgradeableProxy.sol",
+      "kind": "contract",
+      "name": "TransparentUpgradeableProxy",
+      "bases": [
+        "UpgradeableProxy"
+      ]
+    },
+    {
+      "file": "contracts/_uniswap/v2-core/contracts/libraries/UQ112x112.sol",
+      "kind": "library",
+      "name": "UQ112x112",
+      "bases": []
+    },
+    {
+      "file": "contracts/_uniswap/v2-core/contracts/libraries/UniSafeMath.sol",
+      "kind": "library",
+      "name": "UniSafeMath",
+      "bases": []
+    },
+    {
+      "file": "contracts/oracle/uniswap/UniswapOracleSimple.sol",
+      "kind": "contract",
+      "name": "UniswapOracleSimple",
+      "bases": [
+        "OracleCommon"
+      ]
+    },
+    {
+      "file": "contracts/_uniswap/v2-periphery/contracts/libraries/UniswapSafeMath.sol",
+      "kind": "library",
+      "name": "UniswapSafeMath",
+      "bases": []
+    },
+    {
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Factory.sol",
+      "kind": "contract",
+      "name": "UniswapV2Factory",
+      "bases": [
+        "IUniswapV2Factory"
+      ]
+    },
+    {
+      "file": "contracts/_uniswap/v2-periphery/contracts/libraries/UniswapV2Library.sol",
+      "kind": "library",
+      "name": "UniswapV2Library",
+      "bases": []
+    },
+    {
+      "file": "contracts/_uniswap/v2-periphery/contracts/libraries/UniswapV2OracleLibrary.sol",
+      "kind": "library",
+      "name": "UniswapV2OracleLibrary",
+      "bases": []
+    },
+    {
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "kind": "contract",
+      "name": "UniswapV2Pair",
+      "bases": [
+        "IUniswapV2Pair"
+      ]
+    },
+    {
+      "file": "contracts/_openzeppelin/proxy/UpgradeableProxy.sol",
+      "kind": "contract",
+      "name": "UpgradeableProxy",
+      "bases": [
+        "Proxy"
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "file": "contracts/interface/InterfaceCommon.sol",
+      "enum": "ModuleType",
+      "values": [
+        "Version",
+        "Controller",
+        "Strategy",
+        "MintMaster",
+        "Oracle"
+      ]
+    }
+  ],
+  "structs": [
+    {
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "struct": "Asset",
+      "fields": [
+        {
+          "name": "oracle",
+          "type": "address"
+        },
+        {
+          "name": "strategy",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "contracts/OneTokenFactory.sol",
+      "struct": "ForeignToken",
+      "fields": [
+        {
+          "name": "isCollateral",
+          "type": "bool"
+        },
+        {
+          "name": "oracleSet",
+          "type": "AddressSet.Set"
+        }
+      ]
+    },
+    {
+      "file": "contracts/OneTokenFactory.sol",
+      "struct": "Module",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "name": "moduleType",
+          "type": "ModuleType"
+        }
+      ]
+    },
+    {
+      "file": "contracts/oracle/uniswap/UniswapOracleSimple.sol",
+      "struct": "Pair",
+      "fields": [
+        {
+          "name": "token0",
+          "type": "address"
+        },
+        {
+          "name": "token1",
+          "type": "address"
+        },
+        {
+          "name": "price0CumulativeLast",
+          "type": "uint256"
+        },
+        {
+          "name": "price1CumulativeLast",
+          "type": "uint256"
+        },
+        {
+          "name": "blockTimestampLast",
+          "type": "uint32"
+        },
+        {
+          "name": "price0Average",
+          "type": "FixedPoint.uq112x112"
+        },
+        {
+          "name": "price1Average",
+          "type": "FixedPoint.uq112x112"
+        }
+      ]
+    },
+    {
+      "file": "contracts/mintMaster/legacy/Incremental.sol",
+      "struct": "Parameters",
+      "fields": [
+        {
+          "name": "set",
+          "type": "bool"
+        },
+        {
+          "name": "minRatio",
+          "type": "uint256"
+        },
+        {
+          "name": "maxRatio",
+          "type": "uint256"
+        },
+        {
+          "name": "stepSize",
+          "type": "uint256"
+        },
+        {
+          "name": "lastRatio",
+          "type": "uint256"
+        },
+        {
+          "name": "maxOrderVolume",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/testToken/TestMintMaster.sol",
+      "struct": "Parameters",
+      "fields": [
+        {
+          "name": "set",
+          "type": "bool"
+        },
+        {
+          "name": "minRatio",
+          "type": "uint256"
+        },
+        {
+          "name": "maxRatio",
+          "type": "uint256"
+        },
+        {
+          "name": "stepSize",
+          "type": "uint256"
+        },
+        {
+          "name": "lastRatio",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/lib/AddressSet.sol",
+      "struct": "Set",
+      "fields": [
+        {
+          "name": "keyPointers",
+          "type": "mapping(address => uint256)"
+        },
+        {
+          "name": "keyList",
+          "type": "address[]"
+        }
+      ]
+    },
+    {
+      "file": "contracts/_uniswap/lib/contracts/libraries/FixedPoint.sol",
+      "struct": "uq112x112",
+      "fields": [
+        {
+          "name": "_x",
+          "type": "uint224"
+        }
+      ]
+    },
+    {
+      "file": "contracts/_uniswap/lib/contracts/libraries/FixedPoint.sol",
+      "struct": "uq144x112",
+      "fields": [
+        {
+          "name": "_x",
+          "type": "uint256"
+        }
+      ]
+    }
+  ],
+  "all_state_variables": [
+    {
+      "name": "MODULE_TYPE",
+      "type": "bytes32 constant public override",
+      "visibility": "public",
+      "flags": [
+        "constant",
+        "override"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI V1 Controller\"))",
+      "declaration": "bytes32 constant public override MODULE_TYPE = keccak256(abi.encodePacked(\"ICHI V1 Controller\"))",
+      "file": "contracts/controller/ControllerCommon.sol",
+      "contract": "ControllerCommon"
+    },
+    {
+      "name": "description",
+      "type": "string public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "string public override description",
+      "file": "contracts/controller/ControllerCommon.sol",
+      "contract": "ControllerCommon"
+    },
+    {
+      "name": "oneTokenFactory",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override oneTokenFactory",
+      "file": "contracts/controller/ControllerCommon.sol",
+      "contract": "ControllerCommon"
+    },
+    {
+      "name": "DEFAULT_RATIO",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 ** 18",
+      "declaration": "uint256 constant DEFAULT_RATIO = 10 ** 18",
+      "file": "contracts/testToken/DummyMintMaster.sol",
+      "contract": "DummyMintMaster"
+    },
+    {
+      "name": "MAX_VOLUME",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1000",
+      "declaration": "uint256 constant MAX_VOLUME = 1000",
+      "file": "contracts/testToken/DummyMintMaster.sol",
+      "contract": "DummyMintMaster"
+    },
+    {
+      "name": "LOWER_MASK",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xffffffffffffffffffffffffffff",
+      "declaration": "uint256 private constant LOWER_MASK = 0xffffffffffffffffffffffffffff",
+      "file": "contracts/_uniswap/lib/contracts/libraries/FixedPoint.sol",
+      "contract": "FixedPoint"
+    },
+    {
+      "name": "Q112",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x10000000000000000000000000000",
+      "declaration": "uint256 public constant Q112 = 0x10000000000000000000000000000",
+      "file": "contracts/_uniswap/lib/contracts/libraries/FixedPoint.sol",
+      "contract": "FixedPoint"
+    },
+    {
+      "name": "Q224",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x100000000000000000000000000000000000000000000000000000000",
+      "declaration": "uint256 private constant Q224 = 0x100000000000000000000000000000000000000000000000000000000",
+      "file": "contracts/_uniswap/lib/contracts/libraries/FixedPoint.sol",
+      "contract": "FixedPoint"
+    },
+    {
+      "name": "COMPONENT_CONTROLLER",
+      "type": "bytes32 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI V1 Controller\"))",
+      "declaration": "bytes32 constant COMPONENT_CONTROLLER = keccak256(abi.encodePacked(\"ICHI V1 Controller\"))",
+      "file": "contracts/common/ICHICommon.sol",
+      "contract": "ICHICommon"
+    },
+    {
+      "name": "COMPONENT_FACTORY",
+      "type": "bytes32 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI OneToken Factory\"))",
+      "declaration": "bytes32 constant COMPONENT_FACTORY = keccak256(abi.encodePacked(\"ICHI OneToken Factory\"))",
+      "file": "contracts/common/ICHICommon.sol",
+      "contract": "ICHICommon"
+    },
+    {
+      "name": "COMPONENT_MINTMASTER",
+      "type": "bytes32 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI V1 MintMaster Implementation\"))",
+      "declaration": "bytes32 constant COMPONENT_MINTMASTER = keccak256(abi.encodePacked(\"ICHI V1 MintMaster Implementation\"))",
+      "file": "contracts/common/ICHICommon.sol",
+      "contract": "ICHICommon"
+    },
+    {
+      "name": "COMPONENT_ORACLE",
+      "type": "bytes32 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI V1 Oracle Implementation\"))",
+      "declaration": "bytes32 constant COMPONENT_ORACLE = keccak256(abi.encodePacked(\"ICHI V1 Oracle Implementation\"))",
+      "file": "contracts/common/ICHICommon.sol",
+      "contract": "ICHICommon"
+    },
+    {
+      "name": "COMPONENT_STRATEGY",
+      "type": "bytes32 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI V1 Strategy Implementation\"))",
+      "declaration": "bytes32 constant COMPONENT_STRATEGY = keccak256(abi.encodePacked(\"ICHI V1 Strategy Implementation\"))",
+      "file": "contracts/common/ICHICommon.sol",
+      "contract": "ICHICommon"
+    },
+    {
+      "name": "COMPONENT_VERSION",
+      "type": "bytes32 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI V1 OneToken Implementation\"))",
+      "declaration": "bytes32 constant COMPONENT_VERSION = keccak256(abi.encodePacked(\"ICHI V1 OneToken Implementation\"))",
+      "file": "contracts/common/ICHICommon.sol",
+      "contract": "ICHICommon"
+    },
+    {
+      "name": "COMPONENT_VOTERROLL",
+      "type": "bytes32 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI V1 VoterRoll Implementation\"))",
+      "declaration": "bytes32 constant COMPONENT_VOTERROLL = keccak256(abi.encodePacked(\"ICHI V1 VoterRoll Implementation\"))",
+      "file": "contracts/common/ICHICommon.sol",
+      "contract": "ICHICommon"
+    },
+    {
+      "name": "INFINITE",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint256(0-1)",
+      "declaration": "uint256 constant INFINITE = uint256(0-1)",
+      "file": "contracts/common/ICHICommon.sol",
+      "contract": "ICHICommon"
+    },
+    {
+      "name": "NULL_ADDRESS",
+      "type": "address constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "address(0)",
+      "declaration": "address constant NULL_ADDRESS = address(0)",
+      "file": "contracts/common/ICHICommon.sol",
+      "contract": "ICHICommon"
+    },
+    {
+      "name": "PRECISION",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 ** 18",
+      "declaration": "uint256 constant PRECISION = 10 ** 18",
+      "file": "contracts/common/ICHICommon.sol",
+      "contract": "ICHICommon"
+    },
+    {
+      "name": "interimTokens",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public interimTokens",
+      "file": "contracts/oracle/composite/ICHICompositeOracle.sol",
+      "contract": "ICHICompositeOracle"
+    },
+    {
+      "name": "oracleContracts",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public oracleContracts",
+      "file": "contracts/oracle/composite/ICHICompositeOracle.sol",
+      "contract": "ICHICompositeOracle"
+    },
+    {
+      "name": "_allowances",
+      "type": "mapping (address => mapping (address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => mapping (address => uint256)) private _allowances",
+      "file": "contracts/oz_modified/ICHIERC20.sol",
+      "contract": "ICHIERC20"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping (address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => uint256) private _balances",
+      "file": "contracts/oz_modified/ICHIERC20.sol",
+      "contract": "ICHIERC20"
+    },
+    {
+      "name": "_decimals",
+      "type": "uint8 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint8 private _decimals",
+      "file": "contracts/oz_modified/ICHIERC20.sol",
+      "contract": "ICHIERC20"
+    },
+    {
+      "name": "_name",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _name",
+      "file": "contracts/oz_modified/ICHIERC20.sol",
+      "contract": "ICHIERC20"
+    },
+    {
+      "name": "_symbol",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _symbol",
+      "file": "contracts/oz_modified/ICHIERC20.sol",
+      "contract": "ICHIERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/oz_modified/ICHIERC20.sol",
+      "contract": "ICHIERC20"
+    },
+    {
+      "name": "_initialized",
+      "type": "bool private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool private _initialized",
+      "file": "contracts/oz_modified/ICHIInitializable.sol",
+      "contract": "ICHIInitializable"
+    },
+    {
+      "name": "_initializing",
+      "type": "bool private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool private _initializing",
+      "file": "contracts/oz_modified/ICHIInitializable.sol",
+      "contract": "ICHIInitializable"
+    },
+    {
+      "name": "moduleDescription",
+      "type": "string public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "string public override moduleDescription",
+      "file": "contracts/common/ICHIModuleCommon.sol",
+      "contract": "ICHIModuleCommon"
+    },
+    {
+      "name": "moduleType",
+      "type": "ModuleType public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "ModuleType public immutable override moduleType",
+      "file": "contracts/common/ICHIModuleCommon.sol",
+      "contract": "ICHIModuleCommon"
+    },
+    {
+      "name": "oneTokenFactory",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override oneTokenFactory",
+      "file": "contracts/common/ICHIModuleCommon.sol",
+      "contract": "ICHIModuleCommon"
+    },
+    {
+      "name": "_owner",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _owner",
+      "file": "contracts/oz_modified/ICHIOwnable.sol",
+      "contract": "ICHIOwnable"
+    },
+    {
+      "name": "DEFAULT_MAX_ORDER_VOLUME",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "INFINITE",
+      "declaration": "uint256 constant DEFAULT_MAX_ORDER_VOLUME = INFINITE",
+      "file": "contracts/mintMaster/legacy/Incremental.sol",
+      "contract": "Incremental"
+    },
+    {
+      "name": "DEFAULT_RATIO",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 ** 18",
+      "declaration": "uint256 constant DEFAULT_RATIO = 10 ** 18",
+      "file": "contracts/mintMaster/legacy/Incremental.sol",
+      "contract": "Incremental"
+    },
+    {
+      "name": "DEFAULT_STEP_SIZE",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0",
+      "declaration": "uint256 constant DEFAULT_STEP_SIZE = 0",
+      "file": "contracts/mintMaster/legacy/Incremental.sol",
+      "contract": "Incremental"
+    },
+    {
+      "name": "parameters",
+      "type": "mapping(address => Parameters) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => Parameters) public parameters",
+      "file": "contracts/mintMaster/legacy/Incremental.sol",
+      "contract": "Incremental"
+    },
+    {
+      "name": "last_completed_migration",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public last_completed_migration",
+      "file": "contracts/Migrations.sol",
+      "contract": "Migrations"
+    },
+    {
+      "name": "owner",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "msg.sender",
+      "declaration": "address public owner = msg.sender",
+      "file": "contracts/Migrations.sol",
+      "contract": "Migrations"
+    },
+    {
+      "name": "MODULE_TYPE",
+      "type": "bytes32 constant public override",
+      "visibility": "public",
+      "flags": [
+        "constant",
+        "override"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI V1 MintMaster Implementation\"))",
+      "declaration": "bytes32 constant public override MODULE_TYPE = keccak256(abi.encodePacked(\"ICHI V1 MintMaster Implementation\"))",
+      "file": "contracts/mintMaster/MintMasterCommon.sol",
+      "contract": "MintMasterCommon"
+    },
+    {
+      "name": "oneTokenOracles",
+      "type": "mapping(address => address) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(address => address) public override oneTokenOracles",
+      "file": "contracts/mintMaster/MintMasterCommon.sol",
+      "contract": "MintMasterCommon"
+    },
+    {
+      "name": "MODULE_TYPE",
+      "type": "bytes32 public constant override",
+      "visibility": "public",
+      "flags": [
+        "constant",
+        "override"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI OneToken Factory\"))",
+      "declaration": "bytes32 public constant override MODULE_TYPE = keccak256(abi.encodePacked(\"ICHI OneToken Factory\"))",
+      "file": "contracts/OneTokenFactory.sol",
+      "contract": "OneTokenFactory"
+    },
+    {
+      "name": "NULL_DATA",
+      "type": "bytes constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"\"",
+      "declaration": "bytes constant NULL_DATA = \"\"",
+      "file": "contracts/OneTokenFactory.sol",
+      "contract": "OneTokenFactory"
+    },
+    {
+      "name": "foreignTokens",
+      "type": "mapping(address => ForeignToken)",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => ForeignToken) foreignTokens",
+      "file": "contracts/OneTokenFactory.sol",
+      "contract": "OneTokenFactory"
+    },
+    {
+      "name": "modules",
+      "type": "mapping(address => Module) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => Module) public modules",
+      "file": "contracts/OneTokenFactory.sol",
+      "contract": "OneTokenFactory"
+    },
+    {
+      "name": "oneTokenProxyAdmins",
+      "type": "mapping(address => address) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(address => address) public override oneTokenProxyAdmins",
+      "file": "contracts/OneTokenFactory.sol",
+      "contract": "OneTokenFactory"
+    },
+    {
+      "name": "oneTokenSet",
+      "type": "AddressSet.Set",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AddressSet.Set oneTokenSet",
+      "file": "contracts/OneTokenFactory.sol",
+      "contract": "OneTokenFactory"
+    },
+    {
+      "name": "liabilities",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public liabilities",
+      "file": "contracts/version/v1/OneTokenV1.sol",
+      "contract": "OneTokenV1"
+    },
+    {
+      "name": "mintingFee",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override mintingFee",
+      "file": "contracts/version/v1/OneTokenV1.sol",
+      "contract": "OneTokenV1"
+    },
+    {
+      "name": "redemptionFee",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override redemptionFee",
+      "file": "contracts/version/v1/OneTokenV1.sol",
+      "contract": "OneTokenV1"
+    },
+    {
+      "name": "MODULE_TYPE",
+      "type": "bytes32 public constant override",
+      "visibility": "public",
+      "flags": [
+        "constant",
+        "override"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI V1 OneToken Implementation\"))",
+      "declaration": "bytes32 public constant override MODULE_TYPE = keccak256(abi.encodePacked(\"ICHI V1 OneToken Implementation\"))",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "assets",
+      "type": "mapping(address => Asset) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(address => Asset) public override assets",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "collateralTokenSet",
+      "type": "AddressSet.Set",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AddressSet.Set collateralTokenSet",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "controller",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override controller",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "memberToken",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override memberToken",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "mintMaster",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override mintMaster",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "oneTokenFactory",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override oneTokenFactory",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "otherTokenSet",
+      "type": "AddressSet.Set",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AddressSet.Set otherTokenSet",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "MODULE_TYPE",
+      "type": "bytes32 constant public override",
+      "visibility": "public",
+      "flags": [
+        "constant",
+        "override"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI V1 Oracle Implementation\"))",
+      "declaration": "bytes32 constant public override MODULE_TYPE = keccak256(abi.encodePacked(\"ICHI V1 Oracle Implementation\"))",
+      "file": "contracts/oracle/OracleCommon.sol",
+      "contract": "OracleCommon"
+    },
+    {
+      "name": "NORMAL",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "18",
+      "declaration": "uint256 constant NORMAL = 18",
+      "file": "contracts/oracle/OracleCommon.sol",
+      "contract": "OracleCommon"
+    },
+    {
+      "name": "indexToken",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override indexToken",
+      "file": "contracts/oracle/OracleCommon.sol",
+      "contract": "OracleCommon"
+    },
+    {
+      "name": "_owner",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _owner",
+      "file": "contracts/_openzeppelin/access/Ownable.sol",
+      "contract": "Ownable"
+    },
+    {
+      "name": "set",
+      "type": "AddressSet.Set",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AddressSet.Set set",
+      "file": "contracts/testToken/SetTest.sol",
+      "contract": "SetTest"
+    },
+    {
+      "name": "MODULE_TYPE",
+      "type": "bytes32 constant public override",
+      "visibility": "public",
+      "flags": [
+        "constant",
+        "override"
+      ],
+      "initializer": "keccak256(abi.encodePacked(\"ICHI V1 Strategy Implementation\"))",
+      "declaration": "bytes32 constant public override MODULE_TYPE = keccak256(abi.encodePacked(\"ICHI V1 Strategy Implementation\"))",
+      "file": "contracts/strategy/StrategyCommon.sol",
+      "contract": "StrategyCommon"
+    },
+    {
+      "name": "oneToken",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override oneToken",
+      "file": "contracts/strategy/StrategyCommon.sol",
+      "contract": "StrategyCommon"
+    },
+    {
+      "name": "DEFAULT_RATIO",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 ** 18",
+      "declaration": "uint256 constant DEFAULT_RATIO = 10 ** 18",
+      "file": "contracts/testToken/TestMintMaster.sol",
+      "contract": "TestMintMaster"
+    },
+    {
+      "name": "DEFAULT_STEP_SIZE",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0",
+      "declaration": "uint256 constant DEFAULT_STEP_SIZE = 0",
+      "file": "contracts/testToken/TestMintMaster.sol",
+      "contract": "TestMintMaster"
+    },
+    {
+      "name": "MAX_VOLUME",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1000",
+      "declaration": "uint256 constant MAX_VOLUME = 1000",
+      "file": "contracts/testToken/TestMintMaster.sol",
+      "contract": "TestMintMaster"
+    },
+    {
+      "name": "adjustUp",
+      "type": "bool private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool private adjustUp",
+      "file": "contracts/testToken/TestOracle.sol",
+      "contract": "TestOracle"
+    },
+    {
+      "name": "_ADMIN_SLOT",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103",
+      "declaration": "bytes32 private constant _ADMIN_SLOT = 0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103",
+      "file": "contracts/_openzeppelin/proxy/TransparentUpgradeableProxy.sol",
+      "contract": "TransparentUpgradeableProxy"
+    },
+    {
+      "name": "Q112",
+      "type": "uint224 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2**112",
+      "declaration": "uint224 constant Q112 = 2**112",
+      "file": "contracts/_uniswap/v2-core/contracts/libraries/UQ112x112.sol",
+      "contract": "UQ112x112"
+    },
+    {
+      "name": "PERIOD",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable PERIOD",
+      "file": "contracts/oracle/uniswap/UniswapOracleSimple.sol",
+      "contract": "UniswapOracleSimple"
+    },
+    {
+      "name": "uniswapFactory",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable uniswapFactory",
+      "file": "contracts/oracle/uniswap/UniswapOracleSimple.sol",
+      "contract": "UniswapOracleSimple"
+    },
+    {
+      "name": "allPairs",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public allPairs",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Factory.sol",
+      "contract": "UniswapV2Factory"
+    },
+    {
+      "name": "feeTo",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public feeTo",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Factory.sol",
+      "contract": "UniswapV2Factory"
+    },
+    {
+      "name": "feeToSetter",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public feeToSetter",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Factory.sol",
+      "contract": "UniswapV2Factory"
+    },
+    {
+      "name": "getPair",
+      "type": "mapping(address => mapping(address => address)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => address)) public getPair",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Factory.sol",
+      "contract": "UniswapV2Factory"
+    },
+    {
+      "name": "MINIMUM_LIQUIDITY",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 ** 3",
+      "declaration": "uint256 public constant MINIMUM_LIQUIDITY = 10 ** 3",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "SELECTOR",
+      "type": "bytes4 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes4(keccak256(bytes('transfer(address,uint256)')))",
+      "declaration": "bytes4 private constant SELECTOR = bytes4(keccak256(bytes('transfer(address,uint256)')))",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "_price0CumulativeLast",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public _price0CumulativeLast",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "_price1CumulativeLast",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public _price1CumulativeLast",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "_token0",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public _token0",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "_token1",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public _token1",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "blockTimestampLast",
+      "type": "uint32 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 private blockTimestampLast",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "factory",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public factory",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "kLast",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public kLast",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "reserve0",
+      "type": "uint112 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint112 private reserve0",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "reserve1",
+      "type": "uint112 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint112 private reserve1",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "_IMPLEMENTATION_SLOT",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc",
+      "declaration": "bytes32 private constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc",
+      "file": "contracts/_openzeppelin/proxy/UpgradeableProxy.sol",
+      "contract": "UpgradeableProxy"
+    }
+  ],
+  "total_balance_variables": [
+    {
+      "name": "_balances",
+      "type": "mapping (address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => uint256) private _balances",
+      "file": "contracts/oz_modified/ICHIERC20.sol",
+      "contract": "ICHIERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/oz_modified/ICHIERC20.sol",
+      "contract": "ICHIERC20"
+    },
+    {
+      "name": "assets",
+      "type": "mapping(address => Asset) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(address => Asset) public override assets",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "collateralTokenSet",
+      "type": "AddressSet.Set",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AddressSet.Set collateralTokenSet",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "indexToken",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override indexToken",
+      "file": "contracts/oracle/OracleCommon.sol",
+      "contract": "OracleCommon"
+    },
+    {
+      "name": "MINIMUM_LIQUIDITY",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 ** 3",
+      "declaration": "uint256 public constant MINIMUM_LIQUIDITY = 10 ** 3",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "reserve0",
+      "type": "uint112 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint112 private reserve0",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "reserve1",
+      "type": "uint112 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint112 private reserve1",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    }
+  ],
+  "token_variables": [
+    {
+      "name": "oneTokenFactory",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override oneTokenFactory",
+      "file": "contracts/controller/ControllerCommon.sol",
+      "contract": "ControllerCommon"
+    },
+    {
+      "name": "interimTokens",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public interimTokens",
+      "file": "contracts/oracle/composite/ICHICompositeOracle.sol",
+      "contract": "ICHICompositeOracle"
+    },
+    {
+      "name": "oneTokenFactory",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override oneTokenFactory",
+      "file": "contracts/common/ICHIModuleCommon.sol",
+      "contract": "ICHIModuleCommon"
+    },
+    {
+      "name": "oneTokenOracles",
+      "type": "mapping(address => address) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(address => address) public override oneTokenOracles",
+      "file": "contracts/mintMaster/MintMasterCommon.sol",
+      "contract": "MintMasterCommon"
+    },
+    {
+      "name": "foreignTokens",
+      "type": "mapping(address => ForeignToken)",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => ForeignToken) foreignTokens",
+      "file": "contracts/OneTokenFactory.sol",
+      "contract": "OneTokenFactory"
+    },
+    {
+      "name": "oneTokenProxyAdmins",
+      "type": "mapping(address => address) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(address => address) public override oneTokenProxyAdmins",
+      "file": "contracts/OneTokenFactory.sol",
+      "contract": "OneTokenFactory"
+    },
+    {
+      "name": "oneTokenSet",
+      "type": "AddressSet.Set",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AddressSet.Set oneTokenSet",
+      "file": "contracts/OneTokenFactory.sol",
+      "contract": "OneTokenFactory"
+    },
+    {
+      "name": "collateralTokenSet",
+      "type": "AddressSet.Set",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AddressSet.Set collateralTokenSet",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "memberToken",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override memberToken",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "oneTokenFactory",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override oneTokenFactory",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "otherTokenSet",
+      "type": "AddressSet.Set",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AddressSet.Set otherTokenSet",
+      "file": "contracts/version/v1/OneTokenV1Base.sol",
+      "contract": "OneTokenV1Base"
+    },
+    {
+      "name": "indexToken",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override indexToken",
+      "file": "contracts/oracle/OracleCommon.sol",
+      "contract": "OracleCommon"
+    },
+    {
+      "name": "oneToken",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override oneToken",
+      "file": "contracts/strategy/StrategyCommon.sol",
+      "contract": "StrategyCommon"
+    },
+    {
+      "name": "allPairs",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public allPairs",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Factory.sol",
+      "contract": "UniswapV2Factory"
+    },
+    {
+      "name": "_token0",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public _token0",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    },
+    {
+      "name": "_token1",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public _token1",
+      "file": "contracts/_uniswap/v2-core/contracts/UniswapV2Pair.sol",
+      "contract": "UniswapV2Pair"
+    }
+  ],
+  "token_addresses_hardcoded": [],
+  "invariant_values": [
+    "Key accounting vars (`MINIMUM_LIQUIDITY`, `reserve0`, `reserve1`, `indexToken`, `_balances`, `_totalSupply`, `collateralTokenSet`, `assets`) must only change through authorized accounting paths",
+    "Every token address/handle variable must be non-zero and immutable or governance-gated",
+    "Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition"
+  ]
+}

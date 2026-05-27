@@ -1,0 +1,5518 @@
+{
+  "generated_at_utc": "2026-05-26T16:59:50Z",
+  "project": "07_enzyme-onyx",
+  "solidity_file_count": 104,
+  "solidity_files": [
+    "scripts/Deploy.s.sol",
+    "scripts/EncodeStringToBytes10.s.sol",
+    "src/ccip/DepositorWallet.sol",
+    "src/components/automations/chainlink-cre/CreWorkflowConsumer.sol",
+    "src/components/automations/chainlink-cre/IReceiver.sol",
+    "src/components/ccip/WalletsManager.sol",
+    "src/components/fees/FeeHandler.sol",
+    "src/components/fees/interfaces/IManagementFeeTracker.sol",
+    "src/components/fees/interfaces/IPerformanceFeeTracker.sol",
+    "src/components/fees/management-fee-trackers/ContinuousFlatRateManagementFeeTracker.sol",
+    "src/components/fees/performance-fee-trackers/ContinuousFlatRatePerformanceFeeTracker.sol",
+    "src/components/fees/utils/FeeTrackerHelpersMixin.sol",
+    "src/components/issuance/deposit-handlers/ERC7540LikeDepositQueue.sol",
+    "src/components/issuance/deposit-handlers/IERC7540LikeDepositHandler.sol",
+    "src/components/issuance/deposit-handlers/SyncDepositHandler.sol",
+    "src/components/issuance/redeem-handlers/ERC7540LikeRedeemQueue.sol",
+    "src/components/issuance/redeem-handlers/IERC7540LikeRedeemHandler.sol",
+    "src/components/issuance/utils/ERC7540LikeIssuanceBase.sol",
+    "src/components/lists/SharesOwnedAddressList.sol",
+    "src/components/roles/LimitedAccessLimitedCallForwarder.sol",
+    "src/components/roles/OpenAccessLimitedCallForwarder.sol",
+    "src/components/shares-transfer-validators/AddressListsSharesTransferValidator.sol",
+    "src/components/utils/ComponentHelpersMixin.sol",
+    "src/components/value/ValuationHandler.sol",
+    "src/components/value/position-trackers/AccountERC20Tracker.sol",
+    "src/components/value/position-trackers/IPositionTracker.sol",
+    "src/components/value/position-trackers/LinearCreditDebtTracker.sol",
+    "src/factories/BeaconFactory.sol",
+    "src/factories/ComponentBeaconFactory.sol",
+    "src/factories/ComponentBeaconProxy.sol",
+    "src/factories/DeterministicBeaconFactory.sol",
+    "src/global/Global.sol",
+    "src/global/utils/GlobalOwnable.sol",
+    "src/infra/deployment/SharesDeployer.sol",
+    "src/infra/lists/address-list/AddressListBase.sol",
+    "src/infra/lists/address-list/IAddressList.sol",
+    "src/infra/lists/address-list/OwnableAddressList.sol",
+    "src/infra/oracles/OneToOneAggregator.sol",
+    "src/interfaces/IComponentProxy.sol",
+    "src/interfaces/IFeeHandler.sol",
+    "src/interfaces/ISharesTransferValidator.sol",
+    "src/interfaces/IValuationHandler.sol",
+    "src/interfaces/external/IChainlinkAggregator.sol",
+    "src/shares/Shares.sol",
+    "src/utils/Constants.sol",
+    "src/utils/DeploymentHelpersLib.sol",
+    "src/utils/StorageHelpersLib.sol",
+    "src/utils/ValueHelpersLib.sol",
+    "test/contracts/AccountERC20Tracker.t.sol",
+    "test/contracts/AddressListBase.t.sol",
+    "test/contracts/AddressListsSharesTransferValidator.t.sol",
+    "test/contracts/BeaconFactory.t.sol",
+    "test/contracts/ComponentBeaconFactory.t.sol",
+    "test/contracts/ContinuousFlatRateManagementFeeTracker.t.sol",
+    "test/contracts/ContinuousFlatRatePerformanceFeeTracker.t.sol",
+    "test/contracts/CreWorkflowConsumer.t.sol",
+    "test/contracts/ERC7540LikeDepositQueue.t.sol",
+    "test/contracts/ERC7540LikeIssuanceBase.t.sol",
+    "test/contracts/ERC7540LikeRedeemQueue.t.sol",
+    "test/contracts/EncodeStringToBytes10.t.sol",
+    "test/contracts/FeeHandler.t.sol",
+    "test/contracts/Global.t.sol",
+    "test/contracts/GlobalOwnable.t.sol",
+    "test/contracts/LimitedAccessLimitedCallForwarder.t.sol",
+    "test/contracts/LinearCreditDebtTracker.t.sol",
+    "test/contracts/OpenAccessLimitedCallForwarder.t.sol",
+    "test/contracts/OwnableAddressList.t.sol",
+    "test/contracts/Shares.t.sol",
+    "test/contracts/SharesOwnedAddressList.t.sol",
+    "test/contracts/SyncDepositHandler.t.sol",
+    "test/contracts/ValuationHandler.t.sol",
+    "test/contracts/ValueHelpersLib.t.sol",
+    "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+    "test/contracts/deterministic-beacon-factory/DeterministicBeaconFactory.t.sol",
+    "test/contracts/infra/SharesDeployer.t.sol",
+    "test/contracts/wallets-manager/WalletsManager.t.sol",
+    "test/e2e/ccip.t.sol",
+    "test/harnesses/AccountERC20TrackerHarness.sol",
+    "test/harnesses/AddressListBaseHarness.sol",
+    "test/harnesses/AddressListsSharesTransferValidatorHarness.sol",
+    "test/harnesses/ComponentHelpersMixinHarness.sol",
+    "test/harnesses/ContinuousFlatRateManagementFeeTrackerHarness.sol",
+    "test/harnesses/ContinuousFlatRatePerformanceFeeTrackerHarness.sol",
+    "test/harnesses/CreWorkflowConsumerHarness.sol",
+    "test/harnesses/ERC7540LikeDepositQueueHarness.sol",
+    "test/harnesses/ERC7540LikeIssuanceBaseHarness.sol",
+    "test/harnesses/ERC7540LikeRedeemQueueHarness.sol",
+    "test/harnesses/FeeHandlerHarness.sol",
+    "test/harnesses/GlobalOwnableHarness.sol",
+    "test/harnesses/LimitedAccessLimitedCallForwarderHarness.sol",
+    "test/harnesses/LinearCreditDebtTrackerHarness.sol",
+    "test/harnesses/OpenAccessLimitedCallForwarderHarness.sol",
+    "test/harnesses/SharesOwnedAddressListHarness.sol",
+    "test/harnesses/SyncDepositHandlerHarness.sol",
+    "test/harnesses/ValuationHandlerHarness.sol",
+    "test/harnesses/ValueHelpersLibHarness.sol",
+    "test/harnesses/WalletsManagerHarness.sol",
+    "test/harnesses/utils/ComponentHarnessMixin.sol",
+    "test/interfaces/IChainlinkKeystoneForwarder.sol",
+    "test/mocks/Blanks.sol",
+    "test/mocks/MockChainlinkAggregator.sol",
+    "test/mocks/MockERC20.sol",
+    "test/utils/Constants.sol",
+    "test/utils/TestHelpers.sol"
+  ],
+  "pragmas": [
+    "0.8.28",
+    "^0.8.0"
+  ],
+  "top_directories_by_solidity_file_count": [
+    [
+      "test",
+      56
+    ],
+    [
+      "src",
+      46
+    ],
+    [
+      "scripts",
+      2
+    ]
+  ],
+  "contracts": [
+    {
+      "file": "src/components/value/position-trackers/AccountERC20Tracker.sol",
+      "kind": "contract",
+      "name": "AccountERC20Tracker",
+      "bases": [
+        "IPositionTracker",
+        "ComponentHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/AccountERC20TrackerHarness.sol",
+      "kind": "contract",
+      "name": "AccountERC20TrackerHarness",
+      "bases": [
+        "AccountERC20Tracker",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "kind": "contract",
+      "name": "AccountERC20TrackerTest",
+      "bases": [
+        "Test",
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "src/infra/lists/address-list/AddressListBase.sol",
+      "kind": "abstract contract",
+      "name": "AddressListBase",
+      "bases": [
+        "IAddressList"
+      ]
+    },
+    {
+      "file": "test/harnesses/AddressListBaseHarness.sol",
+      "kind": "contract",
+      "name": "AddressListBaseHarness",
+      "bases": [
+        "AddressListBase"
+      ]
+    },
+    {
+      "file": "test/contracts/AddressListBase.t.sol",
+      "kind": "contract",
+      "name": "AddressListBaseTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "src/components/shares-transfer-validators/AddressListsSharesTransferValidator.sol",
+      "kind": "contract",
+      "name": "AddressListsSharesTransferValidator",
+      "bases": [
+        "ISharesTransferValidator",
+        "ComponentHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/AddressListsSharesTransferValidatorHarness.sol",
+      "kind": "contract",
+      "name": "AddressListsSharesTransferValidatorHarness",
+      "bases": [
+        "AddressListsSharesTransferValidator",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/AddressListsSharesTransferValidator.t.sol",
+      "kind": "contract",
+      "name": "AddressListsSharesTransferValidatorTest",
+      "bases": [
+        "Test",
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "src/factories/BeaconFactory.sol",
+      "kind": "contract",
+      "name": "BeaconFactory",
+      "bases": [
+        "IBeacon",
+        "GlobalOwnable"
+      ]
+    },
+    {
+      "file": "test/contracts/BeaconFactory.t.sol",
+      "kind": "contract",
+      "name": "BeaconFactoryTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "test/mocks/Blanks.sol",
+      "kind": "contract",
+      "name": "BlankAddressList",
+      "bases": [
+        "IAddressList"
+      ]
+    },
+    {
+      "file": "test/mocks/Blanks.sol",
+      "kind": "contract",
+      "name": "BlankFeeHandler",
+      "bases": [
+        "IFeeHandler"
+      ]
+    },
+    {
+      "file": "test/mocks/Blanks.sol",
+      "kind": "contract",
+      "name": "BlankManagementFeeTracker",
+      "bases": [
+        "IManagementFeeTracker"
+      ]
+    },
+    {
+      "file": "test/mocks/Blanks.sol",
+      "kind": "contract",
+      "name": "BlankPerformanceFeeTracker",
+      "bases": [
+        "IPerformanceFeeTracker"
+      ]
+    },
+    {
+      "file": "test/mocks/Blanks.sol",
+      "kind": "contract",
+      "name": "BlankPositionTracker",
+      "bases": [
+        "IPositionTracker"
+      ]
+    },
+    {
+      "file": "test/mocks/Blanks.sol",
+      "kind": "contract",
+      "name": "BlankSharesTransferValidator",
+      "bases": [
+        "ISharesTransferValidator"
+      ]
+    },
+    {
+      "file": "test/e2e/ccip.t.sol",
+      "kind": "contract",
+      "name": "CCIPE2ETest",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "kind": "contract",
+      "name": "CallTarget",
+      "bases": []
+    },
+    {
+      "file": "test/contracts/LimitedAccessLimitedCallForwarder.t.sol",
+      "kind": "contract",
+      "name": "CallTarget",
+      "bases": []
+    },
+    {
+      "file": "test/contracts/OpenAccessLimitedCallForwarder.t.sol",
+      "kind": "contract",
+      "name": "CallTarget",
+      "bases": []
+    },
+    {
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "kind": "contract",
+      "name": "CallTarget",
+      "bases": []
+    },
+    {
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "kind": "contract",
+      "name": "CallTarget",
+      "bases": []
+    },
+    {
+      "file": "src/factories/ComponentBeaconFactory.sol",
+      "kind": "contract",
+      "name": "ComponentBeaconFactory",
+      "bases": [
+        "IBeacon",
+        "GlobalOwnable"
+      ]
+    },
+    {
+      "file": "test/contracts/ComponentBeaconFactory.t.sol",
+      "kind": "contract",
+      "name": "ComponentBeaconFactoryTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "src/factories/ComponentBeaconProxy.sol",
+      "kind": "contract",
+      "name": "ComponentBeaconProxy",
+      "bases": [
+        "IComponentProxy",
+        "BeaconProxy"
+      ]
+    },
+    {
+      "file": "test/harnesses/utils/ComponentHarnessMixin.sol",
+      "kind": "contract",
+      "name": "ComponentHarnessMixin",
+      "bases": [
+        "IComponentProxy"
+      ]
+    },
+    {
+      "file": "src/components/utils/ComponentHelpersMixin.sol",
+      "kind": "abstract contract",
+      "name": "ComponentHelpersMixin",
+      "bases": []
+    },
+    {
+      "file": "test/harnesses/ComponentHelpersMixinHarness.sol",
+      "kind": "contract",
+      "name": "ComponentHelpersMixinHarness",
+      "bases": [
+        "ComponentHelpersMixin",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/utils/Constants.sol",
+      "kind": "abstract contract",
+      "name": "Constants",
+      "bases": []
+    },
+    {
+      "file": "src/components/fees/management-fee-trackers/ContinuousFlatRateManagementFeeTracker.sol",
+      "kind": "contract",
+      "name": "ContinuousFlatRateManagementFeeTracker",
+      "bases": [
+        "IManagementFeeTracker",
+        "FeeTrackerHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/ContinuousFlatRateManagementFeeTrackerHarness.sol",
+      "kind": "contract",
+      "name": "ContinuousFlatRateManagementFeeTrackerHarness",
+      "bases": [
+        "ContinuousFlatRateManagementFeeTracker",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/ContinuousFlatRateManagementFeeTracker.t.sol",
+      "kind": "contract",
+      "name": "ContinuousFlatRateManagementFeeTrackerTest",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "src/components/fees/performance-fee-trackers/ContinuousFlatRatePerformanceFeeTracker.sol",
+      "kind": "contract",
+      "name": "ContinuousFlatRatePerformanceFeeTracker",
+      "bases": [
+        "IPerformanceFeeTracker",
+        "FeeTrackerHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/ContinuousFlatRatePerformanceFeeTrackerHarness.sol",
+      "kind": "contract",
+      "name": "ContinuousFlatRatePerformanceFeeTrackerHarness",
+      "bases": [
+        "ContinuousFlatRatePerformanceFeeTracker",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/ContinuousFlatRatePerformanceFeeTracker.t.sol",
+      "kind": "contract",
+      "name": "ContinuousFlatRatePerformanceFeeTrackerTest",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "src/components/automations/chainlink-cre/CreWorkflowConsumer.sol",
+      "kind": "contract",
+      "name": "CreWorkflowConsumer",
+      "bases": [
+        "IReceiver",
+        "ComponentHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/CreWorkflowConsumerHarness.sol",
+      "kind": "contract",
+      "name": "CreWorkflowConsumerHarness",
+      "bases": [
+        "CreWorkflowConsumer",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "kind": "abstract contract",
+      "name": "CreWorkflowConsumerTestBase",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "kind": "contract",
+      "name": "CreWorkflowConsumerTestEthereum",
+      "bases": [
+        "CreWorkflowConsumerTestBase"
+      ]
+    },
+    {
+      "file": "scripts/Deploy.s.sol",
+      "kind": "contract",
+      "name": "DeployProtocol",
+      "bases": [
+        "Script"
+      ]
+    },
+    {
+      "file": "src/utils/DeploymentHelpersLib.sol",
+      "kind": "library",
+      "name": "DeploymentHelpersLib",
+      "bases": []
+    },
+    {
+      "file": "src/ccip/DepositorWallet.sol",
+      "kind": "contract",
+      "name": "DepositorWallet",
+      "bases": [
+        "Initializable"
+      ]
+    },
+    {
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "kind": "contract",
+      "name": "DepositorWalletTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "src/factories/DeterministicBeaconFactory.sol",
+      "kind": "contract",
+      "name": "DeterministicBeaconFactory",
+      "bases": [
+        "IBeacon",
+        "GlobalOwnable"
+      ]
+    },
+    {
+      "file": "test/contracts/deterministic-beacon-factory/DeterministicBeaconFactory.t.sol",
+      "kind": "contract",
+      "name": "DeterministicBeaconFactoryTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "src/components/issuance/deposit-handlers/ERC7540LikeDepositQueue.sol",
+      "kind": "contract",
+      "name": "ERC7540LikeDepositQueue",
+      "bases": [
+        "IERC7540LikeDepositHandler",
+        "ERC7540LikeIssuanceBase"
+      ]
+    },
+    {
+      "file": "test/harnesses/ERC7540LikeDepositQueueHarness.sol",
+      "kind": "contract",
+      "name": "ERC7540LikeDepositQueueHarness",
+      "bases": [
+        "ERC7540LikeDepositQueue",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/ERC7540LikeDepositQueue.t.sol",
+      "kind": "contract",
+      "name": "ERC7540LikeDepositQueueTest",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "src/components/issuance/utils/ERC7540LikeIssuanceBase.sol",
+      "kind": "contract",
+      "name": "ERC7540LikeIssuanceBase",
+      "bases": [
+        "ComponentHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/ERC7540LikeIssuanceBaseHarness.sol",
+      "kind": "contract",
+      "name": "ERC7540LikeIssuanceBaseHarness",
+      "bases": [
+        "ERC7540LikeIssuanceBase",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/ERC7540LikeIssuanceBase.t.sol",
+      "kind": "contract",
+      "name": "ERC7540LikeIssuanceBaseTest",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "src/components/issuance/redeem-handlers/ERC7540LikeRedeemQueue.sol",
+      "kind": "contract",
+      "name": "ERC7540LikeRedeemQueue",
+      "bases": [
+        "IERC7540LikeRedeemHandler",
+        "ERC7540LikeIssuanceBase"
+      ]
+    },
+    {
+      "file": "test/harnesses/ERC7540LikeRedeemQueueHarness.sol",
+      "kind": "contract",
+      "name": "ERC7540LikeRedeemQueueHarness",
+      "bases": [
+        "ERC7540LikeRedeemQueue",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/ERC7540LikeRedeemQueue.t.sol",
+      "kind": "contract",
+      "name": "ERC7540LikeRedeemQueueTest",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "scripts/EncodeStringToBytes10.s.sol",
+      "kind": "contract",
+      "name": "EncodeStringToBytes10",
+      "bases": [
+        "Script"
+      ]
+    },
+    {
+      "file": "test/contracts/EncodeStringToBytes10.t.sol",
+      "kind": "contract",
+      "name": "EncodeStringToBytes10Test",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "src/components/fees/FeeHandler.sol",
+      "kind": "contract",
+      "name": "FeeHandler",
+      "bases": [
+        "IFeeHandler",
+        "ComponentHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/FeeHandlerHarness.sol",
+      "kind": "contract",
+      "name": "FeeHandlerHarness",
+      "bases": [
+        "FeeHandler",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/FeeHandler.t.sol",
+      "kind": "contract",
+      "name": "FeeHandlerTest",
+      "bases": [
+        "Test",
+        "FeeHandlerTestHelpers"
+      ]
+    },
+    {
+      "file": "test/contracts/FeeHandler.t.sol",
+      "kind": "contract",
+      "name": "FeeHandlerTestHelpers",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "src/components/fees/utils/FeeTrackerHelpersMixin.sol",
+      "kind": "abstract contract",
+      "name": "FeeTrackerHelpersMixin",
+      "bases": [
+        "ComponentHelpersMixin"
+      ]
+    },
+    {
+      "file": "src/global/Global.sol",
+      "kind": "contract",
+      "name": "Global",
+      "bases": [
+        "UUPSUpgradeable",
+        "Ownable2StepUpgradeable"
+      ]
+    },
+    {
+      "file": "src/global/utils/GlobalOwnable.sol",
+      "kind": "abstract contract",
+      "name": "GlobalOwnable",
+      "bases": []
+    },
+    {
+      "file": "test/harnesses/GlobalOwnableHarness.sol",
+      "kind": "contract",
+      "name": "GlobalOwnableHarness",
+      "bases": [
+        "GlobalOwnable"
+      ]
+    },
+    {
+      "file": "test/contracts/GlobalOwnable.t.sol",
+      "kind": "contract",
+      "name": "GlobalOwnableTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "test/contracts/Global.t.sol",
+      "kind": "contract",
+      "name": "GlobalTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "src/infra/lists/address-list/IAddressList.sol",
+      "kind": "interface",
+      "name": "IAddressList",
+      "bases": []
+    },
+    {
+      "file": "src/interfaces/external/IChainlinkAggregator.sol",
+      "kind": "interface",
+      "name": "IChainlinkAggregator",
+      "bases": []
+    },
+    {
+      "file": "test/interfaces/IChainlinkKeystoneForwarder.sol",
+      "kind": "interface",
+      "name": "IChainlinkKeystoneForwarder",
+      "bases": []
+    },
+    {
+      "file": "src/interfaces/IComponentProxy.sol",
+      "kind": "interface",
+      "name": "IComponentProxy",
+      "bases": []
+    },
+    {
+      "file": "src/components/issuance/deposit-handlers/IERC7540LikeDepositHandler.sol",
+      "kind": "interface",
+      "name": "IERC7540LikeDepositHandler",
+      "bases": []
+    },
+    {
+      "file": "src/components/issuance/redeem-handlers/IERC7540LikeRedeemHandler.sol",
+      "kind": "interface",
+      "name": "IERC7540LikeRedeemHandler",
+      "bases": []
+    },
+    {
+      "file": "src/interfaces/IFeeHandler.sol",
+      "kind": "interface",
+      "name": "IFeeHandler",
+      "bases": []
+    },
+    {
+      "file": "src/components/fees/interfaces/IManagementFeeTracker.sol",
+      "kind": "interface",
+      "name": "IManagementFeeTracker",
+      "bases": []
+    },
+    {
+      "file": "src/components/fees/interfaces/IPerformanceFeeTracker.sol",
+      "kind": "interface",
+      "name": "IPerformanceFeeTracker",
+      "bases": []
+    },
+    {
+      "file": "src/components/value/position-trackers/IPositionTracker.sol",
+      "kind": "interface",
+      "name": "IPositionTracker",
+      "bases": []
+    },
+    {
+      "file": "src/components/automations/chainlink-cre/IReceiver.sol",
+      "kind": "interface",
+      "name": "IReceiver",
+      "bases": [
+        "IERC165"
+      ]
+    },
+    {
+      "file": "src/interfaces/ISharesTransferValidator.sol",
+      "kind": "interface",
+      "name": "ISharesTransferValidator",
+      "bases": []
+    },
+    {
+      "file": "src/interfaces/IValuationHandler.sol",
+      "kind": "interface",
+      "name": "IValuationHandler",
+      "bases": []
+    },
+    {
+      "file": "src/components/roles/LimitedAccessLimitedCallForwarder.sol",
+      "kind": "contract",
+      "name": "LimitedAccessLimitedCallForwarder",
+      "bases": [
+        "OpenAccessLimitedCallForwarder"
+      ]
+    },
+    {
+      "file": "test/harnesses/LimitedAccessLimitedCallForwarderHarness.sol",
+      "kind": "contract",
+      "name": "LimitedAccessLimitedCallForwarderHarness",
+      "bases": [
+        "LimitedAccessLimitedCallForwarder",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/LimitedAccessLimitedCallForwarder.t.sol",
+      "kind": "contract",
+      "name": "LimitedAccessLimitedCallForwarderTest",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "src/components/value/position-trackers/LinearCreditDebtTracker.sol",
+      "kind": "contract",
+      "name": "LinearCreditDebtTracker",
+      "bases": [
+        "IPositionTracker",
+        "ComponentHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/LinearCreditDebtTrackerHarness.sol",
+      "kind": "contract",
+      "name": "LinearCreditDebtTrackerHarness",
+      "bases": [
+        "LinearCreditDebtTracker",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/LinearCreditDebtTracker.t.sol",
+      "kind": "contract",
+      "name": "LinearCreditDebtTrackerTest",
+      "bases": [
+        "Test",
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "test/mocks/MockChainlinkAggregator.sol",
+      "kind": "contract",
+      "name": "MockChainlinkAggregator",
+      "bases": [
+        "IChainlinkAggregator"
+      ]
+    },
+    {
+      "file": "test/mocks/MockERC20.sol",
+      "kind": "contract",
+      "name": "MockERC20",
+      "bases": [
+        "ERC20(\"MockERC20\"",
+        "\"MOCK\")"
+      ]
+    },
+    {
+      "file": "test/contracts/BeaconFactory.t.sol",
+      "kind": "contract",
+      "name": "MockImplementation",
+      "bases": []
+    },
+    {
+      "file": "test/contracts/ComponentBeaconFactory.t.sol",
+      "kind": "contract",
+      "name": "MockImplementation",
+      "bases": []
+    },
+    {
+      "file": "test/contracts/GlobalOwnable.t.sol",
+      "kind": "contract",
+      "name": "MockImplementation",
+      "bases": []
+    },
+    {
+      "file": "test/contracts/deterministic-beacon-factory/DeterministicBeaconFactory.t.sol",
+      "kind": "contract",
+      "name": "MockImplementation",
+      "bases": []
+    },
+    {
+      "file": "src/infra/oracles/OneToOneAggregator.sol",
+      "kind": "contract",
+      "name": "OneToOneAggregator",
+      "bases": [
+        "IChainlinkAggregator"
+      ]
+    },
+    {
+      "file": "src/components/roles/OpenAccessLimitedCallForwarder.sol",
+      "kind": "contract",
+      "name": "OpenAccessLimitedCallForwarder",
+      "bases": [
+        "ComponentHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/OpenAccessLimitedCallForwarderHarness.sol",
+      "kind": "contract",
+      "name": "OpenAccessLimitedCallForwarderHarness",
+      "bases": [
+        "OpenAccessLimitedCallForwarder",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/OpenAccessLimitedCallForwarder.t.sol",
+      "kind": "contract",
+      "name": "OpenAccessLimitedCallForwarderTest",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "src/infra/lists/address-list/OwnableAddressList.sol",
+      "kind": "contract",
+      "name": "OwnableAddressList",
+      "bases": [
+        "AddressListBase",
+        "OwnableUpgradeable"
+      ]
+    },
+    {
+      "file": "test/contracts/OwnableAddressList.t.sol",
+      "kind": "contract",
+      "name": "OwnableAddressListTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "kind": "contract",
+      "name": "RevertingTarget",
+      "bases": []
+    },
+    {
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "kind": "contract",
+      "name": "RevertingTarget",
+      "bases": []
+    },
+    {
+      "file": "src/shares/Shares.sol",
+      "kind": "contract",
+      "name": "Shares",
+      "bases": [
+        "ERC20Upgradeable",
+        "Ownable2StepUpgradeable"
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "kind": "contract",
+      "name": "SharesDeployer",
+      "bases": []
+    },
+    {
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "kind": "contract",
+      "name": "SharesDeployerTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "test/contracts/Shares.t.sol",
+      "kind": "contract",
+      "name": "SharesInitTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "src/components/lists/SharesOwnedAddressList.sol",
+      "kind": "contract",
+      "name": "SharesOwnedAddressList",
+      "bases": [
+        "AddressListBase",
+        "ComponentHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/SharesOwnedAddressListHarness.sol",
+      "kind": "contract",
+      "name": "SharesOwnedAddressListHarness",
+      "bases": [
+        "SharesOwnedAddressList",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/SharesOwnedAddressList.t.sol",
+      "kind": "contract",
+      "name": "SharesOwnedAddressListTest",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "test/contracts/Shares.t.sol",
+      "kind": "contract",
+      "name": "SharesTest",
+      "bases": [
+        "Test",
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "src/utils/StorageHelpersLib.sol",
+      "kind": "library",
+      "name": "StorageHelpersLib",
+      "bases": []
+    },
+    {
+      "file": "src/components/issuance/deposit-handlers/SyncDepositHandler.sol",
+      "kind": "contract",
+      "name": "SyncDepositHandler",
+      "bases": [
+        "Initializable",
+        "ComponentHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/SyncDepositHandlerHarness.sol",
+      "kind": "contract",
+      "name": "SyncDepositHandlerHarness",
+      "bases": [
+        "SyncDepositHandler",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "kind": "contract",
+      "name": "SyncDepositHandlerTest",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "test/utils/TestHelpers.sol",
+      "kind": "contract",
+      "name": "TestHelpers",
+      "bases": [
+        "Constants",
+        "Test"
+      ]
+    },
+    {
+      "file": "src/components/value/ValuationHandler.sol",
+      "kind": "contract",
+      "name": "ValuationHandler",
+      "bases": [
+        "IValuationHandler",
+        "ComponentHelpersMixin"
+      ]
+    },
+    {
+      "file": "test/harnesses/ValuationHandlerHarness.sol",
+      "kind": "contract",
+      "name": "ValuationHandlerHarness",
+      "bases": [
+        "ValuationHandler",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/ValuationHandler.t.sol",
+      "kind": "contract",
+      "name": "ValuationHandlerTest",
+      "bases": [
+        "TestHelpers"
+      ]
+    },
+    {
+      "file": "src/utils/ValueHelpersLib.sol",
+      "kind": "library",
+      "name": "ValueHelpersLib",
+      "bases": []
+    },
+    {
+      "file": "test/harnesses/ValueHelpersLibHarness.sol",
+      "kind": "contract",
+      "name": "ValueHelpersLibHarness",
+      "bases": []
+    },
+    {
+      "file": "test/contracts/ValueHelpersLib.t.sol",
+      "kind": "contract",
+      "name": "ValueHelpersLibTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "src/components/ccip/WalletsManager.sol",
+      "kind": "contract",
+      "name": "WalletsManager",
+      "bases": [
+        "ComponentHelpersMixin",
+        "CCIPReceiver"
+      ]
+    },
+    {
+      "file": "test/harnesses/WalletsManagerHarness.sol",
+      "kind": "contract",
+      "name": "WalletsManagerHarness",
+      "bases": [
+        "WalletsManager",
+        "ComponentHarnessMixin"
+      ]
+    },
+    {
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "kind": "contract",
+      "name": "WalletsManagerTest",
+      "bases": [
+        "TestHelpers"
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "file": "src/components/issuance/deposit-handlers/ERC7540LikeDepositQueue.sol",
+      "enum": "DepositRestriction",
+      "values": [
+        "None",
+        "ControllerAllowlistInternal",
+        "ControllerAllowlistExternal"
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "enum": "ExternalListSource",
+      "values": [
+        "None",
+        "Existing",
+        "DeploySharesOwnedAddressList",
+        "DeployOwnableAddressList"
+      ]
+    },
+    {
+      "file": "src/components/shares-transfer-validators/AddressListsSharesTransferValidator.sol",
+      "enum": "ListType",
+      "values": [
+        "None",
+        "Allow",
+        "Disallow"
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "enum": "TransferValidatorSource",
+      "values": [
+        "None",
+        "Existing",
+        "DeployAddressLists"
+      ]
+    }
+  ],
+  "structs": [
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "AccountERC20TrackerConfig",
+      "fields": [
+        {
+          "name": "deploy",
+          "type": "bool"
+        },
+        {
+          "name": "assets",
+          "type": "address[]"
+        }
+      ]
+    },
+    {
+      "file": "src/components/value/position-trackers/AccountERC20Tracker.sol",
+      "struct": "AccountERC20TrackerStorage",
+      "fields": [
+        {
+          "name": "assets",
+          "type": "EnumerableSet.AddressSet"
+        },
+        {
+          "name": "account",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/lists/address-list/AddressListBase.sol",
+      "struct": "AddressListBaseStorage",
+      "fields": [
+        {
+          "name": "itemToIsInList",
+          "type": "mapping(address => bool)"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "AddressListsValidatorListConfig",
+      "fields": [
+        {
+          "name": "listType",
+          "type": "AddressListsSharesTransferValidator.ListType"
+        },
+        {
+          "name": "externalListSource",
+          "type": "ExternalListSource"
+        },
+        {
+          "name": "externalListExisting",
+          "type": "address"
+        },
+        {
+          "name": "externalListOwner",
+          "type": "address"
+        },
+        {
+          "name": "seededAddresses",
+          "type": "address[]"
+        }
+      ]
+    },
+    {
+      "file": "scripts/Deploy.s.sol",
+      "struct": "Addrs",
+      "fields": [
+        {
+          "name": "globalProxy",
+          "type": "ERC1967Proxy"
+        },
+        {
+          "name": "global",
+          "type": "Global"
+        },
+        {
+          "name": "sharesBeaconFactory",
+          "type": "BeaconFactory"
+        },
+        {
+          "name": "ownableAddressListFactory",
+          "type": "BeaconFactory"
+        },
+        {
+          "name": "feeHandlerBeaconFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "continuousFlatRateManagementFeeTrackerBeaconFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "continuousFlatRatePerformanceFeeTrackerBeaconFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "valuationHandlerBeaconFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "accountERC20TrackerFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "linearCreditDebtTrackerBeaconFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "erc7540LikeDepositQueueBeaconFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "erc7540LikeRedeemQueueBeaconFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "limitedAccessLimitedCallForwarderFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "creWorkflowConsumerFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "sharesOwnedAddressListFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "syncDepositHandlerFactory",
+          "type": "ComponentBeaconFactory"
+        },
+        {
+          "name": "shares",
+          "type": "Shares"
+        },
+        {
+          "name": "feeHandler",
+          "type": "FeeHandler"
+        },
+        {
+          "name": "continuousFlatRateManagementFeeTracker",
+          "type": "ContinuousFlatRateManagementFeeTracker"
+        },
+        {
+          "name": "continuousFlatRatePerformanceFeeTracker",
+          "type": "ContinuousFlatRatePerformanceFeeTracker"
+        },
+        {
+          "name": "valuationHandler",
+          "type": "ValuationHandler"
+        },
+        {
+          "name": "accountERC20Tracker",
+          "type": "AccountERC20Tracker"
+        },
+        {
+          "name": "linearCreditDebtTracker",
+          "type": "LinearCreditDebtTracker"
+        },
+        {
+          "name": "erc7540LikeDepositQueue",
+          "type": "ERC7540LikeDepositQueue"
+        },
+        {
+          "name": "erc7540LikeRedeemQueue",
+          "type": "ERC7540LikeRedeemQueue"
+        },
+        {
+          "name": "limitedAccessLimitedCallForwarder",
+          "type": "LimitedAccessLimitedCallForwarder"
+        },
+        {
+          "name": "creWorkflowConsumer",
+          "type": "CreWorkflowConsumer"
+        },
+        {
+          "name": "sharesOwnedAddressList",
+          "type": "SharesOwnedAddressList"
+        },
+        {
+          "name": "ownableAddressList",
+          "type": "OwnableAddressList"
+        },
+        {
+          "name": "syncDepositHandler",
+          "type": "SyncDepositHandler"
+        }
+      ]
+    },
+    {
+      "file": "src/components/value/ValuationHandler.sol",
+      "struct": "AssetRateInfo",
+      "fields": [
+        {
+          "name": "rate",
+          "type": "uint128"
+        },
+        {
+          "name": "expiry",
+          "type": "uint40"
+        }
+      ]
+    },
+    {
+      "file": "src/components/value/ValuationHandler.sol",
+      "struct": "AssetRateInput",
+      "fields": [
+        {
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "name": "rate",
+          "type": "uint128"
+        },
+        {
+          "name": "expiry",
+          "type": "uint40"
+        }
+      ]
+    },
+    {
+      "file": "src/components/ccip/WalletsManager.sol",
+      "struct": "BatchSendParams",
+      "fields": [
+        {
+          "name": "wallet",
+          "type": "address"
+        },
+        {
+          "name": "tokens",
+          "type": "address[]"
+        },
+        {
+          "name": "extraArgs",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "src/ccip/DepositorWallet.sol",
+      "struct": "Call",
+      "fields": [
+        {
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "src/components/roles/OpenAccessLimitedCallForwarder.sol",
+      "struct": "Call",
+      "fields": [
+        {
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "ComponentsConfig",
+      "fields": [
+        {
+          "name": "feeHandler",
+          "type": "FeeHandlerConfig"
+        },
+        {
+          "name": "managementFee",
+          "type": "ManagementFeeConfig"
+        },
+        {
+          "name": "performanceFee",
+          "type": "PerformanceFeeConfig"
+        },
+        {
+          "name": "valuationHandler",
+          "type": "ValuationHandlerConfig"
+        },
+        {
+          "name": "accountERC20Tracker",
+          "type": "AccountERC20TrackerConfig"
+        },
+        {
+          "name": "linearCreditDebtTracker",
+          "type": "LinearCreditDebtTrackerConfig"
+        },
+        {
+          "name": "queueDepositHandlers",
+          "type": "QueueDepositHandlerConfig[]"
+        },
+        {
+          "name": "syncDepositHandlers",
+          "type": "SyncDepositHandlerConfig[]"
+        },
+        {
+          "name": "redeemHandlers",
+          "type": "RedeemHandlerConfig[]"
+        }
+      ]
+    },
+    {
+      "file": "src/components/automations/chainlink-cre/CreWorkflowConsumer.sol",
+      "struct": "CreWorkflowConsumerStorage",
+      "fields": [
+        {
+          "name": "allowedWorkflowId",
+          "type": "bytes32"
+        },
+        {
+          "name": "allowedWorkflowName",
+          "type": "bytes10"
+        },
+        {
+          "name": "limitedAccessLimitedCallForwarder",
+          "type": "LimitedAccessLimitedCallForwarder"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "DeployConfig",
+      "fields": [
+        {
+          "name": "shares",
+          "type": "SharesConfig"
+        },
+        {
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "name": "admins",
+          "type": "address[]"
+        },
+        {
+          "name": "transferValidator",
+          "type": "TransferValidatorConfig"
+        },
+        {
+          "name": "components",
+          "type": "ComponentsConfig"
+        },
+        {
+          "name": "preMint",
+          "type": "PreMintConfig"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "Deployed",
+      "fields": [
+        {
+          "name": "shares",
+          "type": "address"
+        },
+        {
+          "name": "feeHandler",
+          "type": "address"
+        },
+        {
+          "name": "valuationHandler",
+          "type": "address"
+        },
+        {
+          "name": "managementFeeTracker",
+          "type": "address"
+        },
+        {
+          "name": "performanceFeeTracker",
+          "type": "address"
+        },
+        {
+          "name": "accountERC20Tracker",
+          "type": "address"
+        },
+        {
+          "name": "linearCreditDebtTracker",
+          "type": "address"
+        },
+        {
+          "name": "queueDepositHandlers",
+          "type": "address[]"
+        },
+        {
+          "name": "queueDepositHandlerAllowlists",
+          "type": "address[]"
+        },
+        {
+          "name": "syncDepositHandlers",
+          "type": "address[]"
+        },
+        {
+          "name": "syncDepositHandlerAllowlists",
+          "type": "address[]"
+        },
+        {
+          "name": "redeemHandlers",
+          "type": "address[]"
+        },
+        {
+          "name": "transferValidator",
+          "type": "address"
+        },
+        {
+          "name": "transferValidatorRecipientList",
+          "type": "address"
+        },
+        {
+          "name": "transferValidatorSenderList",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "src/components/issuance/deposit-handlers/ERC7540LikeDepositQueue.sol",
+      "struct": "DepositQueueStorage",
+      "fields": [
+        {
+          "name": "lastId",
+          "type": "uint128"
+        },
+        {
+          "name": "minRequestDuration",
+          "type": "uint24"
+        },
+        {
+          "name": "depositRestriction",
+          "type": "DepositRestriction"
+        },
+        {
+          "name": "idToRequest",
+          "type": "mapping(uint256 => DepositRequestInfo)"
+        },
+        {
+          "name": "isAllowedController",
+          "type": "mapping(address => bool)"
+        },
+        {
+          "name": "controllerAllowlist",
+          "type": "IAddressList"
+        }
+      ]
+    },
+    {
+      "file": "src/components/issuance/deposit-handlers/ERC7540LikeDepositQueue.sol",
+      "struct": "DepositRequestInfo",
+      "fields": [
+        {
+          "name": "controller",
+          "type": "address"
+        },
+        {
+          "name": "canCancelTime",
+          "type": "uint40"
+        },
+        {
+          "name": "assetAmount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "src/ccip/DepositorWallet.sol",
+      "struct": "DepositorWalletStorage",
+      "fields": [
+        {
+          "name": "walletsManager",
+          "type": "address"
+        },
+        {
+          "name": "chainSelector",
+          "type": "uint64"
+        },
+        {
+          "name": "user",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "src/components/issuance/utils/ERC7540LikeIssuanceBase.sol",
+      "struct": "ERC7540LikeIssuanceBaseStorage",
+      "fields": [
+        {
+          "name": "asset",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "test/contracts/ERC7540LikeDepositQueue.t.sol",
+      "struct": "ExecuteDepositSetupData",
+      "fields": [
+        {
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "name": "request1Controller",
+          "type": "address"
+        },
+        {
+          "name": "request3Controller",
+          "type": "address"
+        },
+        {
+          "name": "request1AssetAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "request3AssetAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "request1ExpectedSharesAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "request3ExpectedSharesAmount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "test/contracts/ERC7540LikeRedeemQueue.t.sol",
+      "struct": "ExecuteRedeemSetupData",
+      "fields": [
+        {
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "name": "request1Controller",
+          "type": "address"
+        },
+        {
+          "name": "request3Controller",
+          "type": "address"
+        },
+        {
+          "name": "request1SharesAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "request3SharesAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "request1ExpectedAssetAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "request3ExpectedAssetAmount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "Factories",
+      "fields": [
+        {
+          "name": "sharesFactory",
+          "type": "address"
+        },
+        {
+          "name": "feeHandlerFactory",
+          "type": "address"
+        },
+        {
+          "name": "valuationHandlerFactory",
+          "type": "address"
+        },
+        {
+          "name": "managementFeeTrackerFactory",
+          "type": "address"
+        },
+        {
+          "name": "performanceFeeTrackerFactory",
+          "type": "address"
+        },
+        {
+          "name": "accountERC20TrackerFactory",
+          "type": "address"
+        },
+        {
+          "name": "linearCreditDebtTrackerFactory",
+          "type": "address"
+        },
+        {
+          "name": "depositQueueFactory",
+          "type": "address"
+        },
+        {
+          "name": "syncDepositHandlerFactory",
+          "type": "address"
+        },
+        {
+          "name": "redeemQueueFactory",
+          "type": "address"
+        },
+        {
+          "name": "sharesOwnedAddressListFactory",
+          "type": "address"
+        },
+        {
+          "name": "ownableAddressListFactory",
+          "type": "address"
+        },
+        {
+          "name": "addressListsSharesTransferValidatorFactory",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "FeeHandlerConfig",
+      "fields": [
+        {
+          "name": "deploy",
+          "type": "bool"
+        },
+        {
+          "name": "feeAsset",
+          "type": "address"
+        },
+        {
+          "name": "entranceFeeBps",
+          "type": "uint16"
+        },
+        {
+          "name": "entranceFeeRecipient",
+          "type": "address"
+        },
+        {
+          "name": "exitFeeBps",
+          "type": "uint16"
+        },
+        {
+          "name": "exitFeeRecipient",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "src/components/fees/FeeHandler.sol",
+      "struct": "FeeHandlerStorage",
+      "fields": [
+        {
+          "name": "managementFeeTracker",
+          "type": "address"
+        },
+        {
+          "name": "performanceFeeTracker",
+          "type": "address"
+        },
+        {
+          "name": "managementFeeRecipient",
+          "type": "address"
+        },
+        {
+          "name": "performanceFeeRecipient",
+          "type": "address"
+        },
+        {
+          "name": "entranceFeeRecipient",
+          "type": "address"
+        },
+        {
+          "name": "entranceFeeBps",
+          "type": "uint16"
+        },
+        {
+          "name": "exitFeeRecipient",
+          "type": "address"
+        },
+        {
+          "name": "exitFeeBps",
+          "type": "uint16"
+        },
+        {
+          "name": "feeAsset",
+          "type": "address"
+        },
+        {
+          "name": "totalFeesOwed",
+          "type": "uint256"
+        },
+        {
+          "name": "userFeesOwed",
+          "type": "mapping(address => uint256)"
+        }
+      ]
+    },
+    {
+      "file": "src/components/value/position-trackers/LinearCreditDebtTracker.sol",
+      "struct": "Item",
+      "fields": [
+        {
+          "name": "totalValue",
+          "type": "int128"
+        },
+        {
+          "name": "settledValue",
+          "type": "int128"
+        },
+        {
+          "name": "id",
+          "type": "uint24"
+        },
+        {
+          "name": "index",
+          "type": "uint24"
+        },
+        {
+          "name": "start",
+          "type": "uint40"
+        },
+        {
+          "name": "duration",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "file": "src/components/roles/LimitedAccessLimitedCallForwarder.sol",
+      "struct": "LimitedAccessLimitedCallForwarderStorage",
+      "fields": [
+        {
+          "name": "isUser",
+          "type": "mapping(address => bool)"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "LinearCreditDebtTrackerConfig",
+      "fields": [
+        {
+          "name": "deploy",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "file": "src/components/value/position-trackers/LinearCreditDebtTracker.sol",
+      "struct": "LinearCreditDebtTrackerStorage",
+      "fields": [
+        {
+          "name": "lastItemId",
+          "type": "uint24"
+        },
+        {
+          "name": "ids",
+          "type": "uint24[]"
+        },
+        {
+          "name": "idToItem",
+          "type": "mapping(uint24 => Item)"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "ManagementFeeConfig",
+      "fields": [
+        {
+          "name": "deploy",
+          "type": "bool"
+        },
+        {
+          "name": "feeBps",
+          "type": "uint16"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "src/components/fees/management-fee-trackers/ContinuousFlatRateManagementFeeTracker.sol",
+      "struct": "ManagementFeeTrackerStorage",
+      "fields": [
+        {
+          "name": "rate",
+          "type": "uint16"
+        },
+        {
+          "name": "lastSettled",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "file": "src/components/roles/OpenAccessLimitedCallForwarder.sol",
+      "struct": "OpenAccessLimitedCallForwarderStorage",
+      "fields": [
+        {
+          "name": "targetToSelectorToCanCall",
+          "type": "mapping(address => mapping(bytes4 => bool))"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "PerformanceFeeConfig",
+      "fields": [
+        {
+          "name": "deploy",
+          "type": "bool"
+        },
+        {
+          "name": "feeBps",
+          "type": "uint16"
+        },
+        {
+          "name": "hurdleRateBps",
+          "type": "int16"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "src/components/fees/performance-fee-trackers/ContinuousFlatRatePerformanceFeeTracker.sol",
+      "struct": "PerformanceFeeTrackerStorage",
+      "fields": [
+        {
+          "name": "rate",
+          "type": "uint16"
+        },
+        {
+          "name": "highWaterMark",
+          "type": "uint128"
+        },
+        {
+          "name": "highWaterMarkTimestamp",
+          "type": "uint40"
+        },
+        {
+          "name": "hurdleRate",
+          "type": "int16"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "PreMintConfig",
+      "fields": [
+        {
+          "name": "enabled",
+          "type": "bool"
+        },
+        {
+          "name": "untrackedPositionsValue",
+          "type": "int256"
+        },
+        {
+          "name": "recipients",
+          "type": "PreMintRecipient[]"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "PreMintRecipient",
+      "fields": [
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "QueueDepositHandlerConfig",
+      "fields": [
+        {
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "name": "minRequestDuration",
+          "type": "uint24"
+        },
+        {
+          "name": "restriction",
+          "type": "ERC7540LikeDepositQueue.DepositRestriction"
+        },
+        {
+          "name": "externalListSource",
+          "type": "ExternalListSource"
+        },
+        {
+          "name": "externalListExisting",
+          "type": "address"
+        },
+        {
+          "name": "externalListOwner",
+          "type": "address"
+        },
+        {
+          "name": "allowedDepositors",
+          "type": "address[]"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "RedeemHandlerConfig",
+      "fields": [
+        {
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "name": "minRequestDuration",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "src/components/issuance/redeem-handlers/ERC7540LikeRedeemQueue.sol",
+      "struct": "RedeemQueueStorage",
+      "fields": [
+        {
+          "name": "lastId",
+          "type": "uint128"
+        },
+        {
+          "name": "minRequestDuration",
+          "type": "uint24"
+        },
+        {
+          "name": "idToRequest",
+          "type": "mapping(uint256 => RedeemRequestInfo)"
+        }
+      ]
+    },
+    {
+      "file": "src/components/issuance/redeem-handlers/ERC7540LikeRedeemQueue.sol",
+      "struct": "RedeemRequestInfo",
+      "fields": [
+        {
+          "name": "controller",
+          "type": "address"
+        },
+        {
+          "name": "canCancelTime",
+          "type": "uint40"
+        },
+        {
+          "name": "sharesAmount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "SharesConfig",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "symbol",
+          "type": "string"
+        },
+        {
+          "name": "valueAsset",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "src/shares/Shares.sol",
+      "struct": "SharesStorage",
+      "fields": [
+        {
+          "name": "valueAsset",
+          "type": "bytes32"
+        },
+        {
+          "name": "feeHandler",
+          "type": "address"
+        },
+        {
+          "name": "sharesTransferValidator",
+          "type": "address"
+        },
+        {
+          "name": "valuationHandler",
+          "type": "address"
+        },
+        {
+          "name": "isDepositHandler",
+          "type": "mapping(address => bool)"
+        },
+        {
+          "name": "isRedeemHandler",
+          "type": "mapping(address => bool)"
+        },
+        {
+          "name": "isAdmin",
+          "type": "mapping(address => bool)"
+        }
+      ]
+    },
+    {
+      "file": "src/components/shares-transfer-validators/AddressListsSharesTransferValidator.sol",
+      "struct": "SharesTransferValidatorStorage",
+      "fields": [
+        {
+          "name": "senderList",
+          "type": "address"
+        },
+        {
+          "name": "recipientList",
+          "type": "address"
+        },
+        {
+          "name": "recipientListType",
+          "type": "ListType"
+        },
+        {
+          "name": "senderListType",
+          "type": "ListType"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "SyncDepositHandlerConfig",
+      "fields": [
+        {
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "name": "maxSharePriceStaleness",
+          "type": "uint24"
+        },
+        {
+          "name": "depositorAllowlistSource",
+          "type": "ExternalListSource"
+        },
+        {
+          "name": "depositorAllowlistExisting",
+          "type": "address"
+        },
+        {
+          "name": "depositorAllowlistOwner",
+          "type": "address"
+        },
+        {
+          "name": "allowedDepositors",
+          "type": "address[]"
+        }
+      ]
+    },
+    {
+      "file": "src/components/issuance/deposit-handlers/SyncDepositHandler.sol",
+      "struct": "SyncDepositHandlerStorage",
+      "fields": [
+        {
+          "name": "asset",
+          "type": "address"
+        },
+        {
+          "name": "depositorAllowlist",
+          "type": "address"
+        },
+        {
+          "name": "maxSharePriceStaleness",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "test/contracts/Shares.t.sol",
+      "struct": "TestInitParams",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "symbol",
+          "type": "string"
+        },
+        {
+          "name": "valueAsset",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "TransferValidatorConfig",
+      "fields": [
+        {
+          "name": "source",
+          "type": "TransferValidatorSource"
+        },
+        {
+          "name": "existing",
+          "type": "address"
+        },
+        {
+          "name": "recipientList",
+          "type": "AddressListsValidatorListConfig"
+        },
+        {
+          "name": "senderList",
+          "type": "AddressListsValidatorListConfig"
+        }
+      ]
+    },
+    {
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "struct": "ValuationHandlerConfig",
+      "fields": [
+        {
+          "name": "deploy",
+          "type": "bool"
+        },
+        {
+          "name": "assetRates",
+          "type": "ValuationHandler.AssetRateInput[]"
+        }
+      ]
+    },
+    {
+      "file": "src/components/value/ValuationHandler.sol",
+      "struct": "ValuationHandlerStorage",
+      "fields": [
+        {
+          "name": "positionTrackers",
+          "type": "EnumerableSet.AddressSet"
+        },
+        {
+          "name": "assetToRate",
+          "type": "mapping(address => AssetRateInfo)"
+        },
+        {
+          "name": "lastShareValue",
+          "type": "uint128"
+        },
+        {
+          "name": "lastShareValueTimestamp",
+          "type": "uint40"
+        }
+      ]
+    }
+  ],
+  "all_state_variables": [
+    {
+      "name": "ACCOUNT_ERC20_TRACKER_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x85378e297d6c8e578e867cf1e0cdf12245bc85fa8c2e83002e863bfec07d5e00",
+      "declaration": "bytes32 private constant ACCOUNT_ERC20_TRACKER_STORAGE_LOCATION = 0x85378e297d6c8e578e867cf1e0cdf12245bc85fa8c2e83002e863bfec07d5e00",
+      "file": "src/components/value/position-trackers/AccountERC20Tracker.sol",
+      "contract": "AccountERC20Tracker"
+    },
+    {
+      "name": "ACCOUNT_ERC20_TRACKER_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"AccountERC20Tracker\"",
+      "declaration": "string private constant ACCOUNT_ERC20_TRACKER_STORAGE_LOCATION_ID = \"AccountERC20Tracker\"",
+      "file": "src/components/value/position-trackers/AccountERC20Tracker.sol",
+      "contract": "AccountERC20Tracker"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"admin\")",
+      "declaration": "address admin = makeAddr(\"admin\")",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "mockValuationHandler",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"mockValuationHandler\")",
+      "declaration": "address mockValuationHandler = makeAddr(\"mockValuationHandler\")",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "token1",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token1",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "token2",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token2",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "trackedAccount",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"trackedAccount\")",
+      "declaration": "address trackedAccount = makeAddr(\"trackedAccount\")",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "tracker",
+      "type": "AccountERC20Tracker",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AccountERC20Tracker tracker",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "ADDRESS_LIST_BASE_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xbdf8df28b0690daa2b80a9a43d66dc30bfa3557748d06b2e704e1b9747c7f000",
+      "declaration": "bytes32 private constant ADDRESS_LIST_BASE_STORAGE_LOCATION = 0xbdf8df28b0690daa2b80a9a43d66dc30bfa3557748d06b2e704e1b9747c7f000",
+      "file": "src/infra/lists/address-list/AddressListBase.sol",
+      "contract": "AddressListBase"
+    },
+    {
+      "name": "ADDRESS_LIST_BASE_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"AddressListBase\"",
+      "declaration": "string private constant ADDRESS_LIST_BASE_STORAGE_LOCATION_ID = \"AddressListBase\"",
+      "file": "src/infra/lists/address-list/AddressListBase.sol",
+      "contract": "AddressListBase"
+    },
+    {
+      "name": "authAccount",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public authAccount",
+      "file": "test/harnesses/AddressListBaseHarness.sol",
+      "contract": "AddressListBaseHarness"
+    },
+    {
+      "name": "addressList",
+      "type": "AddressListBaseHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AddressListBaseHarness addressList",
+      "file": "test/contracts/AddressListBase.t.sol",
+      "contract": "AddressListBaseTest"
+    },
+    {
+      "name": "authAccount",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address authAccount",
+      "file": "test/contracts/AddressListBase.t.sol",
+      "contract": "AddressListBaseTest"
+    },
+    {
+      "name": "SHARES_TRANSFER_VALIDATOR_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"SharesTransferValidator\"",
+      "declaration": "string private constant SHARES_TRANSFER_VALIDATOR_STORAGE_LOCATION_ID = \"SharesTransferValidator\"",
+      "file": "src/components/shares-transfer-validators/AddressListsSharesTransferValidator.sol",
+      "contract": "AddressListsSharesTransferValidator"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"AddressListsSharesTransferValidatorTest.admin\")",
+      "declaration": "address admin = makeAddr(\"AddressListsSharesTransferValidatorTest.admin\")",
+      "file": "test/contracts/AddressListsSharesTransferValidator.t.sol",
+      "contract": "AddressListsSharesTransferValidatorTest"
+    },
+    {
+      "name": "listAddress",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address listAddress",
+      "file": "test/contracts/AddressListsSharesTransferValidator.t.sol",
+      "contract": "AddressListsSharesTransferValidatorTest"
+    },
+    {
+      "name": "listItem",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"listItem\")",
+      "declaration": "address listItem = makeAddr(\"listItem\")",
+      "file": "test/contracts/AddressListsSharesTransferValidator.t.sol",
+      "contract": "AddressListsSharesTransferValidatorTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/AddressListsSharesTransferValidator.t.sol",
+      "contract": "AddressListsSharesTransferValidatorTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/AddressListsSharesTransferValidator.t.sol",
+      "contract": "AddressListsSharesTransferValidatorTest"
+    },
+    {
+      "name": "validator",
+      "type": "AddressListsSharesTransferValidatorHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AddressListsSharesTransferValidatorHarness validator",
+      "file": "test/contracts/AddressListsSharesTransferValidator.t.sol",
+      "contract": "AddressListsSharesTransferValidatorTest"
+    },
+    {
+      "name": "implementation",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override implementation",
+      "file": "src/factories/BeaconFactory.sol",
+      "contract": "BeaconFactory"
+    },
+    {
+      "name": "isInstance",
+      "type": "mapping(address _who => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address _who => bool) public isInstance",
+      "file": "src/factories/BeaconFactory.sol",
+      "contract": "BeaconFactory"
+    },
+    {
+      "name": "nonce",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal nonce",
+      "file": "src/factories/BeaconFactory.sol",
+      "contract": "BeaconFactory"
+    },
+    {
+      "name": "factory",
+      "type": "BeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "BeaconFactory factory",
+      "file": "test/contracts/BeaconFactory.t.sol",
+      "contract": "BeaconFactoryTest"
+    },
+    {
+      "name": "globalOwner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address globalOwner",
+      "file": "test/contracts/BeaconFactory.t.sol",
+      "contract": "BeaconFactoryTest"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"admin\")",
+      "declaration": "address admin = makeAddr(\"admin\")",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "ccipFee",
+      "type": "uint256",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "0.1 ether",
+      "declaration": "uint256 ccipFee = 0.1 ether",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "ccipLocalSimulator",
+      "type": "CCIPLocalSimulator",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "CCIPLocalSimulator ccipLocalSimulator",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "chainSelector",
+      "type": "uint64",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint64 chainSelector",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "depositAmount",
+      "type": "uint256",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "100e6",
+      "declaration": "uint256 depositAmount = 100e6",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "depositAsset",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 depositAsset",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "expectedShares",
+      "type": "uint256",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "100e18",
+      "declaration": "uint256 expectedShares = 100e18",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "factory",
+      "type": "DeterministicBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "DeterministicBeaconFactory factory",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "router",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address router",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "user",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"user\")",
+      "declaration": "address user = makeAddr(\"user\")",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "valuationHandler",
+      "type": "ValuationHandlerHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ValuationHandlerHarness valuationHandler",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "walletsManager",
+      "type": "WalletsManagerHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "WalletsManagerHarness walletsManager",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "wrappedNative",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address wrappedNative",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "bar",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public bar",
+      "file": "test/contracts/OpenAccessLimitedCallForwarder.t.sol",
+      "contract": "CallTarget"
+    },
+    {
+      "name": "bar",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public bar",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "CallTarget"
+    },
+    {
+      "name": "bar",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public bar",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "CallTarget"
+    },
+    {
+      "name": "called",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public called",
+      "file": "test/contracts/LimitedAccessLimitedCallForwarder.t.sol",
+      "contract": "CallTarget"
+    },
+    {
+      "name": "caller",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public caller",
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "contract": "CallTarget"
+    },
+    {
+      "name": "value",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public value",
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "contract": "CallTarget"
+    },
+    {
+      "name": "implementation",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override implementation",
+      "file": "src/factories/ComponentBeaconFactory.sol",
+      "contract": "ComponentBeaconFactory"
+    },
+    {
+      "name": "instanceToShares",
+      "type": "mapping(address => address) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => address) internal instanceToShares",
+      "file": "src/factories/ComponentBeaconFactory.sol",
+      "contract": "ComponentBeaconFactory"
+    },
+    {
+      "name": "nonce",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal nonce",
+      "file": "src/factories/ComponentBeaconFactory.sol",
+      "contract": "ComponentBeaconFactory"
+    },
+    {
+      "name": "factory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory factory",
+      "file": "test/contracts/ComponentBeaconFactory.t.sol",
+      "contract": "ComponentBeaconFactoryTest"
+    },
+    {
+      "name": "globalOwner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address globalOwner",
+      "file": "test/contracts/ComponentBeaconFactory.t.sol",
+      "contract": "ComponentBeaconFactoryTest"
+    },
+    {
+      "name": "SHARES",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public SHARES",
+      "file": "test/harnesses/utils/ComponentHarnessMixin.sol",
+      "contract": "ComponentHarnessMixin"
+    },
+    {
+      "name": "ARBITRUM_BLOCK_LATEST",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "408447230",
+      "declaration": "uint256 internal constant ARBITRUM_BLOCK_LATEST = 408447230",
+      "file": "test/utils/Constants.sol",
+      "contract": "Constants"
+    },
+    {
+      "name": "BASE_BLOCK_LATEST",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "39201030",
+      "declaration": "uint256 internal constant BASE_BLOCK_LATEST = 39201030",
+      "file": "test/utils/Constants.sol",
+      "contract": "Constants"
+    },
+    {
+      "name": "ETHEREUM_BLOCK_LATEST",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "23967530",
+      "declaration": "uint256 internal constant ETHEREUM_BLOCK_LATEST = 23967530",
+      "file": "test/utils/Constants.sol",
+      "contract": "Constants"
+    },
+    {
+      "name": "ETHEREUM_SEPOLIA_BLOCK_LATEST",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10566500",
+      "declaration": "uint256 internal constant ETHEREUM_SEPOLIA_BLOCK_LATEST = 10566500",
+      "file": "test/utils/Constants.sol",
+      "contract": "Constants"
+    },
+    {
+      "name": "MEGA_ETH_BLOCK_LATEST",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "12236830",
+      "declaration": "uint256 internal constant MEGA_ETH_BLOCK_LATEST = 12236830",
+      "file": "test/utils/Constants.sol",
+      "contract": "Constants"
+    },
+    {
+      "name": "PLUME_BLOCK_LATEST",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "41664170",
+      "declaration": "uint256 internal constant PLUME_BLOCK_LATEST = 41664170",
+      "file": "test/utils/Constants.sol",
+      "contract": "Constants"
+    },
+    {
+      "name": "MANAGEMENT_FEE_TRACKER_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x25008e61d6a33ea3313338886e9ba1cacec26ac79d05629f9df4b5d62fb2ee00",
+      "declaration": "bytes32 private constant MANAGEMENT_FEE_TRACKER_STORAGE_LOCATION = 0x25008e61d6a33ea3313338886e9ba1cacec26ac79d05629f9df4b5d62fb2ee00",
+      "file": "src/components/fees/management-fee-trackers/ContinuousFlatRateManagementFeeTracker.sol",
+      "contract": "ContinuousFlatRateManagementFeeTracker"
+    },
+    {
+      "name": "MANAGEMENT_FEE_TRACKER_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"ManagementFeeTracker\"",
+      "declaration": "string private constant MANAGEMENT_FEE_TRACKER_STORAGE_LOCATION_ID = \"ManagementFeeTracker\"",
+      "file": "src/components/fees/management-fee-trackers/ContinuousFlatRateManagementFeeTracker.sol",
+      "contract": "ContinuousFlatRateManagementFeeTracker"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"admin\")",
+      "declaration": "address admin = makeAddr(\"admin\")",
+      "file": "test/contracts/ContinuousFlatRateManagementFeeTracker.t.sol",
+      "contract": "ContinuousFlatRateManagementFeeTrackerTest"
+    },
+    {
+      "name": "managementFeeTracker",
+      "type": "ContinuousFlatRateManagementFeeTrackerHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ContinuousFlatRateManagementFeeTrackerHarness managementFeeTracker",
+      "file": "test/contracts/ContinuousFlatRateManagementFeeTracker.t.sol",
+      "contract": "ContinuousFlatRateManagementFeeTrackerTest"
+    },
+    {
+      "name": "mockFeeHandler",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"mockFeeHandler\")",
+      "declaration": "address mockFeeHandler = makeAddr(\"mockFeeHandler\")",
+      "file": "test/contracts/ContinuousFlatRateManagementFeeTracker.t.sol",
+      "contract": "ContinuousFlatRateManagementFeeTrackerTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/ContinuousFlatRateManagementFeeTracker.t.sol",
+      "contract": "ContinuousFlatRateManagementFeeTrackerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ContinuousFlatRateManagementFeeTracker.t.sol",
+      "contract": "ContinuousFlatRateManagementFeeTrackerTest"
+    },
+    {
+      "name": "PERFORMANCE_FEE_TRACKER_STORAGE_LOCATION",
+      "type": "bytes32 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x9b5db54aad07ab0d695a15cbe8f6baf30e20bec0d8b73b9bd4ded75e29fae800",
+      "declaration": "bytes32 internal constant PERFORMANCE_FEE_TRACKER_STORAGE_LOCATION = 0x9b5db54aad07ab0d695a15cbe8f6baf30e20bec0d8b73b9bd4ded75e29fae800",
+      "file": "src/components/fees/performance-fee-trackers/ContinuousFlatRatePerformanceFeeTracker.sol",
+      "contract": "ContinuousFlatRatePerformanceFeeTracker"
+    },
+    {
+      "name": "PERFORMANCE_FEE_TRACKER_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"PerformanceFeeTracker\"",
+      "declaration": "string private constant PERFORMANCE_FEE_TRACKER_STORAGE_LOCATION_ID = \"PerformanceFeeTracker\"",
+      "file": "src/components/fees/performance-fee-trackers/ContinuousFlatRatePerformanceFeeTracker.sol",
+      "contract": "ContinuousFlatRatePerformanceFeeTracker"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"admin\")",
+      "declaration": "address admin = makeAddr(\"admin\")",
+      "file": "test/contracts/ContinuousFlatRatePerformanceFeeTracker.t.sol",
+      "contract": "ContinuousFlatRatePerformanceFeeTrackerTest"
+    },
+    {
+      "name": "mockFeeHandler",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"mockFeeHandler\")",
+      "declaration": "address mockFeeHandler = makeAddr(\"mockFeeHandler\")",
+      "file": "test/contracts/ContinuousFlatRatePerformanceFeeTracker.t.sol",
+      "contract": "ContinuousFlatRatePerformanceFeeTrackerTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/ContinuousFlatRatePerformanceFeeTracker.t.sol",
+      "contract": "ContinuousFlatRatePerformanceFeeTrackerTest"
+    },
+    {
+      "name": "performanceFeeTracker",
+      "type": "ContinuousFlatRatePerformanceFeeTrackerHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ContinuousFlatRatePerformanceFeeTrackerHarness performanceFeeTracker",
+      "file": "test/contracts/ContinuousFlatRatePerformanceFeeTracker.t.sol",
+      "contract": "ContinuousFlatRatePerformanceFeeTrackerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ContinuousFlatRatePerformanceFeeTracker.t.sol",
+      "contract": "ContinuousFlatRatePerformanceFeeTrackerTest"
+    },
+    {
+      "name": "ALLOWED_WORKFLOW_OWNER",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable ALLOWED_WORKFLOW_OWNER",
+      "file": "src/components/automations/chainlink-cre/CreWorkflowConsumer.sol",
+      "contract": "CreWorkflowConsumer"
+    },
+    {
+      "name": "CHAINLINK_KEYSTONE_FORWARDER",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable CHAINLINK_KEYSTONE_FORWARDER",
+      "file": "src/components/automations/chainlink-cre/CreWorkflowConsumer.sol",
+      "contract": "CreWorkflowConsumer"
+    },
+    {
+      "name": "CRE_WORKFLOW_CONSUMER_STORAGE_LOCATION",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x0e3fe8355c10db856bcbccfa41da7cfb4d5b6dd681a069e0ed1b68eddbef9600",
+      "declaration": "bytes32 public constant CRE_WORKFLOW_CONSUMER_STORAGE_LOCATION = 0x0e3fe8355c10db856bcbccfa41da7cfb4d5b6dd681a069e0ed1b68eddbef9600",
+      "file": "src/components/automations/chainlink-cre/CreWorkflowConsumer.sol",
+      "contract": "CreWorkflowConsumer"
+    },
+    {
+      "name": "CRE_WORKFLOW_CONSUMER_STORAGE_LOCATION_ID",
+      "type": "string public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"CreWorkflowConsumer\"",
+      "declaration": "string public constant CRE_WORKFLOW_CONSUMER_STORAGE_LOCATION_ID = \"CreWorkflowConsumer\"",
+      "file": "src/components/automations/chainlink-cre/CreWorkflowConsumer.sol",
+      "contract": "CreWorkflowConsumer"
+    },
+    {
+      "name": "ALLOWED_WORKFLOW_ID",
+      "type": "bytes32 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"workflowId\")",
+      "declaration": "bytes32 constant ALLOWED_WORKFLOW_ID = keccak256(\"workflowId\")",
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "contract": "CreWorkflowConsumerTestBase"
+    },
+    {
+      "name": "ALLOWED_WORKFLOW_NAME",
+      "type": "bytes10 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes10(\"workflow\")",
+      "declaration": "bytes10 constant ALLOWED_WORKFLOW_NAME = bytes10(\"workflow\")",
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "contract": "CreWorkflowConsumerTestBase"
+    },
+    {
+      "name": "ALLOWED_WORKFLOW_OWNER",
+      "type": "address constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "address(0x3)",
+      "declaration": "address constant ALLOWED_WORKFLOW_OWNER = address(0x3)",
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "contract": "CreWorkflowConsumerTestBase"
+    },
+    {
+      "name": "chainlinkKeystoneForwarder",
+      "type": "IChainlinkKeystoneForwarder",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IChainlinkKeystoneForwarder chainlinkKeystoneForwarder",
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "contract": "CreWorkflowConsumerTestBase"
+    },
+    {
+      "name": "limitedAccessForwarder",
+      "type": "LimitedAccessLimitedCallForwarderHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "LimitedAccessLimitedCallForwarderHarness limitedAccessForwarder",
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "contract": "CreWorkflowConsumerTestBase"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "contract": "CreWorkflowConsumerTestBase"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "contract": "CreWorkflowConsumerTestBase"
+    },
+    {
+      "name": "workflowConsumer",
+      "type": "CreWorkflowConsumerHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "CreWorkflowConsumerHarness workflowConsumer",
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "contract": "CreWorkflowConsumerTestBase"
+    },
+    {
+      "name": "ENZYME_DEVELOPERS",
+      "type": "address constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "address(0xd24bBcD06C54a5a2A6d22f4AaE25AB511190C7b5)",
+      "declaration": "address constant ENZYME_DEVELOPERS = address(0xd24bBcD06C54a5a2A6d22f4AaE25AB511190C7b5)",
+      "file": "scripts/Deploy.s.sol",
+      "contract": "DeployProtocol"
+    },
+    {
+      "name": "CCIP_ROUTER",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable CCIP_ROUTER",
+      "file": "src/ccip/DepositorWallet.sol",
+      "contract": "DepositorWallet"
+    },
+    {
+      "name": "DEPOSITOR_WALLET_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"DepositorWallet\"",
+      "declaration": "string private constant DEPOSITOR_WALLET_STORAGE_LOCATION_ID = \"DepositorWallet\"",
+      "file": "src/ccip/DepositorWallet.sol",
+      "contract": "DepositorWallet"
+    },
+    {
+      "name": "beacon",
+      "type": "UpgradeableBeacon",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "UpgradeableBeacon beacon",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "ccipRouter",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"ccipRouter\")",
+      "declaration": "address ccipRouter = makeAddr(\"ccipRouter\")",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "chainSelector",
+      "type": "uint64",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "1",
+      "declaration": "uint64 chainSelector = 1",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "feeToken",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 feeToken",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "implementation",
+      "type": "DepositorWallet",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "DepositorWallet implementation",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "mockMessageId",
+      "type": "bytes32",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "keccak256(\"mockMessageId\")",
+      "declaration": "bytes32 mockMessageId = keccak256(\"mockMessageId\")",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "token1",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token1",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "token2",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token2",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "user",
+      "type": "bytes",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "abi.encode(makeAddr(\"user\"))",
+      "declaration": "bytes user = abi.encode(makeAddr(\"user\"))",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "wallet",
+      "type": "DepositorWallet",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "DepositorWallet wallet",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "walletsManager",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"walletsManager\")",
+      "declaration": "address walletsManager = makeAddr(\"walletsManager\")",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "implementation",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override implementation",
+      "file": "src/factories/DeterministicBeaconFactory.sol",
+      "contract": "DeterministicBeaconFactory"
+    },
+    {
+      "name": "isInstance",
+      "type": "mapping(address _who => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address _who => bool) public isInstance",
+      "file": "src/factories/DeterministicBeaconFactory.sol",
+      "contract": "DeterministicBeaconFactory"
+    },
+    {
+      "name": "factory",
+      "type": "DeterministicBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "DeterministicBeaconFactory factory",
+      "file": "test/contracts/deterministic-beacon-factory/DeterministicBeaconFactory.t.sol",
+      "contract": "DeterministicBeaconFactoryTest"
+    },
+    {
+      "name": "global",
+      "type": "Global",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Global global",
+      "file": "test/contracts/deterministic-beacon-factory/DeterministicBeaconFactory.t.sol",
+      "contract": "DeterministicBeaconFactoryTest"
+    },
+    {
+      "name": "globalOwner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address globalOwner",
+      "file": "test/contracts/deterministic-beacon-factory/DeterministicBeaconFactory.t.sol",
+      "contract": "DeterministicBeaconFactoryTest"
+    },
+    {
+      "name": "initData",
+      "type": "bytes",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "abi.encodeWithSelector(MockImplementation.init.selector)",
+      "declaration": "bytes initData = abi.encodeWithSelector(MockImplementation.init.selector)",
+      "file": "test/contracts/deterministic-beacon-factory/DeterministicBeaconFactory.t.sol",
+      "contract": "DeterministicBeaconFactoryTest"
+    },
+    {
+      "name": "mockImpl",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address mockImpl",
+      "file": "test/contracts/deterministic-beacon-factory/DeterministicBeaconFactory.t.sol",
+      "contract": "DeterministicBeaconFactoryTest"
+    },
+    {
+      "name": "salt",
+      "type": "bytes32",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "keccak256(\"test-salt\")",
+      "declaration": "bytes32 salt = keccak256(\"test-salt\")",
+      "file": "test/contracts/deterministic-beacon-factory/DeterministicBeaconFactory.t.sol",
+      "contract": "DeterministicBeaconFactoryTest"
+    },
+    {
+      "name": "DEPOSIT_QUEUE_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"DepositQueue\"",
+      "declaration": "string private constant DEPOSIT_QUEUE_STORAGE_LOCATION_ID = \"DepositQueue\"",
+      "file": "src/components/issuance/deposit-handlers/ERC7540LikeDepositQueue.sol",
+      "contract": "ERC7540LikeDepositQueue"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"admin\")",
+      "declaration": "address admin = makeAddr(\"admin\")",
+      "file": "test/contracts/ERC7540LikeDepositQueue.t.sol",
+      "contract": "ERC7540LikeDepositQueueTest"
+    },
+    {
+      "name": "depositQueue",
+      "type": "ERC7540LikeDepositQueueHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ERC7540LikeDepositQueueHarness depositQueue",
+      "file": "test/contracts/ERC7540LikeDepositQueue.t.sol",
+      "contract": "ERC7540LikeDepositQueueTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/ERC7540LikeDepositQueue.t.sol",
+      "contract": "ERC7540LikeDepositQueueTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ERC7540LikeDepositQueue.t.sol",
+      "contract": "ERC7540LikeDepositQueueTest"
+    },
+    {
+      "name": "valuationHandler",
+      "type": "ValuationHandler",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ValuationHandler valuationHandler",
+      "file": "test/contracts/ERC7540LikeDepositQueue.t.sol",
+      "contract": "ERC7540LikeDepositQueueTest"
+    },
+    {
+      "name": "ERC7540_LIKE_ISSUANCE_BASE_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xb6d07fd6f3a90998edd8cc9d24642317ef35db10e62ed4dbf526ac2cdd3b8d00",
+      "declaration": "bytes32 private constant ERC7540_LIKE_ISSUANCE_BASE_STORAGE_LOCATION = 0xb6d07fd6f3a90998edd8cc9d24642317ef35db10e62ed4dbf526ac2cdd3b8d00",
+      "file": "src/components/issuance/utils/ERC7540LikeIssuanceBase.sol",
+      "contract": "ERC7540LikeIssuanceBase"
+    },
+    {
+      "name": "ERC7540_LIKE_ISSUANCE_BASE_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"ERC7540LikeIssuanceBase\"",
+      "declaration": "string private constant ERC7540_LIKE_ISSUANCE_BASE_STORAGE_LOCATION_ID = \"ERC7540LikeIssuanceBase\"",
+      "file": "src/components/issuance/utils/ERC7540LikeIssuanceBase.sol",
+      "contract": "ERC7540LikeIssuanceBase"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"admin\")",
+      "declaration": "address admin = makeAddr(\"admin\")",
+      "file": "test/contracts/ERC7540LikeIssuanceBase.t.sol",
+      "contract": "ERC7540LikeIssuanceBaseTest"
+    },
+    {
+      "name": "issuanceBase",
+      "type": "ERC7540LikeIssuanceBaseHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ERC7540LikeIssuanceBaseHarness issuanceBase",
+      "file": "test/contracts/ERC7540LikeIssuanceBase.t.sol",
+      "contract": "ERC7540LikeIssuanceBaseTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/ERC7540LikeIssuanceBase.t.sol",
+      "contract": "ERC7540LikeIssuanceBaseTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ERC7540LikeIssuanceBase.t.sol",
+      "contract": "ERC7540LikeIssuanceBaseTest"
+    },
+    {
+      "name": "REDEEM_QUEUE_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"RedeemQueue\"",
+      "declaration": "string private constant REDEEM_QUEUE_STORAGE_LOCATION_ID = \"RedeemQueue\"",
+      "file": "src/components/issuance/redeem-handlers/ERC7540LikeRedeemQueue.sol",
+      "contract": "ERC7540LikeRedeemQueue"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"admin\")",
+      "declaration": "address admin = makeAddr(\"admin\")",
+      "file": "test/contracts/ERC7540LikeRedeemQueue.t.sol",
+      "contract": "ERC7540LikeRedeemQueueTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/ERC7540LikeRedeemQueue.t.sol",
+      "contract": "ERC7540LikeRedeemQueueTest"
+    },
+    {
+      "name": "redeemQueue",
+      "type": "ERC7540LikeRedeemQueueHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ERC7540LikeRedeemQueueHarness redeemQueue",
+      "file": "test/contracts/ERC7540LikeRedeemQueue.t.sol",
+      "contract": "ERC7540LikeRedeemQueueTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ERC7540LikeRedeemQueue.t.sol",
+      "contract": "ERC7540LikeRedeemQueueTest"
+    },
+    {
+      "name": "valuationHandler",
+      "type": "ValuationHandler",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ValuationHandler valuationHandler",
+      "file": "test/contracts/ERC7540LikeRedeemQueue.t.sol",
+      "contract": "ERC7540LikeRedeemQueueTest"
+    },
+    {
+      "name": "HEX_CHARS",
+      "type": "bytes private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"0123456789abcdef\"",
+      "declaration": "bytes private constant HEX_CHARS = \"0123456789abcdef\"",
+      "file": "scripts/EncodeStringToBytes10.s.sol",
+      "contract": "EncodeStringToBytes10"
+    },
+    {
+      "name": "encoder",
+      "type": "EncodeStringToBytes10",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "EncodeStringToBytes10 encoder",
+      "file": "test/contracts/EncodeStringToBytes10.t.sol",
+      "contract": "EncodeStringToBytes10Test"
+    },
+    {
+      "name": "FEE_HANDLER_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xf4d55ff99bda85c3aa25c0487eafd29734b8b8c0e94e473480bb8c25cf2aa300",
+      "declaration": "bytes32 private constant FEE_HANDLER_STORAGE_LOCATION = 0xf4d55ff99bda85c3aa25c0487eafd29734b8b8c0e94e473480bb8c25cf2aa300",
+      "file": "src/components/fees/FeeHandler.sol",
+      "contract": "FeeHandler"
+    },
+    {
+      "name": "FEE_HANDLER_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"FeeHandler\"",
+      "declaration": "string private constant FEE_HANDLER_STORAGE_LOCATION_ID = \"FeeHandler\"",
+      "file": "src/components/fees/FeeHandler.sol",
+      "contract": "FeeHandler"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"FeeHandlerTest.admin\")",
+      "declaration": "address admin = makeAddr(\"FeeHandlerTest.admin\")",
+      "file": "test/contracts/FeeHandler.t.sol",
+      "contract": "FeeHandlerTest"
+    },
+    {
+      "name": "feeHandler",
+      "type": "FeeHandlerHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "FeeHandlerHarness feeHandler",
+      "file": "test/contracts/FeeHandler.t.sol",
+      "contract": "FeeHandlerTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/FeeHandler.t.sol",
+      "contract": "FeeHandlerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/FeeHandler.t.sol",
+      "contract": "FeeHandlerTest"
+    },
+    {
+      "name": "valuationHandler",
+      "type": "ValuationHandler",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ValuationHandler valuationHandler",
+      "file": "test/contracts/FeeHandler.t.sol",
+      "contract": "FeeHandlerTest"
+    },
+    {
+      "name": "GLOBAL",
+      "type": "Global public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "Global public immutable GLOBAL",
+      "file": "src/global/utils/GlobalOwnable.sol",
+      "contract": "GlobalOwnable"
+    },
+    {
+      "name": "globalOwnable",
+      "type": "GlobalOwnableHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "GlobalOwnableHarness globalOwnable",
+      "file": "test/contracts/GlobalOwnable.t.sol",
+      "contract": "GlobalOwnableTest"
+    },
+    {
+      "name": "globalOwner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address globalOwner",
+      "file": "test/contracts/GlobalOwnable.t.sol",
+      "contract": "GlobalOwnableTest"
+    },
+    {
+      "name": "global",
+      "type": "Global",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Global global",
+      "file": "test/contracts/Global.t.sol",
+      "contract": "GlobalTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"owner\")",
+      "declaration": "address owner = makeAddr(\"owner\")",
+      "file": "test/contracts/Global.t.sol",
+      "contract": "GlobalTest"
+    },
+    {
+      "name": "LIMITED_ACCESS_LIMITED_CALL_FORWARDER",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xc79bb6d1c38890e2019fbe15ffb6d894add943a40a60096f4039a45558b86300",
+      "declaration": "bytes32 public constant LIMITED_ACCESS_LIMITED_CALL_FORWARDER = 0xc79bb6d1c38890e2019fbe15ffb6d894add943a40a60096f4039a45558b86300",
+      "file": "src/components/roles/LimitedAccessLimitedCallForwarder.sol",
+      "contract": "LimitedAccessLimitedCallForwarder"
+    },
+    {
+      "name": "LIMITED_ACCESS_LIMITED_CALL_FORWARDER_ID",
+      "type": "string public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"LimitedAccessLimitedCallForwarder\"",
+      "declaration": "string public constant LIMITED_ACCESS_LIMITED_CALL_FORWARDER_ID = \"LimitedAccessLimitedCallForwarder\"",
+      "file": "src/components/roles/LimitedAccessLimitedCallForwarder.sol",
+      "contract": "LimitedAccessLimitedCallForwarder"
+    },
+    {
+      "name": "authCaller",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"authCaller\")",
+      "declaration": "address authCaller = makeAddr(\"authCaller\")",
+      "file": "test/contracts/LimitedAccessLimitedCallForwarder.t.sol",
+      "contract": "LimitedAccessLimitedCallForwarderTest"
+    },
+    {
+      "name": "callForwarder",
+      "type": "LimitedAccessLimitedCallForwarderHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "LimitedAccessLimitedCallForwarderHarness callForwarder",
+      "file": "test/contracts/LimitedAccessLimitedCallForwarder.t.sol",
+      "contract": "LimitedAccessLimitedCallForwarderTest"
+    },
+    {
+      "name": "callSelector",
+      "type": "bytes4",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "CallTarget.foo.selector",
+      "declaration": "bytes4 callSelector = CallTarget.foo.selector",
+      "file": "test/contracts/LimitedAccessLimitedCallForwarder.t.sol",
+      "contract": "LimitedAccessLimitedCallForwarderTest"
+    },
+    {
+      "name": "callTarget",
+      "type": "CallTarget",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "CallTarget callTarget",
+      "file": "test/contracts/LimitedAccessLimitedCallForwarder.t.sol",
+      "contract": "LimitedAccessLimitedCallForwarderTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/LimitedAccessLimitedCallForwarder.t.sol",
+      "contract": "LimitedAccessLimitedCallForwarderTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/LimitedAccessLimitedCallForwarder.t.sol",
+      "contract": "LimitedAccessLimitedCallForwarderTest"
+    },
+    {
+      "name": "LINEAR_CREDIT_DEBT_TRACKER_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"LinearCreditDebtTracker\"",
+      "declaration": "string private constant LINEAR_CREDIT_DEBT_TRACKER_STORAGE_LOCATION_ID = \"LinearCreditDebtTracker\"",
+      "file": "src/components/value/position-trackers/LinearCreditDebtTracker.sol",
+      "contract": "LinearCreditDebtTracker"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"admin\")",
+      "declaration": "address admin = makeAddr(\"admin\")",
+      "file": "test/contracts/LinearCreditDebtTracker.t.sol",
+      "contract": "LinearCreditDebtTrackerTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/LinearCreditDebtTracker.t.sol",
+      "contract": "LinearCreditDebtTrackerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/LinearCreditDebtTracker.t.sol",
+      "contract": "LinearCreditDebtTrackerTest"
+    },
+    {
+      "name": "tracker",
+      "type": "LinearCreditDebtTracker",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "LinearCreditDebtTracker tracker",
+      "file": "test/contracts/LinearCreditDebtTracker.t.sol",
+      "contract": "LinearCreditDebtTrackerTest"
+    },
+    {
+      "name": "answer",
+      "type": "int256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "int256 public answer",
+      "file": "test/mocks/MockChainlinkAggregator.sol",
+      "contract": "MockChainlinkAggregator"
+    },
+    {
+      "name": "decimals",
+      "type": "uint8 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint8 public decimals",
+      "file": "test/mocks/MockChainlinkAggregator.sol",
+      "contract": "MockChainlinkAggregator"
+    },
+    {
+      "name": "dummyAnsweredInRound",
+      "type": "uint80",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "81",
+      "declaration": "uint80 dummyAnsweredInRound = 81",
+      "file": "test/mocks/MockChainlinkAggregator.sol",
+      "contract": "MockChainlinkAggregator"
+    },
+    {
+      "name": "dummyRoundId",
+      "type": "uint80",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "80",
+      "declaration": "uint80 dummyRoundId = 80",
+      "file": "test/mocks/MockChainlinkAggregator.sol",
+      "contract": "MockChainlinkAggregator"
+    },
+    {
+      "name": "dummyStartedAt",
+      "type": "uint256",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "754982",
+      "declaration": "uint256 dummyStartedAt = 754982",
+      "file": "test/mocks/MockChainlinkAggregator.sol",
+      "contract": "MockChainlinkAggregator"
+    },
+    {
+      "name": "updatedAt",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public updatedAt",
+      "file": "test/mocks/MockChainlinkAggregator.sol",
+      "contract": "MockChainlinkAggregator"
+    },
+    {
+      "name": "mockDecimals",
+      "type": "uint8",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "18",
+      "declaration": "uint8 mockDecimals = 18",
+      "file": "test/mocks/MockERC20.sol",
+      "contract": "MockERC20"
+    },
+    {
+      "name": "initialized",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public initialized",
+      "file": "test/contracts/BeaconFactory.t.sol",
+      "contract": "MockImplementation"
+    },
+    {
+      "name": "initialized",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public initialized",
+      "file": "test/contracts/ComponentBeaconFactory.t.sol",
+      "contract": "MockImplementation"
+    },
+    {
+      "name": "initialized",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public initialized",
+      "file": "test/contracts/GlobalOwnable.t.sol",
+      "contract": "MockImplementation"
+    },
+    {
+      "name": "initialized",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public initialized",
+      "file": "test/contracts/deterministic-beacon-factory/DeterministicBeaconFactory.t.sol",
+      "contract": "MockImplementation"
+    },
+    {
+      "name": "DECIMALS",
+      "type": "uint8 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "18",
+      "declaration": "uint8 private constant DECIMALS = 18",
+      "file": "src/infra/oracles/OneToOneAggregator.sol",
+      "contract": "OneToOneAggregator"
+    },
+    {
+      "name": "ONE",
+      "type": "int256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 ** 18",
+      "declaration": "int256 private constant ONE = 10 ** 18",
+      "file": "src/infra/oracles/OneToOneAggregator.sol",
+      "contract": "OneToOneAggregator"
+    },
+    {
+      "name": "OPEN_ACCESS_LIMITED_CALL_FORWARDER_ID",
+      "type": "string public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"OpenAccessLimitedCallForwarder\"",
+      "declaration": "string public constant OPEN_ACCESS_LIMITED_CALL_FORWARDER_ID = \"OpenAccessLimitedCallForwarder\"",
+      "file": "src/components/roles/OpenAccessLimitedCallForwarder.sol",
+      "contract": "OpenAccessLimitedCallForwarder"
+    },
+    {
+      "name": "callForwarder",
+      "type": "OpenAccessLimitedCallForwarderHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "OpenAccessLimitedCallForwarderHarness callForwarder",
+      "file": "test/contracts/OpenAccessLimitedCallForwarder.t.sol",
+      "contract": "OpenAccessLimitedCallForwarderTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/OpenAccessLimitedCallForwarder.t.sol",
+      "contract": "OpenAccessLimitedCallForwarderTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/OpenAccessLimitedCallForwarder.t.sol",
+      "contract": "OpenAccessLimitedCallForwarderTest"
+    },
+    {
+      "name": "addressList",
+      "type": "OwnableAddressList",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "OwnableAddressList addressList",
+      "file": "test/contracts/OwnableAddressList.t.sol",
+      "contract": "OwnableAddressListTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/OwnableAddressList.t.sol",
+      "contract": "OwnableAddressListTest"
+    },
+    {
+      "name": "SHARES_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xbe724a55f726228f14b884d45d89388bc2a03793a0006937116ea1275a51fb00",
+      "declaration": "bytes32 private constant SHARES_STORAGE_LOCATION = 0xbe724a55f726228f14b884d45d89388bc2a03793a0006937116ea1275a51fb00",
+      "file": "src/shares/Shares.sol",
+      "contract": "Shares"
+    },
+    {
+      "name": "SHARES_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"Shares\"",
+      "declaration": "string private constant SHARES_STORAGE_LOCATION_ID = \"Shares\"",
+      "file": "src/shares/Shares.sol",
+      "contract": "Shares"
+    },
+    {
+      "name": "ACCOUNT_ERC20_TRACKER_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable ACCOUNT_ERC20_TRACKER_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "ADDRESS_LISTS_SHARES_TRANSFER_VALIDATOR_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable ADDRESS_LISTS_SHARES_TRANSFER_VALIDATOR_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "DEPOSIT_QUEUE_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable DEPOSIT_QUEUE_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "FEE_HANDLER_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable FEE_HANDLER_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "LINEAR_CREDIT_DEBT_TRACKER_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable LINEAR_CREDIT_DEBT_TRACKER_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "MANAGEMENT_FEE_TRACKER_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable MANAGEMENT_FEE_TRACKER_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "OWNABLE_ADDRESS_LIST_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable OWNABLE_ADDRESS_LIST_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "PERFORMANCE_FEE_TRACKER_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable PERFORMANCE_FEE_TRACKER_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "REDEEM_QUEUE_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable REDEEM_QUEUE_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "SHARES_OWNED_ADDRESS_LIST_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable SHARES_OWNED_ADDRESS_LIST_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "SYNC_DEPOSIT_HANDLER_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable SYNC_DEPOSIT_HANDLER_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "VALUATION_HANDLER_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable VALUATION_HANDLER_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "SHARES_NAME",
+      "type": "string constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"Onyx Shares\"",
+      "declaration": "string constant SHARES_NAME = \"Onyx Shares\"",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "SHARES_SYMBOL",
+      "type": "string constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"oSHR\"",
+      "declaration": "string constant SHARES_SYMBOL = \"oSHR\"",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "VALUE_ASSET",
+      "type": "bytes32 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes32(\"USD\")",
+      "declaration": "bytes32 constant VALUE_ASSET = bytes32(\"USD\")",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "accountERC20TrackerFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory accountERC20TrackerFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "addressListsSharesTransferValidatorFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory addressListsSharesTransferValidatorFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "adminA",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"adminA\")",
+      "declaration": "address adminA = makeAddr(\"adminA\")",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "adminB",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"adminB\")",
+      "declaration": "address adminB = makeAddr(\"adminB\")",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "deployer",
+      "type": "SharesDeployer",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "SharesDeployer deployer",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "depositQueueFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory depositQueueFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "depositorAllowlist",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"depositorAllowlist\")",
+      "declaration": "address depositorAllowlist = makeAddr(\"depositorAllowlist\")",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "feeHandlerFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory feeHandlerFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "feeRecipient",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"feeRecipient\")",
+      "declaration": "address feeRecipient = makeAddr(\"feeRecipient\")",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "linearCreditDebtTrackerFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory linearCreditDebtTrackerFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "managementFeeTrackerFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory managementFeeTrackerFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "ownableAddressListFactory",
+      "type": "BeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "BeaconFactory ownableAddressListFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "performanceFeeTrackerFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory performanceFeeTrackerFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "redeemQueueFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory redeemQueueFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "sharesFactory",
+      "type": "BeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "BeaconFactory sharesFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "sharesOwnedAddressListFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory sharesOwnedAddressListFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "syncDepositHandlerFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory syncDepositHandlerFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "usdc",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 usdc",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "validator",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"validator\")",
+      "declaration": "address validator = makeAddr(\"validator\")",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "valuationHandlerFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory valuationHandlerFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "vaultOwner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"vaultOwner\")",
+      "declaration": "address vaultOwner = makeAddr(\"vaultOwner\")",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "weth",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 weth",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "addressList",
+      "type": "SharesOwnedAddressListHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "SharesOwnedAddressListHarness addressList",
+      "file": "test/contracts/SharesOwnedAddressList.t.sol",
+      "contract": "SharesOwnedAddressListTest"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address admin",
+      "file": "test/contracts/SharesOwnedAddressList.t.sol",
+      "contract": "SharesOwnedAddressListTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/SharesOwnedAddressList.t.sol",
+      "contract": "SharesOwnedAddressListTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/SharesOwnedAddressList.t.sol",
+      "contract": "SharesOwnedAddressListTest"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"SharesTest.admin\")",
+      "declaration": "address admin = makeAddr(\"SharesTest.admin\")",
+      "file": "test/contracts/Shares.t.sol",
+      "contract": "SharesTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/Shares.t.sol",
+      "contract": "SharesTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/Shares.t.sol",
+      "contract": "SharesTest"
+    },
+    {
+      "name": "MAX_SHARE_PRICE_STALENESS_DISABLED",
+      "type": "uint24 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "type(uint24).max",
+      "declaration": "uint24 internal constant MAX_SHARE_PRICE_STALENESS_DISABLED = type(uint24).max",
+      "file": "src/components/issuance/deposit-handlers/SyncDepositHandler.sol",
+      "contract": "SyncDepositHandler"
+    },
+    {
+      "name": "SYNC_DEPOSIT_HANDLER_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x8a1bf4b6fe0f19db4139bc2fd041277dc03c6329c0bfe0e30c929d0ea93ecb00",
+      "declaration": "bytes32 private constant SYNC_DEPOSIT_HANDLER_STORAGE_LOCATION = 0x8a1bf4b6fe0f19db4139bc2fd041277dc03c6329c0bfe0e30c929d0ea93ecb00",
+      "file": "src/components/issuance/deposit-handlers/SyncDepositHandler.sol",
+      "contract": "SyncDepositHandler"
+    },
+    {
+      "name": "SYNC_DEPOSIT_HANDLER_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"SyncDepositHandler\"",
+      "declaration": "string private constant SYNC_DEPOSIT_HANDLER_STORAGE_LOCATION_ID = \"SyncDepositHandler\"",
+      "file": "src/components/issuance/deposit-handlers/SyncDepositHandler.sol",
+      "contract": "SyncDepositHandler"
+    },
+    {
+      "name": "ASSET_DECIMALS",
+      "type": "uint8 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "6",
+      "declaration": "uint8 constant ASSET_DECIMALS = 6",
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "contract": "SyncDepositHandlerTest"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"admin\")",
+      "declaration": "address admin = makeAddr(\"admin\")",
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "contract": "SyncDepositHandlerTest"
+    },
+    {
+      "name": "depositAsset",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address depositAsset",
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "contract": "SyncDepositHandlerTest"
+    },
+    {
+      "name": "depositHandler",
+      "type": "SyncDepositHandlerHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "SyncDepositHandlerHarness depositHandler",
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "contract": "SyncDepositHandlerTest"
+    },
+    {
+      "name": "depositor",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"depositor\")",
+      "declaration": "address depositor = makeAddr(\"depositor\")",
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "contract": "SyncDepositHandlerTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "contract": "SyncDepositHandlerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "contract": "SyncDepositHandlerTest"
+    },
+    {
+      "name": "valuationHandler",
+      "type": "ValuationHandlerHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ValuationHandlerHarness valuationHandler",
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "contract": "SyncDepositHandlerTest"
+    },
+    {
+      "name": "RATE_PRECISION",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 ** 18",
+      "declaration": "uint256 public constant RATE_PRECISION = 10 ** 18",
+      "file": "src/components/value/ValuationHandler.sol",
+      "contract": "ValuationHandler"
+    },
+    {
+      "name": "VALUATION_HANDLER_STORAGE_LOCATION_ID",
+      "type": "string public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"ValuationHandler\"",
+      "declaration": "string public constant VALUATION_HANDLER_STORAGE_LOCATION_ID = \"ValuationHandler\"",
+      "file": "src/components/value/ValuationHandler.sol",
+      "contract": "ValuationHandler"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"ValuationHandlerTest.admin\")",
+      "declaration": "address admin = makeAddr(\"ValuationHandlerTest.admin\")",
+      "file": "test/contracts/ValuationHandler.t.sol",
+      "contract": "ValuationHandlerTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/ValuationHandler.t.sol",
+      "contract": "ValuationHandlerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ValuationHandler.t.sol",
+      "contract": "ValuationHandlerTest"
+    },
+    {
+      "name": "valuationHandler",
+      "type": "ValuationHandlerHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ValuationHandlerHarness valuationHandler",
+      "file": "test/contracts/ValuationHandler.t.sol",
+      "contract": "ValuationHandlerTest"
+    },
+    {
+      "name": "valueHelpersLib",
+      "type": "ValueHelpersLibHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ValueHelpersLibHarness valueHelpersLib",
+      "file": "test/contracts/ValueHelpersLib.t.sol",
+      "contract": "ValueHelpersLibTest"
+    },
+    {
+      "name": "admin",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"admin\")",
+      "declaration": "address admin = makeAddr(\"admin\")",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "ccipRouter",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"ccipRouter\")",
+      "declaration": "address ccipRouter = makeAddr(\"ccipRouter\")",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "factory",
+      "type": "DeterministicBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "DeterministicBeaconFactory factory",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "harness",
+      "type": "WalletsManagerHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "WalletsManagerHarness harness",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "mockFee",
+      "type": "uint256",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "1e18",
+      "declaration": "uint256 mockFee = 1e18",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "mockMessageId",
+      "type": "bytes32",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "keccak256(\"mockMessageId\")",
+      "declaration": "bytes32 mockMessageId = keccak256(\"mockMessageId\")",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "owner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address owner",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "sourceChainSelector",
+      "type": "uint64",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "1",
+      "declaration": "uint64 sourceChainSelector = 1",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "token1",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token1",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "token2",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token2",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "user",
+      "type": "bytes",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "abi.encode(makeAddr(\"user\"))",
+      "declaration": "bytes user = abi.encode(makeAddr(\"user\"))",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    }
+  ],
+  "total_balance_variables": [
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "SHARES_TRANSFER_VALIDATOR_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"SharesTransferValidator\"",
+      "declaration": "string private constant SHARES_TRANSFER_VALIDATOR_STORAGE_LOCATION_ID = \"SharesTransferValidator\"",
+      "file": "src/components/shares-transfer-validators/AddressListsSharesTransferValidator.sol",
+      "contract": "AddressListsSharesTransferValidator"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/AddressListsSharesTransferValidator.t.sol",
+      "contract": "AddressListsSharesTransferValidatorTest"
+    },
+    {
+      "name": "depositAsset",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 depositAsset",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "expectedShares",
+      "type": "uint256",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "100e18",
+      "declaration": "uint256 expectedShares = 100e18",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "instanceToShares",
+      "type": "mapping(address => address) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => address) internal instanceToShares",
+      "file": "src/factories/ComponentBeaconFactory.sol",
+      "contract": "ComponentBeaconFactory"
+    },
+    {
+      "name": "SHARES",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public SHARES",
+      "file": "test/harnesses/utils/ComponentHarnessMixin.sol",
+      "contract": "ComponentHarnessMixin"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ContinuousFlatRateManagementFeeTracker.t.sol",
+      "contract": "ContinuousFlatRateManagementFeeTrackerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ContinuousFlatRatePerformanceFeeTracker.t.sol",
+      "contract": "ContinuousFlatRatePerformanceFeeTrackerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/CreWorkflowConsumer.t.sol",
+      "contract": "CreWorkflowConsumerTestBase"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ERC7540LikeDepositQueue.t.sol",
+      "contract": "ERC7540LikeDepositQueueTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ERC7540LikeIssuanceBase.t.sol",
+      "contract": "ERC7540LikeIssuanceBaseTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ERC7540LikeRedeemQueue.t.sol",
+      "contract": "ERC7540LikeRedeemQueueTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/FeeHandler.t.sol",
+      "contract": "FeeHandlerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/LimitedAccessLimitedCallForwarder.t.sol",
+      "contract": "LimitedAccessLimitedCallForwarderTest"
+    },
+    {
+      "name": "LINEAR_CREDIT_DEBT_TRACKER_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"LinearCreditDebtTracker\"",
+      "declaration": "string private constant LINEAR_CREDIT_DEBT_TRACKER_STORAGE_LOCATION_ID = \"LinearCreditDebtTracker\"",
+      "file": "src/components/value/position-trackers/LinearCreditDebtTracker.sol",
+      "contract": "LinearCreditDebtTracker"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/LinearCreditDebtTracker.t.sol",
+      "contract": "LinearCreditDebtTrackerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/OpenAccessLimitedCallForwarder.t.sol",
+      "contract": "OpenAccessLimitedCallForwarderTest"
+    },
+    {
+      "name": "SHARES_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xbe724a55f726228f14b884d45d89388bc2a03793a0006937116ea1275a51fb00",
+      "declaration": "bytes32 private constant SHARES_STORAGE_LOCATION = 0xbe724a55f726228f14b884d45d89388bc2a03793a0006937116ea1275a51fb00",
+      "file": "src/shares/Shares.sol",
+      "contract": "Shares"
+    },
+    {
+      "name": "SHARES_STORAGE_LOCATION_ID",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"Shares\"",
+      "declaration": "string private constant SHARES_STORAGE_LOCATION_ID = \"Shares\"",
+      "file": "src/shares/Shares.sol",
+      "contract": "Shares"
+    },
+    {
+      "name": "ADDRESS_LISTS_SHARES_TRANSFER_VALIDATOR_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable ADDRESS_LISTS_SHARES_TRANSFER_VALIDATOR_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "LINEAR_CREDIT_DEBT_TRACKER_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable LINEAR_CREDIT_DEBT_TRACKER_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "SHARES_OWNED_ADDRESS_LIST_FACTORY",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable SHARES_OWNED_ADDRESS_LIST_FACTORY",
+      "file": "src/infra/deployment/SharesDeployer.sol",
+      "contract": "SharesDeployer"
+    },
+    {
+      "name": "SHARES_NAME",
+      "type": "string constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"Onyx Shares\"",
+      "declaration": "string constant SHARES_NAME = \"Onyx Shares\"",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "SHARES_SYMBOL",
+      "type": "string constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"oSHR\"",
+      "declaration": "string constant SHARES_SYMBOL = \"oSHR\"",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "VALUE_ASSET",
+      "type": "bytes32 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes32(\"USD\")",
+      "declaration": "bytes32 constant VALUE_ASSET = bytes32(\"USD\")",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "addressListsSharesTransferValidatorFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory addressListsSharesTransferValidatorFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "linearCreditDebtTrackerFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory linearCreditDebtTrackerFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "sharesFactory",
+      "type": "BeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "BeaconFactory sharesFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "sharesOwnedAddressListFactory",
+      "type": "ComponentBeaconFactory",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ComponentBeaconFactory sharesOwnedAddressListFactory",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "vaultOwner",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": "makeAddr(\"vaultOwner\")",
+      "declaration": "address vaultOwner = makeAddr(\"vaultOwner\")",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/SharesOwnedAddressList.t.sol",
+      "contract": "SharesOwnedAddressListTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/Shares.t.sol",
+      "contract": "SharesTest"
+    },
+    {
+      "name": "MAX_SHARE_PRICE_STALENESS_DISABLED",
+      "type": "uint24 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "type(uint24).max",
+      "declaration": "uint24 internal constant MAX_SHARE_PRICE_STALENESS_DISABLED = type(uint24).max",
+      "file": "src/components/issuance/deposit-handlers/SyncDepositHandler.sol",
+      "contract": "SyncDepositHandler"
+    },
+    {
+      "name": "ASSET_DECIMALS",
+      "type": "uint8 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "6",
+      "declaration": "uint8 constant ASSET_DECIMALS = 6",
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "contract": "SyncDepositHandlerTest"
+    },
+    {
+      "name": "depositAsset",
+      "type": "address",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address depositAsset",
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "contract": "SyncDepositHandlerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/SyncDepositHandler.t.sol",
+      "contract": "SyncDepositHandlerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/ValuationHandler.t.sol",
+      "contract": "ValuationHandlerTest"
+    },
+    {
+      "name": "shares",
+      "type": "Shares",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Shares shares",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    }
+  ],
+  "token_variables": [
+    {
+      "name": "token1",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token1",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "token2",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token2",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "tracker",
+      "type": "AccountERC20Tracker",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AccountERC20Tracker tracker",
+      "file": "test/contracts/AccountERC20Tracker.t.sol",
+      "contract": "AccountERC20TrackerTest"
+    },
+    {
+      "name": "depositAsset",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 depositAsset",
+      "file": "test/e2e/ccip.t.sol",
+      "contract": "CCIPE2ETest"
+    },
+    {
+      "name": "ETHEREUM_BLOCK_LATEST",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "23967530",
+      "declaration": "uint256 internal constant ETHEREUM_BLOCK_LATEST = 23967530",
+      "file": "test/utils/Constants.sol",
+      "contract": "Constants"
+    },
+    {
+      "name": "ETHEREUM_SEPOLIA_BLOCK_LATEST",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10566500",
+      "declaration": "uint256 internal constant ETHEREUM_SEPOLIA_BLOCK_LATEST = 10566500",
+      "file": "test/utils/Constants.sol",
+      "contract": "Constants"
+    },
+    {
+      "name": "MEGA_ETH_BLOCK_LATEST",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "12236830",
+      "declaration": "uint256 internal constant MEGA_ETH_BLOCK_LATEST = 12236830",
+      "file": "test/utils/Constants.sol",
+      "contract": "Constants"
+    },
+    {
+      "name": "feeToken",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 feeToken",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "token1",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token1",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "token2",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token2",
+      "file": "test/contracts/depositor-wallet/DepositorWallet.t.sol",
+      "contract": "DepositorWalletTest"
+    },
+    {
+      "name": "usdc",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 usdc",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "weth",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 weth",
+      "file": "test/contracts/infra/SharesDeployer.t.sol",
+      "contract": "SharesDeployerTest"
+    },
+    {
+      "name": "valueHelpersLib",
+      "type": "ValueHelpersLibHarness",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ValueHelpersLibHarness valueHelpersLib",
+      "file": "test/contracts/ValueHelpersLib.t.sol",
+      "contract": "ValueHelpersLibTest"
+    },
+    {
+      "name": "token1",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token1",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    },
+    {
+      "name": "token2",
+      "type": "MockERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockERC20 token2",
+      "file": "test/contracts/wallets-manager/WalletsManager.t.sol",
+      "contract": "WalletsManagerTest"
+    }
+  ],
+  "token_addresses_hardcoded": [],
+  "invariant_values": [
+    "Key accounting vars (`MAX_SHARE_PRICE_STALENESS_DISABLED`, `SHARES_TRANSFER_VALIDATOR_STORAGE_LOCATION_ID`, `LINEAR_CREDIT_DEBT_TRACKER_STORAGE_LOCATION_ID`, `instanceToShares`, `LINEAR_CREDIT_DEBT_TRACKER_FACTORY`, `SHARES_OWNED_ADDRESS_LIST_FACTORY`, `ADDRESS_LISTS_SHARES_TRANSFER_VALIDATOR_FACTORY`, `SHARES_STORAGE_LOCATION`) must only change through authorized accounting paths",
+    "Every token address/handle variable must be non-zero and immutable or governance-gated",
+    "Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition"
+  ]
+}

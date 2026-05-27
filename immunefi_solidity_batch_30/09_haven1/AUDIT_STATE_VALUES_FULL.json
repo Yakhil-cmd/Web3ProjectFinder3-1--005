@@ -1,0 +1,4453 @@
+{
+  "generated_at_utc": "2026-05-26T16:59:51Z",
+  "project": "09_haven1",
+  "solidity_file_count": 81,
+  "solidity_files": [
+    "contracts/airdrop/AirdropClaim.sol",
+    "contracts/airdrop/interfaces/IAirdropClaim.sol",
+    "contracts/airdrop/lib/Errors.sol",
+    "contracts/bridge/BridgeController.sol",
+    "contracts/bridge/BridgeRelayer.sol",
+    "contracts/bridge/LockedH1.sol",
+    "contracts/bridge/interfaces/IBridgeController.sol",
+    "contracts/bridge/interfaces/IBridgeRelayer.sol",
+    "contracts/bridge/interfaces/ILockedH1.sol",
+    "contracts/external-chains/eth-mainnet/H1.sol",
+    "contracts/fee/FeeContract.sol",
+    "contracts/fee/channels/fee-distributor-channels/FeeDistributorChannelWH1.sol",
+    "contracts/fee/channels/staking/StakingChannelESH1.sol",
+    "contracts/fee/channels/validator-rewards/ValidatorRewardsBase.sol",
+    "contracts/fee/channels/validator-rewards/ValidatorRewardsConfig.sol",
+    "contracts/fee/channels/validator-rewards/ValidatorRewardsESH1.sol",
+    "contracts/fee/channels/validator-rewards/ValidatorRewardsH1.sol",
+    "contracts/fee/interfaces/IDistributor.sol",
+    "contracts/fee/interfaces/IFeeContract.sol",
+    "contracts/fee/interfaces/IFeeContractV06Downgrade.sol",
+    "contracts/fee/interfaces/IFeeContractV07Downgrade.sol",
+    "contracts/fee/interfaces/IFeeDistributorChannel.sol",
+    "contracts/fee/interfaces/IFeeOracle.sol",
+    "contracts/fee/interfaces/IReceiver.sol",
+    "contracts/fee/interfaces/IStakingChannel.sol",
+    "contracts/fee/interfaces/IValidatorRewards.sol",
+    "contracts/fee/interfaces/IValidatorRewardsConfig.sol",
+    "contracts/fee/lib/Errors.sol",
+    "contracts/governance/FeeDistributor.sol",
+    "contracts/governance/VotingEscrow.sol",
+    "contracts/governance/interfaces/IFeeDistributor.sol",
+    "contracts/governance/interfaces/IVotingEscrow.sol",
+    "contracts/h1-developed-application/H1DevelopedApplication.sol",
+    "contracts/h1-developed-application/interfaces/IH1DevelopedApplication.sol",
+    "contracts/h1-developed-application/lib/Errors.sol",
+    "contracts/h1-developed-application/lib/FnSig.sol",
+    "contracts/h1-native-application/H1NativeApplication.sol",
+    "contracts/h1-native-application/H1NativeApplicationUpgradeable.sol",
+    "contracts/h1-native-application/H1NativeBase.sol",
+    "contracts/h1-native-application/interfaces/IH1NativeApplication.sol",
+    "contracts/network-guardian/NetworkGuardian.sol",
+    "contracts/network-guardian/NetworkGuardianController.sol",
+    "contracts/network-guardian/interfaces/INetworkGuardian.sol",
+    "contracts/network-guardian/interfaces/INetworkGuardianController.sol",
+    "contracts/network-guardian/lib/Array.sol",
+    "contracts/network-guardian/lib/Errors.sol",
+    "contracts/nfts/Haven1LaunchCrew.sol",
+    "contracts/proof-of-identity/ProofOfIdentity.sol",
+    "contracts/proof-of-identity/interfaces/IProofOfIdentity.sol",
+    "contracts/proof-of-identity/interfaces/vendor/IAccountManager.sol",
+    "contracts/proof-of-identity/interfaces/vendor/IPermissionsInterface.sol",
+    "contracts/proof-of-identity/lib/Attribute.sol",
+    "contracts/proof-of-identity/lib/BytesConversion.sol",
+    "contracts/proof-of-identity/lib/Errors.sol",
+    "contracts/proof-of-identity/lib/POIType.sol",
+    "contracts/staking/SimpleStaking.sol",
+    "contracts/staking/Staking.sol",
+    "contracts/staking/interfaces/ISimpleStaking.sol",
+    "contracts/staking/interfaces/IStaking.sol",
+    "contracts/staking/lib/Errors.sol",
+    "contracts/test/FixedFeeOracle.sol",
+    "contracts/tokens/BackedHRC20.sol",
+    "contracts/tokens/EscrowedH1.sol",
+    "contracts/tokens/HRC20.sol",
+    "contracts/tokens/WH1.sol",
+    "contracts/tokens/interfaces/IBackedHRC20.sol",
+    "contracts/tokens/interfaces/IEscrowedH1.sol",
+    "contracts/tokens/interfaces/IHRC20.sol",
+    "contracts/tokens/interfaces/IWETH9.sol",
+    "contracts/tokens/interfaces/IWH1.sol",
+    "contracts/utils/Address.sol",
+    "contracts/utils/OnChainRouting.sol",
+    "contracts/utils/Semver.sol",
+    "contracts/utils/interfaces/IOnChainRouting.sol",
+    "contracts/utils/interfaces/IRecoverable.sol",
+    "contracts/utils/interfaces/IVersion.sol",
+    "contracts/utils/upgradeable/BlacklistableUpgradeable.sol",
+    "contracts/utils/upgradeable/RecoverableUpgradeable.sol",
+    "contracts/vendor/uniswapV3/interfaces/v3-periphery/IQuoterV2.sol",
+    "contracts/vendor/uniswapV3/interfaces/v3-periphery/ISwapRouter.sol",
+    "contracts/vendor/uniswapV3/interfaces/v3-periphery/IUniswapV3SwapCallback.sol"
+  ],
+  "pragmas": [
+    "0.8.24",
+    ">=0.5.0",
+    ">=0.7.5",
+    "^0.6.0",
+    "^0.7.0",
+    "^0.8.0",
+    "^0.8.24"
+  ],
+  "top_directories_by_solidity_file_count": [
+    [
+      "contracts",
+      81
+    ]
+  ],
+  "contracts": [
+    {
+      "file": "contracts/utils/Address.sol",
+      "kind": "library",
+      "name": "Address",
+      "bases": []
+    },
+    {
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "kind": "contract",
+      "name": "AirdropClaim",
+      "bases": [
+        "ReentrancyGuardUpgradeable",
+        "NetworkGuardian",
+        "IAirdropClaim",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/network-guardian/lib/Array.sol",
+      "kind": "library",
+      "name": "Array",
+      "bases": []
+    },
+    {
+      "file": "contracts/proof-of-identity/lib/Attribute.sol",
+      "kind": "library",
+      "name": "AttributeUtils",
+      "bases": []
+    },
+    {
+      "file": "contracts/tokens/BackedHRC20.sol",
+      "kind": "contract",
+      "name": "BackedHRC20",
+      "bases": [
+        "ERC20PermitUpgradeable",
+        "RecoverableUpgradeable",
+        "BlacklistableUpgradeable",
+        "NetworkGuardian",
+        "IBackedHRC20",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/utils/upgradeable/BlacklistableUpgradeable.sol",
+      "kind": "abstract contract",
+      "name": "BlacklistableUpgradeable",
+      "bases": [
+        "Initializable"
+      ]
+    },
+    {
+      "file": "contracts/bridge/BridgeController.sol",
+      "kind": "contract",
+      "name": "BridgeController",
+      "bases": [
+        "NetworkGuardian",
+        "IBridgeController",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "kind": "contract",
+      "name": "BridgeRelayer",
+      "bases": [
+        "NetworkGuardian",
+        "IBridgeRelayer",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/proof-of-identity/lib/BytesConversion.sol",
+      "kind": "library",
+      "name": "BytesConversion",
+      "bases": []
+    },
+    {
+      "file": "contracts/tokens/EscrowedH1.sol",
+      "kind": "contract",
+      "name": "EscrowedH1",
+      "bases": [
+        "ERC20Upgradeable",
+        "ReentrancyGuardUpgradeable",
+        "H1NativeApplicationUpgradeable",
+        "RecoverableUpgradeable",
+        "IEscrowedH1",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/fee/FeeContract.sol",
+      "kind": "contract",
+      "name": "FeeContract",
+      "bases": [
+        "ReentrancyGuardUpgradeable",
+        "NetworkGuardian",
+        "IFeeContract",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/governance/FeeDistributor.sol",
+      "kind": "contract",
+      "name": "FeeDistributor",
+      "bases": [
+        "IFeeDistributor",
+        "H1NativeApplicationUpgradeable",
+        "ReentrancyGuardUpgradeable",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/fee/channels/fee-distributor-channels/FeeDistributorChannelWH1.sol",
+      "kind": "contract",
+      "name": "FeeDistributorChannelWH1",
+      "bases": [
+        "ReentrancyGuardUpgradeable",
+        "NetworkGuardian",
+        "RecoverableUpgradeable",
+        "IFeeDistributorChannel",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/test/FixedFeeOracle.sol",
+      "kind": "contract",
+      "name": "FixedFeeOracle",
+      "bases": [
+        "AccessControl"
+      ]
+    },
+    {
+      "file": "contracts/h1-developed-application/lib/FnSig.sol",
+      "kind": "library",
+      "name": "FnSig",
+      "bases": []
+    },
+    {
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "kind": "abstract contract",
+      "name": "H1DevelopedApplication",
+      "bases": [
+        "NetworkGuardian",
+        "IH1DevelopedApplication"
+      ]
+    },
+    {
+      "file": "contracts/h1-native-application/H1NativeApplication.sol",
+      "kind": "contract",
+      "name": "H1NativeApplication",
+      "bases": [
+        "H1NativeBase",
+        "AccessControl"
+      ]
+    },
+    {
+      "file": "contracts/h1-native-application/H1NativeApplicationUpgradeable.sol",
+      "kind": "abstract contract",
+      "name": "H1NativeApplicationUpgradeable",
+      "bases": [
+        "NetworkGuardian",
+        "IH1NativeApplication"
+      ]
+    },
+    {
+      "file": "contracts/h1-native-application/H1NativeBase.sol",
+      "kind": "abstract contract",
+      "name": "H1NativeBase",
+      "bases": []
+    },
+    {
+      "file": "contracts/tokens/HRC20.sol",
+      "kind": "abstract contract",
+      "name": "HRC20",
+      "bases": [
+        "ERC20PermitUpgradeable",
+        "RecoverableUpgradeable",
+        "H1DevelopedApplication",
+        "IHRC20"
+      ]
+    },
+    {
+      "file": "contracts/external-chains/eth-mainnet/H1.sol",
+      "kind": "contract",
+      "name": "Haven1",
+      "bases": [
+        "ERC20",
+        "ERC20Permit"
+      ]
+    },
+    {
+      "file": "contracts/nfts/Haven1LaunchCrew.sol",
+      "kind": "contract",
+      "name": "Haven1LaunchCrew",
+      "bases": [
+        "ERC721Upgradeable",
+        "NetworkGuardian",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/proof-of-identity/interfaces/vendor/IAccountManager.sol",
+      "kind": "interface",
+      "name": "IAccountManager",
+      "bases": []
+    },
+    {
+      "file": "contracts/airdrop/interfaces/IAirdropClaim.sol",
+      "kind": "interface",
+      "name": "IAirdropClaim",
+      "bases": []
+    },
+    {
+      "file": "contracts/tokens/interfaces/IBackedHRC20.sol",
+      "kind": "interface",
+      "name": "IBackedHRC20",
+      "bases": [
+        "IERC20Upgradeable",
+        "IERC20PermitUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/bridge/interfaces/IBridgeController.sol",
+      "kind": "interface",
+      "name": "IBridgeController",
+      "bases": []
+    },
+    {
+      "file": "contracts/bridge/interfaces/IBridgeRelayer.sol",
+      "kind": "interface",
+      "name": "IBridgeRelayer",
+      "bases": []
+    },
+    {
+      "file": "contracts/fee/interfaces/IDistributor.sol",
+      "kind": "interface",
+      "name": "IDistributor",
+      "bases": []
+    },
+    {
+      "file": "contracts/tokens/interfaces/IEscrowedH1.sol",
+      "kind": "interface",
+      "name": "IEscrowedH1",
+      "bases": [
+        "IERC20Upgradeable"
+      ]
+    },
+    {
+      "file": "contracts/fee/interfaces/IFeeContract.sol",
+      "kind": "interface",
+      "name": "IFeeContract",
+      "bases": []
+    },
+    {
+      "file": "contracts/fee/interfaces/IFeeContractV06Downgrade.sol",
+      "kind": "interface",
+      "name": "IFeeContract",
+      "bases": []
+    },
+    {
+      "file": "contracts/fee/interfaces/IFeeContractV07Downgrade.sol",
+      "kind": "interface",
+      "name": "IFeeContract",
+      "bases": []
+    },
+    {
+      "file": "contracts/governance/interfaces/IFeeDistributor.sol",
+      "kind": "interface",
+      "name": "IFeeDistributor",
+      "bases": []
+    },
+    {
+      "file": "contracts/fee/interfaces/IFeeDistributorChannel.sol",
+      "kind": "interface",
+      "name": "IFeeDistributorChannel",
+      "bases": [
+        "IDistributor",
+        "IReceiver"
+      ]
+    },
+    {
+      "file": "contracts/fee/interfaces/IFeeOracle.sol",
+      "kind": "interface",
+      "name": "IFeeOracle",
+      "bases": []
+    },
+    {
+      "file": "contracts/h1-developed-application/interfaces/IH1DevelopedApplication.sol",
+      "kind": "interface",
+      "name": "IH1DevelopedApplication",
+      "bases": []
+    },
+    {
+      "file": "contracts/h1-native-application/interfaces/IH1NativeApplication.sol",
+      "kind": "interface",
+      "name": "IH1NativeApplication",
+      "bases": []
+    },
+    {
+      "file": "contracts/tokens/interfaces/IHRC20.sol",
+      "kind": "interface",
+      "name": "IHRC20",
+      "bases": [
+        "IERC20Upgradeable",
+        "IERC20PermitUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/bridge/interfaces/ILockedH1.sol",
+      "kind": "interface",
+      "name": "ILockedH1",
+      "bases": []
+    },
+    {
+      "file": "contracts/network-guardian/interfaces/INetworkGuardian.sol",
+      "kind": "interface",
+      "name": "INetworkGuardian",
+      "bases": []
+    },
+    {
+      "file": "contracts/network-guardian/interfaces/INetworkGuardianController.sol",
+      "kind": "interface",
+      "name": "INetworkGuardianController",
+      "bases": []
+    },
+    {
+      "file": "contracts/utils/interfaces/IOnChainRouting.sol",
+      "kind": "interface",
+      "name": "IOnChainRouting",
+      "bases": []
+    },
+    {
+      "file": "contracts/proof-of-identity/interfaces/vendor/IPermissionsInterface.sol",
+      "kind": "interface",
+      "name": "IPermissionsInterface",
+      "bases": []
+    },
+    {
+      "file": "contracts/proof-of-identity/interfaces/IProofOfIdentity.sol",
+      "kind": "interface",
+      "name": "IProofOfIdentity",
+      "bases": []
+    },
+    {
+      "file": "contracts/vendor/uniswapV3/interfaces/v3-periphery/IQuoterV2.sol",
+      "kind": "interface",
+      "name": "IQuoterV2",
+      "bases": []
+    },
+    {
+      "file": "contracts/fee/interfaces/IReceiver.sol",
+      "kind": "interface",
+      "name": "IReceiver",
+      "bases": []
+    },
+    {
+      "file": "contracts/utils/interfaces/IRecoverable.sol",
+      "kind": "interface",
+      "name": "IRecoverable",
+      "bases": []
+    },
+    {
+      "file": "contracts/staking/interfaces/ISimpleStaking.sol",
+      "kind": "interface",
+      "name": "ISimpleStaking",
+      "bases": []
+    },
+    {
+      "file": "contracts/staking/interfaces/IStaking.sol",
+      "kind": "interface",
+      "name": "IStaking",
+      "bases": []
+    },
+    {
+      "file": "contracts/fee/interfaces/IStakingChannel.sol",
+      "kind": "interface",
+      "name": "IStakingChannel",
+      "bases": [
+        "IDistributor",
+        "IReceiver"
+      ]
+    },
+    {
+      "file": "contracts/vendor/uniswapV3/interfaces/v3-periphery/ISwapRouter.sol",
+      "kind": "interface",
+      "name": "ISwapRouter",
+      "bases": [
+        "IUniswapV3SwapCallback"
+      ]
+    },
+    {
+      "file": "contracts/vendor/uniswapV3/interfaces/v3-periphery/IUniswapV3SwapCallback.sol",
+      "kind": "interface",
+      "name": "IUniswapV3SwapCallback",
+      "bases": []
+    },
+    {
+      "file": "contracts/fee/interfaces/IValidatorRewards.sol",
+      "kind": "interface",
+      "name": "IValidatorRewards",
+      "bases": [
+        "IDistributor",
+        "IReceiver"
+      ]
+    },
+    {
+      "file": "contracts/fee/interfaces/IValidatorRewardsConfig.sol",
+      "kind": "interface",
+      "name": "IValidatorRewardsConfig",
+      "bases": []
+    },
+    {
+      "file": "contracts/utils/interfaces/IVersion.sol",
+      "kind": "interface",
+      "name": "IVersion",
+      "bases": []
+    },
+    {
+      "file": "contracts/governance/interfaces/IVotingEscrow.sol",
+      "kind": "interface",
+      "name": "IVotingEscrow",
+      "bases": []
+    },
+    {
+      "file": "contracts/tokens/interfaces/IWETH9.sol",
+      "kind": "interface",
+      "name": "IWETH9",
+      "bases": []
+    },
+    {
+      "file": "contracts/tokens/interfaces/IWH1.sol",
+      "kind": "interface",
+      "name": "IWH1",
+      "bases": []
+    },
+    {
+      "file": "contracts/bridge/LockedH1.sol",
+      "kind": "contract",
+      "name": "LockedH1",
+      "bases": [
+        "NetworkGuardian",
+        "RecoverableUpgradeable",
+        "ILockedH1",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/staking/Staking.sol",
+      "kind": "contract",
+      "name": "NativeStaking",
+      "bases": [
+        "ReentrancyGuardUpgradeable",
+        "H1NativeApplicationUpgradeable",
+        "RecoverableUpgradeable",
+        "IStaking",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/network-guardian/NetworkGuardian.sol",
+      "kind": "abstract contract",
+      "name": "NetworkGuardian",
+      "bases": [
+        "Initializable",
+        "UUPSUpgradeable",
+        "ContextUpgradeable",
+        "ERC165Upgradeable",
+        "AccessControlUpgradeable",
+        "INetworkGuardian"
+      ]
+    },
+    {
+      "file": "contracts/network-guardian/NetworkGuardianController.sol",
+      "kind": "contract",
+      "name": "NetworkGuardianController",
+      "bases": [
+        "Initializable",
+        "AccessControlUpgradeable",
+        "UUPSUpgradeable",
+        "INetworkGuardianController",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/utils/OnChainRouting.sol",
+      "kind": "contract",
+      "name": "OnChainRouting",
+      "bases": [
+        "NetworkGuardian",
+        "IOnChainRouting",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/proof-of-identity/lib/POIType.sol",
+      "kind": "library",
+      "name": "POITypeUtils",
+      "bases": []
+    },
+    {
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "kind": "contract",
+      "name": "ProofOfIdentity",
+      "bases": [
+        "ERC721Upgradeable",
+        "NetworkGuardian",
+        "IProofOfIdentity",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/utils/upgradeable/RecoverableUpgradeable.sol",
+      "kind": "abstract contract",
+      "name": "RecoverableUpgradeable",
+      "bases": [
+        "Initializable"
+      ]
+    },
+    {
+      "file": "contracts/utils/Semver.sol",
+      "kind": "library",
+      "name": "Semver",
+      "bases": []
+    },
+    {
+      "file": "contracts/staking/SimpleStaking.sol",
+      "kind": "contract",
+      "name": "SimpleStaking",
+      "bases": [
+        "ReentrancyGuardUpgradeable",
+        "H1NativeApplicationUpgradeable",
+        "RecoverableUpgradeable",
+        "ISimpleStaking",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/fee/channels/staking/StakingChannelESH1.sol",
+      "kind": "contract",
+      "name": "StakingChannelESH1",
+      "bases": [
+        "ReentrancyGuardUpgradeable",
+        "NetworkGuardian",
+        "RecoverableUpgradeable",
+        "IStakingChannel",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsBase.sol",
+      "kind": "abstract contract",
+      "name": "ValidatorRewardsBase",
+      "bases": [
+        "ReentrancyGuardUpgradeable",
+        "NetworkGuardian",
+        "RecoverableUpgradeable",
+        "IValidatorRewards"
+      ]
+    },
+    {
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsConfig.sol",
+      "kind": "contract",
+      "name": "ValidatorRewardsConfig",
+      "bases": [
+        "NetworkGuardian",
+        "IValidatorRewardsConfig",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsESH1.sol",
+      "kind": "contract",
+      "name": "ValidatorRewardsESH1",
+      "bases": [
+        "ValidatorRewardsBase",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsH1.sol",
+      "kind": "contract",
+      "name": "ValidatorRewardsH1",
+      "bases": [
+        "ValidatorRewardsBase",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/governance/VotingEscrow.sol",
+      "kind": "contract",
+      "name": "VotingEscrow",
+      "bases": [
+        "Initializable",
+        "H1NativeApplicationUpgradeable",
+        "ReentrancyGuardUpgradeable",
+        "IVersion"
+      ]
+    },
+    {
+      "file": "contracts/tokens/WH1.sol",
+      "kind": "contract",
+      "name": "WH1",
+      "bases": [
+        "RecoverableUpgradeable",
+        "NetworkGuardian",
+        "ReentrancyGuardUpgradeable",
+        "BlacklistableUpgradeable",
+        "IWH1",
+        "IVersion"
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "file": "contracts/proof-of-identity/lib/POIType.sol",
+      "enum": "AccountStatus",
+      "values": [
+        "UNSUSPENDED",
+        "SUSPENDED"
+      ]
+    },
+    {
+      "file": "contracts/network-guardian/NetworkGuardianController.sol",
+      "enum": "Action",
+      "values": [
+        "PAUSE",
+        "UNPAUSE"
+      ]
+    },
+    {
+      "file": "contracts/governance/VotingEscrow.sol",
+      "enum": "DepositType",
+      "values": [
+        "DEPOSIT_FOR_TYPE",
+        "CREATE_LOCK_TYPE",
+        "INCREASE_LOCK_AMOUNT",
+        "INCREASE_UNLOCK_TIME"
+      ]
+    },
+    {
+      "file": "contracts/proof-of-identity/lib/POIType.sol",
+      "enum": "POIType",
+      "values": [
+        "NOT_ISSUED",
+        "PRINCIPAL",
+        "AUXILIARY"
+      ]
+    },
+    {
+      "file": "contracts/proof-of-identity/lib/Attribute.sol",
+      "enum": "SupportedAttributeType",
+      "values": [
+        "STRING",
+        "BOOL",
+        "U256",
+        "BYTES"
+      ]
+    },
+    {
+      "file": "contracts/bridge/interfaces/IBridgeController.sol",
+      "enum": "TxType",
+      "values": [
+        "Deposit",
+        "Withdrawal"
+      ]
+    },
+    {
+      "file": "contracts/bridge/interfaces/IBridgeController.sol",
+      "enum": "WithdrawalStatus",
+      "values": [
+        "Pending",
+        "Success"
+      ]
+    }
+  ],
+  "structs": [
+    {
+      "file": "contracts/proof-of-identity/lib/Attribute.sol",
+      "struct": "Attribute",
+      "fields": [
+        {
+          "name": "expiry",
+          "type": "uint256"
+        },
+        {
+          "name": "updatedAt",
+          "type": "uint256"
+        },
+        {
+          "name": "data",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bridge/interfaces/IBridgeController.sol",
+      "struct": "DepositTX",
+      "fields": [
+        {
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "name": "srcTkn",
+          "type": "address"
+        },
+        {
+          "name": "destTkn",
+          "type": "address"
+        },
+        {
+          "name": "chainID",
+          "type": "uint256"
+        },
+        {
+          "name": "amt",
+          "type": "uint256"
+        },
+        {
+          "name": "ts",
+          "type": "uint256"
+        },
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bridge/interfaces/IBridgeRelayer.sol",
+      "struct": "DequeueReq",
+      "fields": [
+        {
+          "name": "srcTxHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "dstChainID",
+          "type": "uint256"
+        },
+        {
+          "name": "increaseNonce",
+          "type": "uint256"
+        },
+        {
+          "name": "safeTxHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "withdrawID",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "contracts/vendor/uniswapV3/interfaces/v3-periphery/ISwapRouter.sol",
+      "struct": "ExactInputParams",
+      "fields": [
+        {
+          "name": "path",
+          "type": "bytes"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "deadline",
+          "type": "uint256"
+        },
+        {
+          "name": "amountIn",
+          "type": "uint256"
+        },
+        {
+          "name": "amountOutMinimum",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/vendor/uniswapV3/interfaces/v3-periphery/ISwapRouter.sol",
+      "struct": "ExactInputSingleParams",
+      "fields": [
+        {
+          "name": "tokenIn",
+          "type": "address"
+        },
+        {
+          "name": "tokenOut",
+          "type": "address"
+        },
+        {
+          "name": "fee",
+          "type": "uint24"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "deadline",
+          "type": "uint256"
+        },
+        {
+          "name": "amountIn",
+          "type": "uint256"
+        },
+        {
+          "name": "amountOutMinimum",
+          "type": "uint256"
+        },
+        {
+          "name": "sqrtPriceLimitX96",
+          "type": "uint160"
+        }
+      ]
+    },
+    {
+      "file": "contracts/vendor/uniswapV3/interfaces/v3-periphery/ISwapRouter.sol",
+      "struct": "ExactOutputParams",
+      "fields": [
+        {
+          "name": "path",
+          "type": "bytes"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "deadline",
+          "type": "uint256"
+        },
+        {
+          "name": "amountOut",
+          "type": "uint256"
+        },
+        {
+          "name": "amountInMaximum",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/vendor/uniswapV3/interfaces/v3-periphery/ISwapRouter.sol",
+      "struct": "ExactOutputSingleParams",
+      "fields": [
+        {
+          "name": "tokenIn",
+          "type": "address"
+        },
+        {
+          "name": "tokenOut",
+          "type": "address"
+        },
+        {
+          "name": "fee",
+          "type": "uint24"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "deadline",
+          "type": "uint256"
+        },
+        {
+          "name": "amountOut",
+          "type": "uint256"
+        },
+        {
+          "name": "amountInMaximum",
+          "type": "uint256"
+        },
+        {
+          "name": "sqrtPriceLimitX96",
+          "type": "uint160"
+        }
+      ]
+    },
+    {
+      "file": "contracts/tokens/HRC20.sol",
+      "struct": "H1DevConfig",
+      "fields": [
+        {
+          "name": "feeContract",
+          "type": "address"
+        },
+        {
+          "name": "guardianController",
+          "type": "address"
+        },
+        {
+          "name": "association",
+          "type": "address"
+        },
+        {
+          "name": "developer",
+          "type": "address"
+        },
+        {
+          "name": "devFeeCollector",
+          "type": "address"
+        },
+        {
+          "name": "fnSigs",
+          "type": "string[]"
+        },
+        {
+          "name": "fnFees",
+          "type": "uint256[]"
+        },
+        {
+          "name": "storesH1",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "file": "contracts/h1-native-application/H1NativeBase.sol",
+      "struct": "H1NativeBaseStorage",
+      "fields": [
+        {
+          "name": "feeContract",
+          "type": "IFeeContract"
+        },
+        {
+          "name": "msgValueAfterFee",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/governance/VotingEscrow.sol",
+      "struct": "LockedBalance",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "int128"
+        },
+        {
+          "name": "end",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/governance/VotingEscrow.sol",
+      "struct": "Point",
+      "fields": [
+        {
+          "name": "bias",
+          "type": "int128"
+        },
+        {
+          "name": "slope",
+          "type": "int128"
+        },
+        {
+          "name": "ts",
+          "type": "uint256"
+        },
+        {
+          "name": "blk",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/governance/interfaces/IVotingEscrow.sol",
+      "struct": "Point",
+      "fields": [
+        {
+          "name": "bias",
+          "type": "int128"
+        },
+        {
+          "name": "slope",
+          "type": "int128"
+        },
+        {
+          "name": "ts",
+          "type": "uint256"
+        },
+        {
+          "name": "blk",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/vendor/uniswapV3/interfaces/v3-periphery/IQuoterV2.sol",
+      "struct": "QuoteExactInputSingleParams",
+      "fields": [
+        {
+          "name": "tokenIn",
+          "type": "address"
+        },
+        {
+          "name": "tokenOut",
+          "type": "address"
+        },
+        {
+          "name": "amountIn",
+          "type": "uint256"
+        },
+        {
+          "name": "fee",
+          "type": "uint24"
+        },
+        {
+          "name": "sqrtPriceLimitX96",
+          "type": "uint160"
+        }
+      ]
+    },
+    {
+      "file": "contracts/vendor/uniswapV3/interfaces/v3-periphery/IQuoterV2.sol",
+      "struct": "QuoteExactOutputSingleParams",
+      "fields": [
+        {
+          "name": "tokenIn",
+          "type": "address"
+        },
+        {
+          "name": "tokenOut",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "fee",
+          "type": "uint24"
+        },
+        {
+          "name": "sqrtPriceLimitX96",
+          "type": "uint160"
+        }
+      ]
+    },
+    {
+      "file": "contracts/network-guardian/lib/Array.sol",
+      "struct": "Range",
+      "fields": [
+        {
+          "name": "start",
+          "type": "uint256"
+        },
+        {
+          "name": "end",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bridge/interfaces/IBridgeRelayer.sol",
+      "struct": "Task",
+      "fields": [
+        {
+          "name": "chainID",
+          "type": "uint256"
+        },
+        {
+          "name": "txHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "ts",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bridge/interfaces/IBridgeRelayer.sol",
+      "struct": "TaskGroup",
+      "fields": [
+        {
+          "name": "locked",
+          "type": "bool"
+        },
+        {
+          "name": "tasks",
+          "type": "Task[]"
+        }
+      ]
+    },
+    {
+      "file": "contracts/tokens/HRC20.sol",
+      "struct": "TokenConfig",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "symbol",
+          "type": "string"
+        },
+        {
+          "name": "decimals",
+          "type": "uint8"
+        },
+        {
+          "name": "proofOfIdentity",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "contracts/governance/FeeDistributor.sol",
+      "struct": "TokenState",
+      "fields": [
+        {
+          "name": "startTime",
+          "type": "uint64"
+        },
+        {
+          "name": "timeCursor",
+          "type": "uint64"
+        },
+        {
+          "name": "cachedBalance",
+          "type": "uint128"
+        }
+      ]
+    },
+    {
+      "file": "contracts/governance/FeeDistributor.sol",
+      "struct": "UserState",
+      "fields": [
+        {
+          "name": "startTime",
+          "type": "uint64"
+        },
+        {
+          "name": "timeCursor",
+          "type": "uint64"
+        },
+        {
+          "name": "lastEpochCheckpointed",
+          "type": "uint128"
+        }
+      ]
+    },
+    {
+      "file": "contracts/fee/interfaces/IValidatorRewardsConfig.sol",
+      "struct": "Validator",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "addr",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "contracts/tokens/interfaces/IEscrowedH1.sol",
+      "struct": "VestingInfo",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "depositTimestamp",
+          "type": "uint256"
+        },
+        {
+          "name": "lastClaimTimestamp",
+          "type": "uint256"
+        },
+        {
+          "name": "totalClaimed",
+          "type": "uint256"
+        },
+        {
+          "name": "finishedClaiming",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bridge/interfaces/IBridgeController.sol",
+      "struct": "WithdrawTX",
+      "fields": [
+        {
+          "name": "nonce",
+          "type": "uint256"
+        },
+        {
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "name": "hrc20",
+          "type": "address"
+        },
+        {
+          "name": "chainId",
+          "type": "uint256"
+        },
+        {
+          "name": "totalAmt",
+          "type": "uint256"
+        },
+        {
+          "name": "gasAmt",
+          "type": "uint256"
+        },
+        {
+          "name": "gasNativeAmt",
+          "type": "uint256"
+        },
+        {
+          "name": "feeAmt",
+          "type": "uint256"
+        },
+        {
+          "name": "ts",
+          "type": "uint256"
+        },
+        {
+          "name": "status",
+          "type": "WithdrawalStatus"
+        }
+      ]
+    }
+  ],
+  "all_state_variables": [
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_BPS_SCALE",
+      "type": "uint16 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10_000",
+      "declaration": "uint16 constant _BPS_SCALE = 10_000",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_H1_DEDUCTION_BPS",
+      "type": "uint16 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2_500",
+      "declaration": "uint16 constant _H1_DEDUCTION_BPS = 2_500",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_PRECISION",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 ** 18",
+      "declaration": "uint256 constant _PRECISION = 10 ** 18",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_XP_AIRDROP_BPS",
+      "type": "uint16 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "8_000",
+      "declaration": "uint16 constant _XP_AIRDROP_BPS = 8_000",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_airdropAmount",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _airdropAmount",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_allocation",
+      "type": "mapping(address user => uint256 allocation) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address user => uint256 allocation) private _allocation",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_availableAirdrop",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _availableAirdrop",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_discardedAirdrop",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _discardedAirdrop",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_discardedCollected",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _discardedCollected",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_endTS",
+      "type": "uint32 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 private _endTS",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_escrowedH1",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _escrowedH1",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_lpH1Allocation",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _lpH1Allocation",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_maxLpAmount",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _maxLpAmount",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_maxXpAmount",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _maxXpAmount",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_ready",
+      "type": "bool private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool private _ready",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_startTS",
+      "type": "uint32 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 private _startTS",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_xpH1Allocation",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _xpH1Allocation",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "TOKEN_MANAGER",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"TOKEN_MANAGER\")",
+      "declaration": "bytes32 public constant TOKEN_MANAGER = keccak256(\"TOKEN_MANAGER\")",
+      "file": "contracts/tokens/BackedHRC20.sol",
+      "contract": "BackedHRC20"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/tokens/BackedHRC20.sol",
+      "contract": "BackedHRC20"
+    },
+    {
+      "name": "_decimals",
+      "type": "uint8 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint8 private _decimals",
+      "file": "contracts/tokens/BackedHRC20.sol",
+      "contract": "BackedHRC20"
+    },
+    {
+      "name": "_BYPASSED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2",
+      "declaration": "uint256 private constant _BYPASSED = 2",
+      "file": "contracts/utils/upgradeable/BlacklistableUpgradeable.sol",
+      "contract": "BlacklistableUpgradeable"
+    },
+    {
+      "name": "_NOT_BYPASSED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1",
+      "declaration": "uint256 private constant _NOT_BYPASSED = 1",
+      "file": "contracts/utils/upgradeable/BlacklistableUpgradeable.sol",
+      "contract": "BlacklistableUpgradeable"
+    },
+    {
+      "name": "_blacklist",
+      "type": "mapping(address => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) private _blacklist",
+      "file": "contracts/utils/upgradeable/BlacklistableUpgradeable.sol",
+      "contract": "BlacklistableUpgradeable"
+    },
+    {
+      "name": "_poi",
+      "type": "IProofOfIdentity private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IProofOfIdentity private _poi",
+      "file": "contracts/utils/upgradeable/BlacklistableUpgradeable.sol",
+      "contract": "BlacklistableUpgradeable"
+    },
+    {
+      "name": "_status",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _status",
+      "file": "contracts/utils/upgradeable/BlacklistableUpgradeable.sol",
+      "contract": "BlacklistableUpgradeable"
+    },
+    {
+      "name": "BPS_SCALE",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10_000",
+      "declaration": "uint256 private constant BPS_SCALE = 10_000",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "GAS",
+      "type": "address public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x0000000000000000000000000000000000000001",
+      "declaration": "address public constant GAS = 0x0000000000000000000000000000000000000001",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "GAS_SETTER",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"GAS_SETTER\")",
+      "declaration": "bytes32 public constant GAS_SETTER = keccak256(\"GAS_SETTER\")",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "H1",
+      "type": "address public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "declaration": "address public constant H1 = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "H1_DEC",
+      "type": "uint8 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "18",
+      "declaration": "uint8 public constant H1_DEC = 18",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "MIN_HRC20_VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant MIN_HRC20_VERSION = uint64(0x0100000000)",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "MIN_WH1_VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant MIN_WH1_VERSION = uint64(0x0100000000)",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_allowedWithdrawals",
+      "type": "mapping(uint256 => mapping(address => bool)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(address => bool)) private _allowedWithdrawals",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(uint256 => mapping(address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(address => uint256)) private _balances",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_chainToNative",
+      "type": "mapping(uint256 => address) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => address) private _chainToNative",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_defaultDepositFeeBPS",
+      "type": "uint16 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint16 private _defaultDepositFeeBPS",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_defaultFeeBpsWithdraw",
+      "type": "uint16 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint16 private _defaultFeeBpsWithdraw",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_depositFeeBPS",
+      "type": "mapping(address => uint16) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint16) private _depositFeeBPS",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_depositTransactions",
+      "type": "mapping(bytes32 => DepositTX) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => DepositTX) private _depositTransactions",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_gas",
+      "type": "mapping(uint256 => mapping(address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(address => uint256)) private _gas",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_hrc20ToSource",
+      "type": "mapping(uint256 => mapping(address => address)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(address => address)) private _hrc20ToSource",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_lockedH1",
+      "type": "ILockedH1 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ILockedH1 private _lockedH1",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_minAmount",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _minAmount",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_nonces",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _nonces",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_onChainRouting",
+      "type": "IOnChainRouting private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IOnChainRouting private _onChainRouting",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_sourceToHRC20",
+      "type": "mapping(uint256 => mapping(address => address)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(address => address)) private _sourceToHRC20",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_wh1",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _wh1",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_withdrawFeeBPS",
+      "type": "mapping(address => uint16) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint16) private _withdrawFeeBPS",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "_withdrawTransactions",
+      "type": "mapping(bytes32 => WithdrawTX) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => WithdrawTX) private _withdrawTransactions",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "INDEXER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"INDEXER_ROLE\")",
+      "declaration": "bytes32 public constant INDEXER_ROLE = keccak256(\"INDEXER_ROLE\")",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "LOCKER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"LOCKER_ROLE\")",
+      "declaration": "bytes32 public constant LOCKER_ROLE = keccak256(\"LOCKER_ROLE\")",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_batchSize",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _batchSize",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_hd",
+      "type": "mapping(uint256 => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) private _hd",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_indexers",
+      "type": "address[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] private _indexers",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_latest",
+      "type": "mapping(uint256 => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) private _latest",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_lockers",
+      "type": "address[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] private _lockers",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_nonce",
+      "type": "mapping(uint256 => mapping(uint256 => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(uint256 => uint256)) private _nonce",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_operators",
+      "type": "address[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] private _operators",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_processedTx",
+      "type": "mapping(uint256 => mapping(bytes32 => bytes32)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(bytes32 => bytes32)) private _processedTx",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_queue",
+      "type": "mapping(uint256 => mapping(uint256 => TaskGroup)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(uint256 => TaskGroup)) private _queue",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_queued",
+      "type": "mapping(bytes32 => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => bool) private _queued",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_reqFreq",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _reqFreq",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_safeTxToWithdrawID",
+      "type": "mapping(uint256 => mapping(bytes32 => bytes32)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(bytes32 => bytes32)) private _safeTxToWithdrawID",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_supportedChain",
+      "type": "mapping(uint256 => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => bool) private _supportedChain",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_supportedChains",
+      "type": "uint256[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256[] private _supportedChains",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_tl",
+      "type": "mapping(uint256 => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) private _tl",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/tokens/EscrowedH1.sol",
+      "contract": "EscrowedH1"
+    },
+    {
+      "name": "_finishedVesting",
+      "type": "mapping(address => VestingInfo[]) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => VestingInfo[]) private _finishedVesting",
+      "file": "contracts/tokens/EscrowedH1.sol",
+      "contract": "EscrowedH1"
+    },
+    {
+      "name": "_inProgressVesting",
+      "type": "mapping(address => VestingInfo[]) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => VestingInfo[]) private _inProgressVesting",
+      "file": "contracts/tokens/EscrowedH1.sol",
+      "contract": "EscrowedH1"
+    },
+    {
+      "name": "_vestingDuration",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _vestingDuration",
+      "file": "contracts/tokens/EscrowedH1.sol",
+      "contract": "EscrowedH1"
+    },
+    {
+      "name": "_whitelist",
+      "type": "mapping(address => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) private _whitelist",
+      "file": "contracts/tokens/EscrowedH1.sol",
+      "contract": "EscrowedH1"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_SCALE",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 ** 18",
+      "declaration": "uint256 private constant _SCALE = 10 ** 18",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_assocShare",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _assocShare",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_channels",
+      "type": "address[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] private _channels",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_contractShares",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _contractShares",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_distributionEpoch",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _distributionEpoch",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_fee",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _fee",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_feeExemptCaller",
+      "type": "mapping(bytes32 => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => bool) private _feeExemptCaller",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_feeExemptContracts",
+      "type": "mapping(address => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) private _feeExemptContracts",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_feeExemptEOAs",
+      "type": "mapping(address => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) private _feeExemptEOAs",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_feeExemptFunctions",
+      "type": "mapping(bytes32 => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => bool) private _feeExemptFunctions",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_feePrior",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _feePrior",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_feeUSD",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _feeUSD",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_feeUpdateEpoch",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _feeUpdateEpoch",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_graceContracts",
+      "type": "mapping(address => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) private _graceContracts",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_gracePeriod",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _gracePeriod",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_h1USD",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _h1USD",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_h1USDPrev",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _h1USDPrev",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_lastDistribution",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _lastDistribution",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_maxDevFee",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _maxDevFee",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_minDevFee",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _minDevFee",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_networkFeeGraceTimestamp",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _networkFeeGraceTimestamp",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_networkFeeResetTimestamp",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _networkFeeResetTimestamp",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_oracle",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _oracle",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_weights",
+      "type": "uint256[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256[] private _weights",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "WEEK_MINUS_SECOND",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1 weeks - 1",
+      "declaration": "uint256 private constant WEEK_MINUS_SECOND = 1 weeks - 1",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_historicalRewardTokens",
+      "type": "address[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] private _historicalRewardTokens",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_isHistoricalRewardToken",
+      "type": "mapping(address => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) private _isHistoricalRewardToken",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_startTime",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _startTime",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_timeCursor",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _timeCursor",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_tokenClaimingEnabled",
+      "type": "mapping(IERC20Upgradeable => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(IERC20Upgradeable => bool) private _tokenClaimingEnabled",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_tokensPerWeek",
+      "type": "mapping(IERC20Upgradeable => mapping(uint256 => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(IERC20Upgradeable => mapping(uint256 => uint256)) private _tokensPerWeek",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_userBalanceAtTimestamp",
+      "type": "mapping(address => mapping(uint256 => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(uint256 => uint256)) private _userBalanceAtTimestamp",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_userTokenTimeCursor",
+      "type": "mapping(address => mapping(IERC20Upgradeable => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(IERC20Upgradeable => uint256)) private _userTokenTimeCursor",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_veSupplyCache",
+      "type": "mapping(uint256 => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) private _veSupplyCache",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_votingEscrow",
+      "type": "IVotingEscrow private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IVotingEscrow private _votingEscrow",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_whitelist",
+      "type": "mapping(address => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) private _whitelist",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/fee/channels/fee-distributor-channels/FeeDistributorChannelWH1.sol",
+      "contract": "FeeDistributorChannelWH1"
+    },
+    {
+      "name": "_WH1",
+      "type": "IWH1 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IWH1 private _WH1",
+      "file": "contracts/fee/channels/fee-distributor-channels/FeeDistributorChannelWH1.sol",
+      "contract": "FeeDistributorChannelWH1"
+    },
+    {
+      "name": "_feeDistributor",
+      "type": "IFeeDistributor private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IFeeDistributor private _feeDistributor",
+      "file": "contracts/fee/channels/fee-distributor-channels/FeeDistributorChannelWH1.sol",
+      "contract": "FeeDistributorChannelWH1"
+    },
+    {
+      "name": "_lastDistribution",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal _lastDistribution",
+      "file": "contracts/fee/channels/fee-distributor-channels/FeeDistributorChannelWH1.sol",
+      "contract": "FeeDistributorChannelWH1"
+    },
+    {
+      "name": "OPERATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"OPERATOR_ROLE\")",
+      "declaration": "bytes32 public constant OPERATOR_ROLE = keccak256(\"OPERATOR_ROLE\")",
+      "file": "contracts/test/FixedFeeOracle.sol",
+      "contract": "FixedFeeOracle"
+    },
+    {
+      "name": "_val",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _val",
+      "file": "contracts/test/FixedFeeOracle.sol",
+      "contract": "FixedFeeOracle"
+    },
+    {
+      "name": "DEV_ADMIN_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"DEV_ADMIN_ROLE\")",
+      "declaration": "bytes32 public constant DEV_ADMIN_ROLE = keccak256(\"DEV_ADMIN_ROLE\")",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "SCALE",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10 ** 18",
+      "declaration": "uint256 private constant SCALE = 10 ** 18",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "_H1_DEV_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1",
+      "declaration": "uint256 private constant _H1_DEV_ENTERED = 1",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "_H1_DEV_NOT_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2",
+      "declaration": "uint256 private constant _H1_DEV_NOT_ENTERED = 2",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "_devFeeCollector",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _devFeeCollector",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "_developer",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _developer",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "_feeContract",
+      "type": "IFeeContract private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IFeeContract private _feeContract",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "_fnFees",
+      "type": "mapping(bytes4 => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes4 => uint256) private _fnFees",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "_fnSigs",
+      "type": "mapping(bytes4 => bytes) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes4 => bytes) private _fnSigs",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "_msgValueAfterFee",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _msgValueAfterFee",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "_status",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _status",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "_storesH1",
+      "type": "bool private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool private _storesH1",
+      "file": "contracts/h1-developed-application/H1DevelopedApplication.sol",
+      "contract": "H1DevelopedApplication"
+    },
+    {
+      "name": "_feeContract",
+      "type": "IFeeContract private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IFeeContract private _feeContract",
+      "file": "contracts/h1-native-application/H1NativeApplicationUpgradeable.sol",
+      "contract": "H1NativeApplicationUpgradeable"
+    },
+    {
+      "name": "_msgValue",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _msgValue",
+      "file": "contracts/h1-native-application/H1NativeApplicationUpgradeable.sol",
+      "contract": "H1NativeApplicationUpgradeable"
+    },
+    {
+      "name": "_blacklist",
+      "type": "mapping(address => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) private _blacklist",
+      "file": "contracts/tokens/HRC20.sol",
+      "contract": "HRC20"
+    },
+    {
+      "name": "_poi",
+      "type": "IProofOfIdentity private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IProofOfIdentity private _poi",
+      "file": "contracts/tokens/HRC20.sol",
+      "contract": "HRC20"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/nfts/Haven1LaunchCrew.sol",
+      "contract": "Haven1LaunchCrew"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/nfts/Haven1LaunchCrew.sol",
+      "contract": "Haven1LaunchCrew"
+    },
+    {
+      "name": "_uri",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _uri",
+      "file": "contracts/nfts/Haven1LaunchCrew.sol",
+      "contract": "Haven1LaunchCrew"
+    },
+    {
+      "name": "BRIDGE_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"BRIDGE_ROLE\")",
+      "declaration": "bytes32 public constant BRIDGE_ROLE = keccak256(\"BRIDGE_ROLE\")",
+      "file": "contracts/bridge/LockedH1.sol",
+      "contract": "LockedH1"
+    },
+    {
+      "name": "MIN_BRIDGE_VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant MIN_BRIDGE_VERSION = uint64(0x0100000000)",
+      "file": "contracts/bridge/LockedH1.sol",
+      "contract": "LockedH1"
+    },
+    {
+      "name": "MIN_WH1_VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant MIN_WH1_VERSION = uint64(0x0100000000)",
+      "file": "contracts/bridge/LockedH1.sol",
+      "contract": "LockedH1"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/bridge/LockedH1.sol",
+      "contract": "LockedH1"
+    },
+    {
+      "name": "_h1Unlocked",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _h1Unlocked",
+      "file": "contracts/bridge/LockedH1.sol",
+      "contract": "LockedH1"
+    },
+    {
+      "name": "_ready",
+      "type": "bool private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool private _ready",
+      "file": "contracts/bridge/LockedH1.sol",
+      "contract": "LockedH1"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/bridge/LockedH1.sol",
+      "contract": "LockedH1"
+    },
+    {
+      "name": "bridgeController",
+      "type": "IBridgeController public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IBridgeController public bridgeController",
+      "file": "contracts/bridge/LockedH1.sol",
+      "contract": "LockedH1"
+    },
+    {
+      "name": "wh1",
+      "type": "IWH1 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IWH1 public wh1",
+      "file": "contracts/bridge/LockedH1.sol",
+      "contract": "LockedH1"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_balanceOfH1",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balanceOfH1",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_balanceOfToken",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balanceOfToken",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_duration",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _duration",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_finishAt",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _finishAt",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_rewardPerTokenStored",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _rewardPerTokenStored",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_rewardRate",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _rewardRate",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_rewardToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private _rewardToken",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_rewards",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _rewards",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_stakingToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private _stakingToken",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_updatedAt",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _updatedAt",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_userRewardPerTokenPaid",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _userRewardPerTokenPaid",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "NETWORK_GUARDIAN",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"NETWORK_GUARDIAN\")",
+      "declaration": "bytes32 public constant NETWORK_GUARDIAN = keccak256(\"NETWORK_GUARDIAN\")",
+      "file": "contracts/network-guardian/NetworkGuardian.sol",
+      "contract": "NetworkGuardian"
+    },
+    {
+      "name": "OPERATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"OPERATOR_ROLE\")",
+      "declaration": "bytes32 public constant OPERATOR_ROLE = keccak256(\"OPERATOR_ROLE\")",
+      "file": "contracts/network-guardian/NetworkGuardian.sol",
+      "contract": "NetworkGuardian"
+    },
+    {
+      "name": "_association",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _association",
+      "file": "contracts/network-guardian/NetworkGuardian.sol",
+      "contract": "NetworkGuardian"
+    },
+    {
+      "name": "_controller",
+      "type": "INetworkGuardianController private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "INetworkGuardianController private _controller",
+      "file": "contracts/network-guardian/NetworkGuardian.sol",
+      "contract": "NetworkGuardian"
+    },
+    {
+      "name": "_guardianPaused",
+      "type": "bool private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool private _guardianPaused",
+      "file": "contracts/network-guardian/NetworkGuardian.sol",
+      "contract": "NetworkGuardian"
+    },
+    {
+      "name": "GUARDIAN_INTERFACE_ID",
+      "type": "bytes4 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x64b581fc",
+      "declaration": "bytes4 private constant GUARDIAN_INTERFACE_ID = 0x64b581fc",
+      "file": "contracts/network-guardian/NetworkGuardianController.sol",
+      "contract": "NetworkGuardianController"
+    },
+    {
+      "name": "NETWORK_GUARDIAN",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"NETWORK_GUARDIAN\")",
+      "declaration": "bytes32 public constant NETWORK_GUARDIAN = keccak256(\"NETWORK_GUARDIAN\")",
+      "file": "contracts/network-guardian/NetworkGuardianController.sol",
+      "contract": "NetworkGuardianController"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/network-guardian/NetworkGuardianController.sol",
+      "contract": "NetworkGuardianController"
+    },
+    {
+      "name": "_association",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _association",
+      "file": "contracts/network-guardian/NetworkGuardianController.sol",
+      "contract": "NetworkGuardianController"
+    },
+    {
+      "name": "_maxIters",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _maxIters",
+      "file": "contracts/network-guardian/NetworkGuardianController.sol",
+      "contract": "NetworkGuardianController"
+    },
+    {
+      "name": "_registered",
+      "type": "mapping(address => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) private _registered",
+      "file": "contracts/network-guardian/NetworkGuardianController.sol",
+      "contract": "NetworkGuardianController"
+    },
+    {
+      "name": "_registeredAddresses",
+      "type": "INetworkGuardian[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "INetworkGuardian[] private _registeredAddresses",
+      "file": "contracts/network-guardian/NetworkGuardianController.sol",
+      "contract": "NetworkGuardianController"
+    },
+    {
+      "name": "FEE_TIER_1",
+      "type": "uint24 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "500",
+      "declaration": "uint24 private constant FEE_TIER_1 = 500",
+      "file": "contracts/utils/OnChainRouting.sol",
+      "contract": "OnChainRouting"
+    },
+    {
+      "name": "FEE_TIER_2",
+      "type": "uint24 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "3000",
+      "declaration": "uint24 private constant FEE_TIER_2 = 3000",
+      "file": "contracts/utils/OnChainRouting.sol",
+      "contract": "OnChainRouting"
+    },
+    {
+      "name": "FEE_TIER_3",
+      "type": "uint24 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10_000",
+      "declaration": "uint24 private constant FEE_TIER_3 = 10_000",
+      "file": "contracts/utils/OnChainRouting.sol",
+      "contract": "OnChainRouting"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/utils/OnChainRouting.sol",
+      "contract": "OnChainRouting"
+    },
+    {
+      "name": "baseTokens",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public baseTokens",
+      "file": "contracts/utils/OnChainRouting.sol",
+      "contract": "OnChainRouting"
+    },
+    {
+      "name": "quoter",
+      "type": "IQuoterV2 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IQuoterV2 public quoter",
+      "file": "contracts/utils/OnChainRouting.sol",
+      "contract": "OnChainRouting"
+    },
+    {
+      "name": "swapRouter",
+      "type": "ISwapRouter public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ISwapRouter public swapRouter",
+      "file": "contracts/utils/OnChainRouting.sol",
+      "contract": "OnChainRouting"
+    },
+    {
+      "name": "ORG",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"HAVEN1\"",
+      "declaration": "string private constant ORG = \"HAVEN1\"",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_accountManager",
+      "type": "IAccountManager private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IAccountManager private _accountManager",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_addressToPOIType",
+      "type": "mapping(address => POIType) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => POIType) private _addressToPOIType",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_addressToTokenID",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _addressToTokenID",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_attributeCount",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _attributeCount",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_attributeToName",
+      "type": "mapping(uint256 => string) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => string) private _attributeToName",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_attributeToType",
+      "type": "mapping(uint256 => SupportedAttributeType) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => SupportedAttributeType) private _attributeToType",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_attributes",
+      "type": "mapping(address => mapping(uint256 => Attribute)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(uint256 => Attribute)) private _attributes",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_maxAux",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _maxAux",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_permissionsInterface",
+      "type": "IPermissionsInterface private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IPermissionsInterface private _permissionsInterface",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_principal",
+      "type": "mapping(address => address) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => address) private _principal",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_principalToAux",
+      "type": "mapping(address => address[]) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => address[]) private _principalToAux",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_tokenIDCounter",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _tokenIDCounter",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_tokenURI",
+      "type": "mapping(uint256 => string) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => string) private _tokenURI",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_balanceOf",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balanceOf",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_duration",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _duration",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_finishAt",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _finishAt",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_rewardPerTokenStored",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _rewardPerTokenStored",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_rewardRate",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _rewardRate",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_rewardToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private _rewardToken",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_rewards",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _rewards",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_stakingToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private _stakingToken",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_updatedAt",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _updatedAt",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_userRewardPerTokenPaid",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _userRewardPerTokenPaid",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/fee/channels/staking/StakingChannelESH1.sol",
+      "contract": "StakingChannelESH1"
+    },
+    {
+      "name": "_esH1",
+      "type": "IEscrowedH1 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IEscrowedH1 private _esH1",
+      "file": "contracts/fee/channels/staking/StakingChannelESH1.sol",
+      "contract": "StakingChannelESH1"
+    },
+    {
+      "name": "_lastDistribution",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _lastDistribution",
+      "file": "contracts/fee/channels/staking/StakingChannelESH1.sol",
+      "contract": "StakingChannelESH1"
+    },
+    {
+      "name": "_staking",
+      "type": "IStaking private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IStaking private _staking",
+      "file": "contracts/fee/channels/staking/StakingChannelESH1.sol",
+      "contract": "StakingChannelESH1"
+    },
+    {
+      "name": "_distFreqSec",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal _distFreqSec",
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsBase.sol",
+      "contract": "ValidatorRewardsBase"
+    },
+    {
+      "name": "_lastDistribution",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal _lastDistribution",
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsBase.sol",
+      "contract": "ValidatorRewardsBase"
+    },
+    {
+      "name": "_validatorConfig",
+      "type": "IValidatorRewardsConfig internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IValidatorRewardsConfig internal _validatorConfig",
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsBase.sol",
+      "contract": "ValidatorRewardsBase"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsConfig.sol",
+      "contract": "ValidatorRewardsConfig"
+    },
+    {
+      "name": "_addressToID",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _addressToID",
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsConfig.sol",
+      "contract": "ValidatorRewardsConfig"
+    },
+    {
+      "name": "_validatorAddresses",
+      "type": "address[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] private _validatorAddresses",
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsConfig.sol",
+      "contract": "ValidatorRewardsConfig"
+    },
+    {
+      "name": "_validators",
+      "type": "mapping(uint256 => Validator) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => Validator) private _validators",
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsConfig.sol",
+      "contract": "ValidatorRewardsConfig"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsESH1.sol",
+      "contract": "ValidatorRewardsESH1"
+    },
+    {
+      "name": "_esH1",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _esH1",
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsESH1.sol",
+      "contract": "ValidatorRewardsESH1"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsH1.sol",
+      "contract": "ValidatorRewardsH1"
+    },
+    {
+      "name": "_H1",
+      "type": "address private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "declaration": "address private constant _H1 = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "file": "contracts/fee/channels/validator-rewards/ValidatorRewardsH1.sol",
+      "contract": "ValidatorRewardsH1"
+    },
+    {
+      "name": "MAXTIME",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "4 * 365 * 86400",
+      "declaration": "uint256 public constant MAXTIME = 4 * 365 * 86400",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "MINTIME",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public MINTIME",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "MULTIPLIER",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1 ether",
+      "declaration": "uint256 internal constant MULTIPLIER = 1 ether",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "WEEK",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1 weeks",
+      "declaration": "uint256 internal constant WEEK = 1 weeks",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "_controller",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public _controller",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "active_deposit_token_keys",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public active_deposit_token_keys",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "decimals",
+      "type": "uint8 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "18",
+      "declaration": "uint8 public constant decimals = 18",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "deposit_for_whitelist",
+      "type": "mapping(address => mapping(address => bool)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => bool)) public deposit_for_whitelist",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "deposit_token_keys",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public deposit_token_keys",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "deposit_tokens",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public deposit_tokens",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "epoch",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public epoch",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "h1_address",
+      "type": "address public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "declaration": "address public constant h1_address = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "iMAXTIME",
+      "type": "int128 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "4 * 365 * 86400",
+      "declaration": "int128 internal constant iMAXTIME = 4 * 365 * 86400",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "locked",
+      "type": "mapping(address => LockedBalance) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => LockedBalance) public locked",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "name",
+      "type": "string public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"veH1\"",
+      "declaration": "string public constant name = \"veH1\"",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "point_history",
+      "type": "mapping(uint256 => Point) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => Point) public point_history",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "slope_changes",
+      "type": "mapping(uint256 => int128) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => int128) public slope_changes",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "supply",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public supply",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "symbol",
+      "type": "string public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"veH1\"",
+      "declaration": "string public constant symbol = \"veH1\"",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "transfersEnabled",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public transfersEnabled",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "unlocked",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public unlocked",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "user_deposited",
+      "type": "mapping(address => mapping(address => uint256)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => uint256)) public user_deposited",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "user_point_epoch",
+      "type": "mapping(address => uint) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint) public user_point_epoch",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "user_point_history",
+      "type": "mapping(address => Point[1000000000]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => Point[1000000000]) public user_point_history",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "wh1_address",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public wh1_address",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "VERSION",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint64(0x0100000000)",
+      "declaration": "uint64 private constant VERSION = uint64(0x0100000000)",
+      "file": "contracts/tokens/WH1.sol",
+      "contract": "WH1"
+    },
+    {
+      "name": "_DECIMALS",
+      "type": "uint8 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "18",
+      "declaration": "uint8 private constant _DECIMALS = 18",
+      "file": "contracts/tokens/WH1.sol",
+      "contract": "WH1"
+    },
+    {
+      "name": "_NAME",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"Wrapped H1\"",
+      "declaration": "string private constant _NAME = \"Wrapped H1\"",
+      "file": "contracts/tokens/WH1.sol",
+      "contract": "WH1"
+    },
+    {
+      "name": "_SYMBOL",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"wH1\"",
+      "declaration": "string private constant _SYMBOL = \"wH1\"",
+      "file": "contracts/tokens/WH1.sol",
+      "contract": "WH1"
+    },
+    {
+      "name": "_allowance",
+      "type": "mapping(address => mapping(address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => uint256)) private _allowance",
+      "file": "contracts/tokens/WH1.sol",
+      "contract": "WH1"
+    },
+    {
+      "name": "_balanceOf",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balanceOf",
+      "file": "contracts/tokens/WH1.sol",
+      "contract": "WH1"
+    }
+  ],
+  "total_balance_variables": [
+    {
+      "name": "_balances",
+      "type": "mapping(uint256 => mapping(address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(address => uint256)) private _balances",
+      "file": "contracts/bridge/BridgeController.sol",
+      "contract": "BridgeController"
+    },
+    {
+      "name": "INDEXER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"INDEXER_ROLE\")",
+      "declaration": "bytes32 public constant INDEXER_ROLE = keccak256(\"INDEXER_ROLE\")",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_indexers",
+      "type": "address[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] private _indexers",
+      "file": "contracts/bridge/BridgeRelayer.sol",
+      "contract": "BridgeRelayer"
+    },
+    {
+      "name": "_assocShare",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _assocShare",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_contractShares",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _contractShares",
+      "file": "contracts/fee/FeeContract.sol",
+      "contract": "FeeContract"
+    },
+    {
+      "name": "_userBalanceAtTimestamp",
+      "type": "mapping(address => mapping(uint256 => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(uint256 => uint256)) private _userBalanceAtTimestamp",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_veSupplyCache",
+      "type": "mapping(uint256 => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) private _veSupplyCache",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/nfts/Haven1LaunchCrew.sol",
+      "contract": "Haven1LaunchCrew"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/bridge/LockedH1.sol",
+      "contract": "LockedH1"
+    },
+    {
+      "name": "_balanceOfH1",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balanceOfH1",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_balanceOfToken",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balanceOfToken",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_stakingToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private _stakingToken",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_balanceOf",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balanceOf",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_stakingToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private _stakingToken",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_staking",
+      "type": "IStaking private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IStaking private _staking",
+      "file": "contracts/fee/channels/staking/StakingChannelESH1.sol",
+      "contract": "StakingChannelESH1"
+    },
+    {
+      "name": "supply",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public supply",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "_balanceOf",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balanceOf",
+      "file": "contracts/tokens/WH1.sol",
+      "contract": "WH1"
+    }
+  ],
+  "token_variables": [
+    {
+      "name": "_discardedAirdrop",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _discardedAirdrop",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_lpH1Allocation",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _lpH1Allocation",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "_maxLpAmount",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _maxLpAmount",
+      "file": "contracts/airdrop/AirdropClaim.sol",
+      "contract": "AirdropClaim"
+    },
+    {
+      "name": "TOKEN_MANAGER",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"TOKEN_MANAGER\")",
+      "declaration": "bytes32 public constant TOKEN_MANAGER = keccak256(\"TOKEN_MANAGER\")",
+      "file": "contracts/tokens/BackedHRC20.sol",
+      "contract": "BackedHRC20"
+    },
+    {
+      "name": "_historicalRewardTokens",
+      "type": "address[] private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] private _historicalRewardTokens",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_isHistoricalRewardToken",
+      "type": "mapping(address => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) private _isHistoricalRewardToken",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_tokenClaimingEnabled",
+      "type": "mapping(IERC20Upgradeable => bool) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(IERC20Upgradeable => bool) private _tokenClaimingEnabled",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_tokensPerWeek",
+      "type": "mapping(IERC20Upgradeable => mapping(uint256 => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(IERC20Upgradeable => mapping(uint256 => uint256)) private _tokensPerWeek",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_userTokenTimeCursor",
+      "type": "mapping(address => mapping(IERC20Upgradeable => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(IERC20Upgradeable => uint256)) private _userTokenTimeCursor",
+      "file": "contracts/governance/FeeDistributor.sol",
+      "contract": "FeeDistributor"
+    },
+    {
+      "name": "_balanceOfToken",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balanceOfToken",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_rewardPerTokenStored",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _rewardPerTokenStored",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_rewardToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private _rewardToken",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_stakingToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private _stakingToken",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "_userRewardPerTokenPaid",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _userRewardPerTokenPaid",
+      "file": "contracts/staking/Staking.sol",
+      "contract": "NativeStaking"
+    },
+    {
+      "name": "baseTokens",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public baseTokens",
+      "file": "contracts/utils/OnChainRouting.sol",
+      "contract": "OnChainRouting"
+    },
+    {
+      "name": "_addressToTokenID",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _addressToTokenID",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_tokenIDCounter",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _tokenIDCounter",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_tokenURI",
+      "type": "mapping(uint256 => string) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => string) private _tokenURI",
+      "file": "contracts/proof-of-identity/ProofOfIdentity.sol",
+      "contract": "ProofOfIdentity"
+    },
+    {
+      "name": "_rewardPerTokenStored",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _rewardPerTokenStored",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_rewardToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private _rewardToken",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_stakingToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private _stakingToken",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "_userRewardPerTokenPaid",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _userRewardPerTokenPaid",
+      "file": "contracts/staking/SimpleStaking.sol",
+      "contract": "SimpleStaking"
+    },
+    {
+      "name": "active_deposit_token_keys",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public active_deposit_token_keys",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "deposit_token_keys",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public deposit_token_keys",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    },
+    {
+      "name": "deposit_tokens",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public deposit_tokens",
+      "file": "contracts/governance/VotingEscrow.sol",
+      "contract": "VotingEscrow"
+    }
+  ],
+  "token_addresses_hardcoded": [],
+  "invariant_values": [
+    "Key accounting vars (`_balances`, `INDEXER_ROLE`, `_indexers`, `_totalSupply`, `_contractShares`, `_assocShare`, `_staking`, `_veSupplyCache`) must only change through authorized accounting paths",
+    "Every token address/handle variable must be non-zero and immutable or governance-gated",
+    "Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition"
+  ]
+}

@@ -1,0 +1,147 @@
+// SPDX-License-Identifier: BUSL-1.1
+
+/*
+    This file is part of the Onyx Protocol.
+
+    (c) Enzyme Foundation <foundation@enzyme.finance>
+
+    For the full license information, please view the LICENSE
+    file that was distributed with this source code.
+*/
+
+pragma solidity 0.8.28;
+
+import {Test} from "forge-std/Test.sol";
+
+import {IFeeHandler} from "src/interfaces/IFeeHandler.sol";
+import {IPositionTracker} from "src/components/value/position-trackers/IPositionTracker.sol";
+import {IValuationHandler} from "src/interfaces/IValuationHandler.sol";
+import {IAddressList} from "src/infra/lists/address-list/IAddressList.sol";
+import {Shares} from "src/shares/Shares.sol";
+
+import {BlankFeeHandler, BlankPositionTracker} from "test/mocks/Blanks.sol";
+
+import {Constants} from "test/utils/Constants.sol";
+
+contract TestHelpers is Constants, Test {
+    function createShares() internal returns (Shares shares_) {
+        address owner = makeAddr("owner");
+        string memory name = "Test Shares";
+        string memory symbol = "TST";
+        bytes32 valueAsset = keccak256("USD");
+
+        shares_ = new Shares();
+        shares_.init({_owner: owner, _name: name, _symbol: symbol, _valueAsset: valueAsset});
+    }
+
+    // MOCKS: FUNCTION CALLS
+
+    function addressList_mockIsInList(address _addressList, address _item, bool _isInList) internal {
+        vm.mockCall(_addressList, abi.encodeWithSelector(IAddressList.isInList.selector, _item), abi.encode(_isInList));
+    }
+
+    function feeHandler_mockGetTotalValueOwed(address _feeHandler, uint256 _totalValueOwed) internal {
+        vm.mockCall(_feeHandler, IFeeHandler.getTotalValueOwed.selector, abi.encode(_totalValueOwed));
+    }
+
+    function feeHandler_mockSettleEntranceFeeGivenGrossShares(address _feeHandler, uint256 _feeSharesAmount) internal {
+        vm.mockCall(_feeHandler, IFeeHandler.settleEntranceFeeGivenGrossShares.selector, abi.encode(_feeSharesAmount));
+    }
+
+    function feeHandler_mockSettleEntranceFeeGivenGrossShares(
+        address _feeHandler,
+        uint256 _feeSharesAmount,
+        uint256 _grossSharesAmount
+    ) internal {
+        vm.mockCall(
+            _feeHandler,
+            abi.encodeWithSelector(IFeeHandler.settleEntranceFeeGivenGrossShares.selector, _grossSharesAmount),
+            abi.encode(_feeSharesAmount)
+        );
+    }
+
+    function feeHandler_mockSettleExitFeeGivenGrossShares(address _feeHandler, uint256 _feeSharesAmount) internal {
+        vm.mockCall(_feeHandler, IFeeHandler.settleExitFeeGivenGrossShares.selector, abi.encode(_feeSharesAmount));
+    }
+
+    function feeHandler_mockSettleExitFeeGivenGrossShares(
+        address _feeHandler,
+        uint256 _feeSharesAmount,
+        uint256 _grossSharesAmount
+    ) internal {
+        vm.mockCall(
+            _feeHandler,
+            abi.encodeWithSelector(IFeeHandler.settleExitFeeGivenGrossShares.selector, _grossSharesAmount),
+            abi.encode(_feeSharesAmount)
+        );
+    }
+
+    function positionTracker_mockGetPositionValue(address _positionTracker, int256 _value) internal {
+        vm.mockCall(_positionTracker, IPositionTracker.getPositionValue.selector, abi.encode(_value));
+    }
+
+    function valuationHandler_mockGetDefaultSharePrice(address _valuationHandler, uint256 _defaultSharePrice) internal {
+        vm.mockCall(_valuationHandler, IValuationHandler.getDefaultSharePrice.selector, abi.encode(_defaultSharePrice));
+    }
+
+    function valuationHandler_mockGetSharePrice(address _valuationHandler, uint256 _sharePrice, uint256 _timestamp)
+        internal
+    {
+        vm.mockCall(_valuationHandler, IValuationHandler.getSharePrice.selector, abi.encode(_sharePrice, _timestamp));
+    }
+
+    function valuationHandler_mockGetShareValue(address _valuationHandler, uint256 _shareValue, uint256 _timestamp)
+        internal
+    {
+        vm.mockCall(_valuationHandler, IValuationHandler.getShareValue.selector, abi.encode(_shareValue, _timestamp));
+    }
+
+    function shares_mockSharePrice(address _shares, uint256 _sharePrice, uint256 _timestamp) internal {
+        vm.mockCall(_shares, Shares.sharePrice.selector, abi.encode(_sharePrice, _timestamp));
+    }
+
+    // MOCKS: CONTRACTS
+
+    function setMockFeeHandler(address _shares, uint256 _totalValueOwed) internal returns (address feeHandler_) {
+        feeHandler_ = address(new BlankFeeHandler());
+
+        vm.prank(Shares(_shares).owner());
+        Shares(_shares).setFeeHandler(feeHandler_);
+
+        feeHandler_mockGetTotalValueOwed({_feeHandler: feeHandler_, _totalValueOwed: _totalValueOwed});
+    }
+
+    // NETWORK SELECTION
+
+    function createSelectEthereumFork() internal {
+        vm.createSelectFork("mainnet", ETHEREUM_BLOCK_LATEST);
+    }
+
+    function createSelectBaseChainFork() internal {
+        vm.createSelectFork("base", BASE_BLOCK_LATEST);
+    }
+
+    function createSelectArbitrumFork() internal {
+        vm.createSelectFork("arbitrum", ARBITRUM_BLOCK_LATEST);
+    }
+
+    function createSelectPlumeFork() internal {
+        vm.createSelectFork(vm.envString("ETHEREUM_NODE_PLUME"), PLUME_BLOCK_LATEST);
+    }
+
+    function createSelectMegaEthFork() internal {
+        vm.createSelectFork(vm.envString("ETHEREUM_NODE_MEGA_ETH"), MEGA_ETH_BLOCK_LATEST);
+    }
+
+    function createSelectEthereumSepoliaFork() internal {
+        vm.createSelectFork(vm.envString("ETHEREUM_NODE_ETHEREUM_SEPOLIA"), ETHEREUM_SEPOLIA_BLOCK_LATEST);
+    }
+
+    // MISC
+
+    function increaseSharesSupply(address _shares, uint256 _increaseAmount) internal {
+        // Mint shares to create desired supply
+        address mintTo = makeAddr("increaseSharesSupply:mintTo");
+        deal({token: _shares, to: mintTo, give: _increaseAmount, adjust: true});
+    }
+}

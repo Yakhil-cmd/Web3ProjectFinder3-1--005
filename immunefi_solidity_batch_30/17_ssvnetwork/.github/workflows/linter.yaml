@@ -1,0 +1,18 @@
+name: Solidity linter
+
+on:
+  push:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    name: Solidity linter
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+      - run: npm ci
+        env:
+          GH_TOKEN: ${{ secrets.github_token }}
+      - run: npx solhint 'contracts/**/*.sol' --ignore-path .solhintignore

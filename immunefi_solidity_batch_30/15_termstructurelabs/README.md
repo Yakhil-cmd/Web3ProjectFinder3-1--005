@@ -1,0 +1,1977 @@
+## TermMax
+
+**TermMax is a decentralized finance (DeFi) platform designed to simplify and enhance leveraged yield strategies. By integrating fixed-rate borrowing and lending mechanisms with leverage functions, TermMax enables investors to borrow at predictable fixed costs, earn expected returns, and maximize leveraged yields. This approach eliminates the need for multiple complex transactions across different protocols, making leveraged yield strategies more accessible, efficient, and profitable for all types of investors.**
+
+## Documentation
+
+TermMax Docs: https://docs.ts.finance/
+
+
+## Bounty
+
+Bounty plan: https://immunefi.com/bug-bounty/termstructurelabs/information/
+
+### Install Dependencies
+```shell
+$ forge soldeer update
+```
+
+### Build
+
+```shell
+$ forge build
+```
+
+### Before test
+
+You can find the `example.env` file at env folders, please copy it and put your env configuration in it.
+Edit the `MAINNET_RPC_URL` value if you want to start fork tests.
+
+### Test
+
+Test without fork.
+
+```shell
+$ forge test --skip Fork
+```
+
+Using '--isolate' when testing TermMaxVault.
+
+```shell
+$ forge test --skip Fork --isolate
+```
+
+Using test scripts can configure multiple environments more flexibly, it will automatically configure the environment variables you need.
+Do unit test if you have an env file named sepolia.env.
+
+```shell
+$ ./test.sh sepolia
+```
+
+You can use the forge test parameter as input.
+
+```shell
+$ ./test.sh sepolia --match-contract xxx -vv
+```
+
+### Deploy
+
+```shell
+$ forge script script/DeployScript.s.sol:FactoryScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+```
+
+### Format
+
+Install `esbenp.prettier-vscode` plugin for VsCode.
+TermMax use Prettier to format codes. Install the plugin by yarn or npm tools.
+Add configurations to your .vscode/settings.json
+
+```json
+  "files.autoSave": "onFocusChange",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[solidity]": {
+    "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
+  },
+```
+
+```shell
+$ npm ci
+```
+
+<!-- AUDIT_DOSSIER_START -->
+## Protocol State/Value Dossier (Auto-Generated)
+
+Generated (UTC): `2026-05-26T16:59:55Z`  
+Project: `15_termstructurelabs`  
+Solidity files: `320`
+
+### Structure
+Top Solidity directories:
+- `contracts`: 211 `.sol` files
+- `test`: 74 `.sol` files
+- `script`: 35 `.sol` files
+
+Pragmas:
+- `>=0.4.16`
+- `>=0.5.0`
+- `>=0.6.2`
+- `>=0.8.0`
+- `>=0.8.4`
+- `^0.8.0`
+- `^0.8.20`
+- `^0.8.22`
+- `^0.8.27`
+
+Contracts/Libraries/Interfaces detected: `406`
+
+### Life Total / Balance Values
+Detected accounting/state total variables:
+- `debtDecimals` | type: `uint8` | vis: `default` | flags: `-` | `AbstractGearingToken` @ `contracts/v1/tokens/AbstractGearingToken.sol`
+- `total` | type: `uint256` | vis: `default` | flags: `-` | `AbstractGearingToken` @ `contracts/v1/tokens/AbstractGearingToken.sol`
+- `debtDenominator` | type: `uint256 internal` | vis: `internal` | flags: `-` | `AbstractGearingTokenV2` @ `contracts/v2/tokens/AbstractGearingTokenV2.sol`
+- `totalIds` | type: `uint256 internal` | vis: `internal` | flags: `-` | `AbstractGearingTokenV2` @ `contracts/v2/tokens/AbstractGearingTokenV2.sol`
+- `vaultOrder` | type: `TermMaxOrderV2` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol`
+- `BTC_USD_INDEX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `DeployB2BTCUSDOracle` @ `script/deploy/DeployB2BTCUSDOracle.s.sol` = `18`
+- `DEFAULT_BEEFY_VAULT` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0xAf92a4C7FCBc0Af09CfFf66d36C615fB40Ac1eEE`
+- `DEFAULT_BEEFY_VAULT_1` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0x64606Bee7e4F5f67414765C4290315d3830ae0e2`
+- `beefyVaults` | type: `address[] public` | vis: `public` | flags: `-` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol`
+- `DUSD_ASSET` | type: `address constant` | vis: `default` | flags: `constant` | `DeployDUSDPriceFeedAdapter` @ `script/deploy/DeployDUSDPriceFeedAdapter.s.sol` = `0x871aB8E36CaE9AF35c6A3488B049965233DeB7ed`
+- `USPC_ASSET` | type: `address constant` | vis: `default` | flags: `constant` | `DeployUSPCPriceFeedAdapter` @ `script/deploy/DeployUSPCPriceFeedAdapter.s.sol` = `0xdc807c3a618B6B1248481783def7ED76700B9eC6`
+- `vaults` | type: `address[]` | vis: `default` | flags: `-` | `DeployVaults` @ `script/deploy/DeployVault.s.sol`
+- `aavePool` | type: `address` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `_balances` | type: `mapping(address account => uint256) private` | vis: `private` | flags: `-` | `ERC20` @ `contracts/v2/tokenomics/TMX.sol`
+- `_totalSupply` | type: `uint256 private` | vis: `private` | flags: `-` | `ERC20` @ `contracts/v2/tokenomics/TMX.sol`
+- `BTC_USD_INDEX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ForkB2TokenPriceFeedAdapterTest` @ `test/v2/integration/ForkB2TokenPriceFeedAdapter.t.sol` = `18`
+- `BEEFY_VAULT` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ForkBeefySharePriceFeedAdapterTest` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `0xAf92a4C7FCBc0Af09CfFf66d36C615fB40Ac1eEE`
+- `DUSD_ASSET` | type: `address constant` | vis: `default` | flags: `constant` | `ForkDUSDPriceFeedAdapterTest` @ `test/v2/integration/ForkDUSDPriceFeedAdapter.t.sol` = `0x1e33E98aF620F1D563fcD3cfd3C75acE841204ef`
+- `stableAsset` | type: `address` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `stockAsset` | type: `address` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `0xf6b1117ec07684D3958caD8BEb1b302bfD21103f`
+- `aaveDebtToken` | type: `ICreditDelegationToken` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol`
+- `vaultAdapter` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol`
+- `stakingBuffer` | type: `StakingBuffer.BufferConfig` | vis: `default` | flags: `-` | `ForkTermMax4626` @ `test/v2/integration/ForkTermMax4626.t.sol`
+- `tETHDepositVault` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xC93bb8D5581D74272F0E304593af9Ab4E3A0181b`
+- `tETHRedeemVault` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xE042678e6c6871Fa279e037C11e390f31334ba0B`
+- `tUSDEDepositVault` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0x5AD2e3d65f8eCDc36eeba38BAE3Cc6Ff258D2dfa`
+- `tUSDERedeemVault` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xFaAE52c6A6d477f859a740a76B29c33559ace18c`
+- `USPC_ASSET` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ForkUSPCPriceFeedAdapterTest` @ `test/v2/integration/ForkUSPCPriceFeedAdapter.t.sol` = `0xdc807c3a618B6B1248481783def7ED76700B9eC6`
+- `venusPools` | type: `StableERC4626ForVenus[] public` | vis: `public` | flags: `-` | `ForkVenusPool` @ `test/v2/integration/ForkVenusPool.t.sol`
+- `pool` | type: `MockERC4626` | vis: `default` | flags: `-` | `FuzzActionsTestV2WithPool` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `indexs` | type: `string[]` | vis: `default` | flags: `-` | `FuzzSwapTestV2` @ `test/v2/FuzzSwapV2.t.sol` = `["0", "1", "2", "3", "4", "5"]`
+- `collateralCapacity` | type: `uint256 public` | vis: `public` | flags: `-` | `GearingTokenWithERC20` @ `contracts/v1/tokens/GearingTokenWithERC20.sol`
+- `collateralDecimals` | type: `uint8` | vis: `default` | flags: `-` | `GearingTokenWithERC20` @ `contracts/v1/tokens/GearingTokenWithERC20.sol`
+- `collateralCapacity` | type: `uint256 public` | vis: `public` | flags: `-` | `GearingTokenWithERC20V2` @ `contracts/v2/tokens/GearingTokenWithERC20V2.sol`
+- `collateralDenominator` | type: `uint256 private` | vis: `private` | flags: `-` | `GearingTokenWithERC20V2` @ `contracts/v2/tokens/GearingTokenWithERC20V2.sol`
+- `pool` | type: `address` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol` = `vm.randomAddress()`
+- `_asset` | type: `address private` | vis: `private` | flags: `-` | `MockAggWithAsset` @ `test/v2/oracle/TermMaxERC4626PriceFeed.t.sol`
+- `asset` | type: `address public` | vis: `public` | flags: `-` | `MockERC4626` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `MockFlashLoanHandler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `collateral` | type: `address` | vis: `default` | flags: `-` | `MockFlashLoanReceiver` @ `contracts/v1/test/MockFlashLoanReceiver.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `pool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MockSwapAdapter` @ `contracts/v1/test/MockSwapAdapter.sol`
+- `pool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MockSwapAdapterV2` @ `contracts/v2/test/MockSwapAdapterV2.sol`
+- `ftReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2.t.sol`
+- `ftReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `ftReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzSwapV2.t.sol`
+- `xtReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2.t.sol`
+- `xtReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `xtReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzSwapV2.t.sol`
+- `assetAddr` | type: `address public` | vis: `public` | flags: `-` | `MockTermMax4626PoolAave` @ `test/v2/TermMaxViewer.t.sol`
+- `totalAssetsValue` | type: `uint256 public` | vis: `public` | flags: `-` | `MockTermMax4626PoolAave` @ `test/v2/TermMaxViewer.t.sol`
+- `assetAddr` | type: `address public` | vis: `public` | flags: `-` | `MockTermMax4626PoolERC4626` @ `test/v2/TermMaxViewer.t.sol`
+- `thirdPool` | type: `IERC4626 public` | vis: `public` | flags: `-` | `MockTermMax4626PoolERC4626` @ `test/v2/TermMaxViewer.t.sol`
+- `totalAssetsValue` | type: `uint256 public` | vis: `public` | flags: `-` | `MockTermMax4626PoolERC4626` @ `test/v2/TermMaxViewer.t.sol`
+- `_observationIndex` | type: `uint16 private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `borrowBalancesMock` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `borrowRateMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `reserveFactorMantissaMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `supplyRateMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `totalBorrowsMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `totalReservesMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `ASSET` | type: `address public constant` | vis: `public` | flags: `constant` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol` = `address(0x2)`
+- `ASSET` | type: `address public constant` | vis: `public` | flags: `constant` | `OracleAggregatorWithSequencerTestV2` @ `test/v2/oracle/OracleAggregatorWithSequencerV2.t.sol` = `address(0x2)`
+- `pool` | type: `MockERC4626` | vis: `default` | flags: `-` | `OrderTestV2WithPool` @ `test/v2/OrderV2WithPool.t.sol`
+- `collateralToMintGt` | type: `uint256` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `0.0001e18`
+- `debtTokenToDeposit` | type: `uint256` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `0`
+- `INITIAL_SUPPLY` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PreTMXTest` @ `test/v2/tokenomics/PreTMX.t.sol` = `1e9 ether`
+- `assetPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `PriceFeedWithERC4626` @ `contracts/v1/extensions/PriceFeedWithERC4626.sol`
+- `vault` | type: `IERC4626 public immutable` | vis: `public` | flags: `immutable` | `PriceFeedWithERC4626` @ `contracts/v1/extensions/PriceFeedWithERC4626.sol`
+- `vaultDenominator` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `PriceFeedWithERC4626` @ `contracts/v1/extensions/PriceFeedWithERC4626.sol`
+- `POOL_DEPLOYER_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("POOL_DEPLOYER_ROLE")`
+- `VAULT_DEPLOYER_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("VAULT_DEPLOYER_ROLE")`
+- `VAULT_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("VAULT_ROLE")`
+- `pool` | type: `address` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol` = `vm.randomAddress()`
+- `ASSET1` | type: `address public constant` | vis: `public` | flags: `constant` | `SimpleAggregatorTest` @ `test/v2/oracle/SimpleAggregator.t.sol` = `address(0x1)`
+- `ASSET2` | type: `address public constant` | vis: `public` | flags: `constant` | `SimpleAggregatorTest` @ `test/v2/oracle/SimpleAggregator.t.sol` = `address(0x2)`
+- `thirdPool` | type: `IERC4626 public` | vis: `public` | flags: `-` | `StableERC4626For4626` @ `contracts/v2/tokens/StableERC4626For4626.sol`
+- `withdawedIncomeAssets` | type: `uint256 internal` | vis: `internal` | flags: `-` | `StableERC4626For4626` @ `contracts/v2/tokens/StableERC4626For4626.sol`
+- `ghost_totalIncomeWithdrawn` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `thirdPool` | type: `MockStableERC4626 public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `thirdPool` | type: `MockStableERC4626 public` | vis: `public` | flags: `-` | `StableERC4626For4626InvariantTest` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `thirdPool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `StableERC4626For4626Test` @ `test/v2/pool/StableERC4626For4626.t.sol`
+- `aavePool` | type: `IAaveV3Pool public immutable` | vis: `public` | flags: `immutable` | `StableERC4626ForAave` @ `contracts/v2/tokens/StableERC4626ForAave.sol`
+- `withdawedIncomeAssets` | type: `uint256 internal` | vis: `internal` | flags: `-` | `StableERC4626ForAave` @ `contracts/v2/tokens/StableERC4626ForAave.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `ghost_totalIncomeWithdrawn` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `StableERC4626ForAaveInvariantTest` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `StableERC4626ForAaveTest` @ `test/v2/pool/StableERC4626ForAave.t.sol`
+- `thirdPool` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626ForCustomize` @ `contracts/v2/tokens/StableERC4626ForCustomize.sol`
+- `withdawedIncomeAssets` | type: `uint256 internal` | vis: `internal` | flags: `-` | `StableERC4626ForCustomize` @ `contracts/v2/tokens/StableERC4626ForCustomize.sol`
+- `thirdPool` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626ForCustomizeTest` @ `test/v2/StableERC4626ForCustomize.t.sol`
+- `thirdPool` | type: `IVToken public` | vis: `public` | flags: `-` | `StableERC4626ForVenus` @ `contracts/v2/tokens/StableERC4626ForVenus.sol`
+- `withdrawnIncomeAssets` | type: `uint256 internal` | vis: `internal` | flags: `-` | `StableERC4626ForVenus` @ `contracts/v2/tokens/StableERC4626ForVenus.sol`
+- `pool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `SwapAdapter` @ `contracts/v1/test/testnet/SwapAdapter.sol`
+- `pool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `SwapAdapterV2` @ `contracts/v2/test/testnet/SwapAdapterV2.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `customizePool` | type: `address public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol` = `makeAddr("customizePool")`
+- `stableDebtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `thirdPool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `variableDebtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `venusPool` | type: `MockVToken public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `pairIndex` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `TermMaxB2TokenPriceFeedAdapter` @ `contracts/v2/oracle/adapters/b2/TermMaxB2TokenPriceFeedAdapter.sol`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `beefyVault` | type: `IBeefyVaultV7 public immutable` | vis: `public` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `assetPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxConstantPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxConstantPriceFeed.sol`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxDUSDPriceFeedAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxDUSDPriceFeedAdapter.sol`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxERC4626PriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxERC4626PriceFeed.sol`
+- `assetPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxERC4626PriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxERC4626PriceFeed.sol`
+- `vaultDenominator` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `TermMaxERC4626PriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxERC4626PriceFeed.sol`
+- `collateral` | type: `address private` | vis: `private` | flags: `-` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `collateral` | type: `address private` | vis: `private` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalBurned` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalFeesCollected` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalFtIssued` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalGtMinted` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalMinted` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalRedeemed` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalXtLeveraged` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `asset` | type: `address public immutable override` | vis: `public` | flags: `immutable,override` | `TermMaxOndoPriceFeedAdapter` @ `contracts/v2/oracle/adapters/ondo/TermMaxOndoPriceFeedAdapter.sol`
+- `T_FT_RESERVE_STORE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol` = `0`
+- `T_XT_RESERVE_STORE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol` = `1`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `pool` | type: `IERC4626 public` | vis: `public` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `virtualXtReserve` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_initialVirtualXtReserve` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_liquidityAdded` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_liquidityRemoved` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_maxVirtualXtReserveReached` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_minVirtualXtReserveReached` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_poolDeposits` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_poolEverSet` | type: `bool public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_poolWithdrawals` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_totalDebtTokenSwapped` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_totalFeesCollected` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_totalFtSwapped` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_totalXtSwapped` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_virtualXtReserveChanges` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `pool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `pool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxPTPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxPTPriceFeed.sol`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxPriceFeedConverter` @ `contracts/v2/oracle/priceFeeds/TermMaxPriceFeedConverter.sol`
+- `mockVault` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxPriceFeedFactoryV2Test` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `T_ROLLOVER_GT_RESERVE_STORE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxRouterV2` @ `contracts/v2/router/TermMaxRouterV2.sol` = `0`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxUSPCPriceFeedAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxUSPCPriceFeedAdapter.sol`
+- `pool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxUniswapTWAPPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxUniswapTWAPPriceFeed.sol`
+- `mockPool` | type: `MockUniswapV3Pool internal` | vis: `internal` | flags: `-` | `TermMaxUniswapTWAPPriceFeedTest` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `TERMMAX_VAULT_IMPLEMENTATION` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxVaultFactoryV2` @ `contracts/v2/factory/TermMaxVaultFactoryV2.sol`
+- `asset` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_badDebtByCollateral` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_maxTotalAssets` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_maxTotalSupply` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_poolChanges` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_poolDeposits` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_poolEverSet` | type: `bool public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_poolWithdrawals` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_totalBadDebtHandled` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_totalDeposits` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_totalMints` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_totalRedeems` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_totalWithdrawals` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `pool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `vault` | type: `TermMaxVaultV2 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `asset` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `pool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `vault` | type: `TermMaxVaultV2 public` | vis: `public` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `mockAsset` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `mockPoolAave` | type: `MockTermMax4626PoolAave public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `mockPoolERC4626` | type: `MockTermMax4626PoolERC4626 public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `mockVault` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `MAX_SUPPLY` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `UniversalFactoryTest` @ `test/v2/tokenomics/UniversalFactory.t.sol` = `1_000_000_000 ether`
+- `aavePool` | type: `IAaveV3Pool public immutable` | vis: `public` | flags: `immutable` | `VariableERC4626ForAave` @ `contracts/v2/tokens/VariableERC4626ForAave.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `ghost_totalInterestGenerated` | type: `uint256 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `ghost_totalYieldAccrued` | type: `uint256 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveInvariantTest` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveTest` @ `test/v2/pool/VariableERC4626ForAave.t.sol`
+- `TERMMAX_VAULT_IMPLEMENTATION` | type: `address public immutable` | vis: `public` | flags: `immutable` | `VaultFactory` @ `contracts/v1/factory/VaultFactory.sol`
+- `_badDebtMapping` | type: `mapping(address => uint256) internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_supplyQueue` | type: `address[] internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_totalFt` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_badDebtMapping` | type: `mapping(address => uint256) internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_pendingPool` | type: `PendingAddress internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_pool` | type: `IERC4626 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_totalFt` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `vault` | type: `TermMaxVaultV2` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol`
+- `pool` | type: `MockERC4626` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+- `vault` | type: `TermMaxVaultV2` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+
+All detected state variables (full list):
+- `DELEGATION_WITH_SIG_TYPEHASH` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `AaveSigUtils` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `keccak256("DelegationWithSig(address delegatee,uint256 value,uint256 nonce,uint256 deadline)")`
+- `debtDecimals` | type: `uint8` | vis: `default` | flags: `-` | `AbstractGearingToken` @ `contracts/v1/tokens/AbstractGearingToken.sol`
+- `loanMapping` | type: `mapping(uint256 => LoanInfo)` | vis: `default` | flags: `-` | `AbstractGearingToken` @ `contracts/v1/tokens/AbstractGearingToken.sol`
+- `total` | type: `uint256` | vis: `default` | flags: `-` | `AbstractGearingToken` @ `contracts/v1/tokens/AbstractGearingToken.sol`
+- `debtDenominator` | type: `uint256 internal` | vis: `internal` | flags: `-` | `AbstractGearingTokenV2` @ `contracts/v2/tokens/AbstractGearingTokenV2.sol`
+- `loanMapping` | type: `mapping(uint256 => LoanInfo) internal` | vis: `internal` | flags: `-` | `AbstractGearingTokenV2` @ `contracts/v2/tokens/AbstractGearingTokenV2.sol`
+- `totalIds` | type: `uint256 internal` | vis: `internal` | flags: `-` | `AbstractGearingTokenV2` @ `contracts/v2/tokens/AbstractGearingTokenV2.sol`
+- `curator` | type: `address` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol` = `vm.randomAddress()`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol` = `vm.randomAddress()`
+- `maker` | type: `address` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol` = `vm.randomAddress()`
+- `manager` | type: `AccessManagerV2` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol`
+- `sender` | type: `address` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol` = `vm.randomAddress()`
+- `stable4626` | type: `IStableERC4626For4626` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol`
+- `testdata` | type: `string` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol` = `vm.randomAddress()`
+- `vaultOrder` | type: `TermMaxOrderV2` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol`
+- `whitelistManager` | type: `WhitelistManager` | vis: `default` | flags: `-` | `AccessManagerTestV2` @ `test/v2/AccessManagerV2.t.sol`
+- `PRICE_DECIMALS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `BeefyLPUnderlyingReader` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `1e18`
+- `DAYS_IN_YEAR` | type: `uint256 constant` | vis: `default` | flags: `constant` | `Constants` @ `contracts/v1/lib/Constants.sol` = `365`
+- `DECIMAL_BASE` | type: `uint256 constant` | vis: `default` | flags: `constant` | `Constants` @ `contracts/v1/lib/Constants.sol` = `1e8`
+- `DECIMAL_BASE_SQ` | type: `uint256 constant` | vis: `default` | flags: `constant` | `Constants` @ `contracts/v1/lib/Constants.sol` = `1e16`
+- `LIQUIDATION_WINDOW` | type: `uint256 constant` | vis: `default` | flags: `constant` | `Constants` @ `contracts/v1/lib/Constants.sol` = `2 hours`
+- `MAX_FEE_RATIO` | type: `uint32 constant` | vis: `default` | flags: `constant` | `Constants` @ `contracts/v1/lib/Constants.sol` = `0.2e8`
+- `SECONDS_IN_DAY` | type: `uint256 constant` | vis: `default` | flags: `constant` | `Constants` @ `contracts/v1/lib/Constants.sol` = `1 days`
+- `DELEGATION_WITH_SIG_TYPEHASH` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `DelegateAble` @ `contracts/v2/lib/DelegateAble.sol` = `keccak256( "DelegationWithSig(address delegator,address delegatee,bool isDelegate,uint256 nonce,uint256 deadline)" )`
+- `_delegateMapping` | type: `mapping(address => Delegation) internal` | vis: `internal` | flags: `-` | `DelegateAble` @ `contracts/v2/lib/DelegateAble.sol`
+- `delegateableGt` | type: `DelegateAble` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol`
+- `delegatee` | type: `address` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol` = `vm.randomAddress()`
+- `delegator` | type: `address` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol` = `vm.addr(delegatorPrivateKey)`
+- `delegatorPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol` = `0x1234567890123456789012345678901234567890123456789012345678901234`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol` = `vm.randomAddress()`
+- `flashLoanReceiver` | type: `MockFlashLoanReceiver` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol`
+- `flashRepayer` | type: `MockFlashRepayerV2` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol`
+- `liquidationLtv` | type: `uint32` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol` = `0.9e8`
+- `maker` | type: `address` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol` = `vm.randomAddress()`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol`
+- `maxLtv` | type: `uint32` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol` = `0.89e8`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol`
+- `testdata` | type: `string` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `DelegateAbleGtTest` @ `test/v2/DelegateAbleGt.t.sol` = `vm.randomAddress()`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployAccessManagerV2` @ `script/deploy/DeployAccessManagerV2.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployAccessManagerV2` @ `script/deploy/DeployAccessManagerV2.s.sol`
+- `deployerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployAccessManagerV2` @ `script/deploy/DeployAccessManagerV2.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployAccessManagerV2` @ `script/deploy/DeployAccessManagerV2.s.sol`
+- `network` | type: `string` | vis: `default` | flags: `-` | `DeployAccessManagerV2` @ `script/deploy/DeployAccessManagerV2.s.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `adapterNames` | type: `string[]` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `adapters` | type: `address[]` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `adaptersJson` | type: `string` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `deploymentPath` | type: `string` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `isArb` | type: `bool` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `isB2` | type: `bool` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `isBase` | type: `bool` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `isBera` | type: `bool` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `isBnb` | type: `bool` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `isBroadcast` | type: `bool` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol` = `vm.envBool("IS_BROADCAST")`
+- `isEth` | type: `bool` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `isHyper` | type: `bool` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `isPharos` | type: `bool` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `isXlayer` | type: `bool` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `lifiRouter` | type: `address` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `odosV2Router` | type: `address` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `ondoGmTokenManager` | type: `address` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `oneInchRouter` | type: `address` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `pancakeRouter` | type: `address` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `pendleRouter` | type: `address` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `BTC_USD_INDEX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `DeployB2BTCUSDOracle` @ `script/deploy/DeployB2BTCUSDOracle.s.sol` = `18`
+- `SUPRA_SVALUE_FEED` | type: `address internal constant` | vis: `internal` | flags: `constant` | `DeployB2BTCUSDOracle` @ `script/deploy/DeployB2BTCUSDOracle.s.sol` = `0xD02cc7a670047b6b012556A88e275c685d25e0c9`
+- `deployerAddr` | type: `address internal` | vis: `internal` | flags: `-` | `DeployB2BTCUSDOracle` @ `script/deploy/DeployB2BTCUSDOracle.s.sol`
+- `deployerPrivateKey` | type: `uint256 internal` | vis: `internal` | flags: `-` | `DeployB2BTCUSDOracle` @ `script/deploy/DeployB2BTCUSDOracle.s.sol`
+- `network` | type: `string internal` | vis: `internal` | flags: `-` | `DeployB2BTCUSDOracle` @ `script/deploy/DeployB2BTCUSDOracle.s.sol`
+- `DEFAULT_BEEFY_VAULT` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0xAf92a4C7FCBc0Af09CfFf66d36C615fB40Ac1eEE`
+- `DEFAULT_BEEFY_VAULT_1` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0x64606Bee7e4F5f67414765C4290315d3830ae0e2`
+- `DEFAULT_TOKEN0_PRICE_FEED` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0xbbF121624c3b85C929Ac83872bf6c86b0976A55e`
+- `DEFAULT_TOKEN0_PRICE_FEED_1` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0xEC352BC99BD444E0AC7f00e9B7D581B4b100CA3e`
+- `DEFAULT_TOKEN1_PRICE_FEED` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0x2D4f3199a80b848F3d094745F3Bbd4224892654e`
+- `DEFAULT_TOKEN1_PRICE_FEED_1` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0x2D4f3199a80b848F3d094745F3Bbd4224892654e`
+- `adapterCount` | type: `uint256 public` | vis: `public` | flags: `-` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `2`
+- `beefyVaults` | type: `address[] public` | vis: `public` | flags: `-` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol`
+- `deployedAdapters` | type: `address[] public` | vis: `public` | flags: `-` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol`
+- `deployerAddr` | type: `address public` | vis: `public` | flags: `-` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol`
+- `deployerPrivateKey` | type: `uint256 public` | vis: `public` | flags: `-` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol`
+- `network` | type: `string public` | vis: `public` | flags: `-` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol`
+- `token0PriceFeeds` | type: `address[] public` | vis: `public` | flags: `-` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol`
+- `token1PriceFeeds` | type: `address[] public` | vis: `public` | flags: `-` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployCoreV2` @ `script/deploy/DeployCoreV2.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployCoreV2` @ `script/deploy/DeployCoreV2.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployCoreV2` @ `script/deploy/DeployCoreV2.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployCoreV2` @ `script/deploy/DeployCoreV2.s.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployCoreV2_20251002` @ `script/deploy/DeployAavePool.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployCoreV2_20251002` @ `script/deploy/DeployAavePool.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployCoreV2_20251002` @ `script/deploy/DeployAavePool.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployCoreV2_20251002` @ `script/deploy/DeployAavePool.s.sol`
+- `DUSD_ASSET` | type: `address constant` | vis: `default` | flags: `constant` | `DeployDUSDPriceFeedAdapter` @ `script/deploy/DeployDUSDPriceFeedAdapter.s.sol` = `0x871aB8E36CaE9AF35c6A3488B049965233DeB7ed`
+- `DUSD_ORACLE` | type: `address constant` | vis: `default` | flags: `constant` | `DeployDUSDPriceFeedAdapter` @ `script/deploy/DeployDUSDPriceFeedAdapter.s.sol` = `0x49fba73738461835fefB19351b161Bde4BcD6b5A`
+- `deployerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployDUSDPriceFeedAdapter` @ `script/deploy/DeployDUSDPriceFeedAdapter.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployDUSDPriceFeedAdapter` @ `script/deploy/DeployDUSDPriceFeedAdapter.s.sol`
+- `network` | type: `string` | vis: `default` | flags: `-` | `DeployDUSDPriceFeedAdapter` @ `script/deploy/DeployDUSDPriceFeedAdapter.s.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployMakerHelper` @ `script/deploy/DeployMakerHelper.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployMakerHelper` @ `script/deploy/DeployMakerHelper.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployMakerHelper` @ `script/deploy/DeployMakerHelper.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployMakerHelper` @ `script/deploy/DeployMakerHelper.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployMakerHelper` @ `script/deploy/DeployMakerHelper.s.sol`
+- `isBroadcast` | type: `bool` | vis: `default` | flags: `-` | `DeployMakerHelper` @ `script/deploy/DeployMakerHelper.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployMarketsScript` @ `script/deploy/DeployMarkets.s.sol`
+- `configPath` | type: `string` | vis: `default` | flags: `-` | `DeployMarketsScript` @ `script/deploy/DeployMarkets.s.sol` = `"-markets.json"`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployMarketsScript` @ `script/deploy/DeployMarkets.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployMarketsScript` @ `script/deploy/DeployMarkets.s.sol`
+- `deployerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployMarketsScript` @ `script/deploy/DeployMarkets.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployMarketsScript` @ `script/deploy/DeployMarkets.s.sol`
+- `markets` | type: `address[]` | vis: `default` | flags: `-` | `DeployMarketsScript` @ `script/deploy/DeployMarkets.s.sol`
+- `network` | type: `string` | vis: `default` | flags: `-` | `DeployMarketsScript` @ `script/deploy/DeployMarkets.s.sol`
+- `treasurerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployMarketsScript` @ `script/deploy/DeployMarkets.s.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployMidasVaultSwapAdapter` @ `script/deploy/DeployMidasVaultSwapAdapter.s.sol`
+- `adapter` | type: `address` | vis: `default` | flags: `-` | `DeployMidasVaultSwapAdapter` @ `script/deploy/DeployMidasVaultSwapAdapter.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployMidasVaultSwapAdapter` @ `script/deploy/DeployMidasVaultSwapAdapter.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployMidasVaultSwapAdapter` @ `script/deploy/DeployMidasVaultSwapAdapter.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployMidasVaultSwapAdapter` @ `script/deploy/DeployMidasVaultSwapAdapter.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployMidasVaultSwapAdapter` @ `script/deploy/DeployMidasVaultSwapAdapter.s.sol`
+- `deploymentPath` | type: `string` | vis: `default` | flags: `-` | `DeployMidasVaultSwapAdapter` @ `script/deploy/DeployMidasVaultSwapAdapter.s.sol`
+- `isBroadcast` | type: `bool` | vis: `default` | flags: `-` | `DeployMidasVaultSwapAdapter` @ `script/deploy/DeployMidasVaultSwapAdapter.s.sol` = `vm.envBool("IS_BROADCAST")`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployOndoPriceFeedAdapterFactory` @ `script/deploy/DeployOndoPriceFeedAdapterFactory.s.sol`
+- `deployerAddr` | type: `address public` | vis: `public` | flags: `-` | `DeployOndoPriceFeedAdapterFactory` @ `script/deploy/DeployOndoPriceFeedAdapterFactory.s.sol`
+- `deployerPrivateKey` | type: `uint256 public` | vis: `public` | flags: `-` | `DeployOndoPriceFeedAdapterFactory` @ `script/deploy/DeployOndoPriceFeedAdapterFactory.s.sol`
+- `network` | type: `string public` | vis: `public` | flags: `-` | `DeployOndoPriceFeedAdapterFactory` @ `script/deploy/DeployOndoPriceFeedAdapterFactory.s.sol`
+- `ondoOracle` | type: `address public` | vis: `public` | flags: `-` | `DeployOndoPriceFeedAdapterFactory` @ `script/deploy/DeployOndoPriceFeedAdapterFactory.s.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracle.s.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracleV1.s.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployPancakeOracle.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracle.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracleV1.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployPancakeOracle.s.sol`
+- `configPath` | type: `string` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracle.s.sol` = `"-pricefeeds.json"`
+- `configPath` | type: `string` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracleV1.s.sol` = `"-pricefeeds.json"`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracle.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracleV1.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployPancakeOracle.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracle.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracleV1.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployPancakeOracle.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracle.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracleV1.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployPancakeOracle.s.sol`
+- `oracleEnvs` | type: `string` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracle.s.sol`
+- `oracleEnvs` | type: `string` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployOracleV1.s.sol`
+- `oracleEnvs` | type: `string` | vis: `default` | flags: `-` | `DeployOracle` @ `script/deploy/DeployPancakeOracle.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployOracleAggregatorV2` @ `script/deploy/DeployOracleAggregatorV2.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployOracleAggregatorV2` @ `script/deploy/DeployOracleAggregatorV2.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployOracleAggregatorV2` @ `script/deploy/DeployOracleAggregatorV2.s.sol`
+- `isBroadcast` | type: `bool` | vis: `default` | flags: `-` | `DeployOracleAggregatorV2` @ `script/deploy/DeployOracleAggregatorV2.s.sol`
+- `SPARK_PTREUSDE_LINEAR_ORACLE` | type: `address constant` | vis: `default` | flags: `constant` | `DeployPTReUSDeAdapter` @ `script/deploy/DeployPTReUSDeAdapter.s.sol` = `0x49FA8Ed54f8e7f5d9A12483AAFDE097ac1635b30`
+- `deployerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployPTReUSDeAdapter` @ `script/deploy/DeployPTReUSDeAdapter.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployPTReUSDeAdapter` @ `script/deploy/DeployPTReUSDeAdapter.s.sol`
+- `isBroadcast` | type: `bool` | vis: `default` | flags: `-` | `DeployPTReUSDeAdapter` @ `script/deploy/DeployPTReUSDeAdapter.s.sol`
+- `network` | type: `string` | vis: `default` | flags: `-` | `DeployPTReUSDeAdapter` @ `script/deploy/DeployPTReUSDeAdapter.s.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployPreTMX` @ `script/deploy/DeployPreTMX.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployPreTMX` @ `script/deploy/DeployPreTMX.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployPreTMX` @ `script/deploy/DeployPreTMX.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployPreTMX` @ `script/deploy/DeployPreTMX.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployPreTMX` @ `script/deploy/DeployPreTMX.s.sol`
+- `isBroadcast` | type: `bool` | vis: `default` | flags: `-` | `DeployPreTMX` @ `script/deploy/DeployPreTMX.s.sol`
+- `preTmxAdmin` | type: `address` | vis: `default` | flags: `-` | `DeployPreTMX` @ `script/deploy/DeployPreTMX.s.sol` = `0x65B7949C97e7d96bCd81cf53BfF602923973c950`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployPriceFeedFactory` @ `script/deploy/DeployPriceFeedFactory.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployPriceFeedFactory` @ `script/deploy/DeployPriceFeedFactory.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployPriceFeedFactory` @ `script/deploy/DeployPriceFeedFactory.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployPriceFeedFactory` @ `script/deploy/DeployPriceFeedFactory.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployPriceFeedFactory` @ `script/deploy/DeployPriceFeedFactory.s.sol`
+- `isBroadcast` | type: `bool` | vis: `default` | flags: `-` | `DeployPriceFeedFactory` @ `script/deploy/DeployPriceFeedFactory.s.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployTermMaxViewer` @ `script/deploy/DeployTermMaxViewer.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployTermMaxViewer` @ `script/deploy/DeployTermMaxViewer.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployTermMaxViewer` @ `script/deploy/DeployTermMaxViewer.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployTermMaxViewer` @ `script/deploy/DeployTermMaxViewer.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployTermMaxViewer` @ `script/deploy/DeployTermMaxViewer.s.sol`
+- `isBroadcast` | type: `bool` | vis: `default` | flags: `-` | `DeployTermMaxViewer` @ `script/deploy/DeployTermMaxViewer.s.sol`
+- `USPC_ASSET` | type: `address constant` | vis: `default` | flags: `constant` | `DeployUSPCPriceFeedAdapter` @ `script/deploy/DeployUSPCPriceFeedAdapter.s.sol` = `0xdc807c3a618B6B1248481783def7ED76700B9eC6`
+- `USPC_ORACLE` | type: `address constant` | vis: `default` | flags: `constant` | `DeployUSPCPriceFeedAdapter` @ `script/deploy/DeployUSPCPriceFeedAdapter.s.sol` = `0x5eC0C20A83554eC1BBC0F1D3414BB8746a04acD4`
+- `deployerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployUSPCPriceFeedAdapter` @ `script/deploy/DeployUSPCPriceFeedAdapter.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployUSPCPriceFeedAdapter` @ `script/deploy/DeployUSPCPriceFeedAdapter.s.sol`
+- `network` | type: `string` | vis: `default` | flags: `-` | `DeployUSPCPriceFeedAdapter` @ `script/deploy/DeployUSPCPriceFeedAdapter.s.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployUniswapPriceFeed` @ `script/deploy/DeployUniswapPriceFeed.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployUniswapPriceFeed` @ `script/deploy/DeployUniswapPriceFeed.s.sol`
+- `configPath` | type: `string` | vis: `default` | flags: `-` | `DeployUniswapPriceFeed` @ `script/deploy/DeployUniswapPriceFeed.s.sol` = `"-uniswap-pairs.json"`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployUniswapPriceFeed` @ `script/deploy/DeployUniswapPriceFeed.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployUniswapPriceFeed` @ `script/deploy/DeployUniswapPriceFeed.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployUniswapPriceFeed` @ `script/deploy/DeployUniswapPriceFeed.s.sol`
+- `oracleEnvs` | type: `string` | vis: `default` | flags: `-` | `DeployUniswapPriceFeed` @ `script/deploy/DeployUniswapPriceFeed.s.sol`
+- `GT_ERC20` | type: `bytes32 constant` | vis: `default` | flags: `constant` | `DeployUtils` @ `test/v2/utils/DeployUtils.sol` = `keccak256("GearingTokenWithERC20")`
+- `vm` | type: `Vm private constant` | vis: `private` | flags: `constant` | `DeployUtils` @ `test/v2/utils/DeployUtils.sol` = `Vm(address(uint160(uint256(keccak256("hevm cheat code")))))`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployVaults` @ `script/deploy/DeployVault.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `DeployVaults` @ `script/deploy/DeployVault.s.sol`
+- `configPath` | type: `string` | vis: `default` | flags: `-` | `DeployVaults` @ `script/deploy/DeployVault.s.sol` = `"-vaults.json"`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployVaults` @ `script/deploy/DeployVault.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployVaults` @ `script/deploy/DeployVault.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployVaults` @ `script/deploy/DeployVault.s.sol`
+- `vaults` | type: `address[]` | vis: `default` | flags: `-` | `DeployVaults` @ `script/deploy/DeployVault.s.sol`
+- `AAVE_WEETH_PRICE_CAP_ADAPTER` | type: `address constant` | vis: `default` | flags: `constant` | `DeployWeETHPriceCapAdapter` @ `script/deploy/DeployWeETHPriceCapAdapter.s.sol` = `0x87625393534d5C102cADB66D37201dF24cc26d4C`
+- `deployerAddr` | type: `address` | vis: `default` | flags: `-` | `DeployWeETHPriceCapAdapter` @ `script/deploy/DeployWeETHPriceCapAdapter.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployWeETHPriceCapAdapter` @ `script/deploy/DeployWeETHPriceCapAdapter.s.sol`
+- `network` | type: `string` | vis: `default` | flags: `-` | `DeployWeETHPriceCapAdapter` @ `script/deploy/DeployWeETHPriceCapAdapter.s.sol`
+- `aavePool` | type: `address` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `aaveReferralCode` | type: `uint16` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `automaticDeployer` | type: `address` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol` = `vm.envAddress("AUTOMATIC_DEPLOYER_ADDRESS")`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `interestManager` | type: `address` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol` = `vm.envAddress("INTEREST_MANAGER_ADDRESS")`
+- `isArb` | type: `bool` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `isB2` | type: `bool` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `isBase` | type: `bool` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `isBera` | type: `bool` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `isBnb` | type: `bool` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `isBroadcast` | type: `bool` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `isEth` | type: `bool` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `isHyper` | type: `bool` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `isPharos` | type: `bool` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `isXlayer` | type: `bool` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `_allowances` | type: `mapping(address account => mapping(address spender => uint256)) private` | vis: `private` | flags: `-` | `ERC20` @ `contracts/v2/tokenomics/TMX.sol`
+- `_balances` | type: `mapping(address account => uint256) private` | vis: `private` | flags: `-` | `ERC20` @ `contracts/v2/tokenomics/TMX.sol`
+- `_name` | type: `string private` | vis: `private` | flags: `-` | `ERC20` @ `contracts/v2/tokenomics/TMX.sol`
+- `_symbol` | type: `string private` | vis: `private` | flags: `-` | `ERC20` @ `contracts/v2/tokenomics/TMX.sol`
+- `_totalSupply` | type: `uint256 private` | vis: `private` | flags: `-` | `ERC20` @ `contracts/v2/tokenomics/TMX.sol`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `FactoryTestV2` @ `test/v2/FactoryV2.t.sol` = `vm.randomAddress()`
+- `liquidationLtv` | type: `uint32` | vis: `default` | flags: `-` | `FactoryTestV2` @ `test/v2/FactoryV2.t.sol` = `0.9e8`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `FactoryTestV2` @ `test/v2/FactoryV2.t.sol`
+- `maxLtv` | type: `uint32` | vis: `default` | flags: `-` | `FactoryTestV2` @ `test/v2/FactoryV2.t.sol` = `0.89e8`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `FactoryTestV2` @ `test/v2/FactoryV2.t.sol`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `FactoryTestV2` @ `test/v2/FactoryV2.t.sol` = `vm.randomAddress()`
+- `canOnlyMintOnce` | type: `bool public` | vis: `public` | flags: `-` | `Faucet` @ `contracts/v1/test/testnet/Faucet.sol`
+- `getTokenId` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `Faucet` @ `contracts/v1/test/testnet/Faucet.sol`
+- `getTokenIdByKey` | type: `mapping(bytes32 => uint256) public` | vis: `public` | flags: `-` | `Faucet` @ `contracts/v1/test/testnet/Faucet.sol`
+- `isMinted` | type: `mapping(address => bool) public` | vis: `public` | flags: `-` | `Faucet` @ `contracts/v1/test/testnet/Faucet.sol`
+- `mintUsdValue` | type: `uint256 public` | vis: `public` | flags: `-` | `Faucet` @ `contracts/v1/test/testnet/Faucet.sol`
+- `tokenConfigs` | type: `mapping(uint256 => TokenConfig) public` | vis: `public` | flags: `-` | `Faucet` @ `contracts/v1/test/testnet/Faucet.sol`
+- `_decimals` | type: `uint8 private immutable` | vis: `private` | flags: `immutable` | `FaucetERC20` @ `contracts/v1/test/testnet/FaucetERC20.sol`
+- `BTC_USD_INDEX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ForkB2TokenPriceFeedAdapterTest` @ `test/v2/integration/ForkB2TokenPriceFeedAdapter.t.sol` = `18`
+- `MAINNET_RPC_URL` | type: `string internal` | vis: `internal` | flags: `-` | `ForkB2TokenPriceFeedAdapterTest` @ `test/v2/integration/ForkB2TokenPriceFeedAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `MILLISECONDS_PER_SECOND` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ForkB2TokenPriceFeedAdapterTest` @ `test/v2/integration/ForkB2TokenPriceFeedAdapter.t.sol` = `1000`
+- `SUPRA_SVALUE_FEED` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ForkB2TokenPriceFeedAdapterTest` @ `test/v2/integration/ForkB2TokenPriceFeedAdapter.t.sol` = `0xD02cc7a670047b6b012556A88e275c685d25e0c9`
+- `adapter` | type: `TermMaxB2TokenPriceFeedAdapter public` | vis: `public` | flags: `-` | `ForkB2TokenPriceFeedAdapterTest` @ `test/v2/integration/ForkB2TokenPriceFeedAdapter.t.sol`
+- `supraSValueFeed` | type: `ISupraSValueFeed public` | vis: `public` | flags: `-` | `ForkB2TokenPriceFeedAdapterTest` @ `test/v2/integration/ForkB2TokenPriceFeedAdapter.t.sol`
+- `jsonData` | type: `string` | vis: `default` | flags: `-` | `ForkBaseTestV2` @ `test/v2/mainnet-fork/ForkBaseTestV2.sol`
+- `tokenPairs` | type: `string[]` | vis: `default` | flags: `-` | `ForkBaseTestV2` @ `test/v2/mainnet-fork/ForkBaseTestV2.sol`
+- `BEEFY_VAULT` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ForkBeefySharePriceFeedAdapterTest` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `0xAf92a4C7FCBc0Af09CfFf66d36C615fB40Ac1eEE`
+- `FORK_BLOCK` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ForkBeefySharePriceFeedAdapterTest` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `17114472`
+- `MAINNET_RPC_URL` | type: `string internal` | vis: `internal` | flags: `-` | `ForkBeefySharePriceFeedAdapterTest` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `OUTPUT_DECIMALS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ForkBeefySharePriceFeedAdapterTest` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `1e8`
+- `TOKEN0_PRICE_FEED` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ForkBeefySharePriceFeedAdapterTest` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `0xbbF121624c3b85C929Ac83872bf6c86b0976A55e`
+- `TOKEN1_PRICE_FEED` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ForkBeefySharePriceFeedAdapterTest` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `0x2D4f3199a80b848F3d094745F3Bbd4224892654e`
+- `adapter` | type: `TermMaxBeefySharePriceFeedAdapter public` | vis: `public` | flags: `-` | `ForkBeefySharePriceFeedAdapterTest` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol`
+- `DUSD_ASSET` | type: `address constant` | vis: `default` | flags: `constant` | `ForkDUSDPriceFeedAdapterTest` @ `test/v2/integration/ForkDUSDPriceFeedAdapter.t.sol` = `0x1e33E98aF620F1D563fcD3cfd3C75acE841204ef`
+- `DUSD_ORACLE` | type: `address constant` | vis: `default` | flags: `constant` | `ForkDUSDPriceFeedAdapterTest` @ `test/v2/integration/ForkDUSDPriceFeedAdapter.t.sol` = `0xFFCBc7A7eEF2796C277095C66067aC749f4cA078`
+- `FORK_BLOCK` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ForkDUSDPriceFeedAdapterTest` @ `test/v2/integration/ForkDUSDPriceFeedAdapter.t.sol` = `23980501`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkDUSDPriceFeedAdapterTest` @ `test/v2/integration/ForkDUSDPriceFeedAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `dusdAdapter` | type: `TermMaxDUSDPriceFeedAdapter public` | vis: `public` | flags: `-` | `ForkDUSDPriceFeedAdapterTest` @ `test/v2/integration/ForkDUSDPriceFeedAdapter.t.sol`
+- `dusdOracle` | type: `IDUSDOracle public` | vis: `public` | flags: `-` | `ForkDUSDPriceFeedAdapterTest` @ `test/v2/integration/ForkDUSDPriceFeedAdapter.t.sol`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkDev` @ `test/v2/integration/ForkDev.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkDev` @ `test/v2/integration/ForkDev.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkGtV2` @ `test/v2/mainnet-fork/mainnet/ForkGtV2.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkGtV2` @ `test/v2/mainnet-fork/mainnet/ForkGtV2.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `USDC` | type: `address constant` | vis: `default` | flags: `constant` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `0x549943e04f40284185054145c6E4e9568C1D3241`
+- `WETH` | type: `address constant` | vis: `default` | flags: `constant` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590`
+- `blockNumber` | type: `uint256` | vis: `default` | flags: `-` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `12321524`
+- `kodiakRouter` | type: `address` | vis: `default` | flags: `-` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `0x43Dac637c4383f91B4368041E7A8687da3806Cae`
+- `kodiakSwapAdapter` | type: `KodiakSwapAdapter` | vis: `default` | flags: `-` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol`
+- `okxApprovalAddress` | type: `address` | vis: `default` | flags: `-` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `0x40aA958dd87FC8305b97f2BA922CDdCa374bcD7f`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol`
+- `timestamp` | type: `uint256` | vis: `default` | flags: `-` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `1761551704`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `admin` | type: `address` | vis: `default` | flags: `-` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol`
+- `blockNumber` | type: `uint256` | vis: `default` | flags: `-` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `24633422`
+- `lifiRouter` | type: `address constant` | vis: `default` | flags: `constant` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE`
+- `lifiSwapAdapter` | type: `LifiSwapAdapter` | vis: `default` | flags: `-` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol`
+- `netAmt` | type: `uint256` | vis: `default` | flags: `-` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `601581707`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `TermMaxRouterV2(0x324596C1682a5675008f6e58F9C4E0A894b079c7)`
+- `swapData` | type: `bytes` | vis: `default` | flags: `-` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `hex"5fd9ae2e5b27fc87afdeb62f7d451bd6df0874071216bb4c8cb04730a6ca28a8297a0a9400000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000100000000000000000000000000324596c1682a5675008f6e58f9c4e0a894b079c7000000000000000000000000000000000000000000000000000000002522a41d000000000000000000000000000000000000000000000000000000000000016000000000000000000000000000000000000000000000000000000000000000086c6966692d617069000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002a307830303030303030303030303030303030303030303030303030303030303030303030303030303030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000001e00000000000000000000000003ef238c36035880efbdfa239d218186b79ad1d6f0000000000000000000000003ef238c36035880efbdfa239d218186b79ad1d6f0000000000000000000000002260fac5e5542a773aa44fbcfedf7c193bc2c5990000000000000000000000002260fac5e5542a773aa44fbcfedf7c193bc2c59900000000000000000000000000000000000000000000000000000000000f424000000000000000000000000000000000000000000000000000000000000000e000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000084eedd56e10000000000000000000000002260fac5e5542a773aa44fbcfedf7c193bc2c599000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009c4000000000000000000000000b9c0de368bece5e76b52545a8e377a4c118f597b00000000000000000000000000000000000000000000000000000000000000000000000000000000ac4c6e212a361c968f1725b4d055b47e63f80b75000000000000000000000000ac4c6e212a361c968f1725b4d055b47e63f80b750000000000000000000000002260fac5e5542a773aa44fbcfedf7c193bc2c599000000000000000000000000a0b86991c6218b36c1d19d4a2e9eb0ce3606eb4800000000000000000000000000000000000000000000000000000000000f387c00000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003a45f3bd1c80000000000000000000000002260fac5e5542a773aa44fbcfedf7c193bc2c59900000000000000000000000000000000000000000000000000000000000f387c0000000000000000000000001231deb6f5749ef6ce6943a275a1d3e7486f4eae000000000000000000000000a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48000000000000000000000000000000000000000000000000000000002519226a000000000000000000000000c10ee9031f2a0b84766a86b55a8d90f357910fb400000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000284ba3f2165000000000000000000000000de7259893af7cdbc9fd806c6ba61d22d581d566700000000000000000000000000000000000000000000000000000000000981b30000000000000000000000002260fac5e5542a773aa44fbcfedf7c193bc2c59900000000000000000000000000000000000000000000000000000000000f387c000000000000000000000000a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48000000000000000000000000000000000000000000000000000000002942ef3d0000000000000000000000001231deb6f5749ef6ce6943a275a1d3e7486f4eae000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000011c019cdc49910b0002012260fac5e5542a773aa44fbcfedf7c193bc2c59901ffff05000000000000000000000000000000000000000000000000000000000000003ff5f5b97624542d72a9e06f04804bf81baa15e2b4020100c10ee9031f2a0b84766a86b55a8d90f357910fb4dac17f958d2ee523a2206206994597c13d831ec7f38804a5090e01dac17f958d2ee523a2206206994597c13d831ec701ffff06000000000004444c5dc75cb358380d2e3de08a90a0b86991c6218b36c1d19d4a2e9eb0ce3606eb480000000800000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c10ee9031f2a0b84766a86b55a8d90f357910fb4a5090ea50c0e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"`
+- `tokenIn` | type: `address constant` | vis: `default` | flags: `constant` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `tokenOut` | type: `address constant` | vis: `default` | flags: `constant` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `tradeAmt` | type: `uint256` | vis: `default` | flags: `-` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `1000000`
+- `whitelistManager` | type: `IWhitelistManager` | vis: `default` | flags: `-` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `IWhitelistManager(0xB84f2a39b271D92586c61232a73ee1F7adFBf317)`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkMarketV2` @ `test/v2/mainnet-fork/mainnet/ForkMarketV2.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkMarketV2` @ `test/v2/mainnet-fork/mainnet/ForkMarketV2.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `blockNumber` | type: `uint256` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `24287307`
+- `data` | type: `bytes` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `hex"f2c4269600000000000000000000000000000000000000000000000000000000000347c40000000000000000000000009dc44ae5be187eca9e2a67e33f27a4c91cea1223000000000000000000000000dac17f958d2ee523a2206206994597c13d831ec700000000000000000000000000000000000000000000001b1ae4d6e2ef500000000000000000000000000000000000000000000000000000000000000612de1e000000000000000000000000000000000000000000000000000000006971977600000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000003000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000002a0000000000000000000000000000000000000000000000000000000000000064000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000000000000000000000000000000000000000012000000000000000000000000000000000000000000000000000000000000001600000000000000000000000009dc44ae5be187eca9e2a67e33f27a4c91cea122300000000000000000000000000000000000000000000000000000000000000010000000000000000000000005745050e787f693ed21e4418d528f78ad9c374a600000000000000000000000000000000000000000000000000000000000000010000000000000000000000005745050e787f693ed21e4418d528f78ad9c374a6000000000000000000000000000000000000000000000000000000000000000180000000000000000001271000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000009dc44ae5be187eca9e2a67e33f27a4c91cea1223000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001f4000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000016000000000000000000000000000000000000000000000000000000000000001c0000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200000000000000000000000000000000000000000000000000000000000000020000000000000000000000006747bcaf9bd5a5f0758cbe08903490e45ddfacb50000000000000000000000006747bcaf9bd5a5f0758cbe08903490e45ddfacb500000000000000000000000000000000000000000000000000000000000000020000000000000000000000006747bcaf9bd5a5f0758cbe08903490e45ddfacb50000000000000000000000006747bcaf9bd5a5f0758cbe08903490e45ddfacb50000000000000000000000000000000000000000000000000000000000000002800000000000000001020320e0554a476a092703abdb3ef35c80e0d76d32939f0000000000000000010323f0c7bbec68d12a0d1830360f8ec58fa599ba1b0e9b00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2000000000000000000000000a0b86991c6218b36c1d19d4a2e9eb0ce3606eb4800000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc2000000000000000000000000dac17f958d2ee523a2206206994597c13d831ec700000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e000000000000000000000000000000000000000000000000000000000000001200000000000000000000000000000000000000000000000000000000000000160000000000000000000000000a0b86991c6218b36c1d19d4a2e9eb0ce3606eb4800000000000000000000000000000000000000000000000000000000000000010000000000000000000000005e18e052517af66575105acff6a7f17ded3f10f200000000000000000000000000000000000000000000000000000000000000010000000000000000000000005e18e052517af66575105acff6a7f17ded3f10f200000000000000000000000000000000000000000000000000000000000000010000000000000000020327100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000080000000000000000000000000a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48000000000000000000000000dac17f958d2ee523a2206206994597c13d831ec70000000000000000000000000000000000000000000053e2d6238da3000000320000000000000000000000000000000000000000000000000000000000000000"`
+- `minTokenOut` | type: `uint256` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `8e6`
+- `okxApprovalAddress` | type: `address` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `0x40aA958dd87FC8305b97f2BA922CDdCa374bcD7f`
+- `okxRouter` | type: `address` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `0x5E1f62Dac767b0491e3CE72469C217365D5B48cC`
+- `okxSwapAdapter` | type: `OkxSwapAdapter` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol`
+- `tokenIn` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `0x9dC44ae5BE187ECA9e2A67e33f27A4c91cEA1223`
+- `tokenInAmt` | type: `uint256` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `480 ether`
+- `tokenOut` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `DEFAULT_MAX_UPDATE_INTERVAL` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol` = `0`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `NVDAON` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol` = `0xA9eE28C80f960B889dFbd1902055218cBa016F75`
+- `ONDO_ORACLE` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol` = `0xF4Fd8a1B412633e10527454137A29Db7Aa35F15e`
+- `TSLAON` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol` = `0x2494b603319d4D9F9715c9f4496d9E0364B59d93`
+- `TSLA_USD_PRICE_FEED` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol` = `0xEEA2ae9c074E87596A85ABE698B2Afebc9B57893`
+- `factory` | type: `TermMaxOndoPriceFeedAdapterFactory public` | vis: `public` | flags: `-` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol`
+- `nvdaonAdapter` | type: `TermMaxOndoPriceFeedAdapter public` | vis: `public` | flags: `-` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol`
+- `ondoOracle` | type: `ISyntheticSharesOracle public` | vis: `public` | flags: `-` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol`
+- `ondoOracleExtended` | type: `ISyntheticSharesOracleExtended public` | vis: `public` | flags: `-` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol`
+- `priceFeedFactory` | type: `TermMaxPriceFeedFactoryV2 public` | vis: `public` | flags: `-` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol`
+- `tslaonAdapter` | type: `TermMaxOndoPriceFeedAdapter public` | vis: `public` | flags: `-` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol`
+- `tslaonUSDConverter` | type: `ITermMaxPriceFeed public` | vis: `public` | flags: `-` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `USDon` | type: `address` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `0xAcE8E719899F6E91831B18AE746C9A965c2119F1`
+- `accessManager` | type: `address` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `0xDA4aAF85Bb924B53DCc2DFFa9e1A9C2Ef97aCFDF`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `0x56E3665038C5F0b56Cc7D81aC66C86521274B251`
+- `ondoMarket` | type: `address` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `0x2c158BC456e027b2AfFCCadF1BDBD9f5fC4c5C8c`
+- `ondoSwapAdapter` | type: `OndoSwapAdapter` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `TermMaxRouterV2(0x324596C1682a5675008f6e58F9C4E0A894b079c7)`
+- `stableAsset` | type: `address` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `stockAsset` | type: `address` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `0xf6b1117ec07684D3958caD8BEb1b302bfD21103f`
+- `whitelistManager` | type: `address` | vis: `default` | flags: `-` | `ForkOndoSwapAdapter` @ `test/v2/integration/ForkOndoSwapAdapter.t.sol` = `0xB84f2a39b271D92586c61232a73ee1F7adFBf317`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `blockNumber` | type: `uint256` | vis: `default` | flags: `-` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `24073987`
+- `data` | type: `bytes` | vis: `default` | flags: `-` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `hex"0000000000000000000000000000000000000002410001050000c900004e00a0744c8c0960be1e1fe41c1370adaf5d8e66f07cf1c2df2268cd6b980029e6e6e0733ac8ec3e02be9410d0979900000000000000000000000000000000000000000000000086a7706a995a2fce0c2060be1e1fe41c1370adaf5d8e66f07cf1c2df226845b6ffb13e5206dafe2cc8780e4ddc0e324962656ae4071198002dc6c045b6ffb13e5206dafe2cc8780e4ddc0e324962650000000000000000000000000000000000000000000000000004949cd530d02d60be1e1fe41c1370adaf5d8e66f07cf1c2df22684101c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200042e1a7d4d000000000000000000000000000000000000000000000000000000000000000041729995855c00494d039ab6792f18e368e530dff9310084f196187f0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000dac17f958d2ee523a2206206994597c13d831ec70000000000000000000000000000000000000000000d1b71758e21960000137e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400065a8177fae27000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003a50e9000000000000000000000000111111125421ca6dc452d289314280a0f8842a65"`
+- `desc` | type: `IOneInchRouter.SwapDescription` | vis: `default` | flags: `-` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol`
+- `oneInchRouter` | type: `address` | vis: `default` | flags: `-` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `0x111111125421cA6dc452d289314280a0f8842A65`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol`
+- `sender` | type: `address` | vis: `default` | flags: `-` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `0x78f87371Ce25c021cf4953528cAa18C78393Ebbd`
+- `swapAdapter` | type: `OneInchSwapAdapter` | vis: `default` | flags: `-` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol`
+- `swapData` | type: `bytes` | vis: `default` | flags: `-` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol`
+- `tokenIn` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `0x60bE1e1fE41c1370ADaF5d8e66f07Cf1C2Df2268`
+- `tokenOut` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkPancakeAdapterV2` @ `test/v2/integration/ForkPancakeAdapterV2.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkPancakeAdapterV2` @ `test/v2/integration/ForkPancakeAdapterV2.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `USDT` | type: `address constant` | vis: `default` | flags: `constant` | `ForkPancakeAdapterV2` @ `test/v2/integration/ForkPancakeAdapterV2.t.sol` = `0x55d398326f99059fF775485246999027B3197955`
+- `WBNB` | type: `address constant` | vis: `default` | flags: `constant` | `ForkPancakeAdapterV2` @ `test/v2/integration/ForkPancakeAdapterV2.t.sol` = `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`
+- `fee` | type: `uint24` | vis: `default` | flags: `-` | `ForkPancakeAdapterV2` @ `test/v2/integration/ForkPancakeAdapterV2.t.sol` = `500`
+- `pancakeFactory` | type: `address` | vis: `default` | flags: `-` | `ForkPancakeAdapterV2` @ `test/v2/integration/ForkPancakeAdapterV2.t.sol` = `0x0BFbCF9fa4f9C56B0F40a671Ad40E0805A091865`
+- `pancakeRouter` | type: `address constant` | vis: `default` | flags: `constant` | `ForkPancakeAdapterV2` @ `test/v2/integration/ForkPancakeAdapterV2.t.sol` = `0x1b81D678ffb9C0263b24A97847620C99d213eB14`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkPancakeAdapterV2` @ `test/v2/integration/ForkPancakeAdapterV2.t.sol`
+- `uniswapAdapter` | type: `UniswapV3AdapterV2` | vis: `default` | flags: `-` | `ForkPancakeAdapterV2` @ `test/v2/integration/ForkPancakeAdapterV2.t.sol`
+- `BUSD` | type: `address constant` | vis: `default` | flags: `constant` | `ForkPancakeOracle` @ `test/v2/integration/ForkPancakeOracle.t.sol` = `0x55d398326f99059fF775485246999027B3197955`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkPancakeOracle` @ `test/v2/integration/ForkPancakeOracle.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkPancakeOracle` @ `test/v2/integration/ForkPancakeOracle.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `WBNB` | type: `address constant` | vis: `default` | flags: `constant` | `ForkPancakeOracle` @ `test/v2/integration/ForkPancakeOracle.t.sol` = `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`
+- `_twapPeriod` | type: `uint32` | vis: `default` | flags: `-` | `ForkPancakeOracle` @ `test/v2/integration/ForkPancakeOracle.t.sol` = `900`
+- `fee` | type: `uint24` | vis: `default` | flags: `-` | `ForkPancakeOracle` @ `test/v2/integration/ForkPancakeOracle.t.sol` = `500`
+- `pancakeFactory` | type: `address` | vis: `default` | flags: `-` | `ForkPancakeOracle` @ `test/v2/integration/ForkPancakeOracle.t.sol` = `0x0BFbCF9fa4f9C56B0F40a671Ad40E0805A091865`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkPancakeSmartAdapter` @ `test/v2/integration/ForkPancakeSmartAdapter.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkPancakeSmartAdapter` @ `test/v2/integration/ForkPancakeSmartAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `USDT` | type: `address constant` | vis: `default` | flags: `constant` | `ForkPancakeSmartAdapter` @ `test/v2/integration/ForkPancakeSmartAdapter.t.sol` = `0x55d398326f99059fF775485246999027B3197955`
+- `WBNB` | type: `address constant` | vis: `default` | flags: `constant` | `ForkPancakeSmartAdapter` @ `test/v2/integration/ForkPancakeSmartAdapter.t.sol` = `0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c`
+- `admin` | type: `address` | vis: `default` | flags: `-` | `ForkPancakeSmartAdapter` @ `test/v2/integration/ForkPancakeSmartAdapter.t.sol` = `vm.addr(1)`
+- `pancakeSmartAdapter` | type: `PancakeSmartAdapter` | vis: `default` | flags: `-` | `ForkPancakeSmartAdapter` @ `test/v2/integration/ForkPancakeSmartAdapter.t.sol`
+- `pancakeSmartRouter` | type: `address constant` | vis: `default` | flags: `constant` | `ForkPancakeSmartAdapter` @ `test/v2/integration/ForkPancakeSmartAdapter.t.sol` = `0x13f4EA83D0bd40E75C8222255bc855a974568Dd4`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkPancakeSmartAdapter` @ `test/v2/integration/ForkPancakeSmartAdapter.t.sol`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `aug_1` | type: `uint64` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `1753977600`
+- `maug_1` | type: `ITermMaxMarket` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `ITermMaxMarket(0xdBB2D44c238c459cCB820De886ABF721EF6E6941)`
+- `may_30` | type: `uint64` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `1748534400`
+- `mmay_30` | type: `ITermMaxMarket` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `ITermMaxMarket(0xe867255dC0c3a27c90f756ECC566a5292ce19492)`
+- `o_aug_1` | type: `ITermMaxOrder` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `ITermMaxOrder(0x71Df74d65c3895C8FA5a1c8E8d93A7eE30A1aFc7)`
+- `o_may_30` | type: `ITermMaxOrder` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `ITermMaxOrder(0xe99ee5b18cB57276EbEADf0E773E4f8Ab49Db9B7)`
+- `odosAdapter` | type: `address` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol`
+- `oracle` | type: `TestOracle` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `TestOracle(0xE3a31690392E8E18DC3d862651C079339E2c1ADE)`
+- `pendleAdapter` | type: `address` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol`
+- `pt_susde_jun_31` | type: `address` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `0x3b3fB9C57858EF816833dC91565EFcd85D96f634`
+- `pt_susde_may_29` | type: `address` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `0xb7de5dFCb74d25c2f21841fbd6230355C50d9308`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol`
+- `susde` | type: `address` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `0x9D39A5DE30e57443BfF2A8307A4256c8797A3497`
+- `usdc` | type: `address` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `usde` | type: `address` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `0x4c9EDD5852cd905f086C759E8383e09bff1E68B3`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `aave` | type: `IAaveV3Pool` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `IAaveV3Pool(0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2)`
+- `aaveDebtToken` | type: `ICreditDelegationToken` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol`
+- `may_30` | type: `uint64` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `1748534400`
+- `mjul_31` | type: `ITermMaxMarket` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `ITermMaxMarket(0xdBB2D44c238c459cCB820De886ABF721EF6E6941)`
+- `mmay_30` | type: `ITermMaxMarket` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `ITermMaxMarket(0xe867255dC0c3a27c90f756ECC566a5292ce19492)`
+- `morpho` | type: `IMorpho` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `IMorpho(0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFCb)`
+- `morpho_market_id` | type: `Id` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `Id.wrap(0xbc552f0b14dd6f8e60b760a534ac1d8613d3539153b4d9675d697e048f2edc7e)`
+- `odosAdapter` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol`
+- `oracle` | type: `TestOracle` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `TestOracle(0xE3a31690392E8E18DC3d862651C079339E2c1ADE)`
+- `pendleAdapter` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol`
+- `pt_susde_jul_31` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `0x3b3fB9C57858EF816833dC91565EFcd85D96f634`
+- `pt_susde_may_29` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `0xb7de5dFCb74d25c2f21841fbd6230355C50d9308`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol`
+- `susde` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `0x9D39A5DE30e57443BfF2A8307A4256c8797A3497`
+- `tmxAdapter` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol`
+- `usdc` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `usde` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `0x4c9EDD5852cd905f086C759E8383e09bff1E68B3`
+- `vaultAdapter` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol`
+- `weth` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `aug_1` | type: `uint64` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `1753977600`
+- `maug_1` | type: `ITermMaxMarket` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `ITermMaxMarket(0xdBB2D44c238c459cCB820De886ABF721EF6E6941)`
+- `may_30` | type: `uint64` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `1748534400`
+- `mmay_30` | type: `ITermMaxMarket` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `ITermMaxMarket(0xe867255dC0c3a27c90f756ECC566a5292ce19492)`
+- `o_aug_1` | type: `ITermMaxOrder` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `ITermMaxOrder(0x71Df74d65c3895C8FA5a1c8E8d93A7eE30A1aFc7)`
+- `o_may_30` | type: `ITermMaxOrder` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `ITermMaxOrder(0xe99ee5b18cB57276EbEADf0E773E4f8Ab49Db9B7)`
+- `odosAdapter` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol`
+- `oracle` | type: `TestOracle` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `TestOracle(0xE3a31690392E8E18DC3d862651C079339E2c1ADE)`
+- `pendleAdapter` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol`
+- `pt_susde_jun_31` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `0x3b3fB9C57858EF816833dC91565EFcd85D96f634`
+- `pt_susde_may_29` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `0xb7de5dFCb74d25c2f21841fbd6230355C50d9308`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol`
+- `susde` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `0x9D39A5DE30e57443BfF2A8307A4256c8797A3497`
+- `tmxAdapter` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol`
+- `usdc` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `usde` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `0x4c9EDD5852cd905f086C759E8383e09bff1E68B3`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkPriceFeedV2` @ `test/v2/mainnet-fork/mainnet/ForkPriceFeedV2.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkPriceFeedV2` @ `test/v2/mainnet-fork/mainnet/ForkPriceFeedV2.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `BLOCK_TIMESTAMP` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ForkSparkLinearOracleAdapterTest` @ `test/v2/integration/ForkSparkLinearOracleAdapter.t.sol` = `1761877213`
+- `FORK_BLOCK` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ForkSparkLinearOracleAdapterTest` @ `test/v2/integration/ForkSparkLinearOracleAdapter.t.sol` = `23694295`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkSparkLinearOracleAdapterTest` @ `test/v2/integration/ForkSparkLinearOracleAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `PENDLE_SPARK_LINEAR_ORACLE` | type: `address constant` | vis: `default` | flags: `constant` | `ForkSparkLinearOracleAdapterTest` @ `test/v2/integration/ForkSparkLinearOracleAdapter.t.sol` = `0xeD2b85Df608fa9FBe95371D01566e12fb005EDeE`
+- `adapter` | type: `TermMaxSparkLinearOracleAdapter public` | vis: `public` | flags: `-` | `ForkSparkLinearOracleAdapterTest` @ `test/v2/integration/ForkSparkLinearOracleAdapter.t.sol`
+- `oracleAggregator` | type: `OracleAggregator public` | vis: `public` | flags: `-` | `ForkSparkLinearOracleAdapterTest` @ `test/v2/integration/ForkSparkLinearOracleAdapter.t.sol` = `OracleAggregator(0xE3a31690392E8E18DC3d862651C079339E2c1ADE)`
+- `sparkLinearOracle` | type: `ISparkLinearOracle public` | vis: `public` | flags: `-` | `ForkSparkLinearOracleAdapterTest` @ `test/v2/integration/ForkSparkLinearOracleAdapter.t.sol`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkStrataVaultAdapter` @ `test/v2/integration/ForkStrataVaultAdapter.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkStrataVaultAdapter` @ `test/v2/integration/ForkStrataVaultAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkStrataVaultAdapter` @ `test/v2/integration/ForkStrataVaultAdapter.t.sol`
+- `srUSDE` | type: `address` | vis: `default` | flags: `-` | `ForkStrataVaultAdapter` @ `test/v2/integration/ForkStrataVaultAdapter.t.sol` = `0x3d7d6fdf07EE548B939A80edbc9B2256d0cdc003`
+- `strataAdapter` | type: `StrataVaultAdapter` | vis: `default` | flags: `-` | `ForkStrataVaultAdapter` @ `test/v2/integration/ForkStrataVaultAdapter.t.sol`
+- `susde` | type: `address` | vis: `default` | flags: `-` | `ForkStrataVaultAdapter` @ `test/v2/integration/ForkStrataVaultAdapter.t.sol` = `0x9D39A5DE30e57443BfF2A8307A4256c8797A3497`
+- `usdc` | type: `address` | vis: `default` | flags: `-` | `ForkStrataVaultAdapter` @ `test/v2/integration/ForkStrataVaultAdapter.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `usde` | type: `address` | vis: `default` | flags: `-` | `ForkStrataVaultAdapter` @ `test/v2/integration/ForkStrataVaultAdapter.t.sol` = `0x4c9EDD5852cd905f086C759E8383e09bff1E68B3`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkTermMax4626` @ `test/v2/integration/ForkTermMax4626.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkTermMax4626` @ `test/v2/integration/ForkTermMax4626.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `aUSDC` | type: `address` | vis: `default` | flags: `-` | `ForkTermMax4626` @ `test/v2/integration/ForkTermMax4626.t.sol`
+- `aave` | type: `IAaveV3Pool` | vis: `default` | flags: `-` | `ForkTermMax4626` @ `test/v2/integration/ForkTermMax4626.t.sol` = `IAaveV3Pool(0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2)`
+- `aave4626` | type: `StableERC4626ForAave` | vis: `default` | flags: `-` | `ForkTermMax4626` @ `test/v2/integration/ForkTermMax4626.t.sol`
+- `admin` | type: `address` | vis: `default` | flags: `-` | `ForkTermMax4626` @ `test/v2/integration/ForkTermMax4626.t.sol` = `vm.randomAddress()`
+- `stakingBuffer` | type: `StakingBuffer.BufferConfig` | vis: `default` | flags: `-` | `ForkTermMax4626` @ `test/v2/integration/ForkTermMax4626.t.sol`
+- `usdc` | type: `address` | vis: `default` | flags: `-` | `ForkTermMax4626` @ `test/v2/integration/ForkTermMax4626.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol`
+- `susde` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0x9D39A5DE30e57443BfF2A8307A4256c8797A3497`
+- `tETH` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xa1150cd4A014e06F5E0A6ec9453fE0208dA5adAb`
+- `tETHDepositVault` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xC93bb8D5581D74272F0E304593af9Ab4E3A0181b`
+- `tETHRedeemVault` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xE042678e6c6871Fa279e037C11e390f31334ba0B`
+- `tUSDEDepositVault` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0x5AD2e3d65f8eCDc36eeba38BAE3Cc6Ff258D2dfa`
+- `tUSDERedeemVault` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xFaAE52c6A6d477f859a740a76B29c33559ace18c`
+- `terminalAdapter` | type: `TerminalVaultAdapter` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol`
+- `tusde` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xA01227A26A7710bc75071286539E47AdB6DEa417`
+- `usde` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0x4c9EDD5852cd905f086C759E8383e09bff1E68B3`
+- `weEth` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee`
+- `weth` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `ADAPTER_DECIMALS` | type: `uint8 internal constant` | vis: `internal` | flags: `constant` | `ForkUSPCPriceFeedAdapterTest` @ `test/v2/integration/ForkUSPCPriceFeedAdapter.t.sol` = `18`
+- `MAINNET_RPC_URL` | type: `string internal` | vis: `internal` | flags: `-` | `ForkUSPCPriceFeedAdapterTest` @ `test/v2/integration/ForkUSPCPriceFeedAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `SCALE_DOWN` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ForkUSPCPriceFeedAdapterTest` @ `test/v2/integration/ForkUSPCPriceFeedAdapter.t.sol` = `1e18`
+- `USPC_ASSET` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ForkUSPCPriceFeedAdapterTest` @ `test/v2/integration/ForkUSPCPriceFeedAdapter.t.sol` = `0xdc807c3a618B6B1248481783def7ED76700B9eC6`
+- `USPC_ORACLE` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ForkUSPCPriceFeedAdapterTest` @ `test/v2/integration/ForkUSPCPriceFeedAdapter.t.sol` = `0x5eC0C20A83554eC1BBC0F1D3414BB8746a04acD4`
+- `adapter` | type: `TermMaxUSPCPriceFeedAdapter public` | vis: `public` | flags: `-` | `ForkUSPCPriceFeedAdapterTest` @ `test/v2/integration/ForkUSPCPriceFeedAdapter.t.sol`
+- `uspcOracle` | type: `IUSPCOracle public` | vis: `public` | flags: `-` | `ForkUSPCPriceFeedAdapterTest` @ `test/v2/integration/ForkUSPCPriceFeedAdapter.t.sol`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkUniswapAdapterV2` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkUniswapAdapterV2` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `USDC` | type: `address constant` | vis: `default` | flags: `constant` | `ForkUniswapAdapterV2` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `WBTC` | type: `address constant` | vis: `default` | flags: `constant` | `ForkUniswapAdapterV2` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `fee` | type: `uint24` | vis: `default` | flags: `-` | `ForkUniswapAdapterV2` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol` = `500`
+- `router` | type: `TermMaxRouterV2` | vis: `default` | flags: `-` | `ForkUniswapAdapterV2` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol`
+- `uniswapAdapter` | type: `UniswapV3AdapterV2` | vis: `default` | flags: `-` | `ForkUniswapAdapterV2` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol`
+- `uniswapFactory` | type: `address` | vis: `default` | flags: `-` | `ForkUniswapAdapterV2` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol` = `0x1F98431c8aD98523631AE4a59f267346ea31F984`
+- `uniswapRouter` | type: `address constant` | vis: `default` | flags: `constant` | `ForkUniswapAdapterV2` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol` = `0xE592427A0AEce92De3Edee1F18E0157C05861564`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkUniswapOracle` @ `test/v2/integration/ForkUniswapOracle.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkUniswapOracle` @ `test/v2/integration/ForkUniswapOracle.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `USDC` | type: `address constant` | vis: `default` | flags: `constant` | `ForkUniswapOracle` @ `test/v2/integration/ForkUniswapOracle.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `WBTC` | type: `address constant` | vis: `default` | flags: `constant` | `ForkUniswapOracle` @ `test/v2/integration/ForkUniswapOracle.t.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `_twapPeriod` | type: `uint32` | vis: `default` | flags: `-` | `ForkUniswapOracle` @ `test/v2/integration/ForkUniswapOracle.t.sol` = `900`
+- `fee` | type: `uint24` | vis: `default` | flags: `-` | `ForkUniswapOracle` @ `test/v2/integration/ForkUniswapOracle.t.sol` = `500`
+- `uniswapFactory` | type: `address` | vis: `default` | flags: `-` | `ForkUniswapOracle` @ `test/v2/integration/ForkUniswapOracle.t.sol` = `0x1F98431c8aD98523631AE4a59f267346ea31F984`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkVaultV2` @ `test/v2/mainnet-fork/mainnet/ForkVaultV2.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkVaultV2` @ `test/v2/mainnet-fork/mainnet/ForkVaultV2.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `DATA_PATH` | type: `string` | vis: `default` | flags: `-` | `ForkVenusPool` @ `test/v2/integration/ForkVenusPool.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fork/mainnet.json")`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkVenusPool` @ `test/v2/integration/ForkVenusPool.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `ForkVenusPool` @ `test/v2/integration/ForkVenusPool.t.sol` = `vm.randomAddress()`
+- `underlyings` | type: `IERC20[] public` | vis: `public` | flags: `-` | `ForkVenusPool` @ `test/v2/integration/ForkVenusPool.t.sol`
+- `vTokens` | type: `IVToken[] public` | vis: `public` | flags: `-` | `ForkVenusPool` @ `test/v2/integration/ForkVenusPool.t.sol`
+- `venusPools` | type: `StableERC4626ForVenus[] public` | vis: `public` | flags: `-` | `ForkVenusPool` @ `test/v2/integration/ForkVenusPool.t.sol`
+- `AAVE_WEETH_PRICE_CAP_ADAPTER` | type: `address constant` | vis: `default` | flags: `constant` | `ForkWeETHPriceCapAdapterTest` @ `test/v2/integration/ForkWeETHPriceCapAdapter.t.sol` = `0x87625393534d5C102cADB66D37201dF24cc26d4C`
+- `FORK_BLOCK` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ForkWeETHPriceCapAdapterTest` @ `test/v2/integration/ForkWeETHPriceCapAdapter.t.sol` = `23668976`
+- `MAINNET_RPC_URL` | type: `string` | vis: `default` | flags: `-` | `ForkWeETHPriceCapAdapterTest` @ `test/v2/integration/ForkWeETHPriceCapAdapter.t.sol` = `vm.envString("MAINNET_RPC_URL")`
+- `aaveWeETHPriceCapAdapter` | type: `IPriceCapAdapter public` | vis: `public` | flags: `-` | `ForkWeETHPriceCapAdapterTest` @ `test/v2/integration/ForkWeETHPriceCapAdapter.t.sol`
+- `adapter` | type: `TermMaxWeETHPriceCapAdapter public` | vis: `public` | flags: `-` | `ForkWeETHPriceCapAdapterTest` @ `test/v2/integration/ForkWeETHPriceCapAdapter.t.sol`
+- `maker` | type: `address` | vis: `default` | flags: `-` | `FuzzActionsTestV2` @ `test/v2/FuzzActionsV2.t.sol` = `vm.randomAddress()`
+- `path` | type: `string` | vis: `default` | flags: `-` | `FuzzActionsTestV2` @ `test/v2/FuzzActionsV2.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fuzzSwap/v2.json")`
+- `taker` | type: `address` | vis: `default` | flags: `-` | `FuzzActionsTestV2` @ `test/v2/FuzzActionsV2.t.sol` = `vm.randomAddress()`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `FuzzActionsTestV2` @ `test/v2/FuzzActionsV2.t.sol` = `vm.randomAddress()`
+- `maker` | type: `address` | vis: `default` | flags: `-` | `FuzzActionsTestV2WithPool` @ `test/v2/FuzzActionsV2WithPool.t.sol` = `vm.randomAddress()`
+- `path` | type: `string` | vis: `default` | flags: `-` | `FuzzActionsTestV2WithPool` @ `test/v2/FuzzActionsV2WithPool.t.sol` = `string.concat(vm.projectRoot(), "/test/testdata/fuzzSwap/v2.json")`
+- `pool` | type: `MockERC4626` | vis: `default` | flags: `-` | `FuzzActionsTestV2WithPool` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `taker` | type: `address` | vis: `default` | flags: `-` | `FuzzActionsTestV2WithPool` @ `test/v2/FuzzActionsV2WithPool.t.sol` = `vm.randomAddress()`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `FuzzActionsTestV2WithPool` @ `test/v2/FuzzActionsV2WithPool.t.sol` = `vm.randomAddress()`
+- `admin` | type: `address` | vis: `default` | flags: `-` | `FuzzSwapTestV2` @ `test/v2/FuzzSwapV2.t.sol` = `vm.randomAddress()`
+- `entities` | type: `uint256` | vis: `default` | flags: `-` | `FuzzSwapTestV2` @ `test/v2/FuzzSwapV2.t.sol`
+- `indexs` | type: `string[]` | vis: `default` | flags: `-` | `FuzzSwapTestV2` @ `test/v2/FuzzSwapV2.t.sol` = `["0", "1", "2", "3", "4", "5"]`
+- `maker` | type: `address` | vis: `default` | flags: `-` | `FuzzSwapTestV2` @ `test/v2/FuzzSwapV2.t.sol` = `vm.randomAddress()`
+- `taker` | type: `address` | vis: `default` | flags: `-` | `FuzzSwapTestV2` @ `test/v2/FuzzSwapV2.t.sol` = `vm.randomAddress()`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `FuzzSwapTestV2` @ `test/v2/FuzzSwapV2.t.sol` = `vm.randomAddress()`
+- `HALF_LIQUIDATION_THRESHOLD` | type: `uint256 constant` | vis: `default` | flags: `constant` | `GearingTokenConstants` @ `contracts/v1/lib/GearingTokenConstants.sol` = `10000e8`
+- `REWARD_TO_LIQUIDATOR` | type: `uint256 constant` | vis: `default` | flags: `constant` | `GearingTokenConstants` @ `contracts/v1/lib/GearingTokenConstants.sol` = `0.05e8`
+- `REWARD_TO_PROTOCOL` | type: `uint256 constant` | vis: `default` | flags: `constant` | `GearingTokenConstants` @ `contracts/v1/lib/GearingTokenConstants.sol` = `0.05e8`
+- `collateralCapacity` | type: `uint256 public` | vis: `public` | flags: `-` | `GearingTokenWithERC20` @ `contracts/v1/tokens/GearingTokenWithERC20.sol`
+- `collateralDecimals` | type: `uint8` | vis: `default` | flags: `-` | `GearingTokenWithERC20` @ `contracts/v1/tokens/GearingTokenWithERC20.sol`
+- `UINT256_LENGTH` | type: `uint256 constant` | vis: `default` | flags: `constant` | `GearingTokenWithERC20V2` @ `contracts/v2/tokens/GearingTokenWithERC20V2.sol` = `32`
+- `collateralCapacity` | type: `uint256 public` | vis: `public` | flags: `-` | `GearingTokenWithERC20V2` @ `contracts/v2/tokens/GearingTokenWithERC20V2.sol`
+- `collateralDenominator` | type: `uint256 private` | vis: `private` | flags: `-` | `GearingTokenWithERC20V2` @ `contracts/v2/tokens/GearingTokenWithERC20V2.sol`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol` = `vm.randomAddress()`
+- `flashLoanReceiver` | type: `MockFlashLoanReceiver` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol`
+- `flashRepayer` | type: `MockFlashRepayerV2` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol`
+- `liquidationLtv` | type: `uint32` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol` = `0.9e8`
+- `maker` | type: `address` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol` = `vm.randomAddress()`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol`
+- `maxLtv` | type: `uint32` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol` = `0.89e8`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol`
+- `sender` | type: `address` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol` = `vm.randomAddress()`
+- `testdata` | type: `string` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `GtTestV2` @ `test/v2/GtV2.t.sol` = `vm.randomAddress()`
+- `vm` | type: `Vm constant` | vis: `default` | flags: `constant` | `JSONLoader` @ `test/v2/utils/JSONLoader.sol` = `Vm(address(uint160(uint256(keccak256("hevm cheat code")))))`
+- `KYBER_SCALING_HELPER` | type: `address public immutable` | vis: `public` | flags: `immutable` | `KyberswapV2Adapter` @ `contracts/v1/router/swapAdapters/KyberswapV2Adapter.sol`
+- `router` | type: `address public immutable` | vis: `public` | flags: `immutable` | `KyberswapV2Adapter` @ `contracts/v1/router/swapAdapters/KyberswapV2Adapter.sol`
+- `KYBER_SCALING_HELPER` | type: `address public immutable` | vis: `public` | flags: `immutable` | `KyberswapV2AdapterV2` @ `contracts/v2/router/swapAdapters/KyberswapV2AdapterV2.sol`
+- `router` | type: `address public immutable` | vis: `public` | flags: `immutable` | `KyberswapV2AdapterV2` @ `contracts/v2/router/swapAdapters/KyberswapV2AdapterV2.sol`
+- `router` | type: `address public immutable` | vis: `public` | flags: `immutable` | `LifiSwapAdapter` @ `contracts/v2/router/swapAdapters/LifiSwapAdapter.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `LiquidateLoanBatch` @ `script/LiquidateLoanBatch.s.sol`
+- `liquidator` | type: `address` | vis: `default` | flags: `-` | `LiquidateLoanBatch` @ `script/LiquidateLoanBatch.s.sol`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol` = `vm.randomAddress()`
+- `maker` | type: `address` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol` = `vm.randomAddress()`
+- `makerHelper` | type: `MakerHelper` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol`
+- `pool` | type: `address` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol` = `vm.randomAddress()`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol`
+- `res2` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol`
+- `sender` | type: `address` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol` = `vm.randomAddress()`
+- `testdata` | type: `string` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol` = `vm.randomAddress()`
+- `PREFIX_FT` | type: `string constant` | vis: `default` | flags: `constant` | `MarketConstants` @ `contracts/v1/lib/MarketConstants.sol` = `"FT:"`
+- `PREFIX_GT` | type: `string constant` | vis: `default` | flags: `constant` | `MarketConstants` @ `contracts/v1/lib/MarketConstants.sol` = `"GT:"`
+- `PREFIX_XT` | type: `string constant` | vis: `default` | flags: `constant` | `MarketConstants` @ `contracts/v1/lib/MarketConstants.sol` = `"XT:"`
+- `PREFIX_FT` | type: `string constant` | vis: `default` | flags: `constant` | `MarketConstantsV2` @ `contracts/v2/lib/MarketConstantsV2.sol` = `"FT:"`
+- `PREFIX_GT` | type: `string constant` | vis: `default` | flags: `constant` | `MarketConstantsV2` @ `contracts/v2/lib/MarketConstantsV2.sol` = `"GT:"`
+- `PREFIX_MARKET` | type: `string constant` | vis: `default` | flags: `constant` | `MarketConstantsV2` @ `contracts/v2/lib/MarketConstantsV2.sol` = `"Termmax Market:"`
+- `PREFIX_XT` | type: `string constant` | vis: `default` | flags: `constant` | `MarketConstantsV2` @ `contracts/v2/lib/MarketConstantsV2.sol` = `"XT:"`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `MarketV2Test` @ `test/v2/MarketV2.t.sol` = `vm.randomAddress()`
+- `maker` | type: `address` | vis: `default` | flags: `-` | `MarketV2Test` @ `test/v2/MarketV2.t.sol` = `vm.randomAddress()`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `MarketV2Test` @ `test/v2/MarketV2.t.sol`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `MarketV2Test` @ `test/v2/MarketV2.t.sol`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `MarketV2Test` @ `test/v2/MarketV2.t.sol`
+- `sender` | type: `address` | vis: `default` | flags: `-` | `MarketV2Test` @ `test/v2/MarketV2.t.sol` = `vm.randomAddress()`
+- `testdata` | type: `string` | vis: `default` | flags: `-` | `MarketV2Test` @ `test/v2/MarketV2.t.sol`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `MarketV2Test` @ `test/v2/MarketV2.t.sol` = `vm.randomAddress()`
+- `_decimals` | type: `uint8` | vis: `default` | flags: `-` | `MintableERC20` @ `contracts/v1/tokens/MintableERC20.sol`
+- `underlying` | type: `IERC20 public immutable` | vis: `public` | flags: `immutable` | `MockAave` @ `contracts/v2/test/MockAave.sol`
+- `_asset` | type: `address private` | vis: `private` | flags: `-` | `MockAggWithAsset` @ `test/v2/oracle/TermMaxERC4626PriceFeed.t.sol`
+- `name` | type: `string public` | vis: `public` | flags: `-` | `MockContract` @ `test/v2/tokenomics/UniversalFactory.t.sol`
+- `owner` | type: `address public` | vis: `public` | flags: `-` | `MockContract` @ `test/v2/tokenomics/UniversalFactory.t.sol`
+- `value` | type: `uint256 public` | vis: `public` | flags: `-` | `MockContract` @ `test/v2/tokenomics/UniversalFactory.t.sol`
+- `_decimals` | type: `uint8 private immutable` | vis: `private` | flags: `immutable` | `MockERC20` @ `contracts/v1/test/MockERC20.sol`
+- `asset` | type: `address public` | vis: `public` | flags: `-` | `MockERC4626` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `decimals` | type: `uint8 public` | vis: `public` | flags: `-` | `MockERC4626` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol` = `18`
+- `name` | type: `string public` | vis: `public` | flags: `-` | `MockERC4626` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol` = `"Mock Vault"`
+- `symbol` | type: `string public` | vis: `public` | flags: `-` | `MockERC4626` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol` = `"MVAULT"`
+- `_decimalsOverride` | type: `uint8 private` | vis: `private` | flags: `-` | `MockERC4626WithDecimals` @ `test/v2/oracle/TermMaxERC4626PriceFeed.t.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `MockFlashLoanHandler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `collateral` | type: `address` | vis: `default` | flags: `-` | `MockFlashLoanReceiver` @ `contracts/v1/test/MockFlashLoanReceiver.sol`
+- `gt` | type: `IGearingToken` | vis: `default` | flags: `-` | `MockFlashLoanReceiver` @ `contracts/v1/test/MockFlashLoanReceiver.sol`
+- `market` | type: `ITermMaxMarket` | vis: `default` | flags: `-` | `MockFlashLoanReceiver` @ `contracts/v1/test/MockFlashLoanReceiver.sol`
+- `underlying` | type: `IERC20` | vis: `default` | flags: `-` | `MockFlashLoanReceiver` @ `contracts/v1/test/MockFlashLoanReceiver.sol`
+- `xt` | type: `IERC20` | vis: `default` | flags: `-` | `MockFlashLoanReceiver` @ `contracts/v1/test/MockFlashLoanReceiver.sol`
+- `gt` | type: `IGearingToken` | vis: `default` | flags: `-` | `MockFlashRepayer` @ `contracts/v1/test/MockFlashRepayer.sol`
+- `gt` | type: `IGearingToken` | vis: `default` | flags: `-` | `MockFlashRepayerV2` @ `contracts/v2/test/MockFlashRepayerV2.sol`
+- `_orderConfig` | type: `OrderConfig private` | vis: `private` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `ft` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `gt` | type: `IGearingToken private` | vis: `private` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `maker` | type: `address public` | vis: `public` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `market` | type: `ITermMaxMarket public` | vis: `public` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `maturity` | type: `uint64 private` | vis: `private` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `xt` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `_orderConfig` | type: `OrderConfig private` | vis: `private` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `ft` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `gt` | type: `IGearingToken private` | vis: `private` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `maker` | type: `address public` | vis: `public` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `market` | type: `ITermMaxMarket public` | vis: `public` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `maturity` | type: `uint64 private` | vis: `private` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `xt` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `_decimals` | type: `uint8 private` | vis: `private` | flags: `-` | `MockPT` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `symbol` | type: `string public` | vis: `public` | flags: `-` | `MockPT` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol` = `"pPT"`
+- `pt` | type: `MockPT public` | vis: `public` | flags: `-` | `MockPendleMarket` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `sy` | type: `MockSY public` | vis: `public` | flags: `-` | `MockPendleMarket` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `_latestRoundData` | type: `RoundData private` | vis: `private` | flags: `-` | `MockPriceFeed` @ `contracts/v1/test/MockPriceFeed.sol`
+- `_decimals` | type: `uint8 private` | vis: `private` | flags: `-` | `MockPriceFeedV2` @ `contracts/v2/test/MockPriceFeedV2.sol`
+- `_latestRoundData` | type: `RoundData private` | vis: `private` | flags: `-` | `MockPriceFeedV2` @ `contracts/v2/test/MockPriceFeedV2.sol`
+- `_decimals` | type: `uint8 private` | vis: `private` | flags: `-` | `MockSY` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `symbol` | type: `string public` | vis: `public` | flags: `-` | `MockSY` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol` = `"sSY"`
+- `pool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MockSwapAdapter` @ `contracts/v1/test/MockSwapAdapter.sol`
+- `pool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MockSwapAdapterV2` @ `contracts/v2/test/MockSwapAdapterV2.sol`
+- `deltaFt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2.t.sol`
+- `deltaFt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `deltaFt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzSwapV2.t.sol`
+- `deltaFt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/OrderV2.t.sol`
+- `deltaFt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/OrderV2WithPool.t.sol`
+- `deltaFt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/RouterV2.t.sol`
+- `deltaXt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2.t.sol`
+- `deltaXt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `deltaXt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzSwapV2.t.sol`
+- `deltaXt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/OrderV2.t.sol`
+- `deltaXt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/OrderV2WithPool.t.sol`
+- `deltaXt` | type: `int256 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/RouterV2.t.sol`
+- `ft` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2.t.sol`
+- `ft` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `ft` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzSwapV2.t.sol`
+- `ftReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2.t.sol`
+- `ftReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `ftReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzSwapV2.t.sol`
+- `xt` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2.t.sol`
+- `xt` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `xt` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzSwapV2.t.sol`
+- `xtReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2.t.sol`
+- `xtReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `xtReserve` | type: `int256` | vis: `default` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzSwapV2.t.sol`
+- `aToken` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockTermMax4626PoolAave` @ `test/v2/TermMaxViewer.t.sol`
+- `assetAddr` | type: `address public` | vis: `public` | flags: `-` | `MockTermMax4626PoolAave` @ `test/v2/TermMaxViewer.t.sol`
+- `totalAssetsValue` | type: `uint256 public` | vis: `public` | flags: `-` | `MockTermMax4626PoolAave` @ `test/v2/TermMaxViewer.t.sol`
+- `assetAddr` | type: `address public` | vis: `public` | flags: `-` | `MockTermMax4626PoolERC4626` @ `test/v2/TermMaxViewer.t.sol`
+- `thirdPool` | type: `IERC4626 public` | vis: `public` | flags: `-` | `MockTermMax4626PoolERC4626` @ `test/v2/TermMaxViewer.t.sol`
+- `totalAssetsValue` | type: `uint256 public` | vis: `public` | flags: `-` | `MockTermMax4626PoolERC4626` @ `test/v2/TermMaxViewer.t.sol`
+- `_feeProtocol` | type: `uint8 private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `_observationCardinality` | type: `uint16 private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `_observationCardinalityNext` | type: `uint16 private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `_observationIndex` | type: `uint16 private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `_observations` | type: `mapping(uint256 => Observation) private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `_snapshots` | type: `mapping(uint32 => ObservationSnapshot) private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `_sqrtPriceX96` | type: `uint160 private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `_tick` | type: `int24 private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `_token1` | type: `address private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `_unlocked` | type: `bool private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol` = `true`
+- `_decimals` | type: `uint8 private` | vis: `private` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol` = `18`
+- `_underlying` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `borrowBalancesMock` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `borrowRateMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `cashMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `exchangeRateMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol` = `1e18`
+- `reserveFactorMantissaMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `supplyRateMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `totalBorrowsMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `totalReservesMock` | type: `uint256 public` | vis: `public` | flags: `-` | `MockVToken` @ `contracts/mocks/MockVToken.sol`
+- `whitelist` | type: `mapping(address => mapping(ContractModule => bool)) public` | vis: `public` | flags: `-` | `MockWhitelistManager` @ `contracts/v2/test/MockWhitelistManager.sol`
+- `AUTHORIZATION_TYPEHASH` | type: `bytes32 constant` | vis: `default` | flags: `constant` | `MorphoSigUtils` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `keccak256( "Authorization(address authorizer,address authorized,bool isAuthorized,uint256 nonce,uint256 deadline)" )`
+- `endpoint` | type: `ILayerZeroEndpointV2 public immutable` | vis: `public` | flags: `immutable` | `OAppCore` @ `contracts/v2/tokenomics/TMX.sol`
+- `peers` | type: `mapping(uint32 eid => bytes32 peer) public` | vis: `public` | flags: `-` | `OAppCore` @ `contracts/v2/tokenomics/TMX.sol`
+- `OPTION_TYPE_3` | type: `uint16 internal constant` | vis: `internal` | flags: `constant` | `OAppOptionsType3` @ `contracts/v2/tokenomics/TMX.sol` = `3`
+- `enforcedOptions` | type: `mapping(uint32 eid => mapping(uint16 msgType => bytes enforcedOption)) public` | vis: `public` | flags: `-` | `OAppOptionsType3` @ `contracts/v2/tokenomics/TMX.sol`
+- `preCrime` | type: `address public` | vis: `public` | flags: `-` | `OAppPreCrimeSimulator` @ `contracts/v2/tokenomics/TMX.sol`
+- `RECEIVER_VERSION` | type: `uint64 internal constant` | vis: `internal` | flags: `constant` | `OAppReceiver` @ `contracts/v2/tokenomics/TMX.sol` = `2`
+- `SENDER_VERSION` | type: `uint64 internal constant` | vis: `internal` | flags: `constant` | `OAppSender` @ `contracts/v2/tokenomics/TMX.sol` = `1`
+- `AMOUNT_LD_OFFSET` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `OFTComposeMsgCodec` @ `contracts/v2/tokenomics/TMX.sol` = `44`
+- `COMPOSE_FROM_OFFSET` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `OFTComposeMsgCodec` @ `contracts/v2/tokenomics/TMX.sol` = `76`
+- `NONCE_OFFSET` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `OFTComposeMsgCodec` @ `contracts/v2/tokenomics/TMX.sol` = `8`
+- `SRC_EID_OFFSET` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `OFTComposeMsgCodec` @ `contracts/v2/tokenomics/TMX.sol` = `12`
+- `SEND` | type: `uint16 public constant` | vis: `public` | flags: `constant` | `OFTCore` @ `contracts/v2/tokenomics/TMX.sol` = `1`
+- `SEND_AND_CALL` | type: `uint16 public constant` | vis: `public` | flags: `constant` | `OFTCore` @ `contracts/v2/tokenomics/TMX.sol` = `2`
+- `decimalConversionRate` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `OFTCore` @ `contracts/v2/tokenomics/TMX.sol`
+- `msgInspector` | type: `address public` | vis: `public` | flags: `-` | `OFTCore` @ `contracts/v2/tokenomics/TMX.sol`
+- `SEND_AMOUNT_SD_OFFSET` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `OFTMsgCodec` @ `contracts/v2/tokenomics/TMX.sol` = `40`
+- `SEND_TO_OFFSET` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `OFTMsgCodec` @ `contracts/v2/tokenomics/TMX.sol` = `32`
+- `router` | type: `IOdosRouterV2 public immutable` | vis: `public` | flags: `immutable` | `OdosV2Adapter` @ `contracts/v1/router/swapAdapters/OdosV2Adapter.sol`
+- `router` | type: `IOdosRouterV2 public immutable` | vis: `public` | flags: `immutable` | `OdosV2AdapterV2` @ `contracts/v2/router/swapAdapters/OdosV2AdapterV2.sol`
+- `USDon` | type: `IERC20 public immutable` | vis: `public` | flags: `immutable` | `OndoSwapAdapter` @ `contracts/v2/router/swapAdapters/OndoSwapAdapter.sol`
+- `ondoMarket` | type: `IGMTokenManager public immutable` | vis: `public` | flags: `immutable` | `OndoSwapAdapter` @ `contracts/v2/router/swapAdapters/OndoSwapAdapter.sol`
+- `router` | type: `IOneInchRouter public immutable` | vis: `public` | flags: `immutable` | `OneInchSwapAdapter` @ `contracts/v2/router/swapAdapters/OneInchSwapAdapter.sol`
+- `addressThis` | type: `address private immutable` | vis: `private` | flags: `immutable` | `OnlyProxyCall` @ `contracts/v2/lib/OnlyProxyCall.sol`
+- `_timeLock` | type: `uint256 internal immutable` | vis: `internal` | flags: `immutable` | `OracleAggregator` @ `contracts/v1/oracle/OracleAggregator.sol`
+- `oracles` | type: `mapping(address => Oracle) public` | vis: `public` | flags: `-` | `OracleAggregator` @ `contracts/v1/oracle/OracleAggregator.sol`
+- `pendingOracles` | type: `mapping(address => PendingOracle) public` | vis: `public` | flags: `-` | `OracleAggregator` @ `contracts/v1/oracle/OracleAggregator.sol`
+- `ASSET` | type: `address public constant` | vis: `public` | flags: `constant` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol` = `address(0x2)`
+- `BACKUP_HEARTBEAT` | type: `uint32 public constant` | vis: `public` | flags: `constant` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol` = `2 hours`
+- `DECIMALS` | type: `uint8 public constant` | vis: `public` | flags: `constant` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol` = `8`
+- `HEARTBEAT` | type: `uint32 public constant` | vis: `public` | flags: `constant` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol` = `1 hours`
+- `INITIAL_PRICE` | type: `int256 public constant` | vis: `public` | flags: `constant` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol` = `3000e8`
+- `MAX_PRICE` | type: `int256 public constant` | vis: `public` | flags: `constant` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol` = `10000e8`
+- `MIN_PRICE` | type: `int256 public constant` | vis: `public` | flags: `constant` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol` = `1000e8`
+- `OWNER` | type: `address public constant` | vis: `public` | flags: `constant` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol` = `address(0x1)`
+- `TIMELOCK` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol` = `1 days`
+- `backupFeed` | type: `MockPriceFeedV2 public` | vis: `public` | flags: `-` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol`
+- `oracleAggregator` | type: `OracleAggregatorV2 public` | vis: `public` | flags: `-` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol`
+- `primaryFeed` | type: `MockPriceFeedV2 public` | vis: `public` | flags: `-` | `OracleAggregatorTestV2` @ `test/v2/oracle/OracleAggregatorV2.t.sol`
+- `_timeLock` | type: `uint256 internal immutable` | vis: `internal` | flags: `immutable` | `OracleAggregatorV2` @ `contracts/v2/oracle/OracleAggregatorV2.sol`
+- `oracles` | type: `mapping(address => Oracle) public` | vis: `public` | flags: `-` | `OracleAggregatorV2` @ `contracts/v2/oracle/OracleAggregatorV2.sol`
+- `pendingOracles` | type: `mapping(address => PendingOracle) public` | vis: `public` | flags: `-` | `OracleAggregatorV2` @ `contracts/v2/oracle/OracleAggregatorV2.sol`
+- `ASSET` | type: `address public constant` | vis: `public` | flags: `constant` | `OracleAggregatorWithSequencerTestV2` @ `test/v2/oracle/OracleAggregatorWithSequencerV2.t.sol` = `address(0x2)`
+- `DECIMALS` | type: `uint8 public constant` | vis: `public` | flags: `constant` | `OracleAggregatorWithSequencerTestV2` @ `test/v2/oracle/OracleAggregatorWithSequencerV2.t.sol` = `8`
+- `INITIAL_PRICE` | type: `int256 public constant` | vis: `public` | flags: `constant` | `OracleAggregatorWithSequencerTestV2` @ `test/v2/oracle/OracleAggregatorWithSequencerV2.t.sol` = `3000e8`
+- `OWNER` | type: `address public constant` | vis: `public` | flags: `constant` | `OracleAggregatorWithSequencerTestV2` @ `test/v2/oracle/OracleAggregatorWithSequencerV2.t.sol` = `address(0x1)`
+- `TIMELOCK` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `OracleAggregatorWithSequencerTestV2` @ `test/v2/oracle/OracleAggregatorWithSequencerV2.t.sol` = `0`
+- `backupFeed` | type: `MockPriceFeedV2 public` | vis: `public` | flags: `-` | `OracleAggregatorWithSequencerTestV2` @ `test/v2/oracle/OracleAggregatorWithSequencerV2.t.sol`
+- `oracleWithSequencer` | type: `OracleAggregatorWithSequencerV2 public` | vis: `public` | flags: `-` | `OracleAggregatorWithSequencerTestV2` @ `test/v2/oracle/OracleAggregatorWithSequencerV2.t.sol`
+- `primaryFeed` | type: `MockPriceFeedV2 public` | vis: `public` | flags: `-` | `OracleAggregatorWithSequencerTestV2` @ `test/v2/oracle/OracleAggregatorWithSequencerV2.t.sol`
+- `sequencerFeed` | type: `MockPriceFeedV2 public` | vis: `public` | flags: `-` | `OracleAggregatorWithSequencerTestV2` @ `test/v2/oracle/OracleAggregatorWithSequencerV2.t.sol`
+- `gracePeriodTime` | type: `uint256 private` | vis: `private` | flags: `-` | `OracleAggregatorWithSequencerV2` @ `contracts/v2/oracle/OracleAggregatorWithSequencerV2.sol`
+- `sequencerUptimeFeed` | type: `AggregatorV3Interface internal` | vis: `internal` | flags: `-` | `OracleAggregatorWithSequencerV2` @ `contracts/v2/oracle/OracleAggregatorWithSequencerV2.sol`
+- `ORDER_MANAGER_SINGLETON` | type: `address private immutable` | vis: `private` | flags: `immutable` | `OrderManager` @ `contracts/v1/vault/OrderManager.sol`
+- `ORDER_MANAGER_SINGLETON` | type: `address private immutable` | vis: `private` | flags: `immutable` | `OrderManagerV2` @ `contracts/v2/vault/OrderManagerV2.sol`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `OrderTestV2` @ `test/v2/OrderV2.t.sol` = `vm.randomAddress()`
+- `maker` | type: `address` | vis: `default` | flags: `-` | `OrderTestV2` @ `test/v2/OrderV2.t.sol` = `vm.randomAddress()`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `OrderTestV2` @ `test/v2/OrderV2.t.sol`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `OrderTestV2` @ `test/v2/OrderV2.t.sol`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `OrderTestV2` @ `test/v2/OrderV2.t.sol`
+- `sender` | type: `address` | vis: `default` | flags: `-` | `OrderTestV2` @ `test/v2/OrderV2.t.sol` = `vm.randomAddress()`
+- `testdata` | type: `string` | vis: `default` | flags: `-` | `OrderTestV2` @ `test/v2/OrderV2.t.sol`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `OrderTestV2` @ `test/v2/OrderV2.t.sol` = `vm.randomAddress()`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `OrderTestV2WithPool` @ `test/v2/OrderV2WithPool.t.sol` = `vm.randomAddress()`
+- `maker` | type: `address` | vis: `default` | flags: `-` | `OrderTestV2WithPool` @ `test/v2/OrderV2WithPool.t.sol` = `vm.randomAddress()`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `OrderTestV2WithPool` @ `test/v2/OrderV2WithPool.t.sol`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `OrderTestV2WithPool` @ `test/v2/OrderV2WithPool.t.sol`
+- `pool` | type: `MockERC4626` | vis: `default` | flags: `-` | `OrderTestV2WithPool` @ `test/v2/OrderV2WithPool.t.sol`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `OrderTestV2WithPool` @ `test/v2/OrderV2WithPool.t.sol`
+- `sender` | type: `address` | vis: `default` | flags: `-` | `OrderTestV2WithPool` @ `test/v2/OrderV2WithPool.t.sol` = `vm.randomAddress()`
+- `testdata` | type: `string` | vis: `default` | flags: `-` | `OrderTestV2WithPool` @ `test/v2/OrderV2WithPool.t.sol`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `OrderTestV2WithPool` @ `test/v2/OrderV2WithPool.t.sol` = `vm.randomAddress()`
+- `_owner` | type: `address private` | vis: `private` | flags: `-` | `Ownable` @ `contracts/v2/tokenomics/TMX.sol`
+- `DURATION` | type: `uint32 public immutable` | vis: `public` | flags: `immutable` | `PTWithPriceFeed` @ `contracts/v1/extensions/PTWithPriceFeed.sol`
+- `MARKET` | type: `IPMarket public immutable` | vis: `public` | flags: `immutable` | `PTWithPriceFeed` @ `contracts/v1/extensions/PTWithPriceFeed.sol`
+- `PRICE_FEED` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `PTWithPriceFeed` @ `contracts/v1/extensions/PTWithPriceFeed.sol`
+- `PY_LP_ORACLE` | type: `PendlePYLpOracle public immutable` | vis: `public` | flags: `immutable` | `PTWithPriceFeed` @ `contracts/v1/extensions/PTWithPriceFeed.sol`
+- `DST_EID_OFFSET` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PacketV1Codec` @ `contracts/v2/tokenomics/TMX.sol` = `45`
+- `GUID_OFFSET` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PacketV1Codec` @ `contracts/v2/tokenomics/TMX.sol` = `81`
+- `MESSAGE_OFFSET` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PacketV1Codec` @ `contracts/v2/tokenomics/TMX.sol` = `113`
+- `NONCE_OFFSET` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PacketV1Codec` @ `contracts/v2/tokenomics/TMX.sol` = `1`
+- `PACKET_VERSION` | type: `uint8 internal constant` | vis: `internal` | flags: `constant` | `PacketV1Codec` @ `contracts/v2/tokenomics/TMX.sol` = `1`
+- `PACKET_VERSION_OFFSET` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PacketV1Codec` @ `contracts/v2/tokenomics/TMX.sol` = `0`
+- `RECEIVER_OFFSET` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PacketV1Codec` @ `contracts/v2/tokenomics/TMX.sol` = `49`
+- `SENDER_OFFSET` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PacketV1Codec` @ `contracts/v2/tokenomics/TMX.sol` = `13`
+- `SRC_EID_OFFSET` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PacketV1Codec` @ `contracts/v2/tokenomics/TMX.sol` = `9`
+- `router` | type: `address public immutable` | vis: `public` | flags: `immutable` | `PancakeSmartAdapter` @ `contracts/v2/router/swapAdapters/PancakeSmartAdapter.sol`
+- `receivedValue` | type: `uint256 public` | vis: `public` | flags: `-` | `PayableContract` @ `test/v2/tokenomics/UniversalFactory.t.sol`
+- `defaultApprox` | type: `ApproxParams public` | vis: `public` | flags: `-` | `PendleHelper` @ `contracts/v1/extensions/PendleHelper.sol` = `ApproxParams(0, type(uint256).max, 0, 256, 1e14)`
+- `defaultApprox` | type: `ApproxParams public` | vis: `public` | flags: `-` | `PendleHelper` @ `contracts/v2/extensions/pendle/PendleHelper.sol` = `ApproxParams(0, type(uint256).max, 0, 256, 1e14)`
+- `emptyLimit` | type: `LimitOrderData public` | vis: `public` | flags: `-` | `PendleHelper` @ `contracts/v1/extensions/PendleHelper.sol`
+- `emptyLimit` | type: `LimitOrderData public` | vis: `public` | flags: `-` | `PendleHelper` @ `contracts/v2/extensions/pendle/PendleHelper.sol`
+- `emptySwap` | type: `SwapData public` | vis: `public` | flags: `-` | `PendleHelper` @ `contracts/v1/extensions/PendleHelper.sol`
+- `emptySwap` | type: `SwapData public` | vis: `public` | flags: `-` | `PendleHelper` @ `contracts/v2/extensions/pendle/PendleHelper.sol`
+- `router` | type: `IPAllActionV3 public immutable` | vis: `public` | flags: `immutable` | `PendleSwapV3Adapter` @ `contracts/v1/router/swapAdapters/PendleSwapV3Adapter.sol`
+- `router` | type: `IPAllActionV3 public immutable` | vis: `public` | flags: `immutable` | `PendleSwapV3AdapterV2` @ `contracts/v2/router/swapAdapters/PendleSwapV3AdapterV2.sol`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/deploy/PlaceOrder.s.sol`
+- `collateralToMintGt` | type: `uint256` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `0.0001e18`
+- `configPath` | type: `string` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/deploy/PlaceOrder.s.sol` = `"-order.json"`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/deploy/PlaceOrder.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/deploy/PlaceOrder.s.sol`
+- `debtTokenToDeposit` | type: `uint256` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `0`
+- `deployerAddr` | type: `address` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/deploy/PlaceOrder.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/deploy/PlaceOrder.s.sol`
+- `ftToDeposit` | type: `uint128` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `0`
+- `gt` | type: `address` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `0xDfB3959DAD26dFce3E9646c92b086E7fe4D12793`
+- `marketAddr` | type: `address` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `0x5022B6563f6bc9f0D47F407ba32B64e1f438213a`
+- `network` | type: `string` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/deploy/PlaceOrder.s.sol`
+- `uBTC` | type: `IERC20` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `IERC20(0x796e4D53067FF374B89b2Ac101ce0c1f72ccaAc2)`
+- `wbtc` | type: `IWBTC` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `IWBTC(0x4200000000000000000000000000000000000006)`
+- `xtToDeposit` | type: `uint128` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `0`
+- `transferEnabled` | type: `bool public` | vis: `public` | flags: `-` | `PreTMX` @ `contracts/v2/tokenomics/PreTMX.sol`
+- `whitelistConfig` | type: `mapping(address => WhitelistConfig) public` | vis: `public` | flags: `-` | `PreTMX` @ `contracts/v2/tokenomics/PreTMX.sol`
+- `INITIAL_SUPPLY` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PreTMXTest` @ `test/v2/tokenomics/PreTMX.t.sol` = `1e9 ether`
+- `TRANSFER_AMOUNT` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PreTMXTest` @ `test/v2/tokenomics/PreTMX.t.sol` = `100 ether`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `PreTMXTest` @ `test/v2/tokenomics/PreTMX.t.sol`
+- `preTMX` | type: `PreTMX public` | vis: `public` | flags: `-` | `PreTMXTest` @ `test/v2/tokenomics/PreTMX.t.sol`
+- `user1` | type: `address public` | vis: `public` | flags: `-` | `PreTMXTest` @ `test/v2/tokenomics/PreTMX.t.sol`
+- `user2` | type: `address public` | vis: `public` | flags: `-` | `PreTMXTest` @ `test/v2/tokenomics/PreTMX.t.sol`
+- `user3` | type: `address public` | vis: `public` | flags: `-` | `PreTMXTest` @ `test/v2/tokenomics/PreTMX.t.sol`
+- `aTokenToBTokenPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `PriceFeedConverter` @ `contracts/v1/extensions/PriceFeedConverter.sol`
+- `bTokenToCTokenPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `PriceFeedConverter` @ `contracts/v1/extensions/PriceFeedConverter.sol`
+- `priceDenominator` | type: `int256 immutable` | vis: `default` | flags: `immutable` | `PriceFeedConverter` @ `contracts/v1/extensions/PriceFeedConverter.sol`
+- `assetPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `PriceFeedWithERC4626` @ `contracts/v1/extensions/PriceFeedWithERC4626.sol`
+- `priceDenominator` | type: `int256 immutable` | vis: `default` | flags: `immutable` | `PriceFeedWithERC4626` @ `contracts/v1/extensions/PriceFeedWithERC4626.sol`
+- `vault` | type: `IERC4626 public immutable` | vis: `public` | flags: `immutable` | `PriceFeedWithERC4626` @ `contracts/v1/extensions/PriceFeedWithERC4626.sol`
+- `vaultDenominator` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `PriceFeedWithERC4626` @ `contracts/v1/extensions/PriceFeedWithERC4626.sol`
+- `CONFIGURATOR_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("CONFIGURATOR_ROLE")`
+- `MARKET_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("MARKET_ROLE")`
+- `ORACLE_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("ORACLE_ROLE")`
+- `PAUSER_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("PAUSER_ROLE")`
+- `POOL_DEPLOYER_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("POOL_DEPLOYER_ROLE")`
+- `STABLE_ERC4626_BUFFER_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("STABLE_ERC4626_BUFFER_ROLE")`
+- `STABLE_ERC4626_INCOME_WITHDRAW_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("STABLE_ERC4626_INCOME_WITHDRAW_ROLE")`
+- `TERMMAX_4626_FACTORY_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("TERMMAX_4626_FACTORY_ROLE")`
+- `TERMMAX_MARKET_FACTORY_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("TERMMAX_MARKET_FACTORY_ROLE")`
+- `UPGRADER_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("UPGRADER_ROLE")`
+- `VAULT_DEPLOYER_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("VAULT_DEPLOYER_ROLE")`
+- `VAULT_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("VAULT_ROLE")`
+- `WHITELIST_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Roles` @ `contracts/v2/access/Roles.sol` = `keccak256("WHITELIST_ROLE")`
+- `adapter` | type: `MockSwapAdapterV2` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol` = `vm.randomAddress()`
+- `maker` | type: `address` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol` = `vm.randomAddress()`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol`
+- `pool` | type: `address` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol` = `vm.randomAddress()`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol`
+- `res2` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol`
+- `sender` | type: `address` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol` = `vm.randomAddress()`
+- `termMaxSwapAdapter` | type: `TermMaxSwapAdapter` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol`
+- `testdata` | type: `string` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `RouterTestV2` @ `test/v2/RouterV2.t.sol` = `vm.randomAddress()`
+- `oracles` | type: `mapping(address => AggregatorV3Interface) public` | vis: `public` | flags: `-` | `SimpleAggregator` @ `contracts/v2/oracle/SimpleAggregator.sol`
+- `ASSET1` | type: `address public constant` | vis: `public` | flags: `constant` | `SimpleAggregatorTest` @ `test/v2/oracle/SimpleAggregator.t.sol` = `address(0x1)`
+- `ASSET2` | type: `address public constant` | vis: `public` | flags: `constant` | `SimpleAggregatorTest` @ `test/v2/oracle/SimpleAggregator.t.sol` = `address(0x2)`
+- `PRICE1` | type: `int256 public constant` | vis: `public` | flags: `constant` | `SimpleAggregatorTest` @ `test/v2/oracle/SimpleAggregator.t.sol` = `2000e8`
+- `PRICE2` | type: `int256 public constant` | vis: `public` | flags: `constant` | `SimpleAggregatorTest` @ `test/v2/oracle/SimpleAggregator.t.sol` = `50000e8`
+- `aggregator` | type: `SimpleAggregator public` | vis: `public` | flags: `-` | `SimpleAggregatorTest` @ `test/v2/oracle/SimpleAggregator.t.sol`
+- `feed1` | type: `TermMaxConstantPriceFeed public` | vis: `public` | flags: `-` | `SimpleAggregatorTest` @ `test/v2/oracle/SimpleAggregator.t.sol`
+- `feed2` | type: `TermMaxConstantPriceFeed public` | vis: `public` | flags: `-` | `SimpleAggregatorTest` @ `test/v2/oracle/SimpleAggregator.t.sol`
+- `FIXED_VALUE` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `SimpleContract` @ `test/v2/tokenomics/UniversalFactory.t.sol` = `42`
+- `bufferConfig` | type: `BufferConfig public` | vis: `public` | flags: `-` | `StableERC4626For4626` @ `contracts/v2/tokens/StableERC4626For4626.sol`
+- `thirdPool` | type: `IERC4626 public` | vis: `public` | flags: `-` | `StableERC4626For4626` @ `contracts/v2/tokens/StableERC4626For4626.sol`
+- `underlying` | type: `IERC20 public` | vis: `public` | flags: `-` | `StableERC4626For4626` @ `contracts/v2/tokens/StableERC4626For4626.sol`
+- `withdawedIncomeAssets` | type: `uint256 internal` | vis: `internal` | flags: `-` | `StableERC4626For4626` @ `contracts/v2/tokens/StableERC4626For4626.sol`
+- `actors` | type: `address[] public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `calls` | type: `mapping(bytes32 => uint256) public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `ghost_burnedSum` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `ghost_depositSum` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `ghost_mintedSum` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `ghost_totalIncomeWithdrawn` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `ghost_withdrawSum` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `stable4626` | type: `StableERC4626For4626 public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `thirdPool` | type: `MockStableERC4626 public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626For4626InvariantTest` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `handler` | type: `StableERC4626For4626Handler public` | vis: `public` | flags: `-` | `StableERC4626For4626InvariantTest` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `stable4626` | type: `StableERC4626For4626 public` | vis: `public` | flags: `-` | `StableERC4626For4626InvariantTest` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `thirdPool` | type: `MockStableERC4626 public` | vis: `public` | flags: `-` | `StableERC4626For4626InvariantTest` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626For4626InvariantTest` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626For4626Test` @ `test/v2/pool/StableERC4626For4626.t.sol` = `vm.randomAddress()`
+- `stable4626` | type: `StableERC4626For4626 public` | vis: `public` | flags: `-` | `StableERC4626For4626Test` @ `test/v2/pool/StableERC4626For4626.t.sol`
+- `thirdPool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `StableERC4626For4626Test` @ `test/v2/pool/StableERC4626For4626.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626For4626Test` @ `test/v2/pool/StableERC4626For4626.t.sol`
+- `aToken` | type: `IERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForAave` @ `contracts/v2/tokens/StableERC4626ForAave.sol`
+- `aavePool` | type: `IAaveV3Pool public immutable` | vis: `public` | flags: `immutable` | `StableERC4626ForAave` @ `contracts/v2/tokens/StableERC4626ForAave.sol`
+- `bufferConfig` | type: `BufferConfig public` | vis: `public` | flags: `-` | `StableERC4626ForAave` @ `contracts/v2/tokens/StableERC4626ForAave.sol`
+- `referralCode` | type: `uint16 public immutable` | vis: `public` | flags: `immutable` | `StableERC4626ForAave` @ `contracts/v2/tokens/StableERC4626ForAave.sol`
+- `underlying` | type: `IERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForAave` @ `contracts/v2/tokens/StableERC4626ForAave.sol`
+- `withdawedIncomeAssets` | type: `uint256 internal` | vis: `internal` | flags: `-` | `StableERC4626ForAave` @ `contracts/v2/tokens/StableERC4626ForAave.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `actors` | type: `address[] public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `calls` | type: `mapping(bytes32 => uint256) public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `ghost_burnedSum` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `ghost_depositSum` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `ghost_mintedSum` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `ghost_totalIncomeWithdrawn` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `ghost_withdrawSum` | type: `uint256 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `stable4626` | type: `StableERC4626ForAave public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `StableERC4626ForAaveInvariantTest` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626ForAaveInvariantTest` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `handler` | type: `StableERC4626ForAaveHandler public` | vis: `public` | flags: `-` | `StableERC4626ForAaveInvariantTest` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `stable4626` | type: `StableERC4626ForAave public` | vis: `public` | flags: `-` | `StableERC4626ForAaveInvariantTest` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveInvariantTest` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `StableERC4626ForAaveTest` @ `test/v2/pool/StableERC4626ForAave.t.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626ForAaveTest` @ `test/v2/pool/StableERC4626ForAave.t.sol` = `vm.randomAddress()`
+- `stable4626` | type: `StableERC4626ForAave public` | vis: `public` | flags: `-` | `StableERC4626ForAaveTest` @ `test/v2/pool/StableERC4626ForAave.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveTest` @ `test/v2/pool/StableERC4626ForAave.t.sol`
+- `bufferConfig` | type: `BufferConfig public` | vis: `public` | flags: `-` | `StableERC4626ForCustomize` @ `contracts/v2/tokens/StableERC4626ForCustomize.sol`
+- `thirdPool` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626ForCustomize` @ `contracts/v2/tokens/StableERC4626ForCustomize.sol`
+- `underlying` | type: `IERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForCustomize` @ `contracts/v2/tokens/StableERC4626ForCustomize.sol`
+- `withdawedIncomeAssets` | type: `uint256 internal` | vis: `internal` | flags: `-` | `StableERC4626ForCustomize` @ `contracts/v2/tokens/StableERC4626ForCustomize.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626ForCustomizeTest` @ `test/v2/StableERC4626ForCustomize.t.sol` = `vm.randomAddress()`
+- `stableCustomize` | type: `StableERC4626ForCustomize public` | vis: `public` | flags: `-` | `StableERC4626ForCustomizeTest` @ `test/v2/StableERC4626ForCustomize.t.sol`
+- `thirdPool` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626ForCustomizeTest` @ `test/v2/StableERC4626ForCustomize.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForCustomizeTest` @ `test/v2/StableERC4626ForCustomize.t.sol`
+- `NO_ERROR` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StableERC4626ForVenus` @ `contracts/v2/tokens/StableERC4626ForVenus.sol` = `0`
+- `PRECISION` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StableERC4626ForVenus` @ `contracts/v2/tokens/StableERC4626ForVenus.sol` = `1e18`
+- `bufferConfig` | type: `BufferConfig public` | vis: `public` | flags: `-` | `StableERC4626ForVenus` @ `contracts/v2/tokens/StableERC4626ForVenus.sol`
+- `thirdPool` | type: `IVToken public` | vis: `public` | flags: `-` | `StableERC4626ForVenus` @ `contracts/v2/tokens/StableERC4626ForVenus.sol`
+- `underlying` | type: `IERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForVenus` @ `contracts/v2/tokens/StableERC4626ForVenus.sol`
+- `withdrawnIncomeAssets` | type: `uint256 internal` | vis: `internal` | flags: `-` | `StableERC4626ForVenus` @ `contracts/v2/tokens/StableERC4626ForVenus.sol`
+- `BUFFER` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StableERC4626ForVenusTest` @ `test/v2/pool/StableERC4626ForVenus.t.sol` = `5000e6`
+- `MAX_BUFFER` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StableERC4626ForVenusTest` @ `test/v2/pool/StableERC4626ForVenus.t.sol` = `10000e6`
+- `MIN_BUFFER` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StableERC4626ForVenusTest` @ `test/v2/pool/StableERC4626ForVenus.t.sol` = `1000e6`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `StableERC4626ForVenusTest` @ `test/v2/pool/StableERC4626ForVenus.t.sol` = `vm.randomAddress()`
+- `stable4626` | type: `StableERC4626ForVenus public` | vis: `public` | flags: `-` | `StableERC4626ForVenusTest` @ `test/v2/pool/StableERC4626ForVenus.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForVenusTest` @ `test/v2/pool/StableERC4626ForVenus.t.sol`
+- `vToken` | type: `MockVToken public` | vis: `public` | flags: `-` | `StableERC4626ForVenusTest` @ `test/v2/pool/StableERC4626ForVenus.t.sol`
+- `pool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `SwapAdapter` @ `contracts/v1/test/testnet/SwapAdapter.sol`
+- `pool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `SwapAdapterV2` @ `contracts/v2/test/testnet/SwapAdapterV2.sol`
+- `STABLE_ERC4626_FOR_4626` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `TermMax4626Factory` @ `contracts/v2/factory/TermMax4626Factory.sol` = `keccak256("StableERC4626For4626")`
+- `STABLE_ERC4626_FOR_AAVE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `TermMax4626Factory` @ `contracts/v2/factory/TermMax4626Factory.sol` = `keccak256("StableERC4626ForAave")`
+- `STABLE_ERC4626_FOR_CUSTOMIZE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `TermMax4626Factory` @ `contracts/v2/factory/TermMax4626Factory.sol` = `keccak256("StableERC4626ForCustomize")`
+- `STABLE_ERC4626_FOR_VENUS` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `TermMax4626Factory` @ `contracts/v2/factory/TermMax4626Factory.sol` = `keccak256("StableERC4626ForVenus")`
+- `VARIABLE_ERC4626_FOR_AAVE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `TermMax4626Factory` @ `contracts/v2/factory/TermMax4626Factory.sol` = `keccak256("VariableERC4626ForAave")`
+- `implementations` | type: `mapping(bytes32 => address) internal` | vis: `internal` | flags: `-` | `TermMax4626Factory` @ `contracts/v2/factory/TermMax4626Factory.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `accessManager` | type: `AccessManagerV2 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol` = `makeAddr("admin")`
+- `customizePool` | type: `address public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol` = `makeAddr("customizePool")`
+- `defaultBufferConfig` | type: `StakingBuffer.BufferConfig public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `factory` | type: `TermMax4626Factory public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `impl4626` | type: `StableERC4626For4626 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `implCustomize` | type: `StableERC4626ForCustomize public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `implStableAave` | type: `StableERC4626ForAave public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `implVariableAave` | type: `VariableERC4626ForAave public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `implVenus` | type: `StableERC4626ForVenus public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `stableDebtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `thirdPool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `user1` | type: `address public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol` = `makeAddr("user1")`
+- `user2` | type: `address public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol` = `makeAddr("user2")`
+- `variableDebtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `venusPool` | type: `MockVToken public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `whitelistManager` | type: `MockWhitelistManager public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `MILLISECONDS_PER_SECOND` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `TermMaxB2TokenPriceFeedAdapter` @ `contracts/v2/oracle/adapters/b2/TermMaxB2TokenPriceFeedAdapter.sol` = `1000`
+- `pairIndex` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `TermMaxB2TokenPriceFeedAdapter` @ `contracts/v2/oracle/adapters/b2/TermMaxB2TokenPriceFeedAdapter.sol`
+- `supraSValueFeed` | type: `ISupraSValueFeed public immutable` | vis: `public` | flags: `immutable` | `TermMaxB2TokenPriceFeedAdapter` @ `contracts/v2/oracle/adapters/b2/TermMaxB2TokenPriceFeedAdapter.sol`
+- `OUTPUT_DECIMALS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol` = `1e8`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `beefyVault` | type: `IBeefyVaultV7 public immutable` | vis: `public` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `lpToken` | type: `IKodiakIsland public immutable` | vis: `public` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token0Decimals` | type: `uint8 internal immutable` | vis: `internal` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token0PriceDecimals` | type: `uint8 internal immutable` | vis: `internal` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token0PriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token1Decimals` | type: `uint8 internal immutable` | vis: `internal` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token1PriceDecimals` | type: `uint8 internal immutable` | vis: `internal` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token1PriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `assetPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxConstantPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxConstantPriceFeed.sol`
+- `result` | type: `int256 private immutable` | vis: `private` | flags: `immutable` | `TermMaxConstantPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxConstantPriceFeed.sol`
+- `INITIAL_PRICE` | type: `int256 public constant` | vis: `public` | flags: `constant` | `TermMaxConstantPriceFeedTest` @ `test/v2/oracle/TermMaxConstantPriceFeed.t.sol` = `3000e8`
+- `feed` | type: `TermMaxConstantPriceFeed public` | vis: `public` | flags: `-` | `TermMaxConstantPriceFeedTest` @ `test/v2/oracle/TermMaxConstantPriceFeed.t.sol`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxDUSDPriceFeedAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxDUSDPriceFeedAdapter.sol`
+- `dusdOracle` | type: `IDUSDOracle public immutable` | vis: `public` | flags: `immutable` | `TermMaxDUSDPriceFeedAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxDUSDPriceFeedAdapter.sol`
+- `PRICE_DECIMALS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxERC4626PriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxERC4626PriceFeed.sol` = `10 ** 8`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxERC4626PriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxERC4626PriceFeed.sol`
+- `assetPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxERC4626PriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxERC4626PriceFeed.sol`
+- `priceDenominator` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `TermMaxERC4626PriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxERC4626PriceFeed.sol`
+- `vaultDenominator` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `TermMaxERC4626PriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxERC4626PriceFeed.sol`
+- `GT_ERC20` | type: `bytes32 constant` | vis: `default` | flags: `constant` | `TermMaxFactory` @ `contracts/v1/factory/TermMaxFactory.sol` = `keccak256("GearingTokenWithERC20")`
+- `TERMMAX_MARKET_IMPLEMENTATION` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxFactory` @ `contracts/v1/factory/TermMaxFactory.sol`
+- `gtImplements` | type: `mapping(bytes32 => address) public` | vis: `public` | flags: `-` | `TermMaxFactory` @ `contracts/v1/factory/TermMaxFactory.sol`
+- `GT_ERC20` | type: `bytes32 constant` | vis: `default` | flags: `constant` | `TermMaxFactoryV2` @ `contracts/v2/factory/TermMaxFactoryV2.sol` = `keccak256("GearingTokenWithERC20")`
+- `TERMMAX_MARKET_IMPLEMENTATION` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxFactoryV2` @ `contracts/v2/factory/TermMaxFactoryV2.sol`
+- `gtImplements` | type: `mapping(bytes32 => address) public` | vis: `public` | flags: `-` | `TermMaxFactoryV2` @ `contracts/v2/factory/TermMaxFactoryV2.sol`
+- `MINTABLE_ERC20_IMPLEMENT` | type: `address immutable` | vis: `default` | flags: `immutable` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `TERMMAX_ORDER_IMPLEMENT` | type: `address immutable` | vis: `default` | flags: `immutable` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `_config` | type: `MarketConfig private` | vis: `private` | flags: `-` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `collateral` | type: `address private` | vis: `private` | flags: `-` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `ft` | type: `IMintableERC20 private` | vis: `private` | flags: `-` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `gt` | type: `IGearingToken private` | vis: `private` | flags: `-` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `xt` | type: `IMintableERC20 private` | vis: `private` | flags: `-` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `MINTABLE_ERC20_IMPLEMENT` | type: `address immutable` | vis: `default` | flags: `immutable` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `TERMMAX_ORDER_IMPLEMENT` | type: `address immutable` | vis: `default` | flags: `immutable` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `_config` | type: `MarketConfig private` | vis: `private` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `collateral` | type: `address private` | vis: `private` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `ft` | type: `IMintableERC20 private` | vis: `private` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `gt` | type: `IGearingToken private` | vis: `private` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `name` | type: `string public` | vis: `public` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `xt` | type: `IMintableERC20 private` | vis: `private` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `actors` | type: `address[] public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `calls` | type: `mapping(bytes32 => uint256) public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `flashLoanHandler` | type: `MockFlashLoanHandler public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ft` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_allGtIds` | type: `uint256[] public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_gtExists` | type: `mapping(uint256 => bool) public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalBurned` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalFeesCollected` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalFtIssued` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalGtMinted` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalMinted` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalRedeemed` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ghost_totalXtLeveraged` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `gt` | type: `IGearingToken public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `market` | type: `TermMaxMarketV2 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `order` | type: `ITermMaxOrder public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `xt` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ft` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `gt` | type: `IGearingToken public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `handler` | type: `TermMaxMarketV2Handler public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `market` | type: `TermMaxMarketV2 public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `order` | type: `ITermMaxOrder public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `xt` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `asset` | type: `address public immutable override` | vis: `public` | flags: `immutable,override` | `TermMaxOndoPriceFeedAdapter` @ `contracts/v2/oracle/adapters/ondo/TermMaxOndoPriceFeedAdapter.sol`
+- `maxUpdateInterval` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `TermMaxOndoPriceFeedAdapter` @ `contracts/v2/oracle/adapters/ondo/TermMaxOndoPriceFeedAdapter.sol`
+- `ondoOracle` | type: `ISyntheticSharesOracle public immutable` | vis: `public` | flags: `immutable` | `TermMaxOndoPriceFeedAdapter` @ `contracts/v2/oracle/adapters/ondo/TermMaxOndoPriceFeedAdapter.sol`
+- `adapters` | type: `mapping(address => mapping(uint256 => address)) public` | vis: `public` | flags: `-` | `TermMaxOndoPriceFeedAdapterFactory` @ `contracts/v2/oracle/adapters/ondo/TermMaxOndoPriceFeedAdapterFactory.sol`
+- `ondoOracle` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxOndoPriceFeedAdapterFactory` @ `contracts/v2/oracle/adapters/ondo/TermMaxOndoPriceFeedAdapterFactory.sol`
+- `priceFeedFactory` | type: `IPriceFeedFactory public immutable` | vis: `public` | flags: `immutable` | `TermMaxOndoPriceFeedAdapterFactory` @ `contracts/v2/oracle/adapters/ondo/TermMaxOndoPriceFeedAdapterFactory.sol`
+- `T_FT_RESERVE_STORE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol` = `0`
+- `T_XT_RESERVE_STORE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol` = `1`
+- `_orderConfig` | type: `OrderConfig private` | vis: `private` | flags: `-` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol`
+- `ft` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol`
+- `gt` | type: `IGearingToken private` | vis: `private` | flags: `-` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol`
+- `market` | type: `ITermMaxMarket public` | vis: `public` | flags: `-` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol`
+- `maturity` | type: `uint64 private` | vis: `private` | flags: `-` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol`
+- `xt` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol`
+- `MATURITY_CACHE_SLOT` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol` = `keccak256("termmax.order.v2.maturity_cache")`
+- `TREASURER_CACHE_SLOT` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol` = `keccak256("termmax.order.v2.treasurer_cache")`
+- `_orderConfig` | type: `OrderConfig private` | vis: `private` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `ft` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `gt` | type: `IGearingToken private` | vis: `private` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `market` | type: `ITermMaxMarket public` | vis: `public` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `orderExpiryTimestamp` | type: `uint64 public` | vis: `public` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `pool` | type: `IERC4626 public` | vis: `public` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `virtualXtReserve` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `xt` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `actors` | type: `address[] public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `calls` | type: `mapping(bytes32 => uint256) public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ft` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_initialVirtualXtReserve` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_liquidityAdded` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_liquidityRemoved` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_maxVirtualXtReserveReached` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_minVirtualXtReserveReached` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_poolDeposits` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_poolEverSet` | type: `bool public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_poolWithdrawals` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_totalDebtTokenSwapped` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_totalFeesCollected` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_totalFtSwapped` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_totalXtSwapped` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_virtualXtReserveChanges` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `gt` | type: `IGearingToken public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `market` | type: `ITermMaxMarket public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `order` | type: `TermMaxOrderV2 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `orderMaker` | type: `address public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `pool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `swapCallback` | type: `MockSwapCallback public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `xt` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ft` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `gt` | type: `IGearingToken public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `handler` | type: `TermMaxOrderV2Handler public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `market` | type: `ITermMaxMarket public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `order` | type: `TermMaxOrderV2 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `orderMaker` | type: `address` | vis: `default` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `pool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `xt` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `DURATION` | type: `uint32 public immutable` | vis: `public` | flags: `immutable` | `TermMaxPTPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxPTPriceFeed.sol`
+- `MARKET` | type: `IPMarket public immutable` | vis: `public` | flags: `immutable` | `TermMaxPTPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxPTPriceFeed.sol`
+- `PRICE_FEED` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxPTPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxPTPriceFeed.sol`
+- `PT_TO_SY_RATE_BASE` | type: `uint256 private immutable` | vis: `private` | flags: `immutable` | `TermMaxPTPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxPTPriceFeed.sol`
+- `PY_LP_ORACLE` | type: `PendlePYLpOracle public immutable` | vis: `public` | flags: `immutable` | `TermMaxPTPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxPTPriceFeed.sol`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxPTPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxPTPriceFeed.sol`
+- `PRICE_DENOMINATOR` | type: `uint256 constant` | vis: `default` | flags: `constant` | `TermMaxPriceFeedConverter` @ `contracts/v2/oracle/priceFeeds/TermMaxPriceFeedConverter.sol` = `10 ** 8`
+- `aTokenToBTokenPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxPriceFeedConverter` @ `contracts/v2/oracle/priceFeeds/TermMaxPriceFeedConverter.sol`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxPriceFeedConverter` @ `contracts/v2/oracle/priceFeeds/TermMaxPriceFeedConverter.sol`
+- `bTokenToCTokenPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxPriceFeedConverter` @ `contracts/v2/oracle/priceFeeds/TermMaxPriceFeedConverter.sol`
+- `priceDenominator` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `TermMaxPriceFeedConverter` @ `contracts/v2/oracle/priceFeeds/TermMaxPriceFeedConverter.sol`
+- `deployer` | type: `address public` | vis: `public` | flags: `-` | `TermMaxPriceFeedFactoryV2Test` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol` = `vm.randomAddress()`
+- `factory` | type: `TermMaxPriceFeedFactoryV2 public` | vis: `public` | flags: `-` | `TermMaxPriceFeedFactoryV2Test` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `mockPendleMarket` | type: `MockPendleMarket public` | vis: `public` | flags: `-` | `TermMaxPriceFeedFactoryV2Test` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `mockPendleOracle` | type: `MockPendlePYLpOracle public` | vis: `public` | flags: `-` | `TermMaxPriceFeedFactoryV2Test` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `mockPriceFeed1` | type: `MockPriceFeed public` | vis: `public` | flags: `-` | `TermMaxPriceFeedFactoryV2Test` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `mockPriceFeed2` | type: `MockPriceFeed public` | vis: `public` | flags: `-` | `TermMaxPriceFeedFactoryV2Test` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `mockToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxPriceFeedFactoryV2Test` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `mockVault` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxPriceFeedFactoryV2Test` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `userProfiles` | type: `mapping(address => UserProfile) public` | vis: `public` | flags: `-` | `TermMaxRewardContract` @ `contracts/v2/activity/TermMaxRewardContract.sol`
+- `T_CALLBACK_ADDRESS_STORE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxRouterV2` @ `contracts/v2/router/TermMaxRouterV2.sol` = `1`
+- `T_CALLER` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxRouterV2` @ `contracts/v2/router/TermMaxRouterV2.sol` = `2`
+- `T_ROLLOVER_GT_RESERVE_STORE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxRouterV2` @ `contracts/v2/router/TermMaxRouterV2.sol` = `0`
+- `__deprecated_whitelistManager` | type: `IWhitelistManager internal` | vis: `internal` | flags: `-` | `TermMaxRouterV2` @ `contracts/v2/router/TermMaxRouterV2.sol`
+- `adapterWhitelist` | type: `mapping(address => bool) public` | vis: `public` | flags: `-` | `TermMaxRouterV2` @ `contracts/v2/router/TermMaxRouterV2.sol`
+- `T_CALLBACK_ADDRESS_STORE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxRouter_Repay_Gt` @ `contracts/v1/router/TermMaxRouter_Repay_Gt.sol` = `1`
+- `T_CALLBACK_ADDRESS_STORE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxRouter_V1_1_2` @ `contracts/v1/router/TermMaxRouter_V1_1_2.sol` = `1`
+- `_decimals` | type: `uint8 private immutable` | vis: `private` | flags: `immutable` | `TermMaxSparkLinearOracleAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxSparkLinearOracleAdapter.sol`
+- `_description` | type: `string private` | vis: `private` | flags: `-` | `TermMaxSparkLinearOracleAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxSparkLinearOracleAdapter.sol`
+- `adapter` | type: `ISparkLinearOracle public immutable` | vis: `public` | flags: `immutable` | `TermMaxSparkLinearOracleAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxSparkLinearOracleAdapter.sol`
+- `whitelistManager` | type: `IWhitelistManager public immutable` | vis: `public` | flags: `immutable` | `TermMaxSwapAdapter` @ `contracts/v2/router/swapAdapters/TermMaxSwapAdapter.sol`
+- `PRICE_SCALE_DOWN` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `TermMaxUSPCPriceFeedAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxUSPCPriceFeedAdapter.sol` = `1e18`
+- `USPC_PRICE_DECIMALS` | type: `uint8 internal constant` | vis: `internal` | flags: `constant` | `TermMaxUSPCPriceFeedAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxUSPCPriceFeedAdapter.sol` = `18`
+- `asset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxUSPCPriceFeedAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxUSPCPriceFeedAdapter.sol`
+- `uspcOracle` | type: `IUSPCPriceFeed public immutable` | vis: `public` | flags: `immutable` | `TermMaxUSPCPriceFeedAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxUSPCPriceFeedAdapter.sol`
+- `baseAmount` | type: `uint128 private immutable` | vis: `private` | flags: `immutable` | `TermMaxUniswapTWAPPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxUniswapTWAPPriceFeed.sol`
+- `baseToken` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxUniswapTWAPPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxUniswapTWAPPriceFeed.sol`
+- `pool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxUniswapTWAPPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxUniswapTWAPPriceFeed.sol`
+- `quoteDecimals` | type: `uint8 private immutable` | vis: `private` | flags: `immutable` | `TermMaxUniswapTWAPPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxUniswapTWAPPriceFeed.sol`
+- `quoteToken` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxUniswapTWAPPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxUniswapTWAPPriceFeed.sol`
+- `twapPeriod` | type: `uint32 public immutable` | vis: `public` | flags: `immutable` | `TermMaxUniswapTWAPPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxUniswapTWAPPriceFeed.sol`
+- `TWAP_PERIOD` | type: `uint32 constant` | vis: `default` | flags: `constant` | `TermMaxUniswapTWAPPriceFeedTest` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol` = `600`
+- `baseToken` | type: `MockERC20 internal` | vis: `internal` | flags: `-` | `TermMaxUniswapTWAPPriceFeedTest` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `mockPool` | type: `MockUniswapV3Pool internal` | vis: `internal` | flags: `-` | `TermMaxUniswapTWAPPriceFeedTest` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `quoteToken` | type: `MockERC20 internal` | vis: `internal` | flags: `-` | `TermMaxUniswapTWAPPriceFeedTest` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `ORDER_MANAGER_SINGLETON` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxVault` @ `contracts/v1/vault/TermMaxVault.sol`
+- `TERMMAX_VAULT_IMPLEMENTATION` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxVaultFactoryV2` @ `contracts/v2/factory/TermMaxVaultFactoryV2.sol`
+- `ACTION_DEPOSIT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxVaultV2` @ `contracts/v2/vault/TermMaxVaultV2.sol` = `0x1d9ff85e70b948f53a2cc45fa6f42c020b2a8eec3349351855dea946b0635700`
+- `ACTION_WITHDRAW` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TermMaxVaultV2` @ `contracts/v2/vault/TermMaxVaultV2.sol` = `0xfcb0c32c4f653382a412cb0caa6a29f9e46d74bae452ca200c67f1e5e6389300`
+- `ORDER_MANAGER_SINGLETON` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxVaultV2` @ `contracts/v2/vault/TermMaxVaultV2.sol`
+- `actors` | type: `address[] public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `asset` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `calls` | type: `mapping(bytes32 => uint256) public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `curator` | type: `address public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_badDebtByCollateral` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_curatorChanges` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_guardianChanges` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_initialMinApy` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_marketWhitelistChanges` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_maxApyReached` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_maxCapacityChanges` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_maxTotalAssets` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_maxTotalSupply` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_minApyChanges` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_minApyReached` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_performanceFeeRateChanges` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_poolChanges` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_poolDeposits` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_poolEverSet` | type: `bool public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_poolWithdrawals` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_timelockChanges` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_totalBadDebtHandled` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_totalDeposits` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_totalMints` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_totalRedeems` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `ghost_totalWithdrawals` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `guardian` | type: `address public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `market` | type: `ITermMaxMarketV2 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `owner` | type: `address public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `pool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `vault` | type: `TermMaxVaultV2 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `asset` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `curator` | type: `address` | vis: `default` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `guardian` | type: `address` | vis: `default` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `handler` | type: `TermMaxVaultV2Handler public` | vis: `public` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `market` | type: `ITermMaxMarketV2 public` | vis: `public` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `owner` | type: `address` | vis: `default` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `pool` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `vault` | type: `TermMaxVaultV2 public` | vis: `public` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `marketConfig` | type: `MarketConfig public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `mockAToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `mockAsset` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `mockPoolAave` | type: `MockTermMax4626PoolAave public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `mockPoolERC4626` | type: `MockTermMax4626PoolERC4626 public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `mockVault` | type: `MockERC4626 public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `orderConfig` | type: `OrderConfig public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `res` | type: `DeployUtils.Res public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `testdata` | type: `string public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `user1` | type: `address public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `user2` | type: `address public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `viewer` | type: `TermMaxViewer public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `viewerImplementation` | type: `TermMaxViewer public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `_decimals` | type: `uint8 private immutable` | vis: `private` | flags: `immutable` | `TermMaxWeETHPriceCapAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxWeETHPriceCapAdapter.sol`
+- `adapter` | type: `IPriceCapAdapter public immutable` | vis: `public` | flags: `immutable` | `TermMaxWeETHPriceCapAdapter` @ `contracts/v2/oracle/priceFeeds/TermMaxWeETHPriceCapAdapter.sol`
+- `T_FLAG_STORE` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `TransactionReentrancyGuard` @ `contracts/v2/lib/TransactionReentrancyGuard.sol` = `0x55d65f3b5821c66716708cd5119fc8b654f479bd23b96d0911cee85241904700`
+- `router` | type: `ISwapRouter public immutable` | vis: `public` | flags: `immutable` | `UniswapV3Adapter` @ `contracts/v1/router/swapAdapters/UniswapV3Adapter.sol`
+- `isDeployed` | type: `mapping(address => bool) public` | vis: `public` | flags: `-` | `UniversalFactory` @ `contracts/v2/tokenomics/UniversalFactory.sol`
+- `nonceUsed` | type: `mapping(uint256 => bool) public` | vis: `public` | flags: `-` | `UniversalFactory` @ `contracts/v2/tokenomics/UniversalFactory.sol`
+- `MAX_SUPPLY` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `UniversalFactoryTest` @ `test/v2/tokenomics/UniversalFactory.t.sol` = `1_000_000_000 ether`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `UniversalFactoryTest` @ `test/v2/tokenomics/UniversalFactory.t.sol` = `address(0x1234)`
+- `factory` | type: `UniversalFactory public` | vis: `public` | flags: `-` | `UniversalFactoryTest` @ `test/v2/tokenomics/UniversalFactory.t.sol`
+- `user1` | type: `address public` | vis: `public` | flags: `-` | `UniversalFactoryTest` @ `test/v2/tokenomics/UniversalFactory.t.sol` = `address(0x5678)`
+- `user2` | type: `address public` | vis: `public` | flags: `-` | `UniversalFactoryTest` @ `test/v2/tokenomics/UniversalFactory.t.sol` = `address(0x9ABC)`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `UpdateAlphaFeeConfig` @ `script/UpdateAlphaFeeConfig.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `UpdateAlphaFeeConfig` @ `script/UpdateAlphaFeeConfig.s.sol`
+- `alphaFeeConfig` | type: `FeeConfig` | vis: `default` | flags: `-` | `UpdateAlphaFeeConfig` @ `script/UpdateAlphaFeeConfig.s.sol`
+- `alphaMarkets` | type: `address[]` | vis: `default` | flags: `-` | `UpdateAlphaFeeConfig` @ `script/UpdateAlphaFeeConfig.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `UpdateAlphaFeeConfig` @ `script/UpdateAlphaFeeConfig.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `UpdateAlphaFeeConfig` @ `script/UpdateAlphaFeeConfig.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `UpdateAlphaFeeConfig` @ `script/UpdateAlphaFeeConfig.s.sol`
+- `mintGtFeeRatio` | type: `uint32` | vis: `default` | flags: `-` | `UpdateAlphaFeeConfig` @ `script/UpdateAlphaFeeConfig.s.sol` = `0.1e8`
+- `mintGtFeeRef` | type: `uint32` | vis: `default` | flags: `-` | `UpdateAlphaFeeConfig` @ `script/UpdateAlphaFeeConfig.s.sol` = `5e8`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `UpdateFeeConfig` @ `script/UpdateFeeConfig.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `UpdateFeeConfig` @ `script/UpdateFeeConfig.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `UpdateFeeConfig` @ `script/UpdateFeeConfig.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `UpdateFeeConfig` @ `script/UpdateFeeConfig.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `UpdateFeeConfig` @ `script/UpdateFeeConfig.s.sol`
+- `otherMarkets` | type: `address[]` | vis: `default` | flags: `-` | `UpdateFeeConfig` @ `script/UpdateFeeConfig.s.sol`
+- `other_mintGtFeeRatio` | type: `uint32` | vis: `default` | flags: `-` | `UpdateFeeConfig` @ `script/UpdateFeeConfig.s.sol` = `0.1e8`
+- `other_mintGtFeeRef` | type: `uint32` | vis: `default` | flags: `-` | `UpdateFeeConfig` @ `script/UpdateFeeConfig.s.sol` = `0.03e8`
+- `stableMarkets` | type: `address[]` | vis: `default` | flags: `-` | `UpdateFeeConfig` @ `script/UpdateFeeConfig.s.sol`
+- `stable_mintGtFeeRatio` | type: `uint32` | vis: `default` | flags: `-` | `UpdateFeeConfig` @ `script/UpdateFeeConfig.s.sol` = `0.1e8`
+- `stable_mintGtFeeRef` | type: `uint32` | vis: `default` | flags: `-` | `UpdateFeeConfig` @ `script/UpdateFeeConfig.s.sol` = `0.08e8`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `UpdateTreasurer` @ `script/UpdateTreasurer.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `UpdateTreasurer` @ `script/UpdateTreasurer.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `UpdateTreasurer` @ `script/UpdateTreasurer.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `UpdateTreasurer` @ `script/UpdateTreasurer.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `UpdateTreasurer` @ `script/UpdateTreasurer.s.sol`
+- `market` | type: `address` | vis: `default` | flags: `-` | `UpdateTreasurer` @ `script/UpdateTreasurer.s.sol` = `0x39256Ad46B721F47d48D1e0918a986cAc0c210ed`
+- `newTreasurer` | type: `address` | vis: `default` | flags: `-` | `UpdateTreasurer` @ `script/UpdateTreasurer.s.sol` = `0x70e992E94474e4E9B2D964F6876c05cDE45f8E89`
+- `accessManagerAddr` | type: `address` | vis: `default` | flags: `-` | `UpgradeRouter` @ `script/UpgradeRouter.s.sol`
+- `adminAddr` | type: `address` | vis: `default` | flags: `-` | `UpgradeRouter` @ `script/UpgradeRouter.s.sol`
+- `coreContracts` | type: `DeployedContracts` | vis: `default` | flags: `-` | `UpgradeRouter` @ `script/UpgradeRouter.s.sol`
+- `coreParams` | type: `CoreParams` | vis: `default` | flags: `-` | `UpgradeRouter` @ `script/UpgradeRouter.s.sol`
+- `deployerPrivateKey` | type: `uint256` | vis: `default` | flags: `-` | `UpgradeRouter` @ `script/UpgradeRouter.s.sol`
+- `aToken` | type: `IERC20 public` | vis: `public` | flags: `-` | `VariableERC4626ForAave` @ `contracts/v2/tokens/VariableERC4626ForAave.sol`
+- `aavePool` | type: `IAaveV3Pool public immutable` | vis: `public` | flags: `immutable` | `VariableERC4626ForAave` @ `contracts/v2/tokens/VariableERC4626ForAave.sol`
+- `bufferConfig` | type: `BufferConfig public` | vis: `public` | flags: `-` | `VariableERC4626ForAave` @ `contracts/v2/tokens/VariableERC4626ForAave.sol`
+- `referralCode` | type: `uint16 public immutable` | vis: `public` | flags: `immutable` | `VariableERC4626ForAave` @ `contracts/v2/tokens/VariableERC4626ForAave.sol`
+- `underlying` | type: `IERC20 public` | vis: `public` | flags: `-` | `VariableERC4626ForAave` @ `contracts/v2/tokens/VariableERC4626ForAave.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `actors` | type: `address[] public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `calls` | type: `mapping(bytes32 => uint256) public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `ghost_burnedSum` | type: `uint256 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `ghost_depositSum` | type: `uint256 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `ghost_mintedSum` | type: `uint256 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `ghost_totalInterestGenerated` | type: `uint256 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `ghost_totalYieldAccrued` | type: `uint256 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `ghost_withdrawSum` | type: `uint256 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `variableToken` | type: `VariableERC4626ForAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveInvariantTest` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveInvariantTest` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `handler` | type: `VariableERC4626ForAaveHandler public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveInvariantTest` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveInvariantTest` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `variableToken` | type: `VariableERC4626ForAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveInvariantTest` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `aavePool` | type: `MockAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveTest` @ `test/v2/pool/VariableERC4626ForAave.t.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveTest` @ `test/v2/pool/VariableERC4626ForAave.t.sol` = `vm.randomAddress()`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveTest` @ `test/v2/pool/VariableERC4626ForAave.t.sol`
+- `variableToken` | type: `VariableERC4626ForAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveTest` @ `test/v2/pool/VariableERC4626ForAave.t.sol`
+- `MAX_FEE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `VaultConstants` @ `contracts/v1/lib/VaultConstants.sol` = `0.5e18`
+- `MAX_PERFORMANCE_FEE_RATE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `VaultConstants` @ `contracts/v1/lib/VaultConstants.sol` = `0.5e8`
+- `MAX_QUEUE_LENGTH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `VaultConstants` @ `contracts/v1/lib/VaultConstants.sol` = `30`
+- `MAX_TERM` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `VaultConstants` @ `contracts/v1/lib/VaultConstants.sol` = `365 days`
+- `MAX_TIMELOCK` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `VaultConstants` @ `contracts/v1/lib/VaultConstants.sol` = `2 weeks`
+- `POST_INITIALIZATION_MIN_TIMELOCK` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `VaultConstants` @ `contracts/v1/lib/VaultConstants.sol` = `1 days`
+- `TERMMAX_VAULT_IMPLEMENTATION` | type: `address public immutable` | vis: `public` | flags: `immutable` | `VaultFactory` @ `contracts/v1/factory/VaultFactory.sol`
+- `_accretingPrincipal` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_annualizedInterest` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_badDebtMapping` | type: `mapping(address => uint256) internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_curator` | type: `address internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_guardian` | type: `address internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_isAllocator` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_lastUpdateTime` | type: `uint64 internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_marketWhitelist` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_maturityMapping` | type: `mapping(uint64 => uint64) internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_maturityToInterest` | type: `mapping(uint64 => uint256) internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_maxCapacity` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_orderMapping` | type: `mapping(address => OrderInfo) internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_pendingGuardian` | type: `PendingAddress internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_pendingMarkets` | type: `mapping(address => PendingUint192) internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_pendingPerformanceFeeRate` | type: `PendingUint192 internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_pendingTimelock` | type: `PendingUint192 internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_performanceFee` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_performanceFeeRate` | type: `uint64 internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_supplyQueue` | type: `address[] internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_timelock` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_totalFt` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_withdrawQueue` | type: `address[] internal` | vis: `internal` | flags: `-` | `VaultStorage` @ `contracts/v1/vault/VaultStorage.sol`
+- `_accretingPrincipal` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_annualizedInterest` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_badDebtMapping` | type: `mapping(address => uint256) internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_curator` | type: `address internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_guardian` | type: `address internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_lastUpdateTime` | type: `uint64 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_marketWhitelist` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_maturityMapping` | type: `mapping(uint64 => uint64) internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_maturityToInterest` | type: `mapping(uint64 => uint256) internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_maxCapacity` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_minApy` | type: `uint64 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_orderMaturityMapping` | type: `mapping(address => uint256) internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_pendingGuardian` | type: `PendingAddress internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_pendingMarkets` | type: `mapping(address => PendingUint192) internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_pendingMinApy` | type: `PendingUint192 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_pendingPerformanceFeeRate` | type: `PendingUint192 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_pendingPool` | type: `PendingAddress internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_pendingTimelock` | type: `PendingUint192 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_performanceFee` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_performanceFeeRate` | type: `uint64 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_pool` | type: `IERC4626 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_timelock` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `_totalFt` | type: `uint256 internal` | vis: `internal` | flags: `-` | `VaultStorageV2` @ `contracts/v2/vault/VaultStorageV2.sol`
+- `curator` | type: `address` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol` = `vm.randomAddress()`
+- `currentTime` | type: `uint256` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol` = `vm.randomAddress()`
+- `guardian` | type: `address` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol` = `vm.randomAddress()`
+- `initialParams` | type: `VaultInitialParamsV2` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol`
+- `liquidationLtv` | type: `uint32` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol` = `0.9e8`
+- `lper` | type: `address` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol` = `vm.randomAddress()`
+- `market2` | type: `ITermMaxMarket` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol`
+- `maxCapacity` | type: `uint256` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol` = `1000000e18`
+- `maxLtv` | type: `uint32` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol` = `0.89e8`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol`
+- `performanceFeeRate` | type: `uint64` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol` = `0.5e8`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol`
+- `testdata` | type: `string` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol`
+- `timelock` | type: `uint256` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol` = `86400`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol` = `vm.randomAddress()`
+- `vault` | type: `TermMaxVaultV2` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol`
+- `curator` | type: `address` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol` = `vm.randomAddress()`
+- `currentTime` | type: `uint256` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+- `deployer` | type: `address` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol` = `vm.randomAddress()`
+- `guardian` | type: `address` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol` = `vm.randomAddress()`
+- `initialParams` | type: `VaultInitialParamsV2` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+- `liquidationLtv` | type: `uint32` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol` = `0.9e8`
+- `lper` | type: `address` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol` = `vm.randomAddress()`
+- `market2` | type: `ITermMaxMarket` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+- `marketConfig` | type: `MarketConfig` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+- `maxCapacity` | type: `uint256` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol` = `1000000e18`
+- `maxLtv` | type: `uint32` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol` = `0.89e8`
+- `orderConfig` | type: `OrderConfig` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+- `performanceFeeRate` | type: `uint64` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol` = `0.5e8`
+- `pool` | type: `MockERC4626` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+- `res` | type: `DeployUtils.Res` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+- `testdata` | type: `string` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+- `timelock` | type: `uint256` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol` = `86400`
+- `treasurer` | type: `address` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol` = `vm.randomAddress()`
+- `vault` | type: `TermMaxVaultV2` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+- `whitelists` | type: `mapping(ContractModule => mapping(address => bool)) private` | vis: `private` | flags: `-` | `WhitelistManager` @ `contracts/v2/access/WhitelistManager.sol`
+- `ACCESS_MANAGER` | type: `address public immutable` | vis: `public` | flags: `immutable` | `WithAccessManagerRole` @ `contracts/v2/access/WithAccessManagerRole.sol`
+- `defaultWhitelistModule` | type: `IWhitelistManager.ContractModule public immutable` | vis: `public` | flags: `immutable` | `WithWhitelistCheck` @ `contracts/v2/access/WithWhitelistCheck.sol`
+- `whitelistManager` | type: `IWhitelistManager public immutable` | vis: `public` | flags: `immutable` | `WithWhitelistCheck` @ `contracts/v2/access/WithWhitelistCheck.sol`
+
+### Tokens Added / Token State Values
+Detected token-related variables:
+- `isEth` | type: `bool` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `ondoGmTokenManager` | type: `address` | vis: `default` | flags: `-` | `DeployAllAdapter` @ `script/deploy/DeployAllAdapter.s.sol`
+- `BTC_USD_INDEX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `DeployB2BTCUSDOracle` @ `script/deploy/DeployB2BTCUSDOracle.s.sol` = `18`
+- `DEFAULT_TOKEN0_PRICE_FEED` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0xbbF121624c3b85C929Ac83872bf6c86b0976A55e`
+- `DEFAULT_TOKEN0_PRICE_FEED_1` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0xEC352BC99BD444E0AC7f00e9B7D581B4b100CA3e`
+- `DEFAULT_TOKEN1_PRICE_FEED` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0x2D4f3199a80b848F3d094745F3Bbd4224892654e`
+- `DEFAULT_TOKEN1_PRICE_FEED_1` | type: `address constant` | vis: `default` | flags: `constant` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0x2D4f3199a80b848F3d094745F3Bbd4224892654e`
+- `token0PriceFeeds` | type: `address[] public` | vis: `public` | flags: `-` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol`
+- `token1PriceFeeds` | type: `address[] public` | vis: `public` | flags: `-` | `DeployBeefySharePriceFeedAdapter` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol`
+- `AAVE_WEETH_PRICE_CAP_ADAPTER` | type: `address constant` | vis: `default` | flags: `constant` | `DeployWeETHPriceCapAdapter` @ `script/deploy/DeployWeETHPriceCapAdapter.s.sol` = `0x87625393534d5C102cADB66D37201dF24cc26d4C`
+- `isEth` | type: `bool` | vis: `default` | flags: `-` | `DeployWhitelistFeature` @ `script/deploy/DeployWhitelistFeature.s.sol`
+- `getTokenId` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `Faucet` @ `contracts/v1/test/testnet/Faucet.sol`
+- `getTokenIdByKey` | type: `mapping(bytes32 => uint256) public` | vis: `public` | flags: `-` | `Faucet` @ `contracts/v1/test/testnet/Faucet.sol`
+- `tokenConfigs` | type: `mapping(uint256 => TokenConfig) public` | vis: `public` | flags: `-` | `Faucet` @ `contracts/v1/test/testnet/Faucet.sol`
+- `BTC_USD_INDEX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ForkB2TokenPriceFeedAdapterTest` @ `test/v2/integration/ForkB2TokenPriceFeedAdapter.t.sol` = `18`
+- `tokenPairs` | type: `string[]` | vis: `default` | flags: `-` | `ForkBaseTestV2` @ `test/v2/mainnet-fork/ForkBaseTestV2.sol`
+- `TOKEN0_PRICE_FEED` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ForkBeefySharePriceFeedAdapterTest` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `0xbbF121624c3b85C929Ac83872bf6c86b0976A55e`
+- `TOKEN1_PRICE_FEED` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ForkBeefySharePriceFeedAdapterTest` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `0x2D4f3199a80b848F3d094745F3Bbd4224892654e`
+- `USDC` | type: `address constant` | vis: `default` | flags: `constant` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `0x549943e04f40284185054145c6E4e9568C1D3241`
+- `WETH` | type: `address constant` | vis: `default` | flags: `constant` | `ForkKodiakSwapAdapter` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590`
+- `tokenIn` | type: `address constant` | vis: `default` | flags: `constant` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `tokenOut` | type: `address constant` | vis: `default` | flags: `constant` | `ForkLifiSwapAdapter` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `minTokenOut` | type: `uint256` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `8e6`
+- `tokenIn` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `0x9dC44ae5BE187ECA9e2A67e33f27A4c91cEA1223`
+- `tokenInAmt` | type: `uint256` | vis: `default` | flags: `-` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `480 ether`
+- `tokenOut` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOkxSwapAdapterV2` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `tslaonUSDConverter` | type: `ITermMaxPriceFeed public` | vis: `public` | flags: `-` | `ForkOndoPriceFeedAdapterTest` @ `test/v2/integration/ForkOndoPriceFeedAdapter.t.sol`
+- `tokenIn` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `0x60bE1e1fE41c1370ADaF5d8e66f07Cf1C2Df2268`
+- `tokenOut` | type: `address constant` | vis: `default` | flags: `constant` | `ForkOneInchSwapAdapter` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `USDT` | type: `address constant` | vis: `default` | flags: `constant` | `ForkPancakeAdapterV2` @ `test/v2/integration/ForkPancakeAdapterV2.t.sol` = `0x55d398326f99059fF775485246999027B3197955`
+- `USDT` | type: `address constant` | vis: `default` | flags: `constant` | `ForkPancakeSmartAdapter` @ `test/v2/integration/ForkPancakeSmartAdapter.t.sol` = `0x55d398326f99059fF775485246999027B3197955`
+- `usdc` | type: `address` | vis: `default` | flags: `-` | `ForkPrdFlashRepay` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `aaveDebtToken` | type: `ICreditDelegationToken` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol`
+- `usdc` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `weth` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollOverToThird` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `usdc` | type: `address` | vis: `default` | flags: `-` | `ForkPrdRollover` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `usdc` | type: `address` | vis: `default` | flags: `-` | `ForkStrataVaultAdapter` @ `test/v2/integration/ForkStrataVaultAdapter.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `aUSDC` | type: `address` | vis: `default` | flags: `-` | `ForkTermMax4626` @ `test/v2/integration/ForkTermMax4626.t.sol`
+- `usdc` | type: `address` | vis: `default` | flags: `-` | `ForkTermMax4626` @ `test/v2/integration/ForkTermMax4626.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `tETH` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xa1150cd4A014e06F5E0A6ec9453fE0208dA5adAb`
+- `tETHDepositVault` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xC93bb8D5581D74272F0E304593af9Ab4E3A0181b`
+- `tETHRedeemVault` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xE042678e6c6871Fa279e037C11e390f31334ba0B`
+- `weEth` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee`
+- `weth` | type: `address` | vis: `default` | flags: `-` | `ForkTerminalTest` @ `test/v2/integration/ForkTerminal.t.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `USDC` | type: `address constant` | vis: `default` | flags: `constant` | `ForkUniswapAdapterV2` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `WBTC` | type: `address constant` | vis: `default` | flags: `constant` | `ForkUniswapAdapterV2` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `USDC` | type: `address constant` | vis: `default` | flags: `constant` | `ForkUniswapOracle` @ `test/v2/integration/ForkUniswapOracle.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `WBTC` | type: `address constant` | vis: `default` | flags: `constant` | `ForkUniswapOracle` @ `test/v2/integration/ForkUniswapOracle.t.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `underlyings` | type: `IERC20[] public` | vis: `public` | flags: `-` | `ForkVenusPool` @ `test/v2/integration/ForkVenusPool.t.sol`
+- `vTokens` | type: `IVToken[] public` | vis: `public` | flags: `-` | `ForkVenusPool` @ `test/v2/integration/ForkVenusPool.t.sol`
+- `AAVE_WEETH_PRICE_CAP_ADAPTER` | type: `address constant` | vis: `default` | flags: `constant` | `ForkWeETHPriceCapAdapterTest` @ `test/v2/integration/ForkWeETHPriceCapAdapter.t.sol` = `0x87625393534d5C102cADB66D37201dF24cc26d4C`
+- `aaveWeETHPriceCapAdapter` | type: `IPriceCapAdapter public` | vis: `public` | flags: `-` | `ForkWeETHPriceCapAdapterTest` @ `test/v2/integration/ForkWeETHPriceCapAdapter.t.sol`
+- `KYBER_SCALING_HELPER` | type: `address public immutable` | vis: `public` | flags: `immutable` | `KyberswapV2Adapter` @ `contracts/v1/router/swapAdapters/KyberswapV2Adapter.sol`
+- `KYBER_SCALING_HELPER` | type: `address public immutable` | vis: `public` | flags: `immutable` | `KyberswapV2AdapterV2` @ `contracts/v2/router/swapAdapters/KyberswapV2AdapterV2.sol`
+- `makerHelper` | type: `MakerHelper` | vis: `default` | flags: `-` | `MakerHelperTest` @ `test/v2/MakerHelper.t.sol`
+- `underlying` | type: `IERC20 public immutable` | vis: `public` | flags: `immutable` | `MockAave` @ `contracts/v2/test/MockAave.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `MockFlashLoanHandler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `underlying` | type: `IERC20` | vis: `default` | flags: `-` | `MockFlashLoanReceiver` @ `contracts/v1/test/MockFlashLoanReceiver.sol`
+- `xt` | type: `IERC20` | vis: `default` | flags: `-` | `MockFlashLoanReceiver` @ `contracts/v1/test/MockFlashLoanReceiver.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `ft` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `xt` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrder` @ `contracts/v1/test/MockOrder.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `ft` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `xt` | type: `IERC20 private` | vis: `private` | flags: `-` | `MockOrderV2` @ `contracts/v2/test/MockOrderV2.sol`
+- `ft` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2.t.sol`
+- `ft` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `ft` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzSwapV2.t.sol`
+- `xt` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2.t.sol`
+- `xt` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzActionsV2WithPool.t.sol`
+- `xt` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockSwapCallback` @ `test/v2/FuzzSwapV2.t.sol`
+- `aToken` | type: `IERC20 public` | vis: `public` | flags: `-` | `MockTermMax4626PoolAave` @ `test/v2/TermMaxViewer.t.sol`
+- `_token1` | type: `address private` | vis: `private` | flags: `-` | `MockUniswapV3Pool` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `USDon` | type: `IERC20 public immutable` | vis: `public` | flags: `immutable` | `OndoSwapAdapter` @ `contracts/v2/router/swapAdapters/OndoSwapAdapter.sol`
+- `PY_LP_ORACLE` | type: `PendlePYLpOracle public immutable` | vis: `public` | flags: `immutable` | `PTWithPriceFeed` @ `contracts/v1/extensions/PTWithPriceFeed.sol`
+- `debtTokenToDeposit` | type: `uint256` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `0`
+- `uBTC` | type: `IERC20` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `IERC20(0x796e4D53067FF374B89b2Ac101ce0c1f72ccaAc2)`
+- `wbtc` | type: `IWBTC` | vis: `default` | flags: `-` | `PlaceOrder` @ `script/PlaceB2Order.s.sol` = `IWBTC(0x4200000000000000000000000000000000000006)`
+- `aTokenToBTokenPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `PriceFeedConverter` @ `contracts/v1/extensions/PriceFeedConverter.sol`
+- `bTokenToCTokenPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `PriceFeedConverter` @ `contracts/v1/extensions/PriceFeedConverter.sol`
+- `underlying` | type: `IERC20 public` | vis: `public` | flags: `-` | `StableERC4626For4626` @ `contracts/v2/tokens/StableERC4626For4626.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626For4626Handler` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626For4626InvariantTest` @ `test/v2/invariant/StableERC4626For4626Invariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626For4626Test` @ `test/v2/pool/StableERC4626For4626.t.sol`
+- `aToken` | type: `IERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForAave` @ `contracts/v2/tokens/StableERC4626ForAave.sol`
+- `underlying` | type: `IERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForAave` @ `contracts/v2/tokens/StableERC4626ForAave.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveHandler` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveInvariantTest` @ `test/v2/invariant/StableERC4626ForAaveInvariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForAaveTest` @ `test/v2/pool/StableERC4626ForAave.t.sol`
+- `underlying` | type: `IERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForCustomize` @ `contracts/v2/tokens/StableERC4626ForCustomize.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForCustomizeTest` @ `test/v2/StableERC4626ForCustomize.t.sol`
+- `underlying` | type: `IERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForVenus` @ `contracts/v2/tokens/StableERC4626ForVenus.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `StableERC4626ForVenusTest` @ `test/v2/pool/StableERC4626ForVenus.t.sol`
+- `vToken` | type: `MockVToken public` | vis: `public` | flags: `-` | `StableERC4626ForVenusTest` @ `test/v2/pool/StableERC4626ForVenus.t.sol`
+- `stableDebtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `variableDebtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMax4626FactoryTest` @ `test/v2/TermMax4626Factory.t.sol`
+- `lpToken` | type: `IKodiakIsland public immutable` | vis: `public` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token0Decimals` | type: `uint8 internal immutable` | vis: `internal` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token0PriceDecimals` | type: `uint8 internal immutable` | vis: `internal` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token0PriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token1Decimals` | type: `uint8 internal immutable` | vis: `internal` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token1PriceDecimals` | type: `uint8 internal immutable` | vis: `internal` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `token1PriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxBeefySharePriceFeedAdapter` @ `contracts/v2/oracle/adapters/beefy/TermMaxBeefySharePriceFeedAdapter.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `ft` | type: `IMintableERC20 private` | vis: `private` | flags: `-` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `xt` | type: `IMintableERC20 private` | vis: `private` | flags: `-` | `TermMaxMarket` @ `contracts/v1/TermMaxMarket.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `ft` | type: `IMintableERC20 private` | vis: `private` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `xt` | type: `IMintableERC20 private` | vis: `private` | flags: `-` | `TermMaxMarketV2` @ `contracts/v2/TermMaxMarketV2.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ft` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `xt` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2Handler` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `ft` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `xt` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxMarketV2InvariantTest` @ `test/v2/invariant/TermMaxMarketV2Invariant.t.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol`
+- `ft` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol`
+- `xt` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrder` @ `contracts/v1/TermMaxOrder.sol`
+- `debtToken` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `ft` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `xt` | type: `IERC20 private` | vis: `private` | flags: `-` | `TermMaxOrderV2` @ `contracts/v2/TermMaxOrderV2.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ft` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ghost_totalDebtTokenSwapped` | type: `uint256 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `xt` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2Handler` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `collateral` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `debtToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `ft` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `xt` | type: `IMintableERC20 public` | vis: `public` | flags: `-` | `TermMaxOrderV2InvariantTest` @ `test/v2/invariant/TermMaxOrderV2Invariant.t.sol`
+- `PY_LP_ORACLE` | type: `PendlePYLpOracle public immutable` | vis: `public` | flags: `immutable` | `TermMaxPTPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxPTPriceFeed.sol`
+- `aTokenToBTokenPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxPriceFeedConverter` @ `contracts/v2/oracle/priceFeeds/TermMaxPriceFeedConverter.sol`
+- `bTokenToCTokenPriceFeed` | type: `AggregatorV3Interface public immutable` | vis: `public` | flags: `immutable` | `TermMaxPriceFeedConverter` @ `contracts/v2/oracle/priceFeeds/TermMaxPriceFeedConverter.sol`
+- `mockToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxPriceFeedFactoryV2Test` @ `test/v2/TermMaxPriceFeedFactoryV2.t.sol`
+- `baseToken` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxUniswapTWAPPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxUniswapTWAPPriceFeed.sol`
+- `quoteToken` | type: `address public immutable` | vis: `public` | flags: `immutable` | `TermMaxUniswapTWAPPriceFeed` @ `contracts/v2/oracle/priceFeeds/TermMaxUniswapTWAPPriceFeed.sol`
+- `baseToken` | type: `MockERC20 internal` | vis: `internal` | flags: `-` | `TermMaxUniswapTWAPPriceFeedTest` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `quoteToken` | type: `MockERC20 internal` | vis: `internal` | flags: `-` | `TermMaxUniswapTWAPPriceFeedTest` @ `test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol`
+- `asset` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxVaultV2Handler` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `asset` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxVaultV2InvariantTest` @ `test/v2/invariant/TermMaxVaultV2Invariant.t.sol`
+- `mockAToken` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `mockAsset` | type: `MockERC20 public` | vis: `public` | flags: `-` | `TermMaxViewerTest` @ `test/v2/TermMaxViewer.t.sol`
+- `alphaFeeConfig` | type: `FeeConfig` | vis: `default` | flags: `-` | `UpdateAlphaFeeConfig` @ `script/UpdateAlphaFeeConfig.s.sol`
+- `alphaMarkets` | type: `address[]` | vis: `default` | flags: `-` | `UpdateAlphaFeeConfig` @ `script/UpdateAlphaFeeConfig.s.sol`
+- `aToken` | type: `IERC20 public` | vis: `public` | flags: `-` | `VariableERC4626ForAave` @ `contracts/v2/tokens/VariableERC4626ForAave.sol`
+- `underlying` | type: `IERC20 public` | vis: `public` | flags: `-` | `VariableERC4626ForAave` @ `contracts/v2/tokens/VariableERC4626ForAave.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `variableToken` | type: `VariableERC4626ForAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveHandler` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveInvariantTest` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `variableToken` | type: `VariableERC4626ForAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveInvariantTest` @ `test/v2/invariant/VariableERC4626ForAaveInvariant.t.sol`
+- `underlying` | type: `MockERC20 public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveTest` @ `test/v2/pool/VariableERC4626ForAave.t.sol`
+- `variableToken` | type: `VariableERC4626ForAave public` | vis: `public` | flags: `-` | `VariableERC4626ForAaveTest` @ `test/v2/pool/VariableERC4626ForAave.t.sol`
+- `initialParams` | type: `VaultInitialParamsV2` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol`
+- `lper` | type: `address` | vis: `default` | flags: `-` | `VaultTestV2` @ `test/v2/VaultV2.t.sol` = `vm.randomAddress()`
+- `initialParams` | type: `VaultInitialParamsV2` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol`
+- `lper` | type: `address` | vis: `default` | flags: `-` | `VaultV2WithPoolTest` @ `test/v2/VaultV2WithPool.t.sol` = `vm.randomAddress()`
+
+Hardcoded token addresses found:
+- `AAVE_WEETH_PRICE_CAP_ADAPTER` @ `script/deploy/DeployWeETHPriceCapAdapter.s.sol` = `0x87625393534d5C102cADB66D37201dF24cc26d4C`
+- `AAVE_WEETH_PRICE_CAP_ADAPTER` @ `test/v2/integration/ForkWeETHPriceCapAdapter.t.sol` = `0x87625393534d5C102cADB66D37201dF24cc26d4C`
+- `DEFAULT_TOKEN0_PRICE_FEED` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0xbbF121624c3b85C929Ac83872bf6c86b0976A55e`
+- `DEFAULT_TOKEN0_PRICE_FEED_1` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0xEC352BC99BD444E0AC7f00e9B7D581B4b100CA3e`
+- `DEFAULT_TOKEN1_PRICE_FEED` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0x2D4f3199a80b848F3d094745F3Bbd4224892654e`
+- `DEFAULT_TOKEN1_PRICE_FEED_1` @ `script/deploy/DeployBeefySharePriceFeedAdapter.s.sol` = `0x2D4f3199a80b848F3d094745F3Bbd4224892654e`
+- `TOKEN0_PRICE_FEED` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `0xbbF121624c3b85C929Ac83872bf6c86b0976A55e`
+- `TOKEN1_PRICE_FEED` @ `test/v2/integration/ForkBeefySharePriceFeedAdapter.t.sol` = `0x2D4f3199a80b848F3d094745F3Bbd4224892654e`
+- `USDC` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `0x549943e04f40284185054145c6E4e9568C1D3241`
+- `USDC` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `USDC` @ `test/v2/integration/ForkUniswapOracle.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `USDT` @ `test/v2/integration/ForkPancakeAdapterV2.t.sol` = `0x55d398326f99059fF775485246999027B3197955`
+- `USDT` @ `test/v2/integration/ForkPancakeSmartAdapter.t.sol` = `0x55d398326f99059fF775485246999027B3197955`
+- `WBTC` @ `test/v2/integration/ForkUniswapAdapterV2.t.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `WBTC` @ `test/v2/integration/ForkUniswapOracle.t.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `WETH` @ `test/v2/integration/ForkKodiakSwapAdapter.t.sol` = `0x2F6F07CDcf3588944Bf4C42aC74ff24bF56e7590`
+- `tETH` @ `test/v2/integration/ForkTerminal.t.sol` = `0xa1150cd4A014e06F5E0A6ec9453fE0208dA5adAb`
+- `tETHDepositVault` @ `test/v2/integration/ForkTerminal.t.sol` = `0xC93bb8D5581D74272F0E304593af9Ab4E3A0181b`
+- `tETHRedeemVault` @ `test/v2/integration/ForkTerminal.t.sol` = `0xE042678e6c6871Fa279e037C11e390f31334ba0B`
+- `tokenIn` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `tokenIn` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `0x9dC44ae5BE187ECA9e2A67e33f27A4c91cEA1223`
+- `tokenIn` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `0x60bE1e1fE41c1370ADaF5d8e66f07Cf1C2Df2268`
+- `tokenOut` @ `test/v2/integration/ForkLifiSwapAdapter.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `tokenOut` @ `test/v2/integration/ForkOkxSwapAdapterV2.t.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `tokenOut` @ `test/v2/integration/ForkOneInchSwapAdapter.t.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `usdc` @ `test/v2/integration/ForkPrdFlashRepay.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `usdc` @ `test/v2/integration/ForkPrdRollOver.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `usdc` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `usdc` @ `test/v2/integration/ForkStrataVaultAdapter.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `usdc` @ `test/v2/integration/ForkTermMax4626.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `weEth` @ `test/v2/integration/ForkTerminal.t.sol` = `0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee`
+- `weth` @ `test/v2/integration/ForkPrdRollOverToThird.t.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `weth` @ `test/v2/integration/ForkTerminal.t.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+
+### Struct Values (All Parsed Struct Fields)
+- `AaveDelegationParams` (contracts/v2/extensions/aave/ICreditDelegationToken.sol): ICreditDelegationToken aaveDebtToken, address delegator, address delegatee, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s
+- `AavePools` (script/deploy/DeployAavePool.s.sol): address assets, address variable, address stable
+- `Action` (test/v2/FuzzActionsV2.t.sol): uint256 opType, uint256 firstAmt, uint256 ftReserve, uint256 xtReserve, uint256 secondAmt, uint256 fee
+- `Action` (test/v2/FuzzActionsV2WithPool.t.sol): uint256 opType, uint256 firstAmt, uint256 ftReserve, uint256 xtReserve, uint256 secondAmt, uint256 fee
+- `Authorization` (contracts/v2/extensions/morpho/IMorpho.sol): address authorizer, address authorized, bool isAuthorized, uint256 nonce, uint256 deadline
+- `BaseRequest` (contracts/v1/extensions/OKXScaleHelper.sol): uint256 fromToken, address toToken, uint256 fromTokenAmount, uint256 minReturnAmount, uint256 deadLine
+- `BufferConfig` (contracts/v2/tokens/StakingBuffer.sol): uint256 minimumBuffer, uint256 maximumBuffer, uint256 buffer
+- `CollateralConfig` (script/utils/JsonLoader.sol): address tokenAddr, address priceFeedAddr, address backupPriceFeedAddr, uint256 heartBeat, string name, string symbol, uint8 decimals, int256 initialPrice, string gtKeyIdentifier
+- `Config` (script/utils/JsonLoader.sol): string marketName, string marketSymbol, uint256 salt, MarketConfig marketConfig, LoanConfig loanConfig, UnderlyingConfig underlyingConfig, CollateralConfig collateralConfig, uint256 collateralCapForGt
+- `CoreParams` (script/deploy/DeployBaseV2.s.sol): address deployerAddr, address adminAddr, string network, bool isL2Network, bool isMainnet, uint256 oracleTimelock, address l2SequencerUpPriceFeed, uint256 l2GracePeriod, address uniswapV3Router, address odosV2Router, address pendleSwapV3Router, address AAVE_POOL, uint16 AAVE_REFERRAL_CODE
+- `CurveCut` (contracts/v1/storage/TermMaxStorage.sol): uint256 xtReserve, uint256 liqSquare, int256 offset
+- `CurveCuts` (contracts/v1/storage/TermMaxStorage.sol): CurveCut[] lendCurveCuts, CurveCut[] borrowCurveCuts
+- `DelegateParameters` (contracts/v2/lib/DelegateAble.sol): address delegator, address delegatee, bool isDelegate, uint256 nonce, uint256 deadline
+- `Delegation` (contracts/v2/lib/DelegateAble.sol): mapping(address => bool) isDelegate, uint256 nonce
+- `DeployedContracts` (script/deploy/DeployBaseV2.s.sol): AccessManagerV2 accessManager, WhitelistManager whitelistManager, TermMaxFactoryV2 factory, TermMaxVaultFactoryV2 vaultFactory, TermMaxFactoryV2 alphaFactory, TermMaxVaultFactoryV2 alphaVaultFactory, TermMaxPriceFeedFactoryV2 priceFeedFactory, TermMax4626Factory tmx4626Factory, IOracle oracle, TermMaxRouterV2 router, MakerHelper makerHelper, SwapAdapterV2 swapAdapter, Faucet faucet, MarketViewer marketViewer, UniswapV3AdapterV2 uniswapV3Adapter, OdosV2AdapterV2 odosV2Adapter, PendleSwapV3AdapterV2 pendleSwapV3Adapter, ERC4626VaultAdapterV2 vaultAdapter, TermMaxSwapAdapter termMaxSwapAdapter, TerminalVaultAdapter terminalVaultAdapter, TermMaxViewer termMaxViewer, TermMaxRouter_V1_1_2 routerV1
+- `EnforcedOptionParam` (contracts/v2/tokenomics/TMX.sol): uint32 eid, uint16 msgType, bytes options
+- `FeeConfig` (contracts/v1/storage/TermMaxStorage.sol): uint32 lendTakerFeeRatio, uint32 lendMakerFeeRatio, uint32 borrowTakerFeeRatio, uint32 borrowMakerFeeRatio, uint32 mintGtFeeRatio, uint32 mintGtFeeRef
+- `FeeData` (contracts/v2/extensions/kodiak/IKodiakRouter.sol): uint256 feeQuote, uint16 surplusFeeBps, uint16 refCode, uint16 referrerFeeBps
+- `GtConfig` (contracts/v1/storage/TermMaxStorage.sol): address collateral, IERC20Metadata debtToken, IERC20 ft, address treasurer, uint64 maturity, LoanConfig loanConfig
+- `GtTestRes` (test/v2/mainnet-fork/GtBaseTestV2.t.sol): uint256 blockNumber, uint256 orderInitialAmount, MarketInitialParams marketInitialParams, OrderConfig orderConfig, TermMaxMarketV2 market, IMintableERC20 ft, IMintableERC20 xt, IGearingToken gt, IERC20Metadata collateral, IERC20Metadata debtToken, IOracleV2 oracle, MockPriceFeed collateralPriceFeed, MockPriceFeed debtPriceFeed, ITermMaxOrder order, TermMaxRouterV2 router, uint256 maxXtReserve, address maker, SwapData swapData, SwapAdapters swapAdapters, TermMaxSwapAdapter termMaxSwapAdapter
+- `InboundPacket` (contracts/v2/tokenomics/TMX.sol): Origin origin, uint32 dstEid, address receiver, bytes32 guid, uint256 value, address executor, bytes message, bytes extraData
+- `InputAmount` (contracts/v2/extensions/kodiak/IKodiakRouter.sol): address token, bool wrap, uint256 amount
+- `LoanConfig` (contracts/v1/storage/TermMaxStorage.sol): IOracle oracle, uint32 liquidationLtv, uint32 maxLtv, bool liquidatable
+- `LoanInfo` (contracts/v1/tokens/AbstractGearingToken.sol): uint128 debtAmt, bytes collateralData
+- `LoanInfo` (contracts/v2/tokens/AbstractGearingTokenV2.sol): uint128 debtAmt, bytes collateralData
+- `LoanPosition` (contracts/v1/router/MarketViewer.sol): uint256 loanId, uint256 collateralAmt, uint256 debtAmt
+- `LoanPosition` (contracts/v2/router/TermMaxViewer.sol): uint256 loanId, uint256 collateralAmt, uint256 debtAmt
+- `LoanPositionV2` (contracts/v1/router/MarketViewer.sol): address owner, uint256 loanId, uint256 collateralAmt, uint256 debtAmt, uint128 ltv, bool isHealthy, bool isLiquidable, uint128 maxRepayAmt
+- `LoanPositionV2` (contracts/v2/router/TermMaxViewer.sol): address owner, uint256 loanId, uint256 collateralAmt, uint256 debtAmt, uint128 ltv, bool isHealthy, bool isLiquidable, uint128 maxRepayAmt
+- `LoanTask` (script/LiquidateLoanBatch.s.sol): address marketAddress, uint256 loanId
+- `MarketConfig` (contracts/v1/storage/TermMaxStorage.sol): address treasurer, uint64 maturity, FeeConfig feeConfig
+- `MarketInitialParams` (contracts/v1/storage/TermMaxStorage.sol): address collateral, IERC20Metadata debtToken, address admin, address gtImplementation, MarketConfig marketConfig, LoanConfig loanConfig, bytes gtInitalParams, string tokenName, string tokenSymbol
+- `MarketParams` (contracts/v2/extensions/morpho/IMorpho.sol): address loanToken, address collateralToken, address oracle, address irm, uint256 lltv
+- `MarketState` (test/v2/utils/StateChecker.sol): uint256 collateralReserve, uint256 debtReserve
+- `MarketTestRes` (test/v2/mainnet-fork/MarketBaseTestV2.t.sol): uint256 blockNumber, uint256 orderInitialAmount, MarketInitialParams marketInitialParams, OrderConfig orderConfig, TermMaxMarketV2 market, IMintableERC20 ft, IMintableERC20 xt, IGearingToken gt, IERC20Metadata collateral, IERC20Metadata debtToken, IOracleV2 oracle, MockPriceFeed collateralPriceFeed, MockPriceFeed debtPriceFeed, ITermMaxOrder order, ITermMaxRouterV2 router, uint256 maxXtReserve, address maker
+- `MessagingFee` (contracts/v2/tokenomics/TMX.sol): uint256 nativeFee, uint256 lzTokenFee
+- `MessagingParams` (contracts/v2/tokenomics/TMX.sol): uint32 dstEid, bytes32 receiver, bytes message, bytes options, bool payInLzToken
+- `MessagingReceipt` (contracts/v2/tokenomics/TMX.sol): bytes32 guid, uint64 nonce, MessagingFee fee
+- `OFTFeeDetail` (contracts/v2/tokenomics/TMX.sol): int256 feeAmountLD, string description
+- `OFTLimit` (contracts/v2/tokenomics/TMX.sol): uint256 minAmountLD, uint256 maxAmountLD
+- `OFTReceipt` (contracts/v2/tokenomics/TMX.sol): uint256 amountSentLD, uint256 amountReceivedLD
+- `Observation` (test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol): uint32 blockTimestamp, int56 tickCumulative, uint160 secondsPerLiquidityCumulativeX128, bool initialized
+- `ObservationSnapshot` (test/v2/oracle/TermMaxUniswapTWAPPriceFeed.t.sol): int56 tickCumulative, uint160 secondsPerLiquidityCumulativeX128, bool set
+- `Oracle` (contracts/v1/oracle/IOracle.sol): AggregatorV3Interface aggregator, AggregatorV3Interface backupAggregator, uint32 heartbeat
+- `Oracle` (contracts/v2/oracle/IOracleV2.sol): AggregatorV3Interface aggregator, AggregatorV3Interface backupAggregator, int256 maxPrice, int256 minPrice, uint32 heartbeat, uint32 backupHeartbeat
+- `OracleConfig` (script/utils/JsonLoader.sol): address asset, bool needsDeployment, PriceFeedDeployParams deployFeedParams, IOracleV2.Oracle oracleParams
+- `OrderConfig` (contracts/v1/storage/TermMaxStorage.sol): CurveCuts curveCuts, uint256 gtId, uint256 maxXtReserve, ISwapCallback swapTrigger, FeeConfig feeConfig
+- `OrderInfo` (contracts/v1/vault/VaultStorage.sol): ITermMaxMarket market, IERC20 ft, IERC20 xt, uint128 maxSupply, uint64 maturity
+- `OrderInitialParams` (contracts/v2/storage/TermMaxStorageV2.sol): address maker, IERC20 ft, IERC20 xt, IERC20 debtToken, IGearingToken gt, uint256 virtualXtReserve, IERC4626 pool, uint64 maturity, OrderConfig orderConfig
+- `OrderState` (contracts/v1/router/MarketViewer.sol): uint256 collateralReserve, uint256 debtReserve, uint256 ftReserve, uint256 xtReserve, uint256 maxXtReserve, uint256 gtId, CurveCuts curveCuts, FeeConfig feeConfig
+- `OrderState` (contracts/v2/router/TermMaxViewer.sol): uint256 collateralReserve, uint256 debtReserve, uint256 ftReserve, uint256 xtReserve, uint256 maxXtReserve, uint256 gtId, CurveCuts curveCuts, FeeConfig feeConfig
+- `OrderState` (test/v2/utils/StateChecker.sol): uint256 ftReserve, uint256 xtReserve
+- `OrderV2ConfigurationParams` (contracts/v2/vault/VaultStorageV2.sol): uint256 originalVirtualXtReserve, uint256 virtualXtReserve, uint256 maxXtReserve, CurveCuts curveCuts
+- `Origin` (contracts/v2/tokenomics/TMX.sol): uint32 srcEid, bytes32 sender, uint64 nonce
+- `OutputAmount` (contracts/v2/extensions/kodiak/IKodiakRouter.sol): address token, bool unwrap, uint256 minAmountOut, address receiver
+- `PMMSwapRequest` (contracts/v1/extensions/OKXScaleHelper.sol): uint256 pathIndex, address payer, address fromToken, address toToken, uint256 fromTokenAmountMax, uint256 toTokenAmountMax, uint256 salt, uint256 deadLine, bool isPushOrder, bytes extension
+- `Packet` (contracts/v2/tokenomics/TMX.sol): uint64 nonce, uint32 srcEid, address sender, uint32 dstEid, bytes32 receiver, bytes32 guid, bytes message
+- `ParsedOrderJson` (script/deploy/PlaceOrder.s.sol): address market, address maker, uint256 virtualXtReserve, address pool, uint256 initialLiquidity, OrderConfig orderConfig
+- `PendingAddress` (contracts/v1/lib/PendingLib.sol): address value, uint64 validAt
+- `PendingOracle` (contracts/v1/oracle/OracleAggregator.sol): Oracle oracle, uint64 validAt
+- `PendingOracle` (contracts/v2/oracle/OracleAggregatorV2.sol): Oracle oracle, uint64 validAt
+- `PendingUint192` (contracts/v1/lib/PendingLib.sol): uint192 value, uint64 validAt
+- `PoolConfig` (script/utils/JsonLoader.sol): address asset, address thirdPool, StakingBuffer.BufferConfig bufferConfig
+- `Position` (contracts/v1/router/MarketViewer.sol): uint256 underlyingBalance, uint256 collateralBalance, uint256 ftBalance, uint256 xtBalance, LoanPosition[] gtInfo
+- `Position` (contracts/v2/router/TermMaxViewer.sol): uint256 underlyingBalance, uint256 collateralBalance, uint256 ftBalance, uint256 xtBalance, LoanPosition[] gtInfo
+- `PreCrimePeer` (contracts/v2/tokenomics/TMX.sol): uint32 eid, bytes32 preCrime, bytes32 oApp
+- `PriceFeedDeployParams` (script/utils/JsonLoader.sol): PriceFeedType priceFeedType, address underlyingPriceFeed, address priceFeed1, address priceFeed2, address pendlePYLpOracle, address market, uint32 duration, int256 constantPrice
+- `Quote` (contracts/v2/extensions/ondo/IGMTokenManager.sol): uint256 chainId, uint256 attestationId, bytes32 userId, address asset, uint256 price, uint256 quantity, uint256 expiration, QuoteSide side, bytes32 additionalData
+- `Res` (test/v2/utils/DeployUtils.sol): TermMaxVaultV2 vault, AccessManagerV2 accessManager, TermMaxVaultFactoryV2 vaultFactory, TermMaxFactoryV2 factory, TermMax4626Factory poolFactory, TermMaxOrderV2 order, TermMaxRouterV2 router, MarketConfig marketConfig, OrderConfig orderConfig, TermMaxMarketV2 market, IMintableERC20 ft, IMintableERC20 xt, IGearingToken gt, MockPriceFeed debtOracle, MockPriceFeed collateralOracle, OracleAggregatorV2 oracle, MockERC20 collateral, MockERC20 debt, SwapRange swapRange, MockAave aave, WhitelistManager whitelistManager
+- `ReserveConfigurationMap` (contracts/v2/extensions/aave/IAaveV3Pool.sol): uint256 data
+- `ReserveData` (contracts/v2/extensions/aave/IAaveV3Pool.sol): ReserveConfigurationMap configuration, uint128 liquidityIndex, uint128 currentLiquidityRate, uint128 variableBorrowIndex, uint128 currentVariableBorrowRate, uint128 currentStableBorrowRate, uint40 lastUpdateTimestamp, uint16 id, address aTokenAddress, address stableDebtTokenAddress, address variableDebtTokenAddress, address interestRateStrategyAddress, uint128 accruedToTreasury, uint128 unbacked, uint128 isolationModeTotalDebt
+- `Reward` (contracts/v2/activity/TermMaxRewardContract.sol): address user, IERC20[] tokens, uint256[] amounts
+- `RoundData` (contracts/v1/test/MockPriceFeed.sol): uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound
+- `RoundData` (contracts/v2/test/MockPriceFeedV2.sol): uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound
+- `RouterPath` (contracts/v1/extensions/OKXScaleHelper.sol): address[] mixAdapters, address[] assetTo, uint256[] rawData, bytes[] extraData, uint256 fromToken
+- `SendParam` (contracts/v2/tokenomics/TMX.sol): uint32 dstEid, bytes32 to, uint256 amountLD, uint256 minAmountLD, bytes extraOptions, bytes composeMsg, bytes oftCmd
+- `SetConfigParam` (contracts/v2/tokenomics/TMX.sol): uint32 eid, uint32 configType, bytes config
+- `Signature` (contracts/v2/extensions/morpho/IMorpho.sol): uint8 v, bytes32 r, bytes32 s
+- `Signature` (contracts/v2/lib/DelegateAble.sol): uint8 v, bytes32 r, bytes32 s
+- `SwapAdapters` (test/v2/mainnet-fork/GtBaseTestV2.t.sol): address uniswapAdapter, address pendleAdapter, address odosAdapter, address vaultAdapter
+- `SwapData` (contracts/v2/extensions/kodiak/IKodiakRouter.sol): address router, bytes data
+- `SwapData` (test/v2/mainnet-fork/GtBaseTestV2.t.sol): uint128 debtAmt, uint128 swapAmtIn, TokenType tokenType, SwapUnit[] leverageUnits, SwapUnit[] flashRepayUnits
+- `SwapDescription` (contracts/v2/extensions/1inch/IOneInchRouter.sol): address srcToken, address dstToken, address payable srcReceiver, address payable dstReceiver, uint256 amount, uint256 minReturnAmount, uint256 flags
+- `SwapPath` (contracts/v2/router/ITermMaxRouterV2.sol): uint256 inputAmount, address recipient, bool useBalanceOnchain, SwapUnit[] units
+- `SwapRange` (test/v2/utils/DeployUtils.sol): uint256 buyFtMax, uint256 buyXtMax, uint256 sellFtMax, uint256 sellXtMax, uint256 buyExactFtMax, uint256 buyExactXtMax, uint256 sellFtForExactTokenMax, uint256 sellXtForExactTokenMax
+- `SwapTokenInfo` (contracts/v2/router/swapAdapters/OdosV2AdapterV2.sol): address inputToken, uint256 inputAmount, address inputReceiver, address outputToken, uint256 outputQuote, uint256 outputMin, address outputReceiver
+- `SwapUnit` (contracts/v1/router/ISwapAdapter.sol): address adapter, address tokenIn, address tokenOut, bytes swapData
+- `TermMaxSwapData` (contracts/v2/router/swapAdapters/TermMaxSwapAdapter.sol): bool swapExactTokenForToken, uint32 scalingFactor, address[] orders, uint128[] tradingAmts, uint128 netTokenAmt, uint256 deadline, address refundAddress
+- `Timeout` (contracts/v2/tokenomics/TMX.sol): address lib, uint256 expiry
+- `TokenConfig` (contracts/v1/test/testnet/Faucet.sol): address tokenAddr, address priceFeedAddr
+- `UnderlyingConfig` (script/utils/JsonLoader.sol): address tokenAddr, address priceFeedAddr, address backupPriceFeedAddr, uint256 heartBeat, string name, string symbol, uint8 decimals, int256 initialPrice
+- `UserProfile` (contracts/v2/activity/TermMaxRewardContract.sol): bool isBlocked, mapping(IERC20 => uint256) rewards
+- `ValueAndPrice` (contracts/v1/tokens/AbstractGearingToken.sol): uint256 collateralValue, uint256 debtValueWithDecimals, uint256 debtPrice, uint256 priceDenominator, uint256 debtDenominator, bytes collateralPriceData
+- `ValueAndPrice` (contracts/v2/tokens/AbstractGearingTokenV2.sol): uint256 collateralValue, uint256 debtValueWithDecimals, uint256 debtPrice, uint256 priceDenominator, uint256 debtDenominator, bytes collateralPriceData
+- `VaultInfo` (contracts/v1/router/MarketViewer.sol): string name, string symbol, address assetAddress, uint256 totalAssets, uint256 totalSupply, uint256 apr, address guardian, address curator, uint256 timelock, uint256 maxDeposit, uint64 performanceFeeRate, uint256 idleFunds, uint256 totalFt, uint256 accretingPrincipal, uint256 annualizedInterest, uint256 performanceFee, address[] supplyQueue, address[] withdrawQueue, PendingAddress pendingGuardian, PendingUint192 pendingTimelock, PendingUint192 pendingPerformanceFeeRate, uint256 maxMint, uint256 convertToSharesPrice, bool isPaused
+- `VaultInfo` (contracts/v2/router/TermMaxViewer.sol): string name, string symbol, address assetAddress, uint256 totalAssets, uint256 totalSupply, uint256 apr, address guardian, address curator, uint256 timelock, uint256 maxDeposit, uint64 performanceFeeRate, uint256 idleFunds, uint256 totalFt, uint256 accretingPrincipal, uint256 annualizedInterest, uint256 performanceFee, address[] supplyQueue, address[] withdrawQueue, PendingAddress pendingGuardian, PendingUint192 pendingTimelock, PendingUint192 pendingPerformanceFeeRate, uint256 maxMint, uint256 convertToSharesPrice, bool isPaused
+- `VaultInitialParams` (contracts/v1/storage/TermMaxStorage.sol): address admin, address curator, uint256 timelock, IERC20 asset, uint256 maxCapacity, string name, string symbol, uint64 performanceFeeRate
+- `VaultInitialParamsV2` (contracts/v2/storage/TermMaxStorageV2.sol): address admin, address curator, address guardian, uint256 timelock, IERC20 asset, IERC4626 pool, uint256 maxCapacity, string name, string symbol, uint64 performanceFeeRate, uint64 minApy
+- `VaultPosition` (contracts/v1/router/MarketViewer.sol): uint256 balance, uint256 toAssetBalance, uint256 usdValue
+- `VaultPosition` (contracts/v2/router/TermMaxViewer.sol): uint256 balance, uint256 toAssetBalance, uint256 usdValue
+- `VaultTestRes` (test/v2/mainnet-fork/VaultBaseTestV2.t.sol): uint256 blockNumber, uint256 orderInitialAmount, MarketInitialParams marketInitialParams, OrderConfig orderConfig, TermMaxMarketV2 market, IMintableERC20 ft, IMintableERC20 xt, IGearingToken gt, IERC20Metadata collateral, IERC20Metadata debtToken, IOracleV2 oracle, MockPriceFeed collateralPriceFeed, MockPriceFeed debtPriceFeed, ITermMaxOrder order, ITermMaxVault vault, VaultInitialParamsV2 vaultInitialParams, uint256 currentTime, uint256 maxCapacity, address maker
+- `WhitelistConfig` (contracts/v2/tokenomics/PreTMX.sol): bool fromWhitelisted, bool toWhitelisted
+- `priceFeed` (contracts/v2/oracle/adapters/b2/ISupraSValueFeed.sol): uint256 round, uint256 decimals, uint256 time, uint256 price
+- `swapTokenInfo` (contracts/v1/router/swapAdapters/OdosV2Adapter.sol): address inputToken, uint256 inputAmount, address inputReceiver, address outputToken, uint256 outputQuote, uint256 outputMin, address outputReceiver
+
+### Enum State Values
+- `Action` (contracts/v1/router/swapAdapters/ERC4626VaultAdapter.sol): Deposit, Redeem
+- `Action` (contracts/v2/router/swapAdapters/ERC4626VaultAdapterV2.sol): Deposit, Redeem
+- `ContractModule` (contracts/v2/access/IWhitelistManager.sol): ADAPTER, ORDER_CALLBACK, MARKET, ORACLE, POOL
+- `FlashLoanType` (contracts/v1/router/TermMaxRouter.sol): COLLATERAL, DEBT
+- `FlashLoanType` (contracts/v1/router/TermMaxRouter_Repay_Gt.sol): COLLATERAL, DEBT
+- `FlashLoanType` (contracts/v1/router/TermMaxRouter_V1_1_2.sol): COLLATERAL, DEBT, EXACT_POSITION
+- `FlashLoanType` (contracts/v2/router/ITermMaxRouterV2.sol): COLLATERAL, DEBT
+- `FlashRepayOptions` (contracts/v2/router/ITermMaxRouterV2.sol): REPAY, ROLLOVER, ROLLOVER_AAVE, ROLLOVER_MORPHO
+- `MessageLibType` (contracts/v2/tokenomics/TMX.sol): Send, Receive, SendAndReceive
+- `OpType` (test/v2/FuzzActionsV2.t.sol): BUY_FT, BUY_XT, SELL_FT, SELL_XT, BUY_EXACT_FT, BUY_EXACT_XT, SELL_FT_FOR_EXACT_TOKEN, SELL_XT_FOR_EXACT_TOKEN
+- `OpType` (test/v2/FuzzActionsV2WithPool.t.sol): BUY_FT, BUY_XT, SELL_FT, SELL_XT, BUY_EXACT_FT, BUY_EXACT_XT, SELL_FT_FOR_EXACT_TOKEN, SELL_XT_FOR_EXACT_TOKEN
+- `PriceFeedType` (script/utils/JsonLoader.sol): PriceFeedWithERC4626, PriceFeedConverter, PTWithPriceFeed, ConstantPriceFeed
+- `QuoteSide` (contracts/v2/extensions/ondo/IGMTokenManager.sol): BUY, SELL
+- `TokenType` (test/v2/mainnet-fork/GtBaseTestV2.t.sol): General, Pendle, Morpho
+
+### Invariant Values (Variable-Tied)
+- `totalAssets` and `totalSupply` must stay conversion-consistent (shares/assets accounting)
+- Debt growth must stay bounded by collateral/liquidation constraints
+- Every token address/handle variable must be non-zero and immutable or governance-gated
+- Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition
+
+### Full Raw State Inventory
+- `AUDIT_STATE_VALUES_FULL.json` includes:
+  - all state variables
+  - all total/balance variables
+  - all token variables
+  - all structs and fields
+  - enum values
+<!-- AUDIT_DOSSIER_END -->

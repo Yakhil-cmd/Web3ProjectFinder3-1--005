@@ -1,0 +1,6658 @@
+{
+  "generated_at_utc": "2026-05-26T17:00:00Z",
+  "project": "26_impossiblefinance",
+  "solidity_file_count": 29,
+  "solidity_files": [
+    "contracts/Create2Deployer.sol",
+    "contracts/GenericToken.sol",
+    "contracts/IFAllocationMaster.sol",
+    "contracts/IFAllocationMasterAdapter.sol",
+    "contracts/IFAllocationMasterOmni.sol",
+    "contracts/IFAllocationMasterSource.sol",
+    "contracts/IFAllocationSale.sol",
+    "contracts/IFFixedSale.sol",
+    "contracts/IFFundable.sol",
+    "contracts/IFPurchasable.sol",
+    "contracts/IFSale.sol",
+    "contracts/IFVestable.sol",
+    "contracts/IFWhitelistable.sol",
+    "contracts/Multicall2.sol",
+    "contracts/TestMerkleVerifier.sol",
+    "contracts/interfaces/IIFBridgableStakeWeight.sol",
+    "contracts/interfaces/IIFRetrievableStakeWeight.sol",
+    "contracts/mocks/MockIFFixedSale.sol",
+    "contracts/vIDIA.sol",
+    "flattened/IFAllocationSaleV6.sol",
+    "foundry-test/IFAllocationMaster.t.sol",
+    "foundry-test/helper-contracts/MockMessageBusSender.sol",
+    "library/ERC2771ContextUpdateable.sol",
+    "library/IFTokenStandard.sol",
+    "library/IICToken.sol",
+    "resources/flattened/IFAllocationMasterOmni.sol",
+    "resources/flattened/IFAllocationMasterSource.sol",
+    "resources/flattened/IFAllocationSaleV8.sol",
+    "resources/flattened/IFFixedSaleV8.sol"
+  ],
+  "pragmas": [
+    "0.8.9",
+    ">=0.8.0",
+    "^0.8",
+    "^0.8.0",
+    "^0.8.1",
+    "^0.8.4",
+    "^0.8.9"
+  ],
+  "top_directories_by_solidity_file_count": [
+    [
+      "contracts",
+      19
+    ],
+    [
+      "resources",
+      4
+    ],
+    [
+      "library",
+      3
+    ],
+    [
+      "foundry-test",
+      2
+    ],
+    [
+      "flattened",
+      1
+    ]
+  ],
+  "contracts": [
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "library",
+      "name": "Address",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "library",
+      "name": "Address",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "library",
+      "name": "Address",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "library",
+      "name": "Address",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "library",
+      "name": "Address",
+      "bases": []
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "abstract contract",
+      "name": "Context",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "abstract contract",
+      "name": "Context",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "abstract contract",
+      "name": "Context",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "Context",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "Context",
+      "bases": []
+    },
+    {
+      "file": "foundry-test/IFAllocationMaster.t.sol",
+      "kind": "contract",
+      "name": "ContractTest",
+      "bases": [
+        "Test"
+      ]
+    },
+    {
+      "file": "contracts/Create2Deployer.sol",
+      "kind": "contract",
+      "name": "Create2Deployer",
+      "bases": []
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "contract",
+      "name": "ERC20",
+      "bases": [
+        "Context",
+        "IERC20",
+        "IERC20Metadata"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "contract",
+      "name": "ERC20",
+      "bases": [
+        "Context",
+        "IERC20",
+        "IERC20Metadata"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "contract",
+      "name": "ERC20",
+      "bases": [
+        "Context",
+        "IERC20",
+        "IERC20Metadata"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "contract",
+      "name": "ERC20",
+      "bases": [
+        "Context",
+        "IERC20",
+        "IERC20Metadata"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "contract",
+      "name": "ERC20",
+      "bases": [
+        "Context",
+        "IERC20",
+        "IERC20Metadata"
+      ]
+    },
+    {
+      "file": "library/ERC2771ContextUpdateable.sol",
+      "kind": "abstract contract",
+      "name": "ERC2771ContextUpdateable",
+      "bases": [
+        "AccessControlEnumerable"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "library",
+      "name": "EnumerableSet",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "library",
+      "name": "EnumerableSet",
+      "bases": []
+    },
+    {
+      "file": "foundry-test/IFAllocationMaster.t.sol",
+      "kind": "contract",
+      "name": "ExpectEmit",
+      "bases": []
+    },
+    {
+      "file": "contracts/GenericToken.sol",
+      "kind": "contract",
+      "name": "GenericToken",
+      "bases": [
+        "ERC20PresetMinterPauser"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IBridge",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IBridge",
+      "bases": []
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "interface",
+      "name": "IERC20",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IERC20",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IERC20",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "interface",
+      "name": "IERC20",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "interface",
+      "name": "IERC20",
+      "bases": []
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "interface",
+      "name": "IERC20Metadata",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IERC20Metadata",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IERC20Metadata",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "interface",
+      "name": "IERC20Metadata",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "interface",
+      "name": "IERC20Metadata",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "interface",
+      "name": "IERC20Permit",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IERC20Permit",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IERC20Permit",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "interface",
+      "name": "IERC20Permit",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "interface",
+      "name": "IERC20Permit",
+      "bases": []
+    },
+    {
+      "file": "contracts/IFAllocationMaster.sol",
+      "kind": "contract",
+      "name": "IFAllocationMaster",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard",
+        "IIFRetrievableStakeWeight",
+        "IIFBridgableStakeWeight"
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMasterAdapter.sol",
+      "kind": "contract",
+      "name": "IFAllocationMasterAdapter",
+      "bases": [
+        "IIFRetrievableStakeWeight",
+        "IIFBridgableStakeWeight"
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "kind": "contract",
+      "name": "IFAllocationMasterOmni",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard",
+        "IIFRetrievableStakeWeight",
+        "IIFBridgableStakeWeight",
+        "OmniScient"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "contract",
+      "name": "IFAllocationMasterOmni",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard",
+        "IIFRetrievableStakeWeight",
+        "IIFBridgableStakeWeight",
+        "OmniScient"
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "kind": "contract",
+      "name": "IFAllocationMasterSource",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard",
+        "IIFRetrievableStakeWeight",
+        "IIFBridgableStakeWeight"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "contract",
+      "name": "IFAllocationMasterSource",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard",
+        "IIFRetrievableStakeWeight",
+        "IIFBridgableStakeWeight"
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationSale.sol",
+      "kind": "contract",
+      "name": "IFAllocationSale",
+      "bases": [
+        "IFSale"
+      ]
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "contract",
+      "name": "IFAllocationSaleV6",
+      "bases": [
+        "IFSale"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "contract",
+      "name": "IFAllocationSaleV8",
+      "bases": [
+        "IFSale"
+      ]
+    },
+    {
+      "file": "contracts/IFFixedSale.sol",
+      "kind": "contract",
+      "name": "IFFixedSale",
+      "bases": [
+        "IFSale"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "contract",
+      "name": "IFFixedSaleV8",
+      "bases": [
+        "IFSale"
+      ]
+    },
+    {
+      "file": "contracts/IFFundable.sol",
+      "kind": "abstract contract",
+      "name": "IFFundable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "abstract contract",
+      "name": "IFFundable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "IFFundable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "IFFundable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "contracts/IFPurchasable.sol",
+      "kind": "abstract contract",
+      "name": "IFPurchasable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "abstract contract",
+      "name": "IFPurchasable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "IFPurchasable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "IFPurchasable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "contracts/IFSale.sol",
+      "kind": "contract",
+      "name": "IFSale",
+      "bases": [
+        "IFPurchasable",
+        "IFVestable",
+        "IFFundable",
+        "IFWhitelistable"
+      ]
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "contract",
+      "name": "IFSale",
+      "bases": [
+        "IFPurchasable",
+        "IFVestable",
+        "IFFundable",
+        "IFWhitelistable"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "contract",
+      "name": "IFSale",
+      "bases": [
+        "IFPurchasable",
+        "IFVestable",
+        "IFFundable",
+        "IFWhitelistable"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "contract",
+      "name": "IFSale",
+      "bases": [
+        "IFPurchasable",
+        "IFVestable",
+        "IFFundable",
+        "IFWhitelistable"
+      ]
+    },
+    {
+      "file": "library/IFTokenStandard.sol",
+      "kind": "contract",
+      "name": "IFTokenStandard",
+      "bases": [
+        "ERC20Burnable",
+        "ERC2771ContextUpdateable",
+        "ERC20Permit",
+        "ERC1363"
+      ]
+    },
+    {
+      "file": "contracts/IFVestable.sol",
+      "kind": "abstract contract",
+      "name": "IFVestable",
+      "bases": [
+        "Ownable"
+      ]
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "abstract contract",
+      "name": "IFVestable",
+      "bases": [
+        "Ownable"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "IFVestable",
+      "bases": [
+        "Ownable"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "IFVestable",
+      "bases": [
+        "Ownable"
+      ]
+    },
+    {
+      "file": "contracts/IFWhitelistable.sol",
+      "kind": "abstract contract",
+      "name": "IFWhitelistable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "abstract contract",
+      "name": "IFWhitelistable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "IFWhitelistable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "IFWhitelistable",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "library/IICToken.sol",
+      "kind": "interface",
+      "name": "IICToken",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IIFBridgableStakeWeight.sol",
+      "kind": "interface",
+      "name": "IIFBridgableStakeWeight",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IIFBridgableStakeWeight",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IIFBridgableStakeWeight",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IIFRetrievableStakeWeight.sol",
+      "kind": "interface",
+      "name": "IIFRetrievableStakeWeight",
+      "bases": []
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "interface",
+      "name": "IIFRetrievableStakeWeight",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IIFRetrievableStakeWeight",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IIFRetrievableStakeWeight",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "interface",
+      "name": "IIFRetrievableStakeWeight",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IMessageBus",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IMessageBus",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IOmni",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IOmniPortal",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IOriginalTokenVault",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IOriginalTokenVault",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IOriginalTokenVaultV2",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IOriginalTokenVaultV2",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IPeggedTokenBridge",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IPeggedTokenBridge",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "IPeggedTokenBridgeV2",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "IPeggedTokenBridgeV2",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "interface",
+      "name": "ISigsVerifier",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "interface",
+      "name": "ISigsVerifier",
+      "bases": []
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "library",
+      "name": "Math",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "library",
+      "name": "Math",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "library",
+      "name": "Math",
+      "bases": []
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "library",
+      "name": "MerkleProof",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "library",
+      "name": "MerkleProof",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "library",
+      "name": "MerkleProof",
+      "bases": []
+    },
+    {
+      "file": "contracts/TestMerkleVerifier.sol",
+      "kind": "contract",
+      "name": "MerkleVerifier",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "contract",
+      "name": "MessageBusSender",
+      "bases": [
+        "Ownable"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "contract",
+      "name": "MessageBusSender",
+      "bases": [
+        "Ownable"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "library",
+      "name": "MessageSenderLib",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "library",
+      "name": "MessageSenderLib",
+      "bases": []
+    },
+    {
+      "file": "contracts/mocks/MockIFFixedSale.sol",
+      "kind": "contract",
+      "name": "MockIFFixedSale",
+      "bases": [
+        "IFFixedSale"
+      ]
+    },
+    {
+      "file": "foundry-test/helper-contracts/MockMessageBusSender.sol",
+      "kind": "contract",
+      "name": "MockMessageBusSender",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "library",
+      "name": "MsgDataTypes",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "library",
+      "name": "MsgDataTypes",
+      "bases": []
+    },
+    {
+      "file": "contracts/Multicall2.sol",
+      "kind": "contract",
+      "name": "Multicall2",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "library",
+      "name": "OmniCodec",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "library",
+      "name": "OmniCodec",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "contract",
+      "name": "OmniScient",
+      "bases": []
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "abstract contract",
+      "name": "Ownable",
+      "bases": [
+        "Context"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "abstract contract",
+      "name": "Ownable",
+      "bases": [
+        "Context"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "abstract contract",
+      "name": "Ownable",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "abstract contract",
+      "name": "Ownable",
+      "bases": [
+        "Context"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "abstract contract",
+      "name": "Ownable",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "Ownable",
+      "bases": [
+        "Context"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "Ownable",
+      "bases": [
+        "Context"
+      ]
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "abstract contract",
+      "name": "ReentrancyGuard",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "abstract contract",
+      "name": "ReentrancyGuard",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "abstract contract",
+      "name": "ReentrancyGuard",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "ReentrancyGuard",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "abstract contract",
+      "name": "ReentrancyGuard",
+      "bases": []
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "kind": "library",
+      "name": "SafeERC20",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "kind": "library",
+      "name": "SafeERC20",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "kind": "library",
+      "name": "SafeERC20",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "kind": "library",
+      "name": "SafeERC20",
+      "bases": []
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "kind": "library",
+      "name": "SafeERC20",
+      "bases": []
+    },
+    {
+      "file": "contracts/vIDIA.sol",
+      "kind": "contract",
+      "name": "vIDIA",
+      "bases": [
+        "AccessControlEnumerable",
+        "IFTokenStandard"
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "enum": "BridgeSendType",
+      "values": [
+        "Null",
+        "Liquidity",
+        "PegDeposit",
+        "PegBurn",
+        "PegV2Deposit",
+        "PegV2Burn",
+        "PegV2BurnFrom"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "enum": "BridgeSendType",
+      "values": [
+        "Null",
+        "Liquidity",
+        "PegDeposit",
+        "PegBurn",
+        "PegV2Deposit",
+        "PegV2Burn",
+        "PegV2BurnFrom"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/IIFBridgableStakeWeight.sol",
+      "enum": "BridgeType",
+      "values": [
+        "UserWeight",
+        "TotalWeight"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "enum": "BridgeType",
+      "values": [
+        "UserWeight",
+        "TotalWeight"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "enum": "BridgeType",
+      "values": [
+        "UserWeight",
+        "TotalWeight"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "enum": "MsgType",
+      "values": [
+        "MessageWithTransfer",
+        "MessageOnly"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "enum": "MsgType",
+      "values": [
+        "MessageWithTransfer",
+        "MessageOnly"
+      ]
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "enum": "Rounding",
+      "values": [
+        "Down",
+        "Up",
+        "Zero"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "enum": "Rounding",
+      "values": [
+        "Down",
+        "Up",
+        "Zero"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "enum": "Rounding",
+      "values": [
+        "Down",
+        "Up",
+        "Zero"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "enum": "TransferType",
+      "values": [
+        "Null",
+        "LqRelay",
+        "LqWithdraw",
+        "PegMint",
+        "PegWithdraw",
+        "PegV2Mint",
+        "PegV2Withdraw"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "enum": "TransferType",
+      "values": [
+        "Null",
+        "LqRelay",
+        "LqWithdraw",
+        "PegMint",
+        "PegWithdraw",
+        "PegV2Mint",
+        "PegV2Withdraw"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "enum": "TxStatus",
+      "values": [
+        "Null",
+        "Success",
+        "Fail",
+        "Fallback",
+        "Pending"
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "enum": "TxStatus",
+      "values": [
+        "Null",
+        "Success",
+        "Fail",
+        "Fallback",
+        "Pending"
+      ]
+    }
+  ],
+  "structs": [
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "AddressSet",
+      "fields": [
+        {
+          "name": "_inner",
+          "type": "Set"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "AddressSet",
+      "fields": [
+        {
+          "name": "_inner",
+          "type": "Set"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMaster.sol",
+      "struct": "AddressStakeWeight",
+      "fields": [
+        {
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "name": "stakeWeight",
+          "type": "uint192"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "struct": "AddressStakeWeight",
+      "fields": [
+        {
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "name": "stakeWeight",
+          "type": "uint192"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "struct": "AddressStakeWeight",
+      "fields": [
+        {
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "name": "stakeWeight",
+          "type": "uint192"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "AddressStakeWeight",
+      "fields": [
+        {
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "name": "stakeWeight",
+          "type": "uint192"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "AddressStakeWeight",
+      "fields": [
+        {
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "name": "stakeWeight",
+          "type": "uint192"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "Block",
+      "fields": [
+        {
+          "name": "sourceChain",
+          "type": "string"
+        },
+        {
+          "name": "parentHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "hash",
+          "type": "bytes32"
+        },
+        {
+          "name": "number",
+          "type": "uint64"
+        },
+        {
+          "name": "txs",
+          "type": "Tx[]"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "Block",
+      "fields": [
+        {
+          "name": "sourceChain",
+          "type": "string"
+        },
+        {
+          "name": "parentHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "hash",
+          "type": "bytes32"
+        },
+        {
+          "name": "number",
+          "type": "uint64"
+        },
+        {
+          "name": "txs",
+          "type": "Tx[]"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "BridgeTransferParams",
+      "fields": [
+        {
+          "name": "request",
+          "type": "bytes"
+        },
+        {
+          "name": "sigs",
+          "type": "bytes[]"
+        },
+        {
+          "name": "signers",
+          "type": "address[]"
+        },
+        {
+          "name": "powers",
+          "type": "uint256[]"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "BridgeTransferParams",
+      "fields": [
+        {
+          "name": "request",
+          "type": "bytes"
+        },
+        {
+          "name": "sigs",
+          "type": "bytes[]"
+        },
+        {
+          "name": "signers",
+          "type": "address[]"
+        },
+        {
+          "name": "powers",
+          "type": "uint256[]"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "Bytes32Set",
+      "fields": [
+        {
+          "name": "_inner",
+          "type": "Set"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "Bytes32Set",
+      "fields": [
+        {
+          "name": "_inner",
+          "type": "Set"
+        }
+      ]
+    },
+    {
+      "file": "contracts/Multicall2.sol",
+      "struct": "Call",
+      "fields": [
+        {
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "name": "callData",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFVestable.sol",
+      "struct": "Cliff",
+      "fields": [
+        {
+          "name": "claimTime",
+          "type": "uint256"
+        },
+        {
+          "name": "pct",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "struct": "Cliff",
+      "fields": [
+        {
+          "name": "claimTime",
+          "type": "uint256"
+        },
+        {
+          "name": "pct",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "struct": "Cliff",
+      "fields": [
+        {
+          "name": "claimTime",
+          "type": "uint256"
+        },
+        {
+          "name": "pct",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "struct": "Cliff",
+      "fields": [
+        {
+          "name": "claimTime",
+          "type": "uint256"
+        },
+        {
+          "name": "pct",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/IIFBridgableStakeWeight.sol",
+      "struct": "MessageRequest",
+      "fields": [
+        {
+          "name": "users",
+          "type": "address[]"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "bridgeType",
+          "type": "BridgeType"
+        },
+        {
+          "name": "trackId",
+          "type": "uint24"
+        },
+        {
+          "name": "weights",
+          "type": "uint192[]"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "MessageRequest",
+      "fields": [
+        {
+          "name": "users",
+          "type": "address[]"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "bridgeType",
+          "type": "BridgeType"
+        },
+        {
+          "name": "trackId",
+          "type": "uint24"
+        },
+        {
+          "name": "weights",
+          "type": "uint192[]"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "MessageRequest",
+      "fields": [
+        {
+          "name": "users",
+          "type": "address[]"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "bridgeType",
+          "type": "BridgeType"
+        },
+        {
+          "name": "trackId",
+          "type": "uint24"
+        },
+        {
+          "name": "weights",
+          "type": "uint192[]"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "MsgWithTransferExecutionParams",
+      "fields": [
+        {
+          "name": "message",
+          "type": "bytes"
+        },
+        {
+          "name": "transfer",
+          "type": "TransferInfo"
+        },
+        {
+          "name": "sigs",
+          "type": "bytes[]"
+        },
+        {
+          "name": "signers",
+          "type": "address[]"
+        },
+        {
+          "name": "powers",
+          "type": "uint256[]"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "MsgWithTransferExecutionParams",
+      "fields": [
+        {
+          "name": "message",
+          "type": "bytes"
+        },
+        {
+          "name": "transfer",
+          "type": "TransferInfo"
+        },
+        {
+          "name": "sigs",
+          "type": "bytes[]"
+        },
+        {
+          "name": "signers",
+          "type": "address[]"
+        },
+        {
+          "name": "powers",
+          "type": "uint256[]"
+        }
+      ]
+    },
+    {
+      "file": "contracts/Multicall2.sol",
+      "struct": "Result",
+      "fields": [
+        {
+          "name": "success",
+          "type": "bool"
+        },
+        {
+          "name": "returnData",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "RouteInfo",
+      "fields": [
+        {
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "name": "srcChainId",
+          "type": "uint64"
+        },
+        {
+          "name": "srcTxHash",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "RouteInfo",
+      "fields": [
+        {
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "name": "srcChainId",
+          "type": "uint64"
+        },
+        {
+          "name": "srcTxHash",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "Set",
+      "fields": [
+        {
+          "name": "_values",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "_indexes",
+          "type": "mapping(bytes32 => uint256)"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "Set",
+      "fields": [
+        {
+          "name": "_values",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "_indexes",
+          "type": "mapping(bytes32 => uint256)"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMaster.sol",
+      "struct": "TrackCheckpoint",
+      "fields": [
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "totalStaked",
+          "type": "uint104"
+        },
+        {
+          "name": "totalStakeWeight",
+          "type": "uint192"
+        },
+        {
+          "name": "numFinishedSales",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "struct": "TrackCheckpoint",
+      "fields": [
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "totalStaked",
+          "type": "uint104"
+        },
+        {
+          "name": "totalStakeWeight",
+          "type": "uint192"
+        },
+        {
+          "name": "numFinishedSales",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "struct": "TrackCheckpoint",
+      "fields": [
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "totalStaked",
+          "type": "uint104"
+        },
+        {
+          "name": "totalStakeWeight",
+          "type": "uint192"
+        },
+        {
+          "name": "numFinishedSales",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "TrackCheckpoint",
+      "fields": [
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "totalStaked",
+          "type": "uint104"
+        },
+        {
+          "name": "totalStakeWeight",
+          "type": "uint192"
+        },
+        {
+          "name": "numFinishedSales",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "TrackCheckpoint",
+      "fields": [
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "totalStaked",
+          "type": "uint104"
+        },
+        {
+          "name": "totalStakeWeight",
+          "type": "uint192"
+        },
+        {
+          "name": "numFinishedSales",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMaster.sol",
+      "struct": "TrackInfo",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "stakeToken",
+          "type": "ERC20"
+        },
+        {
+          "name": "weightAccrualRate",
+          "type": "uint24"
+        },
+        {
+          "name": "passiveRolloverRate",
+          "type": "uint64"
+        },
+        {
+          "name": "activeRolloverRate",
+          "type": "uint64"
+        },
+        {
+          "name": "maxTotalStake",
+          "type": "uint104"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "struct": "TrackInfo",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "stakeToken",
+          "type": "ERC20"
+        },
+        {
+          "name": "weightAccrualRate",
+          "type": "uint24"
+        },
+        {
+          "name": "passiveRolloverRate",
+          "type": "uint64"
+        },
+        {
+          "name": "activeRolloverRate",
+          "type": "uint64"
+        },
+        {
+          "name": "maxTotalStake",
+          "type": "uint104"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "struct": "TrackInfo",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "stakeToken",
+          "type": "ERC20"
+        },
+        {
+          "name": "weightAccrualRate",
+          "type": "uint24"
+        },
+        {
+          "name": "passiveRolloverRate",
+          "type": "uint64"
+        },
+        {
+          "name": "activeRolloverRate",
+          "type": "uint64"
+        },
+        {
+          "name": "maxTotalStake",
+          "type": "uint104"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "TrackInfo",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "stakeToken",
+          "type": "ERC20"
+        },
+        {
+          "name": "weightAccrualRate",
+          "type": "uint24"
+        },
+        {
+          "name": "passiveRolloverRate",
+          "type": "uint64"
+        },
+        {
+          "name": "activeRolloverRate",
+          "type": "uint64"
+        },
+        {
+          "name": "maxTotalStake",
+          "type": "uint104"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "TrackInfo",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "stakeToken",
+          "type": "ERC20"
+        },
+        {
+          "name": "weightAccrualRate",
+          "type": "uint24"
+        },
+        {
+          "name": "passiveRolloverRate",
+          "type": "uint64"
+        },
+        {
+          "name": "activeRolloverRate",
+          "type": "uint64"
+        },
+        {
+          "name": "maxTotalStake",
+          "type": "uint104"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "TransferInfo",
+      "fields": [
+        {
+          "name": "t",
+          "type": "TransferType"
+        },
+        {
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "wdseq",
+          "type": "uint64"
+        },
+        {
+          "name": "srcChainId",
+          "type": "uint64"
+        },
+        {
+          "name": "refId",
+          "type": "bytes32"
+        },
+        {
+          "name": "srcTxHash",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "TransferInfo",
+      "fields": [
+        {
+          "name": "t",
+          "type": "TransferType"
+        },
+        {
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "wdseq",
+          "type": "uint64"
+        },
+        {
+          "name": "srcChainId",
+          "type": "uint64"
+        },
+        {
+          "name": "refId",
+          "type": "bytes32"
+        },
+        {
+          "name": "srcTxHash",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "Tx",
+      "fields": [
+        {
+          "name": "sourceTxHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "sourceChain",
+          "type": "string"
+        },
+        {
+          "name": "destChain",
+          "type": "string"
+        },
+        {
+          "name": "nonce",
+          "type": "uint64"
+        },
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "name": "paid",
+          "type": "uint256"
+        },
+        {
+          "name": "gasLimit",
+          "type": "uint64"
+        },
+        {
+          "name": "data",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "Tx",
+      "fields": [
+        {
+          "name": "sourceTxHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "sourceChain",
+          "type": "string"
+        },
+        {
+          "name": "destChain",
+          "type": "string"
+        },
+        {
+          "name": "nonce",
+          "type": "uint64"
+        },
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "name": "paid",
+          "type": "uint256"
+        },
+        {
+          "name": "gasLimit",
+          "type": "uint64"
+        },
+        {
+          "name": "data",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "UintSet",
+      "fields": [
+        {
+          "name": "_inner",
+          "type": "Set"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "UintSet",
+      "fields": [
+        {
+          "name": "_inner",
+          "type": "Set"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMaster.sol",
+      "struct": "UserCheckpoint",
+      "fields": [
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "staked",
+          "type": "uint104"
+        },
+        {
+          "name": "stakeWeight",
+          "type": "uint192"
+        },
+        {
+          "name": "numFinishedSales",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "struct": "UserCheckpoint",
+      "fields": [
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "staked",
+          "type": "uint104"
+        },
+        {
+          "name": "stakeWeight",
+          "type": "uint192"
+        },
+        {
+          "name": "numFinishedSales",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "struct": "UserCheckpoint",
+      "fields": [
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "staked",
+          "type": "uint104"
+        },
+        {
+          "name": "stakeWeight",
+          "type": "uint192"
+        },
+        {
+          "name": "numFinishedSales",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "struct": "UserCheckpoint",
+      "fields": [
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "staked",
+          "type": "uint104"
+        },
+        {
+          "name": "stakeWeight",
+          "type": "uint192"
+        },
+        {
+          "name": "numFinishedSales",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "struct": "UserCheckpoint",
+      "fields": [
+        {
+          "name": "timestamp",
+          "type": "uint80"
+        },
+        {
+          "name": "staked",
+          "type": "uint104"
+        },
+        {
+          "name": "stakeWeight",
+          "type": "uint192"
+        },
+        {
+          "name": "numFinishedSales",
+          "type": "uint24"
+        }
+      ]
+    },
+    {
+      "file": "contracts/vIDIA.sol",
+      "struct": "UserInfo",
+      "fields": [
+        {
+          "name": "stakedAmt",
+          "type": "uint256"
+        },
+        {
+          "name": "unstakeAt",
+          "type": "uint256"
+        },
+        {
+          "name": "unstakingAmt",
+          "type": "uint256"
+        },
+        {
+          "name": "lastRewardPerShare",
+          "type": "uint256"
+        }
+      ]
+    }
+  ],
+  "all_state_variables": [
+    {
+      "name": "emitter",
+      "type": "ExpectEmit",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ExpectEmit emitter",
+      "file": "foundry-test/IFAllocationMaster.t.sol",
+      "contract": "ContractTest"
+    },
+    {
+      "name": "idiaAddr",
+      "type": "address internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": "0x0b15Ddf19D47E6a86A56148fb4aFFFc6929BcB89",
+      "declaration": "address internal idiaAddr = 0x0b15Ddf19D47E6a86A56148fb4aFFFc6929BcB89",
+      "file": "foundry-test/IFAllocationMaster.t.sol",
+      "contract": "ContractTest"
+    },
+    {
+      "name": "ifAllocationMaster",
+      "type": "IFAllocationMaster internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IFAllocationMaster internal ifAllocationMaster",
+      "file": "foundry-test/IFAllocationMaster.t.sol",
+      "contract": "ContractTest"
+    },
+    {
+      "name": "messageBus",
+      "type": "IMessageBus internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IMessageBus internal messageBus",
+      "file": "foundry-test/IFAllocationMaster.t.sol",
+      "contract": "ContractTest"
+    },
+    {
+      "name": "mockMessageBusSender",
+      "type": "MockMessageBusSender internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "MockMessageBusSender internal mockMessageBusSender",
+      "file": "foundry-test/IFAllocationMaster.t.sol",
+      "contract": "ContractTest"
+    },
+    {
+      "name": "_allowances",
+      "type": "mapping(address => mapping(address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => uint256)) private _allowances",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_allowances",
+      "type": "mapping(address => mapping(address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => uint256)) private _allowances",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_allowances",
+      "type": "mapping(address => mapping(address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => uint256)) private _allowances",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_allowances",
+      "type": "mapping(address => mapping(address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => uint256)) private _allowances",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_allowances",
+      "type": "mapping(address => mapping(address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => uint256)) private _allowances",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_name",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _name",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_name",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _name",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_name",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _name",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_name",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _name",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_name",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _name",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_symbol",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _symbol",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_symbol",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _symbol",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_symbol",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _symbol",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_symbol",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _symbol",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_symbol",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _symbol",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "trustedForwarder",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public trustedForwarder",
+      "file": "library/ERC2771ContextUpdateable.sol",
+      "contract": "ERC2771ContextUpdateable"
+    },
+    {
+      "name": "ROLLOVER_FACTOR_DECIMALS",
+      "type": "uint64 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**18",
+      "declaration": "uint64 constant ROLLOVER_FACTOR_DECIMALS = 10**18",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "hasEmergencyWithdrawn",
+      "type": "mapping(uint24 => mapping(address => bool)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => bool)) public hasEmergencyWithdrawn",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "messageBus",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable messageBus",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "numTrackStakers",
+      "type": "mapping(uint24 => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint256) public numTrackStakers",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "trackActiveRollOvers",
+      "type": "mapping(uint24 => mapping(address => mapping(uint24 => uint192))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint24 => uint192))) public trackActiveRollOvers",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "trackCheckpointCounts",
+      "type": "mapping(uint24 => uint32) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint32) public trackCheckpointCounts",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "trackCheckpoints",
+      "type": "mapping(uint24 => mapping(uint32 => TrackCheckpoint)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint32 => TrackCheckpoint)) public trackCheckpoints",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "trackDisabled",
+      "type": "mapping(uint24 => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => bool) public trackDisabled",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "trackMaxStakes",
+      "type": "mapping(uint24 => uint104) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint104) public trackMaxStakes",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "trackStakers",
+      "type": "mapping(uint24 => address[]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => address[]) public trackStakers",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "trackTotalActiveRollOvers",
+      "type": "mapping(uint24 => mapping(uint24 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint24 => uint192)) public trackTotalActiveRollOvers",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "tracks",
+      "type": "TrackInfo[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "TrackInfo[] public tracks",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "userCheckpointCounts",
+      "type": "mapping(uint24 => mapping(address => uint32)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => uint32)) public userCheckpointCounts",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "userCheckpoints",
+      "type": "mapping(uint24 => mapping(address => mapping(uint32 => UserCheckpoint))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint32 => UserCheckpoint))) public userCheckpoints",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "messageBus",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable messageBus",
+      "file": "contracts/IFAllocationMasterAdapter.sol",
+      "contract": "IFAllocationMasterAdapter"
+    },
+    {
+      "name": "srcAddress",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable srcAddress",
+      "file": "contracts/IFAllocationMasterAdapter.sol",
+      "contract": "IFAllocationMasterAdapter"
+    },
+    {
+      "name": "srcChainId",
+      "type": "uint24 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint24 public immutable srcChainId",
+      "file": "contracts/IFAllocationMasterAdapter.sol",
+      "contract": "IFAllocationMasterAdapter"
+    },
+    {
+      "name": "totalStakeWeight",
+      "type": "mapping(uint24 => mapping(uint80 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint80 => uint192)) public totalStakeWeight",
+      "file": "contracts/IFAllocationMasterAdapter.sol",
+      "contract": "IFAllocationMasterAdapter"
+    },
+    {
+      "name": "userStakeWeights",
+      "type": "mapping(uint24 => mapping(address => mapping(uint80 => uint192))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint80 => uint192))) public userStakeWeights",
+      "file": "contracts/IFAllocationMasterAdapter.sol",
+      "contract": "IFAllocationMasterAdapter"
+    },
+    {
+      "name": "ROLLOVER_FACTOR_DECIMALS",
+      "type": "uint64 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**18",
+      "declaration": "uint64 constant ROLLOVER_FACTOR_DECIMALS = 10**18",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "ROLLOVER_FACTOR_DECIMALS",
+      "type": "uint64 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**18",
+      "declaration": "uint64 constant ROLLOVER_FACTOR_DECIMALS = 10**18",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "hasEmergencyWithdrawn",
+      "type": "mapping(uint24 => mapping(address => bool)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => bool)) public hasEmergencyWithdrawn",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "hasEmergencyWithdrawn",
+      "type": "mapping(uint24 => mapping(address => bool)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => bool)) public hasEmergencyWithdrawn",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "messageBus",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable messageBus",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "messageBus",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable messageBus",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "numTrackStakers",
+      "type": "mapping(uint24 => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint256) public numTrackStakers",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "numTrackStakers",
+      "type": "mapping(uint24 => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint256) public numTrackStakers",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackActiveRollOvers",
+      "type": "mapping(uint24 => mapping(address => mapping(uint24 => uint192))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint24 => uint192))) public trackActiveRollOvers",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackActiveRollOvers",
+      "type": "mapping(uint24 => mapping(address => mapping(uint24 => uint192))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint24 => uint192))) public trackActiveRollOvers",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackCheckpointCounts",
+      "type": "mapping(uint24 => uint32) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint32) public trackCheckpointCounts",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackCheckpointCounts",
+      "type": "mapping(uint24 => uint32) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint32) public trackCheckpointCounts",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackCheckpoints",
+      "type": "mapping(uint24 => mapping(uint32 => TrackCheckpoint)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint32 => TrackCheckpoint)) public trackCheckpoints",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackCheckpoints",
+      "type": "mapping(uint24 => mapping(uint32 => TrackCheckpoint)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint32 => TrackCheckpoint)) public trackCheckpoints",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackDisabled",
+      "type": "mapping(uint24 => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => bool) public trackDisabled",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackDisabled",
+      "type": "mapping(uint24 => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => bool) public trackDisabled",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackMaxStakes",
+      "type": "mapping(uint24 => uint104) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint104) public trackMaxStakes",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackMaxStakes",
+      "type": "mapping(uint24 => uint104) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint104) public trackMaxStakes",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackStakers",
+      "type": "mapping(uint24 => address[]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => address[]) public trackStakers",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackStakers",
+      "type": "mapping(uint24 => address[]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => address[]) public trackStakers",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackTotalActiveRollOvers",
+      "type": "mapping(uint24 => mapping(uint24 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint24 => uint192)) public trackTotalActiveRollOvers",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackTotalActiveRollOvers",
+      "type": "mapping(uint24 => mapping(uint24 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint24 => uint192)) public trackTotalActiveRollOvers",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "tracks",
+      "type": "TrackInfo[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "TrackInfo[] public tracks",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "tracks",
+      "type": "TrackInfo[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "TrackInfo[] public tracks",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "userCheckpointCounts",
+      "type": "mapping(uint24 => mapping(address => uint32)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => uint32)) public userCheckpointCounts",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "userCheckpointCounts",
+      "type": "mapping(uint24 => mapping(address => uint32)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => uint32)) public userCheckpointCounts",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "userCheckpoints",
+      "type": "mapping(uint24 => mapping(address => mapping(uint32 => UserCheckpoint))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint32 => UserCheckpoint))) public userCheckpoints",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "userCheckpoints",
+      "type": "mapping(uint24 => mapping(address => mapping(uint32 => UserCheckpoint))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint32 => UserCheckpoint))) public userCheckpoints",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "userStakedOnCurrentChain",
+      "type": "mapping(uint24 => mapping(address => uint256)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => uint256)) public userStakedOnCurrentChain",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "whitelistedContracts",
+      "type": "mapping(address => bool)",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) whitelistedContracts",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "whitelistedContracts",
+      "type": "mapping(address => bool)",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) whitelistedContracts",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "ROLLOVER_FACTOR_DECIMALS",
+      "type": "uint64 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**18",
+      "declaration": "uint64 constant ROLLOVER_FACTOR_DECIMALS = 10**18",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "ROLLOVER_FACTOR_DECIMALS",
+      "type": "uint64 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**18",
+      "declaration": "uint64 constant ROLLOVER_FACTOR_DECIMALS = 10**18",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "hasEmergencyWithdrawn",
+      "type": "mapping(uint24 => mapping(address => bool)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => bool)) public hasEmergencyWithdrawn",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "hasEmergencyWithdrawn",
+      "type": "mapping(uint24 => mapping(address => bool)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => bool)) public hasEmergencyWithdrawn",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "messageBus",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable messageBus",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "messageBus",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable messageBus",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "numTrackStakers",
+      "type": "mapping(uint24 => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint256) public numTrackStakers",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "numTrackStakers",
+      "type": "mapping(uint24 => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint256) public numTrackStakers",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "omni",
+      "type": "IOmniPortal public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IOmniPortal public omni",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "omni",
+      "type": "IOmniPortal public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IOmniPortal public omni",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "omniAddress",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public omniAddress",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "omniAddress",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public omniAddress",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackActiveRollOvers",
+      "type": "mapping(uint24 => mapping(address => mapping(uint24 => uint192))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint24 => uint192))) public trackActiveRollOvers",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackActiveRollOvers",
+      "type": "mapping(uint24 => mapping(address => mapping(uint24 => uint192))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint24 => uint192))) public trackActiveRollOvers",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackCheckpointCounts",
+      "type": "mapping(uint24 => uint32) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint32) public trackCheckpointCounts",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackCheckpointCounts",
+      "type": "mapping(uint24 => uint32) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint32) public trackCheckpointCounts",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackCheckpoints",
+      "type": "mapping(uint24 => mapping(uint32 => TrackCheckpoint)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint32 => TrackCheckpoint)) public trackCheckpoints",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackCheckpoints",
+      "type": "mapping(uint24 => mapping(uint32 => TrackCheckpoint)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint32 => TrackCheckpoint)) public trackCheckpoints",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackDisabled",
+      "type": "mapping(uint24 => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => bool) public trackDisabled",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackDisabled",
+      "type": "mapping(uint24 => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => bool) public trackDisabled",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackMaxStakes",
+      "type": "mapping(uint24 => uint104) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint104) public trackMaxStakes",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackMaxStakes",
+      "type": "mapping(uint24 => uint104) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint104) public trackMaxStakes",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackStakers",
+      "type": "mapping(uint24 => address[]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => address[]) public trackStakers",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackStakers",
+      "type": "mapping(uint24 => address[]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => address[]) public trackStakers",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackTotalActiveRollOvers",
+      "type": "mapping(uint24 => mapping(uint24 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint24 => uint192)) public trackTotalActiveRollOvers",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackTotalActiveRollOvers",
+      "type": "mapping(uint24 => mapping(uint24 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint24 => uint192)) public trackTotalActiveRollOvers",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "tracks",
+      "type": "TrackInfo[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "TrackInfo[] public tracks",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "tracks",
+      "type": "TrackInfo[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "TrackInfo[] public tracks",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "userCheckpointCounts",
+      "type": "mapping(uint24 => mapping(address => uint32)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => uint32)) public userCheckpointCounts",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "userCheckpointCounts",
+      "type": "mapping(uint24 => mapping(address => uint32)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => uint32)) public userCheckpointCounts",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "userCheckpoints",
+      "type": "mapping(uint24 => mapping(address => mapping(uint32 => UserCheckpoint))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint32 => UserCheckpoint))) public userCheckpoints",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "userCheckpoints",
+      "type": "mapping(uint24 => mapping(address => mapping(uint32 => UserCheckpoint))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint32 => UserCheckpoint))) public userCheckpoints",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "userStakedOnCurrentChain",
+      "type": "mapping(uint24 => mapping(address => uint256)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => uint256)) public userStakedOnCurrentChain",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "allocSnapshotTimestamp",
+      "type": "uint80 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint80 public allocSnapshotTimestamp",
+      "file": "contracts/IFAllocationSale.sol",
+      "contract": "IFAllocationSale"
+    },
+    {
+      "name": "allocationMaster",
+      "type": "IIFRetrievableStakeWeight public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IIFRetrievableStakeWeight public allocationMaster",
+      "file": "contracts/IFAllocationSale.sol",
+      "contract": "IFAllocationSale"
+    },
+    {
+      "name": "trackId",
+      "type": "uint24 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint24 public trackId",
+      "file": "contracts/IFAllocationSale.sol",
+      "contract": "IFAllocationSale"
+    },
+    {
+      "name": "allocSnapshotTimestamp",
+      "type": "uint80 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint80 public allocSnapshotTimestamp",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFAllocationSaleV6"
+    },
+    {
+      "name": "allocationMaster",
+      "type": "IIFRetrievableStakeWeight public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IIFRetrievableStakeWeight public allocationMaster",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFAllocationSaleV6"
+    },
+    {
+      "name": "trackId",
+      "type": "uint24 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint24 public trackId",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFAllocationSaleV6"
+    },
+    {
+      "name": "allocSnapshotTimestamp",
+      "type": "uint80 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint80 public allocSnapshotTimestamp",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFAllocationSaleV8"
+    },
+    {
+      "name": "allocationMaster",
+      "type": "IIFRetrievableStakeWeight public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IIFRetrievableStakeWeight public allocationMaster",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFAllocationSaleV8"
+    },
+    {
+      "name": "trackId",
+      "type": "uint24 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint24 public trackId",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFAllocationSaleV8"
+    },
+    {
+      "name": "publicAllocation",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "0",
+      "declaration": "uint256 public publicAllocation = 0",
+      "file": "contracts/IFFixedSale.sol",
+      "contract": "IFFixedSale"
+    },
+    {
+      "name": "FIVE_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "157784630",
+      "declaration": "uint64 private constant FIVE_YEARS = 157784630",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "FIVE_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "157784630",
+      "declaration": "uint64 private constant FIVE_YEARS = 157784630",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "FIVE_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "157784630",
+      "declaration": "uint64 private constant FIVE_YEARS = 157784630",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "FIVE_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "157784630",
+      "declaration": "uint64 private constant FIVE_YEARS = 157784630",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "ONE_HOUR",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "3600",
+      "declaration": "uint64 private constant ONE_HOUR = 3600",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "ONE_HOUR",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "3600",
+      "declaration": "uint64 private constant ONE_HOUR = 3600",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "ONE_HOUR",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "3600",
+      "declaration": "uint64 private constant ONE_HOUR = 3600",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "ONE_HOUR",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "3600",
+      "declaration": "uint64 private constant ONE_HOUR = 3600",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "ONE_YEAR",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "31556926",
+      "declaration": "uint64 private constant ONE_YEAR = 31556926",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "ONE_YEAR",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "31556926",
+      "declaration": "uint64 private constant ONE_YEAR = 31556926",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "ONE_YEAR",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "31556926",
+      "declaration": "uint64 private constant ONE_YEAR = 31556926",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "ONE_YEAR",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "31556926",
+      "declaration": "uint64 private constant ONE_YEAR = 31556926",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "SALE_PRICE_DECIMALS",
+      "type": "uint64 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**18",
+      "declaration": "uint64 constant SALE_PRICE_DECIMALS = 10**18",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "SALE_PRICE_DECIMALS",
+      "type": "uint64 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**18",
+      "declaration": "uint64 constant SALE_PRICE_DECIMALS = 10**18",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "SALE_PRICE_DECIMALS",
+      "type": "uint64 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**18",
+      "declaration": "uint64 constant SALE_PRICE_DECIMALS = 10**18",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "SALE_PRICE_DECIMALS",
+      "type": "uint64 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**18",
+      "declaration": "uint64 constant SALE_PRICE_DECIMALS = 10**18",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "TEN_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "315742060",
+      "declaration": "uint64 private constant TEN_YEARS = 315742060",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "TEN_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "315360000",
+      "declaration": "uint64 private constant TEN_YEARS = 315360000",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "TEN_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "315360000",
+      "declaration": "uint64 private constant TEN_YEARS = 315360000",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "TEN_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "315360000",
+      "declaration": "uint64 private constant TEN_YEARS = 315360000",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "casher",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public casher",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "casher",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public casher",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "casher",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public casher",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "casher",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public casher",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "endTime",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable endTime",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "endTime",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable endTime",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "endTime",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable endTime",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "endTime",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable endTime",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "funder",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public funder",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "funder",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public funder",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "funder",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public funder",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "funder",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public funder",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "hasCashed",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public hasCashed",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "hasCashed",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public hasCashed",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "hasCashed",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public hasCashed",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "hasCashed",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public hasCashed",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "hasWithdrawn",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public hasWithdrawn",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "hasWithdrawn",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public hasWithdrawn",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "hasWithdrawn",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public hasWithdrawn",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "hasWithdrawn",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public hasWithdrawn",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable paymentToken",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable paymentToken",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable paymentToken",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable paymentToken",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleAmount",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleAmount",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleAmount",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleAmount",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleAmount",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleAmount",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleAmount",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleAmount",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable saleToken",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable saleToken",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable saleToken",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable saleToken",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "startTime",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable startTime",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "startTime",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable startTime",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "startTime",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable startTime",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "startTime",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable startTime",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "withdrawDelay",
+      "type": "uint24 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint24 public withdrawDelay",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "withdrawDelay",
+      "type": "uint24 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint24 public withdrawDelay",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "withdrawDelay",
+      "type": "uint24 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint24 public withdrawDelay",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "withdrawDelay",
+      "type": "uint24 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint24 public withdrawDelay",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "withdrawerCount",
+      "type": "uint32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 public withdrawerCount",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "withdrawerCount",
+      "type": "uint32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 public withdrawerCount",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "withdrawerCount",
+      "type": "uint32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 public withdrawerCount",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "withdrawerCount",
+      "type": "uint32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 public withdrawerCount",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "amountPerCode",
+      "type": "mapping(string => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(string => uint256) public amountPerCode",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "codes",
+      "type": "string[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string[] public codes",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "hasUsedCode",
+      "type": "mapping(address => mapping(string => bool)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(string => bool)) public hasUsedCode",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "isCodeStored",
+      "type": "mapping(string => bool)",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(string => bool) isCodeStored",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "isPurchaseHalted",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "false",
+      "declaration": "bool public isPurchaseHalted = false",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxPromoCodePerUser",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "50",
+      "declaration": "uint256 public maxPromoCodePerUser = 50",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentReceived",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public paymentReceived",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentReceived",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public paymentReceived",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentReceived",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public paymentReceived",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentReceived",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public paymentReceived",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentReceivedWithCode",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public paymentReceivedWithCode",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentReceivedWithEachCode",
+      "type": "mapping(address => mapping(string => uint256)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(string => uint256)) public paymentReceivedWithEachCode",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 public immutable paymentToken",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 public immutable paymentToken",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 public immutable paymentToken",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 public immutable paymentToken",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "promoCodesPerUser",
+      "type": "mapping(address => string[]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => string[]) public promoCodesPerUser",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "purchaserCount",
+      "type": "uint32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 public purchaserCount",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "purchaserCount",
+      "type": "uint32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 public purchaserCount",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "purchaserCount",
+      "type": "uint32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 public purchaserCount",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "purchaserCount",
+      "type": "uint32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 public purchaserCount",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "salePrice",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public salePrice",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "salePrice",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public salePrice",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "salePrice",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public salePrice",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "salePrice",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public salePrice",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "saleTokenPurchased",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleTokenPurchased",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "saleTokenPurchased",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleTokenPurchased",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "saleTokenPurchased",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleTokenPurchased",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "saleTokenPurchased",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleTokenPurchased",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "uniqueUsePerCode",
+      "type": "mapping(string => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(string => uint256) public uniqueUsePerCode",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "claimable",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public claimable",
+      "file": "contracts/IFSale.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "claimable",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public claimable",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "claimable",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public claimable",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "claimable",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public claimable",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "isIntegerSale",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "false",
+      "declaration": "bool public isIntegerSale = false",
+      "file": "contracts/IFSale.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "contracts/IFSale.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "MINTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256('MINTER_ROLE')",
+      "declaration": "bytes32 public constant MINTER_ROLE = keccak256('MINTER_ROLE')",
+      "file": "library/IFTokenStandard.sol",
+      "contract": "IFTokenStandard"
+    },
+    {
+      "name": "TEN_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "315742060",
+      "declaration": "uint64 private constant TEN_YEARS = 315742060",
+      "file": "contracts/IFVestable.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "TEN_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "315360000",
+      "declaration": "uint64 private constant TEN_YEARS = 315360000",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "TEN_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "315360000",
+      "declaration": "uint64 private constant TEN_YEARS = 315360000",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "TEN_YEARS",
+      "type": "uint64 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "315360000",
+      "declaration": "uint64 private constant TEN_YEARS = 315360000",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "buybackClaimableNumber",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public buybackClaimableNumber",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "buybackClaimableNumber",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public buybackClaimableNumber",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "buybackClaimableNumber",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public buybackClaimableNumber",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "hasOptInBuyback",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public hasOptInBuyback",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "hasOptInBuyback",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public hasOptInBuyback",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "hasOptInBuyback",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public hasOptInBuyback",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "latestClaimTime",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public latestClaimTime",
+      "file": "contracts/IFVestable.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "latestClaimTime",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public latestClaimTime",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "latestClaimTime",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public latestClaimTime",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "latestClaimTime",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public latestClaimTime",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "linearVestingEndTime",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public linearVestingEndTime",
+      "file": "contracts/IFVestable.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "linearVestingEndTime",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public linearVestingEndTime",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "linearVestingEndTime",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public linearVestingEndTime",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "linearVestingEndTime",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public linearVestingEndTime",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "vestingEditableOverride",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public vestingEditableOverride",
+      "file": "contracts/IFVestable.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "vestingEditableOverride",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public vestingEditableOverride",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "vestingEditableOverride",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public vestingEditableOverride",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "vestingEditableOverride",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public vestingEditableOverride",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "withdrawTime",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawTime",
+      "file": "contracts/IFVestable.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "withdrawTime",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawTime",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "withdrawTime",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawTime",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "withdrawTime",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawTime",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFVestable"
+    },
+    {
+      "name": "whitelistRootHash",
+      "type": "bytes32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bytes32 public whitelistRootHash",
+      "file": "contracts/IFWhitelistable.sol",
+      "contract": "IFWhitelistable"
+    },
+    {
+      "name": "whitelistRootHash",
+      "type": "bytes32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bytes32 public whitelistRootHash",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFWhitelistable"
+    },
+    {
+      "name": "whitelistRootHash",
+      "type": "bytes32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bytes32 public whitelistRootHash",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFWhitelistable"
+    },
+    {
+      "name": "whitelistRootHash",
+      "type": "bytes32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bytes32 public whitelistRootHash",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFWhitelistable"
+    },
+    {
+      "name": "whitelistSetter",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public whitelistSetter",
+      "file": "contracts/IFWhitelistable.sol",
+      "contract": "IFWhitelistable"
+    },
+    {
+      "name": "whitelistSetter",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public whitelistSetter",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFWhitelistable"
+    },
+    {
+      "name": "whitelistSetter",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public whitelistSetter",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFWhitelistable"
+    },
+    {
+      "name": "whitelistSetter",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public whitelistSetter",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFWhitelistable"
+    },
+    {
+      "name": "feeBase",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public feeBase",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "MessageBusSender"
+    },
+    {
+      "name": "feeBase",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public feeBase",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "MessageBusSender"
+    },
+    {
+      "name": "feePerByte",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public feePerByte",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "MessageBusSender"
+    },
+    {
+      "name": "feePerByte",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public feePerByte",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "MessageBusSender"
+    },
+    {
+      "name": "sigsVerifier",
+      "type": "ISigsVerifier public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ISigsVerifier public immutable sigsVerifier",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "MessageBusSender"
+    },
+    {
+      "name": "sigsVerifier",
+      "type": "ISigsVerifier public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ISigsVerifier public immutable sigsVerifier",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "MessageBusSender"
+    },
+    {
+      "name": "withdrawnFees",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public withdrawnFees",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "MessageBusSender"
+    },
+    {
+      "name": "withdrawnFees",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public withdrawnFees",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "MessageBusSender"
+    },
+    {
+      "name": "feeBase",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "1",
+      "declaration": "uint256 public feeBase = 1",
+      "file": "foundry-test/helper-contracts/MockMessageBusSender.sol",
+      "contract": "MockMessageBusSender"
+    },
+    {
+      "name": "feePerByte",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "1",
+      "declaration": "uint256 public feePerByte = 1",
+      "file": "foundry-test/helper-contracts/MockMessageBusSender.sol",
+      "contract": "MockMessageBusSender"
+    },
+    {
+      "name": "OMNI_PREDEPLOY_ADDRESS",
+      "type": "address internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x1212400000000000000000000000000000000001",
+      "declaration": "address internal constant OMNI_PREDEPLOY_ADDRESS = 0x1212400000000000000000000000000000000001",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "OmniScient"
+    },
+    {
+      "name": "omni",
+      "type": "IOmni constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IOmni(OMNI_PREDEPLOY_ADDRESS)",
+      "declaration": "IOmni constant omni = IOmni(OMNI_PREDEPLOY_ADDRESS)",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "OmniScient"
+    },
+    {
+      "name": "_owner",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _owner",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "Ownable"
+    },
+    {
+      "name": "_owner",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _owner",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "Ownable"
+    },
+    {
+      "name": "_owner",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _owner",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "Ownable"
+    },
+    {
+      "name": "_owner",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _owner",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "Ownable"
+    },
+    {
+      "name": "_owner",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _owner",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "Ownable"
+    },
+    {
+      "name": "_owner",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _owner",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "Ownable"
+    },
+    {
+      "name": "_owner",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _owner",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "Ownable"
+    },
+    {
+      "name": "_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2",
+      "declaration": "uint256 private constant _ENTERED = 2",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2",
+      "declaration": "uint256 private constant _ENTERED = 2",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2",
+      "declaration": "uint256 private constant _ENTERED = 2",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2",
+      "declaration": "uint256 private constant _ENTERED = 2",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2",
+      "declaration": "uint256 private constant _ENTERED = 2",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_NOT_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1",
+      "declaration": "uint256 private constant _NOT_ENTERED = 1",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_NOT_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1",
+      "declaration": "uint256 private constant _NOT_ENTERED = 1",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_NOT_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1",
+      "declaration": "uint256 private constant _NOT_ENTERED = 1",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_NOT_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1",
+      "declaration": "uint256 private constant _NOT_ENTERED = 1",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_NOT_ENTERED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1",
+      "declaration": "uint256 private constant _NOT_ENTERED = 1",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_status",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _status",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_status",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _status",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_status",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _status",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_status",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _status",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "_status",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _status",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "ReentrancyGuard"
+    },
+    {
+      "name": "DELAY_SETTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256('DELAY_SETTER_ROLE')",
+      "declaration": "bytes32 public constant DELAY_SETTER_ROLE = keccak256('DELAY_SETTER_ROLE')",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "FACTOR",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**30",
+      "declaration": "uint256 private constant FACTOR = 10**30",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "FIFTY",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "5000",
+      "declaration": "uint256 private constant FIFTY = 5000",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "ONE_HUNDRED",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10000",
+      "declaration": "uint256 private constant ONE_HUNDRED = 10000",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "ONE_MONTH",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "86400 * 30",
+      "declaration": "uint256 private constant ONE_MONTH = 86400 * 30",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "WHITELIST_SETTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256('WHITELIST_SETTER_ROLE')",
+      "declaration": "bytes32 public constant WHITELIST_SETTER_ROLE = keccak256('WHITELIST_SETTER_ROLE')",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "accumulatedFee",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public accumulatedFee",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "cancelUnstakeFee",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "200",
+      "declaration": "uint256 public cancelUnstakeFee = 200",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "isHalt",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public isHalt",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "rewardPerShare",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public rewardPerShare",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "skipDelayFee",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "2000",
+      "declaration": "uint256 public skipDelayFee = 2000",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "totalStakedAmt",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalStakedAmt",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "underlying",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable underlying",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "unstakingDelay",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "86400 * 14",
+      "declaration": "uint256 public unstakingDelay = 86400 * 14",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "userInfo",
+      "type": "mapping(address => UserInfo) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => UserInfo) public userInfo",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "whitelistAddresses",
+      "type": "EnumerableSet.AddressSet private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "EnumerableSet.AddressSet private whitelistAddresses",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    }
+  ],
+  "total_balance_variables": [
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "ERC20"
+    },
+    {
+      "name": "numTrackStakers",
+      "type": "mapping(uint24 => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint256) public numTrackStakers",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "trackMaxStakes",
+      "type": "mapping(uint24 => uint104) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint104) public trackMaxStakes",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "trackStakers",
+      "type": "mapping(uint24 => address[]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => address[]) public trackStakers",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "trackTotalActiveRollOvers",
+      "type": "mapping(uint24 => mapping(uint24 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint24 => uint192)) public trackTotalActiveRollOvers",
+      "file": "contracts/IFAllocationMaster.sol",
+      "contract": "IFAllocationMaster"
+    },
+    {
+      "name": "totalStakeWeight",
+      "type": "mapping(uint24 => mapping(uint80 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint80 => uint192)) public totalStakeWeight",
+      "file": "contracts/IFAllocationMasterAdapter.sol",
+      "contract": "IFAllocationMasterAdapter"
+    },
+    {
+      "name": "userStakeWeights",
+      "type": "mapping(uint24 => mapping(address => mapping(uint80 => uint192))) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => mapping(uint80 => uint192))) public userStakeWeights",
+      "file": "contracts/IFAllocationMasterAdapter.sol",
+      "contract": "IFAllocationMasterAdapter"
+    },
+    {
+      "name": "numTrackStakers",
+      "type": "mapping(uint24 => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint256) public numTrackStakers",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "numTrackStakers",
+      "type": "mapping(uint24 => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint256) public numTrackStakers",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackMaxStakes",
+      "type": "mapping(uint24 => uint104) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint104) public trackMaxStakes",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackMaxStakes",
+      "type": "mapping(uint24 => uint104) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint104) public trackMaxStakes",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackStakers",
+      "type": "mapping(uint24 => address[]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => address[]) public trackStakers",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackStakers",
+      "type": "mapping(uint24 => address[]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => address[]) public trackStakers",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackTotalActiveRollOvers",
+      "type": "mapping(uint24 => mapping(uint24 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint24 => uint192)) public trackTotalActiveRollOvers",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "trackTotalActiveRollOvers",
+      "type": "mapping(uint24 => mapping(uint24 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint24 => uint192)) public trackTotalActiveRollOvers",
+      "file": "resources/flattened/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "userStakedOnCurrentChain",
+      "type": "mapping(uint24 => mapping(address => uint256)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => uint256)) public userStakedOnCurrentChain",
+      "file": "contracts/IFAllocationMasterOmni.sol",
+      "contract": "IFAllocationMasterOmni"
+    },
+    {
+      "name": "numTrackStakers",
+      "type": "mapping(uint24 => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint256) public numTrackStakers",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "numTrackStakers",
+      "type": "mapping(uint24 => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint256) public numTrackStakers",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackMaxStakes",
+      "type": "mapping(uint24 => uint104) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint104) public trackMaxStakes",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackMaxStakes",
+      "type": "mapping(uint24 => uint104) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => uint104) public trackMaxStakes",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackStakers",
+      "type": "mapping(uint24 => address[]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => address[]) public trackStakers",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackStakers",
+      "type": "mapping(uint24 => address[]) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => address[]) public trackStakers",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackTotalActiveRollOvers",
+      "type": "mapping(uint24 => mapping(uint24 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint24 => uint192)) public trackTotalActiveRollOvers",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "trackTotalActiveRollOvers",
+      "type": "mapping(uint24 => mapping(uint24 => uint192)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(uint24 => uint192)) public trackTotalActiveRollOvers",
+      "file": "resources/flattened/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "userStakedOnCurrentChain",
+      "type": "mapping(uint24 => mapping(address => uint256)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint24 => mapping(address => uint256)) public userStakedOnCurrentChain",
+      "file": "contracts/IFAllocationMasterSource.sol",
+      "contract": "IFAllocationMasterSource"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "contracts/IFSale.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "cancelUnstakeFee",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "200",
+      "declaration": "uint256 public cancelUnstakeFee = 200",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "rewardPerShare",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public rewardPerShare",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "totalStakedAmt",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalStakedAmt",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    },
+    {
+      "name": "unstakingDelay",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "86400 * 14",
+      "declaration": "uint256 public unstakingDelay = 86400 * 14",
+      "file": "contracts/vIDIA.sol",
+      "contract": "vIDIA"
+    }
+  ],
+  "token_variables": [
+    {
+      "name": "paymentToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable paymentToken",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable paymentToken",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable paymentToken",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable paymentToken",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable saleToken",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable saleToken",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable saleToken",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "saleToken",
+      "type": "ERC20 private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 private immutable saleToken",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "contracts/IFFundable.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "totalPaymentReceived",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalPaymentReceived",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFFundable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPayment",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "maxTotalPurchasable",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxTotalPurchasable",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "minTotalPayment",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public minTotalPayment",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 public immutable paymentToken",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 public immutable paymentToken",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 public immutable paymentToken",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "paymentToken",
+      "type": "ERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ERC20 public immutable paymentToken",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "saleTokenPurchased",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleTokenPurchased",
+      "file": "contracts/IFPurchasable.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "saleTokenPurchased",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleTokenPurchased",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "saleTokenPurchased",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleTokenPurchased",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "saleTokenPurchased",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public saleTokenPurchased",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFPurchasable"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "contracts/IFSale.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "flattened/IFAllocationSaleV6.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "resources/flattened/IFAllocationSaleV8.sol",
+      "contract": "IFSale"
+    },
+    {
+      "name": "totalPurchased",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public totalPurchased",
+      "file": "resources/flattened/IFFixedSaleV8.sol",
+      "contract": "IFSale"
+    }
+  ],
+  "token_addresses_hardcoded": [],
+  "invariant_values": [
+    "Key accounting vars (`trackTotalActiveRollOvers`, `numTrackStakers`, `trackStakers`, `trackMaxStakes`, `userStakeWeights`, `totalStakeWeight`, `trackTotalActiveRollOvers`, `numTrackStakers`) must only change through authorized accounting paths",
+    "Every token address/handle variable must be non-zero and immutable or governance-gated",
+    "Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition"
+  ]
+}

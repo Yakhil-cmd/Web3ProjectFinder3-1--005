@@ -1,0 +1,4638 @@
+{
+  "generated_at_utc": "2026-05-26T16:59:52Z",
+  "project": "12_lombard-finance",
+  "solidity_file_count": 96,
+  "solidity_files": [
+    "contracts/LBTC/AssetRouter.sol",
+    "contracts/LBTC/BaseLBTC.sol",
+    "contracts/LBTC/BridgeTokenAdapter.sol",
+    "contracts/LBTC/NativeLBTC.sol",
+    "contracts/LBTC/StakedLBTC.sol",
+    "contracts/LBTC/StakedLBTCOracle.sol",
+    "contracts/LBTC/interfaces/AggregatorV3Interface.sol",
+    "contracts/LBTC/interfaces/IAssetOperation.sol",
+    "contracts/LBTC/interfaces/IAssetRouter.sol",
+    "contracts/LBTC/interfaces/IBaseLBTC.sol",
+    "contracts/LBTC/interfaces/INativeLBTC.sol",
+    "contracts/LBTC/interfaces/IOracle.sol",
+    "contracts/LBTC/interfaces/IStakedLBTC.sol",
+    "contracts/LBTC/libraries/Assert.sol",
+    "contracts/LBTC/libraries/Assets.sol",
+    "contracts/LBTC/libraries/Redeem.sol",
+    "contracts/LBTC/libraries/Validation.sol",
+    "contracts/PoR/IPoR.sol",
+    "contracts/PoR/PoR.sol",
+    "contracts/bascule/Bascule.sol",
+    "contracts/bascule/BasculeV2.sol",
+    "contracts/bascule/BasculeV3.sol",
+    "contracts/bascule/GMPBasculeV1.sol",
+    "contracts/bascule/GMPBasculeV2.sol",
+    "contracts/bascule/interfaces/IBascule.sol",
+    "contracts/bascule/interfaces/IGMPBascule.sol",
+    "contracts/bridge/Bridge.sol",
+    "contracts/bridge/BridgeV2.sol",
+    "contracts/bridge/IBridge.sol",
+    "contracts/bridge/IBridgeV2.sol",
+    "contracts/bridge/adapters/AbstractAdapter.sol",
+    "contracts/bridge/adapters/CLAdapter.sol",
+    "contracts/bridge/adapters/IAdapter.sol",
+    "contracts/bridge/adapters/TokenPool.sol",
+    "contracts/bridge/interfaces/LegacyTokenPoolV2.sol",
+    "contracts/bridge/oft/EfficientRateLimitedOFTAdapter.sol",
+    "contracts/bridge/oft/EfficientRateLimiter.sol",
+    "contracts/bridge/oft/LBTCBurnMintOFTAdapter.sol",
+    "contracts/bridge/oft/LBTCOFTAdapter.sol",
+    "contracts/bridge/providers/BridgeTokenPool.sol",
+    "contracts/bridge/providers/LombardTokenPoolV2.sol",
+    "contracts/consortium/Consortium.sol",
+    "contracts/consortium/DepositNotarizationBlacklist.sol",
+    "contracts/consortium/IDepositNotarizationBlacklist.sol",
+    "contracts/consortium/ILombardTimelockController.sol",
+    "contracts/consortium/INotaryConsortium.sol",
+    "contracts/consortium/LombardTimeLock.sol",
+    "contracts/consortium/test/VerifySignatureTest.sol",
+    "contracts/factory/ProxyFactory.sol",
+    "contracts/fbtc/PartnerVault.sol",
+    "contracts/gmp/IHandler.sol",
+    "contracts/gmp/IMailbox.sol",
+    "contracts/gmp/Mailbox.sol",
+    "contracts/gmp/libs/GMPUtils.sol",
+    "contracts/gmp/libs/MessagePath.sol",
+    "contracts/ibc/IBCVoucher.sol",
+    "contracts/ibc/IIBCVoucher.sol",
+    "contracts/interfaces/IBridgeToken.sol",
+    "contracts/interfaces/IConsortiumConsumer.sol",
+    "contracts/interfaces/IERC20MintableBurnable.sol",
+    "contracts/interfaces/IEfficientRateLimiterV1.sol",
+    "contracts/interfaces/IProxyAdmin.sol",
+    "contracts/libs/Actions.sol",
+    "contracts/libs/BitcoinUtils.sol",
+    "contracts/libs/EIP1271SignatureUtils.sol",
+    "contracts/libs/FeeUtils.sol",
+    "contracts/libs/LChainId.sol",
+    "contracts/libs/RateLimits.sol",
+    "contracts/mock/Auth.sol",
+    "contracts/mock/BTCBMock.sol",
+    "contracts/mock/BoringVault.sol",
+    "contracts/mock/BridgeTokenMock.sol",
+    "contracts/mock/CCIPMocks.sol",
+    "contracts/mock/CCIPRMNMock.sol",
+    "contracts/mock/ConsortiumMock.sol",
+    "contracts/mock/ERC4626Mock.sol",
+    "contracts/mock/GMPHandlerMock.sol",
+    "contracts/mock/IRateProvider.sol",
+    "contracts/mock/LZEndpointMock.sol",
+    "contracts/mock/LockedFBTCMock.sol",
+    "contracts/mock/MailboxMock.sol",
+    "contracts/mock/MailboxTreasuryMock.sol",
+    "contracts/mock/ProxyMock.sol",
+    "contracts/mock/RatioFeedMock.sol",
+    "contracts/mock/StakedLBTCMock.sol",
+    "contracts/mock/TellerWithMultiAssetSupportMock.sol",
+    "contracts/mock/WBTCMock.sol",
+    "contracts/pmm/BTCB/BTCB.sol",
+    "contracts/pmm/CBBTC.sol",
+    "contracts/stakeAndBake/StakeAndBake.sol",
+    "contracts/stakeAndBake/StakeAndBakeNativeToken.sol",
+    "contracts/stakeAndBake/depositor/IDepositor.sol",
+    "contracts/stakeAndBake/depositor/erc4626/ERC4626Depositor.sol",
+    "contracts/stakeAndBake/depositor/veda/ERC4626VaultWrapper.sol",
+    "contracts/stakeAndBake/depositor/veda/ITeller.sol",
+    "contracts/stakeAndBake/depositor/veda/TellerWithMultiAssetSupportDepositor.sol"
+  ],
+  "pragmas": [
+    "0.8.24",
+    ">=0.8.0",
+    "^0.8.0",
+    "^0.8.10",
+    "^0.8.19",
+    "^0.8.21",
+    "^0.8.4"
+  ],
+  "top_directories_by_solidity_file_count": [
+    [
+      "contracts",
+      96
+    ]
+  ],
+  "contracts": [
+    {
+      "file": "contracts/bridge/adapters/AbstractAdapter.sol",
+      "kind": "abstract contract",
+      "name": "AbstractAdapter",
+      "bases": [
+        "IAdapter",
+        "Context"
+      ]
+    },
+    {
+      "file": "contracts/libs/Actions.sol",
+      "kind": "library",
+      "name": "Actions",
+      "bases": []
+    },
+    {
+      "file": "contracts/LBTC/interfaces/AggregatorV3Interface.sol",
+      "kind": "interface",
+      "name": "AggregatorV3Interface",
+      "bases": []
+    },
+    {
+      "file": "contracts/LBTC/libraries/Assert.sol",
+      "kind": "library",
+      "name": "Assert",
+      "bases": []
+    },
+    {
+      "file": "contracts/LBTC/AssetRouter.sol",
+      "kind": "contract",
+      "name": "AssetRouter",
+      "bases": [
+        "IAssetRouter",
+        "IHandler",
+        "AccessControlDefaultAdminRulesUpgradeable",
+        "ReentrancyGuardUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "kind": "library",
+      "name": "Assets",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/Auth.sol",
+      "kind": "abstract contract",
+      "name": "Auth",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/Auth.sol",
+      "kind": "interface",
+      "name": "Authority",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/BTCBMock.sol",
+      "kind": "contract",
+      "name": "BTCBMock",
+      "bases": [
+        "IBEP20",
+        "Context"
+      ]
+    },
+    {
+      "file": "contracts/pmm/BTCB/BTCB.sol",
+      "kind": "contract",
+      "name": "BTCBPMM",
+      "bases": [
+        "PausableUpgradeable",
+        "AccessControlUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/bascule/Bascule.sol",
+      "kind": "contract",
+      "name": "Bascule",
+      "bases": [
+        "IBascule",
+        "Pausable",
+        "AccessControlDefaultAdminRules"
+      ]
+    },
+    {
+      "file": "contracts/bascule/BasculeV2.sol",
+      "kind": "contract",
+      "name": "BasculeV2",
+      "bases": [
+        "IBascule",
+        "Pausable",
+        "AccessControlDefaultAdminRules"
+      ]
+    },
+    {
+      "file": "contracts/bascule/BasculeV3.sol",
+      "kind": "contract",
+      "name": "BasculeV3",
+      "bases": [
+        "IBascule",
+        "Pausable",
+        "AccessControlDefaultAdminRules"
+      ]
+    },
+    {
+      "file": "contracts/LBTC/BaseLBTC.sol",
+      "kind": "abstract contract",
+      "name": "BaseLBTC",
+      "bases": [
+        "IBaseLBTC",
+        "AccessControlDefaultAdminRulesUpgradeable",
+        "ERC20PausableUpgradeable",
+        "ERC20PermitUpgradeable",
+        "ReentrancyGuardUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/libs/BitcoinUtils.sol",
+      "kind": "library",
+      "name": "BitcoinUtils",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/BoringVault.sol",
+      "kind": "contract",
+      "name": "BoringVault",
+      "bases": [
+        "ERC20",
+        "Auth",
+        "ERC721Holder",
+        "ERC1155Holder"
+      ]
+    },
+    {
+      "file": "contracts/bridge/Bridge.sol",
+      "kind": "contract",
+      "name": "Bridge",
+      "bases": [
+        "IBridge",
+        "Ownable2StepUpgradeable",
+        "ReentrancyGuardUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/LBTC/BridgeTokenAdapter.sol",
+      "kind": "contract",
+      "name": "BridgeTokenAdapter",
+      "bases": [
+        "INativeLBTC",
+        "AccessControlDefaultAdminRulesUpgradeable",
+        "PausableUpgradeable",
+        "ReentrancyGuardUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "kind": "contract",
+      "name": "BridgeTokenMock",
+      "bases": [
+        "ERC20Burnable",
+        "IBridgeToken"
+      ]
+    },
+    {
+      "file": "contracts/bridge/providers/BridgeTokenPool.sol",
+      "kind": "contract",
+      "name": "BridgeTokenPool",
+      "bases": [
+        "LombardTokenPoolV2"
+      ]
+    },
+    {
+      "file": "contracts/bridge/BridgeV2.sol",
+      "kind": "contract",
+      "name": "BridgeV2",
+      "bases": [
+        "IBridgeV2",
+        "IHandler",
+        "Ownable2StepUpgradeable",
+        "ReentrancyGuardUpgradeable",
+        "ERC165Upgradeable"
+      ]
+    },
+    {
+      "file": "contracts/pmm/CBBTC.sol",
+      "kind": "contract",
+      "name": "CBBTCPMM",
+      "bases": [
+        "PausableUpgradeable",
+        "AccessControlUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/mock/CCIPRMNMock.sol",
+      "kind": "contract",
+      "name": "CCIPRMNMock",
+      "bases": [
+        "IRMN"
+      ]
+    },
+    {
+      "file": "contracts/bridge/adapters/CLAdapter.sol",
+      "kind": "contract",
+      "name": "CLAdapter",
+      "bases": [
+        "AbstractAdapter",
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "contracts/consortium/Consortium.sol",
+      "kind": "contract",
+      "name": "Consortium",
+      "bases": [
+        "Ownable2StepUpgradeable",
+        "INotaryConsortium"
+      ]
+    },
+    {
+      "file": "contracts/mock/ConsortiumMock.sol",
+      "kind": "contract",
+      "name": "ConsortiumMock",
+      "bases": [
+        "Consortium"
+      ]
+    },
+    {
+      "file": "contracts/consortium/DepositNotarizationBlacklist.sol",
+      "kind": "contract",
+      "name": "DepositNotarizationBlacklist",
+      "bases": [
+        "IDepositNotarizationBlacklist",
+        "AccessControlUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/libs/EIP1271SignatureUtils.sol",
+      "kind": "library",
+      "name": "EIP1271SignatureUtils",
+      "bases": []
+    },
+    {
+      "file": "contracts/stakeAndBake/depositor/erc4626/ERC4626Depositor.sol",
+      "kind": "contract",
+      "name": "ERC4626Depositor",
+      "bases": [
+        "IDepositor",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "contracts/mock/ERC4626Mock.sol",
+      "kind": "contract",
+      "name": "ERC4626Mock",
+      "bases": [
+        "ERC4626"
+      ]
+    },
+    {
+      "file": "contracts/stakeAndBake/depositor/veda/ERC4626VaultWrapper.sol",
+      "kind": "contract",
+      "name": "ERC4626VaultWrapper",
+      "bases": [
+        "IDepositor",
+        "ERC4626Upgradeable",
+        "ERC20PausableUpgradeable",
+        "ERC20PermitUpgradeable",
+        "AccessControlDefaultAdminRulesUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/bridge/oft/EfficientRateLimitedOFTAdapter.sol",
+      "kind": "abstract contract",
+      "name": "EfficientRateLimitedOFTAdapter",
+      "bases": [
+        "OFTAdapter",
+        "EfficientRateLimiter"
+      ]
+    },
+    {
+      "file": "contracts/bridge/oft/EfficientRateLimiter.sol",
+      "kind": "abstract contract",
+      "name": "EfficientRateLimiter",
+      "bases": []
+    },
+    {
+      "file": "contracts/fbtc/PartnerVault.sol",
+      "kind": "contract",
+      "name": "FBTCPartnerVault",
+      "bases": [
+        "PausableUpgradeable",
+        "ReentrancyGuardUpgradeable",
+        "AccessControlUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/libs/FeeUtils.sol",
+      "kind": "library",
+      "name": "FeeUtils",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/TellerWithMultiAssetSupportMock.sol",
+      "kind": "library",
+      "name": "FixedPointMathLib",
+      "bases": []
+    },
+    {
+      "file": "contracts/bascule/GMPBasculeV1.sol",
+      "kind": "contract",
+      "name": "GMPBasculeV1",
+      "bases": [
+        "IGMPBascule",
+        "Pausable",
+        "AccessControlDefaultAdminRules"
+      ]
+    },
+    {
+      "file": "contracts/bascule/GMPBasculeV2.sol",
+      "kind": "contract",
+      "name": "GMPBasculeV2",
+      "bases": [
+        "IGMPBascule",
+        "Pausable",
+        "AccessControlDefaultAdminRules"
+      ]
+    },
+    {
+      "file": "contracts/mock/GMPHandlerMock.sol",
+      "kind": "contract",
+      "name": "GMPHandlerMock",
+      "bases": [
+        "IHandler"
+      ]
+    },
+    {
+      "file": "contracts/gmp/libs/GMPUtils.sol",
+      "kind": "library",
+      "name": "GMPUtils",
+      "bases": []
+    },
+    {
+      "file": "contracts/bridge/adapters/IAdapter.sol",
+      "kind": "interface",
+      "name": "IAdapter",
+      "bases": []
+    },
+    {
+      "file": "contracts/LBTC/interfaces/IAssetOperation.sol",
+      "kind": "interface",
+      "name": "IAssetOperation",
+      "bases": []
+    },
+    {
+      "file": "contracts/LBTC/interfaces/IAssetRouter.sol",
+      "kind": "interface",
+      "name": "IAssetRouter",
+      "bases": []
+    },
+    {
+      "file": "contracts/ibc/IBCVoucher.sol",
+      "kind": "contract",
+      "name": "IBCVoucher",
+      "bases": [
+        "IIBCVoucher",
+        "ERC20PausableUpgradeable",
+        "ReentrancyGuardUpgradeable",
+        "AccessControlUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/mock/BTCBMock.sol",
+      "kind": "interface",
+      "name": "IBEP20",
+      "bases": []
+    },
+    {
+      "file": "contracts/bascule/interfaces/IBascule.sol",
+      "kind": "interface",
+      "name": "IBascule",
+      "bases": []
+    },
+    {
+      "file": "contracts/LBTC/interfaces/IBaseLBTC.sol",
+      "kind": "interface",
+      "name": "IBaseLBTC",
+      "bases": []
+    },
+    {
+      "file": "contracts/bridge/IBridge.sol",
+      "kind": "interface",
+      "name": "IBridge",
+      "bases": [
+        "IConsortiumConsumer"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/IBridgeToken.sol",
+      "kind": "interface",
+      "name": "IBridgeToken",
+      "bases": [
+        "IERC20Metadata"
+      ]
+    },
+    {
+      "file": "contracts/bridge/IBridgeV2.sol",
+      "kind": "interface",
+      "name": "IBridgeV2",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IConsortiumConsumer.sol",
+      "kind": "interface",
+      "name": "IConsortiumConsumer",
+      "bases": []
+    },
+    {
+      "file": "contracts/consortium/IDepositNotarizationBlacklist.sol",
+      "kind": "interface",
+      "name": "IDepositNotarizationBlacklist",
+      "bases": []
+    },
+    {
+      "file": "contracts/stakeAndBake/depositor/IDepositor.sol",
+      "kind": "interface",
+      "name": "IDepositor",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IERC20MintableBurnable.sol",
+      "kind": "interface",
+      "name": "IERC20MintableBurnable",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/IEfficientRateLimiterV1.sol",
+      "kind": "interface",
+      "name": "IEfficientRateLimiterV1",
+      "bases": []
+    },
+    {
+      "file": "contracts/bascule/interfaces/IGMPBascule.sol",
+      "kind": "interface",
+      "name": "IGMPBascule",
+      "bases": []
+    },
+    {
+      "file": "contracts/gmp/IHandler.sol",
+      "kind": "interface",
+      "name": "IHandler",
+      "bases": [
+        "IERC165"
+      ]
+    },
+    {
+      "file": "contracts/ibc/IIBCVoucher.sol",
+      "kind": "interface",
+      "name": "IIBCVoucher",
+      "bases": []
+    },
+    {
+      "file": "contracts/pmm/BTCB/BTCB.sol",
+      "kind": "interface",
+      "name": "ILBTC",
+      "bases": [
+        "IERC20Metadata"
+      ]
+    },
+    {
+      "file": "contracts/pmm/CBBTC.sol",
+      "kind": "interface",
+      "name": "ILBTC",
+      "bases": [
+        "IERC20Metadata"
+      ]
+    },
+    {
+      "file": "contracts/bridge/interfaces/LegacyTokenPoolV2.sol",
+      "kind": "interface",
+      "name": "ILegacyTokenPoolV2",
+      "bases": []
+    },
+    {
+      "file": "contracts/gmp/IMailbox.sol",
+      "kind": "interface",
+      "name": "IMailbox",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/MailboxTreasuryMock.sol",
+      "kind": "interface",
+      "name": "IMailboxWithdrawFee",
+      "bases": []
+    },
+    {
+      "file": "contracts/LBTC/interfaces/INativeLBTC.sol",
+      "kind": "interface",
+      "name": "INativeLBTC",
+      "bases": [
+        "IBaseLBTC"
+      ]
+    },
+    {
+      "file": "contracts/consortium/INotaryConsortium.sol",
+      "kind": "interface",
+      "name": "INotaryConsortium",
+      "bases": []
+    },
+    {
+      "file": "contracts/LBTC/interfaces/IOracle.sol",
+      "kind": "interface",
+      "name": "IOracle",
+      "bases": []
+    },
+    {
+      "file": "contracts/PoR/IPoR.sol",
+      "kind": "interface",
+      "name": "IPoR",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IProxyAdmin.sol",
+      "kind": "interface",
+      "name": "IProxyAdmin",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/IRateProvider.sol",
+      "kind": "interface",
+      "name": "IRateProvider",
+      "bases": []
+    },
+    {
+      "file": "contracts/LBTC/interfaces/IStakedLBTC.sol",
+      "kind": "interface",
+      "name": "IStakedLBTC",
+      "bases": [
+        "IBaseLBTC"
+      ]
+    },
+    {
+      "file": "contracts/stakeAndBake/depositor/veda/ITeller.sol",
+      "kind": "interface",
+      "name": "ITeller",
+      "bases": []
+    },
+    {
+      "file": "contracts/consortium/ILombardTimelockController.sol",
+      "kind": "interface",
+      "name": "ITimelockController",
+      "bases": []
+    },
+    {
+      "file": "contracts/bridge/oft/LBTCBurnMintOFTAdapter.sol",
+      "kind": "contract",
+      "name": "LBTCBurnMintOFTAdapter",
+      "bases": [
+        "OFTAdapter",
+        "EfficientRateLimitedOFTAdapter"
+      ]
+    },
+    {
+      "file": "contracts/bridge/oft/LBTCOFTAdapter.sol",
+      "kind": "contract",
+      "name": "LBTCOFTAdapter",
+      "bases": [
+        "EfficientRateLimitedOFTAdapter"
+      ]
+    },
+    {
+      "file": "contracts/libs/LChainId.sol",
+      "kind": "library",
+      "name": "LChainId",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/LZEndpointMock.sol",
+      "kind": "contract",
+      "name": "LZEndpointMock",
+      "bases": [
+        "EndpointV2Mock"
+      ]
+    },
+    {
+      "file": "contracts/fbtc/PartnerVault.sol",
+      "kind": "interface",
+      "name": "LockedFBTC",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/LockedFBTCMock.sol",
+      "kind": "contract",
+      "name": "LockedFBTCMock",
+      "bases": []
+    },
+    {
+      "file": "contracts/consortium/LombardTimeLock.sol",
+      "kind": "contract",
+      "name": "LombardTimeLock",
+      "bases": [
+        "TimelockController"
+      ]
+    },
+    {
+      "file": "contracts/bridge/adapters/TokenPool.sol",
+      "kind": "contract",
+      "name": "LombardTokenPool",
+      "bases": [
+        "TokenPool"
+      ]
+    },
+    {
+      "file": "contracts/bridge/providers/LombardTokenPoolV2.sol",
+      "kind": "contract",
+      "name": "LombardTokenPoolV2",
+      "bases": [
+        "TokenPool",
+        "ITypeAndVersion"
+      ]
+    },
+    {
+      "file": "contracts/gmp/Mailbox.sol",
+      "kind": "contract",
+      "name": "Mailbox",
+      "bases": [
+        "IMailbox",
+        "AccessControlDefaultAdminRulesUpgradeable",
+        "ReentrancyGuardUpgradeable",
+        "PausableUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/mock/MailboxMock.sol",
+      "kind": "contract",
+      "name": "MailboxMock",
+      "bases": [
+        "Mailbox"
+      ]
+    },
+    {
+      "file": "contracts/mock/MailboxTreasuryMock.sol",
+      "kind": "contract",
+      "name": "MailboxTreasuryMock",
+      "bases": []
+    },
+    {
+      "file": "contracts/gmp/libs/MessagePath.sol",
+      "kind": "library",
+      "name": "MessagePath",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/CCIPMocks.sol",
+      "kind": "contract",
+      "name": "MockCCIPRouter",
+      "bases": [
+        "IRouter",
+        "IRouterClient"
+      ]
+    },
+    {
+      "file": "contracts/LBTC/NativeLBTC.sol",
+      "kind": "contract",
+      "name": "NativeLBTC",
+      "bases": [
+        "INativeLBTC",
+        "BaseLBTC"
+      ]
+    },
+    {
+      "file": "contracts/PoR/PoR.sol",
+      "kind": "contract",
+      "name": "PoR",
+      "bases": [
+        "AccessControlUpgradeable",
+        "IPoR"
+      ]
+    },
+    {
+      "file": "contracts/factory/ProxyFactory.sol",
+      "kind": "contract",
+      "name": "ProxyFactory",
+      "bases": [
+        "AccessControl"
+      ]
+    },
+    {
+      "file": "contracts/mock/ProxyMock.sol",
+      "kind": "contract",
+      "name": "ProxyMock",
+      "bases": [
+        "Initializable"
+      ]
+    },
+    {
+      "file": "contracts/libs/RateLimits.sol",
+      "kind": "library",
+      "name": "RateLimits",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/RatioFeedMock.sol",
+      "kind": "contract",
+      "name": "RatioFeedMock",
+      "bases": [
+        "IOracle"
+      ]
+    },
+    {
+      "file": "contracts/LBTC/libraries/Redeem.sol",
+      "kind": "library",
+      "name": "Redeem",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "kind": "library",
+      "name": "Roles",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/Auth.sol",
+      "kind": "contract",
+      "name": "RolesAuthority",
+      "bases": [
+        "Auth",
+        "Authority"
+      ]
+    },
+    {
+      "file": "contracts/stakeAndBake/StakeAndBake.sol",
+      "kind": "contract",
+      "name": "StakeAndBake",
+      "bases": [
+        "AccessControlUpgradeable",
+        "ReentrancyGuardUpgradeable",
+        "PausableUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/stakeAndBake/StakeAndBakeNativeToken.sol",
+      "kind": "contract",
+      "name": "StakeAndBakeNativeToken",
+      "bases": [
+        "AccessControlUpgradeable",
+        "ReentrancyGuardUpgradeable",
+        "PausableUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/LBTC/StakedLBTC.sol",
+      "kind": "contract",
+      "name": "StakedLBTC",
+      "bases": [
+        "IStakedLBTC",
+        "BaseLBTC"
+      ]
+    },
+    {
+      "file": "contracts/mock/StakedLBTCMock.sol",
+      "kind": "contract",
+      "name": "StakedLBTCMock",
+      "bases": [
+        "StakedLBTC"
+      ]
+    },
+    {
+      "file": "contracts/LBTC/StakedLBTCOracle.sol",
+      "kind": "contract",
+      "name": "StakedLBTCOracle",
+      "bases": [
+        "IOracle",
+        "AggregatorV3Interface",
+        "Ownable2StepUpgradeable",
+        "ReentrancyGuardUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/stakeAndBake/depositor/veda/TellerWithMultiAssetSupportDepositor.sol",
+      "kind": "contract",
+      "name": "TellerWithMultiAssetSupportDepositor",
+      "bases": [
+        "IDepositor",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "contracts/mock/TellerWithMultiAssetSupportMock.sol",
+      "kind": "contract",
+      "name": "TellerWithMultiAssetSupportMock",
+      "bases": [
+        "ERC20"
+      ]
+    },
+    {
+      "file": "contracts/mock/TellerWithMultiAssetSupportMock.sol",
+      "kind": "contract",
+      "name": "TellerWithReferralAwareMock",
+      "bases": [
+        "TellerWithMultiAssetSupportMock"
+      ]
+    },
+    {
+      "file": "contracts/LBTC/libraries/Validation.sol",
+      "kind": "library",
+      "name": "Validation",
+      "bases": []
+    },
+    {
+      "file": "contracts/consortium/test/VerifySignatureTest.sol",
+      "kind": "contract",
+      "name": "VerifySignatureTest",
+      "bases": []
+    },
+    {
+      "file": "contracts/mock/WBTCMock.sol",
+      "kind": "contract",
+      "name": "WBTCMock",
+      "bases": [
+        "ERC20Upgradeable"
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "file": "contracts/bascule/Bascule.sol",
+      "enum": "DepositState",
+      "values": [
+        "UNREPORTED",
+        "REPORTED",
+        "WITHDRAWN"
+      ]
+    },
+    {
+      "file": "contracts/bascule/BasculeV2.sol",
+      "enum": "DepositState",
+      "values": [
+        "UNREPORTED",
+        "REPORTED",
+        "WITHDRAWN"
+      ]
+    },
+    {
+      "file": "contracts/bascule/BasculeV3.sol",
+      "enum": "DepositState",
+      "values": [
+        "UNREPORTED",
+        "REPORTED",
+        "WITHDRAWN"
+      ]
+    },
+    {
+      "file": "contracts/bascule/GMPBasculeV1.sol",
+      "enum": "MintState",
+      "values": [
+        "UNREPORTED",
+        "REPORTED",
+        "MINTED"
+      ]
+    },
+    {
+      "file": "contracts/bascule/GMPBasculeV2.sol",
+      "enum": "MintState",
+      "values": [
+        "UNREPORTED",
+        "REPORTED",
+        "MINTED"
+      ]
+    },
+    {
+      "file": "contracts/fbtc/PartnerVault.sol",
+      "enum": "Operation",
+      "values": [
+        "Nop",
+        "Mint",
+        "Burn",
+        "CrosschainRequest",
+        "CrosschainConfirm"
+      ]
+    },
+    {
+      "file": "contracts/libs/BitcoinUtils.sol",
+      "enum": "OutputType",
+      "values": [
+        "UNSUPPORTED",
+        "P2TR",
+        "P2WPKH",
+        "P2WSH"
+      ]
+    },
+    {
+      "file": "contracts/gmp/Mailbox.sol",
+      "enum": "PathDirectionType",
+      "values": [
+        "UNKNOWN",
+        "OUTBOUND",
+        "INBOUND",
+        "BOTH"
+      ]
+    },
+    {
+      "file": "contracts/bridge/oft/EfficientRateLimiter.sol",
+      "enum": "RateLimitDirection",
+      "values": [
+        "Inbound",
+        "Outbound"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/IEfficientRateLimiterV1.sol",
+      "enum": "RateLimitDirection",
+      "values": [
+        "Inbound",
+        "Outbound"
+      ]
+    },
+    {
+      "file": "contracts/LBTC/interfaces/IAssetRouter.sol",
+      "enum": "RouteType",
+      "values": [
+        "UNKNOWN",
+        "DEPOSIT",
+        "REDEEM"
+      ]
+    },
+    {
+      "file": "contracts/fbtc/PartnerVault.sol",
+      "enum": "Status",
+      "values": [
+        "Unused",
+        "Pending",
+        "Confirmed",
+        "Rejected"
+      ]
+    }
+  ],
+  "structs": [
+    {
+      "file": "contracts/PoR/PoR.sol",
+      "struct": "AddressData",
+      "fields": [
+        {
+          "name": "addressStr",
+          "type": "string"
+        },
+        {
+          "name": "rootPkId",
+          "type": "bytes32"
+        },
+        {
+          "name": "messageOrDerivationData",
+          "type": "string"
+        },
+        {
+          "name": "signature",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "contracts/mock/TellerWithMultiAssetSupportMock.sol",
+      "struct": "Asset",
+      "fields": [
+        {
+          "name": "allowDeposits",
+          "type": "bool"
+        },
+        {
+          "name": "allowWithdraws",
+          "type": "bool"
+        },
+        {
+          "name": "sharePremium",
+          "type": "uint16"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/AssetRouter.sol",
+      "struct": "AssetRouterStorage",
+      "fields": [
+        {
+          "name": "ledgerChainId",
+          "type": "bytes32"
+        },
+        {
+          "name": "bitcoinChainId",
+          "type": "bytes32"
+        },
+        {
+          "name": "routes",
+          "type": "mapping(bytes32 => Routes)"
+        },
+        {
+          "name": "usedPayloads",
+          "type": "mapping(bytes32 => bool)"
+        },
+        {
+          "name": "mailbox",
+          "type": "IMailbox"
+        },
+        {
+          "name": "bascule",
+          "type": "IGMPBascule"
+        },
+        {
+          "name": "nativeToken",
+          "type": "address"
+        },
+        {
+          "name": "tokenConfigs",
+          "type": "mapping(address => TokenConfig)"
+        },
+        {
+          "name": "depositMinAmount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/BaseLBTC.sol",
+      "struct": "BaseLBTCStorage",
+      "fields": [
+        {
+          "name": "mintBurnPaused",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bridge/Bridge.sol",
+      "struct": "BridgeStorage",
+      "fields": [
+        {
+          "name": "treasury",
+          "type": "address"
+        },
+        {
+          "name": "lbtc",
+          "type": "IBaseLBTC"
+        },
+        {
+          "name": "crossChainOperationsNonce",
+          "type": "uint256"
+        },
+        {
+          "name": "destinations",
+          "type": "mapping(bytes32 => DestinationConfig)"
+        },
+        {
+          "name": "deposits",
+          "type": "mapping(bytes32 => Deposit)"
+        },
+        {
+          "name": "consortium",
+          "type": "INotaryConsortium"
+        },
+        {
+          "name": "depositRateLimits",
+          "type": "mapping(bytes32 => RateLimits.Data)"
+        },
+        {
+          "name": "withdrawRateLimits",
+          "type": "mapping(bytes32 => RateLimits.Data)"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/BridgeTokenAdapter.sol",
+      "struct": "BridgeTokenAdapterStorage",
+      "fields": [
+        {
+          "name": "consortium",
+          "type": "INotaryConsortium"
+        },
+        {
+          "name": "treasury",
+          "type": "address"
+        },
+        {
+          "name": "bascule",
+          "type": "IBascule"
+        },
+        {
+          "name": "usedPayloads",
+          "type": "mapping(bytes32 => bool)"
+        },
+        {
+          "name": "assetRouter",
+          "type": "IAssetRouter"
+        },
+        {
+          "name": "bridgeToken",
+          "type": "IBridgeToken"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bridge/BridgeV2.sol",
+      "struct": "BridgeV2Storage",
+      "fields": [
+        {
+          "name": "bridgeContract",
+          "type": "mapping(bytes32 => bytes32)"
+        },
+        {
+          "name": "allowedDestinationToken",
+          "type": "mapping(bytes32 => bytes32)"
+        },
+        {
+          "name": "allowedSourceToken",
+          "type": "mapping(bytes32 => address)"
+        },
+        {
+          "name": "mailbox",
+          "type": "IMailbox"
+        },
+        {
+          "name": "payloadSpent",
+          "type": "mapping(bytes32 => bool)"
+        },
+        {
+          "name": "senderConfig",
+          "type": "mapping(address => SenderConfig)"
+        },
+        {
+          "name": "rateLimit",
+          "type": "mapping(bytes32 => RateLimits.Data)"
+        }
+      ]
+    },
+    {
+      "file": "contracts/libs/RateLimits.sol",
+      "struct": "Config",
+      "fields": [
+        {
+          "name": "chainId",
+          "type": "bytes32"
+        },
+        {
+          "name": "limit",
+          "type": "uint256"
+        },
+        {
+          "name": "window",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/consortium/Consortium.sol",
+      "struct": "ConsortiumStorage",
+      "fields": [
+        {
+          "name": "epoch",
+          "type": "uint256"
+        },
+        {
+          "name": "validatorSet",
+          "type": "mapping(uint256 => ValidatorSet)"
+        }
+      ]
+    },
+    {
+      "file": "contracts/libs/RateLimits.sol",
+      "struct": "Data",
+      "fields": [
+        {
+          "name": "amountInFlight",
+          "type": "uint256"
+        },
+        {
+          "name": "lastUpdated",
+          "type": "uint256"
+        },
+        {
+          "name": "limit",
+          "type": "uint256"
+        },
+        {
+          "name": "window",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bridge/Bridge.sol",
+      "struct": "Deposit",
+      "fields": [
+        {
+          "name": "payload",
+          "type": "bytes"
+        },
+        {
+          "name": "adapterReceived",
+          "type": "bool"
+        },
+        {
+          "name": "notarized",
+          "type": "bool"
+        },
+        {
+          "name": "withdrawn",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "file": "contracts/libs/Actions.sol",
+      "struct": "DepositBridgeAction",
+      "fields": [
+        {
+          "name": "fromChain",
+          "type": "uint256"
+        },
+        {
+          "name": "fromContract",
+          "type": "bytes32"
+        },
+        {
+          "name": "toChain",
+          "type": "uint256"
+        },
+        {
+          "name": "toContract",
+          "type": "address"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint64"
+        },
+        {
+          "name": "nonce",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/libs/Actions.sol",
+      "struct": "DepositBtcActionV0",
+      "fields": [
+        {
+          "name": "toChain",
+          "type": "uint256"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "txid",
+          "type": "bytes32"
+        },
+        {
+          "name": "vout",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "file": "contracts/libs/Actions.sol",
+      "struct": "DepositBtcActionV1",
+      "fields": [
+        {
+          "name": "toChain",
+          "type": "uint256"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "txid",
+          "type": "bytes32"
+        },
+        {
+          "name": "vout",
+          "type": "uint32"
+        },
+        {
+          "name": "token",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bridge/Bridge.sol",
+      "struct": "DestinationConfig",
+      "fields": [
+        {
+          "name": "bridgeContract",
+          "type": "bytes32"
+        },
+        {
+          "name": "relativeCommission",
+          "type": "uint16"
+        },
+        {
+          "name": "absoluteCommission",
+          "type": "uint64"
+        },
+        {
+          "name": "adapter",
+          "type": "IAdapter"
+        },
+        {
+          "name": "requireConsortium",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "file": "contracts/gmp/libs/MessagePath.sol",
+      "struct": "Details",
+      "fields": [
+        {
+          "name": "sourceContract",
+          "type": "bytes32"
+        },
+        {
+          "name": "sourceChain",
+          "type": "bytes32"
+        },
+        {
+          "name": "destinationChain",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "contracts/stakeAndBake/depositor/veda/ERC4626VaultWrapper.sol",
+      "struct": "ERC4626VaultWrapperStorage",
+      "fields": [
+        {
+          "name": "teller",
+          "type": "ITeller"
+        },
+        {
+          "name": "sabAsset",
+          "type": "mapping(address => IERC20)"
+        },
+        {
+          "name": "tellerReferralAddress",
+          "type": "address"
+        },
+        {
+          "name": "tellerDepositWithReferral",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "file": "contracts/libs/Actions.sol",
+      "struct": "FeeApprovalAction",
+      "fields": [
+        {
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "name": "expiry",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/ibc/IBCVoucher.sol",
+      "struct": "IBCVoucherStorage",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "symbol",
+          "type": "string"
+        },
+        {
+          "name": "lbtc",
+          "type": "IBaseLBTC"
+        },
+        {
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "name": "treasury",
+          "type": "address"
+        },
+        {
+          "name": "rateLimit",
+          "type": "RateLimit"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/StakedLBTC.sol",
+      "struct": "LegacyOwnableStorage",
+      "fields": [
+        {
+          "name": "_owner",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "contracts/gmp/Mailbox.sol",
+      "struct": "MailboxStorage",
+      "fields": [
+        {
+          "name": "globalNonce",
+          "type": "uint256"
+        },
+        {
+          "name": "outboundMessagePath",
+          "type": "mapping(bytes32 => bytes32)"
+        },
+        {
+          "name": "inboundMessagePath",
+          "type": "mapping(bytes32 => bytes32)"
+        },
+        {
+          "name": "deliveredPayload",
+          "type": "mapping(bytes32 => bool)"
+        },
+        {
+          "name": "handledPayload",
+          "type": "mapping(bytes32 => bool)"
+        },
+        {
+          "name": "consortium",
+          "type": "INotaryConsortium"
+        },
+        {
+          "name": "defaultMaxPayloadSize",
+          "type": "uint32"
+        },
+        {
+          "name": "senderConfig",
+          "type": "mapping(address => SenderConfig)"
+        },
+        {
+          "name": "feePerByte",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bascule/interfaces/IGMPBascule.sol",
+      "struct": "Message",
+      "fields": [
+        {
+          "name": "nonce",
+          "type": "uint256"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "toToken",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bascule/GMPBasculeV1.sol",
+      "struct": "Mint",
+      "fields": [
+        {
+          "name": "msg",
+          "type": "Message"
+        },
+        {
+          "name": "status",
+          "type": "MintState"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/NativeLBTC.sol",
+      "struct": "NativeLBTCStorage",
+      "fields": [
+        {
+          "name": "consortium",
+          "type": "address"
+        },
+        {
+          "name": "__removed__burnCommission",
+          "type": "uint64"
+        },
+        {
+          "name": "__removed__isWithdrawalsEnabled",
+          "type": "bool"
+        },
+        {
+          "name": "treasury",
+          "type": "address"
+        },
+        {
+          "name": "bascule",
+          "type": "IBascule"
+        },
+        {
+          "name": "__removed__name",
+          "type": "string"
+        },
+        {
+          "name": "__removed__symbol",
+          "type": "string"
+        },
+        {
+          "name": "__removed__dustFeeRate",
+          "type": "uint256"
+        },
+        {
+          "name": "__removed__maximumFee",
+          "type": "uint256"
+        },
+        {
+          "name": "usedPayloads",
+          "type": "mapping(bytes32 => bool)"
+        },
+        {
+          "name": "assetRouter",
+          "type": "IAssetRouter"
+        }
+      ]
+    },
+    {
+      "file": "contracts/pmm/BTCB/BTCB.sol",
+      "struct": "PMMStorage",
+      "fields": [
+        {
+          "name": "btcb",
+          "type": "IERC20Metadata"
+        },
+        {
+          "name": "lbtc",
+          "type": "ILBTC"
+        },
+        {
+          "name": "multiplier",
+          "type": "uint256"
+        },
+        {
+          "name": "divider",
+          "type": "uint256"
+        },
+        {
+          "name": "stakeLimit",
+          "type": "uint256"
+        },
+        {
+          "name": "totalStake",
+          "type": "uint256"
+        },
+        {
+          "name": "withdrawAddress",
+          "type": "address"
+        },
+        {
+          "name": "relativeFee",
+          "type": "uint16"
+        }
+      ]
+    },
+    {
+      "file": "contracts/pmm/CBBTC.sol",
+      "struct": "PMMStorage",
+      "fields": [
+        {
+          "name": "cbbtc",
+          "type": "IERC20Metadata"
+        },
+        {
+          "name": "lbtc",
+          "type": "ILBTC"
+        },
+        {
+          "name": "multiplier",
+          "type": "uint256"
+        },
+        {
+          "name": "divider",
+          "type": "uint256"
+        },
+        {
+          "name": "stakeLimit",
+          "type": "uint256"
+        },
+        {
+          "name": "totalStake",
+          "type": "uint256"
+        },
+        {
+          "name": "withdrawAddress",
+          "type": "address"
+        },
+        {
+          "name": "relativeFee",
+          "type": "uint16"
+        }
+      ]
+    },
+    {
+      "file": "contracts/PoR/PoR.sol",
+      "struct": "PORStorage",
+      "fields": [
+        {
+          "name": "idToPubkeyData",
+          "type": "mapping(bytes32 => RootPubkeyData)"
+        },
+        {
+          "name": "addressData",
+          "type": "AddressData[]"
+        },
+        {
+          "name": "addressIndex",
+          "type": "mapping(string => uint256)"
+        }
+      ]
+    },
+    {
+      "file": "contracts/fbtc/PartnerVault.sol",
+      "struct": "PartnerVaultStorage",
+      "fields": [
+        {
+          "name": "fbtc",
+          "type": "IERC20"
+        },
+        {
+          "name": "lbtc",
+          "type": "IBaseLBTC"
+        },
+        {
+          "name": "lockedFbtc",
+          "type": "LockedFBTC"
+        },
+        {
+          "name": "stakeLimit",
+          "type": "uint256"
+        },
+        {
+          "name": "totalStake",
+          "type": "uint256"
+        },
+        {
+          "name": "allowMintLbtc",
+          "type": "bool"
+        },
+        {
+          "name": "pendingWithdrawals",
+          "type": "mapping(bytes32 => Request)"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bridge/providers/LombardTokenPoolV2.sol",
+      "struct": "Path",
+      "fields": [
+        {
+          "name": "allowedCaller",
+          "type": "bytes32"
+        },
+        {
+          "name": "lChainId",
+          "type": "bytes32"
+        },
+        {
+          "name": "adapter",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "contracts/gmp/libs/GMPUtils.sol",
+      "struct": "Payload",
+      "fields": [
+        {
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "name": "msgPath",
+          "type": "bytes32"
+        },
+        {
+          "name": "msgNonce",
+          "type": "uint256"
+        },
+        {
+          "name": "msgSender",
+          "type": "bytes32"
+        },
+        {
+          "name": "msgRecipient",
+          "type": "address"
+        },
+        {
+          "name": "msgDestinationCaller",
+          "type": "address"
+        },
+        {
+          "name": "msgBody",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "contracts/ibc/IBCVoucher.sol",
+      "struct": "RateLimit",
+      "fields": [
+        {
+          "name": "supplyAtUpdate",
+          "type": "uint64"
+        },
+        {
+          "name": "limit",
+          "type": "uint64"
+        },
+        {
+          "name": "credit",
+          "type": "uint64"
+        },
+        {
+          "name": "startTime",
+          "type": "uint64"
+        },
+        {
+          "name": "window",
+          "type": "uint64"
+        },
+        {
+          "name": "epoch",
+          "type": "uint64"
+        },
+        {
+          "name": "threshold",
+          "type": "uint16"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/IEfficientRateLimiterV1.sol",
+      "struct": "RateLimitConfig",
+      "fields": [
+        {
+          "name": "eid",
+          "type": "uint32"
+        },
+        {
+          "name": "limit",
+          "type": "uint256"
+        },
+        {
+          "name": "window",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/libs/Actions.sol",
+      "struct": "RatioUpdate",
+      "fields": [
+        {
+          "name": "denom",
+          "type": "bytes32"
+        },
+        {
+          "name": "ratio",
+          "type": "uint256"
+        },
+        {
+          "name": "switchTime",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "struct": "Receipt",
+      "fields": [
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "fromToken",
+          "type": "bytes32"
+        },
+        {
+          "name": "toToken",
+          "type": "address"
+        },
+        {
+          "name": "lChainId",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "struct": "Release",
+      "fields": [
+        {
+          "name": "toToken",
+          "type": "address"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/fbtc/PartnerVault.sol",
+      "struct": "Request",
+      "fields": [
+        {
+          "name": "op",
+          "type": "Operation"
+        },
+        {
+          "name": "status",
+          "type": "Status"
+        },
+        {
+          "name": "nonce",
+          "type": "uint128"
+        },
+        {
+          "name": "srcChain",
+          "type": "bytes32"
+        },
+        {
+          "name": "srcAddress",
+          "type": "bytes"
+        },
+        {
+          "name": "dstChain",
+          "type": "bytes32"
+        },
+        {
+          "name": "dstAddress",
+          "type": "bytes"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "name": "extra",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "struct": "Role",
+      "fields": [
+        {
+          "name": "bearer",
+          "type": "mapping(address => bool)"
+        }
+      ]
+    },
+    {
+      "file": "contracts/PoR/PoR.sol",
+      "struct": "RootPubkeyData",
+      "fields": [
+        {
+          "name": "pubkey",
+          "type": "bytes"
+        },
+        {
+          "name": "derivedAddressesCount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/AssetRouter.sol",
+      "struct": "Route",
+      "fields": [
+        {
+          "name": "toTokens",
+          "type": "mapping(bytes32 => RouteType)"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/AssetRouter.sol",
+      "struct": "Routes",
+      "fields": [
+        {
+          "name": "direction",
+          "type": "mapping(bytes32 => Route)"
+        }
+      ]
+    },
+    {
+      "file": "contracts/bridge/BridgeV2.sol",
+      "struct": "SenderConfig",
+      "fields": [
+        {
+          "name": "whitelisted",
+          "type": "bool"
+        },
+        {
+          "name": "feeDiscount",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "file": "contracts/gmp/Mailbox.sol",
+      "struct": "SenderConfig",
+      "fields": [
+        {
+          "name": "maxPayloadSize",
+          "type": "uint32"
+        },
+        {
+          "name": "feeDisabled",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "file": "contracts/stakeAndBake/StakeAndBake.sol",
+      "struct": "StakeAndBakeData",
+      "fields": [
+        {
+          "name": "permitPayload",
+          "type": "bytes"
+        },
+        {
+          "name": "depositPayload",
+          "type": "bytes"
+        },
+        {
+          "name": "mintPayload",
+          "type": "bytes"
+        },
+        {
+          "name": "proof",
+          "type": "bytes"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/stakeAndBake/StakeAndBakeNativeToken.sol",
+      "struct": "StakeAndBakeData",
+      "fields": [
+        {
+          "name": "permitPayload",
+          "type": "bytes"
+        },
+        {
+          "name": "depositPayload",
+          "type": "bytes"
+        },
+        {
+          "name": "mintPayload",
+          "type": "bytes"
+        },
+        {
+          "name": "proof",
+          "type": "bytes"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/stakeAndBake/StakeAndBakeNativeToken.sol",
+      "struct": "StakeAndBakeNativeTokenStorage",
+      "fields": [
+        {
+          "name": "nativeLbtc",
+          "type": "IERC20"
+        },
+        {
+          "name": "adapter",
+          "type": "INativeLBTC"
+        },
+        {
+          "name": "depositor",
+          "type": "IDepositor"
+        },
+        {
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "name": "gasLimit",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/stakeAndBake/StakeAndBake.sol",
+      "struct": "StakeAndBakeStorage",
+      "fields": [
+        {
+          "name": "lbtc",
+          "type": "IStakedLBTC"
+        },
+        {
+          "name": "depositor",
+          "type": "IDepositor"
+        },
+        {
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "name": "gasLimit",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/StakedLBTCOracle.sol",
+      "struct": "StakedLBTCOracleStorage",
+      "fields": [
+        {
+          "name": "consortium",
+          "type": "INotaryConsortium"
+        },
+        {
+          "name": "tokenDetails",
+          "type": "TokenDetails"
+        },
+        {
+          "name": "prevRatio",
+          "type": "uint256"
+        },
+        {
+          "name": "currRatio",
+          "type": "uint256"
+        },
+        {
+          "name": "switchTime",
+          "type": "uint256"
+        },
+        {
+          "name": "maxAheadInterval",
+          "type": "uint256"
+        },
+        {
+          "name": "ratioThreshold",
+          "type": "uint32"
+        },
+        {
+          "name": "prevSwitchTime",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/StakedLBTC.sol",
+      "struct": "StakedLBTCStorage",
+      "fields": [
+        {
+          "name": "legacyUsedPayloads",
+          "type": "mapping(bytes32 => bool)"
+        },
+        {
+          "name": "__removed__name",
+          "type": "string"
+        },
+        {
+          "name": "__removed__symbol",
+          "type": "string"
+        },
+        {
+          "name": "__removed__isWithdrawalsEnabled",
+          "type": "bool"
+        },
+        {
+          "name": "__removed__consortium",
+          "type": "address"
+        },
+        {
+          "name": "__removed_isWBTCEnabled",
+          "type": "bool"
+        },
+        {
+          "name": "__removed_wbtc",
+          "type": "address"
+        },
+        {
+          "name": "treasury",
+          "type": "address"
+        },
+        {
+          "name": "__removed_destinations",
+          "type": "mapping(uint256 => address)"
+        },
+        {
+          "name": "__removed_depositCommission",
+          "type": "mapping(uint256 => uint16)"
+        },
+        {
+          "name": "__removed_usedBridgeProofs",
+          "type": "mapping(bytes32 => bool)"
+        },
+        {
+          "name": "__removed_globalNonce",
+          "type": "uint256"
+        },
+        {
+          "name": "__removed__destinations",
+          "type": "mapping(bytes32 => bytes32)"
+        },
+        {
+          "name": "__removed__depositRelativeCommission",
+          "type": "mapping(bytes32 => uint16)"
+        },
+        {
+          "name": "__removed__depositAbsoluteCommission",
+          "type": "mapping(bytes32 => uint64)"
+        },
+        {
+          "name": "__removed__burnCommission",
+          "type": "uint64"
+        },
+        {
+          "name": "__removed__dustFeeRate",
+          "type": "uint256"
+        },
+        {
+          "name": "__removed__bascule",
+          "type": "address"
+        },
+        {
+          "name": "__removed__pauser",
+          "type": "address"
+        },
+        {
+          "name": "__removed__minters",
+          "type": "mapping(address => bool)"
+        },
+        {
+          "name": "__removed__claimers",
+          "type": "mapping(address => bool)"
+        },
+        {
+          "name": "__removed__maximumFee",
+          "type": "uint256"
+        },
+        {
+          "name": "__removed__usedPayloads",
+          "type": "mapping(bytes32 => bool)"
+        },
+        {
+          "name": "__removed__operator",
+          "type": "address"
+        },
+        {
+          "name": "assetRouter",
+          "type": "IAssetRouter"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/AssetRouter.sol",
+      "struct": "TokenConfig",
+      "fields": [
+        {
+          "name": "redeemFee",
+          "type": "uint256"
+        },
+        {
+          "name": "redeemForBtcMinAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "maximumMintCommission",
+          "type": "uint256"
+        },
+        {
+          "name": "oracle",
+          "type": "IOracle"
+        },
+        {
+          "name": "toNativeCommission",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "file": "contracts/LBTC/StakedLBTCOracle.sol",
+      "struct": "TokenDetails",
+      "fields": [
+        {
+          "name": "denomHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "token",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "contracts/libs/Actions.sol",
+      "struct": "ValSetAction",
+      "fields": [
+        {
+          "name": "epoch",
+          "type": "uint256"
+        },
+        {
+          "name": "validators",
+          "type": "address[]"
+        },
+        {
+          "name": "weights",
+          "type": "uint256[]"
+        },
+        {
+          "name": "weightThreshold",
+          "type": "uint256"
+        },
+        {
+          "name": "height",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/consortium/Consortium.sol",
+      "struct": "ValidatorSet",
+      "fields": [
+        {
+          "name": "validators",
+          "type": "address[]"
+        },
+        {
+          "name": "weights",
+          "type": "uint256[]"
+        },
+        {
+          "name": "weightThreshold",
+          "type": "uint256"
+        }
+      ]
+    }
+  ],
+  "all_state_variables": [
+    {
+      "name": "bridge",
+      "type": "IBridge public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IBridge public override bridge",
+      "file": "contracts/bridge/adapters/AbstractAdapter.sol",
+      "contract": "AbstractAdapter"
+    },
+    {
+      "name": "ABI_SLOT_SIZE",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "32",
+      "declaration": "uint256 internal constant ABI_SLOT_SIZE = 32",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "DEPOSIT_BRIDGE_ACTION",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x5c70a505",
+      "declaration": "bytes4 internal constant DEPOSIT_BRIDGE_ACTION = 0x5c70a505",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "DEPOSIT_BTC_ACTION_V0",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xf2e73f7c",
+      "declaration": "bytes4 internal constant DEPOSIT_BTC_ACTION_V0 = 0xf2e73f7c",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "DEPOSIT_BTC_ACTION_V1",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xce25e7c2",
+      "declaration": "bytes4 internal constant DEPOSIT_BTC_ACTION_V1 = 0xce25e7c2",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "FEE_APPROVAL_ACTION",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x8175ca94",
+      "declaration": "bytes4 internal constant FEE_APPROVAL_ACTION = 0x8175ca94",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "FEE_APPROVAL_EIP712_ACTION",
+      "type": "bytes32 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x40ac9f6aa27075e64c1ed1ea2e831b20b8c25efdeb6b79fd0cf683c9a9c50725",
+      "declaration": "bytes32 internal constant FEE_APPROVAL_EIP712_ACTION = 0x40ac9f6aa27075e64c1ed1ea2e831b20b8c25efdeb6b79fd0cf683c9a9c50725",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "MAX_VALIDATOR_SET_SIZE",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "102",
+      "declaration": "uint256 private constant MAX_VALIDATOR_SET_SIZE = 102",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "MIN_VALIDATOR_SET_SIZE",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1",
+      "declaration": "uint256 private constant MIN_VALIDATOR_SET_SIZE = 1",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "NEW_VALSET",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x4aab1d6f",
+      "declaration": "bytes4 internal constant NEW_VALSET = 0x4aab1d6f",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "RATIO_UPDATE",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x6c722c2c",
+      "declaration": "bytes4 internal constant RATIO_UPDATE = 0x6c722c2c",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "CALLER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"CALLER_ROLE\")",
+      "declaration": "bytes32 public constant CALLER_ROLE = keccak256(\"CALLER_ROLE\")",
+      "file": "contracts/LBTC/AssetRouter.sol",
+      "contract": "AssetRouter"
+    },
+    {
+      "name": "CLAIMER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"CLAIMER_ROLE\")",
+      "declaration": "bytes32 public constant CLAIMER_ROLE = keccak256(\"CLAIMER_ROLE\")",
+      "file": "contracts/LBTC/AssetRouter.sol",
+      "contract": "AssetRouter"
+    },
+    {
+      "name": "OPERATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"OPERATOR_ROLE\")",
+      "declaration": "bytes32 public constant OPERATOR_ROLE = keccak256(\"OPERATOR_ROLE\")",
+      "file": "contracts/LBTC/AssetRouter.sol",
+      "contract": "AssetRouter"
+    },
+    {
+      "name": "ABI_SLOT_SIZE",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "32",
+      "declaration": "uint256 internal constant ABI_SLOT_SIZE = 32",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "ASSETS_MODULE_ADDRESS",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes32(uint256(0x008bf729ffe074caee622c02928173467e658e19e2))",
+      "declaration": "bytes32 public constant ASSETS_MODULE_ADDRESS = bytes32(uint256(0x008bf729ffe074caee622c02928173467e658e19e2))",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "BITCOIN_NATIVE_COIN",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes32(uint256(0x00000000000000000000000000000000000001))",
+      "declaration": "bytes32 public constant BITCOIN_NATIVE_COIN = bytes32(uint256(0x00000000000000000000000000000000000001))",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "BTC_STAKING_MODULE_ADDRESS",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes32(uint256(0x0089e3e4e7a699d6f131d893aeef7ee143706ac23a))",
+      "declaration": "bytes32 public constant BTC_STAKING_MODULE_ADDRESS = bytes32(uint256(0x0089e3e4e7a699d6f131d893aeef7ee143706ac23a))",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "LEDGER_CALLER",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes32(uint256(0x0))",
+      "declaration": "bytes32 public constant LEDGER_CALLER = bytes32(uint256(0x0))",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "MINT_SELECTOR",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x155b6b13",
+      "declaration": "bytes4 internal constant MINT_SELECTOR = 0x155b6b13",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "REDEEM_FROM_NATIVE_TOKEN_SELECTOR",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x4e3e5047",
+      "declaration": "bytes4 internal constant REDEEM_FROM_NATIVE_TOKEN_SELECTOR = 0x4e3e5047",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "REDEEM_REQUEST_SELECTOR",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xaa3db85f",
+      "declaration": "bytes4 internal constant REDEEM_REQUEST_SELECTOR = 0xaa3db85f",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "authority",
+      "type": "Authority public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Authority public authority",
+      "file": "contracts/mock/Auth.sol",
+      "contract": "Auth"
+    },
+    {
+      "name": "owner",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public owner",
+      "file": "contracts/mock/Auth.sol",
+      "contract": "Auth"
+    },
+    {
+      "name": "_allowances",
+      "type": "mapping(address => mapping(address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => uint256)) private _allowances",
+      "file": "contracts/mock/BTCBMock.sol",
+      "contract": "BTCBMock"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "contracts/mock/BTCBMock.sol",
+      "contract": "BTCBMock"
+    },
+    {
+      "name": "_decimals",
+      "type": "uint8 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint8 public _decimals",
+      "file": "contracts/mock/BTCBMock.sol",
+      "contract": "BTCBMock"
+    },
+    {
+      "name": "_name",
+      "type": "string public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string public _name",
+      "file": "contracts/mock/BTCBMock.sol",
+      "contract": "BTCBMock"
+    },
+    {
+      "name": "_symbol",
+      "type": "string public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string public _symbol",
+      "file": "contracts/mock/BTCBMock.sol",
+      "contract": "BTCBMock"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/mock/BTCBMock.sol",
+      "contract": "BTCBMock"
+    },
+    {
+      "name": "PMM_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x75814abe757fd1afd999e293d51fa6528839552b73d81c6cc151470e3106f500",
+      "declaration": "bytes32 private constant PMM_STORAGE_LOCATION = 0x75814abe757fd1afd999e293d51fa6528839552b73d81c6cc151470e3106f500",
+      "file": "contracts/pmm/BTCB/BTCB.sol",
+      "contract": "BTCBPMM"
+    },
+    {
+      "name": "DEPOSIT_REPORTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"DEPOSIT_REPORTER_ROLE\")",
+      "declaration": "bytes32 public constant DEPOSIT_REPORTER_ROLE = keccak256(\"DEPOSIT_REPORTER_ROLE\")",
+      "file": "contracts/bascule/Bascule.sol",
+      "contract": "Bascule"
+    },
+    {
+      "name": "PAUSER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"PAUSER_ROLE\")",
+      "declaration": "bytes32 public constant PAUSER_ROLE = keccak256(\"PAUSER_ROLE\")",
+      "file": "contracts/bascule/Bascule.sol",
+      "contract": "Bascule"
+    },
+    {
+      "name": "VALIDATION_GUARDIAN_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"VALIDATION_GUARDIAN_ROLE\")",
+      "declaration": "bytes32 public constant VALIDATION_GUARDIAN_ROLE = keccak256(\"VALIDATION_GUARDIAN_ROLE\")",
+      "file": "contracts/bascule/Bascule.sol",
+      "contract": "Bascule"
+    },
+    {
+      "name": "WITHDRAWAL_VALIDATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"WITHDRAWAL_VALIDATOR_ROLE\")",
+      "declaration": "bytes32 public constant WITHDRAWAL_VALIDATOR_ROLE = keccak256(\"WITHDRAWAL_VALIDATOR_ROLE\")",
+      "file": "contracts/bascule/Bascule.sol",
+      "contract": "Bascule"
+    },
+    {
+      "name": "_mMaxDeposits",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _mMaxDeposits",
+      "file": "contracts/bascule/Bascule.sol",
+      "contract": "Bascule"
+    },
+    {
+      "name": "_validateThreshold",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _validateThreshold",
+      "file": "contracts/bascule/Bascule.sol",
+      "contract": "Bascule"
+    },
+    {
+      "name": "depositHistory",
+      "type": "mapping(bytes32 depositID => DepositState status) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 depositID => DepositState status) public depositHistory",
+      "file": "contracts/bascule/Bascule.sol",
+      "contract": "Bascule"
+    },
+    {
+      "name": "DEPOSIT_REPORTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"DEPOSIT_REPORTER_ROLE\")",
+      "declaration": "bytes32 public constant DEPOSIT_REPORTER_ROLE = keccak256(\"DEPOSIT_REPORTER_ROLE\")",
+      "file": "contracts/bascule/BasculeV2.sol",
+      "contract": "BasculeV2"
+    },
+    {
+      "name": "PAUSER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"PAUSER_ROLE\")",
+      "declaration": "bytes32 public constant PAUSER_ROLE = keccak256(\"PAUSER_ROLE\")",
+      "file": "contracts/bascule/BasculeV2.sol",
+      "contract": "BasculeV2"
+    },
+    {
+      "name": "VALIDATION_GUARDIAN_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"VALIDATION_GUARDIAN_ROLE\")",
+      "declaration": "bytes32 public constant VALIDATION_GUARDIAN_ROLE = keccak256(\"VALIDATION_GUARDIAN_ROLE\")",
+      "file": "contracts/bascule/BasculeV2.sol",
+      "contract": "BasculeV2"
+    },
+    {
+      "name": "WITHDRAWAL_VALIDATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"WITHDRAWAL_VALIDATOR_ROLE\")",
+      "declaration": "bytes32 public constant WITHDRAWAL_VALIDATOR_ROLE = keccak256(\"WITHDRAWAL_VALIDATOR_ROLE\")",
+      "file": "contracts/bascule/BasculeV2.sol",
+      "contract": "BasculeV2"
+    },
+    {
+      "name": "_mMaxDeposits",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _mMaxDeposits",
+      "file": "contracts/bascule/BasculeV2.sol",
+      "contract": "BasculeV2"
+    },
+    {
+      "name": "_validateThreshold",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _validateThreshold",
+      "file": "contracts/bascule/BasculeV2.sol",
+      "contract": "BasculeV2"
+    },
+    {
+      "name": "depositHistory",
+      "type": "mapping(bytes32 depositID => DepositState status) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 depositID => DepositState status) public depositHistory",
+      "file": "contracts/bascule/BasculeV2.sol",
+      "contract": "BasculeV2"
+    },
+    {
+      "name": "DEPOSIT_REPORTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"DEPOSIT_REPORTER_ROLE\")",
+      "declaration": "bytes32 public constant DEPOSIT_REPORTER_ROLE = keccak256(\"DEPOSIT_REPORTER_ROLE\")",
+      "file": "contracts/bascule/BasculeV3.sol",
+      "contract": "BasculeV3"
+    },
+    {
+      "name": "PAUSER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"PAUSER_ROLE\")",
+      "declaration": "bytes32 public constant PAUSER_ROLE = keccak256(\"PAUSER_ROLE\")",
+      "file": "contracts/bascule/BasculeV3.sol",
+      "contract": "BasculeV3"
+    },
+    {
+      "name": "VALIDATION_GUARDIAN_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"VALIDATION_GUARDIAN_ROLE\")",
+      "declaration": "bytes32 public constant VALIDATION_GUARDIAN_ROLE = keccak256(\"VALIDATION_GUARDIAN_ROLE\")",
+      "file": "contracts/bascule/BasculeV3.sol",
+      "contract": "BasculeV3"
+    },
+    {
+      "name": "WITHDRAWAL_VALIDATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"WITHDRAWAL_VALIDATOR_ROLE\")",
+      "declaration": "bytes32 public constant WITHDRAWAL_VALIDATOR_ROLE = keccak256(\"WITHDRAWAL_VALIDATOR_ROLE\")",
+      "file": "contracts/bascule/BasculeV3.sol",
+      "contract": "BasculeV3"
+    },
+    {
+      "name": "_mMaxDeposits",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _mMaxDeposits",
+      "file": "contracts/bascule/BasculeV3.sol",
+      "contract": "BasculeV3"
+    },
+    {
+      "name": "_trustedSigner",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _trustedSigner",
+      "file": "contracts/bascule/BasculeV3.sol",
+      "contract": "BasculeV3"
+    },
+    {
+      "name": "_validateThreshold",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _validateThreshold",
+      "file": "contracts/bascule/BasculeV3.sol",
+      "contract": "BasculeV3"
+    },
+    {
+      "name": "depositHistory",
+      "type": "mapping(bytes32 depositID => DepositState status) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 depositID => DepositState status) public depositHistory",
+      "file": "contracts/bascule/BasculeV3.sol",
+      "contract": "BasculeV3"
+    },
+    {
+      "name": "EIP712StorageLocation",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xa16a46d94261c7517cc8ff89f61c0ce93598e3c849801011dee649a6a557d100",
+      "declaration": "bytes32 private constant EIP712StorageLocation = 0xa16a46d94261c7517cc8ff89f61c0ce93598e3c849801011dee649a6a557d100",
+      "file": "contracts/LBTC/BaseLBTC.sol",
+      "contract": "BaseLBTC"
+    },
+    {
+      "name": "ERC20StorageLocation",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x52c63247e1f47db19d5ce0460030c497f067ca4cebf71ba98eeadabe20bace00",
+      "declaration": "bytes32 private constant ERC20StorageLocation = 0x52c63247e1f47db19d5ce0460030c497f067ca4cebf71ba98eeadabe20bace00",
+      "file": "contracts/LBTC/BaseLBTC.sol",
+      "contract": "BaseLBTC"
+    },
+    {
+      "name": "MINT_BURN_PAUSER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"MINT_BURN_PAUSER_ROLE\")",
+      "declaration": "bytes32 public constant MINT_BURN_PAUSER_ROLE = keccak256(\"MINT_BURN_PAUSER_ROLE\")",
+      "file": "contracts/LBTC/BaseLBTC.sol",
+      "contract": "BaseLBTC"
+    },
+    {
+      "name": "PAUSER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"PAUSER_ROLE\")",
+      "declaration": "bytes32 public constant PAUSER_ROLE = keccak256(\"PAUSER_ROLE\")",
+      "file": "contracts/LBTC/BaseLBTC.sol",
+      "contract": "BaseLBTC"
+    },
+    {
+      "name": "MINTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"MINTER_ROLE\")",
+      "declaration": "bytes32 public constant MINTER_ROLE = keccak256(\"MINTER_ROLE\")",
+      "file": "contracts/LBTC/BridgeTokenAdapter.sol",
+      "contract": "BridgeTokenAdapter"
+    },
+    {
+      "name": "PAUSER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"PAUSER_ROLE\")",
+      "declaration": "bytes32 public constant PAUSER_ROLE = keccak256(\"PAUSER_ROLE\")",
+      "file": "contracts/LBTC/BridgeTokenAdapter.sol",
+      "contract": "BridgeTokenAdapter"
+    },
+    {
+      "name": "TOKEN_DECIMALS",
+      "type": "uint8 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "8",
+      "declaration": "uint8 private constant TOKEN_DECIMALS = 8",
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "contract": "BridgeTokenMock"
+    },
+    {
+      "name": "TOKEN_NAME",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"Bitcoin\"",
+      "declaration": "string private constant TOKEN_NAME = \"Bitcoin\"",
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "contract": "BridgeTokenMock"
+    },
+    {
+      "name": "TOKEN_SYMBOL",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"BTC.b\"",
+      "declaration": "string private constant TOKEN_SYMBOL = \"BTC.b\"",
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "contract": "BridgeTokenMock"
+    },
+    {
+      "name": "_deployer",
+      "type": "address private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address private immutable _deployer",
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "contract": "BridgeTokenMock"
+    },
+    {
+      "name": "bridgeRoles",
+      "type": "Roles.Role private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "Roles.Role private bridgeRoles",
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "contract": "BridgeTokenMock"
+    },
+    {
+      "name": "chainIds",
+      "type": "mapping(uint256 => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => bool) public chainIds",
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "contract": "BridgeTokenMock"
+    },
+    {
+      "name": "getTokenAdapter",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public getTokenAdapter",
+      "file": "contracts/bridge/providers/BridgeTokenPool.sol",
+      "contract": "BridgeTokenPool"
+    },
+    {
+      "name": "FEE_DISCOUNT_BASE",
+      "type": "uint32 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "100_00",
+      "declaration": "uint32 internal constant FEE_DISCOUNT_BASE = 100_00",
+      "file": "contracts/bridge/BridgeV2.sol",
+      "contract": "BridgeV2"
+    },
+    {
+      "name": "MSG_LENGTH",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "129",
+      "declaration": "uint256 internal constant MSG_LENGTH = 129",
+      "file": "contracts/bridge/BridgeV2.sol",
+      "contract": "BridgeV2"
+    },
+    {
+      "name": "MSG_VERSION",
+      "type": "uint8 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2",
+      "declaration": "uint8 public constant MSG_VERSION = 2",
+      "file": "contracts/bridge/BridgeV2.sol",
+      "contract": "BridgeV2"
+    },
+    {
+      "name": "MSG_VERSION_MIN",
+      "type": "uint8 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1",
+      "declaration": "uint8 public constant MSG_VERSION_MIN = 1",
+      "file": "contracts/bridge/BridgeV2.sol",
+      "contract": "BridgeV2"
+    },
+    {
+      "name": "OPERATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"OPERATOR_ROLE\")",
+      "declaration": "bytes32 public constant OPERATOR_ROLE = keccak256(\"OPERATOR_ROLE\")",
+      "file": "contracts/pmm/CBBTC.sol",
+      "contract": "CBBTCPMM"
+    },
+    {
+      "name": "PMM_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x41c6bdd99210344dba22372f555bef55094fdfda50b5100d427f58faa7ee0900",
+      "declaration": "bytes32 private constant PMM_STORAGE_LOCATION = 0x41c6bdd99210344dba22372f555bef55094fdfda50b5100d427f58faa7ee0900",
+      "file": "contracts/pmm/CBBTC.sol",
+      "contract": "CBBTCPMM"
+    },
+    {
+      "name": "s_blessedByRoot",
+      "type": "mapping(address commitStore => mapping(bytes32 root => bool blessed)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address commitStore => mapping(bytes32 root => bool blessed)) private s_blessedByRoot",
+      "file": "contracts/mock/CCIPRMNMock.sol",
+      "contract": "CCIPRMNMock"
+    },
+    {
+      "name": "s_cursedBySubject",
+      "type": "mapping(bytes16 subject => bool cursed) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes16 subject => bool cursed) private s_cursedBySubject",
+      "file": "contracts/mock/CCIPRMNMock.sol",
+      "contract": "CCIPRMNMock"
+    },
+    {
+      "name": "s_globalCursed",
+      "type": "bool private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool private s_globalCursed",
+      "file": "contracts/mock/CCIPRMNMock.sol",
+      "contract": "CCIPRMNMock"
+    },
+    {
+      "name": "s_isCursedRevert",
+      "type": "bytes private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bytes private s_isCursedRevert",
+      "file": "contracts/mock/CCIPRMNMock.sol",
+      "contract": "CCIPRMNMock"
+    },
+    {
+      "name": "_lastBurnedAmount",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal _lastBurnedAmount",
+      "file": "contracts/bridge/adapters/CLAdapter.sol",
+      "contract": "CLAdapter"
+    },
+    {
+      "name": "_lastPayload",
+      "type": "bytes internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bytes internal _lastPayload",
+      "file": "contracts/bridge/adapters/CLAdapter.sol",
+      "contract": "CLAdapter"
+    },
+    {
+      "name": "getChain",
+      "type": "mapping(uint64 => bytes32) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint64 => bytes32) public getChain",
+      "file": "contracts/bridge/adapters/CLAdapter.sol",
+      "contract": "CLAdapter"
+    },
+    {
+      "name": "getExecutionGasLimit",
+      "type": "uint128 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint128 public getExecutionGasLimit",
+      "file": "contracts/bridge/adapters/CLAdapter.sol",
+      "contract": "CLAdapter"
+    },
+    {
+      "name": "getRemoteChainSelector",
+      "type": "mapping(bytes32 => uint64) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint64) public getRemoteChainSelector",
+      "file": "contracts/bridge/adapters/CLAdapter.sol",
+      "contract": "CLAdapter"
+    },
+    {
+      "name": "refunds",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public refunds",
+      "file": "contracts/bridge/adapters/CLAdapter.sol",
+      "contract": "CLAdapter"
+    },
+    {
+      "name": "tokenPool",
+      "type": "LombardTokenPool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "LombardTokenPool public tokenPool",
+      "file": "contracts/bridge/adapters/CLAdapter.sol",
+      "contract": "CLAdapter"
+    },
+    {
+      "name": "ADD_BLACKLIST_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"ADD_BLACKLIST_ROLE\")",
+      "declaration": "bytes32 public constant ADD_BLACKLIST_ROLE = keccak256(\"ADD_BLACKLIST_ROLE\")",
+      "file": "contracts/consortium/DepositNotarizationBlacklist.sol",
+      "contract": "DepositNotarizationBlacklist"
+    },
+    {
+      "name": "REMOVE_BLACKLIST_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"REMOVE_BLACKLIST_ROLE\")",
+      "declaration": "bytes32 public constant REMOVE_BLACKLIST_ROLE = keccak256(\"REMOVE_BLACKLIST_ROLE\")",
+      "file": "contracts/consortium/DepositNotarizationBlacklist.sol",
+      "contract": "DepositNotarizationBlacklist"
+    },
+    {
+      "name": "_blacklist",
+      "type": "mapping(bytes32 => mapping(uint32 => bool)) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => mapping(uint32 => bool)) internal _blacklist",
+      "file": "contracts/consortium/DepositNotarizationBlacklist.sol",
+      "contract": "DepositNotarizationBlacklist"
+    },
+    {
+      "name": "EIP1271_MAGICVALUE",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x1626ba7e",
+      "declaration": "bytes4 internal constant EIP1271_MAGICVALUE = 0x1626ba7e",
+      "file": "contracts/libs/EIP1271SignatureUtils.sol",
+      "contract": "EIP1271SignatureUtils"
+    },
+    {
+      "name": "EIP1271_WRONGVALUE",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xffffffff",
+      "declaration": "bytes4 internal constant EIP1271_WRONGVALUE = 0xffffffff",
+      "file": "contracts/libs/EIP1271SignatureUtils.sol",
+      "contract": "EIP1271SignatureUtils"
+    },
+    {
+      "name": "depositAsset",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable depositAsset",
+      "file": "contracts/stakeAndBake/depositor/erc4626/ERC4626Depositor.sol",
+      "contract": "ERC4626Depositor"
+    },
+    {
+      "name": "stakeAndBake",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable stakeAndBake",
+      "file": "contracts/stakeAndBake/depositor/erc4626/ERC4626Depositor.sol",
+      "contract": "ERC4626Depositor"
+    },
+    {
+      "name": "vault",
+      "type": "IERC4626 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC4626 public immutable vault",
+      "file": "contracts/stakeAndBake/depositor/erc4626/ERC4626Depositor.sol",
+      "contract": "ERC4626Depositor"
+    },
+    {
+      "name": "EIP712StorageLocation",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xa16a46d94261c7517cc8ff89f61c0ce93598e3c849801011dee649a6a557d100",
+      "declaration": "bytes32 private constant EIP712StorageLocation = 0xa16a46d94261c7517cc8ff89f61c0ce93598e3c849801011dee649a6a557d100",
+      "file": "contracts/stakeAndBake/depositor/veda/ERC4626VaultWrapper.sol",
+      "contract": "ERC4626VaultWrapper"
+    },
+    {
+      "name": "ERC20StorageLocation",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x52c63247e1f47db19d5ce0460030c497f067ca4cebf71ba98eeadabe20bace00",
+      "declaration": "bytes32 private constant ERC20StorageLocation = 0x52c63247e1f47db19d5ce0460030c497f067ca4cebf71ba98eeadabe20bace00",
+      "file": "contracts/stakeAndBake/depositor/veda/ERC4626VaultWrapper.sol",
+      "contract": "ERC4626VaultWrapper"
+    },
+    {
+      "name": "PAUSER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"PAUSER_ROLE\")",
+      "declaration": "bytes32 public constant PAUSER_ROLE = keccak256(\"PAUSER_ROLE\")",
+      "file": "contracts/stakeAndBake/depositor/veda/ERC4626VaultWrapper.sol",
+      "contract": "ERC4626VaultWrapper"
+    },
+    {
+      "name": "inboundRateLimits",
+      "type": "mapping(uint32 srcEid => RateLimits.Data limit) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint32 srcEid => RateLimits.Data limit) public inboundRateLimits",
+      "file": "contracts/bridge/oft/EfficientRateLimiter.sol",
+      "contract": "EfficientRateLimiter"
+    },
+    {
+      "name": "outboundRateLimits",
+      "type": "mapping(uint32 dstEid => RateLimits.Data limit) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint32 dstEid => RateLimits.Data limit) public outboundRateLimits",
+      "file": "contracts/bridge/oft/EfficientRateLimiter.sol",
+      "contract": "EfficientRateLimiter"
+    },
+    {
+      "name": "OPERATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"OPERATOR_ROLE\")",
+      "declaration": "bytes32 public constant OPERATOR_ROLE = keccak256(\"OPERATOR_ROLE\")",
+      "file": "contracts/fbtc/PartnerVault.sol",
+      "contract": "FBTCPartnerVault"
+    },
+    {
+      "name": "PARTNER_VAULT_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xf2032fbd6c6daf0509f7b47277c23d318b85e97f8401e745afc792c2709cec00",
+      "declaration": "bytes32 private constant PARTNER_VAULT_STORAGE_LOCATION = 0xf2032fbd6c6daf0509f7b47277c23d318b85e97f8401e745afc792c2709cec00",
+      "file": "contracts/fbtc/PartnerVault.sol",
+      "contract": "FBTCPartnerVault"
+    },
+    {
+      "name": "MAX_COMMISSION",
+      "type": "uint256 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10000",
+      "declaration": "uint256 constant MAX_COMMISSION = 10000",
+      "file": "contracts/libs/FeeUtils.sol",
+      "contract": "FeeUtils"
+    },
+    {
+      "name": "MAX_UINT256",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2 ** 256 - 1",
+      "declaration": "uint256 internal constant MAX_UINT256 = 2 ** 256 - 1",
+      "file": "contracts/mock/TellerWithMultiAssetSupportMock.sol",
+      "contract": "FixedPointMathLib"
+    },
+    {
+      "name": "WAD",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1e18",
+      "declaration": "uint256 internal constant WAD = 1e18",
+      "file": "contracts/mock/TellerWithMultiAssetSupportMock.sol",
+      "contract": "FixedPointMathLib"
+    },
+    {
+      "name": "MINT_REPORTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"MINT_REPORTER_ROLE\")",
+      "declaration": "bytes32 public constant MINT_REPORTER_ROLE = keccak256(\"MINT_REPORTER_ROLE\")",
+      "file": "contracts/bascule/GMPBasculeV1.sol",
+      "contract": "GMPBasculeV1"
+    },
+    {
+      "name": "MINT_VALIDATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"MINT_VALIDATOR_ROLE\")",
+      "declaration": "bytes32 public constant MINT_VALIDATOR_ROLE = keccak256(\"MINT_VALIDATOR_ROLE\")",
+      "file": "contracts/bascule/GMPBasculeV1.sol",
+      "contract": "GMPBasculeV1"
+    },
+    {
+      "name": "VALIDATION_GUARDIAN_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"VALIDATION_GUARDIAN_ROLE\")",
+      "declaration": "bytes32 public constant VALIDATION_GUARDIAN_ROLE = keccak256(\"VALIDATION_GUARDIAN_ROLE\")",
+      "file": "contracts/bascule/GMPBasculeV1.sol",
+      "contract": "GMPBasculeV1"
+    },
+    {
+      "name": "maxMints",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxMints",
+      "file": "contracts/bascule/GMPBasculeV1.sol",
+      "contract": "GMPBasculeV1"
+    },
+    {
+      "name": "mintHistory",
+      "type": "mapping(bytes32 mintID => Mint mint) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 mintID => Mint mint) public mintHistory",
+      "file": "contracts/bascule/GMPBasculeV1.sol",
+      "contract": "GMPBasculeV1"
+    },
+    {
+      "name": "trustedSigner",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public trustedSigner",
+      "file": "contracts/bascule/GMPBasculeV1.sol",
+      "contract": "GMPBasculeV1"
+    },
+    {
+      "name": "validateThreshold",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public validateThreshold",
+      "file": "contracts/bascule/GMPBasculeV1.sol",
+      "contract": "GMPBasculeV1"
+    },
+    {
+      "name": "MINT_REPORTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"MINT_REPORTER_ROLE\")",
+      "declaration": "bytes32 public constant MINT_REPORTER_ROLE = keccak256(\"MINT_REPORTER_ROLE\")",
+      "file": "contracts/bascule/GMPBasculeV2.sol",
+      "contract": "GMPBasculeV2"
+    },
+    {
+      "name": "MINT_VALIDATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"MINT_VALIDATOR_ROLE\")",
+      "declaration": "bytes32 public constant MINT_VALIDATOR_ROLE = keccak256(\"MINT_VALIDATOR_ROLE\")",
+      "file": "contracts/bascule/GMPBasculeV2.sol",
+      "contract": "GMPBasculeV2"
+    },
+    {
+      "name": "VALIDATION_GUARDIAN_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"VALIDATION_GUARDIAN_ROLE\")",
+      "declaration": "bytes32 public constant VALIDATION_GUARDIAN_ROLE = keccak256(\"VALIDATION_GUARDIAN_ROLE\")",
+      "file": "contracts/bascule/GMPBasculeV2.sol",
+      "contract": "GMPBasculeV2"
+    },
+    {
+      "name": "maxMints",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public maxMints",
+      "file": "contracts/bascule/GMPBasculeV2.sol",
+      "contract": "GMPBasculeV2"
+    },
+    {
+      "name": "mintHistory",
+      "type": "mapping(bytes32 mintID => MintState state) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 mintID => MintState state) public mintHistory",
+      "file": "contracts/bascule/GMPBasculeV2.sol",
+      "contract": "GMPBasculeV2"
+    },
+    {
+      "name": "trustedSigner",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public trustedSigner",
+      "file": "contracts/bascule/GMPBasculeV2.sol",
+      "contract": "GMPBasculeV2"
+    },
+    {
+      "name": "validateThreshold",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public validateThreshold",
+      "file": "contracts/bascule/GMPBasculeV2.sol",
+      "contract": "GMPBasculeV2"
+    },
+    {
+      "name": "enabled",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public enabled",
+      "file": "contracts/mock/GMPHandlerMock.sol",
+      "contract": "GMPHandlerMock"
+    },
+    {
+      "name": "GMP_V1_SELECTOR",
+      "type": "bytes4 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xe288fb4a",
+      "declaration": "bytes4 public constant GMP_V1_SELECTOR = 0xe288fb4a",
+      "file": "contracts/gmp/libs/GMPUtils.sol",
+      "contract": "GMPUtils"
+    },
+    {
+      "name": "MIN_GMP_LENGTH",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "32 * 6 + 4",
+      "declaration": "uint256 internal constant MIN_GMP_LENGTH = 32 * 6 + 4",
+      "file": "contracts/gmp/libs/GMPUtils.sol",
+      "contract": "GMPUtils"
+    },
+    {
+      "name": "IBCVOUCHER_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xbcdad5fb3ea2d152a63bdfe3b5528166cf47e4744fa97c998b76e45dac6f2800",
+      "declaration": "bytes32 private constant IBCVOUCHER_STORAGE_LOCATION = 0xbcdad5fb3ea2d152a63bdfe3b5528166cf47e4744fa97c998b76e45dac6f2800",
+      "file": "contracts/ibc/IBCVoucher.sol",
+      "contract": "IBCVoucher"
+    },
+    {
+      "name": "MIN_RATE_LIMIT_WINDOW",
+      "type": "uint16 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "3600",
+      "declaration": "uint16 public constant MIN_RATE_LIMIT_WINDOW = 3600",
+      "file": "contracts/ibc/IBCVoucher.sol",
+      "contract": "IBCVoucher"
+    },
+    {
+      "name": "OPERATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"OPERATOR_ROLE\")",
+      "declaration": "bytes32 public constant OPERATOR_ROLE = keccak256(\"OPERATOR_ROLE\")",
+      "file": "contracts/ibc/IBCVoucher.sol",
+      "contract": "IBCVoucher"
+    },
+    {
+      "name": "RATIO_MULTIPLIER",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10000",
+      "declaration": "uint256 public constant RATIO_MULTIPLIER = 10000",
+      "file": "contracts/ibc/IBCVoucher.sol",
+      "contract": "IBCVoucher"
+    },
+    {
+      "name": "RELAYER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"RELAYER_ROLE\")",
+      "declaration": "bytes32 public constant RELAYER_ROLE = keccak256(\"RELAYER_ROLE\")",
+      "file": "contracts/ibc/IBCVoucher.sol",
+      "contract": "IBCVoucher"
+    },
+    {
+      "name": "fbtc",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable fbtc",
+      "file": "contracts/mock/LockedFBTCMock.sol",
+      "contract": "LockedFBTCMock"
+    },
+    {
+      "name": "adapter",
+      "type": "CLAdapter public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "CLAdapter public adapter",
+      "file": "contracts/bridge/adapters/TokenPool.sol",
+      "contract": "LombardTokenPool"
+    },
+    {
+      "name": "bridge",
+      "type": "IBridgeV2 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IBridgeV2 public immutable bridge",
+      "file": "contracts/bridge/providers/LombardTokenPoolV2.sol",
+      "contract": "LombardTokenPoolV2"
+    },
+    {
+      "name": "chainSelectorToPath",
+      "type": "mapping(uint64 chainSelector => Path path) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint64 chainSelector => Path path) internal chainSelectorToPath",
+      "file": "contracts/bridge/providers/LombardTokenPoolV2.sol",
+      "contract": "LombardTokenPoolV2"
+    },
+    {
+      "name": "typeAndVersion",
+      "type": "string public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"LombardTokenPoolV2 1.6.1\"",
+      "declaration": "string public constant typeAndVersion = \"LombardTokenPoolV2 1.6.1\"",
+      "file": "contracts/bridge/providers/LombardTokenPoolV2.sol",
+      "contract": "LombardTokenPoolV2"
+    },
+    {
+      "name": "GLOBAL_MAX_PAYLOAD_SIZE",
+      "type": "uint32 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10000",
+      "declaration": "uint32 internal constant GLOBAL_MAX_PAYLOAD_SIZE = 10000",
+      "file": "contracts/gmp/Mailbox.sol",
+      "contract": "Mailbox"
+    },
+    {
+      "name": "MAILBOX_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x0278229f5c76f980110e38383ce9a522090076c3f8b366b016a9b1421b307400",
+      "declaration": "bytes32 private constant MAILBOX_STORAGE_LOCATION = 0x0278229f5c76f980110e38383ce9a522090076c3f8b366b016a9b1421b307400",
+      "file": "contracts/gmp/Mailbox.sol",
+      "contract": "Mailbox"
+    },
+    {
+      "name": "TREASURER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"TREASURER_ROLE\")",
+      "declaration": "bytes32 public constant TREASURER_ROLE = keccak256(\"TREASURER_ROLE\")",
+      "file": "contracts/gmp/Mailbox.sol",
+      "contract": "Mailbox"
+    },
+    {
+      "name": "canReceive",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public canReceive",
+      "file": "contracts/mock/MailboxTreasuryMock.sol",
+      "contract": "MailboxTreasuryMock"
+    },
+    {
+      "name": "mailbox",
+      "type": "address internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address internal mailbox",
+      "file": "contracts/mock/MailboxTreasuryMock.sol",
+      "contract": "MailboxTreasuryMock"
+    },
+    {
+      "name": "DEFAULT_GAS_LIMIT",
+      "type": "uint32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "200_000",
+      "declaration": "uint32 public constant DEFAULT_GAS_LIMIT = 200_000",
+      "file": "contracts/mock/CCIPMocks.sol",
+      "contract": "MockCCIPRouter"
+    },
+    {
+      "name": "GAS_FOR_CALL_EXACT_CHECK",
+      "type": "uint16 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "5_000",
+      "declaration": "uint16 public constant GAS_FOR_CALL_EXACT_CHECK = 5_000",
+      "file": "contracts/mock/CCIPMocks.sol",
+      "contract": "MockCCIPRouter"
+    },
+    {
+      "name": "s_mockFeeTokenAmount",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal s_mockFeeTokenAmount",
+      "file": "contracts/mock/CCIPMocks.sol",
+      "contract": "MockCCIPRouter"
+    },
+    {
+      "name": "CLAIMER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"CLAIMER_ROLE\")",
+      "declaration": "bytes32 public constant CLAIMER_ROLE = keccak256(\"CLAIMER_ROLE\")",
+      "file": "contracts/LBTC/NativeLBTC.sol",
+      "contract": "NativeLBTC"
+    },
+    {
+      "name": "MINTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"MINTER_ROLE\")",
+      "declaration": "bytes32 public constant MINTER_ROLE = keccak256(\"MINTER_ROLE\")",
+      "file": "contracts/LBTC/NativeLBTC.sol",
+      "contract": "NativeLBTC"
+    },
+    {
+      "name": "OPERATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"OPERATOR_ROLE\")",
+      "declaration": "bytes32 public constant OPERATOR_ROLE = keccak256(\"OPERATOR_ROLE\")",
+      "file": "contracts/PoR/PoR.sol",
+      "contract": "PoR"
+    },
+    {
+      "name": "DEPLOYER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"DEPLOYER_ROLE\")",
+      "declaration": "bytes32 public constant DEPLOYER_ROLE = keccak256(\"DEPLOYER_ROLE\")",
+      "file": "contracts/factory/ProxyFactory.sol",
+      "contract": "ProxyFactory"
+    },
+    {
+      "name": "_ratio",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _ratio",
+      "file": "contracts/mock/RatioFeedMock.sol",
+      "contract": "RatioFeedMock"
+    },
+    {
+      "name": "REQUEST_SELECTOR",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xf86c9e7b",
+      "declaration": "bytes4 internal constant REQUEST_SELECTOR = 0xf86c9e7b",
+      "file": "contracts/LBTC/libraries/Redeem.sol",
+      "contract": "Redeem"
+    },
+    {
+      "name": "getRolesWithCapability",
+      "type": "mapping(address => mapping(bytes4 => bytes32)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(bytes4 => bytes32)) public getRolesWithCapability",
+      "file": "contracts/mock/Auth.sol",
+      "contract": "RolesAuthority"
+    },
+    {
+      "name": "isCapabilityPublic",
+      "type": "mapping(address => mapping(bytes4 => bool)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(bytes4 => bool)) public isCapabilityPublic",
+      "file": "contracts/mock/Auth.sol",
+      "contract": "RolesAuthority"
+    },
+    {
+      "name": "CLAIMER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"CLAIMER_ROLE\")",
+      "declaration": "bytes32 public constant CLAIMER_ROLE = keccak256(\"CLAIMER_ROLE\")",
+      "file": "contracts/stakeAndBake/StakeAndBake.sol",
+      "contract": "StakeAndBake"
+    },
+    {
+      "name": "FEE_OPERATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"FEE_OPERATOR_ROLE\")",
+      "declaration": "bytes32 public constant FEE_OPERATOR_ROLE = keccak256(\"FEE_OPERATOR_ROLE\")",
+      "file": "contracts/stakeAndBake/StakeAndBake.sol",
+      "contract": "StakeAndBake"
+    },
+    {
+      "name": "MAXIMUM_FEE",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "100000",
+      "declaration": "uint256 public constant MAXIMUM_FEE = 100000",
+      "file": "contracts/stakeAndBake/StakeAndBake.sol",
+      "contract": "StakeAndBake"
+    },
+    {
+      "name": "STAKE_AND_BAKE_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xd0321c9642a0f7a5931cd62db04cb9e2c0d32906ef8824eece128a7ad5e4f500",
+      "declaration": "bytes32 private constant STAKE_AND_BAKE_STORAGE_LOCATION = 0xd0321c9642a0f7a5931cd62db04cb9e2c0d32906ef8824eece128a7ad5e4f500",
+      "file": "contracts/stakeAndBake/StakeAndBake.sol",
+      "contract": "StakeAndBake"
+    },
+    {
+      "name": "CLAIMER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"CLAIMER_ROLE\")",
+      "declaration": "bytes32 public constant CLAIMER_ROLE = keccak256(\"CLAIMER_ROLE\")",
+      "file": "contracts/stakeAndBake/StakeAndBakeNativeToken.sol",
+      "contract": "StakeAndBakeNativeToken"
+    },
+    {
+      "name": "FEE_OPERATOR_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"FEE_OPERATOR_ROLE\")",
+      "declaration": "bytes32 public constant FEE_OPERATOR_ROLE = keccak256(\"FEE_OPERATOR_ROLE\")",
+      "file": "contracts/stakeAndBake/StakeAndBakeNativeToken.sol",
+      "contract": "StakeAndBakeNativeToken"
+    },
+    {
+      "name": "MAXIMUM_FEE",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "100000",
+      "declaration": "uint256 public constant MAXIMUM_FEE = 100000",
+      "file": "contracts/stakeAndBake/StakeAndBakeNativeToken.sol",
+      "contract": "StakeAndBakeNativeToken"
+    },
+    {
+      "name": "STAKE_AND_BAKE_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x0e47f6bdb2c8c295db7a485b9611b576c67616f4bb0fcb676c069d08170f1800",
+      "declaration": "bytes32 private constant STAKE_AND_BAKE_STORAGE_LOCATION = 0x0e47f6bdb2c8c295db7a485b9611b576c67616f4bb0fcb676c069d08170f1800",
+      "file": "contracts/stakeAndBake/StakeAndBakeNativeToken.sol",
+      "contract": "StakeAndBakeNativeToken"
+    },
+    {
+      "name": "CLAIMER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"CLAIMER_ROLE\")",
+      "declaration": "bytes32 public constant CLAIMER_ROLE = keccak256(\"CLAIMER_ROLE\")",
+      "file": "contracts/LBTC/StakedLBTC.sol",
+      "contract": "StakedLBTC"
+    },
+    {
+      "name": "MINTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"MINTER_ROLE\")",
+      "declaration": "bytes32 public constant MINTER_ROLE = keccak256(\"MINTER_ROLE\")",
+      "file": "contracts/LBTC/StakedLBTC.sol",
+      "contract": "StakedLBTC"
+    },
+    {
+      "name": "MAX_RATIO_THRESHOLD",
+      "type": "uint32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint32(100_000000)",
+      "declaration": "uint32 private constant MAX_RATIO_THRESHOLD = uint32(100_000000)",
+      "file": "contracts/LBTC/StakedLBTCOracle.sol",
+      "contract": "StakedLBTCOracle"
+    },
+    {
+      "name": "RATIO_DEFAULT_SWITCH_INTERVAL",
+      "type": "uint32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "uint32(86400)",
+      "declaration": "uint32 private constant RATIO_DEFAULT_SWITCH_INTERVAL = uint32(86400)",
+      "file": "contracts/LBTC/StakedLBTCOracle.sol",
+      "contract": "StakedLBTCOracle"
+    },
+    {
+      "name": "depositAsset",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable depositAsset",
+      "file": "contracts/stakeAndBake/depositor/veda/TellerWithMultiAssetSupportDepositor.sol",
+      "contract": "TellerWithMultiAssetSupportDepositor"
+    },
+    {
+      "name": "stakeAndBake",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable stakeAndBake",
+      "file": "contracts/stakeAndBake/depositor/veda/TellerWithMultiAssetSupportDepositor.sol",
+      "contract": "TellerWithMultiAssetSupportDepositor"
+    },
+    {
+      "name": "teller",
+      "type": "ITeller public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ITeller public immutable teller",
+      "file": "contracts/stakeAndBake/depositor/veda/TellerWithMultiAssetSupportDepositor.sol",
+      "contract": "TellerWithMultiAssetSupportDepositor"
+    },
+    {
+      "name": "vault",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable vault",
+      "file": "contracts/stakeAndBake/depositor/veda/TellerWithMultiAssetSupportDepositor.sol",
+      "contract": "TellerWithMultiAssetSupportDepositor"
+    },
+    {
+      "name": "assetData",
+      "type": "mapping(ERC20 => Asset) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(ERC20 => Asset) public assetData",
+      "file": "contracts/mock/TellerWithMultiAssetSupportMock.sol",
+      "contract": "TellerWithMultiAssetSupportMock"
+    },
+    {
+      "name": "_decimals",
+      "type": "uint8",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint8 _decimals",
+      "file": "contracts/mock/WBTCMock.sol",
+      "contract": "WBTCMock"
+    }
+  ],
+  "total_balance_variables": [
+    {
+      "name": "ASSETS_MODULE_ADDRESS",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes32(uint256(0x008bf729ffe074caee622c02928173467e658e19e2))",
+      "declaration": "bytes32 public constant ASSETS_MODULE_ADDRESS = bytes32(uint256(0x008bf729ffe074caee622c02928173467e658e19e2))",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "BTC_STAKING_MODULE_ADDRESS",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes32(uint256(0x0089e3e4e7a699d6f131d893aeef7ee143706ac23a))",
+      "declaration": "bytes32 public constant BTC_STAKING_MODULE_ADDRESS = bytes32(uint256(0x0089e3e4e7a699d6f131d893aeef7ee143706ac23a))",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private _balances",
+      "file": "contracts/mock/BTCBMock.sol",
+      "contract": "BTCBMock"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/mock/BTCBMock.sol",
+      "contract": "BTCBMock"
+    },
+    {
+      "name": "tokenPool",
+      "type": "LombardTokenPool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "LombardTokenPool public tokenPool",
+      "file": "contracts/bridge/adapters/CLAdapter.sol",
+      "contract": "CLAdapter"
+    },
+    {
+      "name": "depositAsset",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable depositAsset",
+      "file": "contracts/stakeAndBake/depositor/erc4626/ERC4626Depositor.sol",
+      "contract": "ERC4626Depositor"
+    },
+    {
+      "name": "stakeAndBake",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable stakeAndBake",
+      "file": "contracts/stakeAndBake/depositor/erc4626/ERC4626Depositor.sol",
+      "contract": "ERC4626Depositor"
+    },
+    {
+      "name": "vault",
+      "type": "IERC4626 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC4626 public immutable vault",
+      "file": "contracts/stakeAndBake/depositor/erc4626/ERC4626Depositor.sol",
+      "contract": "ERC4626Depositor"
+    },
+    {
+      "name": "PARTNER_VAULT_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xf2032fbd6c6daf0509f7b47277c23d318b85e97f8401e745afc792c2709cec00",
+      "declaration": "bytes32 private constant PARTNER_VAULT_STORAGE_LOCATION = 0xf2032fbd6c6daf0509f7b47277c23d318b85e97f8401e745afc792c2709cec00",
+      "file": "contracts/fbtc/PartnerVault.sol",
+      "contract": "FBTCPartnerVault"
+    },
+    {
+      "name": "STAKE_AND_BAKE_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xd0321c9642a0f7a5931cd62db04cb9e2c0d32906ef8824eece128a7ad5e4f500",
+      "declaration": "bytes32 private constant STAKE_AND_BAKE_STORAGE_LOCATION = 0xd0321c9642a0f7a5931cd62db04cb9e2c0d32906ef8824eece128a7ad5e4f500",
+      "file": "contracts/stakeAndBake/StakeAndBake.sol",
+      "contract": "StakeAndBake"
+    },
+    {
+      "name": "STAKE_AND_BAKE_STORAGE_LOCATION",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x0e47f6bdb2c8c295db7a485b9611b576c67616f4bb0fcb676c069d08170f1800",
+      "declaration": "bytes32 private constant STAKE_AND_BAKE_STORAGE_LOCATION = 0x0e47f6bdb2c8c295db7a485b9611b576c67616f4bb0fcb676c069d08170f1800",
+      "file": "contracts/stakeAndBake/StakeAndBakeNativeToken.sol",
+      "contract": "StakeAndBakeNativeToken"
+    },
+    {
+      "name": "depositAsset",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable depositAsset",
+      "file": "contracts/stakeAndBake/depositor/veda/TellerWithMultiAssetSupportDepositor.sol",
+      "contract": "TellerWithMultiAssetSupportDepositor"
+    },
+    {
+      "name": "stakeAndBake",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable stakeAndBake",
+      "file": "contracts/stakeAndBake/depositor/veda/TellerWithMultiAssetSupportDepositor.sol",
+      "contract": "TellerWithMultiAssetSupportDepositor"
+    },
+    {
+      "name": "vault",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable vault",
+      "file": "contracts/stakeAndBake/depositor/veda/TellerWithMultiAssetSupportDepositor.sol",
+      "contract": "TellerWithMultiAssetSupportDepositor"
+    },
+    {
+      "name": "assetData",
+      "type": "mapping(ERC20 => Asset) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(ERC20 => Asset) public assetData",
+      "file": "contracts/mock/TellerWithMultiAssetSupportMock.sol",
+      "contract": "TellerWithMultiAssetSupportMock"
+    }
+  ],
+  "token_variables": [
+    {
+      "name": "DEPOSIT_BTC_ACTION_V0",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xf2e73f7c",
+      "declaration": "bytes4 internal constant DEPOSIT_BTC_ACTION_V0 = 0xf2e73f7c",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "DEPOSIT_BTC_ACTION_V1",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0xce25e7c2",
+      "declaration": "bytes4 internal constant DEPOSIT_BTC_ACTION_V1 = 0xce25e7c2",
+      "file": "contracts/libs/Actions.sol",
+      "contract": "Actions"
+    },
+    {
+      "name": "BTC_STAKING_MODULE_ADDRESS",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes32(uint256(0x0089e3e4e7a699d6f131d893aeef7ee143706ac23a))",
+      "declaration": "bytes32 public constant BTC_STAKING_MODULE_ADDRESS = bytes32(uint256(0x0089e3e4e7a699d6f131d893aeef7ee143706ac23a))",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "REDEEM_FROM_NATIVE_TOKEN_SELECTOR",
+      "type": "bytes4 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x4e3e5047",
+      "declaration": "bytes4 internal constant REDEEM_FROM_NATIVE_TOKEN_SELECTOR = 0x4e3e5047",
+      "file": "contracts/LBTC/libraries/Assets.sol",
+      "contract": "Assets"
+    },
+    {
+      "name": "_validateThreshold",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _validateThreshold",
+      "file": "contracts/bascule/Bascule.sol",
+      "contract": "Bascule"
+    },
+    {
+      "name": "_validateThreshold",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _validateThreshold",
+      "file": "contracts/bascule/BasculeV2.sol",
+      "contract": "BasculeV2"
+    },
+    {
+      "name": "_validateThreshold",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _validateThreshold",
+      "file": "contracts/bascule/BasculeV3.sol",
+      "contract": "BasculeV3"
+    },
+    {
+      "name": "TOKEN_DECIMALS",
+      "type": "uint8 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "8",
+      "declaration": "uint8 private constant TOKEN_DECIMALS = 8",
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "contract": "BridgeTokenMock"
+    },
+    {
+      "name": "TOKEN_NAME",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"Bitcoin\"",
+      "declaration": "string private constant TOKEN_NAME = \"Bitcoin\"",
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "contract": "BridgeTokenMock"
+    },
+    {
+      "name": "TOKEN_SYMBOL",
+      "type": "string private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"BTC.b\"",
+      "declaration": "string private constant TOKEN_SYMBOL = \"BTC.b\"",
+      "file": "contracts/mock/BridgeTokenMock.sol",
+      "contract": "BridgeTokenMock"
+    },
+    {
+      "name": "getTokenAdapter",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public getTokenAdapter",
+      "file": "contracts/bridge/providers/BridgeTokenPool.sol",
+      "contract": "BridgeTokenPool"
+    },
+    {
+      "name": "tokenPool",
+      "type": "LombardTokenPool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "LombardTokenPool public tokenPool",
+      "file": "contracts/bridge/adapters/CLAdapter.sol",
+      "contract": "CLAdapter"
+    },
+    {
+      "name": "depositAsset",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable depositAsset",
+      "file": "contracts/stakeAndBake/depositor/erc4626/ERC4626Depositor.sol",
+      "contract": "ERC4626Depositor"
+    },
+    {
+      "name": "validateThreshold",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public validateThreshold",
+      "file": "contracts/bascule/GMPBasculeV1.sol",
+      "contract": "GMPBasculeV1"
+    },
+    {
+      "name": "validateThreshold",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public validateThreshold",
+      "file": "contracts/bascule/GMPBasculeV2.sol",
+      "contract": "GMPBasculeV2"
+    },
+    {
+      "name": "fbtc",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable fbtc",
+      "file": "contracts/mock/LockedFBTCMock.sol",
+      "contract": "LockedFBTCMock"
+    },
+    {
+      "name": "s_mockFeeTokenAmount",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal s_mockFeeTokenAmount",
+      "file": "contracts/mock/CCIPMocks.sol",
+      "contract": "MockCCIPRouter"
+    },
+    {
+      "name": "depositAsset",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable depositAsset",
+      "file": "contracts/stakeAndBake/depositor/veda/TellerWithMultiAssetSupportDepositor.sol",
+      "contract": "TellerWithMultiAssetSupportDepositor"
+    },
+    {
+      "name": "assetData",
+      "type": "mapping(ERC20 => Asset) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(ERC20 => Asset) public assetData",
+      "file": "contracts/mock/TellerWithMultiAssetSupportMock.sol",
+      "contract": "TellerWithMultiAssetSupportMock"
+    }
+  ],
+  "token_addresses_hardcoded": [],
+  "invariant_values": [
+    "Key accounting vars (`BTC_STAKING_MODULE_ADDRESS`, `ASSETS_MODULE_ADDRESS`, `tokenPool`, `PARTNER_VAULT_STORAGE_LOCATION`, `_balances`, `_totalSupply`, `assetData`, `STAKE_AND_BAKE_STORAGE_LOCATION`) must only change through authorized accounting paths",
+    "Every token address/handle variable must be non-zero and immutable or governance-gated",
+    "Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition"
+  ]
+}

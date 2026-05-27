@@ -1,0 +1,113 @@
+{
+    "adminController": "0xf42fdd953e68d0010f5fa9d61ef1ba0fc997ef2f",
+    "constantsWhype": {
+        "ETH_GAS_COMPENSATION": "0",
+        "INTEREST_RATE_ADJ_COOLDOWN": "604800",
+        "MAX_ANNUAL_INTEREST_RATE": "2500000000000000000",
+        "MIN_ANNUAL_INTEREST_RATE": "5000000000000000",
+        "MIN_DEBT": "1000000000000000000000",
+        "SP_YIELD_SPLIT": "750000000000000000",
+        "UPFRONT_INTEREST_PERIOD": "604800"
+    },
+    "constantsUbtc": {
+        "ETH_GAS_COMPENSATION": "0",
+        "INTEREST_RATE_ADJ_COOLDOWN": "604800",
+        "MAX_ANNUAL_INTEREST_RATE": "2500000000000000000",
+        "MIN_ANNUAL_INTEREST_RATE": "5000000000000000",
+        "MIN_DEBT": "2000000000000000000000",
+        "SP_YIELD_SPLIT": "750000000000000000",
+        "UPFRONT_INTEREST_PERIOD": "604800"
+    },
+    "constantsKhype": {
+        "ETH_GAS_COMPENSATION": "0",
+        "INTEREST_RATE_ADJ_COOLDOWN": "604800",
+        "MAX_ANNUAL_INTEREST_RATE": "2500000000000000000",
+        "MIN_ANNUAL_INTEREST_RATE": "5000000000000000",
+        "MIN_DEBT": "1000000000000000000000",
+        "SP_YIELD_SPLIT": "750000000000000000",
+        "UPFRONT_INTEREST_PERIOD": "604800"
+    },
+    "constantsWsthype": {
+        "ETH_GAS_COMPENSATION": "0",
+        "INTEREST_RATE_ADJ_COOLDOWN": "604800",
+        "MAX_ANNUAL_INTEREST_RATE": "2500000000000000000",
+        "MIN_ANNUAL_INTEREST_RATE": "5000000000000000",
+        "MIN_DEBT": "1000000000000000000000",
+        "SP_YIELD_SPLIT": "750000000000000000",
+        "UPFRONT_INTEREST_PERIOD": "604800"
+    },
+    "proxyAdminForCoreContracts": "0x44a600c031dbdf652500f4a6d84b168056f13692",
+    "proxyAdminForAdminController": "0xdf1293b46d3d8f6c090ab98094805db68922ce30",
+    "collateralRegistry": "0x9de1e57049c475736289cb006212f3e1dce4711b",
+    "feUSDToken": "0x02c6a2fa58cc01a18b8d9e00ea48d65e4df26c70",
+    "hintHelpers": "0xa32e89c658f7fdcc0bdb2717f253bacd99f864d4",
+    "multiTroveGetter": "0x708809ac6ac45ba95532c961fd46228fa6dd761e",
+    "metadataNFT": "0x23cd9747f12ee09c55172e3716b3cfd995edef14",
+    "branches": [
+        {
+            "name": "WHYPE",
+            "addressesRegistry": "0x7201fb5c3ba06f10a858819f62221ae2f473815d",
+            "activePool": "0x39ebba742b6917d49d4a9ac7cf5c70f84d34cc9e",
+            "borrowerOperations": "0x5b271dc20ba7beb8eee276eb4f1644b6a217f0a3",
+            "collSurplusPool": "0x9182e36bd7cceb71812c766c4464208ad9c122ca",
+            "defaultPool": "0xa1e95e74d07fec324a82cd2ef19ebcb33907c605",
+            "sortedTroves": "0xd1caa4218808eb94d36e1df7247f7406f43f2ef6",
+            "stabilityPool": "0x576c9c501473e01ae23748de28415a74425efd6b",
+            "troveManager": "0x3100f4e7bda2ed2452d9a57eb30260ab071bbe62",
+            "troveNFT": "0x5ad1512e7006fdbd0f3ebb8aa35c5e9234a03aa7",
+            "priceFeed": "0x12a1868b89789900e413a6241ca9032dd1873a51",
+            "gasPool": "0x7560059081ede2ff6c6b980fd1ee9a53df4e9935",
+            "interestRouter": "0x13c60e4cc2cc8602a5f253113ef56bce60793030",
+            "collToken": "0x5555555555555555555555555555555555555555"
+        },
+        {
+            "name": "UBTC",
+            "addressesRegistry": "0xfc4e20bd9f0e4f8782bea92a7bd8002367882407",
+            "activePool": "0x8d99575ebbbda038a626ca769561c16fdd7a5939",
+            "borrowerOperations": "0x36b7bd65276eda7cdc5f730da5cdb7ee7736672e",
+            "collSurplusPool": "0xe7aba857f8e2c95462e69b93c7ea78ac19aafe38",
+            "defaultPool": "0x50743a84c68a9d14d93364ed31afa4012183df1c",
+            "sortedTroves": "0x642d979341eaac9c10623f5a58283aa72f6e2fa9",
+            "stabilityPool": "0xabf0369530205ae56dd4c49629474c65d1168924",
+            "troveManager": "0xbbe5f227275f24b64bd290a91f55723a00214885",
+            "troveNFT": "0xad8a43ac8da98990efa4d5ec7b91135965d5846b",
+            "priceFeed": "0xb9bE1AeD5Ba289510cDfeF80700d22d4f25459A8",
+            "gasPool": "0x8b71c92edf02dff693042e4e808d0568ccf0a137",
+            "interestRouter": "0x13c60e4cc2cc8602a5f253113ef56bce60793030",
+            "collToken": "0xefbd9cfe88235f0e648aefb52c8e8dc152a9ad6f",
+            "wrapperZapper": "0x557de9e0c3cc187cee25e14325a7ef845dad286c"
+        }, 
+        {
+            "name": "KHYPE",
+            "addressesRegistry": "0x382d2fe4eed8e35a5855321e62fd45ad60ca589f",
+            "activePool": "0xbfd0b103a49faf426f36864d19f5d871bf411a5a",
+            "borrowerOperations": "0x3a2a181ab6e4ffb77c87ee201041a0806dadc397",
+            "collSurplusPool": "0x246aceb6b121fe2cb7ec76fcf8e667fb8096f7b0",
+            "defaultPool": "0xee6d1804feb4817d6db77f6f31b86673d7fc195f",
+            "sortedTroves": "0x6bc81472c10ec526c14c8b0e8faa282f9368f86f",
+            "stabilityPool": "0x56a346e0730cb209a93964c41cd36098030779ab",
+            "troveManager": "0x7c07bb77b1cf9a5b40d92f805c10d90c90957e4a",
+            "troveNFT": "0x9d08780deec2270b8296f520b3fb28346abf6036",
+            "priceFeed": "0x0a04e685f12e47b22b03c3763add63f1dd73265c",
+            "gasPool": "0xea5d5a859be7c96aa0481ed35170af8e277a9f8e",
+            "interestRouter": "0x13c60e4cc2cc8602a5f253113ef56bce60793030",
+            "collToken": "0xfd739d4e423301ce9385c1fb8850539d657c296d"
+        },
+        {
+            "name": "WSTHYPE",
+            "addressesRegistry": "0x6a1ce00901c3deb2683a6c63fcd158cc3adc2740",
+            "activePool": "0x7abca40474d6b5f000f801d7fe7e0df4c89425ff",
+            "borrowerOperations": "0x389c03c1f77981d158fbe286e7cafac2bb2fe83e",
+            "collSurplusPool": "0x339d10ba20f3575ec9b44275f978dd38386f0f32",
+            "defaultPool": "0x535a9ff6bfd0d9f1b64fe03f185b0af8ddeb7bd1",
+            "sortedTroves": "0xa82c325553baee63bd97604e10a7cc40482008a1",
+            "stabilityPool": "0xadfba621a75beced7dd1727b2067047b7eeedc8b",
+            "troveManager": "0x58446c58caa8a6f6cc8be343f812ebf0b997c001",
+            "troveNFT": "0x7d29515fc4eaef2a01c46218b4cb8d2d8ae437e4",
+            "priceFeed": "0x067e69ad6bdb8ee95cac31b34626f48eb6f169a2",
+            "gasPool": "0x5db69b925c35b85905255f0b9443bfefda97fce0",
+            "interestRouter": "0x13c60e4cc2cc8602a5f253113ef56bce60793030",
+            "collToken": "0x94e8396e0869c9f2200760af0621afd240e1cf38"
+        }
+    ]
+}

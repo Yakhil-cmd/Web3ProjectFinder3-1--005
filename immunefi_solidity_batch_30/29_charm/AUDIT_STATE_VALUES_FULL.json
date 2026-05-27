@@ -1,0 +1,850 @@
+{
+  "generated_at_utc": "2026-05-26T17:00:01Z",
+  "project": "29_charm",
+  "solidity_file_count": 9,
+  "solidity_files": [
+    "contracts/AlphaProPeriphery.sol",
+    "contracts/AlphaProVault.sol",
+    "contracts/AlphaProVaultFactory.sol",
+    "contracts/CloneFactory.sol",
+    "contracts/ManagerStore.sol",
+    "contracts/test/ERC20Mock.sol",
+    "contracts/test/ISwapRouter.sol",
+    "contracts/test/TestRouter.sol",
+    "interfaces/IVault.sol"
+  ],
+  "pragmas": [
+    "0.7.6",
+    ">=0.7.0",
+    "^0.7.0",
+    "^0.7.6"
+  ],
+  "top_directories_by_solidity_file_count": [
+    [
+      "contracts",
+      8
+    ],
+    [
+      "interfaces",
+      1
+    ]
+  ],
+  "contracts": [
+    {
+      "file": "contracts/AlphaProPeriphery.sol",
+      "kind": "contract",
+      "name": "AlphaProPeriphery",
+      "bases": []
+    },
+    {
+      "file": "contracts/AlphaProVault.sol",
+      "kind": "contract",
+      "name": "AlphaProVault",
+      "bases": [
+        "IVault",
+        "IUniswapV3MintCallback",
+        "IUniswapV3SwapCallback",
+        "ERC20Upgradeable",
+        "ReentrancyGuardUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/AlphaProVaultFactory.sol",
+      "kind": "contract",
+      "name": "AlphaProVaultFactory",
+      "bases": [
+        "CloneFactory"
+      ]
+    },
+    {
+      "file": "contracts/CloneFactory.sol",
+      "kind": "contract",
+      "name": "CloneFactory",
+      "bases": []
+    },
+    {
+      "file": "contracts/test/ERC20Mock.sol",
+      "kind": "contract",
+      "name": "ERC20Mock",
+      "bases": [
+        "ERC20"
+      ]
+    },
+    {
+      "file": "interfaces/IVault.sol",
+      "kind": "interface",
+      "name": "IVault",
+      "bases": []
+    },
+    {
+      "file": "contracts/ManagerStore.sol",
+      "kind": "contract",
+      "name": "ManagerStore",
+      "bases": [
+        "Ownable"
+      ]
+    },
+    {
+      "file": "contracts/test/TestRouter.sol",
+      "kind": "contract",
+      "name": "TestRouter",
+      "bases": [
+        "IUniswapV3MintCallback",
+        "IUniswapV3SwapCallback"
+      ]
+    }
+  ],
+  "enums": [],
+  "structs": [
+    {
+      "file": "contracts/AlphaProPeriphery.sol",
+      "struct": "CalculateFeesParams",
+      "fields": [
+        {
+          "name": "feeGrowthInsideLast",
+          "type": "uint256"
+        },
+        {
+          "name": "feeGrowthOutsideLower",
+          "type": "uint256"
+        },
+        {
+          "name": "feeGrowthOutsideUpper",
+          "type": "uint256"
+        },
+        {
+          "name": "feeGrowthGlobal",
+          "type": "uint256"
+        },
+        {
+          "name": "liquidity",
+          "type": "uint128"
+        },
+        {
+          "name": "tick",
+          "type": "int24"
+        },
+        {
+          "name": "lowerTick",
+          "type": "int24"
+        },
+        {
+          "name": "upperTick",
+          "type": "int24"
+        },
+        {
+          "name": "performanceFee",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/AlphaProPeriphery.sol",
+      "struct": "GetFeesParams",
+      "fields": [
+        {
+          "name": "lowerTick",
+          "type": "int24"
+        },
+        {
+          "name": "upperTick",
+          "type": "int24"
+        },
+        {
+          "name": "poolAddress",
+          "type": "address"
+        },
+        {
+          "name": "vaultAddress",
+          "type": "address"
+        },
+        {
+          "name": "performanceFee",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/ManagerStore.sol",
+      "struct": "Manager",
+      "fields": [
+        {
+          "name": "managerAddress",
+          "type": "address"
+        },
+        {
+          "name": "ipfsHash",
+          "type": "string"
+        },
+        {
+          "name": "isAuthorized",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "file": "contracts/AlphaProPeriphery.sol",
+      "struct": "PositionAmounts",
+      "fields": [
+        {
+          "name": "amount0",
+          "type": "uint256"
+        },
+        {
+          "name": "amount1",
+          "type": "uint256"
+        },
+        {
+          "name": "fees0",
+          "type": "uint256"
+        },
+        {
+          "name": "fees1",
+          "type": "uint256"
+        },
+        {
+          "name": "total0",
+          "type": "uint256"
+        },
+        {
+          "name": "total1",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/AlphaProVault.sol",
+      "struct": "VaultParams",
+      "fields": [
+        {
+          "name": "pool",
+          "type": "address"
+        },
+        {
+          "name": "manager",
+          "type": "address"
+        },
+        {
+          "name": "managerFee",
+          "type": "uint24"
+        },
+        {
+          "name": "rebalanceDelegate",
+          "type": "address"
+        },
+        {
+          "name": "maxTotalSupply",
+          "type": "uint256"
+        },
+        {
+          "name": "baseThreshold",
+          "type": "int24"
+        },
+        {
+          "name": "limitThreshold",
+          "type": "int24"
+        },
+        {
+          "name": "fullRangeWeight",
+          "type": "uint24"
+        },
+        {
+          "name": "period",
+          "type": "uint32"
+        },
+        {
+          "name": "minTickMove",
+          "type": "int24"
+        },
+        {
+          "name": "maxTwapDeviation",
+          "type": "int24"
+        },
+        {
+          "name": "twapDuration",
+          "type": "uint32"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "symbol",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "all_state_variables": [
+    {
+      "name": "MINIMUM_LIQUIDITY",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1e3",
+      "declaration": "uint256 public constant MINIMUM_LIQUIDITY = 1e3",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "accruedManagerFees0",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override accruedManagerFees0",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "accruedManagerFees1",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override accruedManagerFees1",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "accruedProtocolFees0",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override accruedProtocolFees0",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "accruedProtocolFees1",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override accruedProtocolFees1",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "baseLower",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override baseLower",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "baseThreshold",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override baseThreshold",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "baseUpper",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override baseUpper",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "factory",
+      "type": "AlphaProVaultFactory public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "AlphaProVaultFactory public factory",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "fullLower",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override fullLower",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "fullRangeWeight",
+      "type": "uint24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint24 public override fullRangeWeight",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "fullUpper",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override fullUpper",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "lastTick",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override lastTick",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "lastTimestamp",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override lastTimestamp",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "limitLower",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override limitLower",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "limitThreshold",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override limitThreshold",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "limitUpper",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override limitUpper",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "manager",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override manager",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "managerFee",
+      "type": "uint24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint24 public override managerFee",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "maxTotalSupply",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override maxTotalSupply",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "maxTwapDeviation",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override maxTwapDeviation",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "minTickMove",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override minTickMove",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "pendingManager",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override pendingManager",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "pendingManagerFee",
+      "type": "uint24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint24 public override pendingManagerFee",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "period",
+      "type": "uint32 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint32 public override period",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "pool",
+      "type": "IUniswapV3Pool public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IUniswapV3Pool public override pool",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "protocolFee",
+      "type": "uint24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint24 public override protocolFee",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "rebalanceDelegate",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override rebalanceDelegate",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "tickSpacing",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override tickSpacing",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "token0",
+      "type": "IERC20Upgradeable public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable public token0",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "token1",
+      "type": "IERC20Upgradeable public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable public token1",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "twapDuration",
+      "type": "uint32 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint32 public override twapDuration",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "governance",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public governance",
+      "file": "contracts/AlphaProVaultFactory.sol",
+      "contract": "AlphaProVaultFactory"
+    },
+    {
+      "name": "isVault",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public isVault",
+      "file": "contracts/AlphaProVaultFactory.sol",
+      "contract": "AlphaProVaultFactory"
+    },
+    {
+      "name": "pendingGovernance",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public pendingGovernance",
+      "file": "contracts/AlphaProVaultFactory.sol",
+      "contract": "AlphaProVaultFactory"
+    },
+    {
+      "name": "protocolFee",
+      "type": "uint24 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint24 public protocolFee",
+      "file": "contracts/AlphaProVaultFactory.sol",
+      "contract": "AlphaProVaultFactory"
+    },
+    {
+      "name": "template",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable template",
+      "file": "contracts/AlphaProVaultFactory.sol",
+      "contract": "AlphaProVaultFactory"
+    },
+    {
+      "name": "vaults",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public vaults",
+      "file": "contracts/AlphaProVaultFactory.sol",
+      "contract": "AlphaProVaultFactory"
+    },
+    {
+      "name": "allManagers",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public allManagers",
+      "file": "contracts/ManagerStore.sol",
+      "contract": "ManagerStore"
+    },
+    {
+      "name": "authorizedManagers",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public authorizedManagers",
+      "file": "contracts/ManagerStore.sol",
+      "contract": "ManagerStore"
+    }
+  ],
+  "total_balance_variables": [
+    {
+      "name": "MINIMUM_LIQUIDITY",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1e3",
+      "declaration": "uint256 public constant MINIMUM_LIQUIDITY = 1e3",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "maxTotalSupply",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override maxTotalSupply",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "pool",
+      "type": "IUniswapV3Pool public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IUniswapV3Pool public override pool",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "rebalanceDelegate",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override rebalanceDelegate",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "isVault",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public isVault",
+      "file": "contracts/AlphaProVaultFactory.sol",
+      "contract": "AlphaProVaultFactory"
+    },
+    {
+      "name": "vaults",
+      "type": "address[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address[] public vaults",
+      "file": "contracts/AlphaProVaultFactory.sol",
+      "contract": "AlphaProVaultFactory"
+    }
+  ],
+  "token_variables": [
+    {
+      "name": "baseThreshold",
+      "type": "int24 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "int24 public override baseThreshold",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "token0",
+      "type": "IERC20Upgradeable public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable public token0",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    },
+    {
+      "name": "token1",
+      "type": "IERC20Upgradeable public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable public token1",
+      "file": "contracts/AlphaProVault.sol",
+      "contract": "AlphaProVault"
+    }
+  ],
+  "token_addresses_hardcoded": [],
+  "invariant_values": [
+    "Key accounting vars (`pool`, `MINIMUM_LIQUIDITY`, `rebalanceDelegate`, `maxTotalSupply`, `vaults`, `isVault`) must only change through authorized accounting paths",
+    "Every token address/handle variable must be non-zero and immutable or governance-gated",
+    "Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition"
+  ]
+}

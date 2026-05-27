@@ -1,0 +1,65 @@
+name: Coverage Report
+
+on:
+  pull_request:
+
+permissions: {}
+
+jobs:
+  check:
+    name: Foundry project
+    env:
+      FOUNDRY_PROFILE: ci
+      DEPLOYMENTS: ${{ vars.DEPLOYMENTS }}
+      MAINNET_BRIDGE_ADDRESS: ${{ vars.MAINNET_BRIDGE_ADDRESS }}
+      MAINNET_FLOW_RATED_TOKENS: ${{ vars.MAINNET_FLOW_RATED_TOKENS }}
+      TESTNET_BRIDGE_ADDRESS: ${{ vars.TESTNET_BRIDGE_ADDRESS }}
+      TESTNET_FLOW_RATED_TOKENS: ${{ vars.TESTNET_FLOW_RATED_TOKENS }}
+      MAINNET_RPC_URL: ${{ secrets.MAINNET_RPC_URL }}
+      TESTNET_RPC_URL: ${{ secrets.TESTNET_RPC_URL }}
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+          submodules: recursive
+
+      - uses: ./.github/actions/setup-node
+
+      - uses: ./.github/actions/setup-foundry
+
+      - name: Run Forge build
+        shell: bash
+        run: |
+          forge --version
+          forge build
+
+        # `test/invariant/InvariantBridge.t.sol` requires a localhost RPC
+        # (vm.createFork against http://127.0.0.1:8500) that isn't running
+        # in this workflow; it's excluded so coverage doesn't fail in setUp.
+        # `forge coverage` also doesn't have an `exclude-path` flag for the
+        # report itself (see https://github.com/foundry-rs/foundry/issues/2988),
+        # so we strip the test/ rows and the 'Total' row from the table.
+      - name: Run Forge coverage
+        id: coverage
+        shell: bash
+        run: |
+          forge coverage --report summary --no-match-path "test/invariant/**" \
+            | grep -v "test/" | grep -v "| Total" > ${{ runner.temp }}/coverage.out
+          echo "coverage-report-path=${{ runner.temp }}/coverage.out" >> $GITHUB_OUTPUT
+
+      - name: Debug coverage report
+        shell: bash
+        env:
+          COVERAGE_REPORT: ${{ steps.coverage.outputs.coverage-report-path }}
+        run: |
+          cat "$COVERAGE_REPORT"
+          
+      - name: Publish report
+        uses: ./.github/actions/coverage
+        with:
+          coverage: ${{ steps.coverage.outputs.coverage-report-path }}
+          github-token: ${{ github.token }}

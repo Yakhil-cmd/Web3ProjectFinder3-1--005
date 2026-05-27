@@ -1,0 +1,20 @@
+name: Solidity code coverage
+
+on: [push]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    name: Solidity code coverage
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+      - run: npm ci
+        env:
+          GH_TOKEN: ${{ secrets.github_token }}
+      - run: npx hardhat test --coverage
+        env:
+          NO_GAS_ENFORCE: '1'
+          COVERAGE: 'true'

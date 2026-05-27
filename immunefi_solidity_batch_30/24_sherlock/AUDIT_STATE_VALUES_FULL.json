@@ -1,0 +1,4018 @@
+{
+  "generated_at_utc": "2026-05-26T16:59:58Z",
+  "project": "24_sherlock",
+  "solidity_file_count": 79,
+  "solidity_files": [
+    "contracts/SherBuy.sol",
+    "contracts/SherClaim.sol",
+    "contracts/Sherlock.sol",
+    "contracts/interfaces/ISherClaim.sol",
+    "contracts/interfaces/ISherlock.sol",
+    "contracts/interfaces/ISherlockGov.sol",
+    "contracts/interfaces/ISherlockPayout.sol",
+    "contracts/interfaces/ISherlockStake.sol",
+    "contracts/interfaces/ISherlockStrategy.sol",
+    "contracts/interfaces/UMAprotocol/OptimisticOracleInterface.sol",
+    "contracts/interfaces/UMAprotocol/OptimisticRequester.sol",
+    "contracts/interfaces/UMAprotocol/SkinnyOptimisticOracleInterface.sol",
+    "contracts/interfaces/aaveV2/DataTypes.sol",
+    "contracts/interfaces/aaveV2/IAToken.sol",
+    "contracts/interfaces/aaveV2/IAaveDistributionManager.sol",
+    "contracts/interfaces/aaveV2/IAaveGovernanceV2.sol",
+    "contracts/interfaces/aaveV2/IAaveIncentivesController.sol",
+    "contracts/interfaces/aaveV2/IExecutorWithTimelock.sol",
+    "contracts/interfaces/aaveV2/IGovernanceV2Helper.sol",
+    "contracts/interfaces/aaveV2/ILendingPool.sol",
+    "contracts/interfaces/aaveV2/ILendingPoolAddressesProvider.sol",
+    "contracts/interfaces/aaveV2/IProposalValidator.sol",
+    "contracts/interfaces/aaveV2/IStakeAave.sol",
+    "contracts/interfaces/aaveV2/MockAave.sol",
+    "contracts/interfaces/compound/ICToken.sol",
+    "contracts/interfaces/compound/IComptroller.sol",
+    "contracts/interfaces/compound/InterestRateModel.sol",
+    "contracts/interfaces/euler/IEulerEToken.sol",
+    "contracts/interfaces/managers/IManager.sol",
+    "contracts/interfaces/managers/ISherDistributionManager.sol",
+    "contracts/interfaces/managers/ISherlockClaimManager.sol",
+    "contracts/interfaces/managers/ISherlockProtocolManager.sol",
+    "contracts/interfaces/managers/IStrategyManager.sol",
+    "contracts/interfaces/managers/callbacks/ISherlockClaimManagerCallbackReceiver.sol",
+    "contracts/interfaces/maple/IMplRewards.sol",
+    "contracts/interfaces/maple/IPool.sol",
+    "contracts/interfaces/strategy/IERC4626.sol",
+    "contracts/interfaces/strategy/INode.sol",
+    "contracts/interfaces/strategy/IStrategy.sol",
+    "contracts/interfaces/tempus/ITempusController.sol",
+    "contracts/interfaces/truefi/ITrueFiPool2.sol",
+    "contracts/interfaces/truefi/ITrueMultiFarm.sol",
+    "contracts/managers/AaveV2Strategy.sol",
+    "contracts/managers/Manager.sol",
+    "contracts/managers/MasterStrategy.sol",
+    "contracts/managers/SherDistributionManager.sol",
+    "contracts/managers/SherDistributionManagerEmpty.sol",
+    "contracts/managers/SherlockClaimManager.sol",
+    "contracts/managers/SherlockProtocolManager.sol",
+    "contracts/strategy/AaveStrategy.sol",
+    "contracts/strategy/CompoundStrategy.sol",
+    "contracts/strategy/EulerStrategy.sol",
+    "contracts/strategy/MapleStrategy.sol",
+    "contracts/strategy/TrueFiStrategy.sol",
+    "contracts/strategy/base/BaseMaster.sol",
+    "contracts/strategy/base/BaseNode.sol",
+    "contracts/strategy/base/BaseSplitter.sol",
+    "contracts/strategy/base/BaseStrategy.sol",
+    "contracts/strategy/compound/LibCompound.sol",
+    "contracts/strategy/splitters/AlphaBetaEqualDepositMaxSplitter.sol",
+    "contracts/strategy/splitters/AlphaBetaEqualDepositSplitter.sol",
+    "contracts/strategy/splitters/AlphaBetaSplitter.sol",
+    "contracts/test/AllowanceErrorTest.sol",
+    "contracts/test/ManagerTest.sol",
+    "contracts/test/PayableFail.sol",
+    "contracts/test/SherlockClaimManagerTest.sol",
+    "contracts/test/SherlockProtocolManagerTest.sol",
+    "contracts/test/SherlockTest.sol",
+    "contracts/util/CallbackMock.sol",
+    "contracts/util/ERC20Mock.sol",
+    "contracts/util/Import.sol",
+    "contracts/util/PausableMock.sol",
+    "contracts/util/SherDistributionMock.sol",
+    "contracts/util/SherlockMock.sol",
+    "contracts/util/SherlockProtocolManagerMock.sol",
+    "contracts/util/StrategyMock.sol",
+    "contracts/util/StrategyMockGoerli.sol",
+    "contracts/util/TreeSplitterMock.sol",
+    "contracts/util/TreeStrategyMock.sol"
+  ],
+  "pragmas": [
+    "0.8.10",
+    "^0.8.0"
+  ],
+  "top_directories_by_solidity_file_count": [
+    [
+      "contracts",
+      79
+    ]
+  ],
+  "contracts": [
+    {
+      "file": "contracts/strategy/AaveStrategy.sol",
+      "kind": "contract",
+      "name": "AaveStrategy",
+      "bases": [
+        "BaseStrategy"
+      ]
+    },
+    {
+      "file": "contracts/managers/AaveV2Strategy.sol",
+      "kind": "contract",
+      "name": "AaveV2Strategy",
+      "bases": [
+        "IStrategyManager",
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/test/AllowanceErrorTest.sol",
+      "kind": "contract",
+      "name": "AllowanceErrorTest",
+      "bases": [
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/strategy/splitters/AlphaBetaEqualDepositMaxSplitter.sol",
+      "kind": "contract",
+      "name": "AlphaBetaEqualDepositMaxSplitter",
+      "bases": [
+        "AlphaBetaEqualDepositSplitter"
+      ]
+    },
+    {
+      "file": "contracts/strategy/splitters/AlphaBetaEqualDepositSplitter.sol",
+      "kind": "contract",
+      "name": "AlphaBetaEqualDepositSplitter",
+      "bases": [
+        "AlphaBetaSplitter"
+      ]
+    },
+    {
+      "file": "contracts/strategy/splitters/AlphaBetaSplitter.sol",
+      "kind": "contract",
+      "name": "AlphaBetaSplitter",
+      "bases": [
+        "BaseSplitter"
+      ]
+    },
+    {
+      "file": "contracts/strategy/base/BaseMaster.sol",
+      "kind": "abstract contract",
+      "name": "BaseMaster",
+      "bases": [
+        "IMaster",
+        "BaseNode"
+      ]
+    },
+    {
+      "file": "contracts/strategy/base/BaseNode.sol",
+      "kind": "abstract contract",
+      "name": "BaseNode",
+      "bases": [
+        "INode",
+        "Ownable"
+      ]
+    },
+    {
+      "file": "contracts/strategy/base/BaseSplitter.sol",
+      "kind": "abstract contract",
+      "name": "BaseSplitter",
+      "bases": [
+        "BaseMaster",
+        "ISplitter"
+      ]
+    },
+    {
+      "file": "contracts/strategy/base/BaseStrategy.sol",
+      "kind": "abstract contract",
+      "name": "BaseStrategy",
+      "bases": [
+        "IStrategy",
+        "BaseNode",
+        "Pausable"
+      ]
+    },
+    {
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "kind": "abstract contract",
+      "name": "BaseStrategyMock",
+      "bases": []
+    },
+    {
+      "file": "contracts/util/CallbackMock.sol",
+      "kind": "contract",
+      "name": "CallbackMock",
+      "bases": [
+        "ISherlockClaimManagerCallbackReceiver"
+      ]
+    },
+    {
+      "file": "contracts/strategy/CompoundStrategy.sol",
+      "kind": "contract",
+      "name": "CompoundStrategy",
+      "bases": [
+        "BaseStrategy"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/DataTypes.sol",
+      "kind": "library",
+      "name": "DataTypes",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IAaveDistributionManager.sol",
+      "kind": "library",
+      "name": "DistributionTypes",
+      "bases": []
+    },
+    {
+      "file": "contracts/util/ERC20Mock.sol",
+      "kind": "contract",
+      "name": "ERC20Mock18d",
+      "bases": [
+        "ERC20"
+      ]
+    },
+    {
+      "file": "contracts/util/ERC20Mock.sol",
+      "kind": "contract",
+      "name": "ERC20Mock6d",
+      "bases": [
+        "ERC20"
+      ]
+    },
+    {
+      "file": "contracts/strategy/EulerStrategy.sol",
+      "kind": "contract",
+      "name": "EulerStrategy",
+      "bases": [
+        "BaseStrategy"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IAToken.sol",
+      "kind": "interface",
+      "name": "IAToken",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IAaveDistributionManager.sol",
+      "kind": "interface",
+      "name": "IAaveDistributionManager",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IAaveGovernanceV2.sol",
+      "kind": "interface",
+      "name": "IAaveGovernanceV2",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IAaveIncentivesController.sol",
+      "kind": "interface",
+      "name": "IAaveIncentivesController",
+      "bases": [
+        "IAaveDistributionManager"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/compound/ICToken.sol",
+      "kind": "interface",
+      "name": "ICToken",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/compound/IComptroller.sol",
+      "kind": "interface",
+      "name": "IComptroller",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/truefi/ITrueFiPool2.sol",
+      "kind": "interface",
+      "name": "IDebtToken",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/strategy/IERC4626.sol",
+      "kind": "abstract contract",
+      "name": "IERC4626",
+      "bases": [
+        "ERC20"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/euler/IEulerEToken.sol",
+      "kind": "interface",
+      "name": "IEulerEToken",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IExecutorWithTimelock.sol",
+      "kind": "interface",
+      "name": "IExecutorWithTimelock",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/truefi/ITrueFiPool2.sol",
+      "kind": "interface",
+      "name": "IFixedTermLoanAgency",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IGovernanceV2Helper.sol",
+      "kind": "interface",
+      "name": "IGovernanceV2Helper",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/ILendingPool.sol",
+      "kind": "interface",
+      "name": "ILendingPool",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/ILendingPoolAddressesProvider.sol",
+      "kind": "interface",
+      "name": "ILendingPoolAddressesProvider",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/truefi/ITrueFiPool2.sol",
+      "kind": "interface",
+      "name": "ILoanFactory2",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/truefi/ITrueFiPool2.sol",
+      "kind": "interface",
+      "name": "ILoanToken2Deprecated",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/managers/IManager.sol",
+      "kind": "interface",
+      "name": "IManager",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/strategy/INode.sol",
+      "kind": "interface",
+      "name": "IMaster",
+      "bases": [
+        "INode"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/maple/IMplRewards.sol",
+      "kind": "interface",
+      "name": "IMplRewards",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/strategy/INode.sol",
+      "kind": "interface",
+      "name": "INode",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/maple/IPool.sol",
+      "kind": "interface",
+      "name": "IPool",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IProposalValidator.sol",
+      "kind": "interface",
+      "name": "IProposalValidator",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/truefi/ITrueFiPool2.sol",
+      "kind": "interface",
+      "name": "ISAFU",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/ISherClaim.sol",
+      "kind": "interface",
+      "name": "ISherClaim",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/managers/ISherDistributionManager.sol",
+      "kind": "interface",
+      "name": "ISherDistributionManager",
+      "bases": [
+        "IManager"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/ISherlock.sol",
+      "kind": "interface",
+      "name": "ISherlock",
+      "bases": [
+        "ISherlockStake",
+        "ISherlockGov",
+        "ISherlockPayout",
+        "ISherlockStrategy",
+        "IERC721"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/managers/ISherlockClaimManager.sol",
+      "kind": "interface",
+      "name": "ISherlockClaimManager",
+      "bases": [
+        "IManager",
+        "OptimisticRequester"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/managers/callbacks/ISherlockClaimManagerCallbackReceiver.sol",
+      "kind": "interface",
+      "name": "ISherlockClaimManagerCallbackReceiver",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/ISherlockGov.sol",
+      "kind": "interface",
+      "name": "ISherlockGov",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/ISherlockPayout.sol",
+      "kind": "interface",
+      "name": "ISherlockPayout",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/managers/ISherlockProtocolManager.sol",
+      "kind": "interface",
+      "name": "ISherlockProtocolManager",
+      "bases": [
+        "IManager"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/ISherlockStake.sol",
+      "kind": "interface",
+      "name": "ISherlockStake",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/ISherlockStrategy.sol",
+      "kind": "interface",
+      "name": "ISherlockStrategy",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/strategy/INode.sol",
+      "kind": "interface",
+      "name": "ISplitter",
+      "bases": [
+        "IMaster"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IStakeAave.sol",
+      "kind": "interface",
+      "name": "IStakeAave",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/strategy/IStrategy.sol",
+      "kind": "interface",
+      "name": "IStrategy",
+      "bases": [
+        "INode"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/managers/IStrategyManager.sol",
+      "kind": "interface",
+      "name": "IStrategyManager",
+      "bases": [
+        "IManager"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/tempus/ITempusController.sol",
+      "kind": "interface",
+      "name": "ITempusAMM",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/tempus/ITempusController.sol",
+      "kind": "interface",
+      "name": "ITempusController",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/tempus/ITempusController.sol",
+      "kind": "interface",
+      "name": "ITempusPool",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/truefi/ITrueMultiFarm.sol",
+      "kind": "interface",
+      "name": "ITrueDistributor",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/truefi/ITrueFiPool2.sol",
+      "kind": "interface",
+      "name": "ITrueFiPool2",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/truefi/ITrueFiPool2.sol",
+      "kind": "interface",
+      "name": "ITrueFiPoolOracle",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/truefi/ITrueFiPool2.sol",
+      "kind": "interface",
+      "name": "ITrueLender2Deprecated",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/truefi/ITrueMultiFarm.sol",
+      "kind": "interface",
+      "name": "ITrueMultiFarm",
+      "bases": []
+    },
+    {
+      "file": "contracts/util/Import.sol",
+      "kind": "contract",
+      "name": "Imports",
+      "bases": []
+    },
+    {
+      "file": "contracts/managers/MasterStrategy.sol",
+      "kind": "contract",
+      "name": "InfoStorage",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/compound/InterestRateModel.sol",
+      "kind": "interface",
+      "name": "InterestRateModel",
+      "bases": []
+    },
+    {
+      "file": "contracts/strategy/compound/LibCompound.sol",
+      "kind": "library",
+      "name": "LibCompound",
+      "bases": []
+    },
+    {
+      "file": "contracts/managers/Manager.sol",
+      "kind": "abstract contract",
+      "name": "Manager",
+      "bases": [
+        "IManager",
+        "Ownable",
+        "Pausable"
+      ]
+    },
+    {
+      "file": "contracts/test/ManagerTest.sol",
+      "kind": "contract",
+      "name": "ManagerTest",
+      "bases": [
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/strategy/MapleStrategy.sol",
+      "kind": "contract",
+      "name": "MapleStrategy",
+      "bases": [
+        "BaseStrategy"
+      ]
+    },
+    {
+      "file": "contracts/managers/MasterStrategy.sol",
+      "kind": "contract",
+      "name": "MasterStrategy",
+      "bases": [
+        "BaseMaster",
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/MockAave.sol",
+      "kind": "interface",
+      "name": "MockAave",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/UMAprotocol/OptimisticOracleInterface.sol",
+      "kind": "abstract contract",
+      "name": "OptimisticOracleInterface",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/UMAprotocol/OptimisticRequester.sol",
+      "kind": "interface",
+      "name": "OptimisticRequester",
+      "bases": []
+    },
+    {
+      "file": "contracts/util/PausableMock.sol",
+      "kind": "contract",
+      "name": "PausableMock",
+      "bases": [
+        "Pausable"
+      ]
+    },
+    {
+      "file": "contracts/test/PayableFail.sol",
+      "kind": "contract",
+      "name": "PayableFail",
+      "bases": []
+    },
+    {
+      "file": "contracts/SherBuy.sol",
+      "kind": "contract",
+      "name": "SherBuy",
+      "bases": [
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "contracts/SherClaim.sol",
+      "kind": "contract",
+      "name": "SherClaim",
+      "bases": [
+        "ISherClaim"
+      ]
+    },
+    {
+      "file": "contracts/managers/SherDistributionManager.sol",
+      "kind": "contract",
+      "name": "SherDistributionManager",
+      "bases": [
+        "ISherDistributionManager",
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/managers/SherDistributionManagerEmpty.sol",
+      "kind": "contract",
+      "name": "SherDistributionManagerEmpty",
+      "bases": [
+        "ISherDistributionManager",
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/util/SherDistributionMock.sol",
+      "kind": "contract",
+      "name": "SherDistributionMock",
+      "bases": [
+        "ISherDistributionManager",
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/Sherlock.sol",
+      "kind": "contract",
+      "name": "Sherlock",
+      "bases": [
+        "ISherlock",
+        "ERC721",
+        "Ownable",
+        "Pausable"
+      ]
+    },
+    {
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "kind": "contract",
+      "name": "SherlockClaimManager",
+      "bases": [
+        "ISherlockClaimManager",
+        "ReentrancyGuard",
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/test/SherlockClaimManagerTest.sol",
+      "kind": "contract",
+      "name": "SherlockClaimManagerTest",
+      "bases": [
+        "SherlockClaimManager"
+      ]
+    },
+    {
+      "file": "contracts/util/SherlockMock.sol",
+      "kind": "contract",
+      "name": "SherlockMock",
+      "bases": [
+        "ISherlock",
+        "ERC721",
+        "Ownable"
+      ]
+    },
+    {
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "kind": "contract",
+      "name": "SherlockProtocolManager",
+      "bases": [
+        "ISherlockProtocolManager",
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/util/SherlockProtocolManagerMock.sol",
+      "kind": "contract",
+      "name": "SherlockProtocolManagerMock",
+      "bases": [
+        "ISherlockProtocolManager",
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/test/SherlockProtocolManagerTest.sol",
+      "kind": "contract",
+      "name": "SherlockProtocolManagerTest",
+      "bases": [
+        "SherlockProtocolManager"
+      ]
+    },
+    {
+      "file": "contracts/test/SherlockTest.sol",
+      "kind": "contract",
+      "name": "SherlockTest",
+      "bases": [
+        "Sherlock"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/UMAprotocol/SkinnyOptimisticOracleInterface.sol",
+      "kind": "abstract contract",
+      "name": "SkinnyOptimisticOracleInterface",
+      "bases": []
+    },
+    {
+      "file": "contracts/util/StrategyMock.sol",
+      "kind": "contract",
+      "name": "StrategyMock",
+      "bases": [
+        "IStrategyManager",
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/util/StrategyMockGoerli.sol",
+      "kind": "contract",
+      "name": "StrategyMockGoerli",
+      "bases": [
+        "IStrategyManager",
+        "Manager"
+      ]
+    },
+    {
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "kind": "contract",
+      "name": "TreeSplitterMock",
+      "bases": [
+        "BaseSplitter"
+      ]
+    },
+    {
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "kind": "contract",
+      "name": "TreeSplitterMockCustom",
+      "bases": [
+        "ISplitter"
+      ]
+    },
+    {
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "kind": "contract",
+      "name": "TreeSplitterMockTest",
+      "bases": []
+    },
+    {
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "kind": "contract",
+      "name": "TreeStrategyMock",
+      "bases": [
+        "BaseStrategyMock",
+        "BaseStrategy"
+      ]
+    },
+    {
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "kind": "contract",
+      "name": "TreeStrategyMockCustom",
+      "bases": [
+        "BaseStrategyMock",
+        "IStrategy"
+      ]
+    },
+    {
+      "file": "contracts/strategy/TrueFiStrategy.sol",
+      "kind": "contract",
+      "name": "TrueFiStrategy",
+      "bases": [
+        "BaseStrategy"
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "file": "contracts/interfaces/aaveV2/DataTypes.sol",
+      "enum": "InterestRateMode",
+      "values": [
+        "NONE",
+        "STABLE",
+        "VARIABLE"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IAaveGovernanceV2.sol",
+      "enum": "ProposalState",
+      "values": [
+        "Pending",
+        "Canceled",
+        "Active",
+        "Failed",
+        "Succeeded",
+        "Queued",
+        "Expired",
+        "Executed"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/UMAprotocol/OptimisticOracleInterface.sol",
+      "enum": "State",
+      "values": [
+        "Invalid",
+        "Requested",
+        "Proposed",
+        "Expired",
+        "Disputed",
+        "Resolved",
+        "Settled"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/managers/ISherlockClaimManager.sol",
+      "enum": "State",
+      "values": [
+        "NonExistent",
+        "SpccPending",
+        "SpccApproved",
+        "SpccDenied",
+        "UmaPriceProposed",
+        "ReadyToProposeUmaDispute",
+        "UmaDisputeProposed",
+        "UmaPending",
+        "UmaApproved",
+        "UmaDenied",
+        "Halted",
+        "Cleaned"
+      ]
+    }
+  ],
+  "structs": [
+    {
+      "file": "contracts/interfaces/aaveV2/IAaveDistributionManager.sol",
+      "struct": "AssetConfigInput",
+      "fields": [
+        {
+          "name": "emissionPerSecond",
+          "type": "uint104"
+        },
+        {
+          "name": "totalStaked",
+          "type": "uint256"
+        },
+        {
+          "name": "underlyingAsset",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/managers/ISherlockClaimManager.sol",
+      "struct": "Claim",
+      "fields": [
+        {
+          "name": "created",
+          "type": "uint256"
+        },
+        {
+          "name": "updated",
+          "type": "uint256"
+        },
+        {
+          "name": "initiator",
+          "type": "address"
+        },
+        {
+          "name": "protocol",
+          "type": "bytes32"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint32"
+        },
+        {
+          "name": "state",
+          "type": "State"
+        },
+        {
+          "name": "ancillaryData",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IGovernanceV2Helper.sol",
+      "struct": "Power",
+      "fields": [
+        {
+          "name": "votingPower",
+          "type": "uint256"
+        },
+        {
+          "name": "delegatedAddressVotingPower",
+          "type": "address"
+        },
+        {
+          "name": "propositionPower",
+          "type": "uint256"
+        },
+        {
+          "name": "delegatedAddressPropositionPower",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IAaveGovernanceV2.sol",
+      "struct": "Proposal",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "name": "executor",
+          "type": "IExecutorWithTimelock"
+        },
+        {
+          "name": "targets",
+          "type": "address[]"
+        },
+        {
+          "name": "values",
+          "type": "uint256[]"
+        },
+        {
+          "name": "signatures",
+          "type": "string[]"
+        },
+        {
+          "name": "calldatas",
+          "type": "bytes[]"
+        },
+        {
+          "name": "withDelegatecalls",
+          "type": "bool[]"
+        },
+        {
+          "name": "startBlock",
+          "type": "uint256"
+        },
+        {
+          "name": "endBlock",
+          "type": "uint256"
+        },
+        {
+          "name": "executionTime",
+          "type": "uint256"
+        },
+        {
+          "name": "forVotes",
+          "type": "uint256"
+        },
+        {
+          "name": "againstVotes",
+          "type": "uint256"
+        },
+        {
+          "name": "executed",
+          "type": "bool"
+        },
+        {
+          "name": "canceled",
+          "type": "bool"
+        },
+        {
+          "name": "strategy",
+          "type": "address"
+        },
+        {
+          "name": "ipfsHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "votes",
+          "type": "mapping(address => Vote)"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IGovernanceV2Helper.sol",
+      "struct": "ProposalStats",
+      "fields": [
+        {
+          "name": "totalVotingSupply",
+          "type": "uint256"
+        },
+        {
+          "name": "minimumQuorum",
+          "type": "uint256"
+        },
+        {
+          "name": "minimumDiff",
+          "type": "uint256"
+        },
+        {
+          "name": "executionTimeWithGracePeriod",
+          "type": "uint256"
+        },
+        {
+          "name": "proposalCreated",
+          "type": "uint256"
+        },
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "name": "executor",
+          "type": "IExecutorWithTimelock"
+        },
+        {
+          "name": "targets",
+          "type": "address[]"
+        },
+        {
+          "name": "values",
+          "type": "uint256[]"
+        },
+        {
+          "name": "signatures",
+          "type": "string[]"
+        },
+        {
+          "name": "calldatas",
+          "type": "bytes[]"
+        },
+        {
+          "name": "withDelegatecalls",
+          "type": "bool[]"
+        },
+        {
+          "name": "startBlock",
+          "type": "uint256"
+        },
+        {
+          "name": "endBlock",
+          "type": "uint256"
+        },
+        {
+          "name": "executionTime",
+          "type": "uint256"
+        },
+        {
+          "name": "forVotes",
+          "type": "uint256"
+        },
+        {
+          "name": "againstVotes",
+          "type": "uint256"
+        },
+        {
+          "name": "executed",
+          "type": "bool"
+        },
+        {
+          "name": "canceled",
+          "type": "bool"
+        },
+        {
+          "name": "strategy",
+          "type": "address"
+        },
+        {
+          "name": "ipfsHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "proposalState",
+          "type": "IAaveGovernanceV2.ProposalState"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IAaveGovernanceV2.sol",
+      "struct": "ProposalWithoutVotes",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "name": "executor",
+          "type": "IExecutorWithTimelock"
+        },
+        {
+          "name": "targets",
+          "type": "address[]"
+        },
+        {
+          "name": "values",
+          "type": "uint256[]"
+        },
+        {
+          "name": "signatures",
+          "type": "string[]"
+        },
+        {
+          "name": "calldatas",
+          "type": "bytes[]"
+        },
+        {
+          "name": "withDelegatecalls",
+          "type": "bool[]"
+        },
+        {
+          "name": "startBlock",
+          "type": "uint256"
+        },
+        {
+          "name": "endBlock",
+          "type": "uint256"
+        },
+        {
+          "name": "executionTime",
+          "type": "uint256"
+        },
+        {
+          "name": "forVotes",
+          "type": "uint256"
+        },
+        {
+          "name": "againstVotes",
+          "type": "uint256"
+        },
+        {
+          "name": "executed",
+          "type": "bool"
+        },
+        {
+          "name": "canceled",
+          "type": "bool"
+        },
+        {
+          "name": "strategy",
+          "type": "address"
+        },
+        {
+          "name": "ipfsHash",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/UMAprotocol/OptimisticOracleInterface.sol",
+      "struct": "Request",
+      "fields": [
+        {
+          "name": "proposer",
+          "type": "address"
+        },
+        {
+          "name": "disputer",
+          "type": "address"
+        },
+        {
+          "name": "currency",
+          "type": "IERC20"
+        },
+        {
+          "name": "settled",
+          "type": "bool"
+        },
+        {
+          "name": "refundOnDispute",
+          "type": "bool"
+        },
+        {
+          "name": "proposedPrice",
+          "type": "int256"
+        },
+        {
+          "name": "resolvedPrice",
+          "type": "int256"
+        },
+        {
+          "name": "expirationTime",
+          "type": "uint256"
+        },
+        {
+          "name": "reward",
+          "type": "uint256"
+        },
+        {
+          "name": "finalFee",
+          "type": "uint256"
+        },
+        {
+          "name": "bond",
+          "type": "uint256"
+        },
+        {
+          "name": "customLiveness",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/UMAprotocol/SkinnyOptimisticOracleInterface.sol",
+      "struct": "Request",
+      "fields": [
+        {
+          "name": "proposer",
+          "type": "address"
+        },
+        {
+          "name": "disputer",
+          "type": "address"
+        },
+        {
+          "name": "currency",
+          "type": "IERC20"
+        },
+        {
+          "name": "settled",
+          "type": "bool"
+        },
+        {
+          "name": "proposedPrice",
+          "type": "int256"
+        },
+        {
+          "name": "resolvedPrice",
+          "type": "int256"
+        },
+        {
+          "name": "expirationTime",
+          "type": "uint256"
+        },
+        {
+          "name": "reward",
+          "type": "uint256"
+        },
+        {
+          "name": "finalFee",
+          "type": "uint256"
+        },
+        {
+          "name": "bond",
+          "type": "uint256"
+        },
+        {
+          "name": "customLiveness",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/DataTypes.sol",
+      "struct": "ReserveConfigurationMap",
+      "fields": [
+        {
+          "name": "data",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/DataTypes.sol",
+      "struct": "ReserveData",
+      "fields": [
+        {
+          "name": "configuration",
+          "type": "ReserveConfigurationMap"
+        },
+        {
+          "name": "liquidityIndex",
+          "type": "uint128"
+        },
+        {
+          "name": "variableBorrowIndex",
+          "type": "uint128"
+        },
+        {
+          "name": "currentLiquidityRate",
+          "type": "uint128"
+        },
+        {
+          "name": "currentVariableBorrowRate",
+          "type": "uint128"
+        },
+        {
+          "name": "currentStableBorrowRate",
+          "type": "uint128"
+        },
+        {
+          "name": "lastUpdateTimestamp",
+          "type": "uint40"
+        },
+        {
+          "name": "aTokenAddress",
+          "type": "address"
+        },
+        {
+          "name": "stableDebtTokenAddress",
+          "type": "address"
+        },
+        {
+          "name": "variableDebtTokenAddress",
+          "type": "address"
+        },
+        {
+          "name": "interestRateStrategyAddress",
+          "type": "address"
+        },
+        {
+          "name": "id",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/DataTypes.sol",
+      "struct": "UserConfigurationMap",
+      "fields": [
+        {
+          "name": "data",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IAaveDistributionManager.sol",
+      "struct": "UserStakeInput",
+      "fields": [
+        {
+          "name": "underlyingAsset",
+          "type": "address"
+        },
+        {
+          "name": "stakedByUser",
+          "type": "uint256"
+        },
+        {
+          "name": "totalStaked",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/aaveV2/IAaveGovernanceV2.sol",
+      "struct": "Vote",
+      "fields": [
+        {
+          "name": "support",
+          "type": "bool"
+        },
+        {
+          "name": "votingPower",
+          "type": "uint248"
+        }
+      ]
+    }
+  ],
+  "all_state_variables": [
+    {
+      "name": "LP_ADDRESS_PROVIDER",
+      "type": "ILendingPoolAddressesProvider public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "ILendingPoolAddressesProvider(0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5)",
+      "declaration": "ILendingPoolAddressesProvider public constant LP_ADDRESS_PROVIDER = ILendingPoolAddressesProvider(0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5)",
+      "file": "contracts/strategy/AaveStrategy.sol",
+      "contract": "AaveStrategy"
+    },
+    {
+      "name": "aWant",
+      "type": "IAToken public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IAToken public immutable aWant",
+      "file": "contracts/strategy/AaveStrategy.sol",
+      "contract": "AaveStrategy"
+    },
+    {
+      "name": "aaveIncentivesController",
+      "type": "IAaveIncentivesController public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IAaveIncentivesController public immutable aaveIncentivesController",
+      "file": "contracts/strategy/AaveStrategy.sol",
+      "contract": "AaveStrategy"
+    },
+    {
+      "name": "aaveLmReceiver",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable aaveLmReceiver",
+      "file": "contracts/strategy/AaveStrategy.sol",
+      "contract": "AaveStrategy"
+    },
+    {
+      "name": "LP_ADDRESS_PROVIDER",
+      "type": "ILendingPoolAddressesProvider public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "ILendingPoolAddressesProvider(0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5)",
+      "declaration": "ILendingPoolAddressesProvider public constant LP_ADDRESS_PROVIDER = ILendingPoolAddressesProvider(0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5)",
+      "file": "contracts/managers/AaveV2Strategy.sol",
+      "contract": "AaveV2Strategy"
+    },
+    {
+      "name": "aWant",
+      "type": "IAToken public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IAToken public immutable aWant",
+      "file": "contracts/managers/AaveV2Strategy.sol",
+      "contract": "AaveV2Strategy"
+    },
+    {
+      "name": "aaveIncentivesController",
+      "type": "IAaveIncentivesController public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IAaveIncentivesController public immutable aaveIncentivesController",
+      "file": "contracts/managers/AaveV2Strategy.sol",
+      "contract": "AaveV2Strategy"
+    },
+    {
+      "name": "aaveLmReceiver",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable aaveLmReceiver",
+      "file": "contracts/managers/AaveV2Strategy.sol",
+      "contract": "AaveV2Strategy"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable override want",
+      "file": "contracts/managers/AaveV2Strategy.sol",
+      "contract": "AaveV2Strategy"
+    },
+    {
+      "name": "MAX_AMOUNT_FOR_CHILD_ONE",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable MAX_AMOUNT_FOR_CHILD_ONE",
+      "file": "contracts/strategy/splitters/AlphaBetaEqualDepositMaxSplitter.sol",
+      "contract": "AlphaBetaEqualDepositMaxSplitter"
+    },
+    {
+      "name": "MAX_AMOUNT_FOR_CHILD_TWO",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable MAX_AMOUNT_FOR_CHILD_TWO",
+      "file": "contracts/strategy/splitters/AlphaBetaEqualDepositMaxSplitter.sol",
+      "contract": "AlphaBetaEqualDepositMaxSplitter"
+    },
+    {
+      "name": "NO_LIMIT",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "type(uint256).max",
+      "declaration": "uint256 private constant NO_LIMIT = type(uint256).max",
+      "file": "contracts/strategy/splitters/AlphaBetaEqualDepositMaxSplitter.sol",
+      "contract": "AlphaBetaEqualDepositMaxSplitter"
+    },
+    {
+      "name": "MIN_AMOUNT_FOR_EQUAL_SPLIT",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable MIN_AMOUNT_FOR_EQUAL_SPLIT",
+      "file": "contracts/strategy/splitters/AlphaBetaEqualDepositSplitter.sol",
+      "contract": "AlphaBetaEqualDepositSplitter"
+    },
+    {
+      "name": "childOne",
+      "type": "INode public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "INode public override childOne",
+      "file": "contracts/strategy/base/BaseMaster.sol",
+      "contract": "BaseMaster"
+    },
+    {
+      "name": "core",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override core",
+      "file": "contracts/strategy/base/BaseNode.sol",
+      "contract": "BaseNode"
+    },
+    {
+      "name": "parent",
+      "type": "IMaster public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IMaster public override parent",
+      "file": "contracts/strategy/base/BaseNode.sol",
+      "contract": "BaseNode"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable override want",
+      "file": "contracts/strategy/base/BaseNode.sol",
+      "contract": "BaseNode"
+    },
+    {
+      "name": "cachedChildTwoBalance",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal cachedChildTwoBalance",
+      "file": "contracts/strategy/base/BaseSplitter.sol",
+      "contract": "BaseSplitter"
+    },
+    {
+      "name": "childTwo",
+      "type": "INode public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "INode public override childTwo",
+      "file": "contracts/strategy/base/BaseSplitter.sol",
+      "contract": "BaseSplitter"
+    },
+    {
+      "name": "TOKEN",
+      "type": "IERC20 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48)",
+      "declaration": "IERC20 constant TOKEN = IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48)",
+      "file": "contracts/util/CallbackMock.sol",
+      "contract": "CallbackMock"
+    },
+    {
+      "name": "COMP",
+      "type": "IERC20 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IERC20(0xc00e94Cb662C3520282E6f5717214004A7f26888)",
+      "declaration": "IERC20 internal constant COMP = IERC20(0xc00e94Cb662C3520282E6f5717214004A7f26888)",
+      "file": "contracts/strategy/CompoundStrategy.sol",
+      "contract": "CompoundStrategy"
+    },
+    {
+      "name": "COMPTROLLER",
+      "type": "IComptroller public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IComptroller(0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B)",
+      "declaration": "IComptroller public constant COMPTROLLER = IComptroller(0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B)",
+      "file": "contracts/strategy/CompoundStrategy.sol",
+      "contract": "CompoundStrategy"
+    },
+    {
+      "name": "CUSDC",
+      "type": "ICToken public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "ICToken(0x39AA39c021dfbaE8faC545936693aC917d5E7563)",
+      "declaration": "ICToken public constant CUSDC = ICToken(0x39AA39c021dfbaE8faC545936693aC917d5E7563)",
+      "file": "contracts/strategy/CompoundStrategy.sol",
+      "contract": "CompoundStrategy"
+    },
+    {
+      "name": "LIQUIDITY_MINING_RECEIVER",
+      "type": "address public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "declaration": "address public constant LIQUIDITY_MINING_RECEIVER = 0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "file": "contracts/strategy/CompoundStrategy.sol",
+      "contract": "CompoundStrategy"
+    },
+    {
+      "name": "EULER",
+      "type": "address public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x27182842E098f60e3D576794A5bFFb0777E025d3",
+      "declaration": "address public constant EULER = 0x27182842E098f60e3D576794A5bFFb0777E025d3",
+      "file": "contracts/strategy/EulerStrategy.sol",
+      "contract": "EulerStrategy"
+    },
+    {
+      "name": "EUSDC",
+      "type": "IEulerEToken public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IEulerEToken(0xEb91861f8A4e1C12333F42DCE8fB0Ecdc28dA716)",
+      "declaration": "IEulerEToken public constant EUSDC = IEulerEToken(0xEb91861f8A4e1C12333F42DCE8fB0Ecdc28dA716)",
+      "file": "contracts/strategy/EulerStrategy.sol",
+      "contract": "EulerStrategy"
+    },
+    {
+      "name": "SUB_ACCOUNT",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0",
+      "declaration": "uint256 private constant SUB_ACCOUNT = 0",
+      "file": "contracts/strategy/EulerStrategy.sol",
+      "contract": "EulerStrategy"
+    },
+    {
+      "name": "tc",
+      "type": "TimelockController public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "TimelockController public tc",
+      "file": "contracts/util/Import.sol",
+      "contract": "Imports"
+    },
+    {
+      "name": "core",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable core",
+      "file": "contracts/managers/MasterStrategy.sol",
+      "contract": "InfoStorage"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable want",
+      "file": "contracts/managers/MasterStrategy.sol",
+      "contract": "InfoStorage"
+    },
+    {
+      "name": "DEPLOYER",
+      "type": "address private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x1C11bE636415973520DdDf1b03822b4e2930D94A",
+      "declaration": "address private constant DEPLOYER = 0x1C11bE636415973520DdDf1b03822b4e2930D94A",
+      "file": "contracts/managers/Manager.sol",
+      "contract": "Manager"
+    },
+    {
+      "name": "sherlockCore",
+      "type": "ISherlock internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ISherlock internal sherlockCore",
+      "file": "contracts/managers/Manager.sol",
+      "contract": "Manager"
+    },
+    {
+      "name": "LIQUIDITY_MINING_RECEIVER",
+      "type": "address public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "declaration": "address public constant LIQUIDITY_MINING_RECEIVER = 0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "file": "contracts/strategy/MapleStrategy.sol",
+      "contract": "MapleStrategy"
+    },
+    {
+      "name": "maplePool",
+      "type": "IPool public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IPool public immutable maplePool",
+      "file": "contracts/strategy/MapleStrategy.sol",
+      "contract": "MapleStrategy"
+    },
+    {
+      "name": "mapleRewards",
+      "type": "IMplRewards public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IMplRewards public immutable mapleRewards",
+      "file": "contracts/strategy/MapleStrategy.sol",
+      "contract": "MapleStrategy"
+    },
+    {
+      "name": "PERIOD",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "26 weeks",
+      "declaration": "uint256 public constant PERIOD = 26 weeks",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "RATE_STEPS",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**4",
+      "declaration": "uint256 internal constant RATE_STEPS = 10**4",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "SHER_DECIMALS",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**18",
+      "declaration": "uint256 internal constant SHER_DECIMALS = 10**18",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "SHER_STEPS",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**16",
+      "declaration": "uint256 internal constant SHER_STEPS = 10**16",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "buyRate",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable buyRate",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "receiver",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable receiver",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "sher",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable sher",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "sherClaim",
+      "type": "ISherClaim public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ISherClaim public immutable sherClaim",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "sherlockPosition",
+      "type": "ISherlock public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "ISherlock public immutable sherlockPosition",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "stakeRate",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable stakeRate",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "usdc",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable usdc",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "CLAIM_FREEZE_TIME_AFTER_DEADLINE",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "26 weeks",
+      "declaration": "uint256 internal constant CLAIM_FREEZE_TIME_AFTER_DEADLINE = 26 weeks",
+      "file": "contracts/SherClaim.sol",
+      "contract": "SherClaim"
+    },
+    {
+      "name": "CLAIM_PERIOD_SANITY_BOTTOM",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "7 days",
+      "declaration": "uint256 internal constant CLAIM_PERIOD_SANITY_BOTTOM = 7 days",
+      "file": "contracts/SherClaim.sol",
+      "contract": "SherClaim"
+    },
+    {
+      "name": "CLAIM_PERIOD_SANITY_CEILING",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "14 days",
+      "declaration": "uint256 internal constant CLAIM_PERIOD_SANITY_CEILING = 14 days",
+      "file": "contracts/SherClaim.sol",
+      "contract": "SherClaim"
+    },
+    {
+      "name": "newEntryDeadline",
+      "type": "uint256 public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable override newEntryDeadline",
+      "file": "contracts/SherClaim.sol",
+      "contract": "SherClaim"
+    },
+    {
+      "name": "sher",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable sher",
+      "file": "contracts/SherClaim.sol",
+      "contract": "SherClaim"
+    },
+    {
+      "name": "userClaims",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public userClaims",
+      "file": "contracts/SherClaim.sol",
+      "contract": "SherClaim"
+    },
+    {
+      "name": "DECIMALS",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**6",
+      "declaration": "uint256 internal constant DECIMALS = 10**6",
+      "file": "contracts/managers/SherDistributionManager.sol",
+      "contract": "SherDistributionManager"
+    },
+    {
+      "name": "maxRewardsEndTVL",
+      "type": "uint256 internal immutable",
+      "visibility": "internal",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 internal immutable maxRewardsEndTVL",
+      "file": "contracts/managers/SherDistributionManager.sol",
+      "contract": "SherDistributionManager"
+    },
+    {
+      "name": "maxRewardsRate",
+      "type": "uint256 internal immutable",
+      "visibility": "internal",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 internal immutable maxRewardsRate",
+      "file": "contracts/managers/SherDistributionManager.sol",
+      "contract": "SherDistributionManager"
+    },
+    {
+      "name": "sher",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable sher",
+      "file": "contracts/managers/SherDistributionManager.sol",
+      "contract": "SherDistributionManager"
+    },
+    {
+      "name": "zeroRewardsStartTVL",
+      "type": "uint256 internal immutable",
+      "visibility": "internal",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 internal immutable zeroRewardsStartTVL",
+      "file": "contracts/managers/SherDistributionManager.sol",
+      "contract": "SherDistributionManager"
+    },
+    {
+      "name": "lastAmount",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public lastAmount",
+      "file": "contracts/util/SherDistributionMock.sol",
+      "contract": "SherDistributionMock"
+    },
+    {
+      "name": "lastPeriod",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public lastPeriod",
+      "file": "contracts/util/SherDistributionMock.sol",
+      "contract": "SherDistributionMock"
+    },
+    {
+      "name": "revertReward",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public revertReward",
+      "file": "contracts/util/SherDistributionMock.sol",
+      "contract": "SherDistributionMock"
+    },
+    {
+      "name": "reward",
+      "type": "uint256",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 reward",
+      "file": "contracts/util/SherDistributionMock.sol",
+      "contract": "SherDistributionMock"
+    },
+    {
+      "name": "sher",
+      "type": "IERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20 sher",
+      "file": "contracts/util/SherDistributionMock.sol",
+      "contract": "SherDistributionMock"
+    },
+    {
+      "name": "token",
+      "type": "IERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20 token",
+      "file": "contracts/util/SherDistributionMock.sol",
+      "contract": "SherDistributionMock"
+    },
+    {
+      "name": "value",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public value",
+      "file": "contracts/util/SherDistributionMock.sol",
+      "contract": "SherDistributionMock"
+    },
+    {
+      "name": "ARB_RESTAKE_GROWTH_TIME",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1 weeks",
+      "declaration": "uint256 public constant ARB_RESTAKE_GROWTH_TIME = 1 weeks",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "ARB_RESTAKE_MAX_PERCENTAGE",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "(10**18 / 100) * 20",
+      "declaration": "uint256 public constant ARB_RESTAKE_MAX_PERCENTAGE = (10**18 / 100) * 20",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "ARB_RESTAKE_PERIOD",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "26 weeks",
+      "declaration": "uint256 public constant ARB_RESTAKE_PERIOD = 26 weeks",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "ARB_RESTAKE_WAIT_TIME",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2 weeks",
+      "declaration": "uint256 public constant ARB_RESTAKE_WAIT_TIME = 2 weeks",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "MIN_STAKE",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**6",
+      "declaration": "uint256 public constant MIN_STAKE = 10**6",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "lockupEnd_",
+      "type": "mapping(uint256 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) internal lockupEnd_",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "nftCounter",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal nftCounter",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "nonStakersAddress",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override nonStakersAddress",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "sher",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable sher",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "sherDistributionManager",
+      "type": "ISherDistributionManager public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "ISherDistributionManager public override sherDistributionManager",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "sherRewards_",
+      "type": "mapping(uint256 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) internal sherRewards_",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "sherlockClaimManager",
+      "type": "ISherlockClaimManager public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "ISherlockClaimManager public override sherlockClaimManager",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "sherlockProtocolManager",
+      "type": "ISherlockProtocolManager public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "ISherlockProtocolManager public override sherlockProtocolManager",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "stakeShares",
+      "type": "mapping(uint256 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) internal stakeShares",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "stakingPeriods",
+      "type": "mapping(uint256 => bool) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(uint256 => bool) public override stakingPeriods",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "token",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable token",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "totalStakeShares",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal totalStakeShares",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "yieldStrategy",
+      "type": "IStrategyManager public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IStrategyManager public override yieldStrategy",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "BOND",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "9_600 * 10**6",
+      "declaration": "uint256 internal constant BOND = 9_600 * 10**6",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "ESCALATE_TIME",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "4 weeks",
+      "declaration": "uint256 public constant ESCALATE_TIME = 4 weeks",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "LIVENESS",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "7200",
+      "declaration": "uint256 internal constant LIVENESS = 7200",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "MAX_CALLBACKS",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "4",
+      "declaration": "uint256 public constant MAX_CALLBACKS = 4",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "SPCC_TIME",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "7 days",
+      "declaration": "uint256 public constant SPCC_TIME = 7 days",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "TOKEN",
+      "type": "IERC20 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48)",
+      "declaration": "IERC20 public constant TOKEN = IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48)",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "UMA",
+      "type": "SkinnyOptimisticOracleInterface public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "SkinnyOptimisticOracleInterface(0xeE3Afe347D5C74317041E2618C49534dAf887c24)",
+      "declaration": "SkinnyOptimisticOracleInterface public constant UMA = SkinnyOptimisticOracleInterface(0xeE3Afe347D5C74317041E2618C49534dAf887c24)",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "UMAHO_TIME",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "24 hours",
+      "declaration": "uint256 public constant UMAHO_TIME = 24 hours",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "UMA_IDENTIFIER",
+      "type": "bytes32 public constant override",
+      "visibility": "public",
+      "flags": [
+        "constant",
+        "override"
+      ],
+      "initializer": "bytes32(0x534845524c4f434b5f434c41494d000000000000000000000000000000000000)",
+      "declaration": "bytes32 public constant override UMA_IDENTIFIER = bytes32(0x534845524c4f434b5f434c41494d000000000000000000000000000000000000)",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "claimCallbacks",
+      "type": "ISherlockClaimManagerCallbackReceiver[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "ISherlockClaimManagerCallbackReceiver[] public claimCallbacks",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "claims_",
+      "type": "mapping(bytes32 => Claim) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => Claim) internal claims_",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "internalToPublicID",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal internalToPublicID",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "lastClaimID",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal lastClaimID",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "protocolClaimActive",
+      "type": "mapping(bytes32 => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => bool) public protocolClaimActive",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "publicToInternalID",
+      "type": "mapping(uint256 => bytes32) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => bytes32) internal publicToInternalID",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "sherlockProtocolClaimsCommittee",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override sherlockProtocolClaimsCommittee",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "umaHaltOperator",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override umaHaltOperator",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "umaRequest",
+      "type": "SkinnyOptimisticOracleInterface.Request private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "SkinnyOptimisticOracleInterface.Request private umaRequest",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "lockupEnd",
+      "type": "mapping(uint256 => uint256) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) public override lockupEnd",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "nonStakersAddress",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override nonStakersAddress",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "sherDistributionManager",
+      "type": "ISherDistributionManager public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "ISherDistributionManager public override sherDistributionManager",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "sherRewards",
+      "type": "mapping(uint256 => uint256) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) public override sherRewards",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "sherlockClaimManager",
+      "type": "ISherlockClaimManager public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "ISherlockClaimManager public override sherlockClaimManager",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "sherlockProtocolManager",
+      "type": "ISherlockProtocolManager public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "ISherlockProtocolManager public override sherlockProtocolManager",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "stakingPeriods",
+      "type": "mapping(uint256 => bool) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(uint256 => bool) public override stakingPeriods",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "token",
+      "type": "IERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20 token",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "yieldStrategy",
+      "type": "IStrategyManager public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IStrategyManager public override yieldStrategy",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "HUNDRED_PERCENT",
+      "type": "uint256 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**18",
+      "declaration": "uint256 internal constant HUNDRED_PERCENT = 10**18",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "MIN_BALANCE_SANITY_CEILING",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "30_000 * 10**6",
+      "declaration": "uint256 public constant MIN_BALANCE_SANITY_CEILING = 30_000 * 10**6",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "MIN_SECONDS_LEFT",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "7 days",
+      "declaration": "uint256 public constant MIN_SECONDS_LEFT = 7 days",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "MIN_SECONDS_OF_COVERAGE",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "12 hours",
+      "declaration": "uint256 public constant MIN_SECONDS_OF_COVERAGE = 12 hours",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "PROTOCOL_CLAIM_DEADLINE",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "7 days",
+      "declaration": "uint256 public constant PROTOCOL_CLAIM_DEADLINE = 7 days",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "activeBalances",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal activeBalances",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "allPremiumsPerSecToStakers",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal allPremiumsPerSecToStakers",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "currentCoverage",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal currentCoverage",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "lastAccountedEachProtocol",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal lastAccountedEachProtocol",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "lastAccountedGlobal",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal lastAccountedGlobal",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "lastClaimablePremiumsForStakers",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal lastClaimablePremiumsForStakers",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "minActiveBalance",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override minActiveBalance",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "nonStakersClaimableByProtocol",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal nonStakersClaimableByProtocol",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "nonStakersPercentage",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal nonStakersPercentage",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "premiums_",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal premiums_",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "previousCoverage",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal previousCoverage",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "protocolAgent_",
+      "type": "mapping(bytes32 => address) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => address) internal protocolAgent_",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "removedProtocolAgent",
+      "type": "mapping(bytes32 => address) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => address) internal removedProtocolAgent",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "removedProtocolClaimDeadline",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal removedProtocolClaimDeadline",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "token",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable token",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "amount",
+      "type": "uint256",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 amount",
+      "file": "contracts/util/SherlockProtocolManagerMock.sol",
+      "contract": "SherlockProtocolManagerMock"
+    },
+    {
+      "name": "claimCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public claimCalled",
+      "file": "contracts/util/SherlockProtocolManagerMock.sol",
+      "contract": "SherlockProtocolManagerMock"
+    },
+    {
+      "name": "token",
+      "type": "IERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20 token",
+      "file": "contracts/util/SherlockProtocolManagerMock.sol",
+      "contract": "SherlockProtocolManagerMock"
+    },
+    {
+      "name": "depositCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public depositCalled",
+      "file": "contracts/util/StrategyMock.sol",
+      "contract": "StrategyMock"
+    },
+    {
+      "name": "fail",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public fail",
+      "file": "contracts/util/StrategyMock.sol",
+      "contract": "StrategyMock"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public override want",
+      "file": "contracts/util/StrategyMock.sol",
+      "contract": "StrategyMock"
+    },
+    {
+      "name": "withdrawAllCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawAllCalled",
+      "file": "contracts/util/StrategyMock.sol",
+      "contract": "StrategyMock"
+    },
+    {
+      "name": "withdrawCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawCalled",
+      "file": "contracts/util/StrategyMock.sol",
+      "contract": "StrategyMock"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public override want",
+      "file": "contracts/util/StrategyMockGoerli.sol",
+      "contract": "StrategyMockGoerli"
+    },
+    {
+      "name": "childOne",
+      "type": "INode public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "INode public override childOne",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "childRemovedCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public childRemovedCalled",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "childTwo",
+      "type": "INode public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "INode public override childTwo",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "core",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override core",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "depositCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public depositCalled",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "parent",
+      "type": "IMaster public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IMaster public override parent",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "setupCompleted",
+      "type": "bool public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "bool public override setupCompleted",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "updateChildCalled",
+      "type": "INode public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "INode public updateChildCalled",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public override want",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "withdrawAllByAdminCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawAllByAdminCalled",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "withdrawAllCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawAllCalled",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "withdrawByAdminCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawByAdminCalled",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "withdrawCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawCalled",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "core",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public core",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockTest"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20 public want",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockTest"
+    },
+    {
+      "name": "internalDepositCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public internalDepositCalled",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMock"
+    },
+    {
+      "name": "internalWithdrawAllCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public internalWithdrawAllCalled",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMock"
+    },
+    {
+      "name": "internalWithdrawCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public internalWithdrawCalled",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMock"
+    },
+    {
+      "name": "notWithdraw",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public notWithdraw",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMock"
+    },
+    {
+      "name": "core",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override core",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMockCustom"
+    },
+    {
+      "name": "depositCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public depositCalled",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMockCustom"
+    },
+    {
+      "name": "parent",
+      "type": "IMaster public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IMaster public override parent",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMockCustom"
+    },
+    {
+      "name": "setupCompleted",
+      "type": "bool public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "bool public override setupCompleted",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMockCustom"
+    },
+    {
+      "name": "siblingRemovedCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public siblingRemovedCalled",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMockCustom"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public override want",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMockCustom"
+    },
+    {
+      "name": "withdrawAllByAdminCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawAllByAdminCalled",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMockCustom"
+    },
+    {
+      "name": "withdrawAllCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawAllCalled",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMockCustom"
+    },
+    {
+      "name": "withdrawByAdminCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawByAdminCalled",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMockCustom"
+    },
+    {
+      "name": "withdrawCalled",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public withdrawCalled",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMockCustom"
+    },
+    {
+      "name": "BASIS_PRECISION",
+      "type": "uint256 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10000",
+      "declaration": "uint256 private constant BASIS_PRECISION = 10000",
+      "file": "contracts/strategy/TrueFiStrategy.sol",
+      "contract": "TrueFiStrategy"
+    },
+    {
+      "name": "LIQUIDITY_MINING_RECEIVER",
+      "type": "address public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "declaration": "address public constant LIQUIDITY_MINING_RECEIVER = 0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "file": "contracts/strategy/TrueFiStrategy.sol",
+      "contract": "TrueFiStrategy"
+    },
+    {
+      "name": "rewardToken",
+      "type": "IERC20 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IERC20(0x4C19596f5aAfF459fA38B0f7eD92F11AE6543784)",
+      "declaration": "IERC20 public constant rewardToken = IERC20(0x4C19596f5aAfF459fA38B0f7eD92F11AE6543784)",
+      "file": "contracts/strategy/TrueFiStrategy.sol",
+      "contract": "TrueFiStrategy"
+    },
+    {
+      "name": "tfFarm",
+      "type": "ITrueMultiFarm public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "ITrueMultiFarm(0xec6c3FD795D6e6f202825Ddb56E01b3c128b0b10)",
+      "declaration": "ITrueMultiFarm public constant tfFarm = ITrueMultiFarm(0xec6c3FD795D6e6f202825Ddb56E01b3c128b0b10)",
+      "file": "contracts/strategy/TrueFiStrategy.sol",
+      "contract": "TrueFiStrategy"
+    },
+    {
+      "name": "tfUSDC",
+      "type": "ITrueFiPool2 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "ITrueFiPool2(0xA991356d261fbaF194463aF6DF8f0464F8f1c742)",
+      "declaration": "ITrueFiPool2 public constant tfUSDC = ITrueFiPool2(0xA991356d261fbaF194463aF6DF8f0464F8f1c742)",
+      "file": "contracts/strategy/TrueFiStrategy.sol",
+      "contract": "TrueFiStrategy"
+    }
+  ],
+  "total_balance_variables": [
+    {
+      "name": "cachedChildTwoBalance",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal cachedChildTwoBalance",
+      "file": "contracts/strategy/base/BaseSplitter.sol",
+      "contract": "BaseSplitter"
+    },
+    {
+      "name": "LIQUIDITY_MINING_RECEIVER",
+      "type": "address public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "declaration": "address public constant LIQUIDITY_MINING_RECEIVER = 0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "file": "contracts/strategy/CompoundStrategy.sol",
+      "contract": "CompoundStrategy"
+    },
+    {
+      "name": "LIQUIDITY_MINING_RECEIVER",
+      "type": "address public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "declaration": "address public constant LIQUIDITY_MINING_RECEIVER = 0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "file": "contracts/strategy/MapleStrategy.sol",
+      "contract": "MapleStrategy"
+    },
+    {
+      "name": "maplePool",
+      "type": "IPool public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IPool public immutable maplePool",
+      "file": "contracts/strategy/MapleStrategy.sol",
+      "contract": "MapleStrategy"
+    },
+    {
+      "name": "stakeRate",
+      "type": "uint256 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable stakeRate",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "maxRewardsEndTVL",
+      "type": "uint256 internal immutable",
+      "visibility": "internal",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 internal immutable maxRewardsEndTVL",
+      "file": "contracts/managers/SherDistributionManager.sol",
+      "contract": "SherDistributionManager"
+    },
+    {
+      "name": "zeroRewardsStartTVL",
+      "type": "uint256 internal immutable",
+      "visibility": "internal",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "uint256 internal immutable zeroRewardsStartTVL",
+      "file": "contracts/managers/SherDistributionManager.sol",
+      "contract": "SherDistributionManager"
+    },
+    {
+      "name": "ARB_RESTAKE_GROWTH_TIME",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1 weeks",
+      "declaration": "uint256 public constant ARB_RESTAKE_GROWTH_TIME = 1 weeks",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "ARB_RESTAKE_MAX_PERCENTAGE",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "(10**18 / 100) * 20",
+      "declaration": "uint256 public constant ARB_RESTAKE_MAX_PERCENTAGE = (10**18 / 100) * 20",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "ARB_RESTAKE_PERIOD",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "26 weeks",
+      "declaration": "uint256 public constant ARB_RESTAKE_PERIOD = 26 weeks",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "ARB_RESTAKE_WAIT_TIME",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2 weeks",
+      "declaration": "uint256 public constant ARB_RESTAKE_WAIT_TIME = 2 weeks",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "MIN_STAKE",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**6",
+      "declaration": "uint256 public constant MIN_STAKE = 10**6",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "nonStakersAddress",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override nonStakersAddress",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "stakeShares",
+      "type": "mapping(uint256 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) internal stakeShares",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "stakingPeriods",
+      "type": "mapping(uint256 => bool) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(uint256 => bool) public override stakingPeriods",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "totalStakeShares",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal totalStakeShares",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "nonStakersAddress",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override nonStakersAddress",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "stakingPeriods",
+      "type": "mapping(uint256 => bool) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(uint256 => bool) public override stakingPeriods",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "MIN_BALANCE_SANITY_CEILING",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "30_000 * 10**6",
+      "declaration": "uint256 public constant MIN_BALANCE_SANITY_CEILING = 30_000 * 10**6",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "activeBalances",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal activeBalances",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "allPremiumsPerSecToStakers",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal allPremiumsPerSecToStakers",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "lastClaimablePremiumsForStakers",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal lastClaimablePremiumsForStakers",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "minActiveBalance",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override minActiveBalance",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "nonStakersClaimableByProtocol",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal nonStakersClaimableByProtocol",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "nonStakersPercentage",
+      "type": "mapping(bytes32 => uint256) internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => uint256) internal nonStakersPercentage",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "LIQUIDITY_MINING_RECEIVER",
+      "type": "address public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "declaration": "address public constant LIQUIDITY_MINING_RECEIVER = 0x666B8EbFbF4D5f0CE56962a25635CfF563F13161",
+      "file": "contracts/strategy/TrueFiStrategy.sol",
+      "contract": "TrueFiStrategy"
+    }
+  ],
+  "token_variables": [
+    {
+      "name": "LP_ADDRESS_PROVIDER",
+      "type": "ILendingPoolAddressesProvider public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "ILendingPoolAddressesProvider(0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5)",
+      "declaration": "ILendingPoolAddressesProvider public constant LP_ADDRESS_PROVIDER = ILendingPoolAddressesProvider(0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5)",
+      "file": "contracts/strategy/AaveStrategy.sol",
+      "contract": "AaveStrategy"
+    },
+    {
+      "name": "LP_ADDRESS_PROVIDER",
+      "type": "ILendingPoolAddressesProvider public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "ILendingPoolAddressesProvider(0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5)",
+      "declaration": "ILendingPoolAddressesProvider public constant LP_ADDRESS_PROVIDER = ILendingPoolAddressesProvider(0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5)",
+      "file": "contracts/managers/AaveV2Strategy.sol",
+      "contract": "AaveV2Strategy"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable override want",
+      "file": "contracts/managers/AaveV2Strategy.sol",
+      "contract": "AaveV2Strategy"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable override want",
+      "file": "contracts/strategy/base/BaseNode.sol",
+      "contract": "BaseNode"
+    },
+    {
+      "name": "TOKEN",
+      "type": "IERC20 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48)",
+      "declaration": "IERC20 constant TOKEN = IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48)",
+      "file": "contracts/util/CallbackMock.sol",
+      "contract": "CallbackMock"
+    },
+    {
+      "name": "COMP",
+      "type": "IERC20 internal constant",
+      "visibility": "internal",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IERC20(0xc00e94Cb662C3520282E6f5717214004A7f26888)",
+      "declaration": "IERC20 internal constant COMP = IERC20(0xc00e94Cb662C3520282E6f5717214004A7f26888)",
+      "file": "contracts/strategy/CompoundStrategy.sol",
+      "contract": "CompoundStrategy"
+    },
+    {
+      "name": "CUSDC",
+      "type": "ICToken public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "ICToken(0x39AA39c021dfbaE8faC545936693aC917d5E7563)",
+      "declaration": "ICToken public constant CUSDC = ICToken(0x39AA39c021dfbaE8faC545936693aC917d5E7563)",
+      "file": "contracts/strategy/CompoundStrategy.sol",
+      "contract": "CompoundStrategy"
+    },
+    {
+      "name": "EUSDC",
+      "type": "IEulerEToken public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IEulerEToken(0xEb91861f8A4e1C12333F42DCE8fB0Ecdc28dA716)",
+      "declaration": "IEulerEToken public constant EUSDC = IEulerEToken(0xEb91861f8A4e1C12333F42DCE8fB0Ecdc28dA716)",
+      "file": "contracts/strategy/EulerStrategy.sol",
+      "contract": "EulerStrategy"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable want",
+      "file": "contracts/managers/MasterStrategy.sol",
+      "contract": "InfoStorage"
+    },
+    {
+      "name": "sher",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable sher",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "usdc",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable usdc",
+      "file": "contracts/SherBuy.sol",
+      "contract": "SherBuy"
+    },
+    {
+      "name": "sher",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable sher",
+      "file": "contracts/SherClaim.sol",
+      "contract": "SherClaim"
+    },
+    {
+      "name": "sher",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable sher",
+      "file": "contracts/managers/SherDistributionManager.sol",
+      "contract": "SherDistributionManager"
+    },
+    {
+      "name": "sher",
+      "type": "IERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20 sher",
+      "file": "contracts/util/SherDistributionMock.sol",
+      "contract": "SherDistributionMock"
+    },
+    {
+      "name": "token",
+      "type": "IERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20 token",
+      "file": "contracts/util/SherDistributionMock.sol",
+      "contract": "SherDistributionMock"
+    },
+    {
+      "name": "sher",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable sher",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "token",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable token",
+      "file": "contracts/Sherlock.sol",
+      "contract": "Sherlock"
+    },
+    {
+      "name": "TOKEN",
+      "type": "IERC20 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48)",
+      "declaration": "IERC20 public constant TOKEN = IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48)",
+      "file": "contracts/managers/SherlockClaimManager.sol",
+      "contract": "SherlockClaimManager"
+    },
+    {
+      "name": "token",
+      "type": "IERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20 token",
+      "file": "contracts/util/SherlockMock.sol",
+      "contract": "SherlockMock"
+    },
+    {
+      "name": "allPremiumsPerSecToStakers",
+      "type": "uint256 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 internal allPremiumsPerSecToStakers",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "token",
+      "type": "IERC20 public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable token",
+      "file": "contracts/managers/SherlockProtocolManager.sol",
+      "contract": "SherlockProtocolManager"
+    },
+    {
+      "name": "token",
+      "type": "IERC20",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20 token",
+      "file": "contracts/util/SherlockProtocolManagerMock.sol",
+      "contract": "SherlockProtocolManagerMock"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public override want",
+      "file": "contracts/util/StrategyMock.sol",
+      "contract": "StrategyMock"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public override want",
+      "file": "contracts/util/StrategyMockGoerli.sol",
+      "contract": "StrategyMockGoerli"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public override want",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockCustom"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20 public want",
+      "file": "contracts/util/TreeSplitterMock.sol",
+      "contract": "TreeSplitterMockTest"
+    },
+    {
+      "name": "want",
+      "type": "IERC20 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public override want",
+      "file": "contracts/util/TreeStrategyMock.sol",
+      "contract": "TreeStrategyMockCustom"
+    },
+    {
+      "name": "rewardToken",
+      "type": "IERC20 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "IERC20(0x4C19596f5aAfF459fA38B0f7eD92F11AE6543784)",
+      "declaration": "IERC20 public constant rewardToken = IERC20(0x4C19596f5aAfF459fA38B0f7eD92F11AE6543784)",
+      "file": "contracts/strategy/TrueFiStrategy.sol",
+      "contract": "TrueFiStrategy"
+    },
+    {
+      "name": "tfUSDC",
+      "type": "ITrueFiPool2 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "ITrueFiPool2(0xA991356d261fbaF194463aF6DF8f0464F8f1c742)",
+      "declaration": "ITrueFiPool2 public constant tfUSDC = ITrueFiPool2(0xA991356d261fbaF194463aF6DF8f0464F8f1c742)",
+      "file": "contracts/strategy/TrueFiStrategy.sol",
+      "contract": "TrueFiStrategy"
+    }
+  ],
+  "token_addresses_hardcoded": [],
+  "invariant_values": [
+    "Key accounting vars (`stakeRate`, `MIN_STAKE`, `ARB_RESTAKE_WAIT_TIME`, `ARB_RESTAKE_GROWTH_TIME`, `ARB_RESTAKE_PERIOD`, `ARB_RESTAKE_MAX_PERCENTAGE`, `stakingPeriods`, `stakeShares`) must only change through authorized accounting paths",
+    "Every token address/handle variable must be non-zero and immutable or governance-gated",
+    "Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition"
+  ]
+}

@@ -1,0 +1,1386 @@
+# StarkEx
+
+StarkEx is a STARK-powered scalability engine for crypto exchanges. StarkEx uses cryptographic
+proofs to attest to the validity of a batch of transactions (such as trades and transfers)
+and updates a commitment to the state of the exchange onchain.
+
+StarkEx allows exchanges to provide non-custodial trading at scale with high liquidity and lower
+costs.
+
+## Modules
+
+1. scalable-dex - StarkEx main contract elements
+2. evm-verifier - Cryptographic STARK verifier elements
+
+<!-- AUDIT_DOSSIER_START -->
+## Protocol State/Value Dossier (Auto-Generated)
+
+Generated (UTC): `2026-05-26T17:00:02Z`  
+Project: `30_starkex`  
+Solidity files: `275`
+
+### Structure
+Top Solidity directories:
+- `evm-verifier`: 137 `.sol` files
+- `scalable-dex`: 120 `.sol` files
+- `common-contracts`: 18 `.sol` files
+
+Pragmas:
+- `>=0.5.3 <0.7.0`
+- `^0.6.12`
+
+Contracts/Libraries/Interfaces detected: `277`
+
+### Life Total / Balance Values
+Detected accounting/state total variables:
+- `FIRST_CONTINUOUS_PAGE_INDEX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `1`
+- `MINTABLE_ASSET_ID_FLAG` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `1 << 250`
+- `MINTABLE_ERC20_ASSET_ID_FLAG` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `1 << 248`
+- `NON_UNIQUE_MINTABLE_ASSET_ID_FLAG` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `1 << 249`
+- `ROLLUP_VAULTS_BIT` | type: `uint256 constant` | vis: `default` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `63`
+- `assetTypeToAssetInfo` | type: `mapping(uint256 => bytes)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `assetTypeToQuantum` | type: `mapping(uint256 => uint256)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `permissiveAssetType_DEPRECATED` | type: `mapping(uint256 => bool)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `registeredAssetType` | type: `mapping(uint256 => bool)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `rollupVaultRoot` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `validiumVaultRoot` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `INDEX_SIZE_IN_BYTES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `MerkleVerifier` @ `evm-verifier/solidity/contracts/MerkleVerifier.sol` = `0x20`
+- `PERPETUAL_ASSET_ID_UPPER_BOUND` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PerpetualConstants` @ `scalable-dex/contracts/src/perpetual/PerpetualConstants.sol` = `2**120`
+- `BALANCE_BIAS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PerpetualEscapeVerifier` @ `scalable-dex/contracts/src/perpetual/components/PerpetualEscapeVerifier.sol` = `2**63`
+- `BALANCE_BITS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PerpetualEscapeVerifier` @ `scalable-dex/contracts/src/perpetual/components/PerpetualEscapeVerifier.sol` = `64`
+- `N_ASSETS_BITS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PerpetualEscapeVerifier` @ `scalable-dex/contracts/src/perpetual/components/PerpetualEscapeVerifier.sol` = `16`
+- `sharedStateHash` | type: `bytes32` | vis: `default` | flags: `-` | `PerpetualStorage` @ `scalable-dex/contracts/src/perpetual/components/PerpetualStorage.sol`
+- `systemAssetType` | type: `uint256` | vis: `default` | flags: `-` | `PerpetualStorage` @ `scalable-dex/contracts/src/perpetual/components/PerpetualStorage.sol`
+- `ASSET_CONFIG_OFFSET_ASSET_ID` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `0`
+- `ASSET_CONFIG_OFFSET_CONFIG_HASH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `1`
+- `PROG_OUT_ASSET_CONFIG_HASHES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `3`
+- `PROG_OUT_N_ASSET_CONFIGS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `2`
+- `PROG_OUT_N_WORDS_PER_ASSET_CONFIG` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `2`
+- `STATE_OFFSET_VAULTS_HEIGHT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `1`
+- `STATE_OFFSET_VAULTS_ROOT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `0`
+- `PUB_IN_FINAL_ROLLUP_VAULT_ROOT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `4`
+- `PUB_IN_FINAL_VALIDIUM_VAULT_ROOT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `2`
+- `PUB_IN_INITIAL_ROLLUP_VAULT_ROOT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `3`
+- `PUB_IN_INITIAL_VALIDIUM_VAULT_ROOT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `1`
+- `PUB_IN_N_ONCHAIN_VAULT_UPDATES_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `13`
+- `PUB_IN_N_WORDS_PER_ONCHAIN_VAULT_UPDATE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `3`
+- `PUB_IN_ROLLUP_VAULT_TREE_HEIGHT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `9`
+- `PUB_IN_VALIDIUM_VAULT_TREE_HEIGHT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `8`
+- `STARKEX_MAX_DEFAULT_VAULT_LOCK` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `StarkExConstants` @ `scalable-dex/contracts/src/starkex/StarkExConstants.sol` = `7 days`
+- `defaultVaultWithdrawalLock` | type: `uint256 public` | vis: `public` | flags: `-` | `StarkExStorage` @ `scalable-dex/contracts/src/starkex/components/StarkExStorage.sol`
+- `strictVaultBalancePolicy` | type: `bool` | vis: `default` | flags: `-` | `StarkExStorage` @ `scalable-dex/contracts/src/starkex/components/StarkExStorage.sol`
+- `vaultsBalances` | type: `mapping(address => mapping(uint256 => mapping(uint256 => uint256)))` | vis: `default` | flags: `-` | `StarkExStorage` @ `scalable-dex/contracts/src/starkex/components/StarkExStorage.sol`
+- `vaultsWithdrawalLocks` | type: `mapping(address => mapping(uint256 => mapping(uint256 => uint256)))` | vis: `default` | flags: `-` | `StarkExStorage` @ `scalable-dex/contracts/src/starkex/components/StarkExStorage.sol`
+- `NFT_ASSET_ID_PREFIX` | type: `string internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `"NFT:"`
+
+All detected state variables (full list):
+- `this_` | type: `address immutable` | vis: `default` | flags: `immutable` | `BlockDirectCall` @ `common-contracts/src/interfaces/BlockDirectCall.sol`
+- `this_` | type: `address immutable` | vis: `default` | flags: `immutable` | `BlockDirectCall` @ `scalable-dex/contracts/src/interfaces/BlockDirectCall.sol`
+- `PROGRAM_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CairoBootloaderProgramSize` @ `evm-verifier/solidity/contracts/cpu/CairoBootloaderProgram.sol` = `566`
+- `BITWISE_BUILTIN_BIT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CairoVerifierContract` @ `evm-verifier/solidity/contracts/cpu/CairoVerifierContract.sol` = `4`
+- `ECDSA_BUILTIN_BIT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CairoVerifierContract` @ `evm-verifier/solidity/contracts/cpu/CairoVerifierContract.sol` = `3`
+- `EC_OP_BUILTIN_BIT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CairoVerifierContract` @ `evm-verifier/solidity/contracts/cpu/CairoVerifierContract.sol` = `5`
+- `KECCAK_BUILTIN_BIT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CairoVerifierContract` @ `evm-verifier/solidity/contracts/cpu/CairoVerifierContract.sol` = `6`
+- `OUTPUT_BUILTIN_BIT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CairoVerifierContract` @ `evm-verifier/solidity/contracts/cpu/CairoVerifierContract.sol` = `0`
+- `PEDERSEN_BUILTIN_BIT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CairoVerifierContract` @ `evm-verifier/solidity/contracts/cpu/CairoVerifierContract.sol` = `1`
+- `POSEIDON_BUILTIN_BIT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CairoVerifierContract` @ `evm-verifier/solidity/contracts/cpu/CairoVerifierContract.sol` = `7`
+- `RANGE_CHECK_BUILTIN_BIT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CairoVerifierContract` @ `evm-verifier/solidity/contracts/cpu/CairoVerifierContract.sol` = `2`
+- `CALL_PROXY_VERSION` | type: `string public constant` | vis: `public` | flags: `constant` | `CallProxy` @ `common-contracts/src/upgrade/CallProxy.sol` = `"3.2.0"`
+- `ENTRY_NOT_FOUND` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ChangeVerifiersExternalInitializer` @ `scalable-dex/contracts/src/upgrade/eic/ChangeVerifiersExternalInitializer.sol` = `uint256(~0)`
+- `SIGNATURE_LENGTH` | type: `uint256 constant` | vis: `default` | flags: `constant` | `Committee` @ `scalable-dex/contracts/src/committee/Committee.sol` = `32 * 2 + 1`
+- `isMember` | type: `mapping(address => bool) public` | vis: `public` | flags: `-` | `Committee` @ `scalable-dex/contracts/src/committee/Committee.sol`
+- `signaturesRequired` | type: `uint256 public` | vis: `public` | flags: `-` | `Committee` @ `scalable-dex/contracts/src/committee/Committee.sol`
+- `GLOBAL_CONFIG_KEY` | type: `uint256 constant` | vis: `default` | flags: `constant` | `Configuration` @ `scalable-dex/contracts/src/perpetual/components/Configuration.sol` = `uint256(~0)`
+- `BATCH_INVERSE_CHUNK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `CpuOods` @ `evm-verifier/solidity/contracts/cpu/layout0/CpuOods.sol` = `(2 + N_ROWS_IN_MASK)`
+- `BATCH_INVERSE_CHUNK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `CpuOods` @ `evm-verifier/solidity/contracts/cpu/layout1/CpuOods.sol` = `(2 + N_ROWS_IN_MASK)`
+- `BATCH_INVERSE_CHUNK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `CpuOods` @ `evm-verifier/solidity/contracts/cpu/layout2/CpuOods.sol` = `(2 + N_ROWS_IN_MASK)`
+- `BATCH_INVERSE_CHUNK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `CpuOods` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuOods.sol` = `(2 + N_ROWS_IN_MASK)`
+- `BATCH_INVERSE_CHUNK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `CpuOods` @ `evm-verifier/solidity/contracts/cpu/layout4/CpuOods.sol` = `(2 + N_ROWS_IN_MASK)`
+- `BATCH_INVERSE_CHUNK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `CpuOods` @ `evm-verifier/solidity/contracts/cpu/layout5/CpuOods.sol` = `(2 + N_ROWS_IN_MASK)`
+- `BATCH_INVERSE_CHUNK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `CpuOods` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuOods.sol` = `(2 + N_ROWS_IN_MASK)`
+- `BATCH_INVERSE_CHUNK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `CpuOods` @ `evm-verifier/solidity/contracts/cpu/layout7/CpuOods.sol` = `(2 + N_ROWS_IN_MASK)`
+- `OFFSET_BITWISE_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuPublicInputOffsets.sol` = `16`
+- `OFFSET_BITWISE_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout4/CpuPublicInputOffsets.sol` = `14`
+- `OFFSET_BITWISE_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout5/CpuPublicInputOffsets.sol` = `16`
+- `OFFSET_BITWISE_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `16`
+- `OFFSET_BITWISE_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout7/CpuPublicInputOffsets.sol` = `14`
+- `OFFSET_BITWISE_STOP_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuPublicInputOffsets.sol` = `17`
+- `OFFSET_BITWISE_STOP_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout4/CpuPublicInputOffsets.sol` = `15`
+- `OFFSET_BITWISE_STOP_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout5/CpuPublicInputOffsets.sol` = `17`
+- `OFFSET_BITWISE_STOP_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `17`
+- `OFFSET_BITWISE_STOP_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout7/CpuPublicInputOffsets.sol` = `15`
+- `OFFSET_ECDSA_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsets.sol` = `14`
+- `OFFSET_ECDSA_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout0/CpuPublicInputOffsets.sol` = `14`
+- `OFFSET_ECDSA_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout1/CpuPublicInputOffsets.sol` = `14`
+- `OFFSET_ECDSA_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout2/CpuPublicInputOffsets.sol` = `14`
+- `OFFSET_ECDSA_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuPublicInputOffsets.sol` = `14`
+- `OFFSET_ECDSA_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout5/CpuPublicInputOffsets.sol` = `14`
+- `OFFSET_ECDSA_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `14`
+- `OFFSET_ECDSA_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsets.sol` = `15`
+- `OFFSET_ECDSA_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout0/CpuPublicInputOffsets.sol` = `15`
+- `OFFSET_ECDSA_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout1/CpuPublicInputOffsets.sol` = `15`
+- `OFFSET_ECDSA_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout2/CpuPublicInputOffsets.sol` = `15`
+- `OFFSET_ECDSA_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuPublicInputOffsets.sol` = `15`
+- `OFFSET_ECDSA_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout5/CpuPublicInputOffsets.sol` = `15`
+- `OFFSET_ECDSA_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `15`
+- `OFFSET_EC_OP_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuPublicInputOffsets.sol` = `18`
+- `OFFSET_EC_OP_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `18`
+- `OFFSET_EC_OP_STOP_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuPublicInputOffsets.sol` = `19`
+- `OFFSET_EC_OP_STOP_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `19`
+- `OFFSET_N_PUBLIC_MEMORY_PAGES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsets.sol` = `18`
+- `OFFSET_N_PUBLIC_MEMORY_PAGES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout0/CpuPublicInputOffsets.sol` = `18`
+- `OFFSET_N_PUBLIC_MEMORY_PAGES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout1/CpuPublicInputOffsets.sol` = `18`
+- `OFFSET_N_PUBLIC_MEMORY_PAGES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout2/CpuPublicInputOffsets.sol` = `18`
+- `OFFSET_N_PUBLIC_MEMORY_PAGES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuPublicInputOffsets.sol` = `22`
+- `OFFSET_N_PUBLIC_MEMORY_PAGES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout4/CpuPublicInputOffsets.sol` = `18`
+- `OFFSET_N_PUBLIC_MEMORY_PAGES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout5/CpuPublicInputOffsets.sol` = `20`
+- `OFFSET_N_PUBLIC_MEMORY_PAGES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `24`
+- `OFFSET_N_PUBLIC_MEMORY_PAGES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout7/CpuPublicInputOffsets.sol` = `18`
+- `OFFSET_POSEIDON_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `20`
+- `OFFSET_POSEIDON_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `21`
+- `OFFSET_PUBLIC_MEMORY` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsets.sol` = `19`
+- `OFFSET_PUBLIC_MEMORY` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout0/CpuPublicInputOffsets.sol` = `19`
+- `OFFSET_PUBLIC_MEMORY` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout1/CpuPublicInputOffsets.sol` = `19`
+- `OFFSET_PUBLIC_MEMORY` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout2/CpuPublicInputOffsets.sol` = `19`
+- `OFFSET_PUBLIC_MEMORY` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuPublicInputOffsets.sol` = `23`
+- `OFFSET_PUBLIC_MEMORY` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout4/CpuPublicInputOffsets.sol` = `19`
+- `OFFSET_PUBLIC_MEMORY` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout5/CpuPublicInputOffsets.sol` = `21`
+- `OFFSET_PUBLIC_MEMORY` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `25`
+- `OFFSET_PUBLIC_MEMORY` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout7/CpuPublicInputOffsets.sol` = `19`
+- `OFFSET_PUBLIC_MEMORY_PADDING_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsets.sol` = `16`
+- `OFFSET_PUBLIC_MEMORY_PADDING_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout0/CpuPublicInputOffsets.sol` = `16`
+- `OFFSET_PUBLIC_MEMORY_PADDING_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout1/CpuPublicInputOffsets.sol` = `16`
+- `OFFSET_PUBLIC_MEMORY_PADDING_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout2/CpuPublicInputOffsets.sol` = `16`
+- `OFFSET_PUBLIC_MEMORY_PADDING_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuPublicInputOffsets.sol` = `20`
+- `OFFSET_PUBLIC_MEMORY_PADDING_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout4/CpuPublicInputOffsets.sol` = `16`
+- `OFFSET_PUBLIC_MEMORY_PADDING_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout5/CpuPublicInputOffsets.sol` = `18`
+- `OFFSET_PUBLIC_MEMORY_PADDING_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `22`
+- `OFFSET_PUBLIC_MEMORY_PADDING_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout7/CpuPublicInputOffsets.sol` = `16`
+- `OFFSET_PUBLIC_MEMORY_PADDING_VALUE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsets.sol` = `17`
+- `OFFSET_PUBLIC_MEMORY_PADDING_VALUE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout0/CpuPublicInputOffsets.sol` = `17`
+- `OFFSET_PUBLIC_MEMORY_PADDING_VALUE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout1/CpuPublicInputOffsets.sol` = `17`
+- `OFFSET_PUBLIC_MEMORY_PADDING_VALUE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout2/CpuPublicInputOffsets.sol` = `17`
+- `OFFSET_PUBLIC_MEMORY_PADDING_VALUE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuPublicInputOffsets.sol` = `21`
+- `OFFSET_PUBLIC_MEMORY_PADDING_VALUE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout4/CpuPublicInputOffsets.sol` = `17`
+- `OFFSET_PUBLIC_MEMORY_PADDING_VALUE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout5/CpuPublicInputOffsets.sol` = `19`
+- `OFFSET_PUBLIC_MEMORY_PADDING_VALUE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuPublicInputOffsets.sol` = `23`
+- `OFFSET_PUBLIC_MEMORY_PADDING_VALUE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsets` @ `evm-verifier/solidity/contracts/cpu/layout7/CpuPublicInputOffsets.sol` = `17`
+- `FINAL_PC` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `INITIAL_PC + 4`
+- `INITIAL_PC` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `1`
+- `OFFSET_EXECUTION_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `6`
+- `OFFSET_EXECUTION_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `7`
+- `OFFSET_LAYOUT_CODE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `3`
+- `OFFSET_LOG_N_STEPS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `0`
+- `OFFSET_OUTPUT_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `8`
+- `OFFSET_OUTPUT_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `9`
+- `OFFSET_PEDERSEN_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `10`
+- `OFFSET_PEDERSEN_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `11`
+- `OFFSET_PROGRAM_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `4`
+- `OFFSET_PROGRAM_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `5`
+- `OFFSET_RANGE_CHECK_BEGIN_ADDR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `12`
+- `OFFSET_RANGE_CHECK_STOP_PTR` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `13`
+- `OFFSET_RC_MAX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `2`
+- `OFFSET_RC_MIN` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `CpuPublicInputOffsetsBase` @ `evm-verifier/solidity/contracts/cpu/CpuPublicInputOffsetsBase.sol` = `1`
+- `constraintPoly` | type: `CpuConstraintPoly` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/CpuVerifier.sol`
+- `constraintPoly` | type: `CpuConstraintPoly` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/CpuVerifier.sol`
+- `constraintPoly` | type: `CpuConstraintPoly` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/CpuVerifier.sol`
+- `constraintPoly` | type: `CpuConstraintPoly` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/CpuVerifier.sol`
+- `constraintPoly` | type: `CpuConstraintPoly` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuVerifier.sol`
+- `constraintPoly` | type: `CpuConstraintPoly` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/CpuVerifier.sol`
+- `constraintPoly` | type: `CpuConstraintPoly` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/CpuVerifier.sol`
+- `constraintPoly` | type: `CpuConstraintPoly` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuVerifier.sol`
+- `constraintPoly` | type: `CpuConstraintPoly` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/CpuVerifier.sol`
+- `memoryPageFactRegistry` | type: `IFactRegistry` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/CpuVerifier.sol`
+- `memoryPageFactRegistry` | type: `IFactRegistry` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/CpuVerifier.sol`
+- `memoryPageFactRegistry` | type: `IFactRegistry` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/CpuVerifier.sol`
+- `memoryPageFactRegistry` | type: `IFactRegistry` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/CpuVerifier.sol`
+- `memoryPageFactRegistry` | type: `IFactRegistry` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/CpuVerifier.sol`
+- `memoryPageFactRegistry` | type: `IFactRegistry` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/CpuVerifier.sol`
+- `memoryPageFactRegistry` | type: `IFactRegistry` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/CpuVerifier.sol`
+- `memoryPageFactRegistry` | type: `IFactRegistry` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/CpuVerifier.sol`
+- `memoryPageFactRegistry` | type: `IFactRegistry` | vis: `default` | flags: `-` | `CpuVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/CpuVerifier.sol`
+- `ALPHA` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ECDSA` @ `scalable-dex/contracts/src/components/ECDSA.sol` = `1`
+- `BETA` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ECDSA` @ `scalable-dex/contracts/src/components/ECDSA.sol` = `3141592653589793238462643383279502884197169399375105820974944592307816406665`
+- `EC_GEN_X` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ECDSA` @ `scalable-dex/contracts/src/components/ECDSA.sol` = `0x1ef15c18599971b7beced415a40f0c7deacfd9b0d1819e03d723d8bc943cfca`
+- `EC_GEN_Y` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ECDSA` @ `scalable-dex/contracts/src/components/ECDSA.sol` = `0x5668060aa49730b7be4801df46ec62de53ecd11abe43a32873000c36e8dc1f`
+- `EC_ORDER` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ECDSA` @ `scalable-dex/contracts/src/components/ECDSA.sol` = `3618502788666131213697322783095070105526743751716087489154079457884512865583`
+- `FIELD_PRIME` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ECDSA` @ `scalable-dex/contracts/src/components/ECDSA.sol` = `0x800000000000011000000000000000000000000000000000000000000000001`
+- `N_ELEMENT_BITS_ECDSA` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ECDSA` @ `scalable-dex/contracts/src/components/ECDSA.sol` = `251`
+- `U255_MAX_PLUS_1` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `EllipticCurve` @ `scalable-dex/contracts/src/third_party/EllipticCurve.sol` = `57896044618658097711785492504343953926634992332820282019728792003956564819968`
+- `N_TABLES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `EscapeVerifier` @ `scalable-dex/contracts/src/starkex/components/EscapeVerifier.sol` = `63`
+- `lookupTables` | type: `address[N_TABLES]` | vis: `default` | flags: `-` | `EscapeVerifier` @ `scalable-dex/contracts/src/starkex/components/EscapeVerifier.sol`
+- `anyFactRegistered` | type: `bool` | vis: `default` | flags: `-` | `FactRegistry` @ `common-contracts/src/components/FactRegistry.sol` = `false`
+- `anyFactRegistered` | type: `bool` | vis: `default` | flags: `-` | `FactRegistry` @ `evm-verifier/solidity/contracts/components/FactRegistry.sol` = `false`
+- `anyFactRegistered` | type: `bool` | vis: `default` | flags: `-` | `FactRegistry` @ `scalable-dex/contracts/src/components/FactRegistry.sol` = `false`
+- `verifiedFact` | type: `mapping(bytes32 => bool) private` | vis: `private` | flags: `-` | `FactRegistry` @ `common-contracts/src/components/FactRegistry.sol`
+- `verifiedFact` | type: `mapping(bytes32 => bool) private` | vis: `private` | flags: `-` | `FactRegistry` @ `evm-verifier/solidity/contracts/components/FactRegistry.sol`
+- `verifiedFact` | type: `mapping(bytes32 => bool) private` | vis: `private` | flags: `-` | `FactRegistry` @ `scalable-dex/contracts/src/components/FactRegistry.sol`
+- `FRI_CTX_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriLayer` @ `evm-verifier/solidity/contracts/FriLayer.sol` = `FRI_CTX_TO_FRI_HALF_INV_GROUP_OFFSET + (FRI_GROUP_SIZE / 2)`
+- `FRI_CTX_TO_COSET_EVALUATIONS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriLayer` @ `evm-verifier/solidity/contracts/FriLayer.sol` = `0`
+- `FRI_CTX_TO_FRI_GROUP_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriLayer` @ `evm-verifier/solidity/contracts/FriLayer.sol` = `FRI_GROUP_SIZE`
+- `FRI_CTX_TO_FRI_HALF_INV_GROUP_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriLayer` @ `evm-verifier/solidity/contracts/FriLayer.sol` = `FRI_CTX_TO_FRI_GROUP_OFFSET + FRI_GROUP_SIZE`
+- `FRI_GROUP_GEN` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriLayer` @ `evm-verifier/solidity/contracts/FriLayer.sol` = `0x5ec467b88826aba4537602d514425f3b0bdf467bbf302458337c45f6021e539`
+- `FRI_GROUP_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriLayer` @ `evm-verifier/solidity/contracts/FriLayer.sol` = `0x20 * MAX_COSET_SIZE`
+- `FRI_QUEUE_SLOT_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriLayer` @ `evm-verifier/solidity/contracts/FriLayer.sol` = `3`
+- `FRI_QUEUE_SLOT_SIZE_IN_BYTES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriLayer` @ `evm-verifier/solidity/contracts/FriLayer.sol` = `3 * 0x20`
+- `MAX_COSET_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriLayer` @ `evm-verifier/solidity/contracts/FriLayer.sol` = `2**FRI_MAX_STEP_SIZE`
+- `friStatementContract` | type: `FriStatementContract` | vis: `default` | flags: `-` | `FriStatementVerifier` @ `evm-verifier/solidity/contracts/FriStatementVerifier.sol`
+- `friStatementContract` | type: `FriStatementContract` | vis: `default` | flags: `-` | `FriStatementVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/FriStatementVerifier.sol`
+- `friStatementContract` | type: `FriStatementContract` | vis: `default` | flags: `-` | `FriStatementVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/FriStatementVerifier.sol`
+- `friStatementContract` | type: `FriStatementContract` | vis: `default` | flags: `-` | `FriStatementVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/FriStatementVerifier.sol`
+- `friStatementContract` | type: `FriStatementContract` | vis: `default` | flags: `-` | `FriStatementVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/FriStatementVerifier.sol`
+- `friStatementContract` | type: `FriStatementContract` | vis: `default` | flags: `-` | `FriStatementVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/FriStatementVerifier.sol`
+- `friStatementContract` | type: `FriStatementContract` | vis: `default` | flags: `-` | `FriStatementVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/FriStatementVerifier.sol`
+- `friStatementContract` | type: `FriStatementContract` | vis: `default` | flags: `-` | `FriStatementVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/FriStatementVerifier.sol`
+- `friStatementContract` | type: `FriStatementContract` | vis: `default` | flags: `-` | `FriStatementVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/FriStatementVerifier.sol`
+- `FRI_MAX_STEP_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriTransform` @ `evm-verifier/solidity/contracts/FriTransform.sol` = `4`
+- `FRI_MIN_STEP_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriTransform` @ `evm-verifier/solidity/contracts/FriTransform.sol` = `2`
+- `K_MODULUS_TIMES_16` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FriTransform` @ `evm-verifier/solidity/contracts/FriTransform.sol` = `( 0x8000000000000110000000000000000000000000000000000000000000000010 )`
+- `GOVERNANCE_INFO_TAG_HASH` | type: `bytes32 immutable` | vis: `default` | flags: `immutable` | `GenericGovernance` @ `scalable-dex/contracts/src/components/GenericGovernance.sol`
+- `governanceInfo` | type: `mapping(string => GovernanceInfoStruct) internal` | vis: `internal` | flags: `-` | `GovernanceStorage` @ `common-contracts/src/components/GovernanceStorage.sol`
+- `governanceInfo` | type: `mapping(string => GovernanceInfoStruct) internal` | vis: `internal` | flags: `-` | `GovernanceStorage` @ `scalable-dex/contracts/src/components/GovernanceStorage.sol`
+- `gpsContract` | type: `IQueryableFactRegistry public` | vis: `public` | flags: `-` | `GpsFactRegistryAdapter` @ `scalable-dex/contracts/src/components/GpsFactRegistryAdapter.sol`
+- `programHash` | type: `uint256 public` | vis: `public` | flags: `-` | `GpsFactRegistryAdapter` @ `scalable-dex/contracts/src/components/GpsFactRegistryAdapter.sol`
+- `FIRST_CONTINUOUS_PAGE_INDEX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `1`
+- `METADATA_OFFSET_TASK_N_TREE_PAIRS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `2`
+- `METADATA_OFFSET_TASK_OUTPUT_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `0`
+- `METADATA_OFFSET_TASK_PROGRAM_HASH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `1`
+- `METADATA_OFFSET_TREE_PAIR_N_NODES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `1`
+- `METADATA_OFFSET_TREE_PAIR_N_PAGES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `0`
+- `METADATA_TASKS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `1`
+- `METADATA_TASK_HEADER_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `3`
+- `NODE_STACK_ITEM_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `2`
+- `NODE_STACK_OFFSET_END` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `1`
+- `NODE_STACK_OFFSET_HASH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsOutputParser` @ `evm-verifier/solidity/contracts/gps/GpsOutputParser.sol` = `0`
+- `N_BUILTINS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsStatementVerifier` @ `evm-verifier/solidity/contracts/gps/GpsStatementVerifier.sol` = `8`
+- `N_MAIN_ARGS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsStatementVerifier` @ `evm-verifier/solidity/contracts/gps/GpsStatementVerifier.sol` = `N_BUILTINS`
+- `N_MAIN_RETURN_VALUES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GpsStatementVerifier` @ `evm-verifier/solidity/contracts/gps/GpsStatementVerifier.sol` = `N_BUILTINS`
+- `bootloaderProgramContractAddress` | type: `CairoBootloaderProgram` | vis: `default` | flags: `-` | `GpsStatementVerifier` @ `evm-verifier/solidity/contracts/gps/GpsStatementVerifier.sol`
+- `cairoVerifierContractAddresses` | type: `CairoVerifierContract[]` | vis: `default` | flags: `-` | `GpsStatementVerifier` @ `evm-verifier/solidity/contracts/gps/GpsStatementVerifier.sol`
+- `hashedSupportedCairoVerifiers_` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `GpsStatementVerifier` @ `evm-verifier/solidity/contracts/gps/GpsStatementVerifier.sol`
+- `memoryPageFactRegistry` | type: `MemoryPageFactRegistry` | vis: `default` | flags: `-` | `GpsStatementVerifier` @ `evm-verifier/solidity/contracts/gps/GpsStatementVerifier.sol`
+- `simpleBootloaderProgramHash_` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `GpsStatementVerifier` @ `evm-verifier/solidity/contracts/gps/GpsStatementVerifier.sol`
+- `MAX_N_MERKLE_VERIFIER_QUERIES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `IMerkleVerifier` @ `evm-verifier/solidity/contracts/IMerkleVerifier.sol` = `128`
+- `MERKLE_SLOT_SIZE_IN_BYTES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `IMerkleVerifier` @ `evm-verifier/solidity/contracts/IMerkleVerifier.sol` = `0x40`
+- `MASK_ADDRESS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `KeyGetters` @ `scalable-dex/contracts/src/components/KeyGetters.sol` = `(1 << 160) - 1`
+- `ecdsaGeneratorPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout0/LayoutSpecific.sol`
+- `ecdsaGeneratorPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout1/LayoutSpecific.sol`
+- `ecdsaGeneratorPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout2/LayoutSpecific.sol`
+- `ecdsaGeneratorPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout3/LayoutSpecific.sol`
+- `ecdsaGeneratorPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout5/LayoutSpecific.sol`
+- `ecdsaGeneratorPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout6/LayoutSpecific.sol`
+- `ecdsaGeneratorPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout0/LayoutSpecific.sol`
+- `ecdsaGeneratorPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout1/LayoutSpecific.sol`
+- `ecdsaGeneratorPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout2/LayoutSpecific.sol`
+- `ecdsaGeneratorPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout3/LayoutSpecific.sol`
+- `ecdsaGeneratorPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout5/LayoutSpecific.sol`
+- `ecdsaGeneratorPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout6/LayoutSpecific.sol`
+- `pedersenPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout0/LayoutSpecific.sol`
+- `pedersenPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout1/LayoutSpecific.sol`
+- `pedersenPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout2/LayoutSpecific.sol`
+- `pedersenPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout3/LayoutSpecific.sol`
+- `pedersenPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout4/LayoutSpecific.sol`
+- `pedersenPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout5/LayoutSpecific.sol`
+- `pedersenPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout6/LayoutSpecific.sol`
+- `pedersenPointsX` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout7/LayoutSpecific.sol`
+- `pedersenPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout0/LayoutSpecific.sol`
+- `pedersenPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout1/LayoutSpecific.sol`
+- `pedersenPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout2/LayoutSpecific.sol`
+- `pedersenPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout3/LayoutSpecific.sol`
+- `pedersenPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout4/LayoutSpecific.sol`
+- `pedersenPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout5/LayoutSpecific.sol`
+- `pedersenPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout6/LayoutSpecific.sol`
+- `pedersenPointsY` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout7/LayoutSpecific.sol`
+- `poseidonPoseidonFullRoundKey0` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout6/LayoutSpecific.sol`
+- `poseidonPoseidonFullRoundKey1` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout6/LayoutSpecific.sol`
+- `poseidonPoseidonFullRoundKey2` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout6/LayoutSpecific.sol`
+- `poseidonPoseidonPartialRoundKey0` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout6/LayoutSpecific.sol`
+- `poseidonPoseidonPartialRoundKey1` | type: `IPeriodicColumn` | vis: `default` | flags: `-` | `LayoutSpecific` @ `evm-verifier/solidity/contracts/cpu/layout6/LayoutSpecific.sol`
+- `DEPOSIT_CANCEL_DELAY` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `2 days`
+- `FREEZE_GRACE_PERIOD` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `7 days`
+- `K_BETA` | type: `uint256 constant` | vis: `default` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `0x6f21413efbe40de150e596d72f7a8c5609ad26c15c915c1f4cdfcb99cee9e89`
+- `K_MODULUS` | type: `uint256 constant` | vis: `default` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `0x800000000000011000000000000000000000000000000000000000000000001`
+- `MASK_240` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF`
+- `MASK_250` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `0x03FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF`
+- `MAX_FORCED_ACTIONS_REQS_PER_BLOCK` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `10`
+- `MAX_VERIFIER_COUNT` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `uint256(64)`
+- `MINTABLE_ASSET_ID_FLAG` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `1 << 250`
+- `MINTABLE_ERC20_ASSET_ID_FLAG` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `1 << 248`
+- `NON_UNIQUE_MINTABLE_ASSET_ID_FLAG` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `1 << 249`
+- `QUANTUM_UPPER_BOUND` | type: `uint256 constant` | vis: `default` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `2**128`
+- `ROLLUP_VAULTS_BIT` | type: `uint256 constant` | vis: `default` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `63`
+- `UNFREEZE_DELAY` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `365 days`
+- `VERIFIER_REMOVAL_DELAY` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `FREEZE_GRACE_PERIOD + (21 days)`
+- `ZERO_ADDRESS` | type: `address constant` | vis: `default` | flags: `constant` | `LibConstants` @ `scalable-dex/contracts/src/libraries/LibConstants.sol` = `address(0x0)`
+- `ENTRY_NOT_FOUND` | type: `uint256 constant` | vis: `default` | flags: `constant` | `MApprovalChain` @ `scalable-dex/contracts/src/interfaces/MApprovalChain.sol` = `uint256(~0)`
+- `SUBCONTRACT_BITS` | type: `uint256 constant` | vis: `default` | flags: `constant` | `MainDispatcher` @ `scalable-dex/contracts/src/interfaces/MainDispatcher.sol` = `4`
+- `MAIN_GOVERNANCE_INFO_TAG` | type: `string public constant` | vis: `public` | flags: `constant` | `MainGovernance` @ `scalable-dex/contracts/src/components/MainGovernance.sol` = `"StarkEx.Main.2019.GovernorsInformation"`
+- `LAYOUT_LENGTH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol` = `2**64`
+- `__endGap` | type: `uint256[LAYOUT_LENGTH - 40] private` | vis: `private` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `actionHashList` | type: `bytes32[]` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `actionsTimeLock` | type: `mapping(bytes32 => uint256)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `assetTypeToAssetInfo` | type: `mapping(uint256 => bytes)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `assetTypeToQuantum` | type: `mapping(uint256 => uint256)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `availabilityVerifiersChain` | type: `ApprovalChainData` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `cancellationRequests` | type: `mapping(uint256 => mapping(uint256 => mapping(uint256 => uint256)))` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `escapeVerifierAddress` | type: `address` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `escapesUsed` | type: `mapping(uint256 => bool)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `escapesUsedCount` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `ethKeys` | type: `mapping(uint256 => address)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `forcedActionRequests` | type: `mapping(bytes32 => uint256)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `forcedRequestsInBlock` | type: `mapping(uint256 => uint256)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `fullWithdrawalRequests_DEPRECATED` | type: `mapping(uint256 => mapping(uint256 => uint256))` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `globalConfigCode` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `lastBatchId` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `onchainDataVersion_DEPRECATED` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `operators` | type: `mapping(address => bool)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `orderRoot` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `orderTreeHeight` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `pendingDeposits` | type: `mapping(uint256 => mapping(uint256 => mapping(uint256 => uint256)))` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `pendingWithdrawals` | type: `mapping(uint256 => mapping(uint256 => uint256))` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `permissiveAssetType_DEPRECATED` | type: `mapping(uint256 => bool)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `registeredAssetType` | type: `mapping(uint256 => bool)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `rollupTreeHeight` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `rollupVaultRoot` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `sequenceNumber` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `starkKeys_DEPRECATED` | type: `mapping(address => uint256)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `stateFrozen` | type: `bool` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `subContracts` | type: `mapping(uint256 => address)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `tokenAdmins` | type: `mapping(address => bool)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `unFreezeTime` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `userAdmins_DEPRECATED` | type: `mapping(address => bool)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `validiumTreeHeight` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `validiumVaultRoot` | type: `uint256` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `verifiersChain` | type: `ApprovalChainData` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `FRI_QUEUE_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `MAX_N_QUERIES`
+- `FRI_QUEUE_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `MAX_N_QUERIES`
+- `FRI_QUEUE_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `MAX_N_QUERIES`
+- `FRI_QUEUE_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `MAX_N_QUERIES`
+- `FRI_QUEUE_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `MAX_N_QUERIES`
+- `FRI_QUEUE_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `MAX_N_QUERIES`
+- `FRI_QUEUE_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `MAX_N_QUERIES`
+- `FRI_QUEUE_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `MAX_N_QUERIES`
+- `MAX_FRI_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `10`
+- `MAX_FRI_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `10`
+- `MAX_FRI_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `10`
+- `MAX_FRI_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `10`
+- `MAX_FRI_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `10`
+- `MAX_FRI_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `10`
+- `MAX_FRI_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `10`
+- `MAX_FRI_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `10`
+- `MAX_N_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `48`
+- `MAX_N_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `48`
+- `MAX_N_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `48`
+- `MAX_N_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `48`
+- `MAX_N_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `48`
+- `MAX_N_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `48`
+- `MAX_N_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `48`
+- `MAX_N_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `48`
+- `MAX_SUPPORTED_FRI_STEP_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `4`
+- `MAX_SUPPORTED_FRI_STEP_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `4`
+- `MAX_SUPPORTED_FRI_STEP_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `4`
+- `MAX_SUPPORTED_FRI_STEP_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `4`
+- `MAX_SUPPORTED_FRI_STEP_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `4`
+- `MAX_SUPPORTED_FRI_STEP_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `4`
+- `MAX_SUPPORTED_FRI_STEP_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `4`
+- `MAX_SUPPORTED_FRI_STEP_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `4`
+- `MM_BLOW_UP_FACTOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x1`
+- `MM_BLOW_UP_FACTOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x1`
+- `MM_BLOW_UP_FACTOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x1`
+- `MM_BLOW_UP_FACTOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x1`
+- `MM_BLOW_UP_FACTOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x1`
+- `MM_BLOW_UP_FACTOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x1`
+- `MM_BLOW_UP_FACTOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x1`
+- `MM_BLOW_UP_FACTOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x1`
+- `MM_CHANNEL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0xa`
+- `MM_CHANNEL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0xa`
+- `MM_CHANNEL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0xa`
+- `MM_CHANNEL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0xa`
+- `MM_CHANNEL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0xa`
+- `MM_CHANNEL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0xa`
+- `MM_CHANNEL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0xa`
+- `MM_CHANNEL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0xa`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x15d`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x15d`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x15d`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x169`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x160`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x167`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x16f`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x160`
+- `MM_COMPOSITION_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x227`
+- `MM_COMPOSITION_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x226`
+- `MM_COMPOSITION_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x1de`
+- `MM_COMPOSITION_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x288`
+- `MM_COMPOSITION_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x1e6`
+- `MM_COMPOSITION_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x25e`
+- `MM_COMPOSITION_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x27d`
+- `MM_COMPOSITION_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x1e6`
+- `MM_COMPOSITION_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x70a`
+- `MM_COMPOSITION_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x679`
+- `MM_COMPOSITION_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x3f1`
+- `MM_COMPOSITION_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x7cb`
+- `MM_COMPOSITION_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x3f9`
+- `MM_COMPOSITION_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x6b1`
+- `MM_COMPOSITION_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x490`
+- `MM_COMPOSITION_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x489`
+- `MM_CONSTRAINT_POLY_ARGS_END` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x227`
+- `MM_CONSTRAINT_POLY_ARGS_END` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x226`
+- `MM_CONSTRAINT_POLY_ARGS_END` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x1de`
+- `MM_CONSTRAINT_POLY_ARGS_END` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x288`
+- `MM_CONSTRAINT_POLY_ARGS_END` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x1e6`
+- `MM_CONSTRAINT_POLY_ARGS_END` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x25e`
+- `MM_CONSTRAINT_POLY_ARGS_END` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x27d`
+- `MM_CONSTRAINT_POLY_ARGS_END` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x1e6`
+- `MM_CONSTRAINT_POLY_ARGS_START` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x13d`
+- `MM_CONSTRAINT_POLY_ARGS_START` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x13d`
+- `MM_CONSTRAINT_POLY_ARGS_START` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x13d`
+- `MM_CONSTRAINT_POLY_ARGS_START` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x13d`
+- `MM_CONSTRAINT_POLY_ARGS_START` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x13d`
+- `MM_CONSTRAINT_POLY_ARGS_START` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x13d`
+- `MM_CONSTRAINT_POLY_ARGS_START` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x13d`
+- `MM_CONSTRAINT_POLY_ARGS_START` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x13d`
+- `MM_CONTEXT_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x76d`
+- `MM_CONTEXT_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x6dc`
+- `MM_CONTEXT_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x454`
+- `MM_CONTEXT_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x82e`
+- `MM_CONTEXT_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x45c`
+- `MM_CONTEXT_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x714`
+- `MM_CONTEXT_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x4f3`
+- `MM_CONTEXT_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x4ec`
+- `MM_DILUTED_CHECK__FINAL_CUM_VAL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x154`
+- `MM_DILUTED_CHECK__FINAL_CUM_VAL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x152`
+- `MM_DILUTED_CHECK__FINAL_CUM_VAL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x154`
+- `MM_DILUTED_CHECK__FINAL_CUM_VAL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x159`
+- `MM_DILUTED_CHECK__FINAL_CUM_VAL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x152`
+- `MM_DILUTED_CHECK__FIRST_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x151`
+- `MM_DILUTED_CHECK__FIRST_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x14f`
+- `MM_DILUTED_CHECK__FIRST_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x151`
+- `MM_DILUTED_CHECK__FIRST_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x156`
+- `MM_DILUTED_CHECK__FIRST_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x14f`
+- `MM_DILUTED_CHECK__INTERACTION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x153`
+- `MM_DILUTED_CHECK__INTERACTION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x151`
+- `MM_DILUTED_CHECK__INTERACTION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x153`
+- `MM_DILUTED_CHECK__INTERACTION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x158`
+- `MM_DILUTED_CHECK__INTERACTION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x151`
+- `MM_DILUTED_CHECK__INTERACTION_Z` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x152`
+- `MM_DILUTED_CHECK__INTERACTION_Z` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x150`
+- `MM_DILUTED_CHECK__INTERACTION_Z` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x152`
+- `MM_DILUTED_CHECK__INTERACTION_Z` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x157`
+- `MM_DILUTED_CHECK__INTERACTION_Z` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x150`
+- `MM_DILUTED_CHECK__PERMUTATION__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x14f`
+- `MM_DILUTED_CHECK__PERMUTATION__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x14d`
+- `MM_DILUTED_CHECK__PERMUTATION__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x14f`
+- `MM_DILUTED_CHECK__PERMUTATION__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x154`
+- `MM_DILUTED_CHECK__PERMUTATION__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x14d`
+- `MM_DILUTED_CHECK__PERMUTATION__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x150`
+- `MM_DILUTED_CHECK__PERMUTATION__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x14e`
+- `MM_DILUTED_CHECK__PERMUTATION__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x150`
+- `MM_DILUTED_CHECK__PERMUTATION__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x155`
+- `MM_DILUTED_CHECK__PERMUTATION__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x14e`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x153`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x153`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x153`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x159`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x159`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x15e`
+- `MM_ECDSA__SIG_CONFIG_BETA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x156`
+- `MM_ECDSA__SIG_CONFIG_BETA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x156`
+- `MM_ECDSA__SIG_CONFIG_BETA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x156`
+- `MM_ECDSA__SIG_CONFIG_BETA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x15c`
+- `MM_ECDSA__SIG_CONFIG_BETA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x15c`
+- `MM_ECDSA__SIG_CONFIG_BETA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x161`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x154`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x154`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x154`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x15a`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x15a`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x15f`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x155`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x155`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x155`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x15b`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x15b`
+- `MM_ECDSA__SIG_CONFIG_SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x160`
+- `MM_EC_OP__CURVE_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x160`
+- `MM_EC_OP__CURVE_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x165`
+- `MM_EVAL_DOMAIN_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x4`
+- `MM_EVAL_DOMAIN_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x4`
+- `MM_EVAL_DOMAIN_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x4`
+- `MM_EVAL_DOMAIN_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x4`
+- `MM_EVAL_DOMAIN_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x4`
+- `MM_EVAL_DOMAIN_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x4`
+- `MM_EVAL_DOMAIN_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x4`
+- `MM_EVAL_DOMAIN_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x4`
+- `MM_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x0`
+- `MM_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x0`
+- `MM_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x0`
+- `MM_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x0`
+- `MM_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x0`
+- `MM_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x0`
+- `MM_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x0`
+- `MM_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x0`
+- `MM_FINAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x146`
+- `MM_FINAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x146`
+- `MM_FINAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x146`
+- `MM_FINAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x146`
+- `MM_FINAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x144`
+- `MM_FINAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x146`
+- `MM_FINAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x14b`
+- `MM_FINAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x144`
+- `MM_FINAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x147`
+- `MM_FINAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x147`
+- `MM_FINAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x147`
+- `MM_FINAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x147`
+- `MM_FINAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x145`
+- `MM_FINAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x147`
+- `MM_FINAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x14c`
+- `MM_FINAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x145`
+- `MM_FRI_COMMITMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x131`
+- `MM_FRI_COMMITMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x131`
+- `MM_FRI_COMMITMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x131`
+- `MM_FRI_COMMITMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x131`
+- `MM_FRI_COMMITMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x131`
+- `MM_FRI_COMMITMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x131`
+- `MM_FRI_COMMITMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x131`
+- `MM_FRI_COMMITMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x131`
+- `MM_FRI_CTX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0xfe`
+- `MM_FRI_CTX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0xfe`
+- `MM_FRI_CTX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0xfe`
+- `MM_FRI_CTX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0xfe`
+- `MM_FRI_CTX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0xfe`
+- `MM_FRI_CTX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0xfe`
+- `MM_FRI_CTX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0xfe`
+- `MM_FRI_CTX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0xfe`
+- `MM_FRI_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x127`
+- `MM_FRI_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x127`
+- `MM_FRI_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x127`
+- `MM_FRI_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x127`
+- `MM_FRI_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x127`
+- `MM_FRI_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x127`
+- `MM_FRI_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x127`
+- `MM_FRI_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x127`
+- `MM_FRI_LAST_LAYER_DEG_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x13b`
+- `MM_FRI_LAST_LAYER_DEG_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x13b`
+- `MM_FRI_LAST_LAYER_DEG_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x13b`
+- `MM_FRI_LAST_LAYER_DEG_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x13b`
+- `MM_FRI_LAST_LAYER_DEG_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x13b`
+- `MM_FRI_LAST_LAYER_DEG_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x13b`
+- `MM_FRI_LAST_LAYER_DEG_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x13b`
+- `MM_FRI_LAST_LAYER_DEG_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x13b`
+- `MM_FRI_LAST_LAYER_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x13c`
+- `MM_FRI_LAST_LAYER_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x13c`
+- `MM_FRI_LAST_LAYER_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x13c`
+- `MM_FRI_LAST_LAYER_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x13c`
+- `MM_FRI_LAST_LAYER_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x13c`
+- `MM_FRI_LAST_LAYER_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x13c`
+- `MM_FRI_LAST_LAYER_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x13c`
+- `MM_FRI_LAST_LAYER_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x13c`
+- `MM_FRI_QUERIES_DELIMITER` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0xfd`
+- `MM_FRI_QUERIES_DELIMITER` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0xfd`
+- `MM_FRI_QUERIES_DELIMITER` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0xfd`
+- `MM_FRI_QUERIES_DELIMITER` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0xfd`
+- `MM_FRI_QUERIES_DELIMITER` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0xfd`
+- `MM_FRI_QUERIES_DELIMITER` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0xfd`
+- `MM_FRI_QUERIES_DELIMITER` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0xfd`
+- `MM_FRI_QUERIES_DELIMITER` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0xfd`
+- `MM_FRI_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x6d`
+- `MM_FRI_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x6d`
+- `MM_FRI_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x6d`
+- `MM_FRI_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x6d`
+- `MM_FRI_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x6d`
+- `MM_FRI_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x6d`
+- `MM_FRI_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x6d`
+- `MM_FRI_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x6d`
+- `MM_FRI_STEP_SIZES_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x126`
+- `MM_FRI_STEP_SIZES_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x126`
+- `MM_FRI_STEP_SIZES_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x126`
+- `MM_FRI_STEP_SIZES_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x126`
+- `MM_FRI_STEP_SIZES_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x126`
+- `MM_FRI_STEP_SIZES_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x126`
+- `MM_FRI_STEP_SIZES_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x126`
+- `MM_FRI_STEP_SIZES_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x126`
+- `MM_HALF_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x143`
+- `MM_HALF_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x143`
+- `MM_HALF_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x143`
+- `MM_HALF_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x143`
+- `MM_HALF_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x141`
+- `MM_HALF_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x143`
+- `MM_HALF_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x148`
+- `MM_HALF_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x141`
+- `MM_INITIAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x144`
+- `MM_INITIAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x144`
+- `MM_INITIAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x144`
+- `MM_INITIAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x144`
+- `MM_INITIAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x142`
+- `MM_INITIAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x144`
+- `MM_INITIAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x149`
+- `MM_INITIAL_AP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x142`
+- `MM_INITIAL_BITWISE_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x15e`
+- `MM_INITIAL_BITWISE_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x157`
+- `MM_INITIAL_BITWISE_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x15e`
+- `MM_INITIAL_BITWISE_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x163`
+- `MM_INITIAL_BITWISE_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x157`
+- `MM_INITIAL_ECDSA_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x157`
+- `MM_INITIAL_ECDSA_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x157`
+- `MM_INITIAL_ECDSA_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x157`
+- `MM_INITIAL_ECDSA_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x15d`
+- `MM_INITIAL_ECDSA_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x15d`
+- `MM_INITIAL_ECDSA_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x162`
+- `MM_INITIAL_EC_OP_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x15f`
+- `MM_INITIAL_EC_OP_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x164`
+- `MM_INITIAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x145`
+- `MM_INITIAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x145`
+- `MM_INITIAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x145`
+- `MM_INITIAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x145`
+- `MM_INITIAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x143`
+- `MM_INITIAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x145`
+- `MM_INITIAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x14a`
+- `MM_INITIAL_PC` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x143`
+- `MM_INITIAL_PEDERSEN_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x151`
+- `MM_INITIAL_PEDERSEN_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x151`
+- `MM_INITIAL_PEDERSEN_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x151`
+- `MM_INITIAL_PEDERSEN_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x157`
+- `MM_INITIAL_PEDERSEN_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x155`
+- `MM_INITIAL_PEDERSEN_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x157`
+- `MM_INITIAL_PEDERSEN_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x15c`
+- `MM_INITIAL_PEDERSEN_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x155`
+- `MM_INITIAL_POSEIDON_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x166`
+- `MM_INITIAL_RC_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x152`
+- `MM_INITIAL_RC_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x152`
+- `MM_INITIAL_RC_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x152`
+- `MM_INITIAL_RC_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x158`
+- `MM_INITIAL_RC_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x156`
+- `MM_INITIAL_RC_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x158`
+- `MM_INITIAL_RC_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x15d`
+- `MM_INITIAL_RC_ADDR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x156`
+- `MM_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x15a`
+- `MM_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x15a`
+- `MM_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x15a`
+- `MM_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x163`
+- `MM_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x15a`
+- `MM_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x161`
+- `MM_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x169`
+- `MM_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x15a`
+- `MM_LOG_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x2`
+- `MM_LOG_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x2`
+- `MM_LOG_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x2`
+- `MM_LOG_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x2`
+- `MM_LOG_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x2`
+- `MM_LOG_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x2`
+- `MM_LOG_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x2`
+- `MM_LOG_EVAL_DOMAIN_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x2`
+- `MM_LOG_N_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x76a`
+- `MM_LOG_N_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x6d9`
+- `MM_LOG_N_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x451`
+- `MM_LOG_N_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x82b`
+- `MM_LOG_N_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x459`
+- `MM_LOG_N_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x711`
+- `MM_LOG_N_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x4f0`
+- `MM_LOG_N_STEPS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x4e9`
+- `MM_MEMORY__MULTI_COLUMN_PERM__HASH_INTERACTION_ELM0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x149`
+- `MM_MEMORY__MULTI_COLUMN_PERM__HASH_INTERACTION_ELM0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x149`
+- `MM_MEMORY__MULTI_COLUMN_PERM__HASH_INTERACTION_ELM0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x149`
+- `MM_MEMORY__MULTI_COLUMN_PERM__HASH_INTERACTION_ELM0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x149`
+- `MM_MEMORY__MULTI_COLUMN_PERM__HASH_INTERACTION_ELM0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x147`
+- `MM_MEMORY__MULTI_COLUMN_PERM__HASH_INTERACTION_ELM0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x149`
+- `MM_MEMORY__MULTI_COLUMN_PERM__HASH_INTERACTION_ELM0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x14e`
+- `MM_MEMORY__MULTI_COLUMN_PERM__HASH_INTERACTION_ELM0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x147`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x148`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x148`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x148`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x148`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x146`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x148`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x14d`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x146`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x14a`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x14a`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x14a`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x14a`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x148`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x14a`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x14f`
+- `MM_MEMORY__MULTI_COLUMN_PERM__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x148`
+- `MM_MERKLE_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0xd`
+- `MM_MERKLE_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0xd`
+- `MM_MERKLE_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0xd`
+- `MM_MERKLE_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0xd`
+- `MM_MERKLE_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0xd`
+- `MM_MERKLE_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0xd`
+- `MM_MERKLE_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0xd`
+- `MM_MERKLE_QUEUE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0xd`
+- `MM_N_PUBLIC_MEM_ENTRIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x76b`
+- `MM_N_PUBLIC_MEM_ENTRIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x6da`
+- `MM_N_PUBLIC_MEM_ENTRIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x452`
+- `MM_N_PUBLIC_MEM_ENTRIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x82c`
+- `MM_N_PUBLIC_MEM_ENTRIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x45a`
+- `MM_N_PUBLIC_MEM_ENTRIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x712`
+- `MM_N_PUBLIC_MEM_ENTRIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x4f1`
+- `MM_N_PUBLIC_MEM_ENTRIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x4ea`
+- `MM_N_PUBLIC_MEM_PAGES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x76c`
+- `MM_N_PUBLIC_MEM_PAGES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x6db`
+- `MM_N_PUBLIC_MEM_PAGES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x453`
+- `MM_N_PUBLIC_MEM_PAGES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x82d`
+- `MM_N_PUBLIC_MEM_PAGES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x45b`
+- `MM_N_PUBLIC_MEM_PAGES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x713`
+- `MM_N_PUBLIC_MEM_PAGES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x4f2`
+- `MM_N_PUBLIC_MEM_PAGES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x4eb`
+- `MM_N_UNIQUE_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x9`
+- `MM_N_UNIQUE_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x9`
+- `MM_N_UNIQUE_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x9`
+- `MM_N_UNIQUE_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x9`
+- `MM_N_UNIQUE_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x9`
+- `MM_N_UNIQUE_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x9`
+- `MM_N_UNIQUE_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x9`
+- `MM_N_UNIQUE_QUERIES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x9`
+- `MM_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x142`
+- `MM_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x142`
+- `MM_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x142`
+- `MM_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x142`
+- `MM_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x140`
+- `MM_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x142`
+- `MM_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x147`
+- `MM_OFFSET_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x140`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x259`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x258`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x210`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x2ba`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x218`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x290`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x2af`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x218`
+- `MM_OODS_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x8`
+- `MM_OODS_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x8`
+- `MM_OODS_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x8`
+- `MM_OODS_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x8`
+- `MM_OODS_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x8`
+- `MM_OODS_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x8`
+- `MM_OODS_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x8`
+- `MM_OODS_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x8`
+- `MM_OODS_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x229`
+- `MM_OODS_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x228`
+- `MM_OODS_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x1e0`
+- `MM_OODS_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x28a`
+- `MM_OODS_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x1e8`
+- `MM_OODS_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x260`
+- `MM_OODS_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x27f`
+- `MM_OODS_EVAL_POINTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x1e8`
+- `MM_OODS_POINT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x159`
+- `MM_OODS_POINT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x159`
+- `MM_OODS_POINT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x159`
+- `MM_OODS_POINT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x162`
+- `MM_OODS_POINT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x159`
+- `MM_OODS_POINT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x160`
+- `MM_OODS_POINT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x168`
+- `MM_OODS_POINT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x159`
+- `MM_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x15e`
+- `MM_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x15e`
+- `MM_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x15e`
+- `MM_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x16a`
+- `MM_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x161`
+- `MM_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x168`
+- `MM_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x170`
+- `MM_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x161`
+- `MM_PEDERSEN__SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x14f`
+- `MM_PEDERSEN__SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x14f`
+- `MM_PEDERSEN__SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x14f`
+- `MM_PEDERSEN__SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x155`
+- `MM_PEDERSEN__SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x153`
+- `MM_PEDERSEN__SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x155`
+- `MM_PEDERSEN__SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x15a`
+- `MM_PEDERSEN__SHIFT_POINT_X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x153`
+- `MM_PEDERSEN__SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x150`
+- `MM_PEDERSEN__SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x150`
+- `MM_PEDERSEN__SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x150`
+- `MM_PEDERSEN__SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x156`
+- `MM_PEDERSEN__SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x154`
+- `MM_PEDERSEN__SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x156`
+- `MM_PEDERSEN__SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x15b`
+- `MM_PEDERSEN__SHIFT_POINT_Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x154`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x13f`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x13f`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x13f`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x13f`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x13f`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x13f`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x140`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x140`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x140`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x140`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x140`
+- `MM_PERIODIC_COLUMN__ECDSA__GENERATOR_POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x140`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x13d`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x13d`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x13d`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x13d`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x13d`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x13d`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x13d`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__X` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x13d`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x13e`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x13e`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x13e`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x13e`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x13e`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x13e`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x13e`
+- `MM_PERIODIC_COLUMN__PEDERSEN__POINTS__Y` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x13e`
+- `MM_PERIODIC_COLUMN__POSEIDON__POSEIDON__FULL_ROUND_KEY0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x141`
+- `MM_PERIODIC_COLUMN__POSEIDON__POSEIDON__FULL_ROUND_KEY1` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x142`
+- `MM_PERIODIC_COLUMN__POSEIDON__POSEIDON__FULL_ROUND_KEY2` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x143`
+- `MM_PERIODIC_COLUMN__POSEIDON__POSEIDON__PARTIAL_ROUND_KEY0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x144`
+- `MM_PERIODIC_COLUMN__POSEIDON__POSEIDON__PARTIAL_ROUND_KEY1` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x145`
+- `MM_PROOF_OF_WORK_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x3`
+- `MM_PROOF_OF_WORK_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x3`
+- `MM_PROOF_OF_WORK_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x3`
+- `MM_PROOF_OF_WORK_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x3`
+- `MM_PROOF_OF_WORK_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x3`
+- `MM_PROOF_OF_WORK_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x3`
+- `MM_PROOF_OF_WORK_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x3`
+- `MM_PROOF_OF_WORK_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x3`
+- `MM_PUBLIC_INPUT_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x5`
+- `MM_PUBLIC_INPUT_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x5`
+- `MM_PUBLIC_INPUT_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x5`
+- `MM_PUBLIC_INPUT_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x5`
+- `MM_PUBLIC_INPUT_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x5`
+- `MM_PUBLIC_INPUT_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x5`
+- `MM_PUBLIC_INPUT_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x5`
+- `MM_PUBLIC_INPUT_PTR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x5`
+- `MM_RC16__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x14b`
+- `MM_RC16__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x14b`
+- `MM_RC16__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x14b`
+- `MM_RC16__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x14b`
+- `MM_RC16__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x149`
+- `MM_RC16__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x14b`
+- `MM_RC16__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x150`
+- `MM_RC16__PERM__INTERACTION_ELM` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x149`
+- `MM_RC16__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x14c`
+- `MM_RC16__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x14c`
+- `MM_RC16__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x14c`
+- `MM_RC16__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x14c`
+- `MM_RC16__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x14a`
+- `MM_RC16__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x14c`
+- `MM_RC16__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x151`
+- `MM_RC16__PERM__PUBLIC_MEMORY_PROD` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x14a`
+- `MM_RC_MAX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x14e`
+- `MM_RC_MAX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x14e`
+- `MM_RC_MAX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x14e`
+- `MM_RC_MAX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x14e`
+- `MM_RC_MAX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x14c`
+- `MM_RC_MAX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x14e`
+- `MM_RC_MAX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x153`
+- `MM_RC_MAX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x14c`
+- `MM_RC_MIN` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x14d`
+- `MM_RC_MIN` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x14d`
+- `MM_RC_MIN` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x14d`
+- `MM_RC_MIN` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x14d`
+- `MM_RC_MIN` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x14b`
+- `MM_RC_MIN` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x14d`
+- `MM_RC_MIN` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x152`
+- `MM_RC_MIN` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x14b`
+- `MM_TRACE_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x6`
+- `MM_TRACE_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x6`
+- `MM_TRACE_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x6`
+- `MM_TRACE_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x6`
+- `MM_TRACE_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x6`
+- `MM_TRACE_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x6`
+- `MM_TRACE_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x6`
+- `MM_TRACE_COMMITMENT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x6`
+- `MM_TRACE_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x158`
+- `MM_TRACE_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x158`
+- `MM_TRACE_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x158`
+- `MM_TRACE_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x161`
+- `MM_TRACE_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x158`
+- `MM_TRACE_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x15f`
+- `MM_TRACE_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x167`
+- `MM_TRACE_GENERATOR` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x158`
+- `MM_TRACE_LENGTH` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x141`
+- `MM_TRACE_LENGTH` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x141`
+- `MM_TRACE_LENGTH` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x141`
+- `MM_TRACE_LENGTH` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x141`
+- `MM_TRACE_LENGTH` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x13f`
+- `MM_TRACE_LENGTH` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x141`
+- `MM_TRACE_LENGTH` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x146`
+- `MM_TRACE_LENGTH` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x13f`
+- `MM_TRACE_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x25a`
+- `MM_TRACE_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x259`
+- `MM_TRACE_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x211`
+- `MM_TRACE_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x2bb`
+- `MM_TRACE_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x219`
+- `MM_TRACE_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x291`
+- `MM_TRACE_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x2b0`
+- `MM_TRACE_QUERY_RESPONSES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x219`
+- `CONTINUOUS_PAGE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `MemoryPageFactRegistryConstants` @ `evm-verifier/solidity/contracts/cpu/MemoryPageFactRegistry.sol` = `1`
+- `CONTINUOUS_PAGE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `MemoryPageFactRegistryConstants` @ `scalable-dex/contracts/src/cpu/MemoryPageFactRegistry.sol` = `1`
+- `REGULAR_PAGE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `MemoryPageFactRegistryConstants` @ `evm-verifier/solidity/contracts/cpu/MemoryPageFactRegistry.sol` = `0`
+- `REGULAR_PAGE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `MemoryPageFactRegistryConstants` @ `scalable-dex/contracts/src/cpu/MemoryPageFactRegistry.sol` = `0`
+- `merkleStatementContract` | type: `MerkleStatementContract` | vis: `default` | flags: `-` | `MerkleStatementVerifier` @ `evm-verifier/solidity/contracts/MerkleStatementVerifier.sol`
+- `COMMITMENT_MASK` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `MerkleVerifier` @ `evm-verifier/solidity/contracts/MerkleVerifier.sol` = `( 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000 )`
+- `COMMITMENT_SIZE_IN_BYTES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `MerkleVerifier` @ `evm-verifier/solidity/contracts/MerkleVerifier.sol` = `0x20`
+- `INDEX_SIZE_IN_BYTES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `MerkleVerifier` @ `evm-verifier/solidity/contracts/MerkleVerifier.sol` = `0x20`
+- `TWO_COMMITMENTS_SIZE_IN_BYTES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `MerkleVerifier` @ `evm-verifier/solidity/contracts/MerkleVerifier.sol` = `0x40`
+- `MAX_CONFIG_DELAY` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ModifyConfigurationDelayExternalInitializer` @ `scalable-dex/contracts/src/upgrade/eic/ModifyConfigurationDelayExternalInitializer.sol` = `28 days`
+- `MAX_DELAY` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ModifyUpgradeDelayExternalInitializer` @ `scalable-dex/contracts/src/upgrade/eic/ModifyUpgradeDelayExternalInitializer.sol` = `28 days`
+- `UPGRADE_DELAY_SLOT` | type: `bytes32 constant` | vis: `default` | flags: `constant` | `ModifyUpgradeDelayExternalInitializer` @ `scalable-dex/contracts/src/upgrade/eic/ModifyUpgradeDelayExternalInitializer.sol` = `0xc21dbb3089fcb2c4f4c6a67854ab4db2b0f233ea4b21b21f912d52d18fc5db1f`
+- `LIMIT_ORDER_TYPE` | type: `uint256 constant` | vis: `default` | flags: `constant` | `OrderRegistry` @ `scalable-dex/contracts/src/starkex/components/OrderRegistry.sol` = `0x3`
+- `MASK_32` | type: `uint256 constant` | vis: `default` | flags: `constant` | `OrderRegistry` @ `scalable-dex/contracts/src/starkex/components/OrderRegistry.sol` = `0xFFFFFFFF`
+- `MASK_64` | type: `uint256 constant` | vis: `default` | flags: `constant` | `OrderRegistry` @ `scalable-dex/contracts/src/starkex/components/OrderRegistry.sol` = `0xFFFFFFFFFFFFFFFF`
+- `MEMORY_PAIR_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PageInfo` @ `evm-verifier/solidity/contracts/cpu/PageInfo.sol` = `2`
+- `PAGE_INFO_ADDRESS_OFFSET` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `PageInfo` @ `evm-verifier/solidity/contracts/cpu/PageInfo.sol` = `0`
+- `PAGE_INFO_HASH_OFFSET` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `PageInfo` @ `evm-verifier/solidity/contracts/cpu/PageInfo.sol` = `2`
+- `PAGE_INFO_SIZE` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `PageInfo` @ `evm-verifier/solidity/contracts/cpu/PageInfo.sol` = `3`
+- `PAGE_INFO_SIZE_IN_BYTES` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `PageInfo` @ `evm-verifier/solidity/contracts/cpu/PageInfo.sol` = `3 * 32`
+- `PAGE_INFO_SIZE_OFFSET` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `PageInfo` @ `evm-verifier/solidity/contracts/cpu/PageInfo.sol` = `1`
+- `N_TABLES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PedersenMerkleVerifier` @ `scalable-dex/contracts/src/components/PedersenMerkleVerifier.sol` = `63`
+- `lookupTables` | type: `address[N_TABLES]` | vis: `default` | flags: `-` | `PedersenMerkleVerifier` @ `scalable-dex/contracts/src/components/PedersenMerkleVerifier.sol`
+- `PERPETUAL_AMOUNT_UPPER_BOUND` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PerpetualConstants` @ `scalable-dex/contracts/src/perpetual/PerpetualConstants.sol` = `2**64`
+- `PERPETUAL_ASSET_ID_UPPER_BOUND` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PerpetualConstants` @ `scalable-dex/contracts/src/perpetual/PerpetualConstants.sol` = `2**120`
+- `PERPETUAL_CONFIGURATION_DELAY` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PerpetualConstants` @ `scalable-dex/contracts/src/perpetual/PerpetualConstants.sol` = `0`
+- `PERPETUAL_POSITION_ID_UPPER_BOUND` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PerpetualConstants` @ `scalable-dex/contracts/src/perpetual/PerpetualConstants.sol` = `2**64`
+- `PERPETUAL_SYSTEM_TIME_ADVANCE_BOUND` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PerpetualConstants` @ `scalable-dex/contracts/src/perpetual/PerpetualConstants.sol` = `4 hours`
+- `PERPETUAL_SYSTEM_TIME_LAG_BOUND` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PerpetualConstants` @ `scalable-dex/contracts/src/perpetual/PerpetualConstants.sol` = `7 days`
+- `PERPETUAL_TIMESTAMP_BITS` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PerpetualConstants` @ `scalable-dex/contracts/src/perpetual/PerpetualConstants.sol` = `32`
+- `BALANCE_BIAS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PerpetualEscapeVerifier` @ `scalable-dex/contracts/src/perpetual/components/PerpetualEscapeVerifier.sol` = `2**63`
+- `BALANCE_BITS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PerpetualEscapeVerifier` @ `scalable-dex/contracts/src/perpetual/components/PerpetualEscapeVerifier.sol` = `64`
+- `FUNDING_BITS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PerpetualEscapeVerifier` @ `scalable-dex/contracts/src/perpetual/components/PerpetualEscapeVerifier.sol` = `64`
+- `FUNDING_ENTRY_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PerpetualEscapeVerifier` @ `scalable-dex/contracts/src/perpetual/components/PerpetualEscapeVerifier.sol` = `2`
+- `FXP_BITS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PerpetualEscapeVerifier` @ `scalable-dex/contracts/src/perpetual/components/PerpetualEscapeVerifier.sol` = `32`
+- `N_ASSETS_BITS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PerpetualEscapeVerifier` @ `scalable-dex/contracts/src/perpetual/components/PerpetualEscapeVerifier.sol` = `16`
+- `PRICE_ENTRY_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PerpetualEscapeVerifier` @ `scalable-dex/contracts/src/perpetual/components/PerpetualEscapeVerifier.sol` = `2`
+- `INITIALIZER_SIZE` | type: `uint256 constant` | vis: `default` | flags: `constant` | `PerpetualState` @ `scalable-dex/contracts/src/perpetual/toplevel_subcontracts/PerpetualState.sol` = `384`
+- `__endGap` | type: `uint256[LAYOUT_LENGTH - 5] private` | vis: `private` | flags: `-` | `PerpetualStorage` @ `scalable-dex/contracts/src/perpetual/components/PerpetualStorage.sol`
+- `configurationDelay` | type: `uint256 public` | vis: `public` | flags: `-` | `PerpetualStorage` @ `scalable-dex/contracts/src/perpetual/components/PerpetualStorage.sol`
+- `configurationHash` | type: `mapping(uint256 => bytes32) public` | vis: `public` | flags: `-` | `PerpetualStorage` @ `scalable-dex/contracts/src/perpetual/components/PerpetualStorage.sol`
+- `globalConfigurationHash` | type: `bytes32 public` | vis: `public` | flags: `-` | `PerpetualStorage` @ `scalable-dex/contracts/src/perpetual/components/PerpetualStorage.sol`
+- `sharedStateHash` | type: `bytes32` | vis: `default` | flags: `-` | `PerpetualStorage` @ `scalable-dex/contracts/src/perpetual/components/PerpetualStorage.sol`
+- `systemAssetType` | type: `uint256` | vis: `default` | flags: `-` | `PerpetualStorage` @ `scalable-dex/contracts/src/perpetual/components/PerpetualStorage.sol`
+- `GENERATOR_VAL` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PrimeFieldElement0` @ `evm-verifier/solidity/contracts/PrimeFieldElement0.sol` = `3`
+- `K_MODULUS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PrimeFieldElement0` @ `evm-verifier/solidity/contracts/PrimeFieldElement0.sol` = `0x800000000000011000000000000000000000000000000000000000000000001`
+- `K_MONTGOMERY_R` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PrimeFieldElement0` @ `evm-verifier/solidity/contracts/PrimeFieldElement0.sol` = `0x7fffffffffffdf0ffffffffffffffffffffffffffffffffffffffffffffffe1`
+- `K_MONTGOMERY_R_INV` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PrimeFieldElement0` @ `evm-verifier/solidity/contracts/PrimeFieldElement0.sol` = `0x40000000000001100000000000012100000000000000000000000000000000`
+- `ONE_VAL` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PrimeFieldElement0` @ `evm-verifier/solidity/contracts/PrimeFieldElement0.sol` = `1`
+- `APP_DATA_BATCH_ID_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `0`
+- `APP_DATA_CONDITIONAL_TRANSFER_DATA_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `3`
+- `APP_DATA_N_CONDITIONAL_TRANSFER` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `2`
+- `APP_DATA_N_WORDS_PER_CONDITIONAL_TRANSFER` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `2`
+- `APP_DATA_PREVIOUS_BATCH_ID_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `1`
+- `ASSET_CONFIG_OFFSET_ASSET_ID` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `0`
+- `ASSET_CONFIG_OFFSET_CONFIG_HASH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `1`
+- `MODIFICATIONS_OFFSET_BIASED_DIFF` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `2`
+- `MODIFICATIONS_OFFSET_POS_ID` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `1`
+- `MODIFICATIONS_OFFSET_STARKKEY` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `0`
+- `PROG_OUT_ASSET_CONFIG_HASHES` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `3`
+- `PROG_OUT_DATA_AVAILABILTY_MODE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `1`
+- `PROG_OUT_GENERAL_CONFIG_HASH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `0`
+- `PROG_OUT_N_ASSET_CONFIGS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `2`
+- `PROG_OUT_N_WORDS_MIN_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `9`
+- `PROG_OUT_N_WORDS_PER_ASSET_CONFIG` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `2`
+- `PROG_OUT_N_WORDS_PER_MODIFICATION` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `3`
+- `ROLLUP_MODE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `1`
+- `STATE_OFFSET_FUNDING` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `5`
+- `STATE_OFFSET_N_FUNDING` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `4`
+- `STATE_OFFSET_ORDERS_HEIGHT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `3`
+- `STATE_OFFSET_ORDERS_ROOT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `2`
+- `STATE_OFFSET_VAULTS_HEIGHT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `1`
+- `STATE_OFFSET_VAULTS_ROOT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `0`
+- `VALIDIUM_MODE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `ProgramOutputOffsets` @ `scalable-dex/contracts/src/perpetual/ProgramOutputOffsets.sol` = `0`
+- `MAX_UPGRADE_DELAY` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `Proxy` @ `common-contracts/src/upgrade/Proxy.sol` = `180 days`
+- `MAX_UPGRADE_DELAY` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `Proxy` @ `scalable-dex/contracts/src/upgrade/Proxy.sol` = `180 days`
+- `PROXY_VERSION` | type: `string public constant` | vis: `public` | flags: `constant` | `Proxy` @ `common-contracts/src/upgrade/Proxy.sol` = `"3.0.2"`
+- `PROXY_VERSION` | type: `string public constant` | vis: `public` | flags: `constant` | `Proxy` @ `scalable-dex/contracts/src/upgrade/Proxy.sol` = `"3.0.2"`
+- `PROXY_GOVERNANCE_TAG` | type: `string public constant` | vis: `public` | flags: `constant` | `ProxyGovernance` @ `common-contracts/src/upgrade/ProxyGovernance.sol` = `"StarkEx.Proxy.2019.GovernorsInformation"`
+- `PROXY_GOVERNANCE_TAG` | type: `string public constant` | vis: `public` | flags: `constant` | `ProxyGovernance` @ `scalable-dex/contracts/src/upgrade/ProxyGovernance.sol` = `"StarkEx.Proxy.2019.GovernorsInformation"`
+- `enabledTime` | type: `mapping(bytes32 => uint256) internal` | vis: `internal` | flags: `-` | `ProxyStorage` @ `common-contracts/src/upgrade/ProxyStorage.sol`
+- `enabledTime` | type: `mapping(bytes32 => uint256) internal` | vis: `internal` | flags: `-` | `ProxyStorage` @ `scalable-dex/contracts/src/upgrade/ProxyStorage.sol`
+- `initializationHash_DEPRECATED` | type: `mapping(address => bytes32) internal` | vis: `internal` | flags: `-` | `ProxyStorage` @ `common-contracts/src/upgrade/ProxyStorage.sol`
+- `initializationHash_DEPRECATED` | type: `mapping(address => bytes32) internal` | vis: `internal` | flags: `-` | `ProxyStorage` @ `scalable-dex/contracts/src/upgrade/ProxyStorage.sol`
+- `initialized` | type: `mapping(bytes32 => bool) internal` | vis: `internal` | flags: `-` | `ProxyStorage` @ `common-contracts/src/upgrade/ProxyStorage.sol`
+- `initialized` | type: `mapping(bytes32 => bool) internal` | vis: `internal` | flags: `-` | `ProxyStorage` @ `scalable-dex/contracts/src/upgrade/ProxyStorage.sol`
+- `APP_DATA_BATCH_ID_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `0`
+- `APP_DATA_N_WORDS_PER_CONDITIONAL_TRANSFER` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `2`
+- `APP_DATA_PREVIOUS_BATCH_ID_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `1`
+- `APP_DATA_TRANSACTIONS_DATA_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `2`
+- `PUB_IN_FINAL_ORDER_ROOT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `6`
+- `PUB_IN_FINAL_ROLLUP_VAULT_ROOT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `4`
+- `PUB_IN_FINAL_VALIDIUM_VAULT_ROOT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `2`
+- `PUB_IN_GLOBAL_CONFIG_CODE_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `0`
+- `PUB_IN_GLOBAL_EXPIRATION_TIMESTAMP_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `7`
+- `PUB_IN_INITIAL_ORDER_ROOT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `5`
+- `PUB_IN_INITIAL_ROLLUP_VAULT_ROOT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `3`
+- `PUB_IN_INITIAL_VALIDIUM_VAULT_ROOT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `1`
+- `PUB_IN_N_CONDITIONAL_TRANSFERS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `12`
+- `PUB_IN_N_MIN_WORDS_PER_ONCHAIN_ORDER` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `3`
+- `PUB_IN_N_MODIFICATIONS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `11`
+- `PUB_IN_N_ONCHAIN_ORDERS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `14`
+- `PUB_IN_N_ONCHAIN_VAULT_UPDATES_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `13`
+- `PUB_IN_N_WORDS_PER_CONDITIONAL_TRANSFER` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `1`
+- `PUB_IN_N_WORDS_PER_MODIFICATION` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `3`
+- `PUB_IN_N_WORDS_PER_ONCHAIN_VAULT_UPDATE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `3`
+- `PUB_IN_ORDER_TREE_HEIGHT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `10`
+- `PUB_IN_ROLLUP_VAULT_TREE_HEIGHT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `9`
+- `PUB_IN_TRANSACTIONS_DATA_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `15`
+- `PUB_IN_VALIDIUM_VAULT_TREE_HEIGHT_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PublicInputOffsets` @ `scalable-dex/contracts/src/starkex/PublicInputOffsets.sol` = `8`
+- `ENTRY_NOT_FOUND` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ReplaceGpsAdapterExternalInitializer` @ `scalable-dex/contracts/src/upgrade/eic/ReplaceGpsAdapterExternalInitializer.sol` = `uint256(~0)`
+- `STARKEX_EXPIRATION_TIMESTAMP_BITS` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkExConstants` @ `scalable-dex/contracts/src/starkex/StarkExConstants.sol` = `22`
+- `STARKEX_MAX_DEFAULT_VAULT_LOCK` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `StarkExConstants` @ `scalable-dex/contracts/src/starkex/StarkExConstants.sol` = `7 days`
+- `INITIALIZER_SIZE` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkExState` @ `scalable-dex/contracts/src/starkex/toplevel_subcontracts/StarkExState.sol` = `11 * 32`
+- `__endGap` | type: `uint256[LAYOUT_LENGTH - 5] private` | vis: `private` | flags: `-` | `StarkExStorage` @ `scalable-dex/contracts/src/starkex/components/StarkExStorage.sol`
+- `defaultVaultWithdrawalLock` | type: `uint256 public` | vis: `public` | flags: `-` | `StarkExStorage` @ `scalable-dex/contracts/src/starkex/components/StarkExStorage.sol`
+- `orderRegistryAddress` | type: `address public` | vis: `public` | flags: `-` | `StarkExStorage` @ `scalable-dex/contracts/src/starkex/components/StarkExStorage.sol`
+- `strictVaultBalancePolicy` | type: `bool` | vis: `default` | flags: `-` | `StarkExStorage` @ `scalable-dex/contracts/src/starkex/components/StarkExStorage.sol`
+- `vaultsBalances` | type: `mapping(address => mapping(uint256 => mapping(uint256 => uint256)))` | vis: `default` | flags: `-` | `StarkExStorage` @ `scalable-dex/contracts/src/starkex/components/StarkExStorage.sol`
+- `vaultsWithdrawalLocks` | type: `mapping(address => mapping(uint256 => mapping(uint256 => uint256)))` | vis: `default` | flags: `-` | `StarkExStorage` @ `scalable-dex/contracts/src/starkex/components/StarkExStorage.sol`
+- `IDX_MAP_0` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkExchange` @ `scalable-dex/contracts/src/starkex/StarkExchange.sol` = `0x2010501100000010050000002511000000220005410030200200200000552010`
+- `IDX_MAP_1` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkExchange` @ `scalable-dex/contracts/src/starkex/StarkExchange.sol` = `0x3000030005000050020012003000010604300000002420501003000010000300`
+- `IDX_MAP_2` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkExchange` @ `scalable-dex/contracts/src/starkex/StarkExchange.sol` = `0x1003112030002130000200100020000320202001020001001000040200200020`
+- `IDX_MAP_3` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkExchange` @ `scalable-dex/contracts/src/starkex/StarkExchange.sol` = `0x2000000050000012000013100002002002032050020002020002050000201003`
+- `MAGIC_SALT` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkExchange` @ `scalable-dex/contracts/src/starkex/StarkExchange.sol` = `1527414`
+- `VERSION` | type: `string public constant` | vis: `public` | flags: `constant` | `StarkExchange` @ `scalable-dex/contracts/src/starkex/StarkExchange.sol` = `"4.5.1"`
+- `BITWISE__RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `256`
+- `BITWISE__RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `8`
+- `BITWISE__RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `64`
+- `BITWISE__RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `64`
+- `BITWISE__RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `8`
+- `CONSTRAINTS_DEGREE_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `2`
+- `CONSTRAINTS_DEGREE_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `2`
+- `CONSTRAINTS_DEGREE_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `2`
+- `CONSTRAINTS_DEGREE_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `2`
+- `CONSTRAINTS_DEGREE_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `2`
+- `CONSTRAINTS_DEGREE_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `2`
+- `CONSTRAINTS_DEGREE_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `2`
+- `CONSTRAINTS_DEGREE_BOUND` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `2`
+- `DILUTED_N_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `16`
+- `DILUTED_N_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `16`
+- `DILUTED_N_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `16`
+- `DILUTED_N_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `16`
+- `DILUTED_N_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `16`
+- `DILUTED_SPACING` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `4`
+- `DILUTED_SPACING` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `4`
+- `DILUTED_SPACING` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `4`
+- `DILUTED_SPACING` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `4`
+- `DILUTED_SPACING` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `4`
+- `ECDSA_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `512`
+- `ECDSA_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `512`
+- `ECDSA_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `2048`
+- `ECDSA_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `512`
+- `ECDSA_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `512`
+- `ECDSA_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `2048`
+- `ECDSA_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `1`
+- `ECDSA_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `1`
+- `ECDSA_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `1`
+- `ECDSA_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `1`
+- `ECDSA_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `1`
+- `ECDSA_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `1`
+- `EC_OP_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `256`
+- `EC_OP_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `1024`
+- `EC_OP_N_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `252`
+- `EC_OP_N_BITS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `252`
+- `EC_OP_SCALAR_HEIGHT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `256`
+- `EC_OP_SCALAR_HEIGHT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `256`
+- `LAYOUT_CODE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `495756340332`
+- `LAYOUT_CODE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `6579576`
+- `LAYOUT_CODE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `2073345364981693374828`
+- `LAYOUT_CODE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `30151121717527674777951106169`
+- `LAYOUT_CODE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `2110234636557836973669`
+- `LAYOUT_CODE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `133449663013987685036071398930607862629`
+- `LAYOUT_CODE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `8319381555716711796`
+- `LAYOUT_CODE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `42800643258479064999893963318903811951182475189843316`
+- `LOG_CPU_COMPONENT_HEIGHT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `4`
+- `LOG_CPU_COMPONENT_HEIGHT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `4`
+- `LOG_CPU_COMPONENT_HEIGHT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `4`
+- `LOG_CPU_COMPONENT_HEIGHT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `4`
+- `LOG_CPU_COMPONENT_HEIGHT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `4`
+- `LOG_CPU_COMPONENT_HEIGHT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `4`
+- `LOG_CPU_COMPONENT_HEIGHT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `4`
+- `LOG_CPU_COMPONENT_HEIGHT` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `4`
+- `MASK_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `201`
+- `MASK_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `200`
+- `MASK_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `128`
+- `MASK_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `286`
+- `MASK_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `133`
+- `MASK_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `246`
+- `MASK_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `269`
+- `MASK_SIZE` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `133`
+- `N_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `179`
+- `N_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `179`
+- `N_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `116`
+- `N_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `230`
+- `N_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `93`
+- `N_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `197`
+- `N_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `195`
+- `N_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `93`
+- `N_COLUMNS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `25`
+- `N_COLUMNS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `22`
+- `N_COLUMNS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `10`
+- `N_COLUMNS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `27`
+- `N_COLUMNS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `10`
+- `N_COLUMNS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `22`
+- `N_COLUMNS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `10`
+- `N_COLUMNS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `13`
+- `N_COLUMNS_IN_TRACE0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `23`
+- `N_COLUMNS_IN_TRACE0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `21`
+- `N_COLUMNS_IN_TRACE0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `9`
+- `N_COLUMNS_IN_TRACE0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `24`
+- `N_COLUMNS_IN_TRACE0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `7`
+- `N_COLUMNS_IN_TRACE0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `21`
+- `N_COLUMNS_IN_TRACE0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `9`
+- `N_COLUMNS_IN_TRACE0` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `10`
+- `N_COLUMNS_IN_TRACE1` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `2`
+- `N_COLUMNS_IN_TRACE1` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `1`
+- `N_COLUMNS_IN_TRACE1` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `1`
+- `N_COLUMNS_IN_TRACE1` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `3`
+- `N_COLUMNS_IN_TRACE1` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `3`
+- `N_COLUMNS_IN_TRACE1` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `1`
+- `N_COLUMNS_IN_TRACE1` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `1`
+- `N_COLUMNS_IN_TRACE1` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `3`
+- `N_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `3`
+- `N_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `3`
+- `N_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `3`
+- `N_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `6`
+- `N_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `6`
+- `N_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `6`
+- `N_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `6`
+- `N_INTERACTION_ELEMENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `6`
+- `N_OODS_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `N_OODS_VALUES`
+- `N_OODS_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `N_OODS_VALUES`
+- `N_OODS_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `N_OODS_VALUES`
+- `N_OODS_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `N_OODS_VALUES`
+- `N_OODS_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `N_OODS_VALUES`
+- `N_OODS_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `N_OODS_VALUES`
+- `N_OODS_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `N_OODS_VALUES`
+- `N_OODS_COEFFICIENTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `N_OODS_VALUES`
+- `N_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `MASK_SIZE + CONSTRAINTS_DEGREE_BOUND`
+- `N_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `MASK_SIZE + CONSTRAINTS_DEGREE_BOUND`
+- `N_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `MASK_SIZE + CONSTRAINTS_DEGREE_BOUND`
+- `N_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `MASK_SIZE + CONSTRAINTS_DEGREE_BOUND`
+- `N_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `MASK_SIZE + CONSTRAINTS_DEGREE_BOUND`
+- `N_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `MASK_SIZE + CONSTRAINTS_DEGREE_BOUND`
+- `N_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `MASK_SIZE + CONSTRAINTS_DEGREE_BOUND`
+- `N_OODS_VALUES` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `MASK_SIZE + CONSTRAINTS_DEGREE_BOUND`
+- `N_ROWS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `81`
+- `N_ROWS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `81`
+- `N_ROWS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `79`
+- `N_ROWS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `146`
+- `N_ROWS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `72`
+- `N_ROWS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `120`
+- `N_ROWS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `191`
+- `N_ROWS_IN_MASK` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `68`
+- `PEDERSEN_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `8`
+- `PEDERSEN_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `8`
+- `PEDERSEN_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `32`
+- `PEDERSEN_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `8`
+- `PEDERSEN_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `128`
+- `PEDERSEN_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `8`
+- `PEDERSEN_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `32`
+- `PEDERSEN_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `32`
+- `PEDERSEN_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `4`
+- `PEDERSEN_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `4`
+- `PEDERSEN_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `1`
+- `PEDERSEN_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `4`
+- `PEDERSEN_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `1`
+- `PEDERSEN_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `4`
+- `PEDERSEN_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `1`
+- `PEDERSEN_BUILTIN_REPETITIONS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `1`
+- `POSEIDON__M` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `3`
+- `POSEIDON__RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `32`
+- `POSEIDON__ROUNDS_FULL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `8`
+- `POSEIDON__ROUNDS_PARTIAL` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `83`
+- `PUBLIC_MEMORY_STEP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `8`
+- `PUBLIC_MEMORY_STEP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `8`
+- `PUBLIC_MEMORY_STEP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `8`
+- `PUBLIC_MEMORY_STEP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `16`
+- `PUBLIC_MEMORY_STEP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `16`
+- `PUBLIC_MEMORY_STEP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `8`
+- `PUBLIC_MEMORY_STEP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `8`
+- `PUBLIC_MEMORY_STEP` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `16`
+- `RC_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `8`
+- `RC_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `8`
+- `RC_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `16`
+- `RC_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `8`
+- `RC_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `8`
+- `RC_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `8`
+- `RC_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `16`
+- `RC_BUILTIN_RATIO` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `8`
+- `RC_N_PARTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkParameters.sol` = `8`
+- `RC_N_PARTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkParameters.sol` = `8`
+- `RC_N_PARTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkParameters.sol` = `8`
+- `RC_N_PARTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkParameters.sol` = `8`
+- `RC_N_PARTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkParameters.sol` = `8`
+- `RC_N_PARTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkParameters.sol` = `8`
+- `RC_N_PARTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkParameters.sol` = `8`
+- `RC_N_PARTS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `StarkParameters` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkParameters.sol` = `8`
+- `IDX_MAP_0` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkPerpetual` @ `scalable-dex/contracts/src/perpetual/StarkPerpetual.sol` = `0x2124100000000202022040002000000020022010011100002003000001000000`
+- `IDX_MAP_1` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkPerpetual` @ `scalable-dex/contracts/src/perpetual/StarkPerpetual.sol` = `0x10003203010020002002200030330000100020300002001003030000100202`
+- `IDX_MAP_2` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkPerpetual` @ `scalable-dex/contracts/src/perpetual/StarkPerpetual.sol` = `0x3000002000310000040022000010000000100013430002033100300200000302`
+- `IDX_MAP_3` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkPerpetual` @ `scalable-dex/contracts/src/perpetual/StarkPerpetual.sol` = `0x1103103010020000102000000400320031030100023000004000300000000000`
+- `MAGIC_SALT` | type: `uint256 constant` | vis: `default` | flags: `constant` | `StarkPerpetual` @ `scalable-dex/contracts/src/perpetual/StarkPerpetual.sol` = `349548`
+- `VERSION` | type: `string public constant` | vis: `public` | flags: `constant` | `StarkPerpetual` @ `scalable-dex/contracts/src/perpetual/StarkPerpetual.sol` = `"3.2.0"`
+- `PROOF_PARAMS_FRI_LAST_LAYER_LOG_DEG_BOUND_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/StarkVerifier.sol` = `3`
+- `PROOF_PARAMS_FRI_LAST_LAYER_LOG_DEG_BOUND_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkVerifier.sol` = `3`
+- `PROOF_PARAMS_FRI_LAST_LAYER_LOG_DEG_BOUND_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkVerifier.sol` = `3`
+- `PROOF_PARAMS_FRI_LAST_LAYER_LOG_DEG_BOUND_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkVerifier.sol` = `3`
+- `PROOF_PARAMS_FRI_LAST_LAYER_LOG_DEG_BOUND_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkVerifier.sol` = `3`
+- `PROOF_PARAMS_FRI_LAST_LAYER_LOG_DEG_BOUND_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkVerifier.sol` = `3`
+- `PROOF_PARAMS_FRI_LAST_LAYER_LOG_DEG_BOUND_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkVerifier.sol` = `3`
+- `PROOF_PARAMS_FRI_LAST_LAYER_LOG_DEG_BOUND_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkVerifier.sol` = `3`
+- `PROOF_PARAMS_FRI_LAST_LAYER_LOG_DEG_BOUND_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkVerifier.sol` = `3`
+- `PROOF_PARAMS_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/StarkVerifier.sol` = `5`
+- `PROOF_PARAMS_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkVerifier.sol` = `5`
+- `PROOF_PARAMS_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkVerifier.sol` = `5`
+- `PROOF_PARAMS_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkVerifier.sol` = `5`
+- `PROOF_PARAMS_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkVerifier.sol` = `5`
+- `PROOF_PARAMS_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkVerifier.sol` = `5`
+- `PROOF_PARAMS_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkVerifier.sol` = `5`
+- `PROOF_PARAMS_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkVerifier.sol` = `5`
+- `PROOF_PARAMS_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkVerifier.sol` = `5`
+- `PROOF_PARAMS_LOG_BLOWUP_FACTOR_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/StarkVerifier.sol` = `1`
+- `PROOF_PARAMS_LOG_BLOWUP_FACTOR_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkVerifier.sol` = `1`
+- `PROOF_PARAMS_LOG_BLOWUP_FACTOR_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkVerifier.sol` = `1`
+- `PROOF_PARAMS_LOG_BLOWUP_FACTOR_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkVerifier.sol` = `1`
+- `PROOF_PARAMS_LOG_BLOWUP_FACTOR_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkVerifier.sol` = `1`
+- `PROOF_PARAMS_LOG_BLOWUP_FACTOR_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkVerifier.sol` = `1`
+- `PROOF_PARAMS_LOG_BLOWUP_FACTOR_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkVerifier.sol` = `1`
+- `PROOF_PARAMS_LOG_BLOWUP_FACTOR_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkVerifier.sol` = `1`
+- `PROOF_PARAMS_LOG_BLOWUP_FACTOR_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkVerifier.sol` = `1`
+- `PROOF_PARAMS_N_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/StarkVerifier.sol` = `4`
+- `PROOF_PARAMS_N_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkVerifier.sol` = `4`
+- `PROOF_PARAMS_N_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkVerifier.sol` = `4`
+- `PROOF_PARAMS_N_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkVerifier.sol` = `4`
+- `PROOF_PARAMS_N_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkVerifier.sol` = `4`
+- `PROOF_PARAMS_N_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkVerifier.sol` = `4`
+- `PROOF_PARAMS_N_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkVerifier.sol` = `4`
+- `PROOF_PARAMS_N_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkVerifier.sol` = `4`
+- `PROOF_PARAMS_N_FRI_STEPS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkVerifier.sol` = `4`
+- `PROOF_PARAMS_N_QUERIES_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/StarkVerifier.sol` = `0`
+- `PROOF_PARAMS_N_QUERIES_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkVerifier.sol` = `0`
+- `PROOF_PARAMS_N_QUERIES_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkVerifier.sol` = `0`
+- `PROOF_PARAMS_N_QUERIES_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkVerifier.sol` = `0`
+- `PROOF_PARAMS_N_QUERIES_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkVerifier.sol` = `0`
+- `PROOF_PARAMS_N_QUERIES_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkVerifier.sol` = `0`
+- `PROOF_PARAMS_N_QUERIES_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkVerifier.sol` = `0`
+- `PROOF_PARAMS_N_QUERIES_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkVerifier.sol` = `0`
+- `PROOF_PARAMS_N_QUERIES_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkVerifier.sol` = `0`
+- `PROOF_PARAMS_PROOF_OF_WORK_BITS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/StarkVerifier.sol` = `2`
+- `PROOF_PARAMS_PROOF_OF_WORK_BITS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkVerifier.sol` = `2`
+- `PROOF_PARAMS_PROOF_OF_WORK_BITS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkVerifier.sol` = `2`
+- `PROOF_PARAMS_PROOF_OF_WORK_BITS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkVerifier.sol` = `2`
+- `PROOF_PARAMS_PROOF_OF_WORK_BITS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkVerifier.sol` = `2`
+- `PROOF_PARAMS_PROOF_OF_WORK_BITS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkVerifier.sol` = `2`
+- `PROOF_PARAMS_PROOF_OF_WORK_BITS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkVerifier.sol` = `2`
+- `PROOF_PARAMS_PROOF_OF_WORK_BITS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkVerifier.sol` = `2`
+- `PROOF_PARAMS_PROOF_OF_WORK_BITS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkVerifier.sol` = `2`
+- `minProofOfWorkBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/StarkVerifier.sol`
+- `minProofOfWorkBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkVerifier.sol`
+- `minProofOfWorkBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkVerifier.sol`
+- `minProofOfWorkBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkVerifier.sol`
+- `minProofOfWorkBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkVerifier.sol`
+- `minProofOfWorkBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkVerifier.sol`
+- `minProofOfWorkBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkVerifier.sol`
+- `minProofOfWorkBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkVerifier.sol`
+- `minProofOfWorkBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkVerifier.sol`
+- `numSecurityBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/StarkVerifier.sol`
+- `numSecurityBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkVerifier.sol`
+- `numSecurityBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkVerifier.sol`
+- `numSecurityBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkVerifier.sol`
+- `numSecurityBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkVerifier.sol`
+- `numSecurityBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkVerifier.sol`
+- `numSecurityBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkVerifier.sol`
+- `numSecurityBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkVerifier.sol`
+- `numSecurityBits` | type: `uint256 immutable` | vis: `default` | flags: `immutable` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkVerifier.sol`
+- `oodsContractAddress` | type: `address` | vis: `default` | flags: `-` | `StarkVerifier` @ `evm-verifier/solidity/contracts/StarkVerifier.sol`
+- `oodsContractAddress` | type: `address` | vis: `default` | flags: `-` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout0/StarkVerifier.sol`
+- `oodsContractAddress` | type: `address` | vis: `default` | flags: `-` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout1/StarkVerifier.sol`
+- `oodsContractAddress` | type: `address` | vis: `default` | flags: `-` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout2/StarkVerifier.sol`
+- `oodsContractAddress` | type: `address` | vis: `default` | flags: `-` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout3/StarkVerifier.sol`
+- `oodsContractAddress` | type: `address` | vis: `default` | flags: `-` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout4/StarkVerifier.sol`
+- `oodsContractAddress` | type: `address` | vis: `default` | flags: `-` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout5/StarkVerifier.sol`
+- `oodsContractAddress` | type: `address` | vis: `default` | flags: `-` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout6/StarkVerifier.sol`
+- `oodsContractAddress` | type: `address` | vis: `default` | flags: `-` | `StarkVerifier` @ `evm-verifier/solidity/contracts/cpu/layout7/StarkVerifier.sol`
+- `CALL_PROXY_IMPL_SLOT` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `StorageSlots` @ `common-contracts/src/upgrade/StorageSlots.sol` = `0x7184681641399eb4ad2fdb92114857ee6ff239f94ad635a1779978947b8843be`
+- `CALL_PROXY_IMPL_SLOT` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `StorageSlots` @ `scalable-dex/contracts/src/upgrade/StorageSlots.sol` = `0x7184681641399eb4ad2fdb92114857ee6ff239f94ad635a1779978947b8843be`
+- `FINALIZED_STATE_SLOT` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `StorageSlots` @ `common-contracts/src/upgrade/StorageSlots.sol` = `0x7d433c6f837e8f93009937c466c82efbb5ba621fae36886d0cac433c5d0aa7d2`
+- `FINALIZED_STATE_SLOT` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `StorageSlots` @ `scalable-dex/contracts/src/upgrade/StorageSlots.sol` = `0x7d433c6f837e8f93009937c466c82efbb5ba621fae36886d0cac433c5d0aa7d2`
+- `IMPLEMENTATION_SLOT` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `StorageSlots` @ `common-contracts/src/upgrade/StorageSlots.sol` = `0x177667240aeeea7e35eabe3a35e18306f336219e1386f7710a6bf8783f761b24`
+- `IMPLEMENTATION_SLOT` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `StorageSlots` @ `scalable-dex/contracts/src/upgrade/StorageSlots.sol` = `0x177667240aeeea7e35eabe3a35e18306f336219e1386f7710a6bf8783f761b24`
+- `UPGRADE_DELAY_SLOT` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `StorageSlots` @ `common-contracts/src/upgrade/StorageSlots.sol` = `0xc21dbb3089fcb2c4f4c6a67854ab4db2b0f233ea4b21b21f912d52d18fc5db1f`
+- `UPGRADE_DELAY_SLOT` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `StorageSlots` @ `scalable-dex/contracts/src/upgrade/StorageSlots.sol` = `0xc21dbb3089fcb2c4f4c6a67854ab4db2b0f233ea4b21b21f912d52d18fc5db1f`
+- `ERC1155_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `bytes4(keccak256("ERC1155Token(address,uint256)"))`
+- `ERC20_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `bytes4(keccak256("ERC20Token(address)"))`
+- `ERC721_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `bytes4(keccak256("ERC721Token(address,uint256)"))`
+- `ETH_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `bytes4(keccak256("ETH()"))`
+- `MINTABLE_ERC1155_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `bytes4(keccak256("MintableERC1155Token(address,uint256)"))`
+- `MINTABLE_ERC20_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `bytes4(keccak256("MintableERC20Token(address)"))`
+- `MINTABLE_ERC721_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `bytes4(keccak256("MintableERC721Token(address,uint256)"))`
+- `MINTABLE_PREFIX` | type: `string internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `"MINTABLE:"`
+- `NFT_ASSET_ID_PREFIX` | type: `string internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `"NFT:"`
+- `NON_MINTABLE_PREFIX` | type: `string internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `"NON_MINTABLE:"`
+- `SELECTOR_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `0x20`
+- `SELECTOR_SIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `4`
+- `TOKEN_CONTRACT_ADDRESS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `SELECTOR_OFFSET + SELECTOR_SIZE`
+- `ENTRY_NOT_FOUND` | type: `uint256 constant` | vis: `default` | flags: `constant` | `V3toV45ChangesExternalInitializer` @ `scalable-dex/contracts/src/upgrade/eic/V3toV45ChangesExternalInitializer.sol` = `uint256(~0)`
+
+### Tokens Added / Token State Values
+Detected token-related variables:
+- `ALPHA` | type: `uint256 constant` | vis: `default` | flags: `constant` | `ECDSA` @ `scalable-dex/contracts/src/components/ECDSA.sol` = `1`
+- `ethKeys` | type: `mapping(uint256 => address)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `tokenAdmins` | type: `mapping(address => bool)` | vis: `default` | flags: `-` | `MainStorage` @ `scalable-dex/contracts/src/components/MainStorage.sol`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x15d`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x15d`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x15d`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x169`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x160`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x167`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x16f`
+- `MM_COMPOSITION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x160`
+- `MM_DILUTED_CHECK__INTERACTION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x153`
+- `MM_DILUTED_CHECK__INTERACTION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x151`
+- `MM_DILUTED_CHECK__INTERACTION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x153`
+- `MM_DILUTED_CHECK__INTERACTION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x158`
+- `MM_DILUTED_CHECK__INTERACTION_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x151`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x153`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x153`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x153`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x159`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x159`
+- `MM_ECDSA__SIG_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x15e`
+- `MM_EC_OP__CURVE_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x160`
+- `MM_EC_OP__CURVE_CONFIG_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x165`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout0/MemoryMap.sol` = `0x259`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout1/MemoryMap.sol` = `0x258`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout2/MemoryMap.sol` = `0x210`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout3/MemoryMap.sol` = `0x2ba`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout4/MemoryMap.sol` = `0x218`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout5/MemoryMap.sol` = `0x290`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout6/MemoryMap.sol` = `0x2af`
+- `MM_OODS_ALPHA` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `MemoryMap` @ `evm-verifier/solidity/contracts/cpu/layout7/MemoryMap.sol` = `0x218`
+- `ETH_SELECTOR` | type: `bytes4 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `bytes4(keccak256("ETH()"))`
+- `TOKEN_CONTRACT_ADDRESS_OFFSET` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `TokenAssetData` @ `scalable-dex/contracts/src/interactions/TokenAssetData.sol` = `SELECTOR_OFFSET + SELECTOR_SIZE`
+
+Hardcoded token addresses found:
+- None detected
+
+### Struct Values (All Parsed Struct Fields)
+- `ApprovalChainData` (scalable-dex/contracts/src/libraries/StarkExTypes.sol): address[] verifiers, mapping(address => uint256) verifierAllowedRemovalTime
+- `DataAvailabilityFact` (scalable-dex/contracts/src/components/OnchainDataFactTreeEncoder.sol): uint256 onchainDataHash, uint256 onchainDataSize
+- `GovernanceInfoStruct` (common-contracts/src/components/Governance.sol): mapping(address => bool) effectiveGovernors, address candidateGovernor, bool initialized
+- `GovernanceInfoStruct` (scalable-dex/contracts/src/components/Governance.sol): mapping(address => bool) effectiveGovernors, address candidateGovernor, bool initialized
+- `InitializationArgStruct` (scalable-dex/contracts/src/starkex/toplevel_subcontracts/StarkExState.sol): uint256 globalConfigCode, address escapeVerifierAddress, uint256 sequenceNumber, uint256 validiumVaultRoot, uint256 rollupVaultRoot, uint256 orderRoot, uint256 validiumTreeHeight, uint256 rollupTreeHeight, uint256 orderTreeHeight, bool strictVaultBalancePolicy, address orderRegistryAddress
+- `ProgramOutputMarkers` (scalable-dex/contracts/src/perpetual/components/UpdatePerpetualState.sol): uint256 globalConfigurationHash, uint256 nAssets, uint256 assetConfigOffset, uint256 prevSharedStateSize, uint256 prevSharedStateOffset, uint256 newSharedStateSize, uint256 newSharedStateOffset, uint256 newVaultsRoot, uint256 newVaultsHeight, uint256 newOrdersRoot, uint256 newOrdersHeight, uint256 newSystemTime, uint256 dataAvailabilityMode, uint256 expirationTimestamp, uint256 nModifications, uint256 modificationsOffset, uint256 forcedActionsSize, uint256 nForcedActions, uint256 forcedActionsOffset, uint256 nConditions, uint256 conditionsOffset
+
+### Enum State Values
+- `ForcedAction` (scalable-dex/contracts/src/perpetual/components/UpdatePerpetualState.sol): Withdrawal, Trade
+
+### Invariant Values (Variable-Tied)
+- Key accounting vars (`INDEX_SIZE_IN_BYTES`, `FIRST_CONTINUOUS_PAGE_INDEX`, `validiumVaultRoot`, `assetTypeToAssetInfo`, `registeredAssetType`, `assetTypeToQuantum`, `permissiveAssetType_DEPRECATED`, `rollupVaultRoot`) must only change through authorized accounting paths
+- Every token address/handle variable must be non-zero and immutable or governance-gated
+- Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition
+
+### Full Raw State Inventory
+- `AUDIT_STATE_VALUES_FULL.json` includes:
+  - all state variables
+  - all total/balance variables
+  - all token variables
+  - all structs and fields
+  - enum values
+<!-- AUDIT_DOSSIER_END -->

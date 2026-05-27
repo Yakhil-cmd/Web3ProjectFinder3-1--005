@@ -1,0 +1,64 @@
+// SPDX-License-Identifier:  BUSL-1.1
+pragma solidity ^0.8.27;
+
+import {TransferUtilsV2, IERC20} from "../lib/TransferUtilsV2.sol";
+import {VersionV2} from "../VersionV2.sol";
+
+abstract contract StakingBuffer is VersionV2 {
+    using TransferUtilsV2 for IERC20;
+
+    error InvalidBuffer(uint256 minimumBuffer, uint256 maximumBuffer, uint256 buffer);
+
+    struct BufferConfig {
+        uint256 minimumBuffer;
+        uint256 maximumBuffer;
+        uint256 buffer;
+    }
+
+    function _depositWithBuffer(address assetAddr) internal {
+        uint256 assetBalance = IERC20(assetAddr).balanceOf(address(this));
+        BufferConfig memory bufferConfig = _bufferConfig(assetAddr);
+        if (assetBalance > bufferConfig.maximumBuffer) {
+            _depositToPool(assetAddr, assetBalance - bufferConfig.buffer);
+        }
+    }
+
+    function _withdrawWithBuffer(address assetAddr, address to, uint256 amount) internal {
+        if (amount == 0) return;
+        uint256 assetBalance = IERC20(assetAddr).balanceOf(address(this));
+        BufferConfig memory bufferConfig = _bufferConfig(assetAddr);
+
+        if (assetBalance >= amount && assetBalance - amount >= bufferConfig.minimumBuffer) {
+            // Sufficient buffer, transfer directly from contract balance
+            IERC20(assetAddr).safeTransfer(to, amount);
+            return;
+        }
+        // Not enough buffer, withdraw from pool
+        uint256 targetBalance = bufferConfig.buffer + amount;
+        uint256 amountFromPool = targetBalance - assetBalance;
+        uint256 assetInPool = _assetInPool(assetAddr);
+        if (amountFromPool > assetInPool) {
+            amountFromPool = assetInPool;
+        }
+        if (amountFromPool == amount) {
+            _withdrawFromPool(assetAddr, to, amountFromPool);
+        } else {
+            if (amountFromPool != 0) _withdrawFromPool(assetAddr, address(this), amountFromPool);
+            IERC20(assetAddr).safeTransfer(to, amount);
+        }
+    }
+
+    function _bufferConfig(address assetAddr) internal view virtual returns (BufferConfig memory);
+
+    function _depositToPool(address assetAddr, uint256 amount) internal virtual;
+
+    function _withdrawFromPool(address assetAddr, address to, uint256 amount) internal virtual;
+
+    function _assetInPool(address assetAddr) internal view virtual returns (uint256 amount);
+
+    function _checkBufferConfig(uint256 minimumBuffer, uint256 maximumBuffer, uint256 buffer) internal pure {
+        if (minimumBuffer > maximumBuffer || buffer < minimumBuffer || buffer > maximumBuffer) {
+            revert InvalidBuffer(minimumBuffer, maximumBuffer, buffer);
+        }
+    }
+}

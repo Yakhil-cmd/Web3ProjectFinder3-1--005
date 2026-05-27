@@ -1,0 +1,2010 @@
+{
+  "generated_at_utc": "2026-05-26T16:59:58Z",
+  "project": "22_stellaswap",
+  "solidity_file_count": 34,
+  "solidity_files": [
+    "amm/StellaSwapV2ERC20.sol",
+    "amm/StellaSwapV2Factory.sol",
+    "amm/StellaSwapV2Pair.sol",
+    "amm/StellaSwapV2Router.sol",
+    "amm/StellaSwapV2Router02.sol",
+    "amm/interfaces/IERC20.sol",
+    "amm/interfaces/IStellaSwapV2Callee.sol",
+    "amm/interfaces/IStellaSwapV2ERC20.sol",
+    "amm/interfaces/IStellaSwapV2Factory.sol",
+    "amm/interfaces/IStellaSwapV2Pair.sol",
+    "amm/interfaces/IStellaSwapV2Router01.sol",
+    "amm/interfaces/IStellaSwapV2Router02.sol",
+    "amm/interfaces/IWETH.sol",
+    "amm/libraries/Math.sol",
+    "amm/libraries/SafeMath.sol",
+    "amm/libraries/StellaSwapV2Library.sol",
+    "amm/libraries/TransferHelper.sol",
+    "amm/libraries/UQ112x112.sol",
+    "farms/StellaDistributor.sol",
+    "forwarder/Forwarder.sol",
+    "forwarder/IForwarder.sol",
+    "gasless/EIP712Base.sol",
+    "gasless/EIP712MetaTransaction.sol",
+    "gasless/GasSwap.sol",
+    "gasless/IStellaRouter.sol",
+    "gasless/IToken.sol",
+    "gasless/MockRouter.sol",
+    "helpers/Multicall.sol",
+    "helpers/Timelock.sol",
+    "token/Stella.sol",
+    "utils/IStellaERC20.sol",
+    "utils/MockERC20.sol",
+    "vault/StellaVault.sol",
+    "weth/weth.sol"
+  ],
+  "pragmas": [
+    "=0.6.12",
+    "=0.6.6",
+    ">=0.5.0",
+    ">=0.6.0",
+    ">=0.6.2",
+    "^0.8.0",
+    "^0.8.2",
+    "^0.8.7"
+  ],
+  "top_directories_by_solidity_file_count": [
+    [
+      "amm",
+      18
+    ],
+    [
+      "gasless",
+      6
+    ],
+    [
+      "forwarder",
+      2
+    ],
+    [
+      "helpers",
+      2
+    ],
+    [
+      "utils",
+      2
+    ],
+    [
+      "farms",
+      1
+    ],
+    [
+      "token",
+      1
+    ],
+    [
+      "vault",
+      1
+    ],
+    [
+      "weth",
+      1
+    ]
+  ],
+  "contracts": [
+    {
+      "file": "gasless/EIP712Base.sol",
+      "kind": "contract",
+      "name": "EIP712Base",
+      "bases": []
+    },
+    {
+      "file": "gasless/EIP712MetaTransaction.sol",
+      "kind": "contract",
+      "name": "EIP712MetaTransaction",
+      "bases": [
+        "EIP712Base"
+      ]
+    },
+    {
+      "file": "forwarder/Forwarder.sol",
+      "kind": "contract",
+      "name": "Forwarder",
+      "bases": [
+        "IForwarder"
+      ]
+    },
+    {
+      "file": "gasless/GasSwap.sol",
+      "kind": "contract",
+      "name": "GasSwap",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard",
+        "EIP712MetaTransaction(\"GasSwap\"",
+        "\"2\")"
+      ]
+    },
+    {
+      "file": "amm/StellaSwapV2Router02.sol",
+      "kind": "interface",
+      "name": "IERC20StellaSwap",
+      "bases": []
+    },
+    {
+      "file": "amm/interfaces/IERC20.sol",
+      "kind": "interface",
+      "name": "IERC20StellaSwap",
+      "bases": []
+    },
+    {
+      "file": "forwarder/IForwarder.sol",
+      "kind": "interface",
+      "name": "IForwarder",
+      "bases": []
+    },
+    {
+      "file": "amm/StellaSwapV2Pair.sol",
+      "kind": "interface",
+      "name": "IMigrator",
+      "bases": []
+    },
+    {
+      "file": "utils/IStellaERC20.sol",
+      "kind": "interface",
+      "name": "IStellaERC20",
+      "bases": [
+        "IERC20"
+      ]
+    },
+    {
+      "file": "gasless/IStellaRouter.sol",
+      "kind": "interface",
+      "name": "IStellaRouter",
+      "bases": []
+    },
+    {
+      "file": "amm/interfaces/IStellaSwapV2Callee.sol",
+      "kind": "interface",
+      "name": "IStellaSwapV2Callee",
+      "bases": []
+    },
+    {
+      "file": "amm/interfaces/IStellaSwapV2ERC20.sol",
+      "kind": "interface",
+      "name": "IStellaSwapV2ERC20",
+      "bases": []
+    },
+    {
+      "file": "amm/StellaSwapV2Router02.sol",
+      "kind": "interface",
+      "name": "IStellaSwapV2Factory",
+      "bases": []
+    },
+    {
+      "file": "amm/interfaces/IStellaSwapV2Factory.sol",
+      "kind": "interface",
+      "name": "IStellaSwapV2Factory",
+      "bases": []
+    },
+    {
+      "file": "amm/StellaSwapV2Router02.sol",
+      "kind": "interface",
+      "name": "IStellaSwapV2Pair",
+      "bases": []
+    },
+    {
+      "file": "amm/interfaces/IStellaSwapV2Pair.sol",
+      "kind": "interface",
+      "name": "IStellaSwapV2Pair",
+      "bases": []
+    },
+    {
+      "file": "amm/StellaSwapV2Router02.sol",
+      "kind": "interface",
+      "name": "IStellaSwapV2Router01",
+      "bases": []
+    },
+    {
+      "file": "amm/interfaces/IStellaSwapV2Router01.sol",
+      "kind": "interface",
+      "name": "IStellaSwapV2Router01",
+      "bases": []
+    },
+    {
+      "file": "amm/StellaSwapV2Router02.sol",
+      "kind": "interface",
+      "name": "IStellaSwapV2Router02",
+      "bases": [
+        "IStellaSwapV2Router01"
+      ]
+    },
+    {
+      "file": "amm/interfaces/IStellaSwapV2Router02.sol",
+      "kind": "interface",
+      "name": "IStellaSwapV2Router02",
+      "bases": [
+        "IStellaSwapV2Router01"
+      ]
+    },
+    {
+      "file": "gasless/IToken.sol",
+      "kind": "interface",
+      "name": "IToken",
+      "bases": [
+        "IERC20",
+        "IERC20Permit"
+      ]
+    },
+    {
+      "file": "amm/StellaSwapV2Router02.sol",
+      "kind": "interface",
+      "name": "IWETH",
+      "bases": []
+    },
+    {
+      "file": "amm/interfaces/IWETH.sol",
+      "kind": "interface",
+      "name": "IWETH",
+      "bases": []
+    },
+    {
+      "file": "amm/libraries/Math.sol",
+      "kind": "library",
+      "name": "Math",
+      "bases": []
+    },
+    {
+      "file": "utils/MockERC20.sol",
+      "kind": "contract",
+      "name": "MockERC20",
+      "bases": [
+        "ERC20",
+        "ERC20Permit"
+      ]
+    },
+    {
+      "file": "gasless/MockRouter.sol",
+      "kind": "contract",
+      "name": "MockRouter",
+      "bases": []
+    },
+    {
+      "file": "helpers/Multicall.sol",
+      "kind": "contract",
+      "name": "Multicall",
+      "bases": []
+    },
+    {
+      "file": "amm/StellaSwapV2Router02.sol",
+      "kind": "library",
+      "name": "SafeMathStellaSwap",
+      "bases": []
+    },
+    {
+      "file": "amm/libraries/SafeMath.sol",
+      "kind": "library",
+      "name": "SafeMathStellaSwap",
+      "bases": []
+    },
+    {
+      "file": "token/Stella.sol",
+      "kind": "contract",
+      "name": "Stella",
+      "bases": [
+        "ERC20(\"StellaSwap\"",
+        "\"STELLA\")",
+        "Ownable",
+        "AccessControl"
+      ]
+    },
+    {
+      "file": "farms/StellaDistributor.sol",
+      "kind": "contract",
+      "name": "StellaDistributor",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "kind": "contract",
+      "name": "StellaSwapV2ERC20",
+      "bases": []
+    },
+    {
+      "file": "amm/StellaSwapV2Factory.sol",
+      "kind": "contract",
+      "name": "StellaSwapV2Factory",
+      "bases": [
+        "IStellaSwapV2Factory"
+      ]
+    },
+    {
+      "file": "amm/StellaSwapV2Router02.sol",
+      "kind": "library",
+      "name": "StellaSwapV2Library",
+      "bases": []
+    },
+    {
+      "file": "amm/libraries/StellaSwapV2Library.sol",
+      "kind": "library",
+      "name": "StellaSwapV2Library",
+      "bases": []
+    },
+    {
+      "file": "amm/StellaSwapV2Pair.sol",
+      "kind": "contract",
+      "name": "StellaSwapV2Pair",
+      "bases": [
+        "StellaSwapV2ERC20"
+      ]
+    },
+    {
+      "file": "amm/StellaSwapV2Router.sol",
+      "kind": "contract",
+      "name": "StellaSwapV2Router",
+      "bases": [
+        "IStellaSwapV2Router02"
+      ]
+    },
+    {
+      "file": "amm/StellaSwapV2Router02.sol",
+      "kind": "contract",
+      "name": "StellaSwapV2Router02",
+      "bases": [
+        "IStellaSwapV2Router02"
+      ]
+    },
+    {
+      "file": "vault/StellaVault.sol",
+      "kind": "contract",
+      "name": "StellaVault",
+      "bases": [
+        "Ownable",
+        "ReentrancyGuard"
+      ]
+    },
+    {
+      "file": "helpers/Timelock.sol",
+      "kind": "contract",
+      "name": "Timelock",
+      "bases": []
+    },
+    {
+      "file": "amm/StellaSwapV2Router02.sol",
+      "kind": "library",
+      "name": "TransferHelper",
+      "bases": []
+    },
+    {
+      "file": "amm/libraries/TransferHelper.sol",
+      "kind": "library",
+      "name": "TransferHelper",
+      "bases": []
+    },
+    {
+      "file": "amm/libraries/UQ112x112.sol",
+      "kind": "library",
+      "name": "UQ112x112",
+      "bases": []
+    },
+    {
+      "file": "weth/weth.sol",
+      "kind": "contract",
+      "name": "WETH",
+      "bases": []
+    }
+  ],
+  "enums": [],
+  "structs": [
+    {
+      "file": "helpers/Multicall.sol",
+      "struct": "Call",
+      "fields": [
+        {
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "name": "callData",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "token/Stella.sol",
+      "struct": "Checkpoint",
+      "fields": [
+        {
+          "name": "fromBlock",
+          "type": "uint32"
+        },
+        {
+          "name": "votes",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "gasless/EIP712Base.sol",
+      "struct": "EIP712Domain",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "version",
+          "type": "string"
+        },
+        {
+          "name": "verifyingContract",
+          "type": "address"
+        },
+        {
+          "name": "salt",
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "file": "forwarder/IForwarder.sol",
+      "struct": "ForwardRequest",
+      "fields": [
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "name": "gas",
+          "type": "uint256"
+        },
+        {
+          "name": "nonce",
+          "type": "uint256"
+        },
+        {
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "name": "validUntil",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "gasless/EIP712MetaTransaction.sol",
+      "struct": "MetaTransaction",
+      "fields": [
+        {
+          "name": "nonce",
+          "type": "uint256"
+        },
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "functionSignature",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "farms/StellaDistributor.sol",
+      "struct": "PoolInfo",
+      "fields": [
+        {
+          "name": "lpToken",
+          "type": "IERC20"
+        },
+        {
+          "name": "allocPoint",
+          "type": "uint256"
+        },
+        {
+          "name": "lastRewardBlock",
+          "type": "uint256"
+        },
+        {
+          "name": "accStellaPerShare",
+          "type": "uint256"
+        },
+        {
+          "name": "depositFeeBP",
+          "type": "uint16"
+        },
+        {
+          "name": "harvestInterval",
+          "type": "uint256"
+        },
+        {
+          "name": "totalLp",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "vault/StellaVault.sol",
+      "struct": "PoolInfo",
+      "fields": [
+        {
+          "name": "lpToken",
+          "type": "IERC20"
+        },
+        {
+          "name": "allocPoint",
+          "type": "uint256"
+        },
+        {
+          "name": "lastRewardBlock",
+          "type": "uint256"
+        },
+        {
+          "name": "accStellaPerShare",
+          "type": "uint256"
+        },
+        {
+          "name": "depositFeeBP",
+          "type": "uint16"
+        },
+        {
+          "name": "harvestInterval",
+          "type": "uint256"
+        },
+        {
+          "name": "totalLp",
+          "type": "uint256"
+        },
+        {
+          "name": "lockDownDuration",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "helpers/Multicall.sol",
+      "struct": "Result",
+      "fields": [
+        {
+          "name": "success",
+          "type": "bool"
+        },
+        {
+          "name": "returnData",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "vault/StellaVault.sol",
+      "struct": "TimedStake",
+      "fields": [
+        {
+          "name": "stakes",
+          "type": "mapping(uint256 => uint256)"
+        },
+        {
+          "name": "stakeTimes",
+          "type": "uint256[]"
+        }
+      ]
+    },
+    {
+      "file": "gasless/GasSwap.sol",
+      "struct": "Transformation",
+      "fields": [
+        {
+          "name": "_uint32",
+          "type": "uint32"
+        },
+        {
+          "name": "_bytes",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "farms/StellaDistributor.sol",
+      "struct": "UserInfo",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "rewardDebt",
+          "type": "uint256"
+        },
+        {
+          "name": "rewardLockedUp",
+          "type": "uint256"
+        },
+        {
+          "name": "nextHarvestUntil",
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "file": "vault/StellaVault.sol",
+      "struct": "UserInfo",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "rewardDebt",
+          "type": "uint256"
+        },
+        {
+          "name": "rewardLockedUp",
+          "type": "uint256"
+        },
+        {
+          "name": "nextHarvestUntil",
+          "type": "uint256"
+        }
+      ]
+    }
+  ],
+  "all_state_variables": [
+    {
+      "name": "domainSeparator",
+      "type": "bytes32 internal",
+      "visibility": "internal",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bytes32 internal domainSeparator",
+      "file": "gasless/EIP712Base.sol",
+      "contract": "EIP712Base"
+    },
+    {
+      "name": "META_TRANSACTION_TYPEHASH",
+      "type": "bytes32 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256( bytes( \"MetaTransaction(uint256 nonce,address from,bytes functionSignature)\" ) )",
+      "declaration": "bytes32 private constant META_TRANSACTION_TYPEHASH = keccak256( bytes( \"MetaTransaction(uint256 nonce,address from,bytes functionSignature)\" ) )",
+      "file": "gasless/EIP712MetaTransaction.sol",
+      "contract": "EIP712MetaTransaction"
+    },
+    {
+      "name": "nonces",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private nonces",
+      "file": "gasless/EIP712MetaTransaction.sol",
+      "contract": "EIP712MetaTransaction"
+    },
+    {
+      "name": "EIP712_DOMAIN_TYPE",
+      "type": "string public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)\"",
+      "declaration": "string public constant EIP712_DOMAIN_TYPE = \"EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)\"",
+      "file": "forwarder/Forwarder.sol",
+      "contract": "Forwarder"
+    },
+    {
+      "name": "GENERIC_PARAMS",
+      "type": "string public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "\"address from,address to,uint256 value,uint256 gas,uint256 nonce,bytes data,uint256 validUntil\"",
+      "declaration": "string public constant GENERIC_PARAMS = \"address from,address to,uint256 value,uint256 gas,uint256 nonce,bytes data,uint256 validUntil\"",
+      "file": "forwarder/Forwarder.sol",
+      "contract": "Forwarder"
+    },
+    {
+      "name": "domains",
+      "type": "mapping(bytes32 => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => bool) public domains",
+      "file": "forwarder/Forwarder.sol",
+      "contract": "Forwarder"
+    },
+    {
+      "name": "nonces",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private nonces",
+      "file": "forwarder/Forwarder.sol",
+      "contract": "Forwarder"
+    },
+    {
+      "name": "typeHashes",
+      "type": "mapping(bytes32 => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => bool) public typeHashes",
+      "file": "forwarder/Forwarder.sol",
+      "contract": "Forwarder"
+    },
+    {
+      "name": "WGLMR",
+      "type": "address public immutable",
+      "visibility": "public",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": "0x98878B06940aE243284CA214f92Bb71a2b032B8A",
+      "declaration": "address public immutable WGLMR = 0x98878B06940aE243284CA214f92Bb71a2b032B8A",
+      "file": "gasless/GasSwap.sol",
+      "contract": "GasSwap"
+    },
+    {
+      "name": "feeAddress",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public feeAddress",
+      "file": "gasless/GasSwap.sol",
+      "contract": "GasSwap"
+    },
+    {
+      "name": "feePercent",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "100",
+      "declaration": "uint256 public feePercent = 100",
+      "file": "gasless/GasSwap.sol",
+      "contract": "GasSwap"
+    },
+    {
+      "name": "tokenWhitelist",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public tokenWhitelist",
+      "file": "gasless/GasSwap.sol",
+      "contract": "GasSwap"
+    },
+    {
+      "name": "DELEGATION_TYPEHASH",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"Delegation(address delegatee,uint256 nonce,uint256 expiry)\")",
+      "declaration": "bytes32 public constant DELEGATION_TYPEHASH = keccak256(\"Delegation(address delegatee,uint256 nonce,uint256 expiry)\")",
+      "file": "token/Stella.sol",
+      "contract": "Stella"
+    },
+    {
+      "name": "DOMAIN_TYPEHASH",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256( \"EIP712Domain(string name,uint256 chainId,address verifyingContract)\" )",
+      "declaration": "bytes32 public constant DOMAIN_TYPEHASH = keccak256( \"EIP712Domain(string name,uint256 chainId,address verifyingContract)\" )",
+      "file": "token/Stella.sol",
+      "contract": "Stella"
+    },
+    {
+      "name": "MINTER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"MINTER_ROLE\")",
+      "declaration": "bytes32 public constant MINTER_ROLE = keccak256(\"MINTER_ROLE\")",
+      "file": "token/Stella.sol",
+      "contract": "Stella"
+    },
+    {
+      "name": "_initialSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": "100_000e18",
+      "declaration": "uint256 private _initialSupply = 100_000e18",
+      "file": "token/Stella.sol",
+      "contract": "Stella"
+    },
+    {
+      "name": "maxSupply",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "500_000_000e18",
+      "declaration": "uint256 public maxSupply = 500_000_000e18",
+      "file": "token/Stella.sol",
+      "contract": "Stella"
+    },
+    {
+      "name": "nonces",
+      "type": "mapping(address => uint256) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) public nonces",
+      "file": "token/Stella.sol",
+      "contract": "Stella"
+    },
+    {
+      "name": "numCheckpoints",
+      "type": "mapping(address => uint32) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint32) public numCheckpoints",
+      "file": "token/Stella.sol",
+      "contract": "Stella"
+    },
+    {
+      "name": "MAXIMUM_DEPOSIT_FEE_RATE",
+      "type": "uint16 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1000",
+      "declaration": "uint16 public constant MAXIMUM_DEPOSIT_FEE_RATE = 1000",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "MAXIMUM_HARVEST_INTERVAL",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "90 days",
+      "declaration": "uint256 public constant MAXIMUM_HARVEST_INTERVAL = 90 days",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "_operator",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _operator",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "_trustedForwarder",
+      "type": "address constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x24eE59Fe03Cbc71e71bb05F6E66ffd49D6800363",
+      "declaration": "address constant _trustedForwarder = 0x24eE59Fe03Cbc71e71bb05F6E66ffd49D6800363",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "investorAddress",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public investorAddress",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "investorPercent",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public investorPercent",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "metaTxnsEnabled",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "false",
+      "declaration": "bool public metaTxnsEnabled = false",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "poolInfo",
+      "type": "PoolInfo[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "PoolInfo[] public poolInfo",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "startBlock",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public startBlock",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "stellaPerBlock",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public stellaPerBlock",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "teamAddress",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public teamAddress",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "teamPercent",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public teamPercent",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "totalAllocPoint",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "0",
+      "declaration": "uint256 public totalAllocPoint = 0",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "totalLockedUpRewards",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalLockedUpRewards",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "totalStellaInPools",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "0",
+      "declaration": "uint256 public totalStellaInPools = 0",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "treasuryAddress",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public treasuryAddress",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "treasuryPercent",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public treasuryPercent",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "userInfo",
+      "type": "mapping(uint256 => mapping(address => UserInfo)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(address => UserInfo)) public userInfo",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "DOMAIN_SEPARATOR",
+      "type": "bytes32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bytes32 public DOMAIN_SEPARATOR",
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "contract": "StellaSwapV2ERC20"
+    },
+    {
+      "name": "PERMIT_TYPEHASH",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9",
+      "declaration": "bytes32 public constant PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9",
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "contract": "StellaSwapV2ERC20"
+    },
+    {
+      "name": "allowance",
+      "type": "mapping(address => mapping(address => uint)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => uint)) public allowance",
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "contract": "StellaSwapV2ERC20"
+    },
+    {
+      "name": "balanceOf",
+      "type": "mapping(address => uint) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint) public balanceOf",
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "contract": "StellaSwapV2ERC20"
+    },
+    {
+      "name": "decimals",
+      "type": "uint8 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "18",
+      "declaration": "uint8 public constant decimals = 18",
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "contract": "StellaSwapV2ERC20"
+    },
+    {
+      "name": "name",
+      "type": "string public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "'Stella LP'",
+      "declaration": "string public constant name = 'Stella LP'",
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "contract": "StellaSwapV2ERC20"
+    },
+    {
+      "name": "nonces",
+      "type": "mapping(address => uint) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint) public nonces",
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "contract": "StellaSwapV2ERC20"
+    },
+    {
+      "name": "symbol",
+      "type": "string public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "'STELLA LP'",
+      "declaration": "string public constant symbol = 'STELLA LP'",
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "contract": "StellaSwapV2ERC20"
+    },
+    {
+      "name": "totalSupply",
+      "type": "uint public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint public totalSupply",
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "contract": "StellaSwapV2ERC20"
+    },
+    {
+      "name": "INIT_CODE_PAIR_HASH",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(abi.encodePacked(type(StellaSwapV2Pair).creationCode))",
+      "declaration": "bytes32 public constant INIT_CODE_PAIR_HASH = keccak256(abi.encodePacked(type(StellaSwapV2Pair).creationCode))",
+      "file": "amm/StellaSwapV2Factory.sol",
+      "contract": "StellaSwapV2Factory"
+    },
+    {
+      "name": "allPairs",
+      "type": "address[] public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address[] public override allPairs",
+      "file": "amm/StellaSwapV2Factory.sol",
+      "contract": "StellaSwapV2Factory"
+    },
+    {
+      "name": "feeTo",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override feeTo",
+      "file": "amm/StellaSwapV2Factory.sol",
+      "contract": "StellaSwapV2Factory"
+    },
+    {
+      "name": "feeToSetter",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override feeToSetter",
+      "file": "amm/StellaSwapV2Factory.sol",
+      "contract": "StellaSwapV2Factory"
+    },
+    {
+      "name": "getPair",
+      "type": "mapping(address => mapping(address => address)) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(address => address)) public override getPair",
+      "file": "amm/StellaSwapV2Factory.sol",
+      "contract": "StellaSwapV2Factory"
+    },
+    {
+      "name": "migrator",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override migrator",
+      "file": "amm/StellaSwapV2Factory.sol",
+      "contract": "StellaSwapV2Factory"
+    },
+    {
+      "name": "MINIMUM_LIQUIDITY",
+      "type": "uint public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**3",
+      "declaration": "uint public constant MINIMUM_LIQUIDITY = 10**3",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "SELECTOR",
+      "type": "bytes4 private constant",
+      "visibility": "private",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "bytes4(keccak256(bytes('transfer(address,uint256)')))",
+      "declaration": "bytes4 private constant SELECTOR = bytes4(keccak256(bytes('transfer(address,uint256)')))",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "blockTimestampLast",
+      "type": "uint32 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint32 private blockTimestampLast",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "devFee",
+      "type": "uint32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "5",
+      "declaration": "uint32 public devFee = 5",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "factory",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public factory",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "kLast",
+      "type": "uint public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint public kLast",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "price0CumulativeLast",
+      "type": "uint public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint public price0CumulativeLast",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "price1CumulativeLast",
+      "type": "uint public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint public price1CumulativeLast",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "reserve0",
+      "type": "uint112 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint112 private reserve0",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "reserve1",
+      "type": "uint112 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint112 private reserve1",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "swapFee",
+      "type": "uint32 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "25",
+      "declaration": "uint32 public swapFee = 25",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "token0",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public token0",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "token1",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public token1",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "unlocked",
+      "type": "uint private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": "1",
+      "declaration": "uint private unlocked = 1",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "WETH",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override WETH",
+      "file": "amm/StellaSwapV2Router.sol",
+      "contract": "StellaSwapV2Router"
+    },
+    {
+      "name": "factory",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override factory",
+      "file": "amm/StellaSwapV2Router.sol",
+      "contract": "StellaSwapV2Router"
+    },
+    {
+      "name": "WETH",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override WETH",
+      "file": "amm/StellaSwapV2Router02.sol",
+      "contract": "StellaSwapV2Router02"
+    },
+    {
+      "name": "factory",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override factory",
+      "file": "amm/StellaSwapV2Router02.sol",
+      "contract": "StellaSwapV2Router02"
+    },
+    {
+      "name": "MAXIMUM_DEPOSIT_FEE_RATE",
+      "type": "uint16 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1000",
+      "declaration": "uint16 public constant MAXIMUM_DEPOSIT_FEE_RATE = 1000",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "MAXIMUM_HARVEST_INTERVAL",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "90 days",
+      "declaration": "uint256 public constant MAXIMUM_HARVEST_INTERVAL = 90 days",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "_operator",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private _operator",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "_trustedForwarder",
+      "type": "address constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "0x24eE59Fe03Cbc71e71bb05F6E66ffd49D6800363",
+      "declaration": "address constant _trustedForwarder = 0x24eE59Fe03Cbc71e71bb05F6E66ffd49D6800363",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "investorAddress",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public investorAddress",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "investorPercent",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public investorPercent",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "metaTxnsEnabled",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "false",
+      "declaration": "bool public metaTxnsEnabled = false",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "poolInfo",
+      "type": "PoolInfo[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "PoolInfo[] public poolInfo",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "startBlock",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public startBlock",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "stellaPerBlock",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public stellaPerBlock",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "teamAddress",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public teamAddress",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "teamPercent",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public teamPercent",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "timeStakeInfo",
+      "type": "mapping(uint256 => mapping(address => TimedStake))",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(address => TimedStake)) timeStakeInfo",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "totalAllocPoint",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "0",
+      "declaration": "uint256 public totalAllocPoint = 0",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "totalLockedUpRewards",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalLockedUpRewards",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "totalStellaInPools",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "0",
+      "declaration": "uint256 public totalStellaInPools = 0",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "treasuryAddress",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public treasuryAddress",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "treasuryPercent",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public treasuryPercent",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "userInfo",
+      "type": "mapping(uint256 => mapping(address => UserInfo)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(address => UserInfo)) public userInfo",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "GRACE_PERIOD",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "14 days",
+      "declaration": "uint256 public constant GRACE_PERIOD = 14 days",
+      "file": "helpers/Timelock.sol",
+      "contract": "Timelock"
+    },
+    {
+      "name": "MAXIMUM_DELAY",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "30 days",
+      "declaration": "uint256 public constant MAXIMUM_DELAY = 30 days",
+      "file": "helpers/Timelock.sol",
+      "contract": "Timelock"
+    },
+    {
+      "name": "MINIMUM_DELAY",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "6 hours",
+      "declaration": "uint256 public constant MINIMUM_DELAY = 6 hours",
+      "file": "helpers/Timelock.sol",
+      "contract": "Timelock"
+    },
+    {
+      "name": "admin",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public admin",
+      "file": "helpers/Timelock.sol",
+      "contract": "Timelock"
+    },
+    {
+      "name": "admin_initialized",
+      "type": "bool public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bool public admin_initialized",
+      "file": "helpers/Timelock.sol",
+      "contract": "Timelock"
+    },
+    {
+      "name": "delay",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public delay",
+      "file": "helpers/Timelock.sol",
+      "contract": "Timelock"
+    },
+    {
+      "name": "pendingAdmin",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public pendingAdmin",
+      "file": "helpers/Timelock.sol",
+      "contract": "Timelock"
+    },
+    {
+      "name": "queuedTransactions",
+      "type": "mapping(bytes32 => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(bytes32 => bool) public queuedTransactions",
+      "file": "helpers/Timelock.sol",
+      "contract": "Timelock"
+    },
+    {
+      "name": "Q112",
+      "type": "uint224 constant",
+      "visibility": "default",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "2**112",
+      "declaration": "uint224 constant Q112 = 2**112",
+      "file": "amm/libraries/UQ112x112.sol",
+      "contract": "UQ112x112"
+    },
+    {
+      "name": "allowance",
+      "type": "mapping (address => mapping (address => uint)) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => mapping (address => uint)) public allowance",
+      "file": "weth/weth.sol",
+      "contract": "WETH"
+    },
+    {
+      "name": "balanceOf",
+      "type": "mapping (address => uint) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => uint) public balanceOf",
+      "file": "weth/weth.sol",
+      "contract": "WETH"
+    },
+    {
+      "name": "decimals",
+      "type": "uint8 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "18",
+      "declaration": "uint8 public decimals = 18",
+      "file": "weth/weth.sol",
+      "contract": "WETH"
+    },
+    {
+      "name": "name",
+      "type": "string public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "\"Wrapped GLMR\"",
+      "declaration": "string public name = \"Wrapped GLMR\"",
+      "file": "weth/weth.sol",
+      "contract": "WETH"
+    },
+    {
+      "name": "symbol",
+      "type": "string public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "\"WGLMR\"",
+      "declaration": "string public symbol = \"WGLMR\"",
+      "file": "weth/weth.sol",
+      "contract": "WETH"
+    }
+  ],
+  "total_balance_variables": [
+    {
+      "name": "_initialSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": "100_000e18",
+      "declaration": "uint256 private _initialSupply = 100_000e18",
+      "file": "token/Stella.sol",
+      "contract": "Stella"
+    },
+    {
+      "name": "maxSupply",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "500_000_000e18",
+      "declaration": "uint256 public maxSupply = 500_000_000e18",
+      "file": "token/Stella.sol",
+      "contract": "Stella"
+    },
+    {
+      "name": "poolInfo",
+      "type": "PoolInfo[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "PoolInfo[] public poolInfo",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "totalAllocPoint",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "0",
+      "declaration": "uint256 public totalAllocPoint = 0",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "totalLockedUpRewards",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalLockedUpRewards",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "totalStellaInPools",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "0",
+      "declaration": "uint256 public totalStellaInPools = 0",
+      "file": "farms/StellaDistributor.sol",
+      "contract": "StellaDistributor"
+    },
+    {
+      "name": "balanceOf",
+      "type": "mapping(address => uint) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint) public balanceOf",
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "contract": "StellaSwapV2ERC20"
+    },
+    {
+      "name": "totalSupply",
+      "type": "uint public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint public totalSupply",
+      "file": "amm/StellaSwapV2ERC20.sol",
+      "contract": "StellaSwapV2ERC20"
+    },
+    {
+      "name": "MINIMUM_LIQUIDITY",
+      "type": "uint public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "10**3",
+      "declaration": "uint public constant MINIMUM_LIQUIDITY = 10**3",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "reserve0",
+      "type": "uint112 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint112 private reserve0",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "reserve1",
+      "type": "uint112 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint112 private reserve1",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "poolInfo",
+      "type": "PoolInfo[] public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "PoolInfo[] public poolInfo",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "timeStakeInfo",
+      "type": "mapping(uint256 => mapping(address => TimedStake))",
+      "visibility": "default",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(uint256 => mapping(address => TimedStake)) timeStakeInfo",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "totalAllocPoint",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "0",
+      "declaration": "uint256 public totalAllocPoint = 0",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "totalLockedUpRewards",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public totalLockedUpRewards",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "totalStellaInPools",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": "0",
+      "declaration": "uint256 public totalStellaInPools = 0",
+      "file": "vault/StellaVault.sol",
+      "contract": "StellaVault"
+    },
+    {
+      "name": "balanceOf",
+      "type": "mapping (address => uint) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => uint) public balanceOf",
+      "file": "weth/weth.sol",
+      "contract": "WETH"
+    }
+  ],
+  "token_variables": [
+    {
+      "name": "tokenWhitelist",
+      "type": "mapping(address => bool) public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public tokenWhitelist",
+      "file": "gasless/GasSwap.sol",
+      "contract": "GasSwap"
+    },
+    {
+      "name": "allPairs",
+      "type": "address[] public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address[] public override allPairs",
+      "file": "amm/StellaSwapV2Factory.sol",
+      "contract": "StellaSwapV2Factory"
+    },
+    {
+      "name": "token0",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public token0",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "token1",
+      "type": "address public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address public token1",
+      "file": "amm/StellaSwapV2Pair.sol",
+      "contract": "StellaSwapV2Pair"
+    },
+    {
+      "name": "WETH",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override WETH",
+      "file": "amm/StellaSwapV2Router.sol",
+      "contract": "StellaSwapV2Router"
+    },
+    {
+      "name": "WETH",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override WETH",
+      "file": "amm/StellaSwapV2Router02.sol",
+      "contract": "StellaSwapV2Router02"
+    }
+  ],
+  "token_addresses_hardcoded": [],
+  "invariant_values": [
+    "`sum(balanceOf[*]) == totalSupply` (token balance conservation)",
+    "Every token address/handle variable must be non-zero and immutable or governance-gated",
+    "Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition"
+  ]
+}

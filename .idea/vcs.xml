@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/01_nuva" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/02_katana" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/03_veda" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/04_twyne" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/05_felix" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/07_enzyme-onyx" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/08_immutable" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/09_haven1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/10_usdn" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/12_lombard-finance" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/13_kelp-dao" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/14_flarenetwork" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/15_termstructurelabs" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/17_ssvnetwork" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/19_thresholdnetwork" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/20_fluxfinance" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/21_resonate" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/22_stellaswap" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/23_stakewise" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/24_sherlock" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/25_thegraph" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/26_impossiblefinance" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/27_ichi" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/28_enzymefinance" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/29_charm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/immunefi_solidity_batch_30/30_starkex" vcs="Git" />
+  </component>
+</project>

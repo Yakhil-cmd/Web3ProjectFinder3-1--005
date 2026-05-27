@@ -1,0 +1,1651 @@
+{
+  "generated_at_utc": "2026-05-26T16:59:58Z",
+  "project": "23_stakewise",
+  "solidity_file_count": 37,
+  "solidity_files": [
+    "contracts/ContractChecker.sol",
+    "contracts/Oracles.sol",
+    "contracts/Roles.sol",
+    "contracts/interfaces/IDepositContract.sol",
+    "contracts/interfaces/IEthGenesisVault.sol",
+    "contracts/interfaces/IFeesEscrow.sol",
+    "contracts/interfaces/IMerkleDistributor.sol",
+    "contracts/interfaces/IMerkleDrop.sol",
+    "contracts/interfaces/IOracles.sol",
+    "contracts/interfaces/IOwnablePausable.sol",
+    "contracts/interfaces/IPool.sol",
+    "contracts/interfaces/IPoolEscrow.sol",
+    "contracts/interfaces/IPoolValidators.sol",
+    "contracts/interfaces/IRewardEthToken.sol",
+    "contracts/interfaces/IRoles.sol",
+    "contracts/interfaces/IStakedEthToken.sol",
+    "contracts/interfaces/IVestingEscrow.sol",
+    "contracts/interfaces/IVestingEscrowFactory.sol",
+    "contracts/merkles/MerkleDistributor.sol",
+    "contracts/merkles/MerkleDrop.sol",
+    "contracts/mocks/ERC20Mock.sol",
+    "contracts/mocks/MulticallMock.sol",
+    "contracts/mocks/OwnablePausableMock.sol",
+    "contracts/mocks/OwnablePausableUpgradeableMock.sol",
+    "contracts/mocks/VaultMock.sol",
+    "contracts/pool/FeesEscrow.sol",
+    "contracts/pool/Pool.sol",
+    "contracts/pool/PoolEscrow.sol",
+    "contracts/presets/OwnablePausable.sol",
+    "contracts/presets/OwnablePausableUpgradeable.sol",
+    "contracts/tokens/ERC20PermitUpgradeable.sol",
+    "contracts/tokens/ERC20Upgradeable.sol",
+    "contracts/tokens/RewardEthToken.sol",
+    "contracts/tokens/StakeWiseToken.sol",
+    "contracts/tokens/StakedEthToken.sol",
+    "contracts/vestings/VestingEscrow.sol",
+    "contracts/vestings/VestingEscrowFactory.sol"
+  ],
+  "pragmas": [
+    "0.7.5"
+  ],
+  "top_directories_by_solidity_file_count": [
+    [
+      "contracts",
+      37
+    ]
+  ],
+  "contracts": [
+    {
+      "file": "contracts/ContractChecker.sol",
+      "kind": "contract",
+      "name": "ContractChecker",
+      "bases": []
+    },
+    {
+      "file": "contracts/mocks/ERC20Mock.sol",
+      "kind": "contract",
+      "name": "ERC20Mock",
+      "bases": [
+        "ERC20PermitUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/tokens/ERC20PermitUpgradeable.sol",
+      "kind": "abstract contract",
+      "name": "ERC20PermitUpgradeable",
+      "bases": [
+        "Initializable",
+        "ERC20Upgradeable",
+        "IERC20PermitUpgradeable",
+        "EIP712Upgradeable"
+      ]
+    },
+    {
+      "file": "contracts/tokens/ERC20Upgradeable.sol",
+      "kind": "abstract contract",
+      "name": "ERC20Upgradeable",
+      "bases": [
+        "Initializable",
+        "IERC20Upgradeable"
+      ]
+    },
+    {
+      "file": "contracts/pool/FeesEscrow.sol",
+      "kind": "contract",
+      "name": "FeesEscrow",
+      "bases": [
+        "IFeesEscrow"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/IDepositContract.sol",
+      "kind": "interface",
+      "name": "IDepositContract",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IEthGenesisVault.sol",
+      "kind": "interface",
+      "name": "IEthGenesisVault",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IFeesEscrow.sol",
+      "kind": "interface",
+      "name": "IFeesEscrow",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IMerkleDistributor.sol",
+      "kind": "interface",
+      "name": "IMerkleDistributor",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IMerkleDrop.sol",
+      "kind": "interface",
+      "name": "IMerkleDrop",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IOracles.sol",
+      "kind": "interface",
+      "name": "IOracles",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IOwnablePausable.sol",
+      "kind": "interface",
+      "name": "IOwnablePausable",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IPool.sol",
+      "kind": "interface",
+      "name": "IPool",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IPoolEscrow.sol",
+      "kind": "interface",
+      "name": "IPoolEscrow",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IPoolValidators.sol",
+      "kind": "interface",
+      "name": "IPoolValidators",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IRewardEthToken.sol",
+      "kind": "interface",
+      "name": "IRewardEthToken",
+      "bases": [
+        "IERC20Upgradeable"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/IRoles.sol",
+      "kind": "interface",
+      "name": "IRoles",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IStakedEthToken.sol",
+      "kind": "interface",
+      "name": "IStakedEthToken",
+      "bases": [
+        "IERC20Upgradeable"
+      ]
+    },
+    {
+      "file": "contracts/interfaces/IVestingEscrow.sol",
+      "kind": "interface",
+      "name": "IVestingEscrow",
+      "bases": []
+    },
+    {
+      "file": "contracts/interfaces/IVestingEscrowFactory.sol",
+      "kind": "interface",
+      "name": "IVestingEscrowFactory",
+      "bases": []
+    },
+    {
+      "file": "contracts/merkles/MerkleDistributor.sol",
+      "kind": "contract",
+      "name": "MerkleDistributor",
+      "bases": [
+        "IMerkleDistributor",
+        "OwnablePausableUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/merkles/MerkleDrop.sol",
+      "kind": "contract",
+      "name": "MerkleDrop",
+      "bases": [
+        "IMerkleDrop",
+        "Ownable"
+      ]
+    },
+    {
+      "file": "contracts/mocks/MulticallMock.sol",
+      "kind": "contract",
+      "name": "MulticallMock",
+      "bases": []
+    },
+    {
+      "file": "contracts/Oracles.sol",
+      "kind": "contract",
+      "name": "Oracles",
+      "bases": [
+        "IOracles",
+        "OwnablePausableUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/presets/OwnablePausable.sol",
+      "kind": "abstract contract",
+      "name": "OwnablePausable",
+      "bases": [
+        "IOwnablePausable",
+        "Pausable",
+        "AccessControl"
+      ]
+    },
+    {
+      "file": "contracts/mocks/OwnablePausableMock.sol",
+      "kind": "contract",
+      "name": "OwnablePausableMock",
+      "bases": [
+        "OwnablePausable"
+      ]
+    },
+    {
+      "file": "contracts/presets/OwnablePausableUpgradeable.sol",
+      "kind": "abstract contract",
+      "name": "OwnablePausableUpgradeable",
+      "bases": [
+        "IOwnablePausable",
+        "PausableUpgradeable",
+        "AccessControlUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/mocks/OwnablePausableUpgradeableMock.sol",
+      "kind": "contract",
+      "name": "OwnablePausableUpgradeableMock",
+      "bases": [
+        "OwnablePausableUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/pool/Pool.sol",
+      "kind": "contract",
+      "name": "Pool",
+      "bases": [
+        "IPool",
+        "OwnablePausableUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/pool/PoolEscrow.sol",
+      "kind": "contract",
+      "name": "PoolEscrow",
+      "bases": [
+        "IPoolEscrow"
+      ]
+    },
+    {
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "kind": "contract",
+      "name": "RewardEthToken",
+      "bases": [
+        "IRewardEthToken",
+        "OwnablePausableUpgradeable",
+        "ERC20PermitUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/Roles.sol",
+      "kind": "contract",
+      "name": "Roles",
+      "bases": [
+        "IRoles",
+        "OwnablePausableUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/tokens/StakeWiseToken.sol",
+      "kind": "contract",
+      "name": "StakeWiseToken",
+      "bases": [
+        "OwnablePausableUpgradeable",
+        "ERC20PermitUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/tokens/StakedEthToken.sol",
+      "kind": "contract",
+      "name": "StakedEthToken",
+      "bases": [
+        "IStakedEthToken",
+        "OwnablePausableUpgradeable",
+        "ERC20PermitUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/mocks/VaultMock.sol",
+      "kind": "contract",
+      "name": "VaultMock",
+      "bases": []
+    },
+    {
+      "file": "contracts/vestings/VestingEscrow.sol",
+      "kind": "contract",
+      "name": "VestingEscrow",
+      "bases": [
+        "IVestingEscrow",
+        "OwnablePausableUpgradeable"
+      ]
+    },
+    {
+      "file": "contracts/vestings/VestingEscrowFactory.sol",
+      "kind": "contract",
+      "name": "VestingEscrowFactory",
+      "bases": [
+        "IVestingEscrowFactory",
+        "ReentrancyGuardUpgradeable",
+        "OwnablePausableUpgradeable"
+      ]
+    }
+  ],
+  "enums": [],
+  "structs": [
+    {
+      "file": "contracts/interfaces/IRewardEthToken.sol",
+      "struct": "Checkpoint",
+      "fields": [
+        {
+          "name": "reward",
+          "type": "uint128"
+        },
+        {
+          "name": "rewardPerToken",
+          "type": "uint128"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/IPoolValidators.sol",
+      "struct": "DepositData",
+      "fields": [
+        {
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "name": "withdrawalCredentials",
+          "type": "bytes32"
+        },
+        {
+          "name": "depositDataRoot",
+          "type": "bytes32"
+        },
+        {
+          "name": "publicKey",
+          "type": "bytes"
+        },
+        {
+          "name": "signature",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "file": "contracts/mocks/MulticallMock.sol",
+      "struct": "MerkleRoot",
+      "fields": [
+        {
+          "name": "merkleRoot",
+          "type": "bytes32"
+        },
+        {
+          "name": "merkleProofs",
+          "type": "string"
+        },
+        {
+          "name": "signatures",
+          "type": "bytes[]"
+        }
+      ]
+    },
+    {
+      "file": "contracts/interfaces/IPoolValidators.sol",
+      "struct": "Operator",
+      "fields": [
+        {
+          "name": "depositDataMerkleRoot",
+          "type": "bytes32"
+        },
+        {
+          "name": "committed",
+          "type": "bool"
+        }
+      ]
+    }
+  ],
+  "all_state_variables": [
+    {
+      "name": "_balances",
+      "type": "mapping (address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => uint256) private _balances",
+      "file": "contracts/mocks/ERC20Mock.sol",
+      "contract": "ERC20Mock"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/mocks/ERC20Mock.sol",
+      "contract": "ERC20Mock"
+    },
+    {
+      "name": "owner",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private owner",
+      "file": "contracts/mocks/ERC20Mock.sol",
+      "contract": "ERC20Mock"
+    },
+    {
+      "name": "_PERMIT_TYPEHASH",
+      "type": "bytes32 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bytes32 private _PERMIT_TYPEHASH",
+      "file": "contracts/tokens/ERC20PermitUpgradeable.sol",
+      "contract": "ERC20PermitUpgradeable"
+    },
+    {
+      "name": "_nonces",
+      "type": "mapping (address => CountersUpgradeable.Counter) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => CountersUpgradeable.Counter) private _nonces",
+      "file": "contracts/tokens/ERC20PermitUpgradeable.sol",
+      "contract": "ERC20PermitUpgradeable"
+    },
+    {
+      "name": "_allowances",
+      "type": "mapping (address => mapping (address => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => mapping (address => uint256)) private _allowances",
+      "file": "contracts/tokens/ERC20Upgradeable.sol",
+      "contract": "ERC20Upgradeable"
+    },
+    {
+      "name": "_decimals",
+      "type": "uint8 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint8 private _decimals",
+      "file": "contracts/tokens/ERC20Upgradeable.sol",
+      "contract": "ERC20Upgradeable"
+    },
+    {
+      "name": "_name",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _name",
+      "file": "contracts/tokens/ERC20Upgradeable.sol",
+      "contract": "ERC20Upgradeable"
+    },
+    {
+      "name": "_symbol",
+      "type": "string private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "string private _symbol",
+      "file": "contracts/tokens/ERC20Upgradeable.sol",
+      "contract": "ERC20Upgradeable"
+    },
+    {
+      "name": "pool",
+      "type": "IPool private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IPool private immutable pool",
+      "file": "contracts/pool/FeesEscrow.sol",
+      "contract": "FeesEscrow"
+    },
+    {
+      "name": "rewardEthToken",
+      "type": "address private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address private immutable rewardEthToken",
+      "file": "contracts/pool/FeesEscrow.sol",
+      "contract": "FeesEscrow"
+    },
+    {
+      "name": "_claimedBitMap",
+      "type": "mapping (bytes32 => mapping (uint256 => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (bytes32 => mapping (uint256 => uint256)) private _claimedBitMap",
+      "file": "contracts/merkles/MerkleDistributor.sol",
+      "contract": "MerkleDistributor"
+    },
+    {
+      "name": "lastUpdateBlockNumber",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override lastUpdateBlockNumber",
+      "file": "contracts/merkles/MerkleDistributor.sol",
+      "contract": "MerkleDistributor"
+    },
+    {
+      "name": "merkleRoot",
+      "type": "bytes32 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "bytes32 public override merkleRoot",
+      "file": "contracts/merkles/MerkleDistributor.sol",
+      "contract": "MerkleDistributor"
+    },
+    {
+      "name": "oracles",
+      "type": "IOracles public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IOracles public override oracles",
+      "file": "contracts/merkles/MerkleDistributor.sol",
+      "contract": "MerkleDistributor"
+    },
+    {
+      "name": "rewardEthToken",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override rewardEthToken",
+      "file": "contracts/merkles/MerkleDistributor.sol",
+      "contract": "MerkleDistributor"
+    },
+    {
+      "name": "claimedBitMap",
+      "type": "mapping(uint256 => uint256) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(uint256 => uint256) public override claimedBitMap",
+      "file": "contracts/merkles/MerkleDrop.sol",
+      "contract": "MerkleDrop"
+    },
+    {
+      "name": "expireTimestamp",
+      "type": "uint256 public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public immutable override expireTimestamp",
+      "file": "contracts/merkles/MerkleDrop.sol",
+      "contract": "MerkleDrop"
+    },
+    {
+      "name": "merkleRoot",
+      "type": "bytes32 public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "bytes32 public immutable override merkleRoot",
+      "file": "contracts/merkles/MerkleDrop.sol",
+      "contract": "MerkleDrop"
+    },
+    {
+      "name": "token",
+      "type": "IERC20 public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable override token",
+      "file": "contracts/merkles/MerkleDrop.sol",
+      "contract": "MerkleDrop"
+    },
+    {
+      "name": "merkleDistributor",
+      "type": "IMerkleDistributor private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IMerkleDistributor private merkleDistributor",
+      "file": "contracts/mocks/MulticallMock.sol",
+      "contract": "MulticallMock"
+    },
+    {
+      "name": "rewardEthToken",
+      "type": "IRewardEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IRewardEthToken private rewardEthToken",
+      "file": "contracts/mocks/MulticallMock.sol",
+      "contract": "MulticallMock"
+    },
+    {
+      "name": "stakedEthToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private stakedEthToken",
+      "file": "contracts/mocks/MulticallMock.sol",
+      "contract": "MulticallMock"
+    },
+    {
+      "name": "ORACLE_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"ORACLE_ROLE\")",
+      "declaration": "bytes32 public constant ORACLE_ROLE = keccak256(\"ORACLE_ROLE\")",
+      "file": "contracts/Oracles.sol",
+      "contract": "Oracles"
+    },
+    {
+      "name": "merkleDistributor",
+      "type": "IMerkleDistributor private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IMerkleDistributor private merkleDistributor",
+      "file": "contracts/Oracles.sol",
+      "contract": "Oracles"
+    },
+    {
+      "name": "pool",
+      "type": "IPool private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IPool private pool",
+      "file": "contracts/Oracles.sol",
+      "contract": "Oracles"
+    },
+    {
+      "name": "poolValidators",
+      "type": "IPoolValidators private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IPoolValidators private poolValidators",
+      "file": "contracts/Oracles.sol",
+      "contract": "Oracles"
+    },
+    {
+      "name": "rewardEthToken",
+      "type": "IRewardEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IRewardEthToken private rewardEthToken",
+      "file": "contracts/Oracles.sol",
+      "contract": "Oracles"
+    },
+    {
+      "name": "rewardsNonce",
+      "type": "CountersUpgradeable.Counter private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "CountersUpgradeable.Counter private rewardsNonce",
+      "file": "contracts/Oracles.sol",
+      "contract": "Oracles"
+    },
+    {
+      "name": "validatorsNonce",
+      "type": "CountersUpgradeable.Counter private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "CountersUpgradeable.Counter private validatorsNonce",
+      "file": "contracts/Oracles.sol",
+      "contract": "Oracles"
+    },
+    {
+      "name": "PAUSER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"PAUSER_ROLE\")",
+      "declaration": "bytes32 public constant PAUSER_ROLE = keccak256(\"PAUSER_ROLE\")",
+      "file": "contracts/presets/OwnablePausable.sol",
+      "contract": "OwnablePausable"
+    },
+    {
+      "name": "PAUSER_ROLE",
+      "type": "bytes32 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "keccak256(\"PAUSER_ROLE\")",
+      "declaration": "bytes32 public constant PAUSER_ROLE = keccak256(\"PAUSER_ROLE\")",
+      "file": "contracts/presets/OwnablePausableUpgradeable.sol",
+      "contract": "OwnablePausableUpgradeable"
+    },
+    {
+      "name": "activatedValidators",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private activatedValidators",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "activations",
+      "type": "mapping(address => mapping(uint256 => uint256)) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => mapping(uint256 => uint256)) private activations",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "minActivatingDeposit",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private minActivatingDeposit",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "oracles",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private oracles",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "pendingValidators",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private pendingValidators",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "pendingValidatorsLimit",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private pendingValidatorsLimit",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "poolEscrow",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override poolEscrow",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "stakedEthToken",
+      "type": "IStakedEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IStakedEthToken private stakedEthToken",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "validatorRegistration",
+      "type": "IDepositContract private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IDepositContract private validatorRegistration",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "validators",
+      "type": "IPoolValidators private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IPoolValidators private validators",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "withdrawalCredentials",
+      "type": "bytes32 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "bytes32 private withdrawalCredentials",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "futureOwner",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override futureOwner",
+      "file": "contracts/pool/PoolEscrow.sol",
+      "contract": "PoolEscrow"
+    },
+    {
+      "name": "owner",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override owner",
+      "file": "contracts/pool/PoolEscrow.sol",
+      "contract": "PoolEscrow"
+    },
+    {
+      "name": "checkpoints",
+      "type": "mapping(address => Checkpoint) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(address => Checkpoint) public override checkpoints",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "feesEscrow",
+      "type": "IFeesEscrow private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IFeesEscrow private feesEscrow",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "lastUpdateBlockNumber",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override lastUpdateBlockNumber",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "merkleDistributor",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override merkleDistributor",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "oracles",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private oracles",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "pool",
+      "type": "IPool private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IPool private immutable pool",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "protocolFee",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override protocolFee",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "protocolFeeRecipient",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override protocolFeeRecipient",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "rewardPerToken",
+      "type": "uint128 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint128 public override rewardPerToken",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "rewardsDisabled",
+      "type": "mapping(address => bool) public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "mapping(address => bool) public override rewardsDisabled",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "stakedEthToken",
+      "type": "IStakedEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IStakedEthToken private stakedEthToken",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "totalPenalty",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override totalPenalty",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "totalRewards",
+      "type": "uint128 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint128 public override totalRewards",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "vault",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override vault",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "MAX_PERCENT",
+      "type": "uint256 public constant",
+      "visibility": "public",
+      "flags": [
+        "constant"
+      ],
+      "initializer": "1e4",
+      "declaration": "uint256 public constant MAX_PERCENT = 1e4",
+      "file": "contracts/Roles.sol",
+      "contract": "Roles"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping (address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => uint256) private _balances",
+      "file": "contracts/tokens/StakeWiseToken.sol",
+      "contract": "StakeWiseToken"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/tokens/StakeWiseToken.sol",
+      "contract": "StakeWiseToken"
+    },
+    {
+      "name": "deposits",
+      "type": "mapping(address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => uint256) private deposits",
+      "file": "contracts/tokens/StakedEthToken.sol",
+      "contract": "StakedEthToken"
+    },
+    {
+      "name": "distributorPrincipal",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override distributorPrincipal",
+      "file": "contracts/tokens/StakedEthToken.sol",
+      "contract": "StakedEthToken"
+    },
+    {
+      "name": "pool",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private pool",
+      "file": "contracts/tokens/StakedEthToken.sol",
+      "contract": "StakedEthToken"
+    },
+    {
+      "name": "rewardEthToken",
+      "type": "IRewardEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IRewardEthToken private rewardEthToken",
+      "file": "contracts/tokens/StakedEthToken.sol",
+      "contract": "StakedEthToken"
+    },
+    {
+      "name": "totalDeposits",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override totalDeposits",
+      "file": "contracts/tokens/StakedEthToken.sol",
+      "contract": "StakedEthToken"
+    },
+    {
+      "name": "migratedAssets",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public migratedAssets",
+      "file": "contracts/mocks/VaultMock.sol",
+      "contract": "VaultMock"
+    },
+    {
+      "name": "rewardEthToken",
+      "type": "IRewardEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IRewardEthToken private rewardEthToken",
+      "file": "contracts/mocks/VaultMock.sol",
+      "contract": "VaultMock"
+    },
+    {
+      "name": "beneficiary",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override beneficiary",
+      "file": "contracts/vestings/VestingEscrow.sol",
+      "contract": "VestingEscrow"
+    },
+    {
+      "name": "claimedAmount",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override claimedAmount",
+      "file": "contracts/vestings/VestingEscrow.sol",
+      "contract": "VestingEscrow"
+    },
+    {
+      "name": "cliffLength",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override cliffLength",
+      "file": "contracts/vestings/VestingEscrow.sol",
+      "contract": "VestingEscrow"
+    },
+    {
+      "name": "endTime",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override endTime",
+      "file": "contracts/vestings/VestingEscrow.sol",
+      "contract": "VestingEscrow"
+    },
+    {
+      "name": "recipient",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override recipient",
+      "file": "contracts/vestings/VestingEscrow.sol",
+      "contract": "VestingEscrow"
+    },
+    {
+      "name": "startTime",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override startTime",
+      "file": "contracts/vestings/VestingEscrow.sol",
+      "contract": "VestingEscrow"
+    },
+    {
+      "name": "token",
+      "type": "IERC20 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public override token",
+      "file": "contracts/vestings/VestingEscrow.sol",
+      "contract": "VestingEscrow"
+    },
+    {
+      "name": "totalAmount",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override totalAmount",
+      "file": "contracts/vestings/VestingEscrow.sol",
+      "contract": "VestingEscrow"
+    },
+    {
+      "name": "escrowImplementation",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override escrowImplementation",
+      "file": "contracts/vestings/VestingEscrowFactory.sol",
+      "contract": "VestingEscrowFactory"
+    },
+    {
+      "name": "escrows",
+      "type": "mapping(address => address[]) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping(address => address[]) private escrows",
+      "file": "contracts/vestings/VestingEscrowFactory.sol",
+      "contract": "VestingEscrowFactory"
+    }
+  ],
+  "total_balance_variables": [
+    {
+      "name": "_balances",
+      "type": "mapping (address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => uint256) private _balances",
+      "file": "contracts/mocks/ERC20Mock.sol",
+      "contract": "ERC20Mock"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/mocks/ERC20Mock.sol",
+      "contract": "ERC20Mock"
+    },
+    {
+      "name": "pool",
+      "type": "IPool private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IPool private immutable pool",
+      "file": "contracts/pool/FeesEscrow.sol",
+      "contract": "FeesEscrow"
+    },
+    {
+      "name": "stakedEthToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private stakedEthToken",
+      "file": "contracts/mocks/MulticallMock.sol",
+      "contract": "MulticallMock"
+    },
+    {
+      "name": "pool",
+      "type": "IPool private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IPool private pool",
+      "file": "contracts/Oracles.sol",
+      "contract": "Oracles"
+    },
+    {
+      "name": "poolValidators",
+      "type": "IPoolValidators private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IPoolValidators private poolValidators",
+      "file": "contracts/Oracles.sol",
+      "contract": "Oracles"
+    },
+    {
+      "name": "poolEscrow",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override poolEscrow",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "stakedEthToken",
+      "type": "IStakedEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IStakedEthToken private stakedEthToken",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "pool",
+      "type": "IPool private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "IPool private immutable pool",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "stakedEthToken",
+      "type": "IStakedEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IStakedEthToken private stakedEthToken",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "totalPenalty",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override totalPenalty",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "totalRewards",
+      "type": "uint128 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint128 public override totalRewards",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "vault",
+      "type": "address public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public immutable override vault",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "_balances",
+      "type": "mapping (address => uint256) private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "mapping (address => uint256) private _balances",
+      "file": "contracts/tokens/StakeWiseToken.sol",
+      "contract": "StakeWiseToken"
+    },
+    {
+      "name": "_totalSupply",
+      "type": "uint256 private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 private _totalSupply",
+      "file": "contracts/tokens/StakeWiseToken.sol",
+      "contract": "StakeWiseToken"
+    },
+    {
+      "name": "pool",
+      "type": "address private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "address private pool",
+      "file": "contracts/tokens/StakedEthToken.sol",
+      "contract": "StakedEthToken"
+    },
+    {
+      "name": "totalDeposits",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override totalDeposits",
+      "file": "contracts/tokens/StakedEthToken.sol",
+      "contract": "StakedEthToken"
+    },
+    {
+      "name": "migratedAssets",
+      "type": "uint256 public",
+      "visibility": "public",
+      "flags": [],
+      "initializer": null,
+      "declaration": "uint256 public migratedAssets",
+      "file": "contracts/mocks/VaultMock.sol",
+      "contract": "VaultMock"
+    },
+    {
+      "name": "totalAmount",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override totalAmount",
+      "file": "contracts/vestings/VestingEscrow.sol",
+      "contract": "VestingEscrow"
+    }
+  ],
+  "token_variables": [
+    {
+      "name": "rewardEthToken",
+      "type": "address private immutable",
+      "visibility": "private",
+      "flags": [
+        "immutable"
+      ],
+      "initializer": null,
+      "declaration": "address private immutable rewardEthToken",
+      "file": "contracts/pool/FeesEscrow.sol",
+      "contract": "FeesEscrow"
+    },
+    {
+      "name": "rewardEthToken",
+      "type": "address public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "address public override rewardEthToken",
+      "file": "contracts/merkles/MerkleDistributor.sol",
+      "contract": "MerkleDistributor"
+    },
+    {
+      "name": "token",
+      "type": "IERC20 public immutable override",
+      "visibility": "public",
+      "flags": [
+        "immutable",
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public immutable override token",
+      "file": "contracts/merkles/MerkleDrop.sol",
+      "contract": "MerkleDrop"
+    },
+    {
+      "name": "rewardEthToken",
+      "type": "IRewardEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IRewardEthToken private rewardEthToken",
+      "file": "contracts/mocks/MulticallMock.sol",
+      "contract": "MulticallMock"
+    },
+    {
+      "name": "stakedEthToken",
+      "type": "IERC20Upgradeable private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IERC20Upgradeable private stakedEthToken",
+      "file": "contracts/mocks/MulticallMock.sol",
+      "contract": "MulticallMock"
+    },
+    {
+      "name": "rewardEthToken",
+      "type": "IRewardEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IRewardEthToken private rewardEthToken",
+      "file": "contracts/Oracles.sol",
+      "contract": "Oracles"
+    },
+    {
+      "name": "stakedEthToken",
+      "type": "IStakedEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IStakedEthToken private stakedEthToken",
+      "file": "contracts/pool/Pool.sol",
+      "contract": "Pool"
+    },
+    {
+      "name": "rewardPerToken",
+      "type": "uint128 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint128 public override rewardPerToken",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "stakedEthToken",
+      "type": "IStakedEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IStakedEthToken private stakedEthToken",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "totalPenalty",
+      "type": "uint256 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "uint256 public override totalPenalty",
+      "file": "contracts/tokens/RewardEthToken.sol",
+      "contract": "RewardEthToken"
+    },
+    {
+      "name": "rewardEthToken",
+      "type": "IRewardEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IRewardEthToken private rewardEthToken",
+      "file": "contracts/tokens/StakedEthToken.sol",
+      "contract": "StakedEthToken"
+    },
+    {
+      "name": "rewardEthToken",
+      "type": "IRewardEthToken private",
+      "visibility": "private",
+      "flags": [],
+      "initializer": null,
+      "declaration": "IRewardEthToken private rewardEthToken",
+      "file": "contracts/mocks/VaultMock.sol",
+      "contract": "VaultMock"
+    },
+    {
+      "name": "token",
+      "type": "IERC20 public override",
+      "visibility": "public",
+      "flags": [
+        "override"
+      ],
+      "initializer": null,
+      "declaration": "IERC20 public override token",
+      "file": "contracts/vestings/VestingEscrow.sol",
+      "contract": "VestingEscrow"
+    }
+  ],
+  "token_addresses_hardcoded": [],
+  "invariant_values": [
+    "Key accounting vars (`pool`, `poolValidators`, `_totalSupply`, `_balances`, `stakedEthToken`, `migratedAssets`, `pool`, `poolEscrow`) must only change through authorized accounting paths",
+    "Every token address/handle variable must be non-zero and immutable or governance-gated",
+    "Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition"
+  ]
+}

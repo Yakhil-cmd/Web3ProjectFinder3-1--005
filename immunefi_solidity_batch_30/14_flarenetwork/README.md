@@ -1,0 +1,1556 @@
+<p align="left">
+  <a href="https://flare.network/" target="blank"><img src="https://content.flare.network/Flare-2.svg" width="410" height="106" alt="Flare Logo" /></a>
+</p>
+
+# Flare Systems Protocol - Smart Contracts
+
+The Flare Systems Protocol (FSP) is a foundational infrastructure designed to support Flare's enshrined protocols (sub-protocols).
+
+This repository implements solidity contracts for Flare Systems Protocol (FSP) and its sub-protocols, including Flare Time Series Oracle (FTSO) and Flare Data Connector (FDC).
+
+## Overview
+
+A comprehensive diagram of all V1 and V2 smart contracts is available [here](https://content.flare.network/flare-smart-contracts-v1-v2-all_with_background.svg).
+
+## Development and contribution
+
+If you want to use FTSO or FDC in your project, start on [developer hub - FTSO](https://dev.flare.network/ftso/overview) or [developer hub - FDC](https://dev.flare.network/fdc/overview).
+
+You can also reach out to us on [discord](https://discord.com/invite/flarenetwork).
+
+If you're interested in contributing, please see [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+## Security
+
+If you have found a possible vulnerability please see [SECURITY.md](./SECURITY.md)
+
+<!-- AUDIT_DOSSIER_START -->
+## Protocol State/Value Dossier (Auto-Generated)
+
+Generated (UTC): `2026-05-26T16:59:54Z`  
+Project: `14_flarenetwork`  
+Solidity files: `223`
+
+### Structure
+Top Solidity directories:
+- `contracts`: 170 `.sol` files
+- `test-forge`: 52 `.sol` files
+- `flattened`: 1 `.sol` files
+
+Pragmas:
+- `0.7.6`
+- `>=0.5.0`
+- `>=0.7.6 <0.9`
+- `^0.6.0`
+- `^0.8.20`
+- `^0.8.22`
+- `^0.8.24`
+- `^0.8.27`
+
+Contracts/Libraries/Interfaces detected: `289`
+
+### Life Total / Balance Values
+Detected accounting/state total variables:
+- `endTimeToStakingDataList` | type: `mapping(uint256 => CChainStakingData[]) public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `maxStakeDurationSeconds` | type: `uint256 public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `minStakeAmountWei` | type: `uint256 public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `minStakeDurationSeconds` | type: `uint256 public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `totalExpiredStakeWei` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `stakes` | type: `mapping(address => CChainStakeHistory.CheckPointHistoryState) private` | vis: `private` | flags: `-` | `CChainStakeBase` @ `contracts/mock/CChainStakeBase.sol`
+- `balanceHistory` | type: `CheckPointsByAddress.CheckPointsByAddressState private` | vis: `private` | flags: `-` | `CheckPointable` @ `flattened/FlareSmartContracts.sol`
+- `totalSupply` | type: `CheckPointHistory.CheckPointHistoryState private` | vis: `private` | flags: `-` | `CheckPointable` @ `flattened/FlareSmartContracts.sol`
+- `totalSupplyCache` | type: `CheckPointHistoryCache.CacheState private` | vis: `private` | flags: `-` | `CheckPointable` @ `flattened/FlareSmartContracts.sol`
+- `_balances` | type: `mapping (address => uint256) private` | vis: `private` | flags: `-` | `ERC20` @ `flattened/FlareSmartContracts.sol`
+- `_totalSupply` | type: `uint256 private` | vis: `private` | flags: `-` | `ERC20` @ `flattened/FlareSmartContracts.sol`
+- `totalInflationRewardsOfferedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FastUpdateIncentiveManager` @ `contracts/fastUpdates/implementation/FastUpdateIncentiveManager.sol`
+- `feedIdToIndex` | type: `mapping(bytes21 => uint256) internal` | vis: `internal` | flags: `-` | `FastUpdatesConfiguration` @ `contracts/fastUpdates/implementation/FastUpdatesConfiguration.sol`
+- `totalInflationRewardsOfferedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FdcHub` @ `contracts/fdc/implementation/FdcHub.sol`
+- `ERR_OUT_OF_BALANCE` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"out of balance"`
+- `INDEX_TOO_HIGH` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"start index high"`
+- `lastBalance` | type: `uint256 private` | vis: `private` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `totalMintingReceivedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `totalMintingRequestedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `totalMintingWithdrawnWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `totalSelfDestructReceivedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `totalWeights` | type: `mapping(uint256 => uint16) public` | vis: `public` | flags: `-` | `FlareSystemMock` @ `contracts/fastUpdates/mock/FlareSystemMock.sol`
+- `pChainStakeMirror` | type: `IPChainStakeMirror public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `pChainStakeMirrorEnabled` | type: `bool public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `TOTAL_WNAT_VOTE_POWER` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareSystemsCalculatorTest` @ `test-forge/unit/protocol/implementation/FlareSystemsCalculator.t.sol` = `1e7`
+- `ASSET_PRICE_USD_DECIMALS` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `FtsoProxy` @ `contracts/fscV1/implementation/FtsoProxy.sol` = `5`
+- `ftsoIndex` | type: `mapping(string => uint256) internal` | vis: `internal` | flags: `-` | `FtsoRegistry` @ `flattened/FlareSmartContracts.sol`
+- `mockCChainStake` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `mockPChainStakeMirror` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `totalInflationRewardsOfferedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FtsoRewardOffersManager` @ `contracts/ftso/implementation/FtsoRewardOffersManager.sol`
+- `cChainStake` | type: `ICChainStake public immutable` | vis: `public` | flags: `immutable` | `GovernanceVotePower` @ `contracts/mock/GovernanceVotePower.sol`
+- `pChainStakeMirror` | type: `IPChainStakeMirror public immutable override` | vis: `public` | flags: `immutable,override` | `GovernanceVotePower` @ `contracts/mock/GovernanceVotePower.sol`
+- `supply` | type: `IISupply public` | vis: `public` | flags: `-` | `Governor` @ `contracts/governance/implementation/Governor.sol`
+- `incentivePool` | type: `address internal` | vis: `internal` | flags: `-` | `IncentivePoolReceiver` @ `contracts/incentivePool/implementation/IncentivePoolReceiver.sol`
+- `totalIncentiveAuthorizedWei` | type: `uint256 internal` | vis: `internal` | flags: `-` | `IncentivePoolReceiver` @ `contracts/incentivePool/implementation/IncentivePoolReceiver.sol`
+- `totalIncentiveReceivedWei` | type: `uint256 internal` | vis: `internal` | flags: `-` | `IncentivePoolReceiver` @ `contracts/incentivePool/implementation/IncentivePoolReceiver.sol`
+- `totalInflationAuthorizedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `InflationReceiver` @ `contracts/inflation/implementation/InflationReceiver.sol`
+- `totalInflationReceivedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `InflationReceiver` @ `contracts/inflation/implementation/InflationReceiver.sol`
+- `stakes` | type: `mapping(address => PChainStakeHistory.CheckPointHistoryState) private` | vis: `private` | flags: `-` | `PChainStake` @ `flattened/FlareSmartContracts.sol`
+- `transactionHashToPChainStakingData` | type: `mapping(bytes32 => PChainStakingData) public` | vis: `public` | flags: `-` | `PChainStakeMirror` @ `flattened/FlareSmartContracts.sol`
+- `P_CHAIN_STAKE_MIRROR_PROTOCOL_ID` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol` = `2`
+- `maxStakeAmountGwei` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol`
+- `maxStakeDurationSeconds` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol`
+- `minStakeAmountGwei` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol`
+- `minStakeDurationSeconds` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol`
+- `pChainStakeMirrorVoting` | type: `IPChainStakeMirrorMultiSigVoting public immutable` | vis: `public` | flags: `immutable` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol`
+- `mockSupply` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `mockSupply` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `incentivePoolEnabled` | type: `bool public` | vis: `public` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `totalAssignableRewards` | type: `uint128 internal` | vis: `internal` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `totalAssignedRewards` | type: `uint128 internal` | vis: `internal` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `totalClaimedRewards` | type: `uint128 internal` | vis: `internal` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `totalWithdrawnAssignableRewards` | type: `uint128 internal` | vis: `internal` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `totalWithdrawnRewards` | type: `uint128 internal` | vis: `internal` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `incentivePool` | type: `address private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `SIGNATURE_INDEX_RIGHT_SHIFT_BITS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `240`
+- `SIGNATURE_WITH_INDEX_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `67`
+- `cChainStake` | type: `ICChainStake public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `cChainStakeEnabled` | type: `bool public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `epochTotalInflationRewards` | type: `mapping(uint256 rewardEpochId => uint120) private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `epochTotalRewards` | type: `mapping(uint256 rewardEpochId => uint120) private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `pChainStakeMirror` | type: `IPChainStakeMirror public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `pChainStakeMirrorEnabled` | type: `bool public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `totalBurnedWei` | type: `uint256 private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `totalClaimedWei` | type: `uint256 private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `totalInflationRewardsWei` | type: `uint256 private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `totalRewardsWei` | type: `uint256 private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `mockCChainStake` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `mockPChainStakeMirror` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `totalInflationRewardsOfferedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `ValidatorRewardOffersManager` @ `contracts/staking/implementation/ValidatorRewardOffersManager.sol`
+- `cChainTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `mockPChainStakeMirror` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `pChainTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `wNatTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `cChainTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `pChainTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `wNatTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+
+All detected state variables (full list):
+- `P` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `AddressBinder` @ `flattened/FlareSmartContracts.sol` = `0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F`
+- `cAddressToPAddress` | type: `mapping(address => bytes20) public override` | vis: `public` | flags: `override` | `AddressBinder` @ `flattened/FlareSmartContracts.sol`
+- `pAddressToCAddress` | type: `mapping(bytes20 => address) public override` | vis: `public` | flags: `override` | `AddressBinder` @ `flattened/FlareSmartContracts.sol`
+- `checkPointHistoryState` | type: `AddressHistory.CheckPointHistoryState private` | vis: `private` | flags: `-` | `AddressHistoryTest` @ `test-forge/unit/protocol/lib/AddressHistory.t.sol`
+- `emptyState` | type: `AddressHistory.CheckPointHistoryState private` | vis: `private` | flags: `-` | `AddressHistoryTest` @ `test-forge/unit/protocol/lib/AddressHistory.t.sol`
+- `emptyState2` | type: `AddressHistory.CheckPointHistoryState private` | vis: `private` | flags: `-` | `AddressHistoryTest` @ `test-forge/unit/protocol/lib/AddressHistory.t.sol`
+- `ADDRESS_STORAGE_POSITION` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `AddressUpdatable` @ `contracts/utils/implementation/AddressUpdatable.sol` = `keccak256("flare.diamond.AddressUpdatable.ADDRESS_STORAGE_POSITION")`
+- `ADDRESS_STORAGE_POSITION` | type: `bytes32 internal constant` | vis: `internal` | flags: `constant` | `AddressUpdatable` @ `flattened/FlareSmartContracts.sol` = `keccak256("flare.diamond.AddressUpdatable.ADDRESS_STORAGE_POSITION")`
+- `g1x` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Bn256` @ `contracts/fastUpdates/lib/Bn256.sol` = `1`
+- `g1y` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Bn256` @ `contracts/fastUpdates/lib/Bn256.sol` = `2`
+- `p` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Bn256` @ `contracts/fastUpdates/lib/Bn256.sol` = `21888242871839275222246405745257275088696311157297823662689037894645226208583`
+- `q` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Bn256` @ `contracts/fastUpdates/lib/Bn256.sol` = `21888242871839275222246405745257275088548364400416034343698204186575808495617`
+- `g1` | type: `G1Point public` | vis: `public` | flags: `-` | `Bn256Mock` @ `contracts/fastUpdates/mock/Bn256Mock.sol` = `Bn256.g1()`
+- `cleanupBlockNumberManager` | type: `address public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `endTimeToStakingDataList` | type: `mapping(uint256 => CChainStakingData[]) public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `governanceVotePower` | type: `IIGovernanceVotePower public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `maxStakeDurationSeconds` | type: `uint256 public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `maxUpdatesPerBlock` | type: `uint256 public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `minStakeAmountWei` | type: `uint256 public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `minStakeDurationSeconds` | type: `uint256 public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `nextTimestampToTrigger` | type: `uint256 public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `totalExpiredStakeWei` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `CChainStake` @ `contracts/mock/CChainStake.sol`
+- `CHECKPOINTS_CLEANUP_COUNT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `CChainStakeBase` @ `contracts/mock/CChainStakeBase.sol` = `2`
+- `stakes` | type: `mapping(address => CChainStakeHistory.CheckPointHistoryState) private` | vis: `private` | flags: `-` | `CChainStakeBase` @ `contracts/mock/CChainStakeBase.sol`
+- `votePower` | type: `VotePower.VotePowerState private` | vis: `private` | flags: `-` | `CChainStakeBase` @ `contracts/mock/CChainStakeBase.sol`
+- `votePowerCache` | type: `VotePowerCache.CacheState private` | vis: `private` | flags: `-` | `CChainStakeBase` @ `contracts/mock/CChainStakeBase.sol`
+- `MAX_ACCOUNTS_MSG` | type: `string private constant` | vis: `private` | flags: `constant` | `CChainStakeHistory` @ `contracts/mock/CChainStakeHistory.sol` = `"Max accounts exceeded"`
+- `decimals` | type: `uint8 constant public` | vis: `public` | flags: `constant` | `ChainlinkAdapter` @ `contracts/adapters/implementation/ChainlinkAdapter.sol` = `18`
+- `description` | type: `string public` | vis: `public` | flags: `-` | `ChainlinkAdapter` @ `contracts/adapters/implementation/ChainlinkAdapter.sol`
+- `flareContractRegistry` | type: `IFlareContractRegistry internal constant` | vis: `internal` | flags: `constant` | `ChainlinkAdapter` @ `contracts/adapters/implementation/ChainlinkAdapter.sol` = `IFlareContractRegistry(0xaD67FE66660Fb8dFE9d6b1b4240d8650e30F6019)`
+- `ftsoFeedId` | type: `bytes21 public` | vis: `public` | flags: `-` | `ChainlinkAdapter` @ `contracts/adapters/implementation/ChainlinkAdapter.sol`
+- `staleTimeSeconds` | type: `uint64 public` | vis: `public` | flags: `-` | `ChainlinkAdapter` @ `contracts/adapters/implementation/ChainlinkAdapter.sol`
+- `version` | type: `uint256 public` | vis: `public` | flags: `-` | `ChainlinkAdapter` @ `contracts/adapters/implementation/ChainlinkAdapter.sol`
+- `chainlinkAdapter` | type: `ChainlinkAdapter internal` | vis: `internal` | flags: `-` | `ChainlinkAdapterTest` @ `test-forge/unit/adapters/implementation/ChainlinkAdapter.t.sol`
+- `chainlinkAdapterImpl` | type: `ChainlinkAdapter internal` | vis: `internal` | flags: `-` | `ChainlinkAdapterTest` @ `test-forge/unit/adapters/implementation/ChainlinkAdapter.t.sol`
+- `chainlinkAdapterProxy` | type: `ChainlinkAdapterProxy internal` | vis: `internal` | flags: `-` | `ChainlinkAdapterTest` @ `test-forge/unit/adapters/implementation/ChainlinkAdapter.t.sol`
+- `description` | type: `string internal` | vis: `internal` | flags: `-` | `ChainlinkAdapterTest` @ `test-forge/unit/adapters/implementation/ChainlinkAdapter.t.sol`
+- `flareContractRegistryMock` | type: `address internal constant` | vis: `internal` | flags: `constant` | `ChainlinkAdapterTest` @ `test-forge/unit/adapters/implementation/ChainlinkAdapter.t.sol` = `0xaD67FE66660Fb8dFE9d6b1b4240d8650e30F6019`
+- `ftsoFeedId` | type: `bytes21 internal` | vis: `internal` | flags: `-` | `ChainlinkAdapterTest` @ `test-forge/unit/adapters/implementation/ChainlinkAdapter.t.sol`
+- `ftsoV2Mock` | type: `address internal` | vis: `internal` | flags: `-` | `ChainlinkAdapterTest` @ `test-forge/unit/adapters/implementation/ChainlinkAdapter.t.sol`
+- `governance` | type: `address internal` | vis: `internal` | flags: `-` | `ChainlinkAdapterTest` @ `test-forge/unit/adapters/implementation/ChainlinkAdapter.t.sol`
+- `governanceSettings` | type: `address internal` | vis: `internal` | flags: `-` | `ChainlinkAdapterTest` @ `test-forge/unit/adapters/implementation/ChainlinkAdapter.t.sol`
+- `staleTimeSeconds` | type: `uint64 internal` | vis: `internal` | flags: `-` | `ChainlinkAdapterTest` @ `test-forge/unit/adapters/implementation/ChainlinkAdapter.t.sol`
+- `CLEANUP_COUNT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `CheckPointable` @ `flattened/FlareSmartContracts.sol` = `2`
+- `balanceHistory` | type: `CheckPointsByAddress.CheckPointsByAddressState private` | vis: `private` | flags: `-` | `CheckPointable` @ `flattened/FlareSmartContracts.sol`
+- `cleanerContract` | type: `address public` | vis: `public` | flags: `-` | `CheckPointable` @ `flattened/FlareSmartContracts.sol`
+- `cleanupBlockNumber` | type: `uint256 private` | vis: `private` | flags: `-` | `CheckPointable` @ `flattened/FlareSmartContracts.sol`
+- `totalSupply` | type: `CheckPointHistory.CheckPointHistoryState private` | vis: `private` | flags: `-` | `CheckPointable` @ `flattened/FlareSmartContracts.sol`
+- `totalSupplyCache` | type: `CheckPointHistoryCache.CacheState private` | vis: `private` | flags: `-` | `CheckPointable` @ `flattened/FlareSmartContracts.sol`
+- `circularLength` | type: `uint256 internal` | vis: `internal` | flags: `-` | `CircularListManager` @ `contracts/fastUpdates/implementation/CircularListManager.sol`
+- `ERR_CONTRACT_NOT_FOUND` | type: `string internal constant` | vis: `internal` | flags: `constant` | `CleanupBlockNumberManager` @ `flattened/FlareSmartContracts.sol` = `"contract not found"`
+- `ERR_TRIGGER_CONTRACT_ONLY` | type: `string internal constant` | vis: `internal` | flags: `constant` | `CleanupBlockNumberManager` @ `flattened/FlareSmartContracts.sol` = `"trigger contract only"`
+- `registeredTokens` | type: `IICleanable[] public` | vis: `public` | flags: `-` | `CleanupBlockNumberManager` @ `flattened/FlareSmartContracts.sol`
+- `triggerContract` | type: `address public` | vis: `public` | flags: `-` | `CleanupBlockNumberManager` @ `flattened/FlareSmartContracts.sol`
+- `triggerContractName` | type: `string public` | vis: `public` | flags: `-` | `CleanupBlockNumberManager` @ `flattened/FlareSmartContracts.sol`
+- `UNDELEGATED_VP_TOO_SMALL_MSG` | type: `string constant private` | vis: `private` | flags: `constant` | `Delegatable` @ `flattened/FlareSmartContracts.sol` = `"Undelegated vote power too small"`
+- `cleanerContract` | type: `address public` | vis: `public` | flags: `-` | `Delegatable` @ `flattened/FlareSmartContracts.sol`
+- `cleanupBlockNumber` | type: `uint256 private` | vis: `private` | flags: `-` | `Delegatable` @ `flattened/FlareSmartContracts.sol`
+- `delegationModes` | type: `mapping(address => DelegationMode) private` | vis: `private` | flags: `-` | `Delegatable` @ `flattened/FlareSmartContracts.sol`
+- `explicitDelegations` | type: `mapping(address => ExplicitDelegation.DelegationState) private` | vis: `private` | flags: `-` | `Delegatable` @ `flattened/FlareSmartContracts.sol`
+- `percentageDelegations` | type: `mapping(address => PercentageDelegation.DelegationState) private` | vis: `private` | flags: `-` | `Delegatable` @ `flattened/FlareSmartContracts.sol`
+- `votePower` | type: `VotePower.VotePowerState private` | vis: `private` | flags: `-` | `Delegatable` @ `flattened/FlareSmartContracts.sol`
+- `votePowerCache` | type: `VotePowerCache.CacheState private` | vis: `private` | flags: `-` | `Delegatable` @ `flattened/FlareSmartContracts.sol`
+- `MAX_DELEGATES_BY_PERCENT` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `DelegationHistory` @ `flattened/FlareSmartContracts.sol` = `2`
+- `MAX_DELEGATES_MSG` | type: `string private constant` | vis: `private` | flags: `constant` | `DelegationHistory` @ `flattened/FlareSmartContracts.sol` = `"Max delegates exceeded"`
+- `_allowances` | type: `mapping (address => mapping (address => uint256)) private` | vis: `private` | flags: `-` | `ERC20` @ `flattened/FlareSmartContracts.sol`
+- `_balances` | type: `mapping (address => uint256) private` | vis: `private` | flags: `-` | `ERC20` @ `flattened/FlareSmartContracts.sol`
+- `_decimals` | type: `uint8 private` | vis: `private` | flags: `-` | `ERC20` @ `flattened/FlareSmartContracts.sol`
+- `_name` | type: `string private` | vis: `private` | flags: `-` | `ERC20` @ `flattened/FlareSmartContracts.sol`
+- `_symbol` | type: `string private` | vis: `private` | flags: `-` | `ERC20` @ `flattened/FlareSmartContracts.sol`
+- `_totalSupply` | type: `uint256 private` | vis: `private` | flags: `-` | `ERC20` @ `flattened/FlareSmartContracts.sol`
+- `__decimals` | type: `uint8 immutable internal` | vis: `internal` | flags: `immutable` | `ERC20Mock` @ `contracts/mock/ERC20Mock.sol`
+- `delegationAddressRegistered` | type: `mapping(address delegationAddress => AddressHistory.CheckPointHistoryState) internal` | vis: `internal` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `delegationAddressRegistrationQueue` | type: `mapping(address voter => address delegationAddress) internal` | vis: `internal` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `maxNodeIdsPerEntity` | type: `uint32 public` | vis: `public` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `nodeIdRegistered` | type: `mapping(bytes20 nodeId => AddressHistory.CheckPointHistoryState) internal` | vis: `internal` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `nodePossessionVerifier` | type: `IINodePossessionVerifier public` | vis: `public` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `publicKeyRegistered` | type: `mapping(bytes32 publicKey => AddressHistory.CheckPointHistoryState) internal` | vis: `internal` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `register` | type: `mapping(address voter => Entity) internal` | vis: `internal` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `signingPolicyAddressRegistered` | type: `mapping(address signingPolicyAddress => AddressHistory.CheckPointHistoryState) internal` | vis: `internal` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `signingPolicyAddressRegistrationQueue` | type: `mapping(address voter => address signingPolicyAddress) internal` | vis: `internal` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `submitAddressRegistered` | type: `mapping(address submitAddress => AddressHistory.CheckPointHistoryState) internal` | vis: `internal` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `submitAddressRegistrationQueue` | type: `mapping(address voter => address submitAddress) internal` | vis: `internal` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `submitSignaturesAddressRegistered` | type: `mapping(address submitSignaturesAddress => AddressHistory.CheckPointHistoryState) internal` | vis: `internal` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `submitSignaturesAddressRegistrationQueue` | type: `mapping(address voter => address submitSignaturesAddress) internal` | vis: `internal` | flags: `-` | `EntityManager` @ `contracts/protocol/implementation/EntityManager.sol`
+- `delegationAddr1` | type: `address private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol`
+- `delegationAddr2` | type: `address private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol`
+- `entityManager` | type: `EntityManager private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol`
+- `governanceSettings` | type: `address private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol`
+- `mockPublicKeyVerification` | type: `MockPublicKeyVerification private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol`
+- `nodeId1` | type: `bytes20 private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol`
+- `nodeId2` | type: `bytes20 private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol`
+- `nodeId3` | type: `bytes20 private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol`
+- `user1` | type: `address private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol`
+- `user2` | type: `address private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol`
+- `validPublicKeyData` | type: `bytes private` | vis: `private` | flags: `-` | `EntityManagerTest` @ `test-forge/unit/protocol/implementation/EntityManager.t.sol` = `abi.encode(1, 2, 3)`
+- `num` | type: `uint256 internal` | vis: `internal` | flags: `-` | `ExecuteMock` @ `test-forge/mock/ExecuteMock.sol`
+- `square` | type: `mapping(uint256 => uint256) internal` | vis: `internal` | flags: `-` | `ExecuteMockSquare` @ `test-forge/mock/ExecuteMockSquare.sol`
+- `baseScale` | type: `FPA.Scale internal` | vis: `internal` | flags: `-` | `FastUpdateIncentiveManager` @ `contracts/fastUpdates/implementation/FastUpdateIncentiveManager.sol`
+- `fastUpdater` | type: `address public` | vis: `public` | flags: `-` | `FastUpdateIncentiveManager` @ `contracts/fastUpdates/implementation/FastUpdateIncentiveManager.sol`
+- `fastUpdatesConfiguration` | type: `IFastUpdatesConfiguration public` | vis: `public` | flags: `-` | `FastUpdateIncentiveManager` @ `contracts/fastUpdates/implementation/FastUpdateIncentiveManager.sol`
+- `rangeIncreaseLimit` | type: `FPA.Range public` | vis: `public` | flags: `-` | `FastUpdateIncentiveManager` @ `contracts/fastUpdates/implementation/FastUpdateIncentiveManager.sol`
+- `rangeIncreasePrice` | type: `FPA.Fee public` | vis: `public` | flags: `-` | `FastUpdateIncentiveManager` @ `contracts/fastUpdates/implementation/FastUpdateIncentiveManager.sol`
+- `rewardManager` | type: `IIRewardManager public` | vis: `public` | flags: `-` | `FastUpdateIncentiveManager` @ `contracts/fastUpdates/implementation/FastUpdateIncentiveManager.sol`
+- `sampleIncreaseLimit` | type: `FPA.SampleSize public` | vis: `public` | flags: `-` | `FastUpdateIncentiveManager` @ `contracts/fastUpdates/implementation/FastUpdateIncentiveManager.sol`
+- `totalInflationRewardsOfferedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FastUpdateIncentiveManager` @ `contracts/fastUpdates/implementation/FastUpdateIncentiveManager.sol`
+- `MAX_BLOCKS_HISTORY` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol` = `100`
+- `MAX_FEED_AGE_IN_VOTING_EPOCHS` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol` = `20`
+- `MAX_SUBMITTED_DELTAS_BACKLOG` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol` = `500`
+- `backlogDelta` | type: `uint256 internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `currentDelta` | type: `uint256 internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `currentRewardEpochId` | type: `uint24 public` | vis: `public` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `currentScale` | type: `Scale internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol` = `oneS`
+- `currentVotingEpochId` | type: `uint32 internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `decimals` | type: `bytes internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `fastUpdateIncentiveManager` | type: `IIFastUpdateIncentiveManager public` | vis: `public` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `fastUpdatesConfiguration` | type: `IFastUpdatesConfiguration public` | vis: `public` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `feeCalculator` | type: `IIFeeCalculator public` | vis: `public` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `feeDestination` | type: `address public` | vis: `public` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `feeds` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `firstVotingRoundStartTs` | type: `uint64 public immutable` | vis: `public` | flags: `immutable` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `flareDaemon` | type: `address public immutable` | vis: `public` | flags: `immutable` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `flareSystemsManager` | type: `IFlareSystemsManager public` | vis: `public` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `freeFetchAddresses` | type: `AddressSet.State internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `ftsoFeedPublisher` | type: `IFtsoFeedPublisher public` | vis: `public` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `lastDaemonizeBlock` | type: `uint64 internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `lastDaemonizeTs` | type: `uint64 internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `lastSubmissionTs` | type: `uint64 internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `numOfUpdatesInBlock` | type: `mapping(uint256 blockIx => uint256) internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `submissionWindow` | type: `uint8 public` | vis: `public` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `submittedDeltas` | type: `bytes[] internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `submittedHashes` | type: `mapping(uint256 blockIx => bytes32[]) internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `thresholds` | type: `uint256[] internal` | vis: `internal` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `voterRegistry` | type: `IIVoterRegistry public` | vis: `public` | flags: `-` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `votingEpochDurationSeconds` | type: `uint64 public immutable` | vis: `public` | flags: `immutable` | `FastUpdater` @ `contracts/fastUpdates/implementation/FastUpdater.sol`
+- `fastUpdater` | type: `IIFastUpdater public` | vis: `public` | flags: `-` | `FastUpdatesConfiguration` @ `contracts/fastUpdates/implementation/FastUpdatesConfiguration.sol`
+- `feedConfigurations` | type: `FeedConfiguration[] internal` | vis: `internal` | flags: `-` | `FastUpdatesConfiguration` @ `contracts/fastUpdates/implementation/FastUpdatesConfiguration.sol`
+- `feedIdToIndex` | type: `mapping(bytes21 => uint256) internal` | vis: `internal` | flags: `-` | `FastUpdatesConfiguration` @ `contracts/fastUpdates/implementation/FastUpdatesConfiguration.sol`
+- `unusedIndices` | type: `uint256[] internal` | vis: `internal` | flags: `-` | `FastUpdatesConfiguration` @ `contracts/fastUpdates/implementation/FastUpdatesConfiguration.sol`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FastUpdatesConfigurationTest` @ `test-forge/unit/fastUpdates/implementation/FastUpdatesConfiguration.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FastUpdatesConfigurationTest` @ `test-forge/unit/fastUpdates/implementation/FastUpdatesConfiguration.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FastUpdatesConfigurationTest` @ `test-forge/unit/fastUpdates/implementation/FastUpdatesConfiguration.t.sol`
+- `fastUpdatesConfiguration` | type: `FastUpdatesConfiguration private` | vis: `private` | flags: `-` | `FastUpdatesConfigurationTest` @ `test-forge/unit/fastUpdates/implementation/FastUpdatesConfiguration.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FastUpdatesConfigurationTest` @ `test-forge/unit/fastUpdates/implementation/FastUpdatesConfiguration.t.sol`
+- `mockFastUpdater` | type: `address private` | vis: `private` | flags: `-` | `FastUpdatesConfigurationTest` @ `test-forge/unit/fastUpdates/implementation/FastUpdatesConfiguration.t.sol`
+- `fdcInflationConfigurations` | type: `IFdcInflationConfigurations public` | vis: `public` | flags: `-` | `FdcHub` @ `contracts/fdc/implementation/FdcHub.sol`
+- `fdcRequestFeeConfigurations` | type: `IFdcRequestFeeConfigurations public` | vis: `public` | flags: `-` | `FdcHub` @ `contracts/fdc/implementation/FdcHub.sol`
+- `requestsOffsetSeconds` | type: `uint8 public` | vis: `public` | flags: `-` | `FdcHub` @ `contracts/fdc/implementation/FdcHub.sol`
+- `rewardManager` | type: `IIRewardManager public` | vis: `public` | flags: `-` | `FdcHub` @ `contracts/fdc/implementation/FdcHub.sol`
+- `totalInflationRewardsOfferedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FdcHub` @ `contracts/fdc/implementation/FdcHub.sol`
+- `DAY` | type: `uint64 internal constant` | vis: `internal` | flags: `constant` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol` = `1 days`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `fdcConfigurations` | type: `IFdcInflationConfigurations.FdcConfiguration[] private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `fdcHub` | type: `FdcHub private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `fdcInflationConfigurations` | type: `FdcInflationConfigurations private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `fdcRequestFeeConfigurations` | type: `FdcRequestFeeConfigurations private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `fee1` | type: `uint256 private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `fee2` | type: `uint256 private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `mockInflation` | type: `address private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `mockRewardManager` | type: `address private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `rewardManager` | type: `RewardManager private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `source1` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `source2` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `type1` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `type2` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcHubTest` @ `test-forge/unit/fdc/implementation/FdcHub.t.sol`
+- `fdcConfigurations` | type: `FdcConfiguration[] internal` | vis: `internal` | flags: `-` | `FdcInflationConfigurations` @ `contracts/fdc/implementation/FdcInflationConfigurations.sol`
+- `fdcRequestFeeConfigurations` | type: `IFdcRequestFeeConfigurations public` | vis: `public` | flags: `-` | `FdcInflationConfigurations` @ `contracts/fdc/implementation/FdcInflationConfigurations.sol`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FdcInflationConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcInflationConfigurations.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FdcInflationConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcInflationConfigurations.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FdcInflationConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcInflationConfigurations.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FdcInflationConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcInflationConfigurations.t.sol`
+- `inflationConfigs` | type: `FdcInflationConfigurations private` | vis: `private` | flags: `-` | `FdcInflationConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcInflationConfigurations.t.sol`
+- `mockFdcRequestFeeConfigurations` | type: `address private` | vis: `private` | flags: `-` | `FdcInflationConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcInflationConfigurations.t.sol`
+- `source1` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcInflationConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcInflationConfigurations.t.sol`
+- `source2` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcInflationConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcInflationConfigurations.t.sol`
+- `type1` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcInflationConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcInflationConfigurations.t.sol`
+- `type2` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcInflationConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcInflationConfigurations.t.sol`
+- `typeAndSourceFees` | type: `mapping(bytes32 typeAndSource => uint256 fee) public` | vis: `public` | flags: `-` | `FdcRequestFeeConfigurations` @ `contracts/fdc/implementation/FdcRequestFeeConfigurations.sol`
+- `fdcRequestFeeConfigurations` | type: `FdcRequestFeeConfigurations private` | vis: `private` | flags: `-` | `FdcRequestFeeConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcRequestFeeConfigurations.t.sol`
+- `fee1` | type: `uint256 private` | vis: `private` | flags: `-` | `FdcRequestFeeConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcRequestFeeConfigurations.t.sol`
+- `fee2` | type: `uint256 private` | vis: `private` | flags: `-` | `FdcRequestFeeConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcRequestFeeConfigurations.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FdcRequestFeeConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcRequestFeeConfigurations.t.sol`
+- `source1` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcRequestFeeConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcRequestFeeConfigurations.t.sol`
+- `source2` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcRequestFeeConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcRequestFeeConfigurations.t.sol`
+- `type1` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcRequestFeeConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcRequestFeeConfigurations.t.sol`
+- `type2` | type: `bytes32 private` | vis: `private` | flags: `-` | `FdcRequestFeeConfigurationsTest` @ `test-forge/unit/fdc/implementation/FdcRequestFeeConfigurations.t.sol`
+- `fdcProtocolId` | type: `uint8 public` | vis: `public` | flags: `-` | `FdcVerification` @ `contracts/fdc/implementation/FdcVerification.sol`
+- `relay` | type: `IRelay public` | vis: `public` | flags: `-` | `FdcVerification` @ `contracts/fdc/implementation/FdcVerification.sol`
+- `FDC_PROTOCOL_ID` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `FdcVerificationTest` @ `test-forge/unit/fdc/implementation/FdcVerification.t.sol` = `200`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FdcVerificationTest` @ `test-forge/unit/fdc/implementation/FdcVerification.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FdcVerificationTest` @ `test-forge/unit/fdc/implementation/FdcVerification.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FdcVerificationTest` @ `test-forge/unit/fdc/implementation/FdcVerification.t.sol`
+- `fdcVerification` | type: `FdcVerification private` | vis: `private` | flags: `-` | `FdcVerificationTest` @ `test-forge/unit/fdc/implementation/FdcVerification.t.sol`
+- `fdcVerificationImplementation` | type: `FdcVerification private` | vis: `private` | flags: `-` | `FdcVerificationTest` @ `test-forge/unit/fdc/implementation/FdcVerification.t.sol`
+- `fdcVerificationProxy` | type: `FdcVerificationProxy private` | vis: `private` | flags: `-` | `FdcVerificationTest` @ `test-forge/unit/fdc/implementation/FdcVerification.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FdcVerificationTest` @ `test-forge/unit/fdc/implementation/FdcVerification.t.sol`
+- `mockFlareContractRegistry` | type: `address private` | vis: `private` | flags: `-` | `FdcVerificationTest` @ `test-forge/unit/fdc/implementation/FdcVerification.t.sol`
+- `mockRelay` | type: `address private` | vis: `private` | flags: `-` | `FdcVerificationTest` @ `test-forge/unit/fdc/implementation/FdcVerification.t.sol`
+- `categoryFee` | type: `mapping(uint8 category => uint256) internal` | vis: `internal` | flags: `-` | `FeeCalculator` @ `contracts/fastUpdates/implementation/FeeCalculator.sol`
+- `defaultFee` | type: `uint256 public` | vis: `public` | flags: `-` | `FeeCalculator` @ `contracts/fastUpdates/implementation/FeeCalculator.sol`
+- `fastUpdatesConfiguration` | type: `IFastUpdatesConfiguration public` | vis: `public` | flags: `-` | `FeeCalculator` @ `contracts/fastUpdates/implementation/FeeCalculator.sol`
+- `feedFee` | type: `mapping(bytes21 feedId => uint256) internal` | vis: `internal` | flags: `-` | `FeeCalculator` @ `contracts/fastUpdates/implementation/FeeCalculator.sol`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FeeCalculatorTest` @ `test-forge/unit/fastUpdates/implementation/FeeCalculator.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FeeCalculatorTest` @ `test-forge/unit/fastUpdates/implementation/FeeCalculator.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FeeCalculatorTest` @ `test-forge/unit/fastUpdates/implementation/FeeCalculator.t.sol`
+- `feeCalculator` | type: `FeeCalculator private` | vis: `private` | flags: `-` | `FeeCalculatorTest` @ `test-forge/unit/fastUpdates/implementation/FeeCalculator.t.sol`
+- `feedIds` | type: `bytes21[] private` | vis: `private` | flags: `-` | `FeeCalculatorTest` @ `test-forge/unit/fastUpdates/implementation/FeeCalculator.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FeeCalculatorTest` @ `test-forge/unit/fastUpdates/implementation/FeeCalculator.t.sol`
+- `indices8` | type: `uint256[] private` | vis: `private` | flags: `-` | `FeeCalculatorTest` @ `test-forge/unit/fastUpdates/implementation/FeeCalculator.t.sol` = `new uint256[](8)`
+- `mockFastUpdatesConfiguration` | type: `address private` | vis: `private` | flags: `-` | `FeeCalculatorTest` @ `test-forge/unit/fastUpdates/implementation/FeeCalculator.t.sol`
+- `ERR_ADDRESS_ZERO` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"address zero"`
+- `ERR_BLOCK_NUMBER_SMALL` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"block.number small"`
+- `ERR_DUPLICATE_ADDRESS` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"dup address"`
+- `ERR_INFLATION_MINT_RECEIVE_FAIL` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"unknown error. receiveMinting"`
+- `ERR_INFLATION_ZERO` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"inflation zero"`
+- `ERR_NOT_INFLATION` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"not inflation"`
+- `ERR_OUT_OF_BALANCE` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"out of balance"`
+- `ERR_OUT_OF_GAS` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"out of gas"`
+- `ERR_TOO_BIG` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"too big"`
+- `ERR_TOO_MANY` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"too many"`
+- `ERR_TOO_OFTEN` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"too often"`
+- `INDEX_TOO_HIGH` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"start index high"`
+- `MAX_DAEMONIZE_CONTRACTS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `10`
+- `MAX_MINTING_FREQUENCY_SEC` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `23 hours`
+- `MAX_MINTING_REQUEST_DEFAULT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `60000000 ether`
+- `MAX_MINTING_REQUEST_FREQUENCY_SEC` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `24 hours`
+- `MAX_MINTING_REQUEST_INCREASE_PERCENT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `110`
+- `MAX_MINT_IS_ZERO` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"max mint is zero"`
+- `MAX_MINT_TOO_HIGH` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"max mint too high"`
+- `MIN_GAS_FOR_DAEMONIZE_CALL` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `5000`
+- `MIN_GAS_LEFT_AFTER_DAEMONIZE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `300000`
+- `UPDATE_GAP_TOO_SHORT` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol` = `"time gap too short"`
+- `blockHoldoff` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `blockHoldoffsRemaining` | type: `mapping (IFlareDaemonize => uint256) internal` | vis: `internal` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `daemonizeContracts` | type: `IFlareDaemonize[] internal` | vis: `internal` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `daemonizeErrorHashes` | type: `bytes32 [] internal` | vis: `internal` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `daemonizedErrors` | type: `mapping(bytes32 => DaemonizedError) internal` | vis: `internal` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `errorData` | type: `LastErrorData public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `expectedMintRequest` | type: `uint256 private` | vis: `private` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `gasLimits` | type: `mapping (IFlareDaemonize => uint256) internal` | vis: `internal` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `inflation` | type: `IInflationGenesis public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `initialized` | type: `bool private` | vis: `private` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `lastBalance` | type: `uint256 private` | vis: `private` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `lastMintRequestTs` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `lastUpdateMaxMintRequestTs` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `maxMintingRequestWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `systemLastTriggeredAt` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `totalMintingReceivedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `totalMintingRequestedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `totalMintingWithdrawnWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `totalSelfDestructReceivedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareDaemon` @ `flattened/FlareSmartContracts.sol`
+- `epochLen` | type: `uint256 public` | vis: `public` | flags: `-` | `FlareSystemMock` @ `contracts/fastUpdates/mock/FlareSystemMock.sol`
+- `policies` | type: `mapping(uint256 => mapping(address => Policy)) public` | vis: `public` | flags: `-` | `FlareSystemMock` @ `contracts/fastUpdates/mock/FlareSystemMock.sol`
+- `totalWeights` | type: `mapping(uint256 => uint16) public` | vis: `public` | flags: `-` | `FlareSystemMock` @ `contracts/fastUpdates/mock/FlareSystemMock.sol`
+- `PPM_MAX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol` = `1e6`
+- `entityManager` | type: `IIEntityManager public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `flareSystemsManager` | type: `IIFlareSystemsManager public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `pChainStakeMirror` | type: `IPChainStakeMirror public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `pChainStakeMirrorEnabled` | type: `bool public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `signingPolicySignNoRewardsDurationBlocks` | type: `uint64 public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `signingPolicySignNonPunishableDurationBlocks` | type: `uint64 public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `signingPolicySignNonPunishableDurationSeconds` | type: `uint64 public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `voterRegistry` | type: `IVoterRegistry public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `wNat` | type: `IWNat public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `wNatCapPPM` | type: `uint24 public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `wNatDelegationFee` | type: `IWNatDelegationFee public` | vis: `public` | flags: `-` | `FlareSystemsCalculator` @ `contracts/protocol/implementation/FlareSystemsCalculator.sol`
+- `DELEGATION_FEE_BIPS` | type: `uint16 internal constant` | vis: `internal` | flags: `constant` | `FlareSystemsCalculatorTest` @ `test-forge/unit/protocol/implementation/FlareSystemsCalculator.t.sol` = `15`
+- `MAX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareSystemsCalculatorTest` @ `test-forge/unit/protocol/implementation/FlareSystemsCalculator.t.sol` = `2 ** 128`
+- `TOTAL_WNAT_VOTE_POWER` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareSystemsCalculatorTest` @ `test-forge/unit/protocol/implementation/FlareSystemsCalculator.t.sol` = `1e7`
+- `WNAT_CAP` | type: `uint24 internal constant` | vis: `internal` | flags: `constant` | `FlareSystemsCalculatorTest` @ `test-forge/unit/protocol/implementation/FlareSystemsCalculator.t.sol` = `10000`
+- `WNAT_WEIGHT` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareSystemsCalculatorTest` @ `test-forge/unit/protocol/implementation/FlareSystemsCalculator.t.sol` = `2e5`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FlareSystemsCalculatorTest` @ `test-forge/unit/protocol/implementation/FlareSystemsCalculator.t.sol`
+- `calculator` | type: `FlareSystemsCalculator private` | vis: `private` | flags: `-` | `FlareSystemsCalculatorTest` @ `test-forge/unit/protocol/implementation/FlareSystemsCalculator.t.sol`
+- `calculatorNoMirroring` | type: `FlareSystemsCalculator private` | vis: `private` | flags: `-` | `FlareSystemsCalculatorTest` @ `test-forge/unit/protocol/implementation/FlareSystemsCalculator.t.sol`
+- `govSetting` | type: `IGovernanceSettings private` | vis: `private` | flags: `-` | `FlareSystemsCalculatorTest` @ `test-forge/unit/protocol/implementation/FlareSystemsCalculator.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FlareSystemsCalculatorTest` @ `test-forge/unit/protocol/implementation/FlareSystemsCalculator.t.sol`
+- `PPM_MAX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol` = `1e6`
+- `UINT256_MAX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol` = `type(uint256).max`
+- `cleanupBlockNumberManager` | type: `IICleanupBlockNumberManager public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `currentRewardEpochExpectedEndTs` | type: `uint64 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `firstRewardEpochStartTs` | type: `uint64 public immutable` | vis: `public` | flags: `immutable` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `firstVotingRoundStartTs` | type: `uint64 public immutable` | vis: `public` | flags: `immutable` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `flareDaemon` | type: `address public immutable` | vis: `public` | flags: `immutable` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `initialRandomVotePowerBlockSelectionSize` | type: `uint64 public immutable` | vis: `public` | flags: `immutable` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `lastInitializedVotingRoundId` | type: `uint32 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `lastRewardEpochIdWithSignUptimeVoteEnabled` | type: `uint24 internal` | vis: `internal` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `newSigningPolicyInitializationStartSeconds` | type: `uint64 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `newSigningPolicyMinNumberOfVotingRoundsDelay` | type: `uint32 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `noOfWeightBasedClaims` | type: `mapping(uint256 rewardEpochId => mapping(uint256 rewardManagerId => uint256)) public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `noOfWeightBasedClaimsHash` | type: `mapping(uint256 rewardEpochId => bytes32) public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `randomAcquisitionMaxDurationBlocks` | type: `uint64 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `randomAcquisitionMaxDurationSeconds` | type: `uint64 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `relay` | type: `IIRelay public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `rewardEpochDurationSeconds` | type: `uint64 public immutable` | vis: `public` | flags: `immutable` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `rewardEpochIdToExpireNext` | type: `uint24 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `rewardEpochState` | type: `mapping(uint256 rewardEpochId => RewardEpochState) internal` | vis: `internal` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `rewardEpochSwitchoverTriggerContracts` | type: `IIRewardEpochSwitchoverTrigger[] internal` | vis: `internal` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `rewardExpiryOffsetSeconds` | type: `uint32 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `rewardManager` | type: `IIRewardManager public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `rewardsHash` | type: `mapping(uint256 rewardEpochId => bytes32) public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `signingPolicyMinNumberOfVoters` | type: `uint16 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `signingPolicyThresholdPPM` | type: `uint24 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `submission` | type: `IISubmission public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `submit3Aligned` | type: `bool public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol` = `true`
+- `submitUptimeVoteMinDurationBlocks` | type: `uint64 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `submitUptimeVoteMinDurationSeconds` | type: `uint64 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `triggerExpirationAndCleanup` | type: `bool public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol` = `false`
+- `uptimeVoteHash` | type: `mapping(uint256 rewardEpochId => bytes32) public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `voterRegistrationMinDurationBlocks` | type: `uint64 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `voterRegistrationMinDurationSeconds` | type: `uint64 public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `voterRegistrationTriggerContract` | type: `IIVoterRegistrationTrigger public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `voterRegistry` | type: `IIVoterRegistry public` | vis: `public` | flags: `-` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `votingEpochDurationSeconds` | type: `uint64 public immutable` | vis: `public` | flags: `immutable` | `FlareSystemsManager` @ `contracts/protocol/implementation/FlareSystemsManager.sol`
+- `PPM_MAX` | type: `uint24 private constant` | vis: `private` | flags: `constant` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol` = `1e6`
+- `REWARD_EPOCH_DURATION_IN_SEC` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol` = `uint64(REWARD_EPOCH_DURATION_IN_VOTING_EPOCHS) * VOTING_EPOCH_DURATION_SEC`
+- `REWARD_EPOCH_DURATION_IN_VOTING_EPOCHS` | type: `uint16 private constant` | vis: `private` | flags: `constant` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol` = `3360`
+- `VOTING_EPOCH_DURATION_SEC` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol` = `90`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `flareDaemon` | type: `address private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `flareSystemsManager` | type: `FlareSystemsManager private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `initialSettings` | type: `FlareSystemsManager.InitialSettings private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `mockCleanupBlockNumberManager` | type: `address private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `mockRelay` | type: `address private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `mockRewardManager` | type: `address private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `mockSubmission` | type: `address private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `mockVoterRegistry` | type: `address private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `settings` | type: `FlareSystemsManager.Settings private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `signingAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `signingAddressesPk` | type: `uint256[] private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `switchoverContracts` | type: `IIRewardEpochSwitchoverTrigger[] private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `voter1` | type: `address private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `voters` | type: `address[] private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `votersWeight` | type: `uint16[] private` | vis: `private` | flags: `-` | `FlareSystemsManagerTest` @ `test-forge/unit/protocol/implementation/FlareSystemsManager.t.sol`
+- `decimals` | type: `mapping(bytes21 feedId => Decimals[]) internal` | vis: `internal` | flags: `-` | `FtsoFeedDecimals` @ `contracts/ftso/implementation/FtsoFeedDecimals.sol`
+- `defaultDecimals` | type: `int8 public immutable` | vis: `public` | flags: `immutable` | `FtsoFeedDecimals` @ `contracts/ftso/implementation/FtsoFeedDecimals.sol`
+- `flareSystemsManager` | type: `IFlareSystemsManager public` | vis: `public` | flags: `-` | `FtsoFeedDecimals` @ `contracts/ftso/implementation/FtsoFeedDecimals.sol`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FtsoFeedDecimalsTest` @ `test-forge/unit/ftso/implementation/FtsoFeedDecimals.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FtsoFeedDecimalsTest` @ `test-forge/unit/ftso/implementation/FtsoFeedDecimals.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FtsoFeedDecimalsTest` @ `test-forge/unit/ftso/implementation/FtsoFeedDecimals.t.sol`
+- `decimals` | type: `bytes private` | vis: `private` | flags: `-` | `FtsoFeedDecimalsTest` @ `test-forge/unit/ftso/implementation/FtsoFeedDecimals.t.sol`
+- `feedId1` | type: `bytes21 private` | vis: `private` | flags: `-` | `FtsoFeedDecimalsTest` @ `test-forge/unit/ftso/implementation/FtsoFeedDecimals.t.sol`
+- `feedId2` | type: `bytes21 private` | vis: `private` | flags: `-` | `FtsoFeedDecimalsTest` @ `test-forge/unit/ftso/implementation/FtsoFeedDecimals.t.sol`
+- `feedIds` | type: `bytes private` | vis: `private` | flags: `-` | `FtsoFeedDecimalsTest` @ `test-forge/unit/ftso/implementation/FtsoFeedDecimals.t.sol`
+- `ftsoFeedDecimals` | type: `FtsoFeedDecimals private` | vis: `private` | flags: `-` | `FtsoFeedDecimalsTest` @ `test-forge/unit/ftso/implementation/FtsoFeedDecimals.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FtsoFeedDecimalsTest` @ `test-forge/unit/ftso/implementation/FtsoFeedDecimals.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `FtsoFeedDecimalsTest` @ `test-forge/unit/ftso/implementation/FtsoFeedDecimals.t.sol`
+- `ftsoFeedIdConverter` | type: `FtsoFeedIdConverter private` | vis: `private` | flags: `-` | `FtsoFeedIdConverterTest` @ `test-forge/unit/ftso/implementation/FtsoFeedIdConverter.t.sol`
+- `feedsHistorySize` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `FtsoFeedPublisher` @ `contracts/ftso/implementation/FtsoFeedPublisher.sol`
+- `feedsPublisher` | type: `address public` | vis: `public` | flags: `-` | `FtsoFeedPublisher` @ `contracts/ftso/implementation/FtsoFeedPublisher.sol`
+- `ftsoProtocolId` | type: `uint8 public immutable` | vis: `public` | flags: `immutable` | `FtsoFeedPublisher` @ `contracts/ftso/implementation/FtsoFeedPublisher.sol`
+- `lastFeeds` | type: `mapping(bytes21 feedId => Feed) internal` | vis: `internal` | flags: `-` | `FtsoFeedPublisher` @ `contracts/ftso/implementation/FtsoFeedPublisher.sol`
+- `publishedFeeds` | type: `mapping(bytes21 feedId => mapping(uint256 feedHistoryPosition => Feed)) internal` | vis: `internal` | flags: `-` | `FtsoFeedPublisher` @ `contracts/ftso/implementation/FtsoFeedPublisher.sol`
+- `relay` | type: `IRelay public` | vis: `public` | flags: `-` | `FtsoFeedPublisher` @ `contracts/ftso/implementation/FtsoFeedPublisher.sol`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FtsoFeedPublisherTest` @ `test-forge/unit/ftso/implementation/FtsoFeedPublisher.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FtsoFeedPublisherTest` @ `test-forge/unit/ftso/implementation/FtsoFeedPublisher.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FtsoFeedPublisherTest` @ `test-forge/unit/ftso/implementation/FtsoFeedPublisher.t.sol`
+- `feedId1` | type: `bytes21 private` | vis: `private` | flags: `-` | `FtsoFeedPublisherTest` @ `test-forge/unit/ftso/implementation/FtsoFeedPublisher.t.sol`
+- `feedId2` | type: `bytes21 private` | vis: `private` | flags: `-` | `FtsoFeedPublisherTest` @ `test-forge/unit/ftso/implementation/FtsoFeedPublisher.t.sol`
+- `feedsPublisher` | type: `address private` | vis: `private` | flags: `-` | `FtsoFeedPublisherTest` @ `test-forge/unit/ftso/implementation/FtsoFeedPublisher.t.sol`
+- `ftsoFeedPublisher` | type: `FtsoFeedPublisher private` | vis: `private` | flags: `-` | `FtsoFeedPublisherTest` @ `test-forge/unit/ftso/implementation/FtsoFeedPublisher.t.sol`
+- `ftsoProtocolId` | type: `uint8 private` | vis: `private` | flags: `-` | `FtsoFeedPublisherTest` @ `test-forge/unit/ftso/implementation/FtsoFeedPublisher.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FtsoFeedPublisherTest` @ `test-forge/unit/ftso/implementation/FtsoFeedPublisher.t.sol`
+- `mockRelay` | type: `address private` | vis: `private` | flags: `-` | `FtsoFeedPublisherTest` @ `test-forge/unit/ftso/implementation/FtsoFeedPublisher.t.sol`
+- `MAX_BIPS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FtsoInflationConfigurations` @ `contracts/ftso/implementation/FtsoInflationConfigurations.sol` = `1e4`
+- `PPM_MAX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FtsoInflationConfigurations` @ `contracts/ftso/implementation/FtsoInflationConfigurations.sol` = `1e6`
+- `ftsoConfigurations` | type: `FtsoConfiguration[] internal` | vis: `internal` | flags: `-` | `FtsoInflationConfigurations` @ `contracts/ftso/implementation/FtsoInflationConfigurations.sol`
+- `MAX_BIPS` | type: `uint16 internal constant` | vis: `internal` | flags: `constant` | `FtsoInflationConfigurationsTest` @ `test-forge/unit/ftso/implementation/FtsoInflationConfigurations.t.sol` = `1e4`
+- `config` | type: `IFtsoInflationConfigurations.FtsoConfiguration private` | vis: `private` | flags: `-` | `FtsoInflationConfigurationsTest` @ `test-forge/unit/ftso/implementation/FtsoInflationConfigurations.t.sol`
+- `feed1` | type: `bytes21 private` | vis: `private` | flags: `-` | `FtsoInflationConfigurationsTest` @ `test-forge/unit/ftso/implementation/FtsoInflationConfigurations.t.sol`
+- `feed2` | type: `bytes21 private` | vis: `private` | flags: `-` | `FtsoInflationConfigurationsTest` @ `test-forge/unit/ftso/implementation/FtsoInflationConfigurations.t.sol`
+- `feeds` | type: `bytes private` | vis: `private` | flags: `-` | `FtsoInflationConfigurationsTest` @ `test-forge/unit/ftso/implementation/FtsoInflationConfigurations.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FtsoInflationConfigurationsTest` @ `test-forge/unit/ftso/implementation/FtsoInflationConfigurations.t.sol`
+- `inflationConfigs` | type: `FtsoInflationConfigurations private` | vis: `private` | flags: `-` | `FtsoInflationConfigurationsTest` @ `test-forge/unit/ftso/implementation/FtsoInflationConfigurations.t.sol`
+- `secondaryBands` | type: `bytes private` | vis: `private` | flags: `-` | `FtsoInflationConfigurationsTest` @ `test-forge/unit/ftso/implementation/FtsoInflationConfigurations.t.sol`
+- `fastUpdater` | type: `IIFastUpdaterView public` | vis: `public` | flags: `-` | `FtsoManagerProxy` @ `contracts/fscV1/implementation/FtsoManagerProxy.sol`
+- `fastUpdatesConfiguration` | type: `IFastUpdatesConfiguration public` | vis: `public` | flags: `-` | `FtsoManagerProxy` @ `contracts/fscV1/implementation/FtsoManagerProxy.sol`
+- `flareSystemsManager` | type: `IFlareSystemsManager public` | vis: `public` | flags: `-` | `FtsoManagerProxy` @ `contracts/fscV1/implementation/FtsoManagerProxy.sol`
+- `ftsoRegistry` | type: `IIFtsoRegistry public` | vis: `public` | flags: `-` | `FtsoManagerProxy` @ `contracts/fscV1/implementation/FtsoManagerProxy.sol`
+- `oldFtsoManager` | type: `address public immutable` | vis: `public` | flags: `immutable` | `FtsoManagerProxy` @ `contracts/fscV1/implementation/FtsoManagerProxy.sol`
+- `relay` | type: `IRelay public` | vis: `public` | flags: `-` | `FtsoManagerProxy` @ `contracts/fscV1/implementation/FtsoManagerProxy.sol`
+- `rewardManager` | type: `address public` | vis: `public` | flags: `-` | `FtsoManagerProxy` @ `contracts/fscV1/implementation/FtsoManagerProxy.sol`
+- `rewardManagerV2` | type: `IRewardManager public` | vis: `public` | flags: `-` | `FtsoManagerProxy` @ `contracts/fscV1/implementation/FtsoManagerProxy.sol`
+- `PPM_MAX` | type: `uint24 private constant` | vis: `private` | flags: `constant` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol` = `1e6`
+- `REWARD_EPOCH_DURATION_IN_SEC` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol` = `uint64(REWARD_EPOCH_DURATION_IN_VOTING_EPOCHS) * VOTING_EPOCH_DURATION_SEC`
+- `REWARD_EPOCH_DURATION_IN_VOTING_EPOCHS` | type: `uint16 private constant` | vis: `private` | flags: `constant` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol` = `3360`
+- `VOTING_EPOCH_DURATION_SEC` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol` = `90`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `flareDaemon` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `flareSystemsManager` | type: `FlareSystemsManager private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `ftso1` | type: `IFtso private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `ftso2` | type: `IFtso private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `ftsoManagerProxy` | type: `FtsoManagerProxy private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `ftsoRegistry` | type: `IIIFtsoRegistry private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `ftsoRegistryProxy` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `initialSettings` | type: `FlareSystemsManager.InitialSettings private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `mockCleanupBlockNumberManager` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `mockFastUpdater` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `mockFastUpdatesConfiguration` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `mockRelay` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `mockRewardManager` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `mockRewardManagerV2` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `mockSubmission` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `mockVoterRegistry` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `priceSubmitter` | type: `IIIPriceSubmitter private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `registry` | type: `IIIFtsoRegistry private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `settings` | type: `FlareSystemsManager.Settings private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `signingAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `signingAddressesPk` | type: `uint256[] private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `switchoverContracts` | type: `IIRewardEpochSwitchoverTrigger[] private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `voter1` | type: `address private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `voters` | type: `address[] private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `votersWeight` | type: `uint16[] private` | vis: `private` | flags: `-` | `FtsoManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoManagerProxy.t.sol`
+- `ASSET_PRICE_USD_DECIMALS` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `FtsoProxy` @ `contracts/fscV1/implementation/FtsoProxy.sol` = `5`
+- `feedId` | type: `bytes21 public` | vis: `public` | flags: `-` | `FtsoProxy` @ `contracts/fscV1/implementation/FtsoProxy.sol`
+- `ftsoManager` | type: `IIFtsoManagerProxy immutable public` | vis: `public` | flags: `immutable` | `FtsoProxy` @ `contracts/fscV1/implementation/FtsoProxy.sol`
+- `randomNumberProtocolId` | type: `uint8 public immutable` | vis: `public` | flags: `immutable` | `FtsoProxy` @ `contracts/fscV1/implementation/FtsoProxy.sol`
+- `symbol` | type: `string public` | vis: `public` | flags: `-` | `FtsoProxy` @ `contracts/fscV1/implementation/FtsoProxy.sol`
+- `DURATION` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol` = `8`
+- `RANGE` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol` = `0x800000000000000000000000000`
+- `RANGE_INCREASE_LIMIT` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol` = `0x8000000000000000000000000000`
+- `RANGE_INCREASE_PRICE` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol` = `10 ** 24`
+- `SAMPLE_INCREASE_LIMIT` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol` = `0x100000000000000000000000000000`
+- `SAMPLE_SIZE` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol` = `0x1000000000000000000000000000000`
+- `SAMPLE_SIZE_INCREASE_PRICE` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol` = `1425`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `fastUpdateIncentiveManager` | type: `FastUpdateIncentiveManager private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `fastUpdater` | type: `FastUpdater private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `fastUpdatesConfiguration` | type: `FastUpdatesConfiguration private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `flareDaemon` | type: `address private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `ftsoManagerProxy` | type: `FtsoManagerProxy private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `ftsoProxyBTC` | type: `FtsoProxy private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `ftsoProxyFLR` | type: `FtsoProxy private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `ftsoProxySGB` | type: `FtsoProxy private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `mockFtsoFeedPublisher` | type: `address private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `mockFtsoInflationConfigurations` | type: `address private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `mockInflation` | type: `address private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `mockRelay` | type: `address private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `mockRewardManager` | type: `address private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `mockRewardManagerV2` | type: `address private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `submission` | type: `Submission private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `voter` | type: `address private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `DEAD_ADDRESS` | type: `address internal constant` | vis: `internal` | flags: `constant` | `FtsoRegistry` @ `flattened/FlareSmartContracts.sol` = `0x000000000000000000000000000000000000dEaD`
+- `ERR_FTSO_MANAGER_ONLY` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FtsoRegistry` @ `flattened/FlareSmartContracts.sol` = `"FTSO manager only"`
+- `ERR_TOKEN_NOT_SUPPORTED` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FtsoRegistry` @ `flattened/FlareSmartContracts.sol` = `"FTSO index not supported"`
+- `MAX_HISTORY_LENGTH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FtsoRegistry` @ `flattened/FlareSmartContracts.sol` = `5`
+- `ftsoHistory` | type: `IIFtso[MAX_HISTORY_LENGTH][] internal` | vis: `internal` | flags: `-` | `FtsoRegistry` @ `flattened/FlareSmartContracts.sol`
+- `ftsoIndex` | type: `mapping(string => uint256) internal` | vis: `internal` | flags: `-` | `FtsoRegistry` @ `flattened/FlareSmartContracts.sol`
+- `ftsoManager` | type: `IIFtsoManager public` | vis: `public` | flags: `-` | `FtsoRegistry` @ `flattened/FlareSmartContracts.sol`
+- `enabled` | type: `bool public` | vis: `public` | flags: `-` | `FtsoRewardManagerProxy` @ `contracts/fscV1/implementation/FtsoRewardManagerProxy.sol`
+- `flareSystemsManager` | type: `IIFlareSystemsManager public` | vis: `public` | flags: `-` | `FtsoRewardManagerProxy` @ `contracts/fscV1/implementation/FtsoRewardManagerProxy.sol`
+- `newFtsoRewardManager` | type: `address public` | vis: `public` | flags: `-` | `FtsoRewardManagerProxy` @ `contracts/fscV1/implementation/FtsoRewardManagerProxy.sol`
+- `oldFtsoRewardManager` | type: `address public immutable` | vis: `public` | flags: `immutable` | `FtsoRewardManagerProxy` @ `contracts/fscV1/implementation/FtsoRewardManagerProxy.sol`
+- `rewardManager` | type: `IIRewardManager public` | vis: `public` | flags: `-` | `FtsoRewardManagerProxy` @ `contracts/fscV1/implementation/FtsoRewardManagerProxy.sol`
+- `wNat` | type: `address public` | vis: `public` | flags: `-` | `FtsoRewardManagerProxy` @ `contracts/fscV1/implementation/FtsoRewardManagerProxy.sol`
+- `wNatDelegationFee` | type: `IWNatDelegationFee public` | vis: `public` | flags: `-` | `FtsoRewardManagerProxy` @ `contracts/fscV1/implementation/FtsoRewardManagerProxy.sol`
+- `BURN_ADDRESS` | type: `address payable constant private` | vis: `private` | flags: `constant,payable` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol` = `payable(0x000000000000000000000000000000000000dEaD)`
+- `account1` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `delegator` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `ftsoRewardManagerProxy` | type: `FtsoRewardManagerProxy private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `merkleProof1` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `merkleProof2` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `merkleProof3` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `merkleProof4` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `mockCChainStake` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `mockClaimSetupManager` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `mockFlareSystemsCalculator` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `mockPChainStakeMirror` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `mockWNat` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `nodeId1` | type: `bytes20 private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `recipient` | type: `address payable private` | vis: `private` | flags: `payable` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `rewardOffersManagers` | type: `address[] private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `rewardOwners` | type: `address[] private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `voter1` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `voter2` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `wNatDelegationFee` | type: `WNatDelegationFee private` | vis: `private` | flags: `-` | `FtsoRewardManagerProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol`
+- `MAX_BIPS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FtsoRewardOffersManager` @ `contracts/ftso/implementation/FtsoRewardOffersManager.sol` = `1e4`
+- `PPM_MAX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FtsoRewardOffersManager` @ `contracts/ftso/implementation/FtsoRewardOffersManager.sol` = `1e6`
+- `ftsoFeedDecimals` | type: `IFtsoFeedDecimals public` | vis: `public` | flags: `-` | `FtsoRewardOffersManager` @ `contracts/ftso/implementation/FtsoRewardOffersManager.sol`
+- `ftsoInflationConfigurations` | type: `IFtsoInflationConfigurations public` | vis: `public` | flags: `-` | `FtsoRewardOffersManager` @ `contracts/ftso/implementation/FtsoRewardOffersManager.sol`
+- `minimalRewardsOfferValueWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FtsoRewardOffersManager` @ `contracts/ftso/implementation/FtsoRewardOffersManager.sol`
+- `rewardManager` | type: `IIRewardManager public` | vis: `public` | flags: `-` | `FtsoRewardOffersManager` @ `contracts/ftso/implementation/FtsoRewardOffersManager.sol`
+- `totalInflationRewardsOfferedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `FtsoRewardOffersManager` @ `contracts/ftso/implementation/FtsoRewardOffersManager.sol`
+- `DAY` | type: `uint64 internal constant` | vis: `internal` | flags: `constant` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol` = `1 days`
+- `MAX_BIPS` | type: `uint16 internal constant` | vis: `internal` | flags: `constant` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol` = `1e4`
+- `PPM_MAX` | type: `uint24 internal constant` | vis: `internal` | flags: `constant` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol` = `1e6`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `claimBackAddr` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `feedId1` | type: `bytes21 private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `feedId2` | type: `bytes21 private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `feeds1` | type: `bytes private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `feeds2` | type: `bytes private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `ftsoRewardOffersManager` | type: `FtsoRewardOffersManager private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `mockFtsoFeedDecimals` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `mockFtsoInflationConfigurations` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `mockInflation` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `mockRewardManager` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `rewardManager` | type: `RewardManager private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `sender` | type: `address private` | vis: `private` | flags: `-` | `FtsoRewardOffersManagerTest` @ `test-forge/unit/ftso/implementation/FtsoRewardOffersManager.t.sol`
+- `changedFeedIds` | type: `bytes21[] private` | vis: `private` | flags: `-` | `FtsoV2` @ `contracts/protocol/implementation/FtsoV2.sol`
+- `customFeedIds` | type: `bytes21[] private` | vis: `private` | flags: `-` | `FtsoV2` @ `contracts/protocol/implementation/FtsoV2.sol`
+- `customFeeds` | type: `mapping(bytes21 customFeedId => CustomFeedData) private` | vis: `private` | flags: `-` | `FtsoV2` @ `contracts/protocol/implementation/FtsoV2.sol`
+- `fastUpdater` | type: `IFastUpdater public` | vis: `public` | flags: `-` | `FtsoV2` @ `contracts/protocol/implementation/FtsoV2.sol`
+- `fastUpdatesConfiguration` | type: `IFastUpdatesConfiguration public` | vis: `public` | flags: `-` | `FtsoV2` @ `contracts/protocol/implementation/FtsoV2.sol`
+- `feeCalculator` | type: `IFeeCalculator public` | vis: `public` | flags: `-` | `FtsoV2` @ `contracts/protocol/implementation/FtsoV2.sol`
+- `feedIdChanges` | type: `mapping(bytes21 changedFeedId => FeedIdChangeData) private` | vis: `private` | flags: `-` | `FtsoV2` @ `contracts/protocol/implementation/FtsoV2.sol`
+- `relay` | type: `IRelay public` | vis: `public` | flags: `-` | `FtsoV2` @ `contracts/protocol/implementation/FtsoV2.sol`
+- `DURATION` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol` = `8`
+- `RANGE` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol` = `0x800000000000000000000000000`
+- `RANGE_INCREASE_LIMIT` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol` = `0x8000000000000000000000000000`
+- `RANGE_INCREASE_PRICE` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol` = `10 ** 24`
+- `SAMPLE_INCREASE_LIMIT` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol` = `0x100000000000000000000000000000`
+- `SAMPLE_SIZE` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol` = `0x1000000000000000000000000000000`
+- `SAMPLE_SIZE_INCREASE_PRICE` | type: `uint256 constant private` | vis: `private` | flags: `constant` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol` = `1425`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `fastUpdateIncentiveManager` | type: `FastUpdateIncentiveManager private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `fastUpdater` | type: `FastUpdater private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `fastUpdatesConfiguration` | type: `FastUpdatesConfiguration private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `feeCalculator` | type: `FeeCalculator private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `feeDestination` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `flareDaemon` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `flrFeedId` | type: `bytes21 private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol` = `bytes21(bytes.concat(bytes1(uint8(0)), bytes("FLR")))`
+- `ftsoV2` | type: `FtsoV2 private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `ftsoV2Implementation` | type: `FtsoV2 private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `ftsoV2Proxy` | type: `FtsoV2Proxy private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `mockFastUpdatesConfiguration` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `mockFlareContractRegistry` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `mockFtsoFeedPublisher` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `mockFtsoInflationConfigurations` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `mockInflation` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `mockRelay` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `mockRewardManager` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `sFlr` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `sFlrCustomFeed` | type: `SFlrCustomFeed private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `sflrFeedId` | type: `bytes21 private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol` = `bytes21(bytes.concat(bytes1(uint8(50)), bytes("SFLR")))`
+- `voter` | type: `address private` | vis: `private` | flags: `-` | `FtsoV2Test` @ `test-forge/unit/protocol/implementation/FtsoV2.t.sol`
+- `GENESIS_GOVERNANCE` | type: `address internal constant` | vis: `internal` | flags: `constant` | `GovernanceSettings` @ `flattened/FlareSmartContracts.sol` = `0xfffEc6C83c8BF5c3F4AE0cCF8c45CE20E4560BD7`
+- `MAX_TIMELOCK` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `GovernanceSettings` @ `flattened/FlareSmartContracts.sol` = `365 days`
+- `SIGNAL_COINBASE` | type: `address public constant` | vis: `public` | flags: `constant` | `GovernanceSettings` @ `flattened/FlareSmartContracts.sol` = `address(0x00000000000000000000000000000000000dEAD0)`
+- `executorMap` | type: `mapping (address => bool) private` | vis: `private` | flags: `-` | `GovernanceSettings` @ `flattened/FlareSmartContracts.sol`
+- `executors` | type: `address[] private` | vis: `private` | flags: `-` | `GovernanceSettings` @ `flattened/FlareSmartContracts.sol`
+- `governanceAddress` | type: `address private` | vis: `private` | flags: `-` | `GovernanceSettings` @ `flattened/FlareSmartContracts.sol`
+- `initialised` | type: `bool private` | vis: `private` | flags: `-` | `GovernanceSettings` @ `flattened/FlareSmartContracts.sol`
+- `timelock` | type: `uint64 private` | vis: `private` | flags: `-` | `GovernanceSettings` @ `flattened/FlareSmartContracts.sol`
+- `CLEANUP_COUNT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `GovernanceVotePower` @ `contracts/mock/GovernanceVotePower.sol` = `2`
+- `cChainStake` | type: `ICChainStake public immutable` | vis: `public` | flags: `immutable` | `GovernanceVotePower` @ `contracts/mock/GovernanceVotePower.sol`
+- `cleanerContract` | type: `address public` | vis: `public` | flags: `-` | `GovernanceVotePower` @ `contracts/mock/GovernanceVotePower.sol`
+- `cleanupBlockNumber` | type: `uint256 private` | vis: `private` | flags: `-` | `GovernanceVotePower` @ `contracts/mock/GovernanceVotePower.sol`
+- `delegatesHistory` | type: `DelegateCheckPointsByAddress.DelegateCheckPointsByAddressState private` | vis: `private` | flags: `-` | `GovernanceVotePower` @ `contracts/mock/GovernanceVotePower.sol`
+- `ownerToken` | type: `IVPToken public immutable override` | vis: `public` | flags: `immutable,override` | `GovernanceVotePower` @ `contracts/mock/GovernanceVotePower.sol`
+- `pChainStakeMirror` | type: `IPChainStakeMirror public immutable override` | vis: `public` | flags: `immutable,override` | `GovernanceVotePower` @ `contracts/mock/GovernanceVotePower.sol`
+- `votePowerFromDelegationsHistory` | type: `CheckPointsByAddress.CheckPointsByAddressState private` | vis: `private` | flags: `-` | `GovernanceVotePower` @ `contracts/mock/GovernanceVotePower.sol`
+- `flareDaemon` | type: `FlareDaemon public immutable` | vis: `public` | flags: `immutable` | `GovernedAndFlareDaemonized` @ `flattened/FlareSmartContracts.sol`
+- `executing` | type: `bool private` | vis: `private` | flags: `-` | `GovernedBase` @ `contracts/governance/implementation/GovernedBase.sol`
+- `executing` | type: `bool private` | vis: `private` | flags: `-` | `GovernedBase` @ `flattened/FlareSmartContracts.sol`
+- `initialGovernance` | type: `address private` | vis: `private` | flags: `-` | `GovernedBase` @ `contracts/governance/implementation/GovernedBase.sol`
+- `initialGovernance` | type: `address private` | vis: `private` | flags: `-` | `GovernedBase` @ `flattened/FlareSmartContracts.sol`
+- `initialised` | type: `bool private` | vis: `private` | flags: `-` | `GovernedBase` @ `contracts/governance/implementation/GovernedBase.sol`
+- `initialised` | type: `bool private` | vis: `private` | flags: `-` | `GovernedBase` @ `flattened/FlareSmartContracts.sol`
+- `productionMode` | type: `bool public` | vis: `public` | flags: `-` | `GovernedBase` @ `contracts/governance/implementation/GovernedBase.sol`
+- `productionMode` | type: `bool public` | vis: `public` | flags: `-` | `GovernedBase` @ `flattened/FlareSmartContracts.sol`
+- `timelockedCalls` | type: `mapping(bytes4 selector => TimelockedCall) public` | vis: `public` | flags: `-` | `GovernedBase` @ `contracts/governance/implementation/GovernedBase.sol`
+- `timelockedCalls` | type: `mapping(bytes4 => TimelockedCall) public` | vis: `public` | flags: `-` | `GovernedBase` @ `flattened/FlareSmartContracts.sol`
+- `a` | type: `uint256 public` | vis: `public` | flags: `-` | `GovernedMock` @ `test-forge/mock/GovernedMock.sol`
+- `b` | type: `uint256 public` | vis: `public` | flags: `-` | `GovernedMock` @ `test-forge/mock/GovernedMock.sol`
+- `EMPTY_ADDRESS` | type: `address private constant` | vis: `private` | flags: `constant` | `GovernedProxyImplementation` @ `contracts/governance/implementation/GovernedProxyImplementation.sol` = `0x0000000000000000000000000000000000001111`
+- `HOUR` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `GovernedTest` @ `test-forge/unit/governance/implementation/Governed.t.sol` = `3600`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `GovernedTest` @ `test-forge/unit/governance/implementation/Governed.t.sol`
+- `governanceSettings` | type: `address private` | vis: `private` | flags: `-` | `GovernedTest` @ `test-forge/unit/governance/implementation/Governed.t.sol`
+- `governedMock` | type: `GovernedMock private` | vis: `private` | flags: `-` | `GovernedTest` @ `test-forge/unit/governance/implementation/Governed.t.sol`
+- `initialGovernance` | type: `address private` | vis: `private` | flags: `-` | `GovernedTest` @ `test-forge/unit/governance/implementation/Governed.t.sol`
+- `selectorChangeA` | type: `bytes4 private` | vis: `private` | flags: `-` | `GovernedTest` @ `test-forge/unit/governance/implementation/Governed.t.sol` = `bytes4(keccak256("changeA(uint256)"))`
+- `selectorChangeWithRevert` | type: `bytes4 private` | vis: `private` | flags: `-` | `GovernedTest` @ `test-forge/unit/governance/implementation/Governed.t.sol` = `bytes4(keccak256("changeWithRevert(uint256)"))`
+- `BALLOT_TYPEHASH` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `Governor` @ `contracts/governance/implementation/Governor.sol` = `keccak256("Ballot(uint256 proposalId,uint8 support)")`
+- `MAX_BIPS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `Governor` @ `contracts/governance/implementation/Governor.sol` = `1e4`
+- `flareSystemsManager` | type: `IIFlareSystemsManager public` | vis: `public` | flags: `-` | `Governor` @ `contracts/governance/implementation/Governor.sol`
+- `governanceVotePower` | type: `IIGovernanceVotePower public` | vis: `public` | flags: `-` | `Governor` @ `contracts/governance/implementation/Governor.sol`
+- `submission` | type: `ISubmission public` | vis: `public` | flags: `-` | `Governor` @ `contracts/governance/implementation/Governor.sol`
+- `supply` | type: `IISupply public` | vis: `public` | flags: `-` | `Governor` @ `contracts/governance/implementation/Governor.sol`
+- `chainId` | type: `uint256 immutable public` | vis: `public` | flags: `immutable` | `GovernorProposals` @ `contracts/governance/implementation/GovernorProposals.sol`
+- `proposalIds` | type: `uint256[] public` | vis: `public` | flags: `-` | `GovernorProposals` @ `contracts/governance/implementation/GovernorProposals.sol`
+- `proposals` | type: `mapping(uint256 proposalId => Proposal) internal` | vis: `internal` | flags: `-` | `GovernorProposals` @ `contracts/governance/implementation/GovernorProposals.sol`
+- `proposers` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `GovernorProposer` @ `contracts/governance/implementation/GovernorProposer.sol`
+- `dailyAuthorizedIncentive` | type: `uint256 internal` | vis: `internal` | flags: `-` | `IncentivePoolReceiver` @ `contracts/incentivePool/implementation/IncentivePoolReceiver.sol`
+- `incentivePool` | type: `address internal` | vis: `internal` | flags: `-` | `IncentivePoolReceiver` @ `contracts/incentivePool/implementation/IncentivePoolReceiver.sol`
+- `lastIncentiveAuthorizationReceivedTs` | type: `uint256 internal` | vis: `internal` | flags: `-` | `IncentivePoolReceiver` @ `contracts/incentivePool/implementation/IncentivePoolReceiver.sol`
+- `totalIncentiveAuthorizedWei` | type: `uint256 internal` | vis: `internal` | flags: `-` | `IncentivePoolReceiver` @ `contracts/incentivePool/implementation/IncentivePoolReceiver.sol`
+- `totalIncentiveReceivedWei` | type: `uint256 internal` | vis: `internal` | flags: `-` | `IncentivePoolReceiver` @ `contracts/incentivePool/implementation/IncentivePoolReceiver.sol`
+- `excessOfferIncreases` | type: `FPA.Fee[] internal` | vis: `internal` | flags: `-` | `IncreaseManager` @ `contracts/fastUpdates/implementation/IncreaseManager.sol`
+- `excessOfferValue` | type: `FPA.Fee internal` | vis: `internal` | flags: `-` | `IncreaseManager` @ `contracts/fastUpdates/implementation/IncreaseManager.sol`
+- `range` | type: `FPA.Range internal` | vis: `internal` | flags: `-` | `IncreaseManager` @ `contracts/fastUpdates/implementation/IncreaseManager.sol`
+- `rangeIncreases` | type: `FPA.Range[] internal` | vis: `internal` | flags: `-` | `IncreaseManager` @ `contracts/fastUpdates/implementation/IncreaseManager.sol`
+- `sampleIncreases` | type: `FPA.SampleSize[] internal` | vis: `internal` | flags: `-` | `IncreaseManager` @ `contracts/fastUpdates/implementation/IncreaseManager.sol`
+- `sampleSize` | type: `FPA.SampleSize internal` | vis: `internal` | flags: `-` | `IncreaseManager` @ `contracts/fastUpdates/implementation/IncreaseManager.sol`
+- `dailyAuthorizedInflation` | type: `uint256 public` | vis: `public` | flags: `-` | `InflationReceiver` @ `contracts/inflation/implementation/InflationReceiver.sol`
+- `inflation` | type: `address internal` | vis: `internal` | flags: `-` | `InflationReceiver` @ `contracts/inflation/implementation/InflationReceiver.sol`
+- `lastInflationAuthorizationReceivedTs` | type: `uint256 public` | vis: `public` | flags: `-` | `InflationReceiver` @ `contracts/inflation/implementation/InflationReceiver.sol`
+- `lastInflationReceivedTs` | type: `uint256 public` | vis: `public` | flags: `-` | `InflationReceiver` @ `contracts/inflation/implementation/InflationReceiver.sol`
+- `totalInflationAuthorizedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `InflationReceiver` @ `contracts/inflation/implementation/InflationReceiver.sol`
+- `totalInflationReceivedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `InflationReceiver` @ `contracts/inflation/implementation/InflationReceiver.sol`
+- `CERTIFICATE_RAW_TEST` | type: `bytes constant public` | vis: `public` | flags: `constant` | `MockNodePossessionVerification` @ `test-forge/mock/MockNodePossessionVerification.sol` = `hex"01234567"`
+- `SIGNATURE_TEST` | type: `bytes constant public` | vis: `public` | flags: `constant` | `MockNodePossessionVerification` @ `test-forge/mock/MockNodePossessionVerification.sol` = `hex"89abcdef"`
+- `nodeId` | type: `bytes20 public` | vis: `public` | flags: `-` | `MockNodePossessionVerification` @ `test-forge/mock/MockNodePossessionVerification.sol`
+- `voter` | type: `address public` | vis: `public` | flags: `-` | `MockNodePossessionVerification` @ `test-forge/mock/MockNodePossessionVerification.sol`
+- `result` | type: `bool public` | vis: `public` | flags: `-` | `MockP256Controller` @ `test-forge/mock/MockP256Controller.sol`
+- `ECDSA_ALGORITHM_ID` | type: `bytes internal constant` | vis: `internal` | flags: `constant` | `NodePossessionVerifier` @ `contracts/protocol/implementation/NodePossessionVerifier.sol` = `hex"06072a8648ce3d020106082a8648ce3d030107"`
+- `N` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `NodePossessionVerifier` @ `contracts/protocol/implementation/NodePossessionVerifier.sol` = `0xFFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551`
+- `RSA_ALGORITHM_ID` | type: `bytes internal constant` | vis: `internal` | flags: `constant` | `NodePossessionVerifier` @ `contracts/protocol/implementation/NodePossessionVerifier.sol` = `hex"06092a864886f70d0101010500"`
+- `certificateRaw` | type: `bytes private` | vis: `private` | flags: `-` | `NodePossessionVerifierTest` @ `test-forge/unit/protocol/implementation/NodePossessionVerifier.t.sol`
+- `nodePossessionVerifier` | type: `NodePossessionVerifier private` | vis: `private` | flags: `-` | `NodePossessionVerifierTest` @ `test-forge/unit/protocol/implementation/NodePossessionVerifier.t.sol`
+- `p256Controller` | type: `MockP256Controller private` | vis: `private` | flags: `-` | `NodePossessionVerifierTest` @ `test-forge/unit/protocol/implementation/NodePossessionVerifier.t.sol`
+- `signature` | type: `bytes private` | vis: `private` | flags: `-` | `NodePossessionVerifierTest` @ `test-forge/unit/protocol/implementation/NodePossessionVerifier.t.sol`
+- `checkPointHistoryState` | type: `NodesHistory.CheckPointHistoryState private` | vis: `private` | flags: `-` | `NodesHistoryTest` @ `test-forge/unit/protocol/lib/NodesHistory.t.sol`
+- `emptyState` | type: `NodesHistory.CheckPointHistoryState private` | vis: `private` | flags: `-` | `NodesHistoryTest` @ `test-forge/unit/protocol/lib/NodesHistory.t.sol`
+- `emptyState2` | type: `NodesHistory.CheckPointHistoryState private` | vis: `private` | flags: `-` | `NodesHistoryTest` @ `test-forge/unit/protocol/lib/NodesHistory.t.sol`
+- `maxNodeIds` | type: `uint32 private` | vis: `private` | flags: `-` | `NodesHistoryTest` @ `test-forge/unit/protocol/lib/NodesHistory.t.sol` = `5`
+- `CONTROLLER` | type: `address internal constant` | vis: `internal` | flags: `constant` | `P256` @ `contracts/mock/MockP256.sol` = `0x00000000000000000000000000000000000000A1`
+- `CHECKPOINTS_CLEANUP_COUNT` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `PChainStake` @ `flattened/FlareSmartContracts.sol` = `2`
+- `stakes` | type: `mapping(address => PChainStakeHistory.CheckPointHistoryState) private` | vis: `private` | flags: `-` | `PChainStake` @ `flattened/FlareSmartContracts.sol`
+- `votePower` | type: `VotePower.VotePowerState private` | vis: `private` | flags: `-` | `PChainStake` @ `flattened/FlareSmartContracts.sol`
+- `votePowerCache` | type: `VotePowerCache.CacheState private` | vis: `private` | flags: `-` | `PChainStake` @ `flattened/FlareSmartContracts.sol`
+- `MAX_NODE_IDS_MSG` | type: `string private constant` | vis: `private` | flags: `constant` | `PChainStakeHistory` @ `flattened/FlareSmartContracts.sol` = `"Max node ids exceeded"`
+- `active` | type: `bool public` | vis: `public` | flags: `-` | `PChainStakeMirror` @ `flattened/FlareSmartContracts.sol`
+- `addressBinder` | type: `IAddressBinder public` | vis: `public` | flags: `-` | `PChainStakeMirror` @ `flattened/FlareSmartContracts.sol`
+- `cleanupBlockNumberManager` | type: `address public` | vis: `public` | flags: `-` | `PChainStakeMirror` @ `flattened/FlareSmartContracts.sol`
+- `endTimeToTransactionHashList` | type: `mapping(uint256 => bytes32[]) public` | vis: `public` | flags: `-` | `PChainStakeMirror` @ `flattened/FlareSmartContracts.sol`
+- `governanceVotePower` | type: `IIGovernanceVotePower public` | vis: `public` | flags: `-` | `PChainStakeMirror` @ `flattened/FlareSmartContracts.sol`
+- `maxUpdatesPerBlock` | type: `uint256 public` | vis: `public` | flags: `-` | `PChainStakeMirror` @ `flattened/FlareSmartContracts.sol`
+- `nextTimestampToTrigger` | type: `uint256 public` | vis: `public` | flags: `-` | `PChainStakeMirror` @ `flattened/FlareSmartContracts.sol`
+- `transactionHashToPChainStakingData` | type: `mapping(bytes32 => PChainStakingData) public` | vis: `public` | flags: `-` | `PChainStakeMirror` @ `flattened/FlareSmartContracts.sol`
+- `verifier` | type: `IIPChainStakeMirrorVerifier public` | vis: `public` | flags: `-` | `PChainStakeMirror` @ `flattened/FlareSmartContracts.sol`
+- `P_CHAIN_STAKE_MIRROR_PROTOCOL_ID` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol` = `2`
+- `maxStakeAmountGwei` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol`
+- `maxStakeDurationSeconds` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol`
+- `minStakeAmountGwei` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol`
+- `minStakeDurationSeconds` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol`
+- `pChainStakeMirrorVoting` | type: `IPChainStakeMirrorMultiSigVoting public immutable` | vis: `public` | flags: `immutable` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol`
+- `relay` | type: `IRelay public immutable` | vis: `public` | flags: `immutable` | `PChainStakeMirrorVerifier` @ `contracts/mock/PChainStakeMirrorVerifier.sol`
+- `mockRelay` | type: `address private` | vis: `private` | flags: `-` | `PChainStakeMirrorVerifierTest` @ `test-forge/unit/staking/implementation/PChainStakeMirrorVerifier.t.sol`
+- `verifier` | type: `PChainStakeMirrorVerifier private` | vis: `private` | flags: `-` | `PChainStakeMirrorVerifierTest` @ `test-forge/unit/staking/implementation/PChainStakeMirrorVerifier.t.sol`
+- `account` | type: `address public` | vis: `public` | flags: `-` | `PassContract` @ `test-forge/mock/PassContract.sol`
+- `value` | type: `uint16 public` | vis: `public` | flags: `-` | `PassContract` @ `test-forge/mock/PassContract.sol`
+- `MAX_BIPS` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `PercentageDelegation` @ `flattened/FlareSmartContracts.sol` = `10000`
+- `MAX_BIPS_MSG` | type: `string private constant` | vis: `private` | flags: `constant` | `PercentageDelegation` @ `flattened/FlareSmartContracts.sol` = `"Max delegation bips exceeded"`
+- `BURN_ADDRESS` | type: `address payable constant internal` | vis: `internal` | flags: `constant,payable` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol` = `payable(0x000000000000000000000000000000000000dEaD)`
+- `MAX_BIPS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol` = `1e4`
+- `PPM_MAX` | type: `uint24 private constant` | vis: `private` | flags: `constant` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol` = `1e6`
+- `REWARD_EPOCH_DURATION_IN_SEC` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol` = `uint64(REWARD_EPOCH_DURATION_IN_VOTING_EPOCHS) * VOTING_EPOCH_DURATION_SEC`
+- `REWARD_EPOCH_DURATION_IN_VOTING_EPOCHS` | type: `uint16 private constant` | vis: `private` | flags: `constant` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol` = `3360`
+- `VOTING_EPOCH_DURATION_SEC` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol` = `90`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `flareDaemon` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `flareSystemsManager` | type: `FlareSystemsManager private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `fsmSettings` | type: `FlareSystemsManager.Settings private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `governanceSettings` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `governanceVotePower` | type: `IIGovernanceVotePower private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `initialSettings` | type: `FlareSystemsManager.InitialSettings private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `initialVotePowers` | type: `uint256[] private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `mockCleanupBlockNumberManager` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `mockRelay` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `mockRewardManager` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `mockSubmission` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `mockSupply` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `mockVoterRegistry` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `pollingFoundation` | type: `PollingFoundation private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `privateKeys` | type: `uint256[] private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `proposers` | type: `address[] private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `settings` | type: `IIPollingFoundation.GovernorSettingsWithoutExecParams private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `voters` | type: `address[] private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `vpContract` | type: `IIVPContract private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `wNat` | type: `IWNat private` | vis: `private` | flags: `-` | `PollingFoundationIntegrationTest` @ `test-forge/integration/PollingFoundation.t.sol`
+- `BURN_ADDRESS` | type: `address payable constant internal` | vis: `internal` | flags: `constant,payable` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol` = `payable(0x000000000000000000000000000000000000dEaD)`
+- `MAX_BIPS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol` = `1e4`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `calldatas` | type: `bytes[] private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `executeMock` | type: `ExecuteMock private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `executeMockSquare` | type: `ExecuteMockSquare private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `governanceSettings` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `mockGovernanceVotePower` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `mockSubmission` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `mockSupply` | type: `address private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `pollingFoundation` | type: `PollingFoundation private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `privateKeys` | type: `uint256[] private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `proposalId` | type: `uint256 private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `proposers` | type: `address[] private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `settings` | type: `IIPollingFoundation.GovernorSettingsWithoutExecParams private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `settingsExec` | type: `IGovernor.GovernorSettings private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `targets` | type: `address[] private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `values` | type: `uint256[] private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `votePowers` | type: `uint256[] private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `voters` | type: `address[] private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `vpBlock` | type: `uint256 private` | vis: `private` | flags: `-` | `PollingFoundationTest` @ `test-forge/unit/governance/implementation/PollingFoundation.t.sol`
+- `BURN_ADDRESS` | type: `address payable constant internal` | vis: `internal` | flags: `constant,payable` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol` = `payable(0x000000000000000000000000000000000000dEaD)`
+- `DAY_TO_SECOND` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol` = `1 days`
+- `MAX_BIPS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol` = `1e4`
+- `addAfterNotChilledEpochs` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `addAfterRewardedEpochs` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `entityManager` | type: `IEntityManager public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `flareSystemsManager` | type: `IIFlareSystemsManager public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `idCounter` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol` = `0`
+- `maintainer` | type: `address public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `majorityConditionBIPS` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `managementGroupMembers` | type: `AddressSet.State private` | vis: `private` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `memberAddedAtProposal` | type: `mapping (address voter => uint256 proposalId) public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `memberAddedAtRewardEpoch` | type: `mapping (address voter => uint256 rewardEpochId) public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `memberRemovedAtTs` | type: `mapping(address voter => uint256 timestamp) public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `proposalFeeValueWei` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `proposalVotings` | type: `mapping(uint256 proposalId => ProposalVoting) internal` | vis: `internal` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `proposals` | type: `mapping(uint256 proposalId => Proposal) internal` | vis: `internal` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `proxyToVoter` | type: `mapping(address proxy => address voter) public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `removeAfterEligibleProposals` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `removeAfterNonParticipatingProposals` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `removeAfterNotRewardedEpochs` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `removeForDays` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `rewardManager` | type: `IRewardManager public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `thresholdConditionBIPS` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `voterRegistry` | type: `IIVoterRegistry public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `voterToProxy` | type: `mapping(address voter => address proxy) public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `votingDelaySeconds` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `votingPeriodSeconds` | type: `uint256 public` | vis: `public` | flags: `-` | `PollingManagementGroup` @ `contracts/governance/implementation/PollingManagementGroup.sol`
+- `BURN_ADDRESS` | type: `address payable constant internal` | vis: `internal` | flags: `constant,payable` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol` = `payable(0x000000000000000000000000000000000000dEaD)`
+- `DAY_TO_SECONDS` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol` = `86400`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `governanceSettings` | type: `address private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `maintainer` | type: `address private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `members` | type: `address[] private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `mockEntityManager` | type: `address private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `mockRewardManager` | type: `address private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `mockVoterRegistry` | type: `address private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `pollingManagementGroup` | type: `PollingManagementGroup private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `proposer` | type: `address private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `proxyVoter` | type: `address private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `settings` | type: `PollingManagementGroup.ProposalSettings private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `voters` | type: `address[] private` | vis: `private` | flags: `-` | `PollingManagementGroupTest` @ `test-forge/unit/governance/implementation/PollingManagementGroup.t.sol`
+- `ERR_ALREADY_SET` | type: `string internal constant` | vis: `internal` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `"Already set"`
+- `ERR_ARRAY_LENGTHS` | type: `string internal constant` | vis: `internal` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `"Array lengths do not match"`
+- `ERR_DUPLICATE_SUBMIT_IN_EPOCH` | type: `string internal constant` | vis: `internal` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `"Duplicate submit in epoch"`
+- `ERR_FTSO_INDICES_NOT_INCREASING` | type: `string internal constant` | vis: `internal` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `"FTSO indices not increasing"`
+- `ERR_FTSO_MANAGER_ONLY` | type: `string internal constant` | vis: `internal` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `"FTSO manager only"`
+- `ERR_NOT_WHITELISTED` | type: `string internal constant` | vis: `internal` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `"Not whitelisted"`
+- `ERR_PRICE_INVALID` | type: `string internal constant` | vis: `internal` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `"Price already revealed or not valid"`
+- `ERR_RANDOM_TOO_SMALL` | type: `string internal constant` | vis: `internal` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `"Too small random number"`
+- `ERR_WHITELISTER_ONLY` | type: `string internal constant` | vis: `internal` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `"Voter whitelister only"`
+- `ERR_WRONG_EPOCH_ID` | type: `string internal constant` | vis: `internal` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `"Wrong epoch id"`
+- `MINIMAL_RANDOM` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `2**128`
+- `RANDOM_EPOCH_CYCLIC_BUFFER_SIZE` | type: `uint256 public constant` | vis: `public` | flags: `constant` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol` = `50`
+- `epochVoterHash` | type: `mapping(uint256 => mapping(address => bytes32)) internal` | vis: `internal` | flags: `-` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol`
+- `ftsoManager` | type: `IFtsoManagerGenesis internal` | vis: `internal` | flags: `-` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol`
+- `ftsoRegistry` | type: `IFtsoRegistryGenesis internal` | vis: `internal` | flags: `-` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol`
+- `randoms` | type: `uint256[RANDOM_EPOCH_CYCLIC_BUFFER_SIZE] internal` | vis: `internal` | flags: `-` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol`
+- `trustedAddresses` | type: `address[] internal` | vis: `internal` | flags: `-` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol`
+- `trustedAddressesMapping` | type: `mapping(address => bool) internal` | vis: `internal` | flags: `-` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol`
+- `voterWhitelister` | type: `address internal` | vis: `internal` | flags: `-` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol`
+- `whitelistedFtsoBitmap` | type: `mapping(address => uint256) internal` | vis: `internal` | flags: `-` | `PriceSubmitter` @ `flattened/FlareSmartContracts.sol`
+- `ftsoManager` | type: `IFtsoManagerGenesis internal` | vis: `internal` | flags: `-` | `PriceSubmitterProxy` @ `contracts/fscV1/implementation/PriceSubmitterProxy.sol`
+- `ftsoRegistry` | type: `IFtsoRegistryGenesis internal` | vis: `internal` | flags: `-` | `PriceSubmitterProxy` @ `contracts/fscV1/implementation/PriceSubmitterProxy.sol`
+- `relay` | type: `RandomNumberV2Interface public` | vis: `public` | flags: `-` | `PriceSubmitterProxy` @ `contracts/fscV1/implementation/PriceSubmitterProxy.sol`
+- `voterWhitelister` | type: `address internal` | vis: `internal` | flags: `-` | `PriceSubmitterProxy` @ `contracts/fscV1/implementation/PriceSubmitterProxy.sol`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `PriceSubmitterProxyTest` @ `test-forge/unit/fscV1/implementation/PriceSubmitterProxy.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `PriceSubmitterProxyTest` @ `test-forge/unit/fscV1/implementation/PriceSubmitterProxy.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `PriceSubmitterProxyTest` @ `test-forge/unit/fscV1/implementation/PriceSubmitterProxy.t.sol`
+- `ftsoManager` | type: `address private` | vis: `private` | flags: `-` | `PriceSubmitterProxyTest` @ `test-forge/unit/fscV1/implementation/PriceSubmitterProxy.t.sol`
+- `ftsoRegistry` | type: `address private` | vis: `private` | flags: `-` | `PriceSubmitterProxyTest` @ `test-forge/unit/fscV1/implementation/PriceSubmitterProxy.t.sol`
+- `mockRelay` | type: `address private` | vis: `private` | flags: `-` | `PriceSubmitterProxyTest` @ `test-forge/unit/fscV1/implementation/PriceSubmitterProxy.t.sol`
+- `priceSubmitterProxy` | type: `PriceSubmitterProxy private` | vis: `private` | flags: `-` | `PriceSubmitterProxyTest` @ `test-forge/unit/fscV1/implementation/PriceSubmitterProxy.t.sol`
+- `voter` | type: `address private` | vis: `private` | flags: `-` | `PriceSubmitterProxyTest` @ `test-forge/unit/fscV1/implementation/PriceSubmitterProxy.t.sol`
+- `voterWhitelister` | type: `address private` | vis: `private` | flags: `-` | `PriceSubmitterProxyTest` @ `test-forge/unit/fscV1/implementation/PriceSubmitterProxy.t.sol`
+- `ERR_IMPLEMENTATION_ZERO` | type: `string internal constant` | vis: `internal` | flags: `constant` | `ProxyGoverned` @ `flattened/FlareSmartContracts.sol` = `"implementation zero"`
+- `IMPLEMENTATION_POSITION` | type: `bytes32 private constant` | vis: `private` | flags: `constant` | `ProxyGoverned` @ `flattened/FlareSmartContracts.sol` = `keccak256("flare.diamond.ProxyGoverned.IMPLEMENTATION_POSITION")`
+- `checkPointHistoryState` | type: `PublicKeyHistory.CheckPointHistoryState private` | vis: `private` | flags: `-` | `PublicKeyHistoryTest` @ `test-forge/unit/protocol/lib/PublicKeyHistory.t.sol`
+- `emptyState` | type: `PublicKeyHistory.CheckPointHistoryState private` | vis: `private` | flags: `-` | `PublicKeyHistoryTest` @ `test-forge/unit/protocol/lib/PublicKeyHistory.t.sol`
+- `emptyState2` | type: `PublicKeyHistory.CheckPointHistoryState private` | vis: `private` | flags: `-` | `PublicKeyHistoryTest` @ `test-forge/unit/protocol/lib/PublicKeyHistory.t.sol`
+- `claimSetupManager` | type: `IIClaimSetupManager public` | vis: `public` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `decimals` | type: `uint8 public immutable` | vis: `public` | flags: `immutable` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `firstMonthStartTs` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `fundingAddress` | type: `address public` | vis: `public` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `incentivePoolEnabled` | type: `bool public` | vis: `public` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `libraryAddress` | type: `address public` | vis: `public` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `manager` | type: `address public` | vis: `public` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `name` | type: `string public` | vis: `public` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `ownerToRNatAccount` | type: `mapping(address owner => IIRNatAccount) private` | vis: `private` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `projects` | type: `Project[] internal` | vis: `internal` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `rNatAccountToOwner` | type: `mapping(IIRNatAccount => address owner) private` | vis: `private` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `symbol` | type: `string public` | vis: `public` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `totalAssignableRewards` | type: `uint128 internal` | vis: `internal` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `totalAssignedRewards` | type: `uint128 internal` | vis: `internal` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `totalClaimedRewards` | type: `uint128 internal` | vis: `internal` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `totalWithdrawnAssignableRewards` | type: `uint128 internal` | vis: `internal` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `totalWithdrawnRewards` | type: `uint128 internal` | vis: `internal` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `wNat` | type: `IWNat public` | vis: `public` | flags: `-` | `RNat` @ `contracts/rNat/implementation/RNat.sol`
+- `BURN_ADDRESS` | type: `address payable constant internal` | vis: `internal` | flags: `constant,payable` | `RNatAccount` @ `contracts/rNat/implementation/RNatAccount.sol` = `payable(0x000000000000000000000000000000000000dEaD)`
+- `ERR_RNAT_ONLY` | type: `string internal constant` | vis: `internal` | flags: `constant` | `RNatAccount` @ `contracts/rNat/implementation/RNatAccount.sol` = `"only rNat"`
+- `ERR_TRANSFER_FAILURE` | type: `string internal constant` | vis: `internal` | flags: `constant` | `RNatAccount` @ `contracts/rNat/implementation/RNatAccount.sol` = `"transfer failed"`
+- `MONTH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `RNatAccount` @ `contracts/rNat/implementation/RNatAccount.sol` = `30 days`
+- `disableAutoWrapping` | type: `bool internal` | vis: `internal` | flags: `-` | `RNatAccount` @ `contracts/rNat/implementation/RNatAccount.sol`
+- `owner` | type: `address public` | vis: `public` | flags: `-` | `RNatAccount` @ `contracts/rNat/implementation/RNatAccount.sol`
+- `rNat` | type: `IRNat public` | vis: `public` | flags: `-` | `RNatAccount` @ `contracts/rNat/implementation/RNatAccount.sol`
+- `receivedRewards` | type: `uint128 public` | vis: `public` | flags: `-` | `RNatAccount` @ `contracts/rNat/implementation/RNatAccount.sol`
+- `rewards` | type: `mapping(uint256 month => uint256) internal` | vis: `internal` | flags: `-` | `RNatAccount` @ `contracts/rNat/implementation/RNatAccount.sol`
+- `withdrawnRewards` | type: `uint128 public` | vis: `public` | flags: `-` | `RNatAccount` @ `contracts/rNat/implementation/RNatAccount.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `RNatAccountTest` @ `test-forge/unit/rNat/implementation/RNatAccount.t.sol`
+- `governanceVotePower` | type: `IIGovernanceVotePower private` | vis: `private` | flags: `-` | `RNatAccountTest` @ `test-forge/unit/rNat/implementation/RNatAccount.t.sol`
+- `mockRNat` | type: `IRNat private` | vis: `private` | flags: `-` | `RNatAccountTest` @ `test-forge/unit/rNat/implementation/RNatAccount.t.sol`
+- `owner` | type: `address private` | vis: `private` | flags: `-` | `RNatAccountTest` @ `test-forge/unit/rNat/implementation/RNatAccount.t.sol`
+- `rNatAccount` | type: `RNatAccount private` | vis: `private` | flags: `-` | `RNatAccountTest` @ `test-forge/unit/rNat/implementation/RNatAccount.t.sol`
+- `vpContract` | type: `IIVPContract private` | vis: `private` | flags: `-` | `RNatAccountTest` @ `test-forge/unit/rNat/implementation/RNatAccount.t.sol`
+- `wNat` | type: `IWNatMock private` | vis: `private` | flags: `-` | `RNatAccountTest` @ `test-forge/unit/rNat/implementation/RNatAccount.t.sol`
+- `BURN_ADDRESS` | type: `address payable constant internal` | vis: `internal` | flags: `constant,payable` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol` = `payable(0x000000000000000000000000000000000000dEaD)`
+- `MONTH` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol` = `30 days`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `fundingAddress` | type: `address private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `governanceVotePower` | type: `IIGovernanceVotePower private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `incentivePool` | type: `address private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `manager` | type: `address private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `mockClaimSetupManager` | type: `address private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `owner` | type: `address private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `projectDistributors` | type: `address[] private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `projectNames` | type: `string[] private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `rNat` | type: `RNat private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `rNatAccount` | type: `RNatAccount private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `rewardRecipients1` | type: `address[] private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `rewardRecipients2` | type: `address[] private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `vpContract` | type: `IIVPContract private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `wNat` | type: `IWNatMock private` | vis: `private` | flags: `-` | `RNatTest` @ `test-forge/unit/rNat/implementation/RNat.t.sol`
+- `_ENTERED` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ReentrancyGuard` @ `flattened/FlareSmartContracts.sol` = `2`
+- `_NOT_ENTERED` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `ReentrancyGuard` @ `flattened/FlareSmartContracts.sol` = `1`
+- `_status` | type: `uint256 private` | vis: `private` | flags: `-` | `ReentrancyGuard` @ `flattened/FlareSmartContracts.sol`
+- `ADDRESS_AND_WEIGHT_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `22`
+- `ADDRESS_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `20`
+- `ADDRESS_OFFSET` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `12`
+- `MAX_THRESHOLD_BIPS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `6600`
+- `MAX_VOTERS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `300`
+- `MD_BOFF_numberOfVoters` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `72`
+- `MD_BOFF_rewardEpochId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `48`
+- `MD_BOFF_startingVotingRoundId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `16`
+- `MD_BOFF_threshold` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0`
+- `MD_MASK_numberOfVoters` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffff`
+- `MD_MASK_rewardEpochId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffffff`
+- `MD_MASK_startingVotingRoundId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffffffff`
+- `MD_MASK_threshold` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffff`
+- `MESSAGE_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `38`
+- `MESSAGE_NO_MR_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `6`
+- `METADATA_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `11`
+- `MIN_THRESHOLD_BIPS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `5000`
+- `MSG_NMR_BOFF_isSecureRandom` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0`
+- `MSG_NMR_BOFF_protocolId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `40`
+- `MSG_NMR_BOFF_votingRoundId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `8`
+- `MSG_NMR_MASK_isSecureRandom` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xff`
+- `MSG_NMR_MASK_protocolId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xff`
+- `MSG_NMR_MASK_votingRoundId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffffffff`
+- `M_0` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0`
+- `M_1` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `32`
+- `M_2` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `64`
+- `M_2_signingPolicyHashTmp` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `64`
+- `M_3` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `96`
+- `M_3_existingSigningPolicyHashTmp` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `96`
+- `M_4` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `128`
+- `M_5_isSecureRandom` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `160`
+- `M_5_stateData` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `160`
+- `M_6_merkleRoot` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `192`
+- `NUMBER_OF_SIGNATURES_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `2`
+- `NUMBER_OF_SIGNATURES_MASK` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffff`
+- `NUMBER_OF_SIGNATURES_RIGHT_SHIFT_BITS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `240`
+- `PROTOCOL_ID_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `1`
+- `RANDOM_SEED_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `32`
+- `REWARD_EPOCH_ID_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `3`
+- `SD_BOFF_firstRewardEpochStartVotingRoundId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `48`
+- `SD_BOFF_firstVotingRoundStartTs` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `8`
+- `SD_BOFF_isSecureRandom` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `144`
+- `SD_BOFF_lastInitializedRewardEpoch` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `152`
+- `SD_BOFF_messageFinalizationWindowInRewardEpochs` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `192`
+- `SD_BOFF_noSigningPolicyRelay` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `184`
+- `SD_BOFF_randomNumberProtocolId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0`
+- `SD_BOFF_randomVotingRoundId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `112`
+- `SD_BOFF_rewardEpochDurationInVotingEpochs` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `80`
+- `SD_BOFF_thresholdIncreaseBIPS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `96`
+- `SD_BOFF_votingEpochDurationSeconds` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `40`
+- `SD_MASK_firstRewardEpochStartVotingRoundId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffffffff`
+- `SD_MASK_firstVotingRoundStartTs` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffffffff`
+- `SD_MASK_isSecureRandom` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xff`
+- `SD_MASK_lastInitializedRewardEpoch` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffffffff`
+- `SD_MASK_messageFinalizationWindowInRewardEpochs` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffffffff`
+- `SD_MASK_noSigningPolicyRelay` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xff`
+- `SD_MASK_randomNumberProtocolId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xff`
+- `SD_MASK_randomVotingRoundId` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffffffff`
+- `SD_MASK_rewardEpochDurationInVotingEpochs` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffff`
+- `SD_MASK_thresholdIncreaseBIPS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffff`
+- `SD_MASK_votingEpochDurationSeconds` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xff`
+- `SELECTOR_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `4`
+- `SIGNATURE_INDEX_RIGHT_SHIFT_BITS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `240`
+- `SIGNATURE_V_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `1`
+- `SIGNATURE_WITH_INDEX_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `67`
+- `SIGNING_POLICY_PREFIX_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `43`
+- `WEIGHT_BYTES` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `2`
+- `WEIGHT_MASK` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `Relay` @ `contracts/protocol/implementation/Relay.sol` = `0xffff`
+- `feeCollectionAddress` | type: `address payable public` | vis: `public` | flags: `payable` | `Relay` @ `contracts/protocol/implementation/Relay.sol`
+- `initialRewardEpochId` | type: `uint32 public immutable` | vis: `public` | flags: `immutable` | `Relay` @ `contracts/protocol/implementation/Relay.sol`
+- `isSecureRandomMap` | type: `mapping(uint256 => bytes32) internal` | vis: `internal` | flags: `-` | `Relay` @ `contracts/protocol/implementation/Relay.sol`
+- `merkleRootsPrivate` | type: `mapping(uint256 protocolId => mapping(uint256 votingRoundId => bytes32)) private` | vis: `private` | flags: `-` | `Relay` @ `contracts/protocol/implementation/Relay.sol`
+- `oldRelay` | type: `IRelay public immutable` | vis: `public` | flags: `immutable` | `Relay` @ `contracts/protocol/implementation/Relay.sol`
+- `protocolFeeInWei` | type: `mapping(uint256 => uint256) public` | vis: `public` | flags: `-` | `Relay` @ `contracts/protocol/implementation/Relay.sol`
+- `signingPolicySetter` | type: `address public` | vis: `public` | flags: `-` | `Relay` @ `contracts/protocol/implementation/Relay.sol`
+- `startingVotingRoundIdForInitialRewardEpochId` | type: `uint32 public immutable` | vis: `public` | flags: `immutable` | `Relay` @ `contracts/protocol/implementation/Relay.sol`
+- `startingVotingRoundIds` | type: `mapping(uint256 rewardEpochId => uint256) public` | vis: `public` | flags: `-` | `Relay` @ `contracts/protocol/implementation/Relay.sol`
+- `stateData` | type: `StateData public` | vis: `public` | flags: `-` | `Relay` @ `contracts/protocol/implementation/Relay.sol`
+- `toSigningPolicyHashPrivate` | type: `mapping(uint256 rewardEpochId => bytes32) private` | vis: `private` | flags: `-` | `Relay` @ `contracts/protocol/implementation/Relay.sol`
+- `FIRST_CLAIMABLE_EPOCH` | type: `uint24 constant internal` | vis: `internal` | flags: `constant` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol` = `type(uint24).max`
+- `PPM_MAX` | type: `uint256 constant internal` | vis: `internal` | flags: `constant` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol` = `1e6`
+- `active` | type: `bool public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `cChainStake` | type: `ICChainStake public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `cChainStakeEnabled` | type: `bool public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `claimSetupManager` | type: `IIClaimSetupManager public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `epochBurnedRewards` | type: `mapping(uint256 rewardEpochId => uint120) private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `epochClaimedRewards` | type: `mapping(uint256 rewardEpochId => uint120) private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `epochInitialisedRewards` | type: `mapping(uint256 rewardEpochId => uint120) private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `epochProcessedRewardClaims` | type: `mapping(uint256 rewardEpochId => mapping(bytes32 claimHash => bool)) internal` | vis: `internal` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `epochTotalInflationRewards` | type: `mapping(uint256 rewardEpochId => uint120) private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `epochTotalRewards` | type: `mapping(uint256 rewardEpochId => uint120) private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `epochTypeBeneficiaryUnclaimedReward` | type: `mapping(uint256 rewardEpochId => mapping(ClaimType claimType => mapping(address beneficiary => UnclaimedRewardState))) internal` | vis: `internal` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `epochVotePowerBlock` | type: `mapping(uint256 rewardEpochId => uint256) private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `firstClaimableRewardEpochId` | type: `uint24 public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `flareSystemsCalculator` | type: `IIFlareSystemsCalculator public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `flareSystemsManager` | type: `IIFlareSystemsManager public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `ftsoRewardManagerProxy` | type: `address public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `initialRewardEpochId` | type: `uint24 private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `newRewardManager` | type: `address public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `nextRewardEpochIdToExpire` | type: `uint24 private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `noOfInitialisedWeightBasedClaims` | type: `mapping(uint256 rewardEpochId => uint256) public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `oldRewardManager` | type: `address public immutable` | vis: `public` | flags: `immutable` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `pChainStakeMirror` | type: `IPChainStakeMirror public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `pChainStakeMirrorEnabled` | type: `bool public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `rewardManagerId` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `rewardOffersManagerSet` | type: `AddressSet.State internal` | vis: `internal` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `rewardOwnerNextClaimableEpochId` | type: `mapping(address rewardOwner => uint24) private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `totalBurnedWei` | type: `uint256 private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `totalClaimedWei` | type: `uint256 private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `totalInflationRewardsWei` | type: `uint256 private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `totalRewardsWei` | type: `uint256 private` | vis: `private` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `wNat` | type: `IWNat public` | vis: `public` | flags: `-` | `RewardManager` @ `contracts/protocol/implementation/RewardManager.sol`
+- `BURN_ADDRESS` | type: `address payable constant private` | vis: `private` | flags: `constant,payable` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol` = `payable(0x000000000000000000000000000000000000dEaD)`
+- `account1` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `delegator` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `merkleProof1` | type: `bytes32[] private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `merkleProof2` | type: `bytes32[] private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `merkleProof3` | type: `bytes32[] private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `merkleProof4` | type: `bytes32[] private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `mockCChainStake` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `mockClaimSetupManager` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `mockFlareSystemsCalculator` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `mockFtsoRewardManagerProxy` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `mockPChainStakeMirror` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `mockWNat` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `nodeId1` | type: `bytes20 private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `recipient` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `rewardOffersManagers` | type: `address[] private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `rewardOwners` | type: `address[] private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `voter1` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `voter2` | type: `address private` | vis: `private` | flags: `-` | `RewardManagerTest` @ `test-forge/unit/protocol/implementation/RewardManager.t.sol`
+- `INFLATION_TIME_FRAME_SEC` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `RewardOffersManagerBase` @ `contracts/protocol/implementation/RewardOffersManagerBase.sol` = `1 days`
+- `flareSystemsManager` | type: `IIFlareSystemsManager public` | vis: `public` | flags: `-` | `RewardOffersManagerBase` @ `contracts/protocol/implementation/RewardOffersManagerBase.sol`
+- `feedId` | type: `bytes21 public immutable` | vis: `public` | flags: `immutable` | `SFlrCustomFeed` @ `contracts/customFeeds/implementation/SFlrCustomFeed.sol`
+- `flareContractRegistry` | type: `IFlareContractRegistry public immutable` | vis: `public` | flags: `immutable` | `SFlrCustomFeed` @ `contracts/customFeeds/implementation/SFlrCustomFeed.sol`
+- `referenceFeedId` | type: `bytes21 public immutable` | vis: `public` | flags: `immutable` | `SFlrCustomFeed` @ `contracts/customFeeds/implementation/SFlrCustomFeed.sol`
+- `sFlr` | type: `ISFlr public immutable` | vis: `public` | flags: `immutable` | `SFlrCustomFeed` @ `contracts/customFeeds/implementation/SFlrCustomFeed.sol`
+- `feedId` | type: `bytes21 private` | vis: `private` | flags: `-` | `SFlrCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/SFlrCustomFeed.t.sol`
+- `mockFastUpdater` | type: `address private` | vis: `private` | flags: `-` | `SFlrCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/SFlrCustomFeed.t.sol`
+- `mockFastUpdatesConfiguration` | type: `address private` | vis: `private` | flags: `-` | `SFlrCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/SFlrCustomFeed.t.sol`
+- `mockFeeCalculator` | type: `address private` | vis: `private` | flags: `-` | `SFlrCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/SFlrCustomFeed.t.sol`
+- `mockFlareContractRegistry` | type: `address private` | vis: `private` | flags: `-` | `SFlrCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/SFlrCustomFeed.t.sol`
+- `mockSFlr` | type: `address private` | vis: `private` | flags: `-` | `SFlrCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/SFlrCustomFeed.t.sol`
+- `referenceFeedId` | type: `bytes21 private` | vis: `private` | flags: `-` | `SFlrCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/SFlrCustomFeed.t.sol`
+- `sFlrCustomFeed` | type: `SFlrCustomFeed private` | vis: `private` | flags: `-` | `SFlrCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/SFlrCustomFeed.t.sol`
+- `MAX_BIPS` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `SafePct` @ `contracts/utils/lib/SafePct.sol` = `10_000`
+- `feedId` | type: `bytes21 public immutable` | vis: `public` | flags: `immutable` | `StXrpCustomFeed` @ `contracts/customFeeds/implementation/StXrpCustomFeed.sol`
+- `flareContractRegistry` | type: `IFlareContractRegistry public immutable` | vis: `public` | flags: `immutable` | `StXrpCustomFeed` @ `contracts/customFeeds/implementation/StXrpCustomFeed.sol`
+- `referenceFeedId` | type: `bytes21 public immutable` | vis: `public` | flags: `immutable` | `StXrpCustomFeed` @ `contracts/customFeeds/implementation/StXrpCustomFeed.sol`
+- `stXrp` | type: `IERC4626 public immutable` | vis: `public` | flags: `immutable` | `StXrpCustomFeed` @ `contracts/customFeeds/implementation/StXrpCustomFeed.sol`
+- `feedId` | type: `bytes21 private` | vis: `private` | flags: `-` | `StXrpCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/StXrpCustomFeed.t.sol`
+- `mockFastUpdater` | type: `address private` | vis: `private` | flags: `-` | `StXrpCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/StXrpCustomFeed.t.sol`
+- `mockFastUpdatesConfiguration` | type: `address private` | vis: `private` | flags: `-` | `StXrpCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/StXrpCustomFeed.t.sol`
+- `mockFeeCalculator` | type: `address private` | vis: `private` | flags: `-` | `StXrpCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/StXrpCustomFeed.t.sol`
+- `mockFlareContractRegistry` | type: `address private` | vis: `private` | flags: `-` | `StXrpCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/StXrpCustomFeed.t.sol`
+- `mockStXrp` | type: `address private` | vis: `private` | flags: `-` | `StXrpCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/StXrpCustomFeed.t.sol`
+- `referenceFeedId` | type: `bytes21 private` | vis: `private` | flags: `-` | `StXrpCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/StXrpCustomFeed.t.sol`
+- `stXrpCustomFeed` | type: `StXrpCustomFeed private` | vis: `private` | flags: `-` | `StXrpCustomFeedTest` @ `test-forge/unit/customFeeds/implementation/StXrpCustomFeed.t.sol`
+- `flareSystemsManager` | type: `address public` | vis: `public` | flags: `-` | `Submission` @ `contracts/protocol/implementation/Submission.sol`
+- `relay` | type: `IRelay public` | vis: `public` | flags: `-` | `Submission` @ `contracts/protocol/implementation/Submission.sol`
+- `submit1Addresses` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `Submission` @ `contracts/protocol/implementation/Submission.sol`
+- `submit2Addresses` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `Submission` @ `contracts/protocol/implementation/Submission.sol`
+- `submit3Addresses` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `Submission` @ `contracts/protocol/implementation/Submission.sol`
+- `submit3MethodEnabled` | type: `bool public` | vis: `public` | flags: `-` | `Submission` @ `contracts/protocol/implementation/Submission.sol`
+- `submitAndPassContract` | type: `address public` | vis: `public` | flags: `-` | `Submission` @ `contracts/protocol/implementation/Submission.sol`
+- `submitAndPassSelector` | type: `bytes4 public` | vis: `public` | flags: `-` | `Submission` @ `contracts/protocol/implementation/Submission.sol`
+- `submitSignaturesAddresses` | type: `mapping(address => bool) private` | vis: `private` | flags: `-` | `Submission` @ `contracts/protocol/implementation/Submission.sol`
+- `addresses` | type: `address[] private` | vis: `private` | flags: `-` | `SubmissionTest` @ `test-forge/unit/protocol/implementation/Submission.t.sol`
+- `emptyAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `SubmissionTest` @ `test-forge/unit/protocol/implementation/Submission.t.sol`
+- `mockRelay` | type: `address private` | vis: `private` | flags: `-` | `SubmissionTest` @ `test-forge/unit/protocol/implementation/Submission.t.sol`
+- `nameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `SubmissionTest` @ `test-forge/unit/protocol/implementation/Submission.t.sol`
+- `submission` | type: `Submission private` | vis: `private` | flags: `-` | `SubmissionTest` @ `test-forge/unit/protocol/implementation/Submission.t.sol`
+- `user1` | type: `address private` | vis: `private` | flags: `-` | `SubmissionTest` @ `test-forge/unit/protocol/implementation/Submission.t.sol`
+- `users` | type: `address[] private` | vis: `private` | flags: `-` | `SubmissionTest` @ `test-forge/unit/protocol/implementation/Submission.t.sol`
+- `target` | type: `address payable public` | vis: `public` | flags: `payable` | `SuicidalMock` @ `contracts/mock/SuicidalMock.sol`
+- `BURN_ADDRESS` | type: `address payable constant internal` | vis: `internal` | flags: `constant,payable` | `TokenPoolBase` @ `contracts/utils/implementation/TokenPoolBase.sol` = `payable(0x000000000000000000000000000000000000dEaD)`
+- `owner` | type: `address public immutable` | vis: `public` | flags: `immutable` | `USDTSwapper` @ `contracts/utils/implementation/USDTSwapper.sol`
+- `paused` | type: `bool public` | vis: `public` | flags: `-` | `USDTSwapper` @ `contracts/utils/implementation/USDTSwapper.sol`
+- `usdt0` | type: `IERC20Metadata public immutable` | vis: `public` | flags: `immutable` | `USDTSwapper` @ `contracts/utils/implementation/USDTSwapper.sol`
+- `usdte` | type: `IERC20Metadata public immutable` | vis: `public` | flags: `immutable` | `USDTSwapper` @ `contracts/utils/implementation/USDTSwapper.sol`
+- `owner` | type: `address private` | vis: `private` | flags: `-` | `USDTSwapperTest` @ `test-forge/unit/utils/implementation/USDTSwapper.t.sol`
+- `sender1` | type: `address private` | vis: `private` | flags: `-` | `USDTSwapperTest` @ `test-forge/unit/utils/implementation/USDTSwapper.t.sol`
+- `sender2` | type: `address private` | vis: `private` | flags: `-` | `USDTSwapperTest` @ `test-forge/unit/utils/implementation/USDTSwapper.t.sol`
+- `swapper` | type: `USDTSwapper public` | vis: `public` | flags: `-` | `USDTSwapperTest` @ `test-forge/unit/utils/implementation/USDTSwapper.t.sol`
+- `usdt0` | type: `ERC20Mock public` | vis: `public` | flags: `-` | `USDTSwapperTest` @ `test-forge/unit/utils/implementation/USDTSwapper.t.sol`
+- `usdte` | type: `ERC20Mock public` | vis: `public` | flags: `-` | `USDTSwapperTest` @ `test-forge/unit/utils/implementation/USDTSwapper.t.sol`
+- `ALREADY_EXPLICIT_MSG` | type: `string constant private` | vis: `private` | flags: `constant` | `VPContract` @ `flattened/FlareSmartContracts.sol` = `"Already delegated explicitly"`
+- `ALREADY_PERCENT_MSG` | type: `string constant private` | vis: `private` | flags: `constant` | `VPContract` @ `flattened/FlareSmartContracts.sol` = `"Already delegated by percentage"`
+- `VOTE_POWER_NOT_INITIALIZED` | type: `string constant internal` | vis: `internal` | flags: `constant` | `VPContract` @ `flattened/FlareSmartContracts.sol` = `"Vote power not initialized"`
+- `isReplacement` | type: `bool public immutable override` | vis: `public` | flags: `immutable,override` | `VPContract` @ `flattened/FlareSmartContracts.sol`
+- `ownerToken` | type: `IVPToken public immutable override` | vis: `public` | flags: `immutable,override` | `VPContract` @ `flattened/FlareSmartContracts.sol`
+- `uninitializedVotePowerCache` | type: `mapping (bytes32 => uint256) private` | vis: `private` | flags: `-` | `VPContract` @ `flattened/FlareSmartContracts.sol`
+- `votePowerInitializationBlock` | type: `mapping (address => uint256) private` | vis: `private` | flags: `-` | `VPContract` @ `flattened/FlareSmartContracts.sol`
+- `cleanupBlockNumberManager` | type: `address public` | vis: `public` | flags: `-` | `VPToken` @ `flattened/FlareSmartContracts.sol`
+- `governanceVP` | type: `IIGovernanceVotePower private` | vis: `private` | flags: `-` | `VPToken` @ `flattened/FlareSmartContracts.sol`
+- `readVpContract` | type: `IIVPContract private` | vis: `private` | flags: `-` | `VPToken` @ `flattened/FlareSmartContracts.sol`
+- `vpContractInitialized` | type: `bool public` | vis: `public` | flags: `-` | `VPToken` @ `flattened/FlareSmartContracts.sol` = `false`
+- `writeVpContract` | type: `IIVPContract private` | vis: `private` | flags: `-` | `VPToken` @ `flattened/FlareSmartContracts.sol`
+- `rewardManager` | type: `IIRewardManager public` | vis: `public` | flags: `-` | `ValidatorRewardOffersManager` @ `contracts/staking/implementation/ValidatorRewardOffersManager.sol`
+- `totalInflationRewardsOfferedWei` | type: `uint256 public` | vis: `public` | flags: `-` | `ValidatorRewardOffersManager` @ `contracts/staking/implementation/ValidatorRewardOffersManager.sol`
+- `DAY` | type: `uint64 internal constant` | vis: `internal` | flags: `constant` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol` = `1 days`
+- `MAX_BIPS` | type: `uint16 internal constant` | vis: `internal` | flags: `constant` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol` = `1e4`
+- `PPM_MAX` | type: `uint24 internal constant` | vis: `internal` | flags: `constant` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol` = `1e6`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol`
+- `claimBackAddr` | type: `address private` | vis: `private` | flags: `-` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol`
+- `mockInflation` | type: `address private` | vis: `private` | flags: `-` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol`
+- `mockRewardManager` | type: `address private` | vis: `private` | flags: `-` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol`
+- `rewardManager` | type: `RewardManager private` | vis: `private` | flags: `-` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol`
+- `sender` | type: `address private` | vis: `private` | flags: `-` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol`
+- `validatorRewardOffersManager` | type: `ValidatorRewardOffersManager private` | vis: `private` | flags: `-` | `ValidatorRewardOffersManagerTest` @ `test-forge/unit/staking/implementation/ValidatorRewardOffersManager.t.sol`
+- `entityManager` | type: `IIEntityManager public` | vis: `public` | flags: `-` | `VoterPreRegistry` @ `contracts/protocol/implementation/VoterPreRegistry.sol`
+- `preRegisteredVoters` | type: `mapping(uint256 rewardEpochId => PreRegistryState) internal` | vis: `internal` | flags: `-` | `VoterPreRegistry` @ `contracts/protocol/implementation/VoterPreRegistry.sol`
+- `voterRegistry` | type: `IIVoterRegistry public` | vis: `public` | flags: `-` | `VoterPreRegistry` @ `contracts/protocol/implementation/VoterPreRegistry.sol`
+- `UINT16_MAX` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol` = `type(uint16).max`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialDelegationAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialNodeIds` | type: `bytes20[][] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialPublicKeys` | type: `PublicKey[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialSigningPolicyAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialSubmitAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialSubmitSignaturesAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialVoters` | type: `address[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialVotersRegisteredAddresses` | type: `IEntityManager.VoterAddresses[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialVotersSignatures` | type: `Signature[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialVotersSigningPolicyPk` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialVotersWeights` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialWeights` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `mockEntityManager` | type: `address private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `mockFlareSystemsCalculator` | type: `address private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `voterPreRegistry` | type: `VoterPreRegistry private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `voterRegistry` | type: `VoterRegistry private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `MAX_VOTERS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `VoterRegistry` @ `contracts/protocol/implementation/VoterRegistry.sol` = `300`
+- `UINT256_MAX` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `VoterRegistry` @ `contracts/protocol/implementation/VoterRegistry.sol` = `type(uint256).max`
+- `chilledUntilRewardEpochId` | type: `mapping(bytes20 beneficiary => uint256) public` | vis: `public` | flags: `-` | `VoterRegistry` @ `contracts/protocol/implementation/VoterRegistry.sol`
+- `entityManager` | type: `IIEntityManager public` | vis: `public` | flags: `-` | `VoterRegistry` @ `contracts/protocol/implementation/VoterRegistry.sol`
+- `flareSystemsCalculator` | type: `IIFlareSystemsCalculator public` | vis: `public` | flags: `-` | `VoterRegistry` @ `contracts/protocol/implementation/VoterRegistry.sol`
+- `flareSystemsManager` | type: `IIFlareSystemsManager public` | vis: `public` | flags: `-` | `VoterRegistry` @ `contracts/protocol/implementation/VoterRegistry.sol`
+- `maxVoters` | type: `uint256 public` | vis: `public` | flags: `-` | `VoterRegistry` @ `contracts/protocol/implementation/VoterRegistry.sol`
+- `newSigningPolicyInitializationStartBlockNumber` | type: `mapping(uint256 rewardEpochId => uint256) public` | vis: `public` | flags: `-` | `VoterRegistry` @ `contracts/protocol/implementation/VoterRegistry.sol`
+- `publicKeyRequired` | type: `bool public` | vis: `public` | flags: `-` | `VoterRegistry` @ `contracts/protocol/implementation/VoterRegistry.sol`
+- `register` | type: `mapping(uint256 rewardEpochId => VotersAndWeights) internal` | vis: `internal` | flags: `-` | `VoterRegistry` @ `contracts/protocol/implementation/VoterRegistry.sol`
+- `REWARD_EPOCH_DURATION_IN_SEC` | type: `uint64 private constant` | vis: `private` | flags: `constant` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol` = `uint64(REWARD_EPOCH_DURATION_IN_VOTING_EPOCHS) * VOTING_EPOCH_DURATION_SEC`
+- `REWARD_EPOCH_DURATION_IN_VOTING_EPOCHS` | type: `uint16 private constant` | vis: `private` | flags: `constant` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol` = `3360`
+- `UINT16_MAX` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol` = `type(uint16).max`
+- `VOTING_EPOCH_DURATION_SEC` | type: `uint8 private constant` | vis: `private` | flags: `constant` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol` = `90`
+- `WNAT_CAP_PPM` | type: `uint24 internal constant` | vis: `internal` | flags: `constant` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol` = `200000`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `cChainTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `calculator` | type: `FlareSystemsCalculator private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `certificateRawTest` | type: `bytes private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `entityManager` | type: `EntityManager private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `flareDaemon` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `flareSystemsManager` | type: `FlareSystemsManager private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialDelegationAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialNodeIds` | type: `bytes20[][] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialPublicKeys` | type: `PublicKey[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialSettings` | type: `FlareSystemsManager.InitialSettings private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialSigningPolicyAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialSubmitAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialSubmitSignaturesAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialVoters` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialVotersPChainVP` | type: `uint256[][] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialVotersPK` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialVotersRegisteredAddresses` | type: `IEntityManager.VoterAddresses[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialVotersRegistrationWeight` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialVotersSigningPolicyPk` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialVotersWNatVP` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialWeights` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `mockCleanupBlockNumberManager` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `mockNodePossessionVerification` | type: `MockNodePossessionVerification private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `mockPChainStakeMirror` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `mockPublicKeyVerification` | type: `MockPublicKeyVerification private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `mockRelay` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `mockRewardManager` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `mockSubmission` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `mockWNat` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `mockWNatDelegationFee` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `newSigningPolicyHash` | type: `bytes32 private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `pChainTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `r` | type: `bytes32 private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `s` | type: `bytes32 private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `settings` | type: `FlareSystemsManager.Settings private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `signature` | type: `Signature private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `signatureFSM` | type: `IFlareSystemsManager.Signature private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `signatureTest` | type: `bytes private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `signedMessageHash` | type: `bytes32 private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `v` | type: `uint8 private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `validPublicKeyData` | type: `bytes private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol` = `abi.encode(1, 2, 3)`
+- `voter3RegisteredNodesAtVpBlock` | type: `bytes20[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `voter3RegisteredPChainVPAtVpBlock` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `voterPreRegistry` | type: `VoterPreRegistry private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `voterRegistry` | type: `VoterRegistry private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `wNatTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `MAX_VOTERS` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol` = `300`
+- `UINT16_MAX` | type: `uint256 private constant` | vis: `private` | flags: `constant` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol` = `type(uint16).max`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `cChainTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `governance` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialDelegationAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialNodeIds` | type: `bytes20[][] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialPublicKeyParts1` | type: `bytes32[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialPublicKeyParts2` | type: `bytes32[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialSigningPolicyAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialSubmitAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialSubmitSignaturesAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialVoters` | type: `address[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialVotersRegisteredAddresses` | type: `IEntityManager.VoterAddresses[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialVotersSigningPolicyPk` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialVotersWeights` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialWeights` | type: `uint256[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `mockEntityManager` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `mockFlareSystemsCalculator` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `pChainTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `voterRegistry` | type: `VoterRegistry private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `wNatTotalVP` | type: `uint256 private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `priceSubmitter` | type: `IIPriceSubmitter public immutable` | vis: `public` | flags: `immutable` | `VoterWhitelisterProxy` @ `contracts/fscV1/implementation/VoterWhitelisterProxy.sol`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `VoterWhitelisterProxyTest` @ `test-forge/unit/fscV1/implementation/VoterWhitelisterProxy.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `VoterWhitelisterProxyTest` @ `test-forge/unit/fscV1/implementation/VoterWhitelisterProxy.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `VoterWhitelisterProxyTest` @ `test-forge/unit/fscV1/implementation/VoterWhitelisterProxy.t.sol`
+- `mockFtsoManager` | type: `address private` | vis: `private` | flags: `-` | `VoterWhitelisterProxyTest` @ `test-forge/unit/fscV1/implementation/VoterWhitelisterProxy.t.sol`
+- `mockFtsoRegistry` | type: `address private` | vis: `private` | flags: `-` | `VoterWhitelisterProxyTest` @ `test-forge/unit/fscV1/implementation/VoterWhitelisterProxy.t.sol`
+- `priceSubmitter` | type: `IIPriceSubmitter private` | vis: `private` | flags: `-` | `VoterWhitelisterProxyTest` @ `test-forge/unit/fscV1/implementation/VoterWhitelisterProxy.t.sol`
+- `voterWhitelisterProxy` | type: `VoterWhitelisterProxy private` | vis: `private` | flags: `-` | `VoterWhitelisterProxyTest` @ `test-forge/unit/fscV1/implementation/VoterWhitelisterProxy.t.sol`
+- `defaultFeePercentageBIPS` | type: `uint16 public immutable` | vis: `public` | flags: `immutable` | `WNatDelegationFee` @ `contracts/protocol/implementation/WNatDelegationFee.sol`
+- `feePercentageUpdateOffset` | type: `uint24 public immutable` | vis: `public` | flags: `immutable` | `WNatDelegationFee` @ `contracts/protocol/implementation/WNatDelegationFee.sol`
+- `flareSystemsManager` | type: `IFlareSystemsManager public` | vis: `public` | flags: `-` | `WNatDelegationFee` @ `contracts/protocol/implementation/WNatDelegationFee.sol`
+- `voterFeePercentages` | type: `mapping(address voter => FeePercentage[]) internal` | vis: `internal` | flags: `-` | `WNatDelegationFee` @ `contracts/protocol/implementation/WNatDelegationFee.sol`
+- `addressUpdater` | type: `address private` | vis: `private` | flags: `-` | `WNatDelegationFeeTest` @ `test-forge/unit/protocol/implementation/WNatDelegationFee.t.sol`
+- `contractAddresses` | type: `address[] private` | vis: `private` | flags: `-` | `WNatDelegationFeeTest` @ `test-forge/unit/protocol/implementation/WNatDelegationFee.t.sol`
+- `contractNameHashes` | type: `bytes32[] private` | vis: `private` | flags: `-` | `WNatDelegationFeeTest` @ `test-forge/unit/protocol/implementation/WNatDelegationFee.t.sol`
+- `feeManager` | type: `WNatDelegationFee private` | vis: `private` | flags: `-` | `WNatDelegationFeeTest` @ `test-forge/unit/protocol/implementation/WNatDelegationFee.t.sol`
+- `mockFlareSystemsManager` | type: `address private` | vis: `private` | flags: `-` | `WNatDelegationFeeTest` @ `test-forge/unit/protocol/implementation/WNatDelegationFee.t.sol`
+- `voter` | type: `address private` | vis: `private` | flags: `-` | `WNatDelegationFeeTest` @ `test-forge/unit/protocol/implementation/WNatDelegationFee.t.sol`
+
+### Tokens Added / Token State Values
+Detected token-related variables:
+- `registeredTokens` | type: `IICleanable[] public` | vis: `public` | flags: `-` | `CleanupBlockNumberManager` @ `flattened/FlareSmartContracts.sol`
+- `ftsoProxyBTC` | type: `FtsoProxy private` | vis: `private` | flags: `-` | `FtsoProxyTest` @ `test-forge/unit/fscV1/implementation/FtsoProxy.t.sol`
+- `ERR_TOKEN_NOT_SUPPORTED` | type: `string internal constant` | vis: `internal` | flags: `constant` | `FtsoRegistry` @ `flattened/FlareSmartContracts.sol` = `"FTSO index not supported"`
+- `ownerToken` | type: `IVPToken public immutable override` | vis: `public` | flags: `immutable,override` | `GovernanceVotePower` @ `contracts/mock/GovernanceVotePower.sol`
+- `dailyAuthorizedIncentive` | type: `uint256 internal` | vis: `internal` | flags: `-` | `IncentivePoolReceiver` @ `contracts/incentivePool/implementation/IncentivePoolReceiver.sol`
+- `dailyAuthorizedInflation` | type: `uint256 public` | vis: `public` | flags: `-` | `InflationReceiver` @ `contracts/inflation/implementation/InflationReceiver.sol`
+- `submit3MethodEnabled` | type: `bool public` | vis: `public` | flags: `-` | `Submission` @ `contracts/protocol/implementation/Submission.sol`
+- `usdt0` | type: `IERC20Metadata public immutable` | vis: `public` | flags: `immutable` | `USDTSwapper` @ `contracts/utils/implementation/USDTSwapper.sol`
+- `usdte` | type: `IERC20Metadata public immutable` | vis: `public` | flags: `immutable` | `USDTSwapper` @ `contracts/utils/implementation/USDTSwapper.sol`
+- `usdt0` | type: `ERC20Mock public` | vis: `public` | flags: `-` | `USDTSwapperTest` @ `test-forge/unit/utils/implementation/USDTSwapper.t.sol`
+- `usdte` | type: `ERC20Mock public` | vis: `public` | flags: `-` | `USDTSwapperTest` @ `test-forge/unit/utils/implementation/USDTSwapper.t.sol`
+- `ownerToken` | type: `IVPToken public immutable override` | vis: `public` | flags: `immutable,override` | `VPContract` @ `flattened/FlareSmartContracts.sol`
+- `initialPublicKeys` | type: `PublicKey[] private` | vis: `private` | flags: `-` | `VoterPreRegistryTest` @ `test-forge/unit/protocol/implementation/VoterPreRegistry.t.sol`
+- `initialPublicKeys` | type: `PublicKey[] private` | vis: `private` | flags: `-` | `VoterRegistryAndFlareSystemsManagerTest` @ `test-forge/integration/VoterRegistryAndFlareSystemsManager.t.sol`
+- `initialPublicKeyParts1` | type: `bytes32[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+- `initialPublicKeyParts2` | type: `bytes32[] private` | vis: `private` | flags: `-` | `VoterRegistryTest` @ `test-forge/unit/protocol/implementation/VoterRegistry.t.sol`
+
+Hardcoded token addresses found:
+- None detected
+
+### Struct Values (All Parsed Struct Fields)
+- `CChainStakingData` (contracts/mock/CChainStake.sol): address owner, address account, uint256 weightWei
+- `CacheState` (flattened/FlareSmartContracts.sol): mapping(uint256 => uint256) cache
+- `CacheState` (flattened/FlareSmartContracts.sol): mapping(bytes32 => uint256) valueCache, mapping(bytes32 => RevocationCacheRecord) revocationCache
+- `CheckPoint` (contracts/mock/CChainStakeHistory.sol): mapping(uint256 => Stake) stakes
+- `CheckPoint` (contracts/protocol/lib/AddressHistory.sol): address account, uint64 fromBlock
+- `CheckPoint` (contracts/protocol/lib/NodesHistory.sol): mapping(uint256 => Node) nodeIds
+- `CheckPoint` (contracts/protocol/lib/PublicKeyHistory.sol): bytes32 part1, bytes32 part2, uint64 fromBlock
+- `CheckPoint` (flattened/FlareSmartContracts.sol): uint192 value, uint64 fromBlock
+- `CheckPoint` (flattened/FlareSmartContracts.sol): mapping(uint256 => Delegation) delegations
+- `CheckPoint` (flattened/FlareSmartContracts.sol): mapping(uint256 => Stake) stakes
+- `CheckPointHistoryState` (contracts/mock/CChainStakeHistory.sol): mapping(uint256 => CheckPoint) checkpoints, uint64 startIndex, uint64 length
+- `CheckPointHistoryState` (contracts/protocol/lib/AddressHistory.sol): mapping(uint256 => CheckPoint) checkpoints, uint64 startIndex, uint64 endIndex
+- `CheckPointHistoryState` (contracts/protocol/lib/NodesHistory.sol): mapping(uint256 => CheckPoint) checkpoints, uint64 startIndex, uint64 endIndex
+- `CheckPointHistoryState` (contracts/protocol/lib/PublicKeyHistory.sol): mapping(uint256 => CheckPoint) checkpoints, uint64 startIndex, uint64 endIndex
+- `CheckPointHistoryState` (flattened/FlareSmartContracts.sol): mapping(uint256 => CheckPoint) checkpoints, uint64 startIndex, uint64 endIndex
+- `CheckPointHistoryState` (flattened/FlareSmartContracts.sol): mapping(uint256 => CheckPoint) checkpoints, uint64 startIndex, uint64 length
+- `CheckPointHistoryState` (flattened/FlareSmartContracts.sol): mapping(uint256 => CheckPoint) checkpoints, uint64 startIndex, uint64 length
+- `CheckPointsByAddressState` (flattened/FlareSmartContracts.sol): mapping(address => CheckPointHistory.CheckPointHistoryState) historyByAddress
+- `Counters` (contracts/protocol/implementation/Relay.sol): uint256 weightIndex, uint256 weightPos, uint256 voterIndex, uint256 voterPos, uint256 count, uint256 bytesToTake, bytes32 nextSlot, uint256 pos, uint256 signingPolicyPos
+- `CustomFeed` (contracts/protocol/implementation/FtsoV2.sol): bytes21 feedId, IICustomFeed customFeed
+- `CustomFeedData` (contracts/protocol/implementation/FtsoV2.sol): IICustomFeed customFeed, uint96 index
+- `DaemonizedError` (flattened/FlareSmartContracts.sol): uint192 lastErrorBlock, uint64 numErrors, address fromContract, uint64 errorTypeIndex, string errorMessage
+- `Decimals` (contracts/ftso/implementation/FtsoFeedDecimals.sol): int8 value, uint24 validFromEpochId
+- `DelegateCheckPoint` (flattened/FlareSmartContracts.sol): address to, uint64 fromBlock
+- `DelegateCheckPointHistoryState` (flattened/FlareSmartContracts.sol): mapping(uint256 => DelegateCheckPoint) checkpoints, uint64 startIndex, uint64 endIndex
+- `DelegateCheckPointsByAddressState` (flattened/FlareSmartContracts.sol): mapping(address => DelegateCheckPointHistory.DelegateCheckPointHistoryState) historyByAddress
+- `Delegation` (flattened/FlareSmartContracts.sol): address delegate, uint16 value, uint64 fromBlock, uint8 length
+- `DelegationState` (flattened/FlareSmartContracts.sol): DelegationHistory.CheckPointHistoryState delegation
+- `DelegationState` (flattened/FlareSmartContracts.sol): CheckPointHistory.CheckPointHistoryState delegatedTotal, CheckPointsByAddress.CheckPointsByAddressState delegatedVotePower
+- `Entity` (contracts/protocol/implementation/EntityManager.sol): AddressHistory.CheckPointHistoryState delegationAddress, AddressHistory.CheckPointHistoryState submitAddress, AddressHistory.CheckPointHistoryState submitSignaturesAddress, AddressHistory.CheckPointHistoryState signingPolicyAddress, NodesHistory.CheckPointHistoryState nodeIds, PublicKeyHistory.CheckPointHistoryState publicKey
+- `Event` (contracts/userInterfaces/fdc/IEVMTransaction.sol): uint32 logIndex, address emitterAddress, bytes32[] topics, bytes data, bool removed
+- `FastUpdates` (contracts/userInterfaces/IFastUpdater.sol): uint256 sortitionBlock, SortitionCredential sortitionCredential, bytes deltas, Signature signature
+- `FdcConfiguration` (contracts/userInterfaces/IFdcInflationConfigurations.sol): bytes32 attestationType, bytes32 source, uint24 inflationShare, uint8 minRequestsThreshold, uint224 mode
+- `FeeConfig` (contracts/userInterfaces/IRelay.sol): uint8 protocolId, uint256 feeInWei
+- `FeePercentage` (contracts/protocol/implementation/WNatDelegationFee.sol): uint16 valueBIPS, uint24 validFromEpochId
+- `Feed` (contracts/userInterfaces/IFtsoFeedPublisher.sol): uint32 votingRoundId, bytes21 id, int32 value, uint16 turnoutBIPS, int8 decimals
+- `FeedConfiguration` (contracts/userInterfaces/IFastUpdatesConfiguration.sol): bytes21 feedId, uint32 rewardBandValue, uint24 inflationShare
+- `FeedData` (contracts/userInterfaces/LTS/FtsoV2Interface.sol): uint32 votingRoundId, bytes21 id, int32 value, uint16 turnoutBIPS, int8 decimals
+- `FeedDataWithProof` (contracts/userInterfaces/LTS/FtsoV2Interface.sol): bytes32[] proof, FeedData body
+- `FeedIdChange` (contracts/userInterfaces/LTS/FtsoV2Interface.sol): bytes21 oldFeedId, bytes21 newFeedId
+- `FeedIdChangeData` (contracts/protocol/implementation/FtsoV2.sol): bytes21 newFeedId, uint88 index
+- `FeedWithProof` (contracts/userInterfaces/IFtsoFeedPublisher.sol): bytes32[] merkleProof, Feed body
+- `FtsoConfiguration` (contracts/userInterfaces/IFtsoInflationConfigurations.sol): bytes feedIds, uint24 inflationShare, uint16 minRewardedTurnoutBIPS, uint24 primaryBandRewardSharePPM, bytes secondaryBandWidthPPMs, uint16 mode
+- `G1Point` (contracts/userInterfaces/IBn256.sol): uint256 x, uint256 y
+- `GovernorSettings` (contracts/userInterfaces/IGovernor.sol): bool accept, uint256 votingStartTs, uint256 votingPeriodSeconds, uint256 vpBlockPeriodSeconds, uint256 thresholdConditionBIPS, uint256 majorityConditionBIPS, uint256 executionDelaySeconds, uint256 executionPeriodSeconds
+- `GovernorSettingsWithoutExecParams` (contracts/governance/interface/IIPollingFoundation.sol): bool accept, uint256 votingStartTs, uint256 votingPeriodSeconds, uint256 vpBlockPeriodSeconds, uint256 thresholdConditionBIPS, uint256 majorityConditionBIPS
+- `IncentiveOffer` (contracts/userInterfaces/IFastUpdateIncentiveManager.sol): Range rangeIncrease, Range rangeLimit
+- `InitialFeedDecimals` (contracts/ftso/implementation/FtsoFeedDecimals.sol): bytes21 feedId, int8 decimals
+- `InitialSettings` (contracts/protocol/implementation/FlareSystemsManager.sol): uint16 initialRandomVotePowerBlockSelectionSize, uint24 initialRewardEpochId, uint16 initialRewardEpochThreshold
+- `InitialVoterData` (contracts/protocol/implementation/EntityManager.sol): address voter, address delegationAddress, bytes20[] nodeIds
+- `LastErrorData` (flattened/FlareSmartContracts.sol): uint192 totalDaemonizedErrors, uint64 lastErrorTypeIndex
+- `MonthlyRewards` (contracts/rNat/implementation/RNat.sol): uint128 assignedRewards, uint128 distributedRewards, uint128 claimedRewards, uint128 unassignedUnclaimedRewards, mapping(address owner => Rewards) rewards
+- `Node` (contracts/protocol/lib/NodesHistory.sol): bytes20 nodeId, uint64 fromBlock, uint32 length
+- `NumberOfWeightBasedClaims` (contracts/userInterfaces/IFlareSystemsManager.sol): uint256 rewardManagerId, uint256 noOfWeightBasedClaims
+- `Offer` (contracts/userInterfaces/IFtsoRewardOffersManager.sol): uint120 amount, bytes21 feedId, uint16 minRewardedTurnoutBIPS, uint24 primaryBandRewardSharePPM, uint24 secondaryBandWidthPPM, address claimBackAddress
+- `PChainStake` (flattened/FlareSmartContracts.sol): bytes32 txId, uint8 stakingType, bytes20 inputAddress, bytes20 nodeId, uint64 startTime, uint64 endTime, uint64 weight
+- `PChainStakingData` (flattened/FlareSmartContracts.sol): address owner, bytes20 nodeId, uint64 weightGwei
+- `Policy` (contracts/fastUpdates/mock/FlareSystemMock.sol): bytes32 pk1, bytes32 pk2, uint16 weight
+- `PreRegistryState` (contracts/protocol/implementation/VoterPreRegistry.sol): VoterWithSignature[] list, mapping (address => uint256) index
+- `PriceInfo` (flattened/FlareSmartContracts.sol): uint256 ftsoIndex, uint256 price, uint256 decimals, uint256 timestamp
+- `Project` (contracts/rNat/implementation/RNat.sol): string name, address distributor, bool currentMonthDistributionEnabled, bool distributionDisabled, bool claimingDisabled, uint128 totalAssignedRewards, uint128 totalDistributedRewards, uint128 totalClaimedRewards, uint128 totalUnassignedUnclaimedRewards, mapping(uint256 month => MonthlyRewards) monthlyRewards, uint256[] monthsWithRewards, mapping(address owner => uint256 index) lastClaimingMonthIndex
+- `Proof` (contracts/fdc/interface/ITypeTemplate.sol): bytes32[] merkleProof, Response data
+- `Proof` (contracts/userInterfaces/fdc/IAddressValidity.sol): bytes32[] merkleProof, Response data
+- `Proof` (contracts/userInterfaces/fdc/IBalanceDecreasingTransaction.sol): bytes32[] merkleProof, Response data
+- `Proof` (contracts/userInterfaces/fdc/IConfirmedBlockHeightExists.sol): bytes32[] merkleProof, Response data
+- `Proof` (contracts/userInterfaces/fdc/IEVMTransaction.sol): bytes32[] merkleProof, Response data
+- `Proof` (contracts/userInterfaces/fdc/IPayment.sol): bytes32[] merkleProof, Response data
+- `Proof` (contracts/userInterfaces/fdc/IReferencedPaymentNonexistence.sol): bytes32[] merkleProof, Response data
+- `Proof` (contracts/userInterfaces/fdc/IWeb2Json.sol): bytes32[] merkleProof, Response data
+- `Proof` (contracts/userInterfaces/fdc/IXRPPayment.sol): bytes32[] merkleProof, Response data
+- `Proof` (contracts/userInterfaces/fdc/IXRPPaymentNonexistence.sol): bytes32[] merkleProof, Response data
+- `Proposal` (contracts/governance/implementation/GovernorProposals.sol): address proposer, bool accept, bool executed, bool canceled, bool executableOnChain, uint256 votePowerBlock, uint256 voteStartTime, uint256 voteEndTime, uint256 execStartTime, uint256 execEndTime, uint256 thresholdConditionBIPS, uint256 majorityConditionBIPS, uint256 circulatingSupply, string description
+- `Proposal` (contracts/userInterfaces/IPollingManagementGroup.sol): uint256 rewardEpochId, string description, address proposer, bool canceled, uint256 voteStartTime, uint256 voteEndTime, uint256 thresholdConditionBIPS, uint256 majorityConditionBIPS, mapping(address => bool) isEligible, uint256 noOfEligibleMembers, bool accept
+- `ProposalSettings` (contracts/governance/interface/IIPollingManagementGroup.sol): bool accept, uint256 votingStartTs, uint256 votingPeriodSeconds, uint256 thresholdConditionBIPS, uint256 majorityConditionBIPS
+- `ProposalVoting` (contracts/governance/implementation/GovernorVotes.sol): uint256 againstVotePower, uint256 forVotePower, mapping(address => bool) hasVoted
+- `ProposalVoting` (contracts/userInterfaces/IPollingManagementGroup.sol): uint256 againstVotePower, uint256 forVotePower, mapping(address => bool) hasVoted
+- `PublicKey` (contracts/userInterfaces/IPublicKey.sol): bytes32 x, bytes32 y
+- `Random` (contracts/userInterfaces/IFtsoFeedPublisher.sol): uint32 votingRoundId, uint256 value, bool isSecure
+- `Registration` (contracts/mock/IIFlareSmartContracts.sol): address daemonizedContract, uint256 gasLimit
+- `Registration` (flattened/FlareSmartContracts.sol): IFlareDaemonize daemonizedContract, uint256 gasLimit
+- `RelayGovernanceConfig` (contracts/userInterfaces/IRelay.sol): bytes32 descriptionHash, uint256 chainId, FeeConfig[] newFeeConfigs
+- `RelayInitialConfig` (contracts/userInterfaces/IRelay.sol): uint32 initialRewardEpochId, uint32 startingVotingRoundIdForInitialRewardEpochId, bytes32 initialSigningPolicyHash, uint8 randomNumberProtocolId, uint32 firstVotingRoundStartTs, uint8 votingEpochDurationSeconds, uint32 firstRewardEpochStartVotingRoundId, uint16 rewardEpochDurationInVotingEpochs, uint16 thresholdIncreaseBIPS, uint32 messageFinalizationWindowInRewardEpochs, address payable feeCollectionAddress, FeeConfig[] feeConfigs
+- `Request` (contracts/fdc/interface/ITypeTemplate.sol): bytes32 attestationType, bytes32 sourceId, bytes32 messageIntegrityCode, RequestBody requestBody
+- `Request` (contracts/userInterfaces/fdc/IAddressValidity.sol): bytes32 attestationType, bytes32 sourceId, bytes32 messageIntegrityCode, RequestBody requestBody
+- `Request` (contracts/userInterfaces/fdc/IBalanceDecreasingTransaction.sol): bytes32 attestationType, bytes32 sourceId, bytes32 messageIntegrityCode, RequestBody requestBody
+- `Request` (contracts/userInterfaces/fdc/IConfirmedBlockHeightExists.sol): bytes32 attestationType, bytes32 sourceId, bytes32 messageIntegrityCode, RequestBody requestBody
+- `Request` (contracts/userInterfaces/fdc/IEVMTransaction.sol): bytes32 attestationType, bytes32 sourceId, bytes32 messageIntegrityCode, RequestBody requestBody
+- `Request` (contracts/userInterfaces/fdc/IPayment.sol): bytes32 attestationType, bytes32 sourceId, bytes32 messageIntegrityCode, RequestBody requestBody
+- `Request` (contracts/userInterfaces/fdc/IReferencedPaymentNonexistence.sol): bytes32 attestationType, bytes32 sourceId, bytes32 messageIntegrityCode, RequestBody requestBody
+- `Request` (contracts/userInterfaces/fdc/IWeb2Json.sol): bytes32 attestationType, bytes32 sourceId, bytes32 messageIntegrityCode, RequestBody requestBody
+- `Request` (contracts/userInterfaces/fdc/IXRPPayment.sol): bytes32 attestationType, bytes32 sourceId, bytes32 messageIntegrityCode, RequestBody requestBody
+- `Request` (contracts/userInterfaces/fdc/IXRPPaymentNonexistence.sol): bytes32 attestationType, bytes32 sourceId, bytes32 messageIntegrityCode, RequestBody requestBody
+- `RequestBody` (contracts/fdc/interface/ITypeTemplate.sol): bytes32 bytes32Field, bool boolField, RequestSubstruct1 requestSubstruct1, RequestSubstruct2[] requestSubstruct2Array
+- `RequestBody` (contracts/userInterfaces/fdc/IAddressValidity.sol): string addressStr
+- `RequestBody` (contracts/userInterfaces/fdc/IBalanceDecreasingTransaction.sol): bytes32 transactionId, bytes32 sourceAddressIndicator
+- `RequestBody` (contracts/userInterfaces/fdc/IConfirmedBlockHeightExists.sol): uint64 blockNumber, uint64 queryWindow
+- `RequestBody` (contracts/userInterfaces/fdc/IEVMTransaction.sol): bytes32 transactionHash, uint16 requiredConfirmations, bool provideInput, bool listEvents, uint32[] logIndices
+- `RequestBody` (contracts/userInterfaces/fdc/IPayment.sol): bytes32 transactionId, uint256 inUtxo, uint256 utxo
+- `RequestBody` (contracts/userInterfaces/fdc/IReferencedPaymentNonexistence.sol): uint64 minimalBlockNumber, uint64 deadlineBlockNumber, uint64 deadlineTimestamp, bytes32 destinationAddressHash, uint256 amount, bytes32 standardPaymentReference, bool checkSourceAddresses, bytes32 sourceAddressesRoot
+- `RequestBody` (contracts/userInterfaces/fdc/IWeb2Json.sol): string url, string httpMethod, string headers, string queryParams, string body, string postProcessJq, string abiSignature
+- `RequestBody` (contracts/userInterfaces/fdc/IXRPPayment.sol): bytes32 transactionId, address proofOwner
+- `RequestBody` (contracts/userInterfaces/fdc/IXRPPaymentNonexistence.sol): uint64 minimalBlockNumber, uint64 deadlineBlockNumber, uint64 deadlineTimestamp, bytes32 destinationAddressHash, uint256 amount, bool checkFirstMemoData, bytes32 firstMemoDataHash, bool checkDestinationTag, uint256 destinationTag, address proofOwner
+- `RequestSubstruct1` (contracts/fdc/interface/ITypeTemplate.sol): bytes32 templateStructField, uint256[] uintArrayField, bool[] boolArrayField
+- `RequestSubstruct2` (contracts/fdc/interface/ITypeTemplate.sol): bytes32 templateStructField, int256[] intArrayField, bool[] boolArrayField
+- `Response` (contracts/fdc/interface/ITypeTemplate.sol): bytes32 attestationType, bytes32 sourceId, uint64 votingRound, uint64 lowestUsedTimestamp, RequestBody requestBody, ResponseBody responseBody
+- `Response` (contracts/userInterfaces/fdc/IAddressValidity.sol): bytes32 attestationType, bytes32 sourceId, uint64 votingRound, uint64 lowestUsedTimestamp, RequestBody requestBody, ResponseBody responseBody
+- `Response` (contracts/userInterfaces/fdc/IBalanceDecreasingTransaction.sol): bytes32 attestationType, bytes32 sourceId, uint64 votingRound, uint64 lowestUsedTimestamp, RequestBody requestBody, ResponseBody responseBody
+- `Response` (contracts/userInterfaces/fdc/IConfirmedBlockHeightExists.sol): bytes32 attestationType, bytes32 sourceId, uint64 votingRound, uint64 lowestUsedTimestamp, RequestBody requestBody, ResponseBody responseBody
+- `Response` (contracts/userInterfaces/fdc/IEVMTransaction.sol): bytes32 attestationType, bytes32 sourceId, uint64 votingRound, uint64 lowestUsedTimestamp, RequestBody requestBody, ResponseBody responseBody
+- `Response` (contracts/userInterfaces/fdc/IPayment.sol): bytes32 attestationType, bytes32 sourceId, uint64 votingRound, uint64 lowestUsedTimestamp, RequestBody requestBody, ResponseBody responseBody
+- `Response` (contracts/userInterfaces/fdc/IReferencedPaymentNonexistence.sol): bytes32 attestationType, bytes32 sourceId, uint64 votingRound, uint64 lowestUsedTimestamp, RequestBody requestBody, ResponseBody responseBody
+- `Response` (contracts/userInterfaces/fdc/IWeb2Json.sol): bytes32 attestationType, bytes32 sourceId, uint64 votingRound, uint64 lowestUsedTimestamp, RequestBody requestBody, ResponseBody responseBody
+- `Response` (contracts/userInterfaces/fdc/IXRPPayment.sol): bytes32 attestationType, bytes32 sourceId, uint64 votingRound, uint64 lowestUsedTimestamp, RequestBody requestBody, ResponseBody responseBody
+- `Response` (contracts/userInterfaces/fdc/IXRPPaymentNonexistence.sol): bytes32 attestationType, bytes32 sourceId, uint64 votingRound, uint64 lowestUsedTimestamp, RequestBody requestBody, ResponseBody responseBody
+- `ResponseBody` (contracts/fdc/interface/ITypeTemplate.sol): bytes32 templateResponseField, ResponseSubstruct1[] responseSubstruct1Array
+- `ResponseBody` (contracts/userInterfaces/fdc/IAddressValidity.sol): bool isValid, string standardAddress, bytes32 standardAddressHash
+- `ResponseBody` (contracts/userInterfaces/fdc/IBalanceDecreasingTransaction.sol): uint64 blockNumber, uint64 blockTimestamp, bytes32 sourceAddressHash, int256 spentAmount, bytes32 standardPaymentReference
+- `ResponseBody` (contracts/userInterfaces/fdc/IConfirmedBlockHeightExists.sol): uint64 blockTimestamp, uint64 numberOfConfirmations, uint64 lowestQueryWindowBlockNumber, uint64 lowestQueryWindowBlockTimestamp
+- `ResponseBody` (contracts/userInterfaces/fdc/IEVMTransaction.sol): uint64 blockNumber, uint64 timestamp, address sourceAddress, bool isDeployment, address receivingAddress, uint256 value, bytes input, uint8 status, Event[] events
+- `ResponseBody` (contracts/userInterfaces/fdc/IPayment.sol): uint64 blockNumber, uint64 blockTimestamp, bytes32 sourceAddressHash, bytes32 sourceAddressesRoot, bytes32 receivingAddressHash, bytes32 intendedReceivingAddressHash, int256 spentAmount, int256 intendedSpentAmount, int256 receivedAmount, int256 intendedReceivedAmount, bytes32 standardPaymentReference, bool oneToOne, uint8 status
+- `ResponseBody` (contracts/userInterfaces/fdc/IReferencedPaymentNonexistence.sol): uint64 minimalBlockTimestamp, uint64 firstOverflowBlockNumber, uint64 firstOverflowBlockTimestamp
+- `ResponseBody` (contracts/userInterfaces/fdc/IWeb2Json.sol): bytes abiEncodedData
+- `ResponseBody` (contracts/userInterfaces/fdc/IXRPPayment.sol): uint64 blockNumber, uint64 blockTimestamp, string sourceAddress, bytes32 sourceAddressHash, bytes32 receivingAddressHash, bytes32 intendedReceivingAddressHash, int256 spentAmount, int256 intendedSpentAmount, int256 receivedAmount, int256 intendedReceivedAmount, bool hasMemoData, bytes firstMemoData, bool hasDestinationTag, uint256 destinationTag, uint8 status
+- `ResponseBody` (contracts/userInterfaces/fdc/IXRPPaymentNonexistence.sol): uint64 minimalBlockTimestamp, uint64 firstOverflowBlockNumber, uint64 firstOverflowBlockTimestamp
+- `ResponseSubstruct1` (contracts/fdc/interface/ITypeTemplate.sol): bytes32 templateStructField
+- `RevocationCacheRecord` (flattened/FlareSmartContracts.sol): mapping(address => uint256) revocations
+- `RewardClaim` (contracts/userInterfaces/LTS/RewardsV2Interface.sol): uint24 rewardEpochId, bytes20 beneficiary, uint120 amount, ClaimType claimType
+- `RewardClaimWithProof` (contracts/userInterfaces/LTS/RewardsV2Interface.sol): bytes32[] merkleProof, RewardClaim body
+- `RewardEpochData` (flattened/FlareSmartContracts.sol): uint256 votepowerBlock, uint256 startBlock, uint256 startTimestamp
+- `RewardEpochData` (test-forge/unit/fscV1/implementation/FtsoRewardManagerProxy.t.sol): uint24 id, uint256 vpBlock
+- `RewardEpochData` (test-forge/unit/protocol/implementation/RewardManager.t.sol): uint24 id, uint256 vpBlock
+- `RewardEpochState` (contracts/protocol/implementation/FlareSystemsManager.sol): uint64 randomAcquisitionStartTs, uint64 randomAcquisitionStartBlock, uint64 randomAcquisitionEndTs, uint64 randomAcquisitionEndBlock, uint64 signingPolicySignStartTs, uint64 signingPolicySignStartBlock, uint64 signingPolicySignEndTs, uint64 signingPolicySignEndBlock, uint64 rewardsSignStartTs, uint64 rewardsSignStartBlock, uint64 rewardsSignEndTs, uint64 rewardsSignEndBlock, uint64 rewardEpochStartTs, uint64 rewardEpochStartBlock, uint64 uptimeVoteSignStartTs, uint64 uptimeVoteSignStartBlock, uint256 seed, uint64 votePowerBlock, uint32 startVotingRoundId, uint16 threshold, Votes signingPolicyVotes, Votes submitUptimeVoteVotes, mapping(bytes32 uptimeVoteHash => Votes) uptimeVoteVotes, mapping(bytes32 rewardsVoteHash => Votes) rewardVotes
+- `RewardState` (contracts/userInterfaces/LTS/RewardsV2Interface.sol): uint24 rewardEpochId, bytes20 beneficiary, uint120 amount, ClaimType claimType, bool initialised
+- `Rewards` (contracts/rNat/implementation/RNat.sol): uint128 assignedRewards, uint128 claimedRewards
+- `Settings` (contracts/protocol/implementation/FlareSystemsManager.sol): uint16 randomAcquisitionMaxDurationSeconds, uint16 randomAcquisitionMaxDurationBlocks, uint16 newSigningPolicyInitializationStartSeconds, uint8 newSigningPolicyMinNumberOfVotingRoundsDelay, uint16 voterRegistrationMinDurationSeconds, uint16 voterRegistrationMinDurationBlocks, uint16 submitUptimeVoteMinDurationSeconds, uint16 submitUptimeVoteMinDurationBlocks, uint24 signingPolicyThresholdPPM, uint16 signingPolicyMinNumberOfVoters, uint32 rewardExpiryOffsetSeconds
+- `Signature` (contracts/userInterfaces/IFastUpdater.sol): uint8 v, bytes32 r, bytes32 s
+- `Signature` (contracts/userInterfaces/IFlareSystemsManager.sol): uint8 v, bytes32 r, bytes32 s
+- `Signature` (contracts/userInterfaces/ISignature.sol): uint8 v, bytes32 r, bytes32 s
+- `SigningPolicy` (contracts/protocol/interface/IIRelay.sol): uint24 rewardEpochId, uint32 startVotingRoundId, uint16 threshold, uint256 seed, address[] voters, uint16[] weights
+- `SortitionCredential` (contracts/userInterfaces/ISortition.sol): uint256 replicate, G1Point gamma, uint256 c, uint256 s
+- `SortitionState` (contracts/fastUpdates/lib/Sortition.sol): uint256 baseSeed, uint256 blockNumber, uint256 scoreCutoff, uint256 weight, G1Point pubKey
+- `Stake` (contracts/mock/CChainStakeHistory.sol): uint256 value, address account, uint64 fromBlock, uint8 length
+- `Stake` (flattened/FlareSmartContracts.sol): uint256 value, bytes20 nodeId, uint64 fromBlock, uint8 length
+- `State` (contracts/utils/lib/AddressSet.sol): address[] list, mapping (address => uint256) index
+- `StateData` (contracts/protocol/implementation/Relay.sol): uint8 randomNumberProtocolId, uint32 firstVotingRoundStartTs, uint8 votingEpochDurationSeconds, uint32 firstRewardEpochStartVotingRoundId, uint16 rewardEpochDurationInVotingEpochs, uint16 thresholdIncreaseBIPS, uint32 randomVotingRoundId, bool isSecureRandom, uint32 lastInitializedRewardEpoch, bool noSigningPolicyRelay, uint32 messageFinalizationWindowInRewardEpochs
+- `StateOfRewardsTmp` (contracts/protocol/implementation/RewardManager.sol): bytes20[] nodeIds, uint256[] nodeWeights, address[] cChainAddresses, uint256[] cChainWeights, uint256 delegatorBalance, address[] delegates, uint256[] bips, uint256 undelegatedVotePower
+- `TimelockedCall` (contracts/governance/implementation/GovernedBase.sol): uint256 allowedAfterTimestamp, bytes encodedCall
+- `TimelockedCall` (flattened/FlareSmartContracts.sol): uint256 allowedAfterTimestamp, bytes encodedCall
+- `UnclaimedRewardState` (contracts/userInterfaces/IRewardManager.sol): bool initialised, uint120 amount, uint128 weight
+- `VotePowerState` (flattened/FlareSmartContracts.sol): CheckPointsByAddress.CheckPointsByAddressState votePowerByAddress
+- `VoterAddresses` (contracts/userInterfaces/IEntityManager.sol): address submitAddress, address submitSignaturesAddress, address signingPolicyAddress
+- `VoterData` (contracts/protocol/implementation/FlareSystemsManager.sol): uint64 signTs, uint64 signBlock
+- `VoterWithSignature` (contracts/protocol/implementation/VoterPreRegistry.sol): address voter, uint8 v, bytes32 r, bytes32 s
+- `VotersAndWeights` (contracts/protocol/implementation/VoterRegistry.sol): address[] voters, mapping (address voter => uint256) weights, uint128 weightsSum, uint16 normalisedWeightsSum, uint16 normalisedWeightsSumOfVotersWithPublicKeys
+- `Votes` (contracts/protocol/implementation/FlareSystemsManager.sol): uint16 accumulatedWeight, mapping(address => VoterData) voters
+
+### Enum State Values
+- `ClaimType` (contracts/userInterfaces/LTS/RewardsV2Interface.sol): DIRECT, FEE, WNAT, MIRROR, CCHAIN
+- `DelegationMode` (flattened/FlareSmartContracts.sol): NOTSET, PERCENTAGE, AMOUNT
+- `PriceFinalizationType` (flattened/FlareSmartContracts.sol): NOT_FINALIZED, WEIGHTED_MEDIAN, TRUSTED_ADDRESSES, PREVIOUS_PRICE_COPIED, TRUSTED_ADDRESSES_EXCEPTION, PREVIOUS_PRICE_COPIED_EXCEPTION
+- `ProposalState` (contracts/userInterfaces/IGovernor.sol): Pending, Active, Defeated, Succeeded, Queued, Expired, Executed, Canceled
+- `ProposalState` (contracts/userInterfaces/IPollingManagementGroup.sol): Canceled, Pending, Active, Defeated, Succeeded
+- `TopupType` (contracts/mock/IIFlareSmartContracts.sol): FACTOROFDAILYAUTHORIZED, ALLAUTHORIZED
+- `VoteType` (contracts/governance/implementation/GovernorVotes.sol): Against, For
+- `VoteType` (contracts/userInterfaces/IPollingManagementGroup.sol): Against, For
+
+### Invariant Values (Variable-Tied)
+- Key accounting vars (`totalInflationRewardsOfferedWei`, `feedIdToIndex`, `totalWeights`, `totalInflationRewardsOfferedWei`, `ASSET_PRICE_USD_DECIMALS`, `totalInflationRewardsOfferedWei`, `supply`, `totalIncentiveAuthorizedWei`) must only change through authorized accounting paths
+- Every token address/handle variable must be non-zero and immutable or governance-gated
+- Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition
+
+### Full Raw State Inventory
+- `AUDIT_STATE_VALUES_FULL.json` includes:
+  - all state variables
+  - all total/balance variables
+  - all token variables
+  - all structs and fields
+  - enum values
+<!-- AUDIT_DOSSIER_END -->

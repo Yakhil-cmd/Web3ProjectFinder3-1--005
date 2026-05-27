@@ -1,0 +1,646 @@
+Live at [Resonate](https://resonate.finance)
+
+# Setup
+
+1. cd into hardhat
+2. Run npm install
+3. Create a .env file under /hardhat according to .envtemplate
+
+<!-- AUDIT_DOSSIER_START -->
+## Protocol State/Value Dossier (Auto-Generated)
+
+Generated (UTC): `2026-05-26T16:59:58Z`  
+Project: `21_resonate`  
+Solidity files: `139`
+
+### Structure
+Top Solidity directories:
+- `hardhat`: 139 `.sol` files
+
+Pragmas:
+- `0.8.13`
+- `>0.8.0`
+- `>= 0.8.0`
+- `>=0.6.12`
+- `>=0.6.2`
+- `>=0.7.5`
+- `>=0.8`
+- `>=0.8.0`
+- `>=0.8.0 <0.9.0`
+- `>=0.8.10`
+- `>=0.8.4`
+- `^0.8`
+- `^0.8.0`
+- `^0.8.10`
+- `^0.8.12`
+- `^0.8.13`
+- `^0.8.2`
+
+Contracts/Libraries/Interfaces detected: `166`
+
+### Life Total / Balance Values
+Detected accounting/state total variables:
+- `lendingPool` | type: `ILendingPool public immutable` | vis: `public` | flags: `immutable` | `AaveV2ERC4626` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626.sol`
+- `lendingPool` | type: `ILendingPool public immutable` | vis: `public` | flags: `immutable` | `AaveV2ERC4626Factory` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626Factory.sol`
+- `asset` | type: `IERC20` | vis: `default` | flags: `-` | `AdapterTest` @ `hardhat/test/foundry/adapters/GenericAdapter.t.sol`
+- `vault` | type: `address` | vis: `default` | flags: `-` | `AdapterTest` @ `hardhat/test/foundry/adapters/GenericAdapter.t.sol`
+- `poolId` | type: `bytes32 public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xc4451498f950b8b3abd9a815cf221a8e647913880001000000000000000001ea`
+- `pooln2Addr` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xb460DAa847c45f1C4a41cb05BFB3b51c92e41B36`
+- `secondPoolID` | type: `bytes32 public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0x3e5fa9518ea95c3e533eb377c001702a9aacaa32000200000000000000000052`
+- `usdtWETHPool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0x3e5FA9518eA95c3E533EB377C001702A9AaCAA32`
+- `vault` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xBA12222222228d8Ba445958a75a0704d566BF2C8`
+- `tokenPools` | type: `mapping(address => address) public` | vis: `public` | flags: `-` | `BalancerV2PriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2PriceOracle.sol`
+- `vault` | type: `address public` | vis: `public` | flags: `-` | `BalancerV2PriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2PriceOracle.sol`
+- `vault` | type: `IBVaultV2 public` | vis: `public` | flags: `-` | `BalancerV2WeightedPoolPriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2WeightedPoolPriceOracle.sol`
+- `poolId1` | type: `bytes32` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `vault1` | type: `IERC4626` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `vault2` | type: `IERC4626` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `vault3` | type: `IERC4626` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `yVault` | type: `BeefyAPI public immutable` | vis: `public` | flags: `immutable` | `BeefyWrapper` @ `hardhat/contracts/adapters/yearn/BeefyWrapper.sol`
+- `BeefyVaultFantom` | type: `address` | vis: `default` | flags: `-` | `BeefyWrapperTest` @ `hardhat/test/foundry/adapters/BeefyWrapper.t.sol` = `0xE7E08D82853dcf1057B2f8BCeF781d904602B6a0`
+- `pool` | type: `IBufferBinaryPool public immutable` | vis: `public` | flags: `immutable` | `BufferWrapper` @ `hardhat/contracts/adapters/buffer/BufferWrapper.sol`
+- `poolId1` | type: `bytes32` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol`
+- `poolId2` | type: `bytes32` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol`
+- `vault1` | type: `IERC4626` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol`
+- `vault2` | type: `IERC4626` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol`
+- `conversionAsset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `CurveMinterOracle` @ `hardhat/contracts/oracles/adapters/curve/CurveMinterOracle.sol`
+- `conversionAsset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `CurvePoolOracle` @ `hardhat/contracts/oracles/adapters/curve/CurvePoolOracle.sol`
+- `pools` | type: `mapping(address => address) public` | vis: `public` | flags: `-` | `CurvePoolOracle` @ `hardhat/contracts/oracles/adapters/curve/CurvePoolOracle.sol`
+- `vault` | type: `RariVault` | vis: `default` | flags: `-` | `Deploy_CreatePool` @ `hardhat/scripts/foundry/createPool.s.sol`
+- `balanceOf` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `ERC20` @ `hardhat/contracts/lib/ERC20.sol`
+- `totalSupply` | type: `uint256 public` | vis: `public` | flags: `-` | `ERC20` @ `hardhat/contracts/lib/ERC20.sol`
+- `asset` | type: `ERC20 public immutable` | vis: `public` | flags: `immutable` | `ERC4626` @ `hardhat/contracts/lib/ERC4626.sol`
+- `poolId` | type: `uint256` | vis: `default` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `poolId` | type: `uint256` | vis: `default` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `poolId` | type: `uint256` | vis: `default` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `poolId` | type: `uint256` | vis: `default` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `poolId` | type: `uint256` | vis: `default` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `TOKEN_VAULT` | type: `address public` | vis: `public` | flags: `-` | `OutputReceiverProxy` @ `hardhat/contracts/OutputReceiverProxy.sol`
+- `yVault` | type: `ReaperAPI public immutable` | vis: `public` | flags: `immutable` | `ReaperWrapper` @ `hardhat/contracts/adapters/yearn/ReaperWrapper.sol`
+- `fnftIdToIndex` | type: `mapping(uint => uint) public` | vis: `public` | flags: `-` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `pools` | type: `mapping(bytes32 => PoolConfig) public override` | vis: `public` | flags: `override` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `vaultAdapters` | type: `mapping(address => address) public override` | vis: `public` | flags: `override` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `POOL_TEMPLATE` | type: `address public override` | vis: `public` | flags: `override` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol`
+- `vault` | type: `address` | vis: `default` | flags: `-` | `ResonatePlayground` @ `hardhat/test/foundry/ResonateDemo.t.sol` = `0x91155c72ea13BcbF6066dD161BECED3EB7c35e35`
+- `poolId` | type: `bytes32` | vis: `default` | flags: `-` | `SubmitConsumerBasic` @ `hardhat/test/foundry/submitConsumer.t.sol`
+- `vault_address` | type: `address` | vis: `default` | flags: `-` | `SubmitConsumerBasic` @ `hardhat/test/foundry/submitConsumer.t.sol`
+- `yVault` | type: `VaultAPI public` | vis: `public` | flags: `-` | `YearnWrapper` @ `hardhat/contracts/adapters/yearn/YearnWrapper.sol`
+- `yVault` | type: `VaultAPI public` | vis: `public` | flags: `-` | `YearnWrapperAlt` @ `hardhat/contracts/adapters/yearn/YearnWrapperAlt.sol`
+- `vault` | type: `address` | vis: `default` | flags: `-` | `YearnWrapperTest` @ `hardhat/test/foundry/adapters/YearnWrapper.t.sol` = `address(0xa354F35829Ae975e850e23e9615b11Da1B3dC4DE)`
+- `vaultAPI` | type: `VaultAPI` | vis: `default` | flags: `-` | `YearnWrapperTest` @ `hardhat/test/foundry/adapters/YearnWrapper.t.sol` = `VaultAPI(vault)`
+- `poolId` | type: `bytes32` | vis: `default` | flags: `-` | `breakGlass` @ `hardhat/test/foundry/breakGlass.t.sol`
+- `vault_address` | type: `address` | vis: `default` | flags: `-` | `breakGlass` @ `hardhat/test/foundry/breakGlass.t.sol`
+- `vault` | type: `address immutable` | vis: `default` | flags: `immutable` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol`
+- `vault` | type: `address immutable` | vis: `default` | flags: `immutable` | `jusdcAdapter` @ `hardhat/contracts/adapters/jonesDAO/jusdcAdapter.sol`
+- `FTMStaking` | type: `IFTMStaking` | vis: `default` | flags: `-` | `sFTMxOracle` @ `hardhat/contracts/oracles/adapters/stader/sFTMxOracle.sol`
+- `sFTMxStaking` | type: `address public constant` | vis: `public` | flags: `constant` | `sFTMxTest` @ `hardhat/test/foundry/oracles/sFTMx.t.sol` = `0xB458BfC855ab504a8a327720FcEF98886065529b`
+- `poolId` | type: `bytes32` | vis: `default` | flags: `-` | `submitProducerBasic` @ `hardhat/test/foundry/submitProducer.t.sol`
+- `vault_address` | type: `address` | vis: `default` | flags: `-` | `submitProducerBasic` @ `hardhat/test/foundry/submitProducer.t.sol`
+
+All detected state variables (full list):
+- `ACTIVE_MASK` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `AaveV2ERC4626` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626.sol` = `0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFFFFFFFF`
+- `FROZEN_MASK` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `AaveV2ERC4626` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626.sol` = `0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFFFFFFFFFFFFFF`
+- `aToken` | type: `ERC20 public immutable` | vis: `public` | flags: `immutable` | `AaveV2ERC4626` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626.sol`
+- `aaveMining` | type: `IAaveMining public immutable` | vis: `public` | flags: `immutable` | `AaveV2ERC4626` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626.sol`
+- `lendingPool` | type: `ILendingPool public immutable` | vis: `public` | flags: `immutable` | `AaveV2ERC4626` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626.sol`
+- `rewardRecipient` | type: `address public immutable` | vis: `public` | flags: `immutable` | `AaveV2ERC4626` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626.sol`
+- `aaveMining` | type: `IAaveMining public immutable` | vis: `public` | flags: `immutable` | `AaveV2ERC4626Factory` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626Factory.sol`
+- `lendingPool` | type: `ILendingPool public immutable` | vis: `public` | flags: `immutable` | `AaveV2ERC4626Factory` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626Factory.sol`
+- `rewardRecipient` | type: `address public immutable` | vis: `public` | flags: `immutable` | `AaveV2ERC4626Factory` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626Factory.sol`
+- `adapter` | type: `IERC4626` | vis: `default` | flags: `-` | `AdapterTest` @ `hardhat/test/foundry/adapters/GenericAdapter.t.sol`
+- `alice` | type: `address` | vis: `default` | flags: `-` | `AdapterTest` @ `hardhat/test/foundry/adapters/GenericAdapter.t.sol` = `address(2)`
+- `angel` | type: `address` | vis: `default` | flags: `-` | `AdapterTest` @ `hardhat/test/foundry/adapters/GenericAdapter.t.sol` = `address(1)`
+- `asset` | type: `IERC20` | vis: `default` | flags: `-` | `AdapterTest` @ `hardhat/test/foundry/adapters/GenericAdapter.t.sol`
+- `bob` | type: `address` | vis: `default` | flags: `-` | `AdapterTest` @ `hardhat/test/foundry/adapters/GenericAdapter.t.sol` = `address(3)`
+- `tolerance` | type: `uint256` | vis: `default` | flags: `-` | `AdapterTest` @ `hardhat/test/foundry/adapters/GenericAdapter.t.sol` = `10`
+- `vault` | type: `address` | vis: `default` | flags: `-` | `AdapterTest` @ `hardhat/test/foundry/adapters/GenericAdapter.t.sol`
+- `PRECISION` | type: `uint public constant` | vis: `public` | flags: `constant` | `AddressLockProxy` @ `hardhat/contracts/AddressLockProxy.sol` = `1 ether`
+- `_resonateSet` | type: `bool private` | vis: `private` | flags: `-` | `AddressLockProxy` @ `hardhat/contracts/AddressLockProxy.sol`
+- `metadataHandler` | type: `address public` | vis: `public` | flags: `-` | `AddressLockProxy` @ `hardhat/contracts/AddressLockProxy.sol`
+- `resonate` | type: `IResonate public` | vis: `public` | flags: `-` | `AddressLockProxy` @ `hardhat/contracts/AddressLockProxy.sol`
+- `BADGER` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0x3472A5A71965499acd81997a54BBA8D852C6E53d`
+- `USDT` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `WBTC` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `oracle` | type: `BalancerV2WeightedPoolPriceOracle public` | vis: `public` | flags: `-` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol`
+- `oracle2` | type: `BalancerV2WeightedPoolPriceOracle public` | vis: `public` | flags: `-` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol`
+- `poolId` | type: `bytes32 public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xc4451498f950b8b3abd9a815cf221a8e647913880001000000000000000001ea`
+- `pooln2Addr` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xb460DAa847c45f1C4a41cb05BFB3b51c92e41B36`
+- `priceProvider` | type: `PriceProvider public` | vis: `public` | flags: `-` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol`
+- `secondPoolID` | type: `bytes32 public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0x3e5fa9518ea95c3e533eb377c001702a9aacaa32000200000000000000000052`
+- `simpleOracle` | type: `SimpleOracle public` | vis: `public` | flags: `-` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol`
+- `usdtWETHPool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0x3e5FA9518eA95c3E533EB377C001702A9AaCAA32`
+- `vault` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xBA12222222228d8Ba445958a75a0704d566BF2C8`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerV2PriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2PriceOracle.sol`
+- `denominatedOracles` | type: `mapping(address => IPriceOracle) public` | vis: `public` | flags: `-` | `BalancerV2PriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2PriceOracle.sol`
+- `minimumUpdateInterval` | type: `uint256 public` | vis: `public` | flags: `-` | `BalancerV2PriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2PriceOracle.sol` = `5 minutes`
+- `tokenPools` | type: `mapping(address => address) public` | vis: `public` | flags: `-` | `BalancerV2PriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2PriceOracle.sol`
+- `vault` | type: `address public` | vis: `public` | flags: `-` | `BalancerV2PriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2PriceOracle.sol`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerV2WeightedPoolPriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2WeightedPoolPriceOracle.sol`
+- `ratioDiffLimitDenominator` | type: `uint256 public` | vis: `public` | flags: `-` | `BalancerV2WeightedPoolPriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2WeightedPoolPriceOracle.sol`
+- `ratioDiffLimitNumerator` | type: `uint256 public` | vis: `public` | flags: `-` | `BalancerV2WeightedPoolPriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2WeightedPoolPriceOracle.sol`
+- `vault` | type: `IBVaultV2 public` | vis: `public` | flags: `-` | `BalancerV2WeightedPoolPriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2WeightedPoolPriceOracle.sol`
+- `alice` | type: `address` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol` = `address(2e9)`
+- `angel` | type: `address` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol` = `address(2e11)`
+- `bob` | type: `address` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol` = `address(2e10)`
+- `buffer` | type: `uint` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol` = `0`
+- `denom` | type: `uint` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol` = `100`
+- `fee` | type: `uint` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol` = `5`
+- `fnftIds` | type: `uint[]` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `poolId1` | type: `bytes32` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `rari1` | type: `RariVault` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `rari2` | type: `RariVault` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `rari3` | type: `RariVault` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `vault1` | type: `IERC4626` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `vault2` | type: `IERC4626` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `vault3` | type: `IERC4626` | vis: `default` | flags: `-` | `BatchInterestTest` @ `hardhat/test/foundry/batchInterest.t.sol`
+- `_decimals` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `BeefyWrapper` @ `hardhat/contracts/adapters/yearn/BeefyWrapper.sol`
+- `token` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BeefyWrapper` @ `hardhat/contracts/adapters/yearn/BeefyWrapper.sol`
+- `yVault` | type: `BeefyAPI public immutable` | vis: `public` | flags: `immutable` | `BeefyWrapper` @ `hardhat/contracts/adapters/yearn/BeefyWrapper.sol`
+- `BeefyAdapter` | type: `BeefyWrapper` | vis: `default` | flags: `-` | `BeefyWrapperTest` @ `hardhat/test/foundry/adapters/BeefyWrapper.t.sol`
+- `BeefyVaultFantom` | type: `address` | vis: `default` | flags: `-` | `BeefyWrapperTest` @ `hardhat/test/foundry/adapters/BeefyWrapper.t.sol` = `0xE7E08D82853dcf1057B2f8BCeF781d904602B6a0`
+- `DUST` | type: `address` | vis: `default` | flags: `-` | `BeefyWrapperTest` @ `hardhat/test/foundry/adapters/BeefyWrapper.t.sol` = `0x8cA573430Fd584065C080fF1d2eA1a8DfB259Ae8`
+- `pool` | type: `IBufferBinaryPool public immutable` | vis: `public` | flags: `immutable` | `BufferWrapper` @ `hardhat/contracts/adapters/buffer/BufferWrapper.sol`
+- `BASE_PRICE_FEED` | type: `address public` | vis: `public` | flags: `-` | `ChainlinkPriceOracle` @ `hardhat/contracts/oracles/adapters/chainlink/ChainlinkPriceOracle.sol`
+- `MIN_TIME` | type: `uint private constant` | vis: `private` | flags: `constant` | `ChainlinkPriceOracle` @ `hardhat/contracts/oracles/adapters/chainlink/ChainlinkPriceOracle.sol` = `60 minutes`
+- `decimals` | type: `uint8 public` | vis: `public` | flags: `-` | `ChainlinkPriceOracle` @ `hardhat/contracts/oracles/adapters/chainlink/ChainlinkPriceOracle.sol` = `18`
+- `priceFeed` | type: `mapping(address => address) public` | vis: `public` | flags: `-` | `ChainlinkPriceOracle` @ `hardhat/contracts/oracles/adapters/chainlink/ChainlinkPriceOracle.sol`
+- `alice` | type: `address` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol` = `address(2e9)`
+- `angel` | type: `address` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol` = `address(2e11)`
+- `bob` | type: `address` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol` = `address(2e10)`
+- `denom` | type: `uint` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol` = `100`
+- `fee` | type: `uint` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol` = `3`
+- `poolId1` | type: `bytes32` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol`
+- `poolId2` | type: `bytes32` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol`
+- `rari1` | type: `RariVault` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol`
+- `rari2` | type: `RariVault` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol`
+- `vault1` | type: `IERC4626` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol`
+- `vault2` | type: `IERC4626` | vis: `default` | flags: `-` | `ClaimInterestTest` @ `hardhat/test/foundry/singleInterest.t.sol`
+- `crvTokens` | type: `mapping(address => CrvTokenInfo) public` | vis: `public` | flags: `-` | `CurveETHLPOracle` @ `hardhat/contracts/oracles/adapters/curve/CurveETHLPOracle.sol`
+- `USDC` | type: `address private immutable` | vis: `private` | flags: `immutable` | `CurveLPOracle` @ `hardhat/contracts/oracles/adapters/curve/CurveLPOracle.sol`
+- `crvTokens` | type: `mapping(address => CrvTokenInfo) public` | vis: `public` | flags: `-` | `CurveLPOracle` @ `hardhat/contracts/oracles/adapters/curve/CurveLPOracle.sol`
+- `conversionAsset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `CurveMinterOracle` @ `hardhat/contracts/oracles/adapters/curve/CurveMinterOracle.sol`
+- `conversionAsset` | type: `address public immutable` | vis: `public` | flags: `immutable` | `CurvePoolOracle` @ `hardhat/contracts/oracles/adapters/curve/CurvePoolOracle.sol`
+- `pools` | type: `mapping(address => address) public` | vis: `public` | flags: `-` | `CurvePoolOracle` @ `hardhat/contracts/oracles/adapters/curve/CurvePoolOracle.sol`
+- `adapter` | type: `IERC4626` | vis: `default` | flags: `-` | `Deploy_CreatePool` @ `hardhat/scripts/foundry/createPool.s.sol`
+- `vault` | type: `RariVault` | vis: `default` | flags: `-` | `Deploy_CreatePool` @ `hardhat/scripts/foundry/createPool.s.sol`
+- `INITIAL_CHAIN_ID` | type: `uint256 internal immutable` | vis: `internal` | flags: `immutable` | `ERC20` @ `hardhat/contracts/lib/ERC20.sol`
+- `INITIAL_DOMAIN_SEPARATOR` | type: `bytes32 internal immutable` | vis: `internal` | flags: `immutable` | `ERC20` @ `hardhat/contracts/lib/ERC20.sol`
+- `allowance` | type: `mapping(address => mapping(address => uint256)) public` | vis: `public` | flags: `-` | `ERC20` @ `hardhat/contracts/lib/ERC20.sol`
+- `balanceOf` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `ERC20` @ `hardhat/contracts/lib/ERC20.sol`
+- `decimals` | type: `uint8 public immutable` | vis: `public` | flags: `immutable` | `ERC20` @ `hardhat/contracts/lib/ERC20.sol`
+- `name` | type: `string public` | vis: `public` | flags: `-` | `ERC20` @ `hardhat/contracts/lib/ERC20.sol`
+- `nonces` | type: `mapping(address => uint256) public` | vis: `public` | flags: `-` | `ERC20` @ `hardhat/contracts/lib/ERC20.sol`
+- `symbol` | type: `string public` | vis: `public` | flags: `-` | `ERC20` @ `hardhat/contracts/lib/ERC20.sol`
+- `totalSupply` | type: `uint256 public` | vis: `public` | flags: `-` | `ERC20` @ `hardhat/contracts/lib/ERC20.sol`
+- `MIN_DEPOSIT` | type: `uint private constant` | vis: `private` | flags: `constant` | `ERC4626` @ `hardhat/contracts/lib/ERC4626.sol` = `1E3`
+- `asset` | type: `ERC20 public immutable` | vis: `public` | flags: `immutable` | `ERC4626` @ `hardhat/contracts/lib/ERC4626.sol`
+- `BOO` | type: `ERC20` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol` = `ERC20(0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE)`
+- `DAI` | type: `ERC20` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol` = `ERC20(0x6B175474E89094C44Da98b954EedeAC495271d0F)`
+- `ORP` | type: `OutputReceiverProxy` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol`
+- `RH` | type: `ResonateHelper` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol` = `ERC20(0x04068DA6C83AFCFA0e13ba15A6696662335D5B75)`
+- `devWallet` | type: `DevWallet` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol`
+- `fnftHandler` | type: `IFNFTHandler` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol` = `IFNFTHandler(address(0xa07E6a51420EcfCB081917f40423D29529705e8a))`
+- `priceProvider` | type: `PriceProvider` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol`
+- `resonate` | type: `Resonate` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol`
+- `swwl` | type: `SmartWalletWhitelistV2` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol`
+- `DAI` | type: `ERC20` | vis: `default` | flags: `-` | `ETHTokensTest` @ `hardhat/test/foundry/helpers/ETHTokensTest.t.sol` = `ERC20(address(0x6B175474E89094C44Da98b954EedeAC495271d0F))`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `ETHTokensTest` @ `hardhat/test/foundry/helpers/ETHTokensTest.t.sol` = `ERC20(address(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48))`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `FTMTokensTest` @ `hardhat/test/foundry/helpers/FTMTokensTest.t.sol` = `ERC20(address(0x04068DA6C83AFCFA0e13ba15A6696662335D5B75))`
+- `WAD` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `FixedPointMathLib` @ `hardhat/contracts/lib/FixedPointMathLib.sol` = `1e18`
+- `GLP` | type: `address public immutable` | vis: `public` | flags: `immutable` | `GLPOracle` @ `hardhat/contracts/oracles/adapters/gmx/GLPOracle.sol`
+- `GLP_PRECISION` | type: `uint private` | vis: `private` | flags: `-` | `GLPOracle` @ `hardhat/contracts/oracles/adapters/gmx/GLPOracle.sol` = `10 ** 30`
+- `USDC` | type: `address public immutable` | vis: `public` | flags: `immutable` | `GLPOracle` @ `hardhat/contracts/oracles/adapters/gmx/GLPOracle.sol`
+- `glpManager` | type: `IGLPManager public` | vis: `public` | flags: `-` | `GLPOracle` @ `hardhat/contracts/oracles/adapters/gmx/GLPOracle.sol`
+- `sGLP` | type: `address public immutable` | vis: `public` | flags: `immutable` | `GLPOracle` @ `hardhat/contracts/oracles/adapters/gmx/GLPOracle.sol`
+- `admin` | type: `address public` | vis: `public` | flags: `-` | `GovernanceController` @ `hardhat/contracts/GovernanceController.sol`
+- `functionOwner` | type: `mapping(address => mapping(uint => address)) public` | vis: `public` | flags: `-` | `GovernanceController` @ `hardhat/contracts/GovernanceController.sol`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `lastCompound` | type: `uint` | vis: `default` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `masterChef` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `poolId` | type: `uint256` | vis: `default` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `uniRouter` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `lastCompound` | type: `uint` | vis: `default` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `masterChef` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `poolId` | type: `uint256` | vis: `default` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `uniRouter` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `wftm` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol` = `address(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2)`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `lastCompound` | type: `uint` | vis: `default` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `masterChef` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `poolId` | type: `uint256` | vis: `default` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `uniRouter` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `lastCompound` | type: `uint` | vis: `default` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `masterChef` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `poolId` | type: `uint256` | vis: `default` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `uniRouter` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `wftm` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol` = `address(0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2)`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `lastCompound` | type: `uint` | vis: `default` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `masterChef` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `poolId` | type: `uint256` | vis: `default` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `uniRouter` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `lastCompound` | type: `uint` | vis: `default` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `masterChef` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `uniRouter` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `OR_METADATA` | type: `string public constant` | vis: `public` | flags: `constant` | `MetadataHandler` @ `hardhat/contracts/MetadataHandler.sol` = `"https: string public constant AL_METADATA = "https: uint public constant PRECISION = 1 ether`
+- `_resonateSet` | type: `bool private` | vis: `private` | flags: `-` | `MetadataHandler` @ `hardhat/contracts/MetadataHandler.sol`
+- `resonate` | type: `address public` | vis: `public` | flags: `-` | `MetadataHandler` @ `hardhat/contracts/MetadataHandler.sol`
+- `tokenDescriptions` | type: `mapping(address => string) public` | vis: `public` | flags: `-` | `MetadataHandler` @ `hardhat/contracts/MetadataHandler.sol`
+- `ADDRESS_REGISTRY` | type: `address public immutable` | vis: `public` | flags: `immutable` | `OutputReceiverProxy` @ `hardhat/contracts/OutputReceiverProxy.sol`
+- `FNFT_HANDLER` | type: `IFNFTHandler private immutable` | vis: `private` | flags: `immutable` | `OutputReceiverProxy` @ `hardhat/contracts/OutputReceiverProxy.sol`
+- `REVEST` | type: `address public` | vis: `public` | flags: `-` | `OutputReceiverProxy` @ `hardhat/contracts/OutputReceiverProxy.sol`
+- `TOKEN_VAULT` | type: `address public` | vis: `public` | flags: `-` | `OutputReceiverProxy` @ `hardhat/contracts/OutputReceiverProxy.sol`
+- `_resonateSet` | type: `bool private` | vis: `private` | flags: `-` | `OutputReceiverProxy` @ `hardhat/contracts/OutputReceiverProxy.sol`
+- `metadataHandler` | type: `address public` | vis: `public` | flags: `-` | `OutputReceiverProxy` @ `hardhat/contracts/OutputReceiverProxy.sol`
+- `resonate` | type: `address public` | vis: `public` | flags: `-` | `OutputReceiverProxy` @ `hardhat/contracts/OutputReceiverProxy.sol`
+- `SCALE_INVERSE` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PRBMath` @ `hardhat/contracts/lib/PRBMath.sol` = `78156646155174841979727994598816262306175212592076161876661_508869554232690281`
+- `SCALE_LPOTD` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PRBMath` @ `hardhat/contracts/lib/PRBMath.sol` = `262144`
+- `HALF_SCALE` | type: `int256 internal constant` | vis: `internal` | flags: `constant` | `PRBMathSD59x18` @ `hardhat/contracts/lib/PRBMathSD59x18.sol` = `5e17`
+- `LOG2_E` | type: `int256 internal constant` | vis: `internal` | flags: `constant` | `PRBMathSD59x18` @ `hardhat/contracts/lib/PRBMathSD59x18.sol` = `1_442695040888963407`
+- `MAX_SD59x18` | type: `int256 internal constant` | vis: `internal` | flags: `constant` | `PRBMathSD59x18` @ `hardhat/contracts/lib/PRBMathSD59x18.sol` = `57896044618658097711785492504343953926634992332820282019728_792003956564819967`
+- `MAX_WHOLE_SD59x18` | type: `int256 internal constant` | vis: `internal` | flags: `constant` | `PRBMathSD59x18` @ `hardhat/contracts/lib/PRBMathSD59x18.sol` = `57896044618658097711785492504343953926634992332820282019728_000000000000000000`
+- `MIN_SD59x18` | type: `int256 internal constant` | vis: `internal` | flags: `constant` | `PRBMathSD59x18` @ `hardhat/contracts/lib/PRBMathSD59x18.sol` = `-57896044618658097711785492504343953926634992332820282019728_792003956564819968`
+- `MIN_WHOLE_SD59x18` | type: `int256 internal constant` | vis: `internal` | flags: `constant` | `PRBMathSD59x18` @ `hardhat/contracts/lib/PRBMathSD59x18.sol` = `-57896044618658097711785492504343953926634992332820282019728_000000000000000000`
+- `SCALE` | type: `int256 internal constant` | vis: `internal` | flags: `constant` | `PRBMathSD59x18` @ `hardhat/contracts/lib/PRBMathSD59x18.sol` = `1e18`
+- `HARVESTER` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `PermissionedAdapter` @ `hardhat/contracts/adapters/base/PermissionedAdapter.sol` = `'HARVESTER'`
+- `SMART_WALLET` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `PermissionedAdapter` @ `hardhat/contracts/adapters/base/PermissionedAdapter.sol` = `'SMART_WALLET'`
+- `IERC20_INTERFACE` | type: `bytes4 public constant` | vis: `public` | flags: `constant` | `PoolSmartWallet` @ `hardhat/contracts/PoolSmartWallet.sol` = `type(IERC20).interfaceId`
+- `MASTER` | type: `address public immutable override` | vis: `public` | flags: `immutable,override` | `PoolSmartWallet` @ `hardhat/contracts/PoolSmartWallet.sol`
+- `RESONATE` | type: `address public immutable override` | vis: `public` | flags: `immutable,override` | `PoolSmartWallet` @ `hardhat/contracts/PoolSmartWallet.sol`
+- `PRECISION` | type: `uint private constant` | vis: `private` | flags: `constant` | `PriceProvider` @ `hardhat/contracts/oracles/PriceProvider.sol` = `1 ether`
+- `priceOracle` | type: `mapping(address => address) public` | vis: `public` | flags: `-` | `PriceProvider` @ `hardhat/contracts/oracles/PriceProvider.sol`
+- `ChainlinkOracle` | type: `ChainlinkPriceOracle` | vis: `default` | flags: `-` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol`
+- `DAI` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- `FRAX` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x853d955aCEf822Db058eb8505911ED77F175b99e`
+- `USDC` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `USDT` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `WETH` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `chainlink_DAI_ETH` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x773616E4d11A78F511299002da57A0a94577F1f4`
+- `chainlink_ETH_USD` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419`
+- `chainlink_FRAX_ETH` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x14d04Fff8D21bd62987a5cE9ce543d2F1edF5D3E`
+- `chainlink_USDC_ETH` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x986b5E1e1755e3C2440e960477f25201B0a8bbD4`
+- `chainlink_USDT_ETH` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xEe9F2375b4bdF6387aa8265dD4FB8F16512A1d46`
+- `priceProvider` | type: `PriceProvider` | vis: `default` | flags: `-` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol`
+- `uniV2LPOracle` | type: `UniswapV2LPPriceOracle` | vis: `default` | flags: `-` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol`
+- `uniV2_ETH_USDC` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc`
+- `PRECISION` | type: `uint internal constant` | vis: `internal` | flags: `constant` | `ProviderAwareOracle` @ `hardhat/contracts/oracles/adapters/ProviderAwareOracle.sol` = `1 ether`
+- `provider` | type: `IPriceProvider public` | vis: `public` | flags: `-` | `ProviderAwareOracle` @ `hardhat/contracts/oracles/adapters/ProviderAwareOracle.sol`
+- `_decimals` | type: `uint256 public immutable` | vis: `public` | flags: `immutable` | `ReaperWrapper` @ `hardhat/contracts/adapters/yearn/ReaperWrapper.sol`
+- `token` | type: `address public immutable` | vis: `public` | flags: `immutable` | `ReaperWrapper` @ `hardhat/contracts/adapters/yearn/ReaperWrapper.sol`
+- `yVault` | type: `ReaperAPI public immutable` | vis: `public` | flags: `immutable` | `ReaperWrapper` @ `hardhat/contracts/adapters/yearn/ReaperWrapper.sol`
+- `DUST` | type: `address` | vis: `default` | flags: `-` | `ReaperWrapperTarotTest` @ `hardhat/test/foundry/adapters/ReaperWrapperTarot.t.sol` = `0x8cA573430Fd584065C080fF1d2eA1a8DfB259Ae8`
+- `ReaperAdapter` | type: `ReaperWrapper` | vis: `default` | flags: `-` | `ReaperWrapperTarotTest` @ `hardhat/test/foundry/adapters/ReaperWrapperTarot.t.sol`
+- `cryptFantom` | type: `address` | vis: `default` | flags: `-` | `ReaperWrapperTarotTest` @ `hardhat/test/foundry/adapters/ReaperWrapperTarot.t.sol` = `0xb4bb795B165FB0fBF11598a3c6E3D011EF5d9dF8`
+- `cryptOptimism` | type: `address` | vis: `default` | flags: `-` | `ReaperWrapperTarotTest` @ `hardhat/test/foundry/adapters/ReaperWrapperTarot.t.sol` = `0x4f086A048c33f3BF9011dd2265861ce812624f2c`
+- `DUST` | type: `address` | vis: `default` | flags: `-` | `ReaperWrapperTest` @ `hardhat/test/foundry/adapters/ReaperWrapper.t.sol` = `0x8cA573430Fd584065C080fF1d2eA1a8DfB259Ae8`
+- `ReaperAdapter` | type: `ReaperWrapper` | vis: `default` | flags: `-` | `ReaperWrapperTest` @ `hardhat/test/foundry/adapters/ReaperWrapper.t.sol`
+- `cryptFantom` | type: `address` | vis: `default` | flags: `-` | `ReaperWrapperTest` @ `hardhat/test/foundry/adapters/ReaperWrapper.t.sol` = `0xa14cD844Afb46a4aC87B2DA710f94738828Ee07C`
+- `cryptOptimism` | type: `address` | vis: `default` | flags: `-` | `ReaperWrapperTest` @ `hardhat/test/foundry/adapters/ReaperWrapper.t.sol` = `0x4f086A048c33f3BF9011dd2265861ce812624f2c`
+- `DENOM` | type: `uint private constant` | vis: `private` | flags: `constant` | `Resonate` @ `hardhat/contracts/Resonate.sol` = `100`
+- `DEV_ADDRESS` | type: `address private immutable` | vis: `private` | flags: `immutable` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `FEE` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `Resonate` @ `hardhat/contracts/Resonate.sol` = `5`
+- `FNFT_HANDLER` | type: `IFNFTHandler private immutable` | vis: `private` | flags: `immutable` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `MIN_DEPOSIT` | type: `uint private constant` | vis: `private` | flags: `constant` | `Resonate` @ `hardhat/contracts/Resonate.sol` = `1E3`
+- `MIN_LOCKUP` | type: `uint32 private constant` | vis: `private` | flags: `constant` | `Resonate` @ `hardhat/contracts/Resonate.sol` = `1 days`
+- `PRECISION` | type: `uint private constant` | vis: `private` | flags: `constant` | `Resonate` @ `hardhat/contracts/Resonate.sol` = `1 ether`
+- `PRICE_PROVIDER` | type: `IPriceProvider private immutable` | vis: `private` | flags: `immutable` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `PROXY_ADDRESS_LOCK` | type: `address public immutable` | vis: `public` | flags: `immutable` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `PROXY_OUTPUT_RECEIVER` | type: `address public immutable` | vis: `public` | flags: `immutable` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `REGISTRY_ADDRESS` | type: `address public immutable` | vis: `public` | flags: `immutable` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `RESONATE_HELPER` | type: `address public immutable override` | vis: `public` | flags: `immutable,override` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `SMART_WALLET_WHITELIST` | type: `ISmartWalletWhitelistV2 private immutable` | vis: `private` | flags: `immutable` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `_approvedContracts` | type: `mapping (address => mapping (address => bool)) private` | vis: `private` | flags: `-` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `activated` | type: `mapping (uint => Active) public override` | vis: `public` | flags: `override` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `consumerQueue` | type: `mapping(bytes32 => mapping(uint => Order)) public override` | vis: `public` | flags: `override` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `fnftIdToIndex` | type: `mapping(uint => uint) public` | vis: `public` | flags: `-` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `owner` | type: `address public` | vis: `public` | flags: `-` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `pools` | type: `mapping(bytes32 => PoolConfig) public override` | vis: `public` | flags: `override` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `providerQueue` | type: `mapping(bytes32 => mapping(uint => Order)) public override` | vis: `public` | flags: `override` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `queueMarkers` | type: `mapping(bytes32 => PoolQueue) public override` | vis: `public` | flags: `override` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `residuals` | type: `mapping(uint => uint) public override` | vis: `public` | flags: `override` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `vaultAdapters` | type: `mapping(address => address) public override` | vis: `public` | flags: `override` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `DAI` | type: `ERC20` | vis: `default` | flags: `-` | `ResonateDeploy` @ `hardhat/scripts/foundry/Resonate.s.sol` = `ERC20(address(0x6B175474E89094C44Da98b954EedeAC495271d0F))`
+- `RH` | type: `ResonateHelper` | vis: `default` | flags: `-` | `ResonateDeploy` @ `hardhat/scripts/foundry/Resonate.s.sol`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `ResonateDeploy` @ `hardhat/scripts/foundry/Resonate.s.sol` = `ERC20(address(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48))`
+- `fnftHandler` | type: `IFNFTHandler` | vis: `default` | flags: `-` | `ResonateDeploy` @ `hardhat/scripts/foundry/Resonate.s.sol` = `IFNFTHandler(address(0xa07E6a51420EcfCB081917f40423D29529705e8a))`
+- `resonate` | type: `Resonate` | vis: `default` | flags: `-` | `ResonateDeploy` @ `hardhat/scripts/foundry/Resonate.s.sol`
+- `ADMIN` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol` = `'ADMIN'`
+- `BREAKER` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol` = `'BREAKER'`
+- `DENOM` | type: `uint public constant` | vis: `public` | flags: `constant` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol` = `100`
+- `FEE` | type: `uint public constant` | vis: `public` | flags: `constant` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol` = `5`
+- `FNFT_TEMPLATE` | type: `address public override` | vis: `public` | flags: `override` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol`
+- `POOL_TEMPLATE` | type: `address public override` | vis: `public` | flags: `override` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol`
+- `PRECISION` | type: `uint private constant` | vis: `private` | flags: `constant` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol` = `1 ether`
+- `SANDWICH_BOT_ADDRESS` | type: `address public immutable override` | vis: `public` | flags: `immutable,override` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol`
+- `blackListedFunctionSignatures` | type: `mapping(uint32 => bool)` | vis: `default` | flags: `-` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol`
+- `isPaused` | type: `bool public` | vis: `public` | flags: `-` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol`
+- `owner` | type: `address public override` | vis: `public` | flags: `override` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol`
+- `whiteListedFunctionSignatures` | type: `mapping(uint32 => bool)` | vis: `default` | flags: `-` | `ResonateHelper` @ `hardhat/contracts/ResonateHelper.sol`
+- `BOO` | type: `ERC20` | vis: `default` | flags: `-` | `ResonatePlayground` @ `hardhat/test/foundry/ResonateDemo.t.sol` = `ERC20(0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE)`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `ResonatePlayground` @ `hardhat/test/foundry/ResonateDemo.t.sol` = `ERC20(0x04068DA6C83AFCFA0e13ba15A6696662335D5B75)`
+- `alice` | type: `address` | vis: `default` | flags: `-` | `ResonatePlayground` @ `hardhat/test/foundry/ResonateDemo.t.sol` = `address(1)`
+- `resonate` | type: `Resonate` | vis: `default` | flags: `-` | `ResonatePlayground` @ `hardhat/test/foundry/ResonateDemo.t.sol` = `Resonate(0xe318412Ee02Dea2DC3B36882226103A58ce28F2D)`
+- `vault` | type: `address` | vis: `default` | flags: `-` | `ResonatePlayground` @ `hardhat/test/foundry/ResonateDemo.t.sol` = `0x91155c72ea13BcbF6066dD161BECED3EB7c35e35`
+- `IERC20_INTERFACE` | type: `bytes4 public constant` | vis: `public` | flags: `constant` | `ResonateSmartWallet` @ `hardhat/contracts/SmartWallet.sol` = `type(IERC20).interfaceId`
+- `MASTER` | type: `address public immutable override` | vis: `public` | flags: `immutable,override` | `ResonateSmartWallet` @ `hardhat/contracts/SmartWallet.sol`
+- `PRECISION` | type: `uint private constant` | vis: `private` | flags: `constant` | `ResonateSmartWallet` @ `hardhat/contracts/SmartWallet.sol` = `1 ether`
+- `RESONATE` | type: `address public immutable override` | vis: `public` | flags: `immutable,override` | `ResonateSmartWallet` @ `hardhat/contracts/SmartWallet.sol`
+- `ADMIN` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `SandwichBotProxy` @ `hardhat/contracts/SandwichBotProxy.sol` = `'ADMIN'`
+- `CALLER` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `SandwichBotProxy` @ `hardhat/contracts/SandwichBotProxy.sol` = `'CALLER'`
+- `RESONATE_HELPER` | type: `address public` | vis: `public` | flags: `-` | `SandwichBotProxy` @ `hardhat/contracts/SandwichBotProxy.sol`
+- `VOTER` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `SandwichBotProxy` @ `hardhat/contracts/SandwichBotProxy.sol` = `'VOTER'`
+- `addressesProvider` | type: `IAddressRegistry public` | vis: `public` | flags: `-` | `SecuredAddressLock` @ `hardhat/contracts/utils/SecuredAddressLock.sol`
+- `_currentPrices` | type: `mapping(address => uint) private` | vis: `private` | flags: `-` | `SimpleOracle` @ `hardhat/contracts/oracles/adapters/SimpleOracle.sol`
+- `tokenAdmins` | type: `mapping(address => mapping(address => bool)) public` | vis: `public` | flags: `-` | `SimpleOracle` @ `hardhat/contracts/oracles/adapters/SimpleOracle.sol`
+- `ADMIN` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `SmartWalletWhitelistV2` @ `hardhat/contracts/SmartWalletWhitelistV2.sol` = `"ADMIN"`
+- `SUPER_ADMIN` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `SmartWalletWhitelistV2` @ `hardhat/contracts/SmartWalletWhitelistV2.sol` = `"SUPER_ADMIN"`
+- `checker` | type: `address public` | vis: `public` | flags: `-` | `SmartWalletWhitelistV2` @ `hardhat/contracts/SmartWalletWhitelistV2.sol`
+- `future_checker` | type: `address public` | vis: `public` | flags: `-` | `SmartWalletWhitelistV2` @ `hardhat/contracts/SmartWalletWhitelistV2.sol`
+- `roles` | type: `mapping(address => bytes32) public` | vis: `public` | flags: `-` | `SmartWalletWhitelistV2` @ `hardhat/contracts/SmartWalletWhitelistV2.sol`
+- `wallets` | type: `mapping(address => bool) public` | vis: `public` | flags: `-` | `SmartWalletWhitelistV2` @ `hardhat/contracts/SmartWalletWhitelistV2.sol`
+- `adapter` | type: `IERC4626` | vis: `default` | flags: `-` | `SubmitConsumerBasic` @ `hardhat/test/foundry/submitConsumer.t.sol`
+- `alice` | type: `address` | vis: `default` | flags: `-` | `SubmitConsumerBasic` @ `hardhat/test/foundry/submitConsumer.t.sol` = `address(2e9)`
+- `bob` | type: `address` | vis: `default` | flags: `-` | `SubmitConsumerBasic` @ `hardhat/test/foundry/submitConsumer.t.sol` = `address(2e10)`
+- `poolId` | type: `bytes32` | vis: `default` | flags: `-` | `SubmitConsumerBasic` @ `hardhat/test/foundry/submitConsumer.t.sol`
+- `vault_address` | type: `address` | vis: `default` | flags: `-` | `SubmitConsumerBasic` @ `hardhat/test/foundry/submitConsumer.t.sol`
+- `MAX_UPDATE` | type: `uint32 public constant` | vis: `public` | flags: `constant` | `UniswapV2TWAPOracle` @ `hardhat/contracts/oracles/adapters/uniswapV2/UniswapV2TWAPOracle.sol` = `60 minutes`
+- `MIN_UPDATE` | type: `uint32 public immutable` | vis: `public` | flags: `immutable` | `UniswapV2TWAPOracle` @ `hardhat/contracts/oracles/adapters/uniswapV2/UniswapV2TWAPOracle.sol`
+- `MIN_UPDATE_DEFAULT` | type: `uint32 public constant` | vis: `public` | flags: `constant` | `UniswapV2TWAPOracle` @ `hardhat/contracts/oracles/adapters/uniswapV2/UniswapV2TWAPOracle.sol` = `5 minutes`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `UniswapV2TWAPOracle` @ `hardhat/contracts/oracles/adapters/uniswapV2/UniswapV2TWAPOracle.sol`
+- `twaps` | type: `mapping(address => TwapConfig) public` | vis: `public` | flags: `-` | `UniswapV2TWAPOracle` @ `hardhat/contracts/oracles/adapters/uniswapV2/UniswapV2TWAPOracle.sol`
+- `uniswap` | type: `address public` | vis: `public` | flags: `-` | `UniswapV2TWAPOracle` @ `hardhat/contracts/oracles/adapters/uniswapV2/UniswapV2TWAPOracle.sol`
+- `TOKEN_DECIMALS` | type: `uint8 public immutable` | vis: `public` | flags: `immutable` | `VelodromeTWAP` @ `hardhat/contracts/oracles/adapters/velodrome/VelodromeTWAP.sol`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `VelodromeTWAP` @ `hardhat/contracts/oracles/adapters/velodrome/VelodromeTWAP.sol`
+- `twaps` | type: `mapping(address => TwapConfig) public` | vis: `public` | flags: `-` | `VelodromeTWAP` @ `hardhat/contracts/oracles/adapters/velodrome/VelodromeTWAP.sol`
+- `velodrome` | type: `address public` | vis: `public` | flags: `-` | `VelodromeTWAP` @ `hardhat/contracts/oracles/adapters/velodrome/VelodromeTWAP.sol`
+- `twap` | type: `VelodromeTWAP` | vis: `default` | flags: `-` | `VelodromeTWAPTest` @ `hardhat/test/foundry/oracles/VelodromeTWAP.t.sol`
+- `DUST_WALLET` | type: `address public immutable` | vis: `public` | flags: `immutable` | `YearnV1_4626` @ `hardhat/contracts/adapters/base/YearnV1_4626.sol`
+- `MIN_DEPOSIT` | type: `uint private constant` | vis: `private` | flags: `constant` | `YearnWrapper` @ `hardhat/contracts/adapters/yearn/YearnWrapper.sol` = `1E3`
+- `_decimals` | type: `uint8 public immutable` | vis: `public` | flags: `immutable` | `YearnWrapper` @ `hardhat/contracts/adapters/yearn/YearnWrapper.sol`
+- `registry` | type: `IYearnRegistry public` | vis: `public` | flags: `-` | `YearnWrapper` @ `hardhat/contracts/adapters/yearn/YearnWrapper.sol` = `IYearnRegistry(0x50c1a2eA0a861A967D9d0FFE2AE4012c2E053804)`
+- `token` | type: `address public immutable` | vis: `public` | flags: `immutable` | `YearnWrapper` @ `hardhat/contracts/adapters/yearn/YearnWrapper.sol`
+- `yVault` | type: `VaultAPI public` | vis: `public` | flags: `-` | `YearnWrapper` @ `hardhat/contracts/adapters/yearn/YearnWrapper.sol`
+- `MIN_DEPOSIT` | type: `uint private constant` | vis: `private` | flags: `constant` | `YearnWrapperAlt` @ `hardhat/contracts/adapters/yearn/YearnWrapperAlt.sol` = `1E3`
+- `_decimals` | type: `uint8 public immutable` | vis: `public` | flags: `immutable` | `YearnWrapperAlt` @ `hardhat/contracts/adapters/yearn/YearnWrapperAlt.sol`
+- `registry` | type: `IYearnRegistry public` | vis: `public` | flags: `-` | `YearnWrapperAlt` @ `hardhat/contracts/adapters/yearn/YearnWrapperAlt.sol` = `IYearnRegistry(0x50c1a2eA0a861A967D9d0FFE2AE4012c2E053804)`
+- `token` | type: `address public immutable` | vis: `public` | flags: `immutable` | `YearnWrapperAlt` @ `hardhat/contracts/adapters/yearn/YearnWrapperAlt.sol`
+- `yVault` | type: `VaultAPI public` | vis: `public` | flags: `-` | `YearnWrapperAlt` @ `hardhat/contracts/adapters/yearn/YearnWrapperAlt.sol`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `YearnWrapperTest` @ `hardhat/test/foundry/adapters/YearnWrapper.t.sol` = `ERC20(address(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48))`
+- `adapter` | type: `YearnWrapper` | vis: `default` | flags: `-` | `YearnWrapperTest` @ `hardhat/test/foundry/adapters/YearnWrapper.t.sol`
+- `alice` | type: `address` | vis: `default` | flags: `-` | `YearnWrapperTest` @ `hardhat/test/foundry/adapters/YearnWrapper.t.sol` = `address(15)`
+- `angel` | type: `address` | vis: `default` | flags: `-` | `YearnWrapperTest` @ `hardhat/test/foundry/adapters/YearnWrapper.t.sol` = `address(1)`
+- `bob` | type: `address` | vis: `default` | flags: `-` | `YearnWrapperTest` @ `hardhat/test/foundry/adapters/YearnWrapper.t.sol` = `address(14)`
+- `tolerance` | type: `uint immutable` | vis: `default` | flags: `immutable` | `YearnWrapperTest` @ `hardhat/test/foundry/adapters/YearnWrapper.t.sol` = `100`
+- `vault` | type: `address` | vis: `default` | flags: `-` | `YearnWrapperTest` @ `hardhat/test/foundry/adapters/YearnWrapper.t.sol` = `address(0xa354F35829Ae975e850e23e9615b11Da1B3dC4DE)`
+- `vaultAPI` | type: `VaultAPI` | vis: `default` | flags: `-` | `YearnWrapperTest` @ `hardhat/test/foundry/adapters/YearnWrapper.t.sol` = `VaultAPI(vault)`
+- `YearnAdapter` | type: `YearnWrapper` | vis: `default` | flags: `-` | `YearnWrapperTest2` @ `hardhat/test/foundry/adapters/YearnWrapper2.t.sol`
+- `cryptFantom` | type: `address` | vis: `default` | flags: `-` | `YearnWrapperTest2` @ `hardhat/test/foundry/adapters/YearnWrapper2.t.sol` = `0x0DEC85e74A92c52b7F708c4B10207D9560CEFaf0`
+- `cryptOptimism` | type: `address` | vis: `default` | flags: `-` | `YearnWrapperTest2` @ `hardhat/test/foundry/adapters/YearnWrapper2.t.sol` = `0x4f086A048c33f3BF9011dd2265861ce812624f2c`
+- `adapter` | type: `IERC4626` | vis: `default` | flags: `-` | `breakGlass` @ `hardhat/test/foundry/breakGlass.t.sol`
+- `alice` | type: `address` | vis: `default` | flags: `-` | `breakGlass` @ `hardhat/test/foundry/breakGlass.t.sol` = `address(2e9)`
+- `bob` | type: `address` | vis: `default` | flags: `-` | `breakGlass` @ `hardhat/test/foundry/breakGlass.t.sol` = `address(2e10)`
+- `poolId` | type: `bytes32` | vis: `default` | flags: `-` | `breakGlass` @ `hardhat/test/foundry/breakGlass.t.sol`
+- `vault_address` | type: `address` | vis: `default` | flags: `-` | `breakGlass` @ `hardhat/test/foundry/breakGlass.t.sol`
+- `admin` | type: `address` | vis: `default` | flags: `-` | `governanceControllerTest` @ `hardhat/test/foundry/governanceControllerTests.t.sol` = `address(2e8)`
+- `alice` | type: `address` | vis: `default` | flags: `-` | `governanceControllerTest` @ `hardhat/test/foundry/governanceControllerTests.t.sol` = `address(2e9)`
+- `bob` | type: `address` | vis: `default` | flags: `-` | `governanceControllerTest` @ `hardhat/test/foundry/governanceControllerTests.t.sol` = `address(2e10)`
+- `govController` | type: `GovernanceController` | vis: `default` | flags: `-` | `governanceControllerTest` @ `hardhat/test/foundry/governanceControllerTests.t.sol`
+- `DUST_WALLET` | type: `address immutable` | vis: `default` | flags: `immutable` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol`
+- `GLP` | type: `address constant public` | vis: `public` | flags: `constant` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol` = `0x4277f8F2c384827B5273592FF7CeBd9f2C1ac258`
+- `GVRT` | type: `address immutable` | vis: `default` | flags: `immutable` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol`
+- `RESONATE_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol` = `bytes32("RESONATE")`
+- `adapter` | type: `address immutable` | vis: `default` | flags: `immutable` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol`
+- `feeHelper` | type: `address immutable` | vis: `default` | flags: `immutable` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol`
+- `router` | type: `address immutable` | vis: `default` | flags: `immutable` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol`
+- `vault` | type: `address immutable` | vis: `default` | flags: `immutable` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol`
+- `whitelist` | type: `address immutable` | vis: `default` | flags: `immutable` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol`
+- `DUST_WALLET` | type: `address immutable` | vis: `default` | flags: `immutable` | `jusdcAdapter` @ `hardhat/contracts/adapters/jonesDAO/jusdcAdapter.sol`
+- `RESONATE_ROLE` | type: `bytes32 public constant` | vis: `public` | flags: `constant` | `jusdcAdapter` @ `hardhat/contracts/adapters/jonesDAO/jusdcAdapter.sol` = `bytes32("RESONATE")`
+- `adapter` | type: `address immutable` | vis: `default` | flags: `immutable` | `jusdcAdapter` @ `hardhat/contracts/adapters/jonesDAO/jusdcAdapter.sol`
+- `feeHelper` | type: `address immutable` | vis: `default` | flags: `immutable` | `jusdcAdapter` @ `hardhat/contracts/adapters/jonesDAO/jusdcAdapter.sol`
+- `router` | type: `address immutable` | vis: `default` | flags: `immutable` | `jusdcAdapter` @ `hardhat/contracts/adapters/jonesDAO/jusdcAdapter.sol`
+- `uvrt` | type: `address immutable` | vis: `default` | flags: `immutable` | `jusdcAdapter` @ `hardhat/contracts/adapters/jonesDAO/jusdcAdapter.sol`
+- `vault` | type: `address immutable` | vis: `default` | flags: `immutable` | `jusdcAdapter` @ `hardhat/contracts/adapters/jonesDAO/jusdcAdapter.sol`
+- `whitelist` | type: `address immutable` | vis: `default` | flags: `immutable` | `jusdcAdapter` @ `hardhat/contracts/adapters/jonesDAO/jusdcAdapter.sol`
+- `MIN_TIME` | type: `uint private constant` | vis: `private` | flags: `constant` | `mockOracleDispatch` @ `hardhat/contracts/mocks/mockOracleDispatch.sol` = `45 minutes`
+- `FTMStaking` | type: `IFTMStaking` | vis: `default` | flags: `-` | `sFTMxOracle` @ `hardhat/contracts/oracles/adapters/stader/sFTMxOracle.sol`
+- `wFTM` | type: `address` | vis: `default` | flags: `-` | `sFTMxOracle` @ `hardhat/contracts/oracles/adapters/stader/sFTMxOracle.sol`
+- `WETH` | type: `address public constant` | vis: `public` | flags: `constant` | `sFTMxTest` @ `hardhat/test/foundry/oracles/sFTMx.t.sol` = `0x74b23882a30290451A17c44f4F05243b6b58C76d`
+- `WFTM` | type: `address public constant` | vis: `public` | flags: `constant` | `sFTMxTest` @ `hardhat/test/foundry/oracles/sFTMx.t.sol` = `0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83`
+- `_sFTMxOracle` | type: `sFTMxOracle` | vis: `default` | flags: `-` | `sFTMxTest` @ `hardhat/test/foundry/oracles/sFTMx.t.sol`
+- `priceProvider` | type: `PriceProvider` | vis: `default` | flags: `-` | `sFTMxTest` @ `hardhat/test/foundry/oracles/sFTMx.t.sol` = `PriceProvider(0x3415E3A79189f9440159E3163518075560670F5E)`
+- `sFTMx` | type: `address public constant` | vis: `public` | flags: `constant` | `sFTMxTest` @ `hardhat/test/foundry/oracles/sFTMx.t.sol` = `0xd7028092c830b5C8FcE061Af2E593413EbbC1fc1`
+- `sFTMxStaking` | type: `address public constant` | vis: `public` | flags: `constant` | `sFTMxTest` @ `hardhat/test/foundry/oracles/sFTMx.t.sol` = `0xB458BfC855ab504a8a327720FcEF98886065529b`
+- `adapter` | type: `IERC4626` | vis: `default` | flags: `-` | `submitProducerBasic` @ `hardhat/test/foundry/submitProducer.t.sol`
+- `alice` | type: `address` | vis: `default` | flags: `-` | `submitProducerBasic` @ `hardhat/test/foundry/submitProducer.t.sol` = `address(2e9)`
+- `bob` | type: `address` | vis: `default` | flags: `-` | `submitProducerBasic` @ `hardhat/test/foundry/submitProducer.t.sol` = `address(2e10)`
+- `poolId` | type: `bytes32` | vis: `default` | flags: `-` | `submitProducerBasic` @ `hardhat/test/foundry/submitProducer.t.sol`
+- `vault_address` | type: `address` | vis: `default` | flags: `-` | `submitProducerBasic` @ `hardhat/test/foundry/submitProducer.t.sol`
+
+### Tokens Added / Token State Values
+Detected token-related variables:
+- `aToken` | type: `ERC20 public immutable` | vis: `public` | flags: `immutable` | `AaveV2ERC4626` @ `hardhat/contracts/adapters/aave-v2/AaveV2ERC4626.sol`
+- `asset` | type: `IERC20` | vis: `default` | flags: `-` | `AdapterTest` @ `hardhat/test/foundry/adapters/GenericAdapter.t.sol`
+- `USDT` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `WBTC` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `usdtWETHPool` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerLPPricingTest` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0x3e5FA9518eA95c3E533EB377C001702A9AaCAA32`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerV2PriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2PriceOracle.sol`
+- `tokenPools` | type: `mapping(address => address) public` | vis: `public` | flags: `-` | `BalancerV2PriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2PriceOracle.sol`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BalancerV2WeightedPoolPriceOracle` @ `hardhat/contracts/oracles/adapters/balancer/BalancerV2WeightedPoolPriceOracle.sol`
+- `token` | type: `address public immutable` | vis: `public` | flags: `immutable` | `BeefyWrapper` @ `hardhat/contracts/adapters/yearn/BeefyWrapper.sol`
+- `crvTokens` | type: `mapping(address => CrvTokenInfo) public` | vis: `public` | flags: `-` | `CurveETHLPOracle` @ `hardhat/contracts/oracles/adapters/curve/CurveETHLPOracle.sol`
+- `USDC` | type: `address private immutable` | vis: `private` | flags: `immutable` | `CurveLPOracle` @ `hardhat/contracts/oracles/adapters/curve/CurveLPOracle.sol`
+- `crvTokens` | type: `mapping(address => CrvTokenInfo) public` | vis: `public` | flags: `-` | `CurveLPOracle` @ `hardhat/contracts/oracles/adapters/curve/CurveLPOracle.sol`
+- `asset` | type: `ERC20 public immutable` | vis: `public` | flags: `immutable` | `ERC4626` @ `hardhat/contracts/lib/ERC4626.sol`
+- `BOO` | type: `ERC20` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol` = `ERC20(0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE)`
+- `DAI` | type: `ERC20` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol` = `ERC20(0x6B175474E89094C44Da98b954EedeAC495271d0F)`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `ETHResonateTest` @ `hardhat/test/foundry/ETHResonate.t.sol` = `ERC20(0x04068DA6C83AFCFA0e13ba15A6696662335D5B75)`
+- `DAI` | type: `ERC20` | vis: `default` | flags: `-` | `ETHTokensTest` @ `hardhat/test/foundry/helpers/ETHTokensTest.t.sol` = `ERC20(address(0x6B175474E89094C44Da98b954EedeAC495271d0F))`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `ETHTokensTest` @ `hardhat/test/foundry/helpers/ETHTokensTest.t.sol` = `ERC20(address(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48))`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `FTMTokensTest` @ `hardhat/test/foundry/helpers/FTMTokensTest.t.sol` = `ERC20(address(0x04068DA6C83AFCFA0e13ba15A6696662335D5B75))`
+- `GLP` | type: `address public immutable` | vis: `public` | flags: `immutable` | `GLPOracle` @ `hardhat/contracts/oracles/adapters/gmx/GLPOracle.sol`
+- `GLP_PRECISION` | type: `uint private` | vis: `private` | flags: `-` | `GLPOracle` @ `hardhat/contracts/oracles/adapters/gmx/GLPOracle.sol` = `10 ** 30`
+- `USDC` | type: `address public immutable` | vis: `public` | flags: `immutable` | `GLPOracle` @ `hardhat/contracts/oracles/adapters/gmx/GLPOracle.sol`
+- `glpManager` | type: `IGLPManager public` | vis: `public` | flags: `-` | `GLPOracle` @ `hardhat/contracts/oracles/adapters/gmx/GLPOracle.sol`
+- `sGLP` | type: `address public immutable` | vis: `public` | flags: `immutable` | `GLPOracle` @ `hardhat/contracts/oracles/adapters/gmx/GLPOracle.sol`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefAdapter` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapter.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefAdapterManual` @ `hardhat/contracts/adapters/masterchef/MasterChefAdapterManual.sol`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2Adapter` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2AdapterManual` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2AdapterManual.sol`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2Adapter_BOO` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_BOO.sol`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `lpPair` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `lpToken0` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `lpToken1` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `rewardToken` | type: `address public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `rewardTokenToLp0Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `rewardTokenToLp1Route` | type: `address[] public` | vis: `public` | flags: `-` | `MasterChefV2_CROWD` @ `hardhat/contracts/adapters/masterchefv2/MasterChefV2Adapter_CROWD.sol`
+- `tokenDescriptions` | type: `mapping(address => string) public` | vis: `public` | flags: `-` | `MetadataHandler` @ `hardhat/contracts/MetadataHandler.sol`
+- `TOKEN_VAULT` | type: `address public` | vis: `public` | flags: `-` | `OutputReceiverProxy` @ `hardhat/contracts/OutputReceiverProxy.sol`
+- `SCALE_LPOTD` | type: `uint256 internal constant` | vis: `internal` | flags: `constant` | `PRBMath` @ `hardhat/contracts/lib/PRBMath.sol` = `262144`
+- `DAI` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- `USDC` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `USDT` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `WETH` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `chainlink_DAI_ETH` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x773616E4d11A78F511299002da57A0a94577F1f4`
+- `chainlink_ETH_USD` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419`
+- `chainlink_FRAX_ETH` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x14d04Fff8D21bd62987a5cE9ce543d2F1edF5D3E`
+- `chainlink_USDC_ETH` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x986b5E1e1755e3C2440e960477f25201B0a8bbD4`
+- `chainlink_USDT_ETH` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xEe9F2375b4bdF6387aa8265dD4FB8F16512A1d46`
+- `uniV2LPOracle` | type: `UniswapV2LPPriceOracle` | vis: `default` | flags: `-` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol`
+- `uniV2_ETH_USDC` | type: `address public constant` | vis: `public` | flags: `constant` | `PriceProviderTest` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc`
+- `token` | type: `address public immutable` | vis: `public` | flags: `immutable` | `ReaperWrapper` @ `hardhat/contracts/adapters/yearn/ReaperWrapper.sol`
+- `RESONATE_HELPER` | type: `address public immutable override` | vis: `public` | flags: `immutable,override` | `Resonate` @ `hardhat/contracts/Resonate.sol`
+- `DAI` | type: `ERC20` | vis: `default` | flags: `-` | `ResonateDeploy` @ `hardhat/scripts/foundry/Resonate.s.sol` = `ERC20(address(0x6B175474E89094C44Da98b954EedeAC495271d0F))`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `ResonateDeploy` @ `hardhat/scripts/foundry/Resonate.s.sol` = `ERC20(address(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48))`
+- `BOO` | type: `ERC20` | vis: `default` | flags: `-` | `ResonatePlayground` @ `hardhat/test/foundry/ResonateDemo.t.sol` = `ERC20(0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE)`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `ResonatePlayground` @ `hardhat/test/foundry/ResonateDemo.t.sol` = `ERC20(0x04068DA6C83AFCFA0e13ba15A6696662335D5B75)`
+- `RESONATE_HELPER` | type: `address public` | vis: `public` | flags: `-` | `SandwichBotProxy` @ `hardhat/contracts/SandwichBotProxy.sol`
+- `tokenAdmins` | type: `mapping(address => mapping(address => bool)) public` | vis: `public` | flags: `-` | `SimpleOracle` @ `hardhat/contracts/oracles/adapters/SimpleOracle.sol`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `UniswapV2TWAPOracle` @ `hardhat/contracts/oracles/adapters/uniswapV2/UniswapV2TWAPOracle.sol`
+- `TOKEN_DECIMALS` | type: `uint8 public immutable` | vis: `public` | flags: `immutable` | `VelodromeTWAP` @ `hardhat/contracts/oracles/adapters/velodrome/VelodromeTWAP.sol`
+- `WETH` | type: `address public immutable` | vis: `public` | flags: `immutable` | `VelodromeTWAP` @ `hardhat/contracts/oracles/adapters/velodrome/VelodromeTWAP.sol`
+- `token` | type: `address public immutable` | vis: `public` | flags: `immutable` | `YearnWrapper` @ `hardhat/contracts/adapters/yearn/YearnWrapper.sol`
+- `token` | type: `address public immutable` | vis: `public` | flags: `immutable` | `YearnWrapperAlt` @ `hardhat/contracts/adapters/yearn/YearnWrapperAlt.sol`
+- `USDC` | type: `ERC20` | vis: `default` | flags: `-` | `YearnWrapperTest` @ `hardhat/test/foundry/adapters/YearnWrapper.t.sol` = `ERC20(address(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48))`
+- `GLP` | type: `address constant public` | vis: `public` | flags: `constant` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol` = `0x4277f8F2c384827B5273592FF7CeBd9f2C1ac258`
+- `feeHelper` | type: `address immutable` | vis: `default` | flags: `immutable` | `jGLPAdapter` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol`
+- `feeHelper` | type: `address immutable` | vis: `default` | flags: `immutable` | `jusdcAdapter` @ `hardhat/contracts/adapters/jonesDAO/jusdcAdapter.sol`
+- `WETH` | type: `address public constant` | vis: `public` | flags: `constant` | `sFTMxTest` @ `hardhat/test/foundry/oracles/sFTMx.t.sol` = `0x74b23882a30290451A17c44f4F05243b6b58C76d`
+
+Hardcoded token addresses found:
+- `DAI` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x6B175474E89094C44Da98b954EedeAC495271d0F`
+- `GLP` @ `hardhat/contracts/adapters/jonesDAO/jGLPAdapter.sol` = `0x4277f8F2c384827B5273592FF7CeBd9f2C1ac258`
+- `USDC` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`
+- `USDT` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `USDT` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xdAC17F958D2ee523a2206206994597C13D831ec7`
+- `WBTC` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599`
+- `WETH` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `WETH` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`
+- `WETH` @ `hardhat/test/foundry/oracles/sFTMx.t.sol` = `0x74b23882a30290451A17c44f4F05243b6b58C76d`
+- `chainlink_DAI_ETH` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x773616E4d11A78F511299002da57A0a94577F1f4`
+- `chainlink_ETH_USD` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419`
+- `chainlink_FRAX_ETH` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x14d04Fff8D21bd62987a5cE9ce543d2F1edF5D3E`
+- `chainlink_USDC_ETH` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0x986b5E1e1755e3C2440e960477f25201B0a8bbD4`
+- `chainlink_USDT_ETH` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xEe9F2375b4bdF6387aa8265dD4FB8F16512A1d46`
+- `uniV2_ETH_USDC` @ `hardhat/test/foundry/oracles/PriceProvider.t.sol` = `0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc`
+- `usdtWETHPool` @ `hardhat/test/foundry/oracles/BalancerLPPricingTest.sol` = `0x3e5FA9518eA95c3E533EB377C001702A9AaCAA32`
+
+### Struct Values (All Parsed Struct Fields)
+- `Active` (hardhat/contracts/interfaces/IResonate.sol): uint256 principalId, uint256 sharesPerPacket, uint256 startingSharesPerPacket, bytes32 poolId
+- `Contracts` (hardhat/contracts/interfaces/adapters/jonesDAO/IJonesRouter.sol): JonesGlpVault glpVault, JonesGlpVaultRouter router, GlpJonesRewards jonesRewards, JonesGlpRewardTracker glpTracker, JonesGlpRewardTracker stableTracker, JonesGlpLeverageStrategy strategy, JonesGlpStableVault stableVault, JonesGlpCompoundRewards glpCompounder, JonesGlpCompoundRewards stableCompounder, IGMXVault gmxVault, WhitelistController controller, GlpAdapter adapter
+- `CrvTokenInfo` (hardhat/contracts/oracles/adapters/curve/CurveETHLPOracle.sol): bool isCrvToken, CurvePoolType poolType, address curveSwap, uint nCoins
+- `CrvTokenInfo` (hardhat/contracts/oracles/adapters/curve/CurveLPOracle.sol): bool isCrvToken, CurvePoolType poolType, address curveSwap, uint nCoins
+- `FNFTConfig` (hardhat/contracts/interfaces/IRevest.sol): address asset, address pipeToContract, uint depositAmount, uint depositMul, uint split, uint depositStopTime, bool maturityExtension, bool isMulti, bool nontransferrable
+- `LPStakeholder` (hardhat/contracts/interfaces/IMasterChefV2_CROWD.sol): uint256 userRewardPerTokenPaid, uint256 lpRewards, uint256 userLpBalance, bool exist
+- `Lock` (hardhat/contracts/interfaces/IRevest.sol): address addressLock, LockType lockType, ValueLock valueLock, uint timeLockExpiry, uint creationTime, bool unlocked
+- `LockParam` (hardhat/contracts/interfaces/IRevest.sol): address addressLock, uint timeLockExpiry, LockType lockType, ValueLock valueLock
+- `OracleAverageQuery` (hardhat/contracts/oracles/interfaces/IBalV2PriceOracle.sol): TWAP_VALUE variable, uint256 secs, uint256 ago
+- `Order` (hardhat/contracts/interfaces/IResonate.sol): uint256 packetsRemaining, uint256 depositedShares, bytes32 owner
+- `ParamPacker` (hardhat/contracts/interfaces/IResonate.sol): Order consumerOrder, Order producerOrder, bool isProducerNew, bool isCrossAsset, uint quantityPackets, uint currentExchangeRate, PoolConfig pool, address adapter, bytes32 poolId
+- `PoolConfig` (hardhat/contracts/interfaces/IResonate.sol): address asset, address vault, address adapter, uint32 lockupPeriod, uint128 rate, uint128 addInterestRate, uint256 packetSize
+- `PoolQueue` (hardhat/contracts/interfaces/IResonate.sol): uint64 providerHead, uint64 providerTail, uint64 consumerHead, uint64 consumerTail
+- `ReserveConfigurationMap` (hardhat/contracts/adapters/aave-v2/external/ILendingPool.sol): uint256 data
+- `ReserveData` (hardhat/contracts/adapters/aave-v2/external/ILendingPool.sol): ReserveConfigurationMap configuration, uint128 liquidityIndex, uint128 variableBorrowIndex, uint128 currentLiquidityRate, uint128 currentVariableBorrowRate, uint128 currentStableBorrowRate, uint40 lastUpdateTimestamp, address aTokenAddress, address stableDebtTokenAddress, address variableDebtTokenAddress, address interestRateStrategyAddress, uint8 id
+- `RoleInfo` (hardhat/contracts/interfaces/adapters/jonesDAO/IJonesRouter.sol): bool jGLP_BYPASS_CAP, bool jUSDC_BYPASS_TIME, uint256 jGLP_RETENTION, uint256 jUSDC_RETENTION
+- `SD59x18` (hardhat/contracts/lib/PRBMath.sol): int256 value
+- `StrategyParams` (hardhat/contracts/interfaces/adapters/yearn/BeefyAPI.sol): uint256 performanceFee, uint256 activation, uint256 debtRatio, uint256 minDebtPerHarvest, uint256 maxDebtPerHarvest, uint256 lastReport, uint256 totalDebt, uint256 totalGain, uint256 totalLoss
+- `StrategyParams` (hardhat/contracts/interfaces/adapters/yearn/ReaperAPI.sol): uint256 performanceFee, uint256 activation, uint256 debtRatio, uint256 minDebtPerHarvest, uint256 maxDebtPerHarvest, uint256 lastReport, uint256 totalDebt, uint256 totalGain, uint256 totalLoss
+- `StrategyParams` (hardhat/contracts/interfaces/adapters/yearn/VaultAPI.sol): uint256 performanceFee, uint256 activation, uint256 debtRatio, uint256 minDebtPerHarvest, uint256 maxDebtPerHarvest, uint256 lastReport, uint256 totalDebt, uint256 totalGain, uint256 totalLoss
+- `TokenTracker` (hardhat/contracts/interfaces/IRevest.sol): uint lastBalance, uint lastMul
+- `TwapConfig` (hardhat/contracts/oracles/adapters/uniswapV2/UniswapV2TWAPOracle.sol): uint lastUpdateCumulativePrice, uint32 timestampLatest, FixedPoint.uq112x112 lastUpdateTwapPrice, address pairAddress, bool isToken0, uint8 decimals, uint32 lastTimeTwapPoked
+- `TwapConfig` (hardhat/contracts/oracles/adapters/velodrome/VelodromeTWAP.sol): address pairAddress, uint8 decimals
+- `UD60x18` (hardhat/contracts/lib/PRBMath.sol): uint256 value
+- `ValueLock` (hardhat/contracts/interfaces/IRevest.sol): address asset, address compareTo, address oracle, uint unlockValue, bool unlockRisingEdge
+- `uq112x112` (hardhat/contracts/lib/FixedPoint.sol): uint224 _x
+- `uq144x112` (hardhat/contracts/lib/FixedPoint.sol): uint256 _x
+
+### Enum State Values
+- `CurvePoolType` (hardhat/contracts/oracles/adapters/curve/CurveETHLPOracle.sol): ETH, USD
+- `CurvePoolType` (hardhat/contracts/oracles/adapters/curve/CurveLPOracle.sol): ETH, USD
+- `CurveTokenVersion` (hardhat/contracts/oracles/adapters/curve/CurveETHLPOracle.sol): V1, V2, V3
+- `CurveTokenVersion` (hardhat/contracts/oracles/adapters/curve/CurveLPOracle.sol): V1, V2, V3
+- `LockType` (hardhat/contracts/interfaces/IRevest.sol): DoesNotExist, TimeLock, ValueLock, AddressLock
+- `TWAP_VALUE` (hardhat/contracts/oracles/interfaces/IBalV2PriceOracle.sol): PAIR_PRICE, BPT_PRICE, INVARIANT
+
+### Invariant Values (Variable-Tied)
+- `sum(balanceOf[*]) == totalSupply` (token balance conservation)
+- Every token address/handle variable must be non-zero and immutable or governance-gated
+- Struct fields representing amounts/indexes/nonces must remain monotonic or strictly validated per lifecycle transition
+
+### Full Raw State Inventory
+- `AUDIT_STATE_VALUES_FULL.json` includes:
+  - all state variables
+  - all total/balance variables
+  - all token variables
+  - all structs and fields
+  - enum values
+<!-- AUDIT_DOSSIER_END -->
